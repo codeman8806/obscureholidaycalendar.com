@@ -1,0 +1,107 @@
+/* Global */
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top, #ffe6ff, #dfe8ff);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Centering */
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+/* Card */
+.card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* App Icon */
+.app-icon {
+  width: 95px;
+  height: 95px;
+  border-radius: 22%;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+}
+
+/* Typography */
+h1 {
+  font-size: 1.9rem;
+  margin: 0.5rem 0 0;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 1.3rem;
+}
+
+.description {
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.8rem;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.8rem;
+}
+
+/* Store buttons */
+.store-button {
+  padding: 0.9rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  display: block;
+  border: 1px solid #ddd;
+  text-align: center;
+  transition: opacity 0.2s;
+}
+
+.store-button:hover {
+  opacity: 0.85;
+}
+
+.apple {
+  background: #000;
+  color: #fff;
+}
+
+.google {
+  background: #fff;
+  color: #000;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid #e3e3e3;
+  margin: 1.5rem 0;
+}
+
+/* Footer */
+footer a {
+  color: #4da3ff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
