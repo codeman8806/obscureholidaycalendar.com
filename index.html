@@ -3,62 +3,208 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Obscure Holiday Calendar</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/png" href="icon.png" />
+  <title>Obscure Holiday Calendar — Daily Fun, Weird & Obscure Holidays</title>
 
-  <!-- SEO / ASO Power Tags -->
-  <meta name="description" content="Discover today’s obscure, funny, and unique holidays. Daily stories, fun facts, and shareable celebrations. Available on iOS and Android." />
-  <meta name="keywords" content="holiday app, daily holidays, obscure holiday calendar, fun holidays, national day app, today is, daily trivia" />
+  <!-- SEO Meta -->
+  <meta name="description" content="Discover fun, weird, quirky & obscure holidays every single day. Enjoy daily stories, colorful artwork, fun facts, national days, shareable celebrations & more! Available on iOS and Android." />
+  <meta name="keywords" content="obscure holidays, weird holidays, fun holidays, holiday calendar, national day calendar, quirky holidays, daily holidays, holiday app, fun facts, daily trivia, national days, obscure holiday calendar app" />
 
-  <!-- OpenGraph for sharing -->
+  <!-- Open Graph (social previews) -->
   <meta property="og:title" content="Obscure Holiday Calendar" />
-  <meta property="og:description" content="Discover today’s obscure and fun holidays. Learn, share, and celebrate!" />
-  <meta property="og:image" content="icon.png" />
+  <meta property="og:description" content="Celebrate something new every day! Discover fun & obscure holidays with stories, artwork, and facts." />
+  <meta property="og:image" content="app-icon.png" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.obscureholidaycalendar.com" />
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Obscure Holiday Calendar",
+    "operatingSystem": "iOS, Android",
+    "applicationCategory": "LifestyleApplication",
+    "description": "Discover fun, quirky, weird & obscure holidays every single day with colorful artwork, fun facts, stories, widgets and shareable celebrations.",
+    "image": "https://www.obscureholidaycalendar.com/app-icon.png",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Cody Graves"
+    }
+  }
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, Arial, sans-serif;
+      background: linear-gradient(180deg, #f9e8ff 0%, #f0e6ff 100%);
+      color: #222;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    img.icon {
+      width: 120px;
+      height: 120px;
+      margin-top: 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-top: 20px;
+      color: #2c005f;
+      font-weight: 700;
+    }
+
+    .tagline {
+      font-size: 18px;
+      color: #444;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .subtext {
+      font-size: 16px;
+      color: #555;
+      margin: 18px 0 30px;
+      line-height: 1.6;
+    }
+
+    .store-btn {
+      display: block;
+      width: 90%;
+      margin: 12px auto;
+      padding: 16px;
+      border-radius: 32px;
+      font-size: 17px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .ios {
+      background: #000;
+      color: #fff;
+    }
+
+    .android {
+      background: #fff;
+      color: #000;
+      border: 2px solid #000;
+    }
+
+    .store-btn:hover {
+      transform: scale(1.03);
+    }
+
+    footer {
+      margin-top: 40px;
+    }
+
+    footer a {
+      color: #444;
+      text-decoration: none;
+      margin: 0 8px;
+      font-size: 14px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* SEO Section Styling */
+    .seo-section {
+      margin-top: 50px;
+      text-align: left;
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      line-height: 1.6;
+    }
+
+    .seo-section h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #2c005f;
+    }
+
+    .seo-section h3 {
+      font-size: 20px;
+      margin-top: 24px;
+      color: #401080;
+    }
+
+    .seo-section ul {
+      padding-left: 20px;
+    }
+  </style>
 </head>
 
 <body>
-  <header>
-    <img src="app-icon.png" alt="Obscure Holiday Calendar App Icon" class="app-icon" />
-    <h1>Obscure Holiday Calendar</h1>
-    <p class="tagline">Discover today’s obscure, funny, and unique holidays.</p>
-  </header>
+  <div class="container">
+    <img src="app-icon.png" alt="Obscure Holiday Calendar App Icon" class="icon" />
 
-  <div class="buttons">
-    <a class="store-button ios" href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank">
+    <h1>Obscure Holiday Calendar</h1>
+
+    <p class="tagline">Discover today's fun, weird & obscure holidays — every single day.</p>
+
+    <p class="subtext">
+      Celebrate something new every day! Learn the story behind each quirky holiday, enjoy colorful artwork,
+      explore fun facts, and share your favorites with friends and family.
+    </p>
+
+    <a class="store-btn ios" href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank">
       Download on the App Store
     </a>
 
-    <a class="store-button android" href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar" target="_blank">
+    <a class="store-btn android" href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar" target="_blank">
       Get it on Google Play
     </a>
+
+    <!-- SEO RICH CONTENT SECTION -->
+    <div class="seo-section">
+      <h2>Discover Fun, Weird & Obscure Holidays Every Day</h2>
+      <p>
+        Obscure Holiday Calendar is the easiest and most delightful way to discover quirky, fun, and unusual holidays celebrated around the world.
+        Whether you're interested in food holidays, national days, weird traditions, fun facts, or daily trivia, this app gives you
+        a fresh celebration every morning.
+      </p>
+
+      <h3>Features</h3>
+      <ul>
+        <li>Daily obscure holidays with beautiful artwork</li>
+        <li>Fun facts and bite-sized holiday history</li>
+        <li>Holiday descriptions for kids, adults, families, and teachers</li>
+        <li>Shareable holiday cards for friends & social media</li>
+        <li>Clean holiday calendar layout</li>
+        <li>Widgets and notifications so you never miss a day</li>
+        <li>Perfect for daily trivia lovers and social content creators</li>
+      </ul>
+
+      <h3>Why People Love This App</h3>
+      <p>
+        Each day reveals a new celebration like National Taco Day, Puzzle Day, Jukebox Day, World Kindness Day,
+        Cookie Day, and hundreds more. It’s perfect for classrooms, workplaces, social posts, or simply making mornings more fun.
+      </p>
+    </div>
+
+    <footer>
+      <a href="https://github.com/codeman8806/Privacy-Policy/wiki/Privacy-Policy-for-Obscure-Holiday-Calendar" target="_blank">Privacy Policy</a>
+      •
+      <a href="https://github.com/codeman8806/Privacy-Policy/wiki/Support-for-Obscure-Holiday-Calendar" target="_blank">Support</a>
+    </footer>
   </div>
-
-  <section class="features">
-    <h2>Features</h2>
-    <ul>
-      <li>🎉 New obscure holiday every day</li>
-      <li>📘 Bite-sized fun facts and stories</li>
-      <li>📤 Share holidays with friends</li>
-      <li>🔔 Widgets & notifications</li>
-      <li>🌎 Explore holidays from any date</li>
-    </ul>
-  </section>
-
-  <footer>
-    <p><a href="https://github.com/codeman8806/Privacy-Policy/wiki/Privacy-Policy-for-Obscure-Holiday-Calendar" target="_blank">Privacy Policy</a></p>
-    <p><a href="https://github.com/codeman8806/Privacy-Policy/wiki/Support-for-Obscure-Holiday-Calendar" target="_blank">Support</a></p>
-  </footer>
-
-  <!-- Deep link preview support -->
-  <script>
-    // This ensures deep links keep working under the custom domain
-    // Example: obscureholidaycalendar.com/holiday/Cookbook-Launch-Day
-    if (location.pathname.startsWith("/holiday/")) {
-      const slug = location.pathname.replace("/holiday/", "");
-      window.location.href = `https://codeman8806.github.io/holiday/${slug}`;
-    }
-  </script>
 </body>
 </html>
