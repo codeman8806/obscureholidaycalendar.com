@@ -94,7 +94,7 @@
       "name": "Does the app include widgets and notifications?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Obscure Holiday Calendar includes widgets and optional notifications so you can see today\u2019s obscure holiday right on your Home Screen and get a daily reminder to check the app."
+        "text": "Yes. Obscure Holiday Calendar includes widgets and optional notifications so you can see today’s obscure holiday right on your Home Screen and get a daily reminder to check the app."
       }
     }]
   }
@@ -363,6 +363,35 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* --- HOLIDAY FALLBACK SECTION --- */
+    #holiday-section {
+      display: none;
+      margin-top: 24px;
+      padding: 20px;
+      background: #f1e9ff;
+      border-radius: 16px;
+      border: 1px solid #e0d2ff;
+      text-align: center;
+    }
+
+    #holiday-title {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: var(--primary-soft);
+    }
+
+    #open-in-app {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 12px 18px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
   </style>
 </head>
 
@@ -402,6 +431,13 @@
           </span>
         </a>
       </div>
+
+      <!-- HOLIDAY FALLBACK (shown ONLY if a deep link is detected) -->
+      <section id="holiday-section">
+        <h2 id="holiday-title">Loading holiday…</h2>
+        <p>This holiday is best experienced inside the app.</p>
+        <a id="open-in-app" href="#">Open in the App</a>
+      </section>
 
       <section class="seo-box" aria-label="About Obscure Holiday Calendar app">
         <h2>Daily Fun, Weird & Obscure Holidays</h2>
@@ -485,5 +521,32 @@
       </footer>
     </main>
   </div>
+
+  <!-- 🟣 Deep Link Handler Script (SPA Router) -->
+  <script>
+  (function () {
+    const path = window.location.pathname;
+
+    // Expected format: /holiday/<slug>
+    if (path.startsWith("/holiday/")) {
+      const slug = path.replace("/holiday/", "").replace("/", "");
+
+      console.log("Detected deep link slug:", slug);
+
+      // Show the fallback section
+      const holidaySection = document.getElementById("holiday-section");
+      holidaySection.style.display = "block";
+
+      // Update the holiday title
+      const title = document.getElementById("holiday-title");
+      title.textContent = slug.replace(/-/g, " ").toUpperCase();
+
+      // Set "Open in App" button
+      const openBtn = document.getElementById("open-in-app");
+      openBtn.href = `obscureholidaycalendar://holiday/${slug}`;
+    }
+  })();
+  </script>
+
 </body>
 </html>
