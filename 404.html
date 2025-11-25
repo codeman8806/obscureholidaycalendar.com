@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting…</title>
-
-  <!-- GitHub Pages SPA redirect (fix deep links) -->
   <script>
-    // Redirect all 404 routes back to index.html
-    const redirectTo = "/";
-    window.location.replace(redirectTo);
+    // Save the original path before redirecting
+    sessionStorage.setItem("originalPath", window.location.pathname);
+
+    // Redirect to homepage
+    window.location.replace("/");
   </script>
 </head>
 <body>
