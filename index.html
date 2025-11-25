@@ -30,7 +30,7 @@
 
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- ✅ JSON-LD Structured Data for App SEO -->
+  <!-- JSON-LD Site/App Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -57,7 +57,7 @@
 
 <body>
 
-  <!-- 🔵 HOMEPAGE -->
+  <!-- HOMEPAGE -->
   <div id="homepage" class="page-wrap">
     <main class="container">
       <img src="assets/app-icon.png" class="app-icon" alt="App icon" />
@@ -76,6 +76,7 @@
         Each holiday includes artwork, fun facts, and reminders.
       </p>
 
+      <!-- STORE BUTTONS -->
       <div class="badge-row">
         <a class="store-btn ios" href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank">
           <span><small>Download on the</small><strong>App Store</strong></span>
@@ -85,7 +86,35 @@
         </a>
       </div>
 
-      <!-- 🔥 SEO Section -->
+      <!-- 🔥 INTERNAL LINKING BOOST (Today’s Holiday + Popular Holidays) -->
+      <div id="today-holiday-wrapper" style="margin: 20px 0;">
+        <a id="today-holiday-link" class="today-holiday-link" style="font-size:1.2rem; font-weight:600; text-decoration:none; color:#5a00a0;">
+          🎉 See Today’s Holiday →
+        </a>
+      </div>
+
+      <script>
+      (function() {
+        const today = new Date();
+        const pretty = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-');
+        document.getElementById("today-holiday-link").href = `/holiday/${pretty}/`;
+      })();
+      </script>
+
+      <section class="popular-holidays" style="margin-top:10px;">
+        <h2>Popular Fun Holidays</h2>
+        <ul style="list-style:none; padding:0; font-size:1.1rem;">
+          <li><a href="/holiday/april-fools-day/">April Fools' Day</a></li>
+          <li><a href="/holiday/halloween/">Halloween</a></li>
+          <li><a href="/holiday/new-years-eve/">New Year’s Eve</a></li>
+          <li><a href="/holiday/thanksgiving/">Thanksgiving</a></li>
+          <li><a href="/holiday/christmas-day/">Christmas Day</a></li>
+        </ul>
+      </section>
+
+      <!-- SEO BOX -->
       <section class="seo-box">
         <h2>About Obscure Holiday Calendar</h2>
         <p>
@@ -115,7 +144,7 @@
     </main>
   </div>
 
-  <!-- 🟣 HOLIDAY DEEP-LINK VIEW -->
+  <!-- HOLIDAY DEEP-LINK VIEW -->
   <div id="holiday-view" class="page-wrap" style="display:none;">
     <main class="container">
       <img src="assets/app-icon.png" class="app-icon" alt="App icon" />
@@ -142,7 +171,7 @@
     </main>
   </div>
 
-  <!-- 🟢 DEEP LINK ROUTER -->
+  <!-- DEEP LINK ROUTER -->
   <script>
     (function () {
       const path = window.location.pathname;
