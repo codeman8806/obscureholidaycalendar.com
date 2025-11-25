@@ -14,7 +14,7 @@
   <meta name="google-play-app" content="app-id=com.codeman8806.obscureholidaycalendar" />
 
   <!-- Basic SEO Meta -->
-  <meta name="description" content="Obscure Holiday Calendar is a fun daily holiday app that shows weird, quirky & obscure national days with artwork, facts, and reminders. Available on iOS and Android." />
+  <meta name="description" content="Obscure Holiday Calendar is a fun daily holiday app that shows weird, quirky & obscure national national days with artwork, facts, and reminders. Available on iOS and Android." />
   <meta name="keywords" content="obscure holidays app, weird holidays app, fun holidays app, holiday calendar app, national day calendar alternative, quirky holidays, daily holiday reminder, daily trivia app, fun iOS widgets, holiday widget app" />
 
   <!-- Open Graph -->
@@ -295,58 +295,6 @@
       color: var(--primary-soft);
     }
 
-    .seo-box h3 {
-      margin-top: 20px;
-      margin-bottom: 8px;
-      font-size: 18px;
-      color: #4d0a9c;
-    }
-
-    .seo-box p {
-      margin: 0 0 8px;
-      font-size: 15px;
-    }
-
-    .seo-box ul {
-      margin: 6px 0 6px 20px;
-      padding: 0;
-      font-size: 15px;
-    }
-
-    .seo-box li {
-      margin-bottom: 4px;
-    }
-
-    .faq-block {
-      margin-top: 26px;
-      border-top: 1px solid #e2d8ff;
-      padding-top: 18px;
-    }
-
-    .faq-block h2 {
-      font-size: 20px;
-      margin: 0 0 10px;
-      color: var(--primary-soft);
-    }
-
-    .faq-item {
-      margin-bottom: 10px;
-    }
-
-    .faq-item strong {
-      display: block;
-      font-size: 15px;
-      margin-bottom: 2px;
-      color: #333333;
-    }
-
-    .faq-item p {
-      margin: 0;
-      font-size: 14px;
-      color: var(--text-sub);
-      line-height: 1.6;
-    }
-
     footer {
       margin-top: 24px;
       font-size: 13px;
@@ -364,34 +312,39 @@
       text-decoration: underline;
     }
 
-    /* --- HOLIDAY FALLBACK SECTION --- */
+    /* DEEP LINK HOLIDAY SECTION */
     #holiday-section {
       display: none;
-      margin-top: 24px;
+      background: #fff6fe;
       padding: 20px;
-      background: #f1e9ff;
-      border-radius: 16px;
-      border: 1px solid #e0d2ff;
+      border-radius: 20px;
+      margin-top: 26px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid #f5d8f0;
       text-align: center;
     }
 
-    #holiday-title {
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: var(--primary-soft);
+    #holiday-section h2 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 26px;
     }
 
     #open-in-app {
       display: inline-block;
-      margin-top: 12px;
-      padding: 12px 18px;
-      background: var(--primary);
-      color: #fff;
+      margin-top: 14px;
+      padding: 12px 20px;
       border-radius: var(--radius-pill);
-      text-decoration: none;
+      background: var(--primary);
+      color: white;
       font-weight: 600;
+      text-decoration: none;
+      box-shadow: var(--shadow-soft);
     }
 
+    #open-in-app:hover {
+      background: var(--primary-soft);
+    }
   </style>
 </head>
 
@@ -416,6 +369,16 @@
         alternative</strong> that fits in your pocket, complete with widgets and daily reminders.
       </p>
 
+      <!-- HOLIDAY SECTION (shows only when deep link detected) -->
+      <section id="holiday-section">
+        <h2 id="holiday-title">Loading…</h2>
+        <p>This holiday is best experienced in the app.</p>
+
+        <a id="open-in-app" href="#">
+          Open in the App
+        </a>
+      </section>
+
       <div class="badge-row">
         <a class="store-btn ios" href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank" rel="noopener noreferrer">
           <span>
@@ -432,86 +395,11 @@
         </a>
       </div>
 
-      <!-- HOLIDAY FALLBACK (shown ONLY if a deep link is detected) -->
-      <section id="holiday-section">
-        <h2 id="holiday-title">Loading holiday…</h2>
-        <p>This holiday is best experienced inside the app.</p>
-        <a id="open-in-app" href="#">Open in the App</a>
-      </section>
-
-      <section class="seo-box" aria-label="About Obscure Holiday Calendar app">
+      <section class="seo-box" aria-label="About">
         <h2>Daily Fun, Weird & Obscure Holidays</h2>
         <p>
-          Every morning, Obscure Holiday Calendar highlights a new <strong>obscure holiday</strong> or
-          <strong>quirky celebration</strong> — from food days like National Taco Day to silly observances like
-          Bubble Wrap Appreciation Day. It’s a playful mix of <strong>daily holiday reminders</strong>,
-          <strong>fun facts</strong> and light <strong>daily trivia</strong>.
+          Every morning, Obscure Holiday Calendar highlights a new <strong>obscure holiday</strong> or fun observance.
         </p>
-
-        <h3>What you can explore in the app</h3>
-        <ul>
-          <li>Daily weird holidays, obscure national days and fun observances</li>
-          <li>Short descriptions and fun facts you can read in a few seconds</li>
-          <li>Colorful, scroll-stopping holiday artwork</li>
-          <li>Optional notifications so you never miss today’s holiday</li>
-          <li>Home Screen widgets (on supported devices) to see the holiday at a glance</li>
-          <li>Easy sharing so you can send holidays to friends, family or your class</li>
-        </ul>
-
-        <h3>Who the Obscure Holiday Calendar app is for</h3>
-        <p>
-          The app is perfect for:
-        </p>
-        <ul>
-          <li>Parents looking for a quick, fun moment with kids</li>
-          <li>Teachers who want a light icebreaker or writing prompt in class</li>
-          <li>Trivia fans and people who love random <strong>daily facts</strong></li>
-          <li>Social media creators who post about <strong>weird holidays</strong></li>
-          <li>Anyone who enjoys <strong>holiday widget apps</strong> and fun iOS / Android widgets</li>
-        </ul>
-
-        <h3>Why people enjoy this daily holiday app</h3>
-        <p>
-          Obscure Holiday Calendar keeps things easy: one main holiday per day, clean artwork, and a short description.
-          It’s a simple habit that’s easy to stick with, and it makes a great companion to other
-          <strong>daily trivia apps</strong> or <strong>national day calendar</strong> style sites.
-        </p>
-
-        <div class="faq-block" aria-label="Frequently Asked Questions">
-          <h2>Frequently Asked Questions</h2>
-
-          <div class="faq-item">
-            <strong>Is the app free?</strong>
-            <p>
-              Yes, Obscure Holiday Calendar is free to download on both iOS and Android. Optional in-app purchases or
-              rewarded ads may unlock extra features like an ad-free experience.
-            </p>
-          </div>
-
-          <div class="faq-item">
-            <strong>Does it work on both iPhone and Android?</strong>
-            <p>
-              Yes. The app is available on the Apple App Store for iPhone and iPad and on Google Play for Android
-              phones and tablets.
-            </p>
-          </div>
-
-          <div class="faq-item">
-            <strong>Can I use it as a daily reminder?</strong>
-            <p>
-              You can enable notifications and widgets so today’s obscure holiday appears automatically, making it a
-              fun <strong>daily holiday reminder</strong>.
-            </p>
-          </div>
-
-          <div class="faq-item">
-            <strong>Is the content family friendly?</strong>
-            <p>
-              Yes. The app is designed to stay light, fun and family-friendly, making it suitable for parents, kids,
-              teachers and classrooms.
-            </p>
-          </div>
-        </div>
       </section>
 
       <footer>
@@ -522,31 +410,29 @@
     </main>
   </div>
 
-  <!-- 🟣 Deep Link Handler Script (SPA Router) -->
+  <!-- DEEP LINK ROUTER -->
   <script>
   (function () {
     const path = window.location.pathname;
 
-    // Expected format: /holiday/<slug>
     if (path.startsWith("/holiday/")) {
       const slug = path.replace("/holiday/", "").replace("/", "");
+      const title = slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
 
-      console.log("Detected deep link slug:", slug);
+      sessionStorage.setItem("selectedHolidaySlug", slug);
 
-      // Show the fallback section
-      const holidaySection = document.getElementById("holiday-section");
-      holidaySection.style.display = "block";
-
-      // Update the holiday title
-      const title = document.getElementById("holiday-title");
-      title.textContent = slug.replace(/-/g, " ").toUpperCase();
-
-      // Set "Open in App" button
+      const section = document.getElementById("holiday-section");
+      const titleEl = document.getElementById("holiday-title");
       const openBtn = document.getElementById("open-in-app");
-      openBtn.href = `obscureholidaycalendar://holiday/${slug}`;
+
+      if (section) section.style.display = "block";
+      if (titleEl) titleEl.textContent = title;
+
+      if (openBtn) {
+        openBtn.href = `obscureholidaycalendar://holiday/${slug}`;
+      }
     }
   })();
   </script>
-
 </body>
 </html>
