@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <title>Redirecting…</title>
   <script>
-    // Save the original path before redirecting
-    sessionStorage.setItem("originalPath", window.location.pathname);
+    // Preserve full URL path and query when redirecting to index.html
+    var redirectUrl = '/' + window.location.pathname + window.location.search + window.location.hash;
 
-    // Redirect to homepage
-    window.location.replace("/");
+    // Store the original path so index.html can read it
+    sessionStorage.setItem('originalPath', window.location.pathname);
+
+    // Redirect to index.html while keeping the path info in sessionStorage
+    window.location.replace('/');
   </script>
 </head>
 <body>
-  <p>Redirecting…</p>
+  Redirecting…
 </body>
 </html>
