@@ -11,11 +11,11 @@
   <meta name="apple-itunes-app" content="app-id=6755315850" />
   <meta name="google-play-app" content="app-id=com.codeman8806.obscureholidaycalendar" />
 
-  <meta name="description" content="Discover today’s fun, weird, quirky & obscure holidays with artwork, facts, reminders, and widgets. A simple and joyful daily holiday app for iOS & Android." />
+  <meta name="description" content="Discover today’s fun, weird, quirky & obscure holidays with artwork, facts, reminders, and widgets. A joyful daily holiday app for iOS & Android." />
   <meta name="keywords" content="obscure holidays app, weird holidays app, fun holidays, holiday calendar app, national day calendar, quirky holidays, daily reminder app, holiday widgets iOS, holiday widgets Android" />
 
   <meta property="og:title" content="Obscure Holiday Calendar — Daily Fun & Obscure Holidays" />
-  <meta property="og:description" content="Explore unique, weird & obscure holidays everyday. Artwork, facts, reminders & widgets on iOS and Android." />
+  <meta property="og:description" content="Explore unique, weird & obscure holidays every day. Artwork, facts, reminders & widgets on iOS and Android." />
   <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.obscureholidaycalendar.com/" />
@@ -29,6 +29,30 @@
   <link rel="icon" type="image/png" href="assets/app-icon.png" />
 
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- ✅ JSON-LD Structured Data for App SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Obscure Holiday Calendar",
+    "operatingSystem": "iOS, Android",
+    "applicationCategory": "LifestyleApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "url": "https://www.obscureholidaycalendar.com/",
+    "downloadUrl": "https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850",
+    "installUrl": "https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Obscure Holiday Calendar"
+    }
+  }
+  </script>
+
 </head>
 
 <body>
@@ -65,9 +89,9 @@
       <section class="seo-box">
         <h2>About Obscure Holiday Calendar</h2>
         <p>
-          Every day has a unique celebration — from food holidays to unusual awareness days.
-          Obscure Holiday Calendar curates the most fun, weird, and unexpected holidays so
-          you always have something to celebrate.
+          Every day has its own unique celebration — from food holidays to unusual national days.
+          Obscure Holiday Calendar curates the best fun, weird, and unexpected holidays so you always
+          have something to celebrate.
         </p>
 
         <ul>
@@ -80,7 +104,7 @@
 
         <p>
           Available worldwide on both iOS and Android devices. Perfect for creators,
-          social media posts, classrooms, families, or just adding something fun to your day.
+          social media posts, classrooms, families, and anyone who loves discovering something new each day.
         </p>
       </section>
 
@@ -91,7 +115,7 @@
     </main>
   </div>
 
-  <!-- 🟣 HOLIDAY DEEP-LINK FALLBACK -->
+  <!-- 🟣 HOLIDAY DEEP-LINK VIEW -->
   <div id="holiday-view" class="page-wrap" style="display:none;">
     <main class="container">
       <img src="assets/app-icon.png" class="app-icon" alt="App icon" />
@@ -124,7 +148,7 @@
       const path = window.location.pathname;
 
       if (path.startsWith("/holiday/")) {
-        const slug = path.replace("/holiday/", "");
+        const slug = path.replace("/holiday/", "").replace("/", "");
 
         document.getElementById("homepage").style.display = "none";
         document.getElementById("holiday-view").style.display = "flex";
