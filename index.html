@@ -11,34 +11,29 @@
   <meta name="apple-itunes-app" content="app-id=6755315850" />
   <meta name="google-play-app" content="app-id=com.codeman8806.obscureholidaycalendar" />
 
-  <meta name="description" content="Obscure Holiday Calendar is a fun daily holiday app that shows weird, quirky & obscure national days with artwork, facts, and reminders. Available on iOS and Android." />
-  <meta name="keywords" content="obscure holidays app, weird holidays app, fun holidays app, holiday calendar app, national day calendar alternative, quirky holidays, daily holiday reminder, daily trivia app, fun iOS widgets, holiday widget app" />
+  <meta name="description" content="Discover today’s fun, weird, quirky & obscure holidays with artwork, facts, reminders, and widgets. A simple and joyful daily holiday app for iOS & Android." />
+  <meta name="keywords" content="obscure holidays app, weird holidays app, fun holidays, holiday calendar app, national day calendar, quirky holidays, daily reminder app, holiday widgets iOS, holiday widgets Android" />
 
   <meta property="og:title" content="Obscure Holiday Calendar — Daily Fun & Obscure Holidays" />
-  <meta property="og:description" content="Discover a new weird, quirky, or obscure holiday every day. Artwork, fun facts, and reminders on iOS & Android." />
+  <meta property="og:description" content="Explore unique, weird & obscure holidays everyday. Artwork, facts, reminders & widgets on iOS and Android." />
   <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.obscureholidaycalendar.com/" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Obscure Holiday Calendar — Fun Daily Holiday App" />
-  <meta name="twitter:description" content="Celebrate fun, weird & obscure holidays with daily artwork, facts, and widgets." />
+  <meta name="twitter:description" content="Celebrate fun, weird & obscure holidays with daily artwork, facts & reminders." />
   <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png" />
 
   <link rel="apple-touch-icon" href="assets/app-icon.png" />
   <link rel="icon" type="image/png" href="assets/app-icon.png" />
 
   <link rel="stylesheet" href="styles.css" />
-
-  <style>
-    /* --- Styles from your existing page kept intact --- */
-    /* (same CSS as your current version — unchanged) */
-  </style>
 </head>
 
 <body>
 
-  <!-- 🔵 HOMEPAGE CONTENT (SHOWN ONLY IF NO HOLIDAY SLUG) -->
+  <!-- 🔵 HOMEPAGE -->
   <div id="homepage" class="page-wrap">
     <main class="container">
       <img src="assets/app-icon.png" class="app-icon" alt="App icon" />
@@ -52,9 +47,9 @@
       <p class="tagline">Discover today’s fun, weird & obscure holidays — every single day.</p>
 
       <p class="description">
-        Obscure Holiday Calendar is a <strong>fun daily holiday app</strong> that surfaces
-        <strong>weird holidays</strong>, <strong>quirky national days</strong>, food holidays and more,
-        with colorful artwork and bite-sized facts.
+        Obscure Holiday Calendar is a <strong>daily holiday app</strong> featuring unique
+        <strong>quirky national days</strong>, <strong>food holidays</strong>, and fun celebrations.
+        Each holiday includes artwork, fun facts, and reminders.
       </p>
 
       <div class="badge-row">
@@ -66,8 +61,28 @@
         </a>
       </div>
 
-      <!-- SEO section unchanged -->
-      <section class="seo-box">… existing content …</section>
+      <!-- 🔥 SEO Section -->
+      <section class="seo-box">
+        <h2>About Obscure Holiday Calendar</h2>
+        <p>
+          Every day has a unique celebration — from food holidays to unusual awareness days.
+          Obscure Holiday Calendar curates the most fun, weird, and unexpected holidays so
+          you always have something to celebrate.
+        </p>
+
+        <ul>
+          <li>Daily obscure, weird & quirky holidays</li>
+          <li>Artwork & fun facts for every celebration</li>
+          <li>Widgets for iPhone & Android</li>
+          <li>Notifications so you never miss today’s holiday</li>
+          <li>Deep links so holidays can be shared instantly</li>
+        </ul>
+
+        <p>
+          Available worldwide on both iOS and Android devices. Perfect for creators,
+          social media posts, classrooms, families, or just adding something fun to your day.
+        </p>
+      </section>
 
       <footer>
         <a href="https://github.com/codeman8806/Privacy-Policy/wiki/Privacy-Policy-for-Obscure-Holiday-Calendar">Privacy Policy</a> •
@@ -76,7 +91,7 @@
     </main>
   </div>
 
-  <!-- 🟣 HOLIDAY FALLBACK VIEW (VISIBLE ONLY FOR DEEP LINKS) -->
+  <!-- 🟣 HOLIDAY DEEP-LINK FALLBACK -->
   <div id="holiday-view" class="page-wrap" style="display:none;">
     <main class="container">
       <img src="assets/app-icon.png" class="app-icon" alt="App icon" />
@@ -84,8 +99,8 @@
       <h1 id="holiday-title">Holiday</h1>
 
       <p class="description" id="holiday-description">
-        This holiday is best experienced in the app.  
-        Open the app to see artwork, facts, and the full holiday experience.
+        This holiday is best experienced in the app.
+        Open the app to see artwork, facts, widgets, and the full holiday experience.
       </p>
 
       <div class="badge-row">
@@ -103,26 +118,20 @@
     </main>
   </div>
 
-  <!-- 🟢 DEEP LINK ROUTER SCRIPT -->
+  <!-- 🟢 DEEP LINK ROUTER -->
   <script>
     (function () {
       const path = window.location.pathname;
 
-      // Detect deep link
       if (path.startsWith("/holiday/")) {
         const slug = path.replace("/holiday/", "");
 
-        // Hide homepage
         document.getElementById("homepage").style.display = "none";
-
-        // Show holiday fallback
         document.getElementById("holiday-view").style.display = "flex";
 
-        // Update title
         const pretty = slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
         document.getElementById("holiday-title").textContent = pretty;
 
-        // Open-in-app deep link format
         document.getElementById("open-in-app").href = `obscureholidaycalendar://holiday/${slug}`;
       }
     })();
