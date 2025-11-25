@@ -11,290 +11,323 @@
   <meta name="apple-itunes-app" content="app-id=6755315850" />
   <meta name="google-play-app" content="app-id=com.codeman8806.obscureholidaycalendar" />
 
-  <meta name="description" content="Discover today’s fun, weird & obscure holidays with artwork, reminders, widgets, and an easy daily feed. Available on iOS & Android." />
-  <meta name="keywords" content="obscure holidays app, weird holidays app, fun holidays app, holiday calendar app, national day calendar alternative, quirky holidays, daily holiday reminder, daily trivia app, fun iOS widgets, holiday widget app" />
+  <meta name="description" content="Discover today’s fun, weird & obscure holidays with artwork, reminders, widgets, and daily fun facts. Available on iOS & Android." />
+  <meta name="keywords" content="obscure holidays app, weird holidays, fun holidays app, national day calendar, quirky holidays, daily holiday reminder, holiday app" />
 
   <meta property="og:title" content="Obscure Holiday Calendar — Daily Fun & Obscure Holidays" />
-  <meta property="og:description" content="Discover a new weird, quirky, or obscure holiday every day with artwork, facts, and reminders." />
+  <meta property="og:description" content="Explore fun, weird & obscure holidays every day with artwork, facts, widgets, and reminders." />
   <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.obscureholidaycalendar.com/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Obscure Holiday Calendar — Fun Daily Holiday App" />
-  <meta name="twitter:description" content="Celebrate fun, weird & obscure holidays with daily artwork, facts, and widgets." />
+  <meta name="twitter:title" content="Obscure Holiday Calendar — Fun Daily Holidays" />
+  <meta name="twitter:description" content="Celebrate fun, weird & obscure holidays every day with artwork and reminders." />
   <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png" />
 
   <link rel="icon" type="image/png" href="assets/app-icon.png" />
 
   <style>
     :root {
-      --bg: #faf7ff;
-      --card-bg: #ffffff;
-      --primary: #2c005f;
-      --primary-soft: #3d0070;
-      --accent: #f25d94;
-      --text-main: #222;
-      --text-sub: #555;
-      --radius-lg: 22px;
-      --shadow-soft: 0 10px 26px rgba(0,0,0,0.08);
+      --purple-dark: #2B0050;
+      --purple-light: #6A0DFF;
+      --purple-accent: #8A3DFF;
+      --text-main: #fff;
+      --text-sub: #e8dfff;
+      --card-bg: rgba(255,255,255,0.14);
+      --radius: 22px;
     }
 
     body {
       margin: 0;
-      background: var(--bg);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
       color: var(--text-main);
+      background: radial-gradient(circle at top, var(--purple-light) 0%, var(--purple-dark) 70%);
+      min-height: 100vh;
     }
 
-    .page-wrap {
-      display: flex;
-      justify-content: center;
-      padding: 32px 16px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 680px;
-      background: var(--card-bg);
-      padding: 28px 22px 40px;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-soft);
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 70px;
       text-align: center;
     }
 
     .app-icon {
-      width: 120px;
-      height: 120px;
-      border-radius: 26px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
-      margin-bottom: 14px;
+      width: 140px;
+      height: 140px;
+      border-radius: 28px;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    }
+
+    .highlight-strip {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255,255,255,0.18);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: var(--text-sub);
     }
 
     h1 {
-      margin: 0;
-      font-size: 32px;
+      font-size: 40px;
+      margin: 8px 0 12px;
       font-weight: 800;
-      color: var(--primary);
     }
 
     .tagline {
-      font-size: 16px;
+      font-size: 18px;
       color: var(--text-sub);
-      margin: 12px 0 22px;
-    }
-
-    .description {
-      font-size: 16px;
-      color: var(--text-main);
-      line-height: 1.55;
-      margin-bottom: 24px;
-    }
-
-    /* Store buttons */
-    .badge-row {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
       margin-bottom: 26px;
     }
 
+    .description {
+      max-width: 720px;
+      margin: 0 auto 28px;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--text-sub);
+    }
+
+    /* Store buttons row */
+    .store-row {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 0 auto 30px;
+      max-width: 360px;
+    }
+
     @media (min-width: 520px) {
-      .badge-row {
+      .store-row {
         flex-direction: row;
-        justify-content: center;
+        max-width: 600px;
       }
     }
 
-    .store-btn {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      padding: 14px 20px;
-      border-radius: 999px;
-      text-decoration: none;
+    .store-badge img {
+      height: 56px;
+      max-width: 200px;
+    }
+
+    .cta-today {
+      display: inline-block;
+      background: var(--purple-accent);
+      color: white;
+      padding: 12px 22px;
+      border-radius: 12px;
       font-weight: 600;
-      border: 2px solid transparent;
-      transition: 0.18s ease;
+      margin: 22px 0 34px;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
     }
 
-    .store-btn small {
-      display: block;
-      font-size: 11px;
-      opacity: 0.85;
-      line-height: 1.2;
+    /* Popular Holidays Section */
+    .section {
+      margin-top: 40px;
+      text-align: left;
+      color: white;
     }
 
-    .store-btn strong {
-      display: block;
-      font-size: 15px;
-      margin-top: -2px;
+    .section h2 {
+      font-size: 26px;
+      margin-bottom: 12px;
     }
 
-    .store-btn.ios {
-      background: #000;
+    .popular-list a {
+      display: inline-block;
+      margin-right: 12px;
+      margin-bottom: 10px;
+      background: rgba(255,255,255,0.14);
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-decoration: none;
       color: #fff;
+      font-weight: 500;
+      transition: background 0.15s;
     }
 
-    .store-btn.android {
-      background: #fff;
-      color: #000;
-      border: 2px solid #000;
+    .popular-list a:hover {
+      background: rgba(255,255,255,0.22);
     }
 
-    .store-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    /* OTHER APP BOX */
+    /* Other App Box */
     .other-app {
-      margin-top: 34px;
-      padding: 20px 18px;
-      background: #f1e9ff;
+      margin-top: 50px;
+      background: rgba(255,255,255,0.14);
+      padding: 22px 20px;
       border-radius: 16px;
       text-align: center;
     }
 
     .other-app h3 {
-      margin: 0 0 8px;
-      font-size: 1.2rem;
-      color: #3d0070;
+      margin: 0 0 10px;
+      font-size: 22px;
     }
 
     .other-app p {
-      margin: 0 0 14px;
-      font-size: 0.95rem;
-      color: #444;
+      margin: 0 0 16px;
+      color: var(--text-sub);
     }
 
     .other-app a {
       display: inline-block;
       padding: 10px 20px;
-      background: #3d0070;
-      color: white;
+      background: var(--purple-accent);
       border-radius: 999px;
-      font-weight: 600;
+      color: white;
       text-decoration: none;
+      font-weight: 600;
     }
 
     footer {
-      margin-top: 26px;
+      margin-top: 50px;
       font-size: 14px;
-      color: #666;
+      color: var(--text-sub);
     }
 
     footer a {
-      color: #444;
-      text-decoration: none;
+      color: var(--text-sub);
       margin: 0 8px;
+      text-decoration: none;
     }
 
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* HOLIDAY VIEW (Deep Link Fallback) */
-    #holiday-view {
-      display: none;
-    }
+    /* Deep Link Holiday View */
+    #holiday-view { display: none; }
   </style>
 </head>
 
 <body>
 
-  <!-- HOMEPAGE -->
-  <div id="homepage" class="page-wrap">
-    <main class="container">
-      <img src="assets/app-icon.png" alt="App Icon" class="app-icon" />
+<!-- HOMEPAGE -->
+<div id="homepage">
+  <div class="wrap">
+    
+    <img src="assets/app-icon.png" class="app-icon" alt="Obscure Holiday Calendar Icon" />
 
-      <h1>Obscure Holiday Calendar</h1>
-      <p class="tagline">Discover fun, weird & obscure holidays — every single day.</p>
+    <div class="highlight-strip">
+      Fun & weird holidays • Daily reminders
+    </div>
 
-      <p class="description">
-        See today’s quirky holidays with artwork, fun facts, widgets, reminders, and more.
-        Available on iOS & Android.
-      </p>
+    <h1>Obscure Holiday Calendar</h1>
 
-      <!-- Store Buttons -->
-      <div class="badge-row">
-        <a class="store-btn ios" href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank">
-          <span>
-            <small>Download on the</small>
-            <strong>App Store</strong>
-          </span>
-        </a>
+    <p class="tagline">
+      Discover today’s fun, weird & obscure holidays — every single day.
+    </p>
 
-        <a class="store-btn android" href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar" target="_blank">
-          <span>
-            <small>Get it on</small>
-            <strong>Google Play</strong>
-          </span>
-        </a>
-      </div>
+    <p class="description">
+      Obscure Holiday Calendar is a daily holiday app featuring unique quirky national days,
+      food holidays, and fun celebrations. Each holiday includes artwork, fun facts,
+      widgets, and helpful reminders. Available worldwide on iPhone and Android.
+    </p>
 
-      <!-- Cross Link to Scoreboard App -->
-      <div class="other-app">
-        <h3>Also Try My Sports App</h3>
-        <p>A clean scoreboard & game timer for basketball, soccer, volleyball, and more.</p>
-        <a href="https://scoreboardwithtimer.com" target="_blank">Scoreboard With Timer</a>
-      </div>
-
-      <footer>
-        <a href="https://github.com/codeman8806/Privacy-Policy/wiki/Privacy-Policy-for-Obscure-Holiday-Calendar" target="_blank">Privacy Policy</a> •
-        <a href="https://github.com/codeman8806/Privacy-Policy/wiki/Support-for-Obscure-Holiday-Calendar" target="_blank">Support</a> •
-        <a href="https://scoreboardwithtimer.com" target="_blank">Scoreboard With Timer</a>
-      </footer>
-    </main>
-  </div>
-
-  <!-- HOLIDAY VIEW FOR DEEP LINKS -->
-  <div id="holiday-view" class="page-wrap">
-    <main class="container">
-      <img src="assets/app-icon.png" alt="App Icon" class="app-icon" />
-      <h1 id="holiday-title"></h1>
-
-      <p class="description">
-        This holiday is featured in the Obscure Holiday Calendar app.  
-        Open the app to see artwork, fun facts, and the full holiday experience.
-      </p>
-
-      <div class="badge-row">
-        <a class="store-btn ios" href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank">
-          <span><small>Open in</small><strong>App Store</strong></span>
-        </a>
-
-        <a class="store-btn android" href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar" target="_blank">
-          <span><small>Open in</small><strong>Google Play</strong></span>
-        </a>
-      </div>
-
-      <a id="open-in-app" class="other-app-btn" style="display:inline-block; margin-top:14px; padding:12px 20px; background:#3d0070; color:white; border-radius:999px; text-decoration:none; font-weight:600;">
-        Open in the App
+    <!-- Store Buttons -->
+    <div class="store-row">
+      <a class="store-badge" href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank">
+        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" />
       </a>
+      <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar" target="_blank">
+        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" />
+      </a>
+    </div>
 
-      <footer>
-        <a href="/">Back to Homepage</a>
-      </footer>
-    </main>
+    <!-- CTA -->
+    <a class="cta-today" href="/holiday/today">🎉 See Today’s Holiday →</a>
+
+    <!-- Popular Holidays -->
+    <div class="section">
+      <h2>Popular Fun Holidays</h2>
+      <div class="popular-list">
+        <a href="/holiday/april-fools-day">April Fools' Day</a>
+        <a href="/holiday/halloween">Halloween</a>
+        <a href="/holiday/new-years-eve">New Year’s Eve</a>
+        <a href="/holiday/thanksgiving">Thanksgiving</a>
+        <a href="/holiday/christmas-day">Christmas Day</a>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="section">
+      <h2>About Obscure Holiday Calendar</h2>
+      <p class="description">
+        Every day has a unique celebration — from food holidays to unusual awareness days.
+        Obscure Holiday Calendar curates the most fun, weird, and unexpected holidays
+        so you always have something to celebrate.
+      </p>
+
+      <ul style="max-width:700px; margin:0 auto; line-height:1.7;">
+        <li>Daily obscure, weird & quirky holidays</li>
+        <li>Artwork & fun facts for every celebration</li>
+        <li>Widgets for iPhone & Android</li>
+        <li>Notifications so you never miss today’s holiday</li>
+        <li>Deep links so holidays can be shared instantly</li>
+      </ul>
+    </div>
+
+    <!-- Other App -->
+    <div class="other-app">
+      <h3>Also Try My Sports App</h3>
+      <p>A clean scoreboard & game timer for basketball, soccer, volleyball, and more.</p>
+      <a href="https://scoreboardwithtimer.com" target="_blank">Scoreboard With Timer</a>
+    </div>
+
+    <footer>
+      <a href="https://github.com/codeman8806/Privacy-Policy/wiki/Privacy-Policy-for-Obscure-Holiday-Calendar">Privacy Policy</a> •
+      <a href="https://github.com/codeman8806/Privacy-Policy/wiki/Support-for-Obscure-Holiday-Calendar">Support</a> •
+      <a href="https://scoreboardwithtimer.com" target="_blank">Scoreboard With Timer</a>
+    </footer>
+
   </div>
+</div>
 
-  <!-- DEEP LINK ROUTER -->
-  <script>
-    (function () {
-      const path = window.location.pathname;
-      if (path.startsWith("/holiday/")) {
-        const slug = path.replace("/holiday/", "").replace("/", "");
+<!-- HOLIDAY VIEW (Deep Link Fallback) -->
+<div id="holiday-view">
+  <div class="wrap">
 
-        document.getElementById("homepage").style.display = "none";
-        document.getElementById("holiday-view").style.display = "flex";
+    <img src="assets/app-icon.png" class="app-icon" alt="App Icon"/>
 
-        const pretty = slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-        document.getElementById("holiday-title").textContent = pretty;
+    <h1 id="holiday-title"></h1>
 
-        document.getElementById("open-in-app").href = `obscureholidaycalendar://holiday/${slug}`;
-      }
-    })();
-  </script>
+    <p class="description">
+      This holiday is featured in the Obscure Holiday Calendar app.
+      Open the app to see artwork, fun facts, and the full holiday experience.
+    </p>
+
+    <div class="store-row">
+      <a class="store-badge" href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank">
+        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" />
+      </a>
+      <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar" target="_blank">
+        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" />
+      </a>
+    </div>
+
+    <a id="open-in-app" class="cta-today" href="#">
+      Open in the App
+    </a>
+
+  </div>
+</div>
+
+<!-- Deep Link Router -->
+<script>
+(function () {
+  const path = window.location.pathname;
+  if (path.startsWith("/holiday/")) {
+    const slug = path.replace("/holiday/","").replace("/","");
+    document.getElementById("homepage").style.display = "none";
+    document.getElementById("holiday-view").style.display = "block";
+
+    const pretty = slug.replace(/-/g," ").replace(/\b\w/g,x=>x.toUpperCase());
+    document.getElementById("holiday-title").textContent = pretty;
+
+    document.getElementById("open-in-app").href = `obscureholidaycalendar://holiday/${slug}`;
+  }
+})();
+</script>
 
 </body>
 </html>
