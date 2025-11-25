@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting…</title>
+  <script>
+    (function () {
+      // Get today's date (month/day)
+      const now = new Date();
+
+      // Convert to MM-DD format
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
+
+      // Map dates → holiday slugs
+      // ⚠️ You'll need to fill this with your actual list eventually
+      const holidayMap = {
+        "1-1": "new-years-day",
+        "2-14": "valentines-day",
+        "4-1": "april-fools-day",
+        "10-31": "halloween",
+        "12-25": "christmas-day",
+        // ...and so on
+      };
+
+      const key = `${month}-${day}`;
+      const slug = holidayMap[key] || "april-fools-day";
+
+      window.location.href = `/holiday/${slug}/`;
+    })();
+  </script>
+</head>
+<body>
+  Redirecting to today’s holiday...
+</body>
+</html>
