@@ -7944,25 +7944,27 @@
     "11-26": [
       {
         "date": "11-26",
-        "description": "National Cake Day, observed annually on November 26th, is a sweet celebration dedicated to one of the world's most beloved desserts: cake. This unofficial holiday encourages individuals to bake, buy, or simply enjoy a slice of their favorite cake, whether it's a simple pound cake, a decadent chocolate masterpiece, or a beautifully frosted creation. It's a day to appreciate the joy and comfort that cake brings to celebrations, gatherings, and everyday indulgences.",
-        "emoji": "🎂",
+        "description": "An annual celebration on November 26th, commemorating the publication of Lewis Carroll's classic children's novel, \"Alice's Adventures in Wonderland.\" It's a day to delve into the fantastical world of Wonderland, its whimsical characters, and the enduring literary legacy of Charles Lutwidge Dodgson, better known as Lewis Carroll.",
+        "emoji": "🐇",
         "funFacts": [
-          "The earliest forms of cake, more akin to honey-sweetened bread, are believed to have originated in ancient Egypt.",
-          "The word \"cake\" is thought to be derived from the Old Norse word \"kaka.\"",
-          "The tradition of frosting cakes with sugar and butter began to gain widespread popularity in the 17th century with advances in oven technology and sugar refinement."
+          "\"Alice's Adventures in Wonderland\" was first published on November 26, 1865.",
+          "The story originated from a tale Lewis Carroll told to Alice Liddell and her sisters during a boat trip on July 4, 1862.",
+          "The original title of the manuscript given to Alice Liddell was \"Alice's Adventures Under Ground.\"",
+          "Lewis Carroll initially wanted to call the book \"Alice's Golden Hour\" or \"Alice's Hour in Wonderland.\""
         ],
-        "name": "National Cake Day"
+        "name": "Lewis Carroll's Alice in Wonderland Day"
       },
       {
         "date": "11-26",
-        "description": "Good Grief Day, observed annually on November 26th, is an unofficial holiday celebrating life's everyday exasperations and minor setbacks, often with a humorous or resigned sigh. The day's name is famously associated with Charlie Brown, the long-suffering protagonist of Charles M. Schulz's Peanuts comic strip, whose iconic catchphrase \"Good grief!\" perfectly encapsulates the feeling of being overwhelmed yet enduring. It encourages acknowledging these small frustrations and finding a way to move past them, much like Charlie Brown always does.",
-        "emoji": "🤦‍♂️",
+        "description": "First Televised Football Day, observed annually on November 26th, commemorates the historic broadcast of the first professional American football game. On this day in 1939, NBC aired a game between the Brooklyn Dodgers and the Philadelphia Eagles from Ebbets Field, a groundbreaking event that ushered in a new era for sports broadcasting and laid the foundation for football's immense popularity as a televised spectacle.",
+        "emoji": "📺🏈",
         "funFacts": [
-          "The iconic phrase \"Good grief!\" is the signature catchphrase of Charlie Brown from the Peanuts comic strip.",
-          "Charles M. Schulz, the creator of Peanuts, drew every single strip himself for nearly 50 years, from 1950 until his retirement in 2000.",
-          "Charlie Brown's \"Good grief!\" often accompanies his many misfortunes, such as failing to kick Lucy's football or having his kite eaten by the 'Kite-Eating Tree'."
+          "The inaugural televised professional football game took place at Ebbets Field in Brooklyn, New York.",
+          "At the time of the broadcast, there were only an estimated 500 to 1000 television sets in operation within the New York City area, severely limiting the potential audience.",
+          "In the historic match, the Brooklyn Dodgers defeated the Philadelphia Eagles with a final score of 23-14.",
+          "The televised game was part of NBC's early experimental programming as television technology was still in its nascent stages."
         ],
-        "name": "Good Grief Day"
+        "name": "First Televised Football Day"
       }
     ],
     "11-27": [
