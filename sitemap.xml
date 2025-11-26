@@ -2266,11 +2266,6 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-peach-ice-cream-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-peach-pie-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -3572,6 +3567,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/world-cocktail-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/world-emoji-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
