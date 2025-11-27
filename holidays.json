@@ -7972,26 +7972,31 @@
     "11-27": [
       {
         "date": "11-27",
-        "description": "This day commemorates the signing of Alfred Nobel's final will and testament on November 27, 1895, in Paris. This pivotal document famously stipulated that the bulk of his fortune be used to establish a series of international awards, known as the Nobel Prizes, to honor individuals who have conferred the greatest benefit to humankind in the fields of physics, chemistry, physiology or medicine, literature, and peace. It highlights the lasting impact of philanthropic legacy.",
-        "emoji": "📜",
+        "description": "A national holiday primarily celebrated in the United States and Canada as a day of giving thanks for the harvest and other blessings of the past year. It typically involves a large family meal, often featuring turkey, and reflection on gratitude and community.",
+        "emoji": "🦃",
         "funFacts": [
-          "Alfred Nobel, the Swedish chemist, engineer, inventor, and entrepreneur, signed his last will at the Swedish-Norwegian Club in Paris.",
-          "The establishment of the Nobel Prizes was initially met with opposition from some of Nobel's relatives and King Oscar II of Sweden and Norway, leading to a delay in their first awarding.",
-          "The first Nobel Prizes were awarded in 1901, five years after Nobel's death, which occurred on December 10, 1896.",
-          "The 'Prize in Economic Sciences' was added much later in 1968 by Sweden's central bank and is not part of Nobel's original will."
+          "The first Thanksgiving feast shared by the Pilgrims and the Wampanoag people in 1621 lasted three days.",
+          "While turkey is iconic, historical accounts suggest that venison and seafood, such as fish and lobster, were also prominent at early colonial harvest feasts.",
+          "Sarah Josepha Hale, the author of 'Mary Had a Little Lamb,' campaigned for 36 years to make Thanksgiving a national holiday.",
+          "The annual Macy's Thanksgiving Day Parade in New York City began in 1924, originally featuring animals from the Central Park Zoo.",
+          "In the US, two turkeys are 'pardoned' by the President each year, a tradition that became official in 1989.",
+          "Canadians celebrate Thanksgiving on the second Monday of October, a tradition that dates back to 1879, earlier than the US national holiday."
         ],
-        "name": "Alfred Nobel's Will Day"
+        "name": "Thanksgiving Day"
       },
       {
         "date": "11-27",
-        "description": "The National Day of Listening is an annual event encouraging people to set aside time to listen to a loved one's stories. Initiated by StoryCorps, a non-profit organization dedicated to preserving and sharing humanity's stories, this day promotes the importance of oral history and intergenerational communication. It's often observed the day after Thanksgiving, encouraging families to connect through shared narratives.",
-        "emoji": "👂",
+        "description": "A day to commemorate the inaugural Macy's Christmas Parade, held on November 27, 1924, which marked the beginning of a beloved American tradition that ushers in the holiday season with elaborate floats, marching bands, and live animals, preceding the introduction of giant balloons.",
+        "emoji": "🎈",
         "funFacts": [
-          "The National Day of Listening was launched in 2008 by StoryCorps.",
-          "StoryCorps provides a free DIY StoryKit to help participants record interviews.",
-          "The organization aims to create an archive of American voices, storing interviews at the American Folklife Center at the Library of Congress."
+          "The first parade was originally called 'Macy's Christmas Parade' and was created to celebrate the expansion of the Macy's Herald Square store.",
+          "It featured animals from the Central Park Zoo, including elephants, camels, and donkeys, much to the delight of the estimated 250,000 spectators.",
+          "The parade route was six miles long, starting from 145th Street and Convent Avenue and ending at Herald Square in front of Macy's.",
+          "Instead of the giant character balloons that are iconic today, the first parade showcased elaborate floats, marching bands, and the live animals.",
+          "The famous giant character balloons were introduced three years later in 1927, replacing the live animals.",
+          "Despite its initial success, the parade did not feature giant character balloons until 1927, three years after its inception, evolving into the format recognized today."
         ],
-        "name": "National Day of Listening"
+        "name": "First Macy's Christmas Parade Day"
       }
     ],
     "11-28": [
