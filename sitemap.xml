@@ -21,11 +21,6 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/alfred-nobel-s-will-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/all-or-nothing-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -682,6 +677,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/fire-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/first-macy-s-christmas-parade-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -1752,11 +1752,6 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-date-nut-bread-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-day-of-listening/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -3342,6 +3337,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/tell-the-truth-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/thanksgiving-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
