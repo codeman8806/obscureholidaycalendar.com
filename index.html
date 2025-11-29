@@ -6,7 +6,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="description" content="Discover today's fun, weird & obscure holidays with artwork, widgets, reminders, fun facts and shareable deep links. Available on iOS & Android." />
-  <meta name="keywords" content="obscure holidays, weird holidays, fun holidays, national days, daily holidays app, holiday calendar app" />
+  <meta name="keywords" content="obscure holidays, weird holidays, fun holidays, national days, daily holidays app, holiday calendar app, daily obscure holiday, holiday reminder app" />
+
+  <!-- JSON-LD Schema for Website + App -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Obscure Holiday Calendar",
+    "url": "https://www.obscureholidaycalendar.com/",
+    "description": "Daily obscure, weird, and fun holiday calendar with artwork, widgets, reminders and deep links on iOS and Android.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Obscure Holiday Calendar",
+      "url": "https://www.obscureholidaycalendar.com/"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.obscureholidaycalendar.com/holiday/{search_term_string}/",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Obscure Holiday Calendar",
+    "operatingSystem": "iOS, Android",
+    "applicationCategory": "LifestyleApplication",
+    "description": "Discover today’s obscure, weird and fun holidays with artwork, widgets, reminders, and deep links for sharing.",
+    "image": "https://www.obscureholidaycalendar.com/assets/app-icon.png",
+    "url": "https://www.obscureholidaycalendar.com/",
+    "installUrl": [
+      "https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850",
+      "https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
 
   <style>
     body {
@@ -120,7 +163,7 @@
       font-size: 1.4rem;
     }
 
-    /* Popular Holidays */
+    /* Section titles */
     .section-title {
       font-size: 1.4rem;
       margin: 44px 0 12px;
@@ -128,6 +171,7 @@
       color: #d8b7ff;
     }
 
+    /* Popular Holidays */
     .popular-list a {
       display: block;
       color: #e3c8ff;
@@ -137,6 +181,44 @@
     }
     .popular-list a:hover {
       text-decoration: underline;
+    }
+
+    /* SEO Content Block */
+    .seo-text {
+      max-width: 690px;
+      margin: 0 auto;
+      text-align: left;
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: #f4ecff;
+      opacity: 0.95;
+    }
+    .seo-text strong {
+      color: #fbe3ff;
+    }
+    .seo-text ul {
+      padding-left: 1.3rem;
+      margin: 0.4rem 0 0.8rem;
+    }
+    .seo-text li {
+      margin-bottom: 0.3rem;
+    }
+
+    /* FAQ Section */
+    .faq {
+      max-width: 690px;
+      margin: 32px auto 0;
+      text-align: left;
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+    .faq-item {
+      margin-bottom: 16px;
+    }
+    .faq-item h3 {
+      margin: 0 0 4px;
+      font-size: 1.02rem;
+      color: #e7cafc;
     }
 
     /* Cross-link */
@@ -205,10 +287,10 @@
     <!-- Download Badges -->
     <div class="badges">
       <a href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank">
-        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="App Store">
+        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store">
       </a>
       <a href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar" target="_blank">
-        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Google Play">
+        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
       </a>
     </div>
 
@@ -235,14 +317,80 @@
       <a href="/holiday/national-pizza-day/">National Pizza Day</a>
     </div>
 
-    <!-- About Section -->
-    <div class="section-title">About Obscure Holiday Calendar</div>
-    <p class="tagline" style="max-width:650px; margin:auto;">
-      Every day has its own unique celebration — from food holidays to unusual national days.
-      Obscure Holiday Calendar curates the best quirky, fun, and unexpected holidays so you
-      always have something to celebrate. Perfect for creators, families, classrooms, and anyone
-      who loves discovering something new each day.
-    </p>
+    <!-- SEO-Rich About / Features Section -->
+    <div class="section-title">Why Obscure Holiday Calendar?</div>
+    <div class="seo-text">
+      <p>
+        <strong>Obscure Holiday Calendar</strong> is a daily holiday calendar app that surfaces
+        the fun, weird, and obscure holidays that most people never hear about. Instead of only
+        celebrating the usual big dates like New Year’s Eve, Christmas, or Halloween, the app
+        highlights quirky national days, internet holidays, and lesser-known observances that
+        are perfect for social posts, classroom activities, family fun, or creative campaigns.
+      </p>
+
+      <p>
+        Each day, the app shows you a curated holiday with artwork, a short description, and
+        a deep link you can share directly with friends, followers, or students. You can use
+        widgets on your Home Screen, lock screen, or Today View, and set reminders so you never
+        miss today’s obscure holiday.
+      </p>
+
+      <p><strong>Great for:</strong></p>
+      <ul>
+        <li>Creators and social media managers looking for daily content ideas.</li>
+        <li>Families who want a fun “theme” for each day (desserts, games, activities).</li>
+        <li>Teachers and classrooms celebrating unusual national days with students.</li>
+        <li>Small businesses that post about food holidays, awareness days, or seasonal events.</li>
+      </ul>
+
+      <p>
+        The app is available on both <strong>iOS</strong> and <strong>Android</strong>, so you
+        can keep the same daily holiday calendar across your iPhone, iPad, or Android device.
+        Deep links let you share a specific holiday page (for example, World Emoji Day,
+        Bubble Tea Day, or Talk Like a Pirate Day) and open it directly in the app.
+      </p>
+
+      <p>
+        Whether you call them <strong>obscure holidays</strong>, weird holidays, national days,
+        or fun daily celebrations, Obscure Holiday Calendar makes it easy to see “what holiday
+        is today” at a glance and build a habit of celebrating something small every day.
+      </p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section-title">FAQ</div>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>Is Obscure Holiday Calendar free?</h3>
+        <p>
+          Yes. You can download the app for free on iOS and Android. Some platforms may offer
+          optional upgrades or extra features, but the core daily holiday experience is free.
+        </p>
+      </div>
+      <div class="faq-item">
+        <h3>What types of holidays are included?</h3>
+        <p>
+          The app focuses on fun, obscure, and weird holidays: food holidays, pop culture days,
+          internet celebrations, animal days, and other creative observances. Big traditional
+          holidays still show up but are not the main focus.
+        </p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I share a specific holiday with friends?</h3>
+        <p>
+          Yes. Each holiday has a deep link that can be shared via messages, social media, or
+          email. When someone taps the link, it can open the corresponding holiday page or app
+          screen, depending on their device.
+        </p>
+      </div>
+      <div class="faq-item">
+        <h3>Does the app support widgets and reminders?</h3>
+        <p>
+          Obscure Holiday Calendar supports widgets so you can see today’s holiday at a glance,
+          and you can enable notifications or reminders so you never miss a fun or obscure day.
+        </p>
+      </div>
+    </div>
 
     <!-- Cross-link -->
     <div class="other-app">
@@ -269,7 +417,7 @@
         const now = new Date();
         const mm = String(now.getMonth() + 1).padStart(2, "0");
         const dd = String(now.getDate()).padStart(2, "0");
-        const key = `${mm}-${dd}`;
+        const key = mm + "-" + dd;
 
         const list = data.holidays[key];
         if (!list || !list.length) {
@@ -278,7 +426,6 @@
         }
 
         document.getElementById("holiday-name").textContent = list[0].name;
-
       } catch (err) {
         document.getElementById("holiday-name").textContent = "Error loading holiday";
       }
