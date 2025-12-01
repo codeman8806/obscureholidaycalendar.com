@@ -10,10 +10,43 @@ from pathlib import Path
 JSON_FILE = "holidays.json"
 ADSENSE_CLIENT = "ca-pub-7162731177966348"
 AD_SLOT = "7747026448"
+DOMAIN = "https://www.obscureholidaycalendar.com"
+
+IOS_URL = "https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850"
+ANDROID_URL = "https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar"
 
 ADSENSE_LOADER = f"""
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}"
      crossorigin="anonymous"></script>
+""".strip()
+
+STORE_BUTTONS_TOP = f"""
+<div class="store-buttons-top">
+  <a href="{IOS_URL}" target="_blank" rel="noopener">
+    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+         alt="Download on the App Store" class="store-badge" />
+  </a>
+  <a href="{ANDROID_URL}" target="_blank" rel="noopener">
+    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+         alt="Get it on Google Play" class="store-badge" />
+  </a>
+</div>
+""".strip()
+
+STORE_BUTTONS_CSS = """
+<!-- STORE-BUTTONS-CSS-START -->
+<style>
+.store-buttons-top {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 10px 0 20px 0;
+}
+.store-badge {
+    height: 50px;
+}
+</style>
+<!-- STORE-BUTTONS-CSS-END -->
 """.strip()
 
 AD_BANNER = f"""
@@ -28,7 +61,7 @@ AD_BANNER = f"""
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({{}});
 </script>
-""".rstrip()  # we'll append SEO content after this and then close with END-SEO-BLOCK
+""".rstrip()
 
 WHY_OBSCURE = """
 <h2>Why Obscure Holiday Calendar?</h2>
@@ -54,7 +87,7 @@ APP_FAQ = """
 
 <p><strong>Can I share a holiday?</strong><br>Yes — every holiday includes a deep link you can share with friends or followers.</p>
 
-<p><strong>Does it support widgets?</strong><br>Yes — widgets show today’s holiday at a glance on iOS & Android.</p>
+<p><strong>Does it support widgets?</strong><br>Yes — widgets show today's holiday at a glance on iOS & Android.</p>
 """.strip()
 
 
@@ -63,15 +96,10 @@ APP_FAQ = """
 # -----------------------------
 
 def slugify(name: str) -> str:
-    """Convert holiday name to URL slug, roughly matching your folder names."""
     s = name.lower()
-    # replace apostrophes with nothing
     s = s.replace("’", "").replace("'", "")
-    # replace non-alphanumeric with hyphen
     s = re.sub(r"[^a-z0-9]+", "-", s)
-    # collapse multiple hyphens
     s = re.sub(r"-+", "-", s)
-    # trim hyphens
     s = s.strip("-")
     return s
 
@@ -115,7 +143,7 @@ def load_holiday_data(json_file: str):
                 continue
             slug = slugify(name)
             if slug in slug_map:
-                print(f"⚠️ Duplicate slug '{slug}' found for '{name}' and '{slug_map[slug]['name']}'")
+                print(f"⚠️ Duplicate slug '{slug}' for '{name}' and '{slug_map[slug]['name']}'")
             slug_map[slug] = {
                 "name": name,
                 "emoji": entry.get("emoji", ""),
@@ -129,17 +157,164 @@ def load_holiday_data(json_file: str):
     return slug_map
 
 
-def ensure_adsense_loader_in_head(html: str) -> str:
-    """Insert the AdSense loader script into <head> if not already present."""
-    if ADSENSE_CLIENT in html:
-        # already present
-        return html
+def ensure_adsense_loader_and_css_and_schema(html: str, hdata: dict, slug: str) -> str:
+    """
+    Ensure:
+    - AdSense loader in <head>
+    - store-buttons CSS in <head>
+    - Article + FAQ schema in <head>
+    """
 
+    # Ensure <head> exists
     head_close_idx = html.lower().find("</head>")
     if head_close_idx == -1:
-        return html  # malformed, skip
+        return html
 
-    return html[:head_close_idx] + "\n" + ADSENSE_LOADER + "\n" + html[head_close_idx:]
+    head_section = html[:head_close_idx]
+    rest = html[head_close_idx:]
+
+    # AdSense loader
+    if ADSENSE_CLIENT not in head_section:
+        head_section += "\n" + ADSENSE_LOADER + "\n"
+
+    # Store buttons CSS (idempotent via markers)
+    if "STORE-BUTTONS-CSS-START" not in head_section:
+        head_section += "\n" + STORE_BUTTONS_CSS + "\n"
+
+    # Article + FAQ schema (idempotent via markers)
+    article_start = "<!-- ARTICLE-SCHEMA-START -->"
+    article_end = "<!-- ARTICLE-SCHEMA-END -->"
+    faq_start = "<!-- FAQ-SCHEMA-START -->"
+    faq_end = "<!-- FAQ-SCHEMA-END -->"
+
+    # Remove old blocks if present
+    def strip_block(text, start_marker, end_marker):
+        s = text.find(start_marker)
+        e = text.find(end_marker)
+        if s != -1 and e != -1 and e > s:
+            e += len(end_marker)
+            return text[:s] + text[e:]
+        return text
+
+    head_section = strip_block(head_section, article_start, article_end)
+    head_section = strip_block(head_section, faq_start, faq_end)
+
+    # Build new schema
+    schema_block = build_schema_block(hdata, slug)
+
+    head_section += "\n" + schema_block + "\n"
+
+    return head_section + rest
+
+
+def build_schema_block(hdata: dict, slug: str) -> str:
+    import json as _json
+
+    name = hdata["name"]
+    description = hdata["description"] or f"{name} is one of many fun, weird, and obscure holidays featured in the Obscure Holiday Calendar app."
+    pretty = hdata["pretty_date"]
+    url = f"{DOMAIN}/holiday/{slug}/"
+
+    article = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": name,
+        "description": description,
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": url
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Obscure Holiday Calendar"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Obscure Holiday Calendar",
+            "logo": {
+                "@type": "ImageObject",
+                "url": f"{DOMAIN}/assets/og-image.png"
+            }
+        }
+    }
+
+    faq = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": f"When is {name}?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": f"{name} is observed each year on {pretty}."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": f"Is {name} an official national holiday?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No — like most obscure holidays, it is an informal observance people celebrate for fun."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": f"How do people celebrate {name}?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": f"People typically mark {name} by sharing themed posts, doing a small related activity, or using it as a lighthearted reason to connect."
+                }
+            }
+        ]
+    }
+
+    article_json = _json.dumps(article, ensure_ascii=False, indent=2)
+    faq_json = _json.dumps(faq, ensure_ascii=False, indent=2)
+
+    return f"""{'<!-- ARTICLE-SCHEMA-START -->'}
+<script type="application/ld+json">
+{article_json}
+</script>
+{'<!-- ARTICLE-SCHEMA-END -->'}
+
+{'<!-- FAQ-SCHEMA-START -->'}
+<script type="application/ld+json">
+{faq_json}
+</script>
+{'<!-- FAQ-SCHEMA-END -->'}"""
+
+
+def remove_top_image(html: str) -> str:
+    """
+    Remove the first <img ...> after the start of the main container.
+    Assumes there's only one hero image we don't want anymore.
+    """
+    # Find first <img ...> and remove it
+    new_html, count = re.subn(r"<img[^>]*>", "", html, count=1, flags=re.IGNORECASE)
+    return new_html if count > 0 else html
+
+
+def ensure_store_buttons_top(html: str) -> str:
+    """
+    Insert official store buttons right after <h1>...</h1>, and remove old .store-buttons block.
+    """
+    if "store-buttons-top" in html:
+        # already done
+        return html
+
+    # Insert after first <h1>...</h1>
+    h1_match = re.search(r"<h1[^>]*>.*?</h1>", html, flags=re.IGNORECASE | re.DOTALL)
+    if not h1_match:
+        return html
+
+    insert_pos = h1_match.end()
+    html = html[:insert_pos] + "\n\n" + STORE_BUTTONS_TOP + "\n\n" + html[insert_pos:]
+
+    # Remove old store-buttons block(s)
+    html = re.sub(r'<div\s+class="store-buttons".*?</div>', "", html, flags=re.IGNORECASE | re.DOTALL)
+
+    return html
 
 
 def build_seo_block(hdata: dict) -> str:
@@ -147,11 +322,11 @@ def build_seo_block(hdata: dict) -> str:
     pretty = hdata["pretty_date"]
     description = hdata["description"] or f"{name} is one of the many fun, weird, and obscure holidays featured in the Obscure Holiday Calendar app."
     funfacts = hdata["funFacts"] or []
-    fun_fact = funfacts[0] if funfacts else f"{name} is part of the growing trend of fun social holidays people share online."
+    fun_fact = funfacts[0] if funfacts else f"{name} is part of the growing trend of fun social holidays that people share online."
 
     history_section = f"""
 <h2>History of {name}</h2>
-<p>{name} doesn’t have a long formal history like major public holidays, but it has grown in popularity thanks to social media, blogs, and people who love celebrating the little things in life. As more creators, families, and teachers look for reasons to mark each day with something fun, {name} has become one of those niche observances that quietly spreads through word of mouth and online posts.</p>
+<p>{name} doesn&apos;t have a long formal history like major public holidays, but it has grown in popularity thanks to social media, blogs, and people who love celebrating the little things in life. As more creators, families, and teachers look for reasons to mark each day with something fun, {name} has become one of those niche observances that quietly spreads through word of mouth and online posts.</p>
 <p>Like many modern “national days,” {name} is part of a larger movement of unofficial holidays that help people connect, share laughs, and create small traditions around specific dates on the calendar.</p>
 """.strip()
 
@@ -170,7 +345,7 @@ def build_seo_block(hdata: dict) -> str:
 <h2>{name} FAQ</h2>
 <p><strong>When is {name}?</strong><br>{name} is observed each year on {pretty}.</p>
 
-<p><strong>Is {name} an official national holiday?</strong><br>No — like most obscure holidays, it’s an informal observance that people celebrate for fun.</p>
+<p><strong>Is {name} an official national holiday?</strong><br>No — like most obscure holidays, it&apos;s an informal observance that people celebrate for fun.</p>
 
 <p><strong>How do people usually celebrate?</strong><br>Most people mark {name} by sharing themed posts, doing a small related activity, or simply using it as a lighthearted excuse to smile and connect.</p>
 
@@ -219,14 +394,12 @@ def inject_seo_block(html: str, hdata: dict) -> str:
         html = html[:start_idx] + html[end_idx:]
 
     # Find the date div
-    # We'll look for the first occurrence of <div class="date">
     date_match = re.search(r'<div\s+class="date"[^>]*>.*?</div>', html, flags=re.IGNORECASE | re.DOTALL)
     if not date_match:
         print("  ⚠️ Could not find <div class=\"date\"> block; skipping SEO injection for this file.")
         return html
 
     insert_pos = date_match.end()  # insert right after </div>
-
     seo_block = build_seo_block(hdata)
     new_html = html[:insert_pos] + seo_block + html[insert_pos:]
     return new_html
@@ -237,10 +410,8 @@ def inject_seo_block(html: str, hdata: dict) -> str:
 # -----------------------------
 
 def main():
-    # 1. Load JSON and build slug map
     slug_map = load_holiday_data(JSON_FILE)
 
-    # 2. Walk holiday subfolders and update index.html
     root = Path("holiday")
     if not root.exists():
         print("❌ 'holiday' directory not found. Run this from the repo root.")
@@ -254,7 +425,7 @@ def main():
             continue
 
         dirpath = Path(dirpath)
-        slug = dirpath.name  # folder name as slug, e.g., "falling-needles-family-fest-day"
+        slug = dirpath.name
         html_path = dirpath / "index.html"
 
         if slug not in slug_map:
@@ -262,15 +433,22 @@ def main():
             skipped_files += 1
             continue
 
-        print(f"✅ Updating {html_path} for holiday '{slug_map[slug]['name']}'")
+        hdata = slug_map[slug]
+        print(f"✅ Updating {html_path} for holiday '{hdata['name']}'")
 
         html = html_path.read_text(encoding="utf-8")
 
-        # Ensure AdSense loader in <head>
-        html = ensure_adsense_loader_in_head(html)
+        # Remove top image
+        html = remove_top_image(html)
 
-        # Inject SEO block after date
-        html = inject_seo_block(html, slug_map[slug])
+        # Store buttons at top (official badges)
+        html = ensure_store_buttons_top(html)
+
+        # Ensure head: AdSense loader, CSS, Article + FAQ schema
+        html = ensure_adsense_loader_and_css_and_schema(html, hdata, slug)
+
+        # Inject SEO block
+        html = inject_seo_block(html, hdata)
 
         html_path.write_text(html, encoding="utf-8")
         updated_files += 1
