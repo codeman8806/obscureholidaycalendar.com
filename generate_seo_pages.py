@@ -1,49 +1,22 @@
-import json
 import os
 import re
 from pathlib import Path
 
-# -----------------------------
-# CONFIG
-# -----------------------------
-
-JSON_FILE = "holidays.json"
+DOMAIN = "https://www.obscureholidaycalendar.com"
 ADSENSE_CLIENT = "ca-pub-7162731177966348"
 AD_SLOT = "7747026448"
-DOMAIN = "https://www.obscureholidaycalendar.com"
 
 IOS_URL = "https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850"
 ANDROID_URL = "https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar"
+APP_URL = "https://www.obscureholidaycalendar.com/app/"
 
+# Brand icon with inline spacing so it isn't jammed on the H1
 BRAND_ICON_HTML = """
-<img src="/assets/app-icon.png" alt="Obscure Holiday Calendar App Icon" class="brand-icon">
+<img src="/assets/app-icon.png"
+     alt="Obscure Holiday Calendar App Icon"
+     class="brand-icon"
+     style="margin-top:10px;margin-bottom:14px;width:120px;">
 """
-
-BRAND_ICON_CSS = """
-<!-- BRAND-ICON-CSS-START -->
-<style>
-.brand-icon {
-    display: block;
-    margin: 20px auto 10px auto;
-    width: 140px;
-}
-.store-buttons-top {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin: 10px 0 20px 0;
-}
-.store-badge {
-    height: 50px;
-}
-</style>
-<!-- BRAND-ICON-CSS-END -->
-"""
-
-ADSENSE_LOADER = f"""
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}"
-     crossorigin="anonymous"></script>
-""".strip()
 
 STORE_BUTTONS_TOP = f"""
 <div class="store-buttons-top">
@@ -56,259 +29,320 @@ STORE_BUTTONS_TOP = f"""
          alt="Get it on Google Play" class="store-badge" />
   </a>
 </div>
-""".strip()
+"""
 
-AD_BANNER = f"""
-<!-- START-SEO-BLOCK -->
-<!-- AdSense banner -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="{ADSENSE_CLIENT}"
-     data-ad-slot="{AD_SLOT}"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({{}});
+ASO_BOOST_PARAGRAPH = """
+<p class="aso-note">
+  The Obscure Holiday Calendar app includes daily widgets, reminders, fun facts,
+  and thousands of obscure holidays—free on iOS & Android.
+</p>
+"""
+
+APP_BACKLINKS = f"""
+<div class="app-backlinks">
+  <p>
+    Get the Obscure Holiday Calendar app on
+    <a href="{IOS_URL}">iOS</a> or
+    <a href="{ANDROID_URL}">Android</a>.
+  </p>
+</div>
+"""
+
+# Safe JS banner block
+BANNER_TEMPLATE = (
+    "<!-- ASO/SEO Banner Block -->\n"
+    "<ins class=\"adsbygoogle\" style=\"display:block\" "
+    f"data-ad-client=\"{ADSENSE_CLIENT}\" "
+    f"data-ad-slot=\"{AD_SLOT}\" "
+    "data-ad-format=\"auto\" "
+    "data-full-width-responsive=\"true\"></ins>\n"
+    "<script>\n"
+    "    (adsbygoogle = window.adsbygoogle || []).push({});\n"
+    "</script>\n"
+)
+
+ADSENSE_LOADER = f"""
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}" crossorigin="anonymous"></script>
+"""
+
+IOS_SMART_BANNER = """
+<meta name="apple-itunes-app" content="app-id=6755315850">
+"""
+
+ANDROID_SMART_BANNER = """
+<meta name="google-play-app" content="app-id=com.codeman8806.obscureholidaycalendar">
+"""
+
+# -------------- HTML PARSERS ----------------
+
+def get_headline(html: str) -> str:
+    m = re.search(r"<title>(.*?)</title>", html, flags=re.IGNORECASE | re.DOTALL)
+    if not m:
+        return "Obscure Holiday"
+    full = m.group(1).strip()
+    parts = re.split(r"[–—-]", full, maxsplit=1)
+    headline = parts[0].strip()
+    return headline or full
+
+
+def get_canonical(html: str, folder_slug: str) -> str:
+    m = re.search(r'<link\s+rel=["\']canonical["\']\s+href=["\'](.*?)["\']', html, flags=re.IGNORECASE)
+    if m:
+        return m.group(1).strip()
+    return f"{DOMAIN}/holiday/{folder_slug}"
+
+
+def get_meta_description(html: str) -> str:
+    m = re.search(
+        r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']',
+        html,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if m:
+        return m.group(1).strip()
+    return ""
+
+
+def get_date_text(html: str) -> str:
+    m = re.search(
+        r'<div\s+class=["\']date["\']>(.*?)</div>',
+        html,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if not m:
+        return ""
+    return re.sub(r"\s+", " ", m.group(1)).strip()
+
+# -------------- SCHEMA BUILDERS ----------------
+
+def build_article_schema(headline: str, canonical: str, description: str) -> str:
+    if not description:
+        description = f"Learn about {headline} and fun ways to celebrate this obscure holiday."
+    return f"""
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{headline}",
+  "description": "{description}",
+  "mainEntityOfPage": {{
+    "@type": "WebPage",
+    "@id": "{canonical}"
+  }},
+  "author": {{
+    "@type": "Organization",
+    "name": "Obscure Holiday Calendar"
+  }},
+  "publisher": {{
+    "@type": "Organization",
+    "name": "Obscure Holiday Calendar",
+    "logo": {{
+      "@type": "ImageObject",
+      "url": "{DOMAIN}/assets/app-icon.png"
+    }}
+  }}
+}}
 </script>
 """
 
-WHY_OBSCURE = """
-<h2>Why Obscure Holiday Calendar?</h2>
-<p>Obscure Holiday Calendar celebrates the fun, weird, and wonderfully obscure national days that make every single day worth sharing...</p>
-""".strip()
 
-APP_FAQ = """
-<h2>Obscure Holiday Calendar App FAQ</h2>
-<p><strong>Is Obscure Holiday Calendar free?</strong><br>Yes — the core daily holiday experience is completely free.</p>
-""".strip()
-
-# -----------------------------
-# HELPERS
-# -----------------------------
-
-def slugify(name: str) -> str:
-    s = name.lower()
-    s = s.replace("’", "").replace("'", "")
-    s = re.sub(r"[^a-z0-9]+", "-", s)
-    s = re.sub(r"-+", "-", s)
-    return s.strip("-")
-
-
-MONTH_NAMES = {
-    "01": "January", "02": "February", "03": "March", "04": "April",
-    "05": "May", "06": "June", "07": "July", "08": "August",
-    "09": "September", "10": "October", "11": "November", "12": "December",
-}
-
-
-def pretty_date(mm_dd: str) -> str:
-    mm, dd = mm_dd.split("-")
-    month = MONTH_NAMES.get(mm, mm)
-    return f"{month} {int(dd)}"
-
-
-def load_holiday_data(json_file: str):
-    with open(json_file, "r") as f:
-        data = json.load(f)
-
-    slug_map = {}
-    holidays = data.get("holidays", {})
-
-    for date_key, holiday_list in holidays.items():
-        for entry in holiday_list:
-            name = entry.get("name")
-            if not name:
-                continue
-            slug = slugify(name)
-            slug_map[slug] = {
-                "name": name,
-                "description": entry.get("description", ""),
-                "emoji": entry.get("emoji", ""),
-                "funFacts": entry.get("funFacts", []),
-                "pretty_date": pretty_date(date_key),
-            }
-
-    print(f"Loaded {len(slug_map)} holidays.")
-    return slug_map
-
-
-def build_schema_block(hdata, slug):
-    import json as _json
-
-    article = {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": hdata["name"],
-        "description": hdata["description"],
-        "mainEntityOfPage": f"{DOMAIN}/holiday/{slug}/",
-        "author": {"@type": "Organization", "name": "Obscure Holiday Calendar"},
-        "publisher": {
-            "@type": "Organization",
-            "name": "Obscure Holiday Calendar",
-            "logo": {"@type": "ImageObject", "url": f"{DOMAIN}/assets/app-icon.png"}
-        }
-    }
-
-    faq = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": f"When is {hdata['name']}?",
-                "acceptedAnswer": {"@type": "Answer", "text": f"It is observed on {hdata['pretty_date']}."}
-            },
-            {
-                "@type": "Question",
-                "name": f"Is {hdata['name']} an official holiday?",
-                "acceptedAnswer": {"@type": "Answer", "text": "No — it is an unofficial observance."}
-            }
-        ]
-    }
-
+def build_faq_schema(headline: str, date_text: str) -> str:
+    when_answer = f"{headline} is observed each year."
+    if date_text:
+        when_answer = f"{headline} is observed each year on {date_text}."
     return f"""
-<!-- ARTICLE-SCHEMA-START -->
 <script type="application/ld+json">
-{_json.dumps(article, indent=2)}
+{{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{
+      "@type": "Question",
+      "name": "When is {headline}?",
+      "acceptedAnswer": {{
+        "@type": "Answer",
+        "text": "{when_answer}"
+      }}
+    }},
+    {{
+      "@type": "Question",
+      "name": "How can I celebrate {headline}?",
+      "acceptedAnswer": {{
+        "@type": "Answer",
+        "text": "You can celebrate {headline} by learning the story behind the holiday, sharing it with friends, and enjoying fun themed activities."
+      }}
+    }}
+  ]
+}}
 </script>
-<!-- ARTICLE-SCHEMA-END -->
+"""
 
-<!-- FAQ-SCHEMA-START -->
-<script type="application/ld+json">
-{_json.dumps(faq, indent=2)}
-</script>
-<!-- FAQ-SCHEMA-END -->
-""".strip()
+# -------------- INJECTION / CLEANUP HELPERS ----------------
 
-
-def ensure_head_assets(html, hdata, slug):
+def inject_into_head(html: str, block: str, marker: str) -> str:
+    """Inject block into <head> if marker not present (marker is a small unique substring)."""
+    if marker in html:
+        return html
     head_close = html.lower().find("</head>")
     if head_close == -1:
         return html
-
-    head = html[:head_close]
-    rest = html[head_close:]
-
-    if ADSENSE_CLIENT not in head:
-        head += "\n" + ADSENSE_LOADER + "\n"
-
-    if "BRAND-ICON-CSS-START" not in head:
-        head += "\n" + BRAND_ICON_CSS + "\n"
-
-    head = re.sub(r"<!-- ARTICLE-SCHEMA-START -->.*?<!-- FAQ-SCHEMA-END -->",
-                  "", head, flags=re.DOTALL)
-
-    head += "\n" + build_schema_block(hdata, slug) + "\n"
-
-    return head + rest
+    return html[:head_close] + "\n" + block + "\n" + html[head_close:]
 
 
-def inject_brand_icon_and_store_buttons(html):
-    # Insert brand icon before <h1> if missing
-    if "brand-icon" not in html:
-        h1 = re.search(r"<h1[^>]*>", html)
-        if h1:
-            html = html[:h1.start()] + BRAND_ICON_HTML + "\n" + html[h1.start():]
+def inject_after_h1(html: str, block: str, marker: str) -> str:
+    if marker in html:
+        return html
+    m = re.search(r"<h1[^>]*>.*?</h1>", html, flags=re.IGNORECASE | re.DOTALL)
+    if not m:
+        return html
+    return html[:m.end()] + "\n" + block + "\n" + html[m.end():]
 
-    # Insert store buttons after <h1> if missing
-    if "store-buttons-top" not in html:
-        h1_block = re.search(r"<h1[^>]*>.*?</h1>", html, flags=re.DOTALL)
-        if h1_block:
-            html = html[:h1_block.end()] + "\n\n" + STORE_BUTTONS_TOP + "\n\n" + html[h1_block.end():]
 
-    # Remove old store-buttons div
-    html = re.sub(r'<div\s+class="store-buttons".*?</div>', "", html, flags=re.DOTALL)
+def inject_banner_after_date(html: str) -> str:
+    if BANNER_TEMPLATE in html:
+        return html
+    return html.replace('<div class="date">', BANNER_TEMPLATE + "\n<div class=\"date\">")
+
+
+def add_backlinks_to_bottom(html: str) -> str:
+    if "app-backlinks" in html:
+        return html
+    return html.replace("</body>", APP_BACKLINKS + "\n</body>")
+
+
+def remove_legacy_ads_block(html: str) -> str:
+    """
+    Remove old hand-inserted AdSense block like:
+    <!-- START-SEO-BLOCK --> ... <!-- END-SEO-BLOCK -->
+    or a generic adsbygoogle block with a comment marker.
+    """
+    # If you used explicit START/END comments, strip that region:
+    pattern = r"<!-- START-SEO-BLOCK -->.*?<!-- END-SEO-BLOCK -->"
+    new_html, n = re.subn(pattern, "", html, flags=re.DOTALL | re.IGNORECASE)
+    if n > 0:
+        return new_html
+
+    # Fallback: try to remove a lone commented adsbygoogle block if it exists
+    pattern2 = r"<!-- AdSense banner -->.*?</script>"
+    new_html2, n2 = re.subn(pattern2, "", html, flags=re.DOTALL | re.IGNORECASE)
+    if n2 > 0:
+        return new_html2
 
     return html
 
 
-def build_seo_block(hdata):
-    name = hdata["name"]
-    desc = hdata["description"]
-    pretty = hdata["pretty_date"]
-    fun = hdata["funFacts"][0] if hdata["funFacts"] else f"A fun tradition tied to {name}."
-
-    return f"""
-{AD_BANNER}
-
-<h2>What is {name}?</h2>
-<p>{desc}</p>
-
-<h2>History of {name}</h2>
-<p>{name} has grown in popularity thanks to social sharing and themed online observances...</p>
-
-<h2>How to Celebrate {name}</h2>
-<ul>
-    <li>Share a themed post</li>
-    <li>Do a related activity</li>
-    <li>Teach kids or coworkers about the holiday</li>
-</ul>
-
-<h2>Fun Fact</h2>
-<p>{fun}</p>
-
-<h2>{name} FAQ</h2>
-<p><strong>When is it?</strong> {pretty}</p>
-
-{WHY_OBSCURE}
-
-{APP_FAQ}
-
-<!-- END-SEO-BLOCK -->
-""".strip()
-
-
-def inject_seo_block(html, hdata):
-    html = re.sub(r"<!-- START-SEO-BLOCK -->.*?<!-- END-SEO-BLOCK -->",
-                  "", html, flags=re.DOTALL)
-
-    date_block = re.search(r'<div\s+class="date"[^>]*>.*?</div>',
-                           html, flags=re.IGNORECASE | re.DOTALL)
-    if not date_block:
+def move_breadcrumb_schema_into_head(html: str) -> str:
+    """
+    If there's a <!-- BREADCRUMB-SCHEMA --> block outside </html>,
+    move that whole block into <head>.
+    """
+    m = re.search(r"<!-- BREADCRUMB-SCHEMA -->.*?</script>", html, flags=re.DOTALL | re.IGNORECASE)
+    if not m:
         return html
 
-    pos = date_block.end()
-    block = build_seo_block(hdata)
+    block = m.group(0)
+    # Remove from current position
+    html_no = html.replace(block, "")
+    # Inject into head
+    html_new = inject_into_head(html_no, block, "BREADCRUMB-SCHEMA")
+    return html_new
 
-    return html[:pos] + "\n\n" + block + "\n\n" + html[pos:]
-
-
-# -----------------------------
-# MAIN
-# -----------------------------
+# -------------- MAIN ----------------
 
 def main():
-    slug_map = load_holiday_data(JSON_FILE)
-
     root = Path("holiday")
+    if not root.exists():
+        print("No 'holiday' directory found.")
+        return
+
     updated = 0
-    skipped = 0
 
     for dirpath, dirnames, filenames in os.walk(root):
         if "index.html" not in filenames:
             continue
 
         path = Path(dirpath) / "index.html"
-        slug = Path(dirpath).name
+        folder_slug = Path(dirpath).name
 
-        if slug not in slug_map:
-            print(f"Skipping {slug} — no JSON match")
-            skipped += 1
-            continue
+        html = path.read_text(encoding="utf-8")
 
-        hdata = slug_map[slug]
-        html = path.read_text()
+        # Basic info from HTML
+        headline = get_headline(html)
+        canonical = get_canonical(html, folder_slug)
+        description = get_meta_description(html)
+        date_text = get_date_text(html)
 
-        html = inject_brand_icon_and_store_buttons(html)
-        html = ensure_head_assets(html, hdata, slug)
-        html = inject_seo_block(html, hdata)
+        # CLEANUP FIRST
+        html = remove_legacy_ads_block(html)
+        html = move_breadcrumb_schema_into_head(html)
 
-        path.write_text(html)
+        # 1) Brand icon at top
+        if "brand-icon" not in html:
+            html = BRAND_ICON_HTML + html
+
+        # 2) Store buttons + ASO line after H1
+        html = inject_after_h1(html, STORE_BUTTONS_TOP, "store-buttons-top")
+        html = inject_after_h1(html, ASO_BOOST_PARAGRAPH, "aso-note")
+
+        # 3) Smart banners
+        html = inject_into_head(html, IOS_SMART_BANNER, "apple-itunes-app")
+        html = inject_into_head(html, ANDROID_SMART_BANNER, "google-play-app")
+
+        # 4) AdSense loader
+        html = inject_into_head(html, ADSENSE_LOADER, "pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+
+        # 5) MobileApp schema (generic)
+        if '"MobileApplication"' not in html:
+            mobile_schema = f"""
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Obscure Holiday Calendar",
+  "operatingSystem": "Android, iOS",
+  "applicationCategory": "LifestyleApplication",
+  "url": "{APP_URL}",
+  "downloadUrl": [
+    "{ANDROID_URL}",
+    "{IOS_URL}"
+  ],
+  "offers": {{
+    "@type": "Offer",
+    "price": 0,
+    "priceCurrency": "USD"
+  }},
+  "publisher": {{
+    "@type": "Organization",
+    "name": "Obscure Holiday Calendar",
+    "logo": {{
+      "@type": "ImageObject",
+      "url": "{DOMAIN}/assets/app-icon.png"
+    }}
+  }}
+}}
+</script>
+"""
+            html = inject_into_head(html, mobile_schema, '"MobileApplication"')
+
+        # 6) Article + FAQ schema
+        if '"Article"' not in html:
+            article_schema = build_article_schema(headline, canonical, description)
+            html = inject_into_head(html, article_schema, '"Article"')
+        if '"FAQPage"' not in html:
+            faq_schema = build_faq_schema(headline, date_text)
+            html = inject_into_head(html, faq_schema, '"FAQPage"')
+
+        # 7) Banner after date (if date marker exists)
+        if '<div class="date">' in html:
+            html = inject_banner_after_date(html)
+
+        # 8) App backlinks at bottom
+        html = add_backlinks_to_bottom(html)
+
+        path.write_text(html, encoding="utf-8")
         updated += 1
 
-        print(f"Updated: {slug}")
-
-    print(f"\nDone. Updated {updated}, skipped {skipped}.")
+    print(f"Done! Cleaned & updated {updated} holiday pages.")
 
 
 if __name__ == "__main__":
