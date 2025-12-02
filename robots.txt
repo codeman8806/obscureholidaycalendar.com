@@ -1,28 +1,24 @@
 User-agent: *
 Allow: /
 
-# Make sure Google indexes holiday pages fully
 User-agent: Googlebot
 Allow: /
 
-# Ensure image crawlers get icons and artwork
 User-agent: Googlebot-Image
 Allow: /
 
-# Ensure adsbot can render AdSense properly
 User-agent: AdsBot-Google
 Allow: /
 
-# Helps Google News parsing
 User-agent: Googlebot-News
 Allow: /
 
-# Block common garbage scrapers & AI spiders (optional but harmless)
-User-agent: MJ12bot
-Disallow: /
+# Block junk scrapers (optional but beneficial)
 User-agent: AhrefsBot
 Disallow: /
 User-agent: SemrushBot
+Disallow: /
+User-agent: MJ12bot
 Disallow: /
 User-agent: dotbot
 Disallow: /
@@ -30,9 +26,5 @@ User-agent: GPTBot
 Disallow: /
 User-agent: CCBot
 Disallow: /
-User-agent: FacebookExternalHit
-Disallow: /
 
-# Sitemaps (both formats)
-Sitemap: https://www.obscureholidaycalendar.com/sitemap.xml
 Sitemap: https://www.obscureholidaycalendar.com/sitemap-index.xml
