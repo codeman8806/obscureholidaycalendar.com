@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="/favicon.png" type="image/png">
+  <!-- Correct Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -11,59 +12,65 @@
   <meta name="description" content="Discover today's obscure, weird & fun holidays with the Obscure Holiday Calendar app. Includes widgets, reminders, deep links & daily content. Free on iOS & Android." />
   <meta name="keywords" content="obscure holidays app, holiday calendar app, fun holidays app, daily holiday app, weird holidays app, holiday reminders app, holiday widget app, national day app, obscure holiday calendar, daily observance app">
 
-  <!-- ASO: iOS Smart Banner -->
+  <!-- ASO Smart Banners -->
   <meta name="apple-itunes-app" content="app-id=6755315850">
-
-  <!-- ASO: Android Smart Banner -->
   <meta name="google-play-app" content="app-id=com.codeman8806.obscureholidaycalendar">
 
   <!-- Canonical -->
   <link rel="canonical" href="https://www.obscureholidaycalendar.com/" />
 
-  <!-- OpenGraph -->
+  <!-- OG / Twitter -->
   <meta property="og:title" content="Obscure Holiday Calendar – Fun, Weird & Daily Holidays">
   <meta property="og:description" content="Celebrate a fun, weird or obscure holiday every day with widgets, reminders, fun facts & more.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png">
   <meta property="og:url" content="https://www.obscureholidaycalendar.com/">
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Obscure Holiday Calendar – Daily Fun Holidays">
   <meta name="twitter:description" content="Discover today's obscure, weird and fun holidays. Widgets, reminders, deep links & more.">
   <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png">
 
-  <!-- Existing WebSite and MobileApp Schema preserved -->
-  <!-- (Your two existing JSON-LDs here) -->
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7162731177966348"
+     crossorigin="anonymous"></script>
 
-  <!-- AdSense Loader -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7162731177966348" crossorigin="anonymous"></script>
-
-  <!-- ARTICLE + FAQ Schema (unchanged) -->
-  <!-- (Your previously inserted schema blocks are kept here) -->
-
+  <!-- Purple Themed Styles to Match Holiday Pages -->
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
       margin: 0;
-      background: #fff;
-      color: #222;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+      background: linear-gradient(180deg, #4B0082, #6A0DAD);
+      color: white;
       text-align: center;
+      padding: 0;
+      min-height: 100vh;
     }
+
     .icon {
       width: 150px;
-      margin: 30px auto 10px auto;
-      display: block;
+      margin: 40px auto 20px auto;
+      border-radius: 24px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.35);
     }
-    .hero .store-buttons-top img {
+
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+
+    p.tagline {
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: 0 auto 25px auto;
+      line-height: 1.4;
+    }
+
+    .store-buttons-top img {
       height: 50px;
       margin: 0 6px;
+      filter: drop-shadow(0px 3px 4px rgba(0,0,0,0.4));
     }
-    .aso-boost {
-      color: #444;
-      margin-top: 10px;
-      font-size: 1.06rem;
-    }
+
     .screenshots-row {
       display: flex;
       justify-content: center;
@@ -71,20 +78,39 @@
       margin: 30px 0;
       flex-wrap: wrap;
     }
+
     .screenshots-row img {
       width: 260px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      border-radius: 14px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.45);
     }
-    .qr-lower {
-      margin: 40px 0;
+
+    section {
+      padding: 20px 16px;
     }
-    .qr-lower img {
-      height: 140px;
-      margin-top: 10px;
+
+    .white-card {
+      background: white;
+      color: #333;
+      margin: 30px auto;
+      padding: 20px 20px 30px 20px;
+      border-radius: 16px;
+      max-width: 700px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    }
+
+    .white-card h2 {
+      margin-top: 0;
+      color: #4B0082;
+    }
+
+    footer {
+      margin-top: 50px;
+      color: white;
+      opacity: 0.9;
+      padding-bottom: 40px;
     }
   </style>
-  
 </head>
 
 <body>
@@ -92,56 +118,53 @@
   <main>
     <section class="hero">
       <img src="assets/app-icon.png" alt="Obscure Holiday Calendar Icon" class="icon" />
+
       <h1>Obscure Holiday Calendar</h1>
-      <p class="tagline">Discover a fun and obscure holiday every day. Enjoy delightful artwork, reminders, widgets and daily curiosities.</p>
 
-      <div class="store-buttons-top">
-        <a href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850">
-          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar">
-          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
-        </a>
-      </div>
-
-      <!-- ASO Keyword Booster -->
-      <p class="aso-boost">
-        The Obscure Holiday Calendar app includes daily widgets, reminders, fun facts, and thousands of obscure holidays—free on iOS & Android.
+      <p class="tagline">
+        Discover a fun and obscure holiday every day. Enjoy delightful artwork, reminders,
+        widgets and daily curiosities.
       </p>
 
-      <!-- Screenshots Row -->
-      <div class="screenshots-row">
-        <img src="/assets/screen1.png" alt="App screenshot 1">
-        <img src="/assets/screen2.png" alt="App screenshot 2">
+      <!-- Store Buttons -->
+      <div class="store-buttons-top">
+        <a href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store">
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Google Play">
+        </a>
       </div>
 
+      <!-- Screenshots -->
+      <div class="screenshots-row">
+        <img src="/assets/screen1.png" alt="Screenshot 1">
+        <img src="/assets/screen2.png" alt="Screenshot 2">
+      </div>
     </section>
 
-    <!-- Today's Holiday (your existing JS block preserved) -->
-    <hr />
-    <section id="today" class="today-holiday">
+    <!-- Today's Holiday White Card Block -->
+    <div class="white-card">
       <h2>What Holiday Is Today?</h2>
       <p id="name"></p>
-      <div class="store-buttons">
-        <a class="appstore" href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850">Download on the App Store</a>
-        <a class="playstore" href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar">Get it on Google Play</a>
-      </div>
-      <div id="date" class="date"></div>
+      <div id="date"></div>
       <a id="learn-more" href="#" class="learn-more"></a>
-    </section>
 
-    <!-- QR Code Block (Option C – LOWER on page) -->
-    <div class="qr-lower">
-      <h2>Scan to Download</h2>
-      <img src="/assets/qr_app.png" alt="QR code to download Obscure Holiday Calendar">
+      <div class="store-buttons-top" style="margin-top:20px;">
+        <a href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg">
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png">
+        </a>
+      </div>
     </div>
 
-    <!-- All your existing sections (Popular Holidays, FAQ, secondary app, footer) remain unchanged here -->
-
-    <!-- KEEP your existing holiday-loader script EXACTLY as is -->
-    <script>
-    /* your full today's holiday JS remains here unchanged */
-    </script>
+    <!-- QR Section -->
+    <section class="white-card">
+      <h2>Scan to Download</h2>
+      <img src="/assets/qr_app.png" alt="QR code" style="height:150px;">
+    </section>
 
   </main>
 
