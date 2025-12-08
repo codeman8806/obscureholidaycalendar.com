@@ -293,6 +293,7 @@ def render_page(
   <title>{html.escape(name)} — Obscure Holiday Calendar</title>
   <meta name="description" content="{html.escape(meta_desc)}" />
   <meta name="last-modified" content="{last_updated}" />
+  <meta name="google-adsense-account" content="ca-pub-7162731177966348" />
   <link rel="canonical" href="{canonical}" />
   <link rel="icon" href="{SITE_BASE}/favicon.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="{SITE_BASE}/favicon.ico" type="image/x-icon" />
