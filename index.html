@@ -63,47 +63,80 @@
   <style>
     /* Home page size tweaks to avoid oversized hero */
     .home .holiday-card {
-      max-width: 780px;
-      padding: 16px 14px 18px;
+      max-width: 760px;
+      padding: 16px 14px 16px;
     }
     .home .brand-icon {
-      width: 80px;
+      width: 72px;
     }
     .home .holiday-title {
-      font-size: 1.72rem;
-      margin-top: 6px;
+      font-size: 1.64rem;
+      margin-top: 4px;
     }
     .home .meta-line {
       gap: 8px;
       justify-content: center;
     }
     .home .lead {
-      font-size: 1.02rem;
-      max-width: 640px;
-      margin: 8px auto 10px;
+      font-size: 1rem;
+      max-width: 620px;
+      margin: 6px auto 10px;
       text-align: center;
     }
     .home .store-badge {
-      width: 135px;
-    }
-    .home .screenshots-row img {
-      width: 150px;
-    }
-    .home .section h2 {
-      font-size: 1.2rem;
+      width: 128px;
     }
     .home .store-buttons-top {
-      margin: 10px auto 14px;
-      gap: 10px;
-    }
-    .home .screenshots-row {
       margin: 10px auto 12px;
       gap: 10px;
-      justify-content: center;
-      align-items: center;
+    }
+    .home .section h2 {
+      font-size: 1.12rem;
+      margin-bottom: 6px;
     }
     .home .section {
-      margin-top: 14px;
+      margin-top: 12px;
+    }
+    .home .today-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      text-align: center;
+      margin: 6px auto 10px;
+    }
+    .home #name {
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 4px;
+    }
+    .home #date {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 6px;
+    }
+    .home #learn-more {
+      color: var(--accent-2);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .home #learn-more:hover {
+      text-decoration: underline;
+    }
+    .home .screenshots-row {
+      margin: 6px auto 10px;
+      gap: 10px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .home .screenshots-row img {
+      width: 140px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
+    .home .qr-block {
+      text-align: center;
     }
     .home #name,
     .home #date,
@@ -141,7 +174,7 @@
       <p class="lead">
         Discover a fun and obscure holiday every day with reminders, widgets, and emoji-style visuals in the app.
       </p>
-      <section class="section">
+      <section class="section today-card">
         <h2>Today’s holiday</h2>
         <p id="name"></p>
         <div id="date"></div>
@@ -164,7 +197,9 @@
 
       <section class="section app-cta">
         <h2>Scan to download</h2>
-        <img src="/assets/qr-combined.png" alt="QR code" style="height:150px;">
+        <div class="qr-block">
+          <img src="/assets/qr-combined.png" alt="QR code" style="height:150px;">
+        </div>
       </section>
     </article>
   </main>
