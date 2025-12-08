@@ -60,8 +60,36 @@
      crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Home page size tweaks to avoid oversized hero */
+    .home .holiday-card {
+      max-width: 900px;
+      padding: 18px 16px 22px;
+    }
+    .home .brand-icon {
+      width: 80px;
+    }
+    .home .holiday-title {
+      font-size: 1.8rem;
+    }
+    .home .meta-line {
+      gap: 8px;
+    }
+    .home .lead {
+      font-size: 1.02rem;
+    }
+    .home .store-badge {
+      width: 135px;
+    }
+    .home .screenshots-row img {
+      width: 160px;
+    }
+    .home .section h2 {
+      font-size: 1.2rem;
+    }
+  </style>
 </head>
-<body class="page">
+<body class="page home">
   <header class="site-header">
     <a class="brand" href="/">
       <img src="/assets/app-icon.png" alt="Obscure Holiday Calendar icon" class="brand-mark" />
