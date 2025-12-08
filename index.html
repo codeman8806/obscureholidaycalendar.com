@@ -97,12 +97,19 @@
       gap: 10px;
     }
     .home .screenshots-row {
-      margin: 10px 0 6px;
+      margin: 10px auto 12px;
       gap: 10px;
       justify-content: center;
+      align-items: center;
     }
     .home .section {
       margin-top: 14px;
+    }
+    .home #name,
+    .home #date,
+    .home #learn-more {
+      text-align: center;
+      display: block;
     }
   </style>
 </head>
@@ -184,5 +191,47 @@
     </div>
     <p>&copy; 2025 Obscure Holiday Calendar</p>
   </footer>
+  <script>
+    (function() {
+      const nameEl = document.getElementById("name");
+      const dateEl = document.getElementById("date");
+      const linkEl = document.getElementById("learn-more");
+      if (!nameEl || !dateEl || !linkEl) return;
+
+      function slugify(text) {
+        return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      }
+
+      const now = new Date();
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const dd = String(now.getDate()).padStart(2, "0");
+      const key = `${mm}-${dd}`;
+
+      fetch("/holidays.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const holidays = (data && data.holidays && data.holidays[key]) || [];
+          const first = holidays[0];
+          if (!first) {
+            nameEl.textContent = "Check back tomorrow for a new holiday!";
+            dateEl.textContent = "";
+            linkEl.textContent = "";
+            linkEl.removeAttribute("href");
+            return;
+          }
+          const name = first.name || "Today's holiday";
+          const slug = first.slug || slugify(name);
+          nameEl.textContent = name;
+          dateEl.textContent = `${Number(mm)}/${Number(dd)}`;
+          linkEl.textContent = "View the holiday page";
+          linkEl.href = `/holiday/${slug}/`;
+        })
+        .catch(() => {
+          nameEl.textContent = "Unable to load today's holiday.";
+          dateEl.textContent = "";
+          linkEl.textContent = "";
+        });
+    })();
+  </script>
 </body>
 </html>
