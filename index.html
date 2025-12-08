@@ -87,7 +87,7 @@
       width: 128px;
     }
     .home .store-buttons-top {
-      margin: 10px auto 12px;
+      margin: 10px auto 8px;
       gap: 10px;
     }
     .home .section h2 {
@@ -124,19 +124,25 @@
       text-decoration: underline;
     }
     .home .screenshots-row {
-      margin: 6px auto 10px;
-      gap: 10px;
+      display: flex;
       justify-content: center;
       align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 4px auto 10px;
     }
     .home .screenshots-row img {
-      width: 140px;
+      width: 130px;
       border: 1px solid var(--border);
       border-radius: 12px;
       box-shadow: 0 6px 14px rgba(0,0,0,0.18);
     }
     .home .qr-block {
       text-align: center;
+    }
+    .home .today-emoji {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
     }
     .home #name,
     .home #date,
@@ -176,6 +182,7 @@
       </p>
       <section class="section today-card">
         <h2>Today’s holiday</h2>
+        <div id="emoji" class="today-emoji"></div>
         <p id="name"></p>
         <div id="date"></div>
         <a id="learn-more" href="#" class="learn-more"></a>
@@ -231,6 +238,7 @@
       const nameEl = document.getElementById("name");
       const dateEl = document.getElementById("date");
       const linkEl = document.getElementById("learn-more");
+      const emojiEl = document.getElementById("emoji");
       if (!nameEl || !dateEl || !linkEl) return;
 
       function slugify(text) {
@@ -255,9 +263,11 @@
             return;
           }
           const name = first.name || "Today's holiday";
+          const emoji = first.emoji || "";
           const slug = first.slug || slugify(name);
           nameEl.textContent = name;
           dateEl.textContent = `${Number(mm)}/${Number(dd)}`;
+          if (emojiEl) emojiEl.textContent = emoji;
           linkEl.textContent = "View the holiday page";
           linkEl.href = `/holiday/${slug}/`;
         })
