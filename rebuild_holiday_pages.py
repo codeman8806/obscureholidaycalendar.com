@@ -342,7 +342,7 @@ def render_page(
       </div>
 
       <p class="lead">
-        This holiday is featured in the Obscure Holiday Calendar app with artwork, reminders, and daily fun facts.
+        This holiday is featured in the Obscure Holiday Calendar app with emoji-style visuals, reminders, and daily fun facts.
       </p>
 
       <div class="store-buttons-top">
