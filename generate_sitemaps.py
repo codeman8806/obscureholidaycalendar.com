@@ -1,43 +1,50 @@
 import os
 import re
 import datetime
+import json
 from pathlib import Path
 from xml.etree.ElementTree import Element, SubElement, ElementTree
 
 DOMAIN = "https://www.obscureholidaycalendar.com"
 HOLIDAY_DIR = "holiday"
 OUTPUT_DIR = "sitemaps"
+HOLIDAYS_JSON = Path("holidays.json")
+STATIC_PAGES = [
+    f"{DOMAIN}/",
+    f"{DOMAIN}/holiday/",
+    f"{DOMAIN}/about/",
+    f"{DOMAIN}/contact/",
+    f"{DOMAIN}/privacy/",
+]
 
 # Create output directory
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Regex to detect YYYY-MM-DD in each holiday page
-DATE_REGEX = re.compile(r'<div class="date">([A-Za-z]+)\s+(\d{1,2})</div>')
+def slugify(name: str) -> str:
+    s = name.lower()
+    s = re.sub(r"[^a-z0-9]+", "-", s)
+    return s.strip("-")
 
-# Map month names to numbers
-MONTH_MAP = {
-    "January": "01", "February": "02", "March": "03", "April": "04",
-    "May": "05", "June": "06", "July": "07", "August": "08",
-    "September": "09", "October": "10", "November": "11", "December": "12"
-}
 
-def extract_date(html):
+def load_slug_dates():
     """
-    Extracts the pretty date (e.g., December 30) from the holiday page
-    and converts it to YYYY-MM-DD format.
+    Return mapping of slug -> MM-DD string from holidays.json
     """
-    m = DATE_REGEX.search(html)
-    if not m:
-        return None
-
-    month_name, day = m.group(1), m.group(2)
-    month_num = MONTH_MAP.get(month_name)
-
-    if not month_num:
-        return None
-
-    # Use year 2025 since holidays repeat annually
-    return f"2025-{month_num}-{int(day):02d}"
+    if not HOLIDAYS_JSON.exists():
+        return {}
+    data = json.loads(HOLIDAYS_JSON.read_text(encoding="utf-8"))
+    holidays = data.get("holidays", {})
+    mapping = {}
+    for date_key, items in holidays.items():
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            name = item.get("name")
+            if not name:
+                continue
+            slug = item.get("slug") or slugify(name)
+            mapping[slug] = item.get("date", date_key)
+    return mapping
 
 
 def create_sitemap(urls, output_file):
@@ -73,6 +80,8 @@ def create_sitemap_index(files, output_file):
 def main():
     monthly = {f"{m:02d}": [] for m in range(1, 13)}
     sitemap_files = []
+    today_str = datetime.date.today().isoformat()
+    slug_dates = load_slug_dates()
 
     # Walk holiday directory
     for folder in Path(HOLIDAY_DIR).iterdir():
@@ -83,15 +92,25 @@ def main():
         slug = folder.name
         url = f"{DOMAIN}/holiday/{slug}/"
 
-        html = index_file.read_text(encoding="utf-8")
-        date = extract_date(html)
+        date_mmdd = slug_dates.get(slug)
+        lastmod = None
+        if date_mmdd and "-" in date_mmdd:
+            try:
+                mm, dd = date_mmdd.split("-")
+                lastmod = f"2025-{int(mm):02d}-{int(dd):02d}"
+            except Exception:
+                pass
 
-        if date:
-            month = date[5:7]
-            monthly[month].append((url, date))
-        else:
-            # If date missing, put into December by default
-            monthly["12"].append((url, None))
+        try:
+            html = index_file.read_text(encoding="utf-8")
+            m = re.search(r'<meta name="last-modified" content="([\\d-]+)"', html, flags=re.IGNORECASE)
+            if m:
+                lastmod = m.group(1)
+        except Exception:
+            pass
+
+        month_bucket = date_mmdd.split("-")[0] if date_mmdd and "-" in date_mmdd else "12"
+        monthly[month_bucket].append((url, lastmod))
 
     # Generate monthly sitemaps
     for month, entries in monthly.items():
@@ -104,6 +123,12 @@ def main():
         create_sitemap(entries, filepath)
         sitemap_files.append(filename)
 
+    # Static pages sitemap
+    static_entries = [(url, today_str) for url in STATIC_PAGES]
+    static_filename = "sitemap-static.xml"
+    create_sitemap(static_entries, os.path.join(OUTPUT_DIR, static_filename))
+    sitemap_files.append(static_filename)
+
     # Generate index
     create_sitemap_index(sitemap_files, "sitemap-index.xml")
 
@@ -112,4 +137,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
