@@ -337,7 +337,7 @@ def render_page(
       <img src="{badge_path}" alt="{html.escape(name)} badge" class="hero-badge" loading="lazy" decoding="async" />
       <div class="meta-line">
         <span class="pill">{html.escape(pretty)}</span>
-        <span class="pill pill-secondary">Unofficial / Just for fun</span>
+        <span class="pill pill-secondary">Cultural / community observance</span>
         <span class="pill pill-secondary">Updated {last_updated}</span>
       </div>
 

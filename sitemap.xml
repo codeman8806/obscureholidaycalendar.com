@@ -66,12 +66,12 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/argyle-day/</loc>
+    <loc>https://www.obscureholidaycalendar.com/holiday/ask-a-stupid-question-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/ask-a-stupid-question-day/</loc>
+    <loc>https://www.obscureholidaycalendar.com/holiday/australia-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -146,17 +146,7 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/bean-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/beaujolais-nouveau-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/belly-laugh-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -261,11 +251,6 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/cable-car-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/card-playing-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -297,6 +282,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/celebrate-your-unique-talent-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/celebration-of-life-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -501,17 +491,17 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/data-privacy-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/day-of-the-mushroom/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/deep-dish-pizza-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/dental-drill-appreciation-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -532,16 +522,6 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/dinosaur-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/ditch-new-year-s-resolutions-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/dj-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -591,17 +571,17 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/earths-rotation-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/eat-a-red-apple-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/eat-an-extra-dessert-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/eat-brussels-sprouts-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -647,11 +627,6 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/ferris-wheel-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/festival-of-sleep-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -766,6 +741,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/global-belly-laugh-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/go-caroling-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -831,11 +811,6 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/handwriting-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/happiness-happens-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -876,7 +851,7 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/hot-pastrami-sandwich-day/</loc>
+    <loc>https://www.obscureholidaycalendar.com/holiday/houseplant-appreciation-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -906,11 +881,6 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/i-m-not-going-to-take-it-anymore-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/i-need-a-patch-for-that-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -932,6 +902,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/indian-pudding-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/inspire-your-heart-with-art-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -966,6 +941,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/international-holocaust-remembrance-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/international-human-solidarity-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -982,6 +962,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/international-left-handers-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/international-lego-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -1056,12 +1041,17 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/kiss-a-ginger-day/</loc>
+    <loc>https://www.obscureholidaycalendar.com/holiday/kid-inventors-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/kiss-and-make-up-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/korean-american-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -1211,6 +1201,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/martin-luther-king-jr-s-birthday/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/may-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -1331,6 +1326,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-answer-your-cat-s-questions-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-apple-betty-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -1411,6 +1411,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-bird-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-black-cat-appreciation-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -1421,22 +1426,7 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-blonde-brownie-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-blueberry-pancake-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-blueberry-popsicle-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-bobblehead-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -1667,6 +1657,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-comic-book-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-compliment-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -1911,11 +1906,6 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-granola-bar-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-greasy-foods-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -1961,11 +1951,6 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-hat-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-high-five-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -1986,17 +1971,12 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-hot-sauce-day/</loc>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-hot-tea-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-hot-toddy-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-houseplant-appreciation-day/</loc>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-hugging-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2017,6 +1997,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-iced-tea-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-inane-answering-machine-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2051,11 +2036,6 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-kazoo-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-kite-flying-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -2077,6 +2057,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-laundry-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-law-enforcement-appreciation-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2146,17 +2131,22 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-marzipan-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-matchmaker-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-measure-your-feet-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-milk-chocolate-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-milk-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2216,6 +2206,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-nothing-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-oatmeal-cookie-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -2271,22 +2266,12 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-peanut-brittle-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-peanut-butter-and-jelly-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-peanut-butter-cookie-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-peanut-butter-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2327,6 +2312,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-pet-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-pharmacist-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2501,17 +2491,7 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-science-fiction-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-scrabble-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-screenwriters-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2547,11 +2527,6 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-spumoni-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-static-electricity-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2626,12 +2601,22 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-technology-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-teddy-bear-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-tell-a-joke-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/national-tempura-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2652,11 +2637,6 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/national-train-your-brain-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/national-trivia-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2751,6 +2731,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/new-years-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/niagara-falls-runs-dry-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -2801,12 +2786,12 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/nothing-day/</loc>
+    <loc>https://www.obscureholidaycalendar.com/holiday/nutty-fudge-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/nutty-fudge-day/</loc>
+    <loc>https://www.obscureholidaycalendar.com/holiday/old-rock-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2832,6 +2817,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/orange-blossom-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/organize-your-home-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -2906,6 +2896,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/penguin-awareness-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/pfeffernusse-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -2946,11 +2941,6 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/play-god-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/pledge-of-allegiance-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -2971,6 +2961,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/popeye-s-birthday/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/poultry-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -2987,11 +2982,6 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/public-sleeping-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/punch-the-clock-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -3121,6 +3111,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/science-fiction-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/seafood-bisque-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -3152,11 +3147,6 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/singles-awareness-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/skeptic-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -3216,6 +3206,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/spouse-s-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/spumoni-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -3226,12 +3221,22 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/squirrel-appreciation-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/st-patrick-s-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/star-wars-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/static-electricity-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -3247,11 +3252,6 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/still-need-to-do-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/strawberry-ice-cream-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -3521,6 +3521,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/wikipedia-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/wild-foods-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -3532,6 +3537,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/winter-solstice/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/women-rock-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -3557,6 +3567,11 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/world-bartender-day/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.obscureholidaycalendar.com/holiday/world-braille-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -3616,11 +3631,6 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/world-snow-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/world-toilet-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
@@ -3637,16 +3647,6 @@
   </url>
   <url>
     <loc>https://www.obscureholidaycalendar.com/holiday/wright-brother-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/yodel-for-your-neighbors-day/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.obscureholidaycalendar.com/holiday/z-day/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.80</priority>
   </url>
