@@ -299,6 +299,13 @@ def render_page(
   <link rel="shortcut icon" href="{SITE_BASE}/favicon.ico" type="image/x-icon" />
   <link rel="icon" type="image/png" href="{SITE_BASE}/assets/app-icon.png" />
   <link rel="apple-touch-icon" href="{SITE_BASE}/apple-touch-icon.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTLDP7FMGV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){{dataLayer.push(arguments);}}
+    gtag('js', new Date());
+    gtag('config', 'G-JTLDP7FMGV');
+  </script>
   <meta name="apple-itunes-app" content="app-id=6755315850">
   <meta name="google-play-app" content="app-id=com.codeman8806.obscureholidaycalendar">
   <meta property="og:title" content="{html.escape(name)} — Obscure Holiday Calendar" />
