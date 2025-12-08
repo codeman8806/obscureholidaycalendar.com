@@ -327,6 +327,34 @@ main.content-page {
   line-height: 1.6;
 }
 
+.month-section {
+  margin-top: 18px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+
+.month-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 8px 0 0;
+}
+
+.month-list li {
+  margin-bottom: 8px;
+}
+
+.month-list .day {
+  display: inline-block;
+  min-width: 32px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+  margin-top: 6px;
+}
+
 @media (max-width: 720px) {
   .site-header {
     flex-direction: column;
