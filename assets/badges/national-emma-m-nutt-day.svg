@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="120" viewBox="0 0 240 120" role="img" aria-label="National Emma M. Nutt Day">
+  <defs>
+    <linearGradient id="grad-national-emma-m-nutt-day" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#21e594"/>
+      <stop offset="100%" stop-color="#8c9fda"/>
+    </linearGradient>
+  </defs>
+  <rect rx="16" ry="16" width="240" height="120" fill="url(#grad-national-emma-m-nutt-day)"/>
+  <text x="50%" y="54%" fill="#ffffff" font-family="Inter, Manrope, system-ui, sans-serif" font-size="20" font-weight="700" text-anchor="middle">National Emma M. Nutt ...</text>
+  <text x="50%" y="78%" fill="#f1f5f9" font-family="Inter, Manrope, system-ui, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Obscure Holiday Calendar</text>
+</svg>
