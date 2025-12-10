@@ -46,6 +46,7 @@ const SUPPORT_URL = process.env.SUPPORT_URL || `${SITE_URL}/discord-bot/`;
 const PREMIUM_ROLE_ID = process.env.PREMIUM_ROLE_ID || null; // Discord Server Subscription role id
 const CONFIG_PATH = path.resolve(__dirname, "guild-config.json");
 const PREMIUM_PATH = path.resolve(__dirname, "premium.json"); // optional allowlist
+const BOT_OWNER_ID = process.env.BOT_OWNER_ID || null;
 
 function readJsonSafe(filePath, fallback) {
   try {
@@ -96,6 +97,11 @@ function isPremiumGuild(guild) {
     if (role && role.members && role.members.size > 0) return true;
   }
   return false;
+}
+
+function isOwner(userId) {
+  if (!BOT_OWNER_ID) return false;
+  return userId === BOT_OWNER_ID;
 }
 
 function getGuildConfig(guildId) {
@@ -255,19 +261,6 @@ async function handleRandom(interaction) {
   return interaction.reply({ embeds: [buildEmbed(h, { branding: !premium || getGuildConfig(interaction.guild.id).branding })], components: buildButtons(h) });
 }
 
-async function handlePremium(interaction) {
-  const premium = isPremium(interaction.guild, interaction.member);
-  const config = getGuildConfig(interaction.guild.id);
-  const lines = [
-    premium ? "✅ Premium active (Server Subscription role or allowlist)." : "⚠️ Premium not active.",
-    `Daily channel(s): ${config.channelIds.length ? config.channelIds.map((c) => `<#${c}>`).join(", ") : "not set"}`,
-    `Timezone: ${config.timezone} @ ${config.hour}:00`,
-    `Branding: ${config.branding === false ? "off" : "on"}`,
-  ];
-  if (!premium) lines.push(`Upgrade: ${SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/"}`);
-  return interaction.reply({ content: lines.join("\n"), ephemeral: true });
-}
-
 async function handleSetup(interaction) {
   const guildId = interaction.guild.id;
   const config = getGuildConfig(guildId);
@@ -383,6 +376,35 @@ async function handleUpcoming(interaction) {
   }
   return interaction.reply({ embeds: [embed], components: buildButtons(items[0].holiday) });
 }
+
+async function handlePremiumStatus(interaction) {
+  const premium = isPremium(interaction.guild, interaction.member);
+  const config = getGuildConfig(interaction.guild.id);
+  const lines = [
+    premium ? "✅ Premium active (Server Subscription role or allowlist)." : "⚠️ Premium not active.",
+    `Daily channel(s): ${config.channelIds.length ? config.channelIds.map((c) => `<#${c}>`).join(", ") : "not set"}`,
+    `Timezone: ${config.timezone} @ ${config.hour}:00`,
+    `Branding: ${config.branding === false ? "off" : "on"}`,
+  ];
+  if (!premium) lines.push(`Upgrade: ${SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/"}`);
+  return interaction.reply({ content: lines.join("\n"), ephemeral: true });
+}
+
+async function handleGrantPremium(interaction) {
+  if (!isOwner(interaction.user.id)) {
+    return interaction.reply({ content: "Owner-only command.", ephemeral: true });
+  }
+  const serverId = interaction.options.getString("server_id", true);
+  const enabled = interaction.options.getBoolean("enabled");
+  const flag = typeof enabled === "boolean" ? enabled : true;
+  if (flag) {
+    premiumAllowlist[serverId] = true;
+  } else {
+    delete premiumAllowlist[serverId];
+  }
+  writeJsonSafe(PREMIUM_PATH, premiumAllowlist);
+  return interaction.reply({ content: `Premium ${flag ? "granted to" : "revoked from"} ${serverId}.`, ephemeral: true });
+}
 async function handleHelp(interaction) {
   return interaction.reply({
     content: [
@@ -496,6 +518,24 @@ const commandDefs = [
       },
     ],
   },
+  {
+    name: "grantpremium",
+    description: "Owner-only: grant premium to a server id",
+    options: [
+      {
+        name: "server_id",
+        description: "Discord server (guild) ID",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+      },
+      {
+        name: "enabled",
+        description: "true to enable, false to revoke (default true)",
+        type: ApplicationCommandOptionType.Boolean,
+        required: false,
+      },
+    ],
+  },
   { name: "help", description: "List commands" },
 ];
 
@@ -545,11 +585,13 @@ client.on("interactionCreate", async (interaction) => {
       case "setup":
         return handleSetup(interaction);
       case "premium":
-        return handlePremium(interaction);
+        return handlePremiumStatus(interaction);
       case "tomorrow":
         return handleTomorrow(interaction);
       case "upcoming":
         return handleUpcoming(interaction);
+      case "grantpremium":
+        return handleGrantPremium(interaction);
       case "invite":
         return interaction.reply({
           content: "Invite the bot to your server:",
