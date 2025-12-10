@@ -1,0 +1,17 @@
+{
+  "name": "obscure-holiday-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for Obscure Holiday Calendar. Answers today/by-date queries, random holidays, searches, and fun facts using holidays.json.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
