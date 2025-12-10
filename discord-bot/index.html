@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Discord Bot for Obscure Holiday Calendar</title>
+  <meta name="description" content="Invite the Obscure Holiday Calendar Discord bot. Get today’s obscure holidays, fun facts, and daily posts into your server with one click." />
+  <meta name="google-adsense-account" content="ca-pub-7162731177966348">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://www.obscureholidaycalendar.com/discord-bot/" />
+  <meta property="og:title" content="Obscure Holiday Calendar Discord Bot">
+  <meta property="og:description" content="Add obscure holidays to your Discord server: /today, /date, /search, /random, fun facts, and daily posts." />
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.obscureholidaycalendar.com/discord-bot/">
+  <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Obscure Holiday Calendar Discord Bot">
+  <meta name="twitter:description" content="Invite the bot for daily obscure holidays, fun facts, and random holiday searches.">
+  <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTLDP7FMGV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JTLDP7FMGV');
+  </script>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .bot-hero {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .bot-cta {
+      display: inline-flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 12px auto 18px;
+    }
+    .bot-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+    }
+    .bot-button.invite { background: linear-gradient(120deg, #5865f2, #4552d9); }
+    .bot-button.secondary { background: #0f172a; }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .feature-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: #f8fafc;
+      box-shadow: 0 10px 20px rgba(12,18,52,0.08);
+    }
+    .steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .steps li {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: #fff;
+      box-shadow: 0 8px 18px rgba(12,18,52,0.06);
+    }
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    .screenshots img {
+      width: 220px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+      background: #fff;
+    }
+    .hero-badge {
+      width: 140px;
+    }
+  </style>
+</head>
+<body class="page">
+  <header class="site-header">
+    <a class="brand" href="/">
+      <img src="/assets/app-icon.png" alt="Obscure Holiday Calendar icon" class="brand-mark" />
+      <div class="brand-text">
+        <span class="brand-name">Obscure Holiday Calendar</span>
+        <span class="brand-tagline">Daily fun, weird, and wonderful observances</span>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="/holiday/">Holidays</a>
+      <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener">@obscureholidaycalendar</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+    </nav>
+  </header>
+
+  <main class="page-wrap">
+    <article class="holiday-card">
+      <div class="bot-hero">
+        <img src="/assets/app-icon.png" alt="Bot icon" class="hero-badge" />
+        <h1 class="holiday-title">Obscure Holiday Discord Bot</h1>
+        <div class="meta-line" style="justify-content: center;">
+          <span class="pill">/today</span>
+          <span class="pill pill-secondary">/date</span>
+          <span class="pill pill-secondary">/search</span>
+          <span class="pill">Daily posts</span>
+        </div>
+        <p class="lead" style="margin: 8px auto 12px; max-width: 640px;">
+          Bring daily obscure holidays, random picks, and fun facts into your Discord server. Free, no signup—just invite and go.
+        </p>
+        <div class="bot-cta">
+          <a class="bot-button invite" href="https://discord.com/oauth2/authorize?client_id=1447955404142153789&permissions=2684438528&integration_type=0&scope=applications.commands+bot">
+            Invite to Discord
+          </a>
+          <a class="bot-button secondary" href="https://www.obscureholidaycalendar.com/app/">
+            Get the Mobile App
+          </a>
+        </div>
+      </div>
+
+      <section class="section">
+        <h2>What the bot does</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <strong>/today & /date</strong>
+            <p>Show today’s holiday or any date (MM-DD) with emoji, description, and a link to your site.</p>
+          </div>
+          <div class="feature-card">
+            <strong>/search & /random</strong>
+            <p>Find holidays by keyword (e.g., “bacon day”) or let the bot surprise you.</p>
+          </div>
+          <div class="feature-card">
+            <strong>/facts</strong>
+            <p>Quick fun facts pulled from your holiday library to keep chats lively.</p>
+          </div>
+          <div class="feature-card">
+            <strong>Daily channel posts</strong>
+            <p>Auto-posts today’s holidays to a channel you choose, with a teaser for tomorrow.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>How to add it</h2>
+        <ul class="steps">
+          <li><strong>Step 1:</strong> Click “Invite to Discord.”</li>
+          <li><strong>Step 2:</strong> Choose your server and approve (needs Send Messages + Embed Links).</li>
+          <li><strong>Step 3:</strong> Try <code>/today</code>, <code>/date</code>, or <code>/random</code> right away. Daily posts run once configured by the bot owner.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Preview</h2>
+        <div class="screenshots">
+          <img src="/assets/screen1.png" alt="Holiday preview 1" loading="lazy">
+          <img src="/assets/screen2.png" alt="Holiday preview 2" loading="lazy">
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/holiday/">Holidays</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/discord-bot/">Discord Bot</a>
+    </div>
+    <p>&copy; 2025 Obscure Holiday Calendar</p>
+  </footer>
+</body>
+</html>

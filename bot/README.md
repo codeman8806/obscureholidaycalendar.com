@@ -9,6 +9,9 @@ Node.js Discord bot that answers holiday questions using `holidays.json`.
   - `/search <query>` — search by name/keywords
   - `/random` — random holiday
   - `/facts <name|MM-DD>` — quick fun facts
+  - `/invite` — get the bot invite link
+  - `/support` — landing/help link
+  - `/app` — app store/site links
   - `/help` — list commands
 - Presence/status set on startup (“Watching obscure holidays”).
 - Optional daily auto-post to a channel at 00:05 (local time).
@@ -21,8 +24,10 @@ Node.js Discord bot that answers holiday questions using `holidays.json`.
    - `npm install`  
    - Set env:  
      - `DISCORD_BOT_TOKEN=your_token_here`  
+     - Optional: `BOT_INVITE_URL=https://discord.com/oauth2/authorize?client_id=1447955404142153789&permissions=2684438528&integration_type=0&scope=applications.commands+bot` (defaults to this if unset)  
      - Optional: `DAILY_CHANNEL_ID=<channel_id>` to enable daily auto-post at 00:05.  
      - Optional: `GUILD_ID=<guild_id>` to register slash commands to one guild for instant availability (otherwise they register globally and may take a few minutes).  
+     - Optional: `SUPPORT_URL=https://www.obscureholidaycalendar.com/discord-bot/` to point `/support` to your landing page.
    - Run `npm start`.
 3) Invite the bot to your server using the OAuth URL with `bot` scope and at least `Send Messages` / `Embed Links` permissions.
 
