@@ -7,6 +7,9 @@ import {
   EmbedBuilder,
   ActivityType,
   ApplicationCommandOptionType,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
 } from "discord.js";
 
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
@@ -34,6 +37,12 @@ function resolveHolidaysPath() {
 }
 
 const HOLIDAYS_PATH = resolveHolidaysPath();
+const APP_URL = "https://www.obscureholidaycalendar.com/app/";
+const SITE_URL = "https://www.obscureholidaycalendar.com";
+const BOT_INVITE_URL =
+  process.env.BOT_INVITE_URL ||
+  "https://discord.com/oauth2/authorize?client_id=1447955404142153789&permissions=2684438528&integration_type=0&scope=applications.commands+bot";
+const SUPPORT_URL = process.env.SUPPORT_URL || `${SITE_URL}/discord-bot/`;
 const SITE_BASE = "https://www.obscureholidaycalendar.com/holiday";
 
 function loadHolidays() {
@@ -113,7 +122,8 @@ function buildEmbed(h) {
     .setURL(url)
     .setDescription(desc || "Learn more on the site.")
     .addFields([{ name: "Date", value: prettyDate(date), inline: true }])
-    .setColor(0x1c96f3);
+    .setColor(0x1c96f3)
+    .setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
 
   if (facts.length) {
     embed.addFields([{ name: "Fun facts", value: facts.map((f) => `• ${f}`).join("\n") }]);
@@ -122,12 +132,25 @@ function buildEmbed(h) {
   return embed;
 }
 
+function buildButtons(h) {
+  const name = h.name || "Holiday";
+  const slug = h.slug || slugify(name);
+  const url = `${SITE_BASE}/${slug}/`;
+  return [
+    new ActionRowBuilder().addComponents(
+      new ButtonBuilder().setLabel("View on Website").setStyle(ButtonStyle.Link).setURL(url),
+      new ButtonBuilder().setLabel("Get the App").setStyle(ButtonStyle.Link).setURL(APP_URL),
+      new ButtonBuilder().setLabel("Invite the Bot").setStyle(ButtonStyle.Link).setURL(BOT_INVITE_URL)
+    ),
+  ];
+}
+
 async function handleToday(interaction) {
   const now = new Date();
   const mmdd = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
   const hits = findByDate(mmdd);
   if (!hits.length) return interaction.reply({ content: "No holiday found for today.", ephemeral: true });
-  return interaction.reply({ embeds: [buildEmbed(hits[0])] });
+  return interaction.reply({ embeds: [buildEmbed(hits[0])], components: buildButtons(hits[0]) });
 }
 
 async function handleDate(interaction) {
@@ -136,18 +159,20 @@ async function handleDate(interaction) {
   if (!parsed) return interaction.reply({ content: "Please provide a date as MM-DD or MM/DD (example: 07-04).", ephemeral: true });
   const hits = findByDate(parsed);
   if (!hits.length) return interaction.reply({ content: `No holidays found on ${parsed}.`, ephemeral: true });
-  return interaction.reply({ embeds: [buildEmbed(hits[0])] });
+  return interaction.reply({ embeds: [buildEmbed(hits[0])], components: buildButtons(hits[0]) });
 }
 
 async function handleSearch(interaction) {
   const query = interaction.options.getString("query", true);
   const matches = findByName(query);
   if (!matches.length) return interaction.reply({ content: "No match. Try a simpler phrase.", ephemeral: true });
-  return interaction.reply({ embeds: matches.map(buildEmbed).slice(0, 3) });
+  const embeds = matches.slice(0, 3).map(buildEmbed);
+  return interaction.reply({ embeds, components: buildButtons(matches[0]) });
 }
 
 async function handleRandom(interaction) {
-  return interaction.reply({ embeds: [buildEmbed(pickRandom())] });
+  const h = pickRandom();
+  return interaction.reply({ embeds: [buildEmbed(h)], components: buildButtons(h) });
 }
 
 async function handleFacts(interaction) {
@@ -170,8 +195,9 @@ async function handleFacts(interaction) {
   const embed = new EmbedBuilder()
     .setTitle(`${holiday.emoji ? holiday.emoji + " " : ""}${holiday.name || "Holiday"} — fun facts`)
     .setDescription(facts.map((f) => `• ${f}`).join("\n"))
-    .setColor(0xff7a3c);
-  return interaction.reply({ embeds: [embed] });
+    .setColor(0xff7a3c)
+    .setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
+  return interaction.reply({ embeds: [embed], components: buildButtons(holiday) });
 }
 
 async function handleHelp(interaction) {
@@ -183,6 +209,9 @@ async function handleHelp(interaction) {
       "/search <query> — find matching holidays",
       "/random — surprise me",
       "/facts <name|MM-DD> — quick fun facts",
+      "/invite — invite the bot",
+      "/support — help/landing page",
+      "/app — mobile app links",
     ].join("\n"),
     ephemeral: true,
   });
@@ -227,6 +256,9 @@ const commandDefs = [
       },
     ],
   },
+  { name: "invite", description: "Get the bot invite link" },
+  { name: "support", description: "Get help/landing page link" },
+  { name: "app", description: "Get the mobile app links" },
   { name: "help", description: "List commands" },
 ];
 
@@ -273,6 +305,38 @@ client.on("interactionCreate", async (interaction) => {
         return handleRandom(interaction);
       case "facts":
         return handleFacts(interaction);
+      case "invite":
+        return interaction.reply({
+          content: "Invite the bot to your server:",
+          components: [
+            new ActionRowBuilder().addComponents(
+              new ButtonBuilder().setLabel("Invite the Bot").setStyle(ButtonStyle.Link).setURL(BOT_INVITE_URL),
+              new ButtonBuilder().setLabel("Get the App").setStyle(ButtonStyle.Link).setURL(APP_URL)
+            ),
+          ],
+        });
+      case "support":
+        return interaction.reply({
+          content: "Need help? Visit our landing page:",
+          components: [
+            new ActionRowBuilder().addComponents(
+              new ButtonBuilder().setLabel("Support / Landing").setStyle(ButtonStyle.Link).setURL(SUPPORT_URL),
+              new ButtonBuilder().setLabel("Invite the Bot").setStyle(ButtonStyle.Link).setURL(BOT_INVITE_URL)
+            ),
+          ],
+          ephemeral: true,
+        });
+      case "app":
+        return interaction.reply({
+          content: "Get the Obscure Holiday Calendar app:",
+          components: [
+            new ActionRowBuilder().addComponents(
+              new ButtonBuilder().setLabel("Get the App").setStyle(ButtonStyle.Link).setURL(APP_URL),
+              new ButtonBuilder().setLabel("View Website").setStyle(ButtonStyle.Link).setURL(SITE_URL)
+            ),
+          ],
+          ephemeral: true,
+        });
       case "help":
         return handleHelp(interaction);
       default:
@@ -318,11 +382,20 @@ async function postToday() {
     return channel.send("No holiday found for today. Check back tomorrow!");
   }
 
-  const top = hits.slice(0, 2).map((h) => h.name).join(" and ");
-  const embed = buildEmbed(hits[0]);
+  const topNames = hits.slice(0, 2).map((h) => h.name).join(" and ");
+  const todayEmbed = buildEmbed(hits[0]);
+
+  // Coming up tomorrow teaser
+  const tomorrow = new Date(now);
+  tomorrow.setDate(now.getDate() + 1);
+  const tmm = `${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}`;
+  const nextHits = findByDate(tmm);
+  const teaser = nextHits.length ? `Up next: ${nextHits[0].name} (${prettyDate(tmm)})` : "";
+
   await channel.send({
-    content: `🎉 Today’s holidays: ${top}`,
-    embeds: [embed],
+    content: `🎉 Today’s holidays: ${topNames}${teaser ? `\n${teaser}` : ""}`,
+    embeds: [todayEmbed],
+    components: buildButtons(hits[0]),
   });
 }
 

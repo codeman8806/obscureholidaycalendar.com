@@ -15,6 +15,7 @@ STATIC_PAGES = [
     f"{DOMAIN}/about/",
     f"{DOMAIN}/contact/",
     f"{DOMAIN}/privacy/",
+    f"{DOMAIN}/discord-bot/",
 ]
 
 # Create output directory
