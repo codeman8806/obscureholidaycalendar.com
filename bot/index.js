@@ -405,6 +405,14 @@ async function handleGrantPremium(interaction) {
   writeJsonSafe(PREMIUM_PATH, premiumAllowlist);
   return interaction.reply({ content: `Premium ${flag ? "granted to" : "revoked from"} ${serverId}.`, ephemeral: true });
 }
+
+async function handleInstallCount(interaction) {
+  if (!isOwner(interaction.user.id)) {
+    return interaction.reply({ content: "Owner-only command.", ephemeral: true });
+  }
+  const count = client.guilds.cache.size;
+  return interaction.reply({ content: `I am currently in ${count} server(s).`, ephemeral: true });
+}
 async function handleHelp(interaction) {
   return interaction.reply({
     content: [
@@ -536,6 +544,10 @@ const commandDefs = [
       },
     ],
   },
+  {
+    name: "installcount",
+    description: "Owner-only: show how many servers this bot is in",
+  },
   { name: "help", description: "List commands" },
 ];
 
@@ -592,6 +604,8 @@ client.on("interactionCreate", async (interaction) => {
         return handleUpcoming(interaction);
       case "grantpremium":
         return handleGrantPremium(interaction);
+      case "installcount":
+        return handleInstallCount(interaction);
       case "invite":
         return interaction.reply({
           content: "Invite the bot to your server:",
