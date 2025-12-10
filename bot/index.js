@@ -20,7 +20,20 @@ if (!TOKEN) {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const HOLIDAYS_PATH = path.resolve(__dirname, "..", "holidays.json");
+
+function resolveHolidaysPath() {
+  // Option A: keep a copy next to the bot (./holidays.json)
+  const local = path.resolve(__dirname, "holidays.json");
+  if (fs.existsSync(local)) return local;
+
+  // Fallback: root-level (../holidays.json)
+  const root = path.resolve(__dirname, "..", "holidays.json");
+  if (fs.existsSync(root)) return root;
+
+  throw new Error("holidays.json not found. Place it in bot/ or repo root.");
+}
+
+const HOLIDAYS_PATH = resolveHolidaysPath();
 const SITE_BASE = "https://www.obscureholidaycalendar.com/holiday";
 
 function loadHolidays() {
