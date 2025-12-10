@@ -43,6 +43,31 @@ const BOT_INVITE_URL =
   process.env.BOT_INVITE_URL ||
   "https://discord.com/oauth2/authorize?client_id=1447955404142153789&permissions=2684438528&integration_type=0&scope=applications.commands+bot";
 const SUPPORT_URL = process.env.SUPPORT_URL || `${SITE_URL}/discord-bot/`;
+const PREMIUM_ROLE_ID = process.env.PREMIUM_ROLE_ID || null; // Discord Server Subscription role id
+const CONFIG_PATH = path.resolve(__dirname, "guild-config.json");
+const PREMIUM_PATH = path.resolve(__dirname, "premium.json"); // optional allowlist
+
+function readJsonSafe(filePath, fallback) {
+  try {
+    if (fs.existsSync(filePath)) {
+      return JSON.parse(fs.readFileSync(filePath, "utf8"));
+    }
+  } catch (e) {
+    console.error(`Failed to read ${filePath}:`, e);
+  }
+  return fallback;
+}
+
+function writeJsonSafe(filePath, data) {
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
+  } catch (e) {
+    console.error(`Failed to write ${filePath}:`, e);
+  }
+}
+
+const guildConfig = readJsonSafe(CONFIG_PATH, {});
+const premiumAllowlist = readJsonSafe(PREMIUM_PATH, {});
 const SITE_BASE = "https://www.obscureholidaycalendar.com/holiday";
 
 function loadHolidays() {
@@ -53,6 +78,41 @@ function loadHolidays() {
 
 const holidaysByDate = loadHolidays();
 const allHolidays = Object.values(holidaysByDate).flat();
+
+function isPremium(guild, member) {
+  if (!guild) return false;
+  // Discord Server Subscription role check on interacting member
+  if (PREMIUM_ROLE_ID && member && member.roles && member.roles.cache.has(PREMIUM_ROLE_ID)) return true;
+  // Allowlist fallback
+  if (premiumAllowlist[guild.id]) return true;
+  return false;
+}
+
+function isPremiumGuild(guild) {
+  if (!guild) return false;
+  if (premiumAllowlist[guild.id]) return true;
+  if (PREMIUM_ROLE_ID) {
+    const role = guild.roles.cache.get(PREMIUM_ROLE_ID);
+    if (role && role.members && role.members.size > 0) return true;
+  }
+  return false;
+}
+
+function getGuildConfig(guildId) {
+  if (!guildConfig[guildId]) {
+    guildConfig[guildId] = {
+      channelIds: [],
+      timezone: "UTC",
+      hour: 0, // 00:00 UTC-ish
+      branding: true,
+    };
+  }
+  return guildConfig[guildId];
+}
+
+function saveGuildConfig() {
+  writeJsonSafe(CONFIG_PATH, guildConfig);
+}
 
 function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -108,7 +168,19 @@ function pickRandom() {
   return allHolidays[Math.floor(Math.random() * allHolidays.length)];
 }
 
-function buildEmbed(h) {
+function holidaysForRange(startDate, days) {
+  const list = [];
+  for (let i = 0; i < days; i++) {
+    const d = new Date(startDate);
+    d.setDate(startDate.getDate() + i);
+    const mmdd = `${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    const hits = findByDate(mmdd);
+    if (hits.length) list.push({ date: mmdd, holiday: hits[0] });
+  }
+  return list;
+}
+
+function buildEmbed(h, options = {}) {
   const name = h.name || "Holiday";
   const emoji = h.emoji || "";
   const date = h.date || "??-??";
@@ -116,14 +188,18 @@ function buildEmbed(h) {
   const facts = Array.isArray(h.funFacts) ? h.funFacts.slice(0, 3) : [];
   const slug = h.slug || slugify(name);
   const url = `${SITE_BASE}/${slug}/`;
+  const showBranding = options.branding !== false; // default true
 
   const embed = new EmbedBuilder()
     .setTitle(`${emoji ? emoji + " " : ""}${name}`)
     .setURL(url)
     .setDescription(desc || "Learn more on the site.")
     .addFields([{ name: "Date", value: prettyDate(date), inline: true }])
-    .setColor(0x1c96f3)
-    .setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
+    .setColor(0x1c96f3);
+
+  if (showBranding) {
+    embed.setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
+  }
 
   if (facts.length) {
     embed.addFields([{ name: "Fun facts", value: facts.map((f) => `• ${f}`).join("\n") }]);
@@ -150,7 +226,8 @@ async function handleToday(interaction) {
   const mmdd = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
   const hits = findByDate(mmdd);
   if (!hits.length) return interaction.reply({ content: "No holiday found for today.", ephemeral: true });
-  return interaction.reply({ embeds: [buildEmbed(hits[0])], components: buildButtons(hits[0]) });
+  const premium = isPremium(interaction.guild, interaction.member);
+  return interaction.reply({ embeds: [buildEmbed(hits[0], { branding: !premium || getGuildConfig(interaction.guild.id).branding })], components: buildButtons(hits[0]) });
 }
 
 async function handleDate(interaction) {
@@ -159,20 +236,84 @@ async function handleDate(interaction) {
   if (!parsed) return interaction.reply({ content: "Please provide a date as MM-DD or MM/DD (example: 07-04).", ephemeral: true });
   const hits = findByDate(parsed);
   if (!hits.length) return interaction.reply({ content: `No holidays found on ${parsed}.`, ephemeral: true });
-  return interaction.reply({ embeds: [buildEmbed(hits[0])], components: buildButtons(hits[0]) });
+  const premium = isPremium(interaction.guild, interaction.member);
+  return interaction.reply({ embeds: [buildEmbed(hits[0], { branding: !premium || getGuildConfig(interaction.guild.id).branding })], components: buildButtons(hits[0]) });
 }
 
 async function handleSearch(interaction) {
   const query = interaction.options.getString("query", true);
   const matches = findByName(query);
   if (!matches.length) return interaction.reply({ content: "No match. Try a simpler phrase.", ephemeral: true });
-  const embeds = matches.slice(0, 3).map(buildEmbed);
+  const premium = isPremium(interaction.guild, interaction.member);
+  const embeds = matches.slice(0, 3).map((h) => buildEmbed(h, { branding: !premium || getGuildConfig(interaction.guild.id).branding }));
   return interaction.reply({ embeds, components: buildButtons(matches[0]) });
 }
 
 async function handleRandom(interaction) {
   const h = pickRandom();
-  return interaction.reply({ embeds: [buildEmbed(h)], components: buildButtons(h) });
+  const premium = isPremium(interaction.guild, interaction.member);
+  return interaction.reply({ embeds: [buildEmbed(h, { branding: !premium || getGuildConfig(interaction.guild.id).branding })], components: buildButtons(h) });
+}
+
+async function handlePremium(interaction) {
+  const premium = isPremium(interaction.guild, interaction.member);
+  const config = getGuildConfig(interaction.guild.id);
+  const lines = [
+    premium ? "✅ Premium active (Server Subscription role or allowlist)." : "⚠️ Premium not active.",
+    `Daily channel(s): ${config.channelIds.length ? config.channelIds.map((c) => `<#${c}>`).join(", ") : "not set"}`,
+    `Timezone: ${config.timezone} @ ${config.hour}:00`,
+    `Branding: ${config.branding === false ? "off" : "on"}`,
+  ];
+  if (!premium) lines.push(`Upgrade: ${SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/"}`);
+  return interaction.reply({ content: lines.join("\n"), ephemeral: true });
+}
+
+async function handleSetup(interaction) {
+  const guildId = interaction.guild.id;
+  const config = getGuildConfig(guildId);
+  const channel = interaction.options.getChannel("channel", true);
+  const tz = interaction.options.getString("timezone");
+  const hour = interaction.options.getInteger("hour");
+  const brandingOpt = interaction.options.getBoolean("branding");
+  const premium = isPremium(interaction.guild, interaction.member);
+
+  if (!channel.isTextBased()) {
+    return interaction.reply({ content: "Please pick a text channel.", ephemeral: true });
+  }
+
+  if (!premium) {
+    config.channelIds = [channel.id];
+    config.timezone = "UTC";
+    config.hour = 0;
+    config.branding = true;
+    saveGuildConfig();
+    scheduleForGuild(guildId);
+    return interaction.reply({ content: `Daily posts set to <#${channel.id}> at 00:00 UTC. Premium unlocks timezone/hour/branding toggles.`, ephemeral: true });
+  }
+
+  // Premium path: allow multiple channels (cap 3), timezone/hour, branding toggle
+  const MAX_CHANNELS = 3;
+  if (!config.channelIds.includes(channel.id)) {
+    if (config.channelIds.length >= MAX_CHANNELS) {
+      config.channelIds.shift();
+    }
+    config.channelIds.push(channel.id);
+  }
+  if (tz) config.timezone = tz;
+  if (Number.isInteger(hour)) config.hour = Math.max(0, Math.min(hour, 23));
+  if (typeof brandingOpt === "boolean") config.branding = brandingOpt;
+
+  saveGuildConfig();
+  scheduleForGuild(guildId);
+
+  return interaction.reply({
+    content: [
+      `Daily posts set to ${config.channelIds.map((c) => `<#${c}>`).join(", ")}`,
+      `Time: ${config.hour}:00 in ${config.timezone}`,
+      `Branding: ${config.branding === false ? "off" : "on"}`,
+    ].join("\n"),
+    ephemeral: true,
+  });
 }
 
 async function handleFacts(interaction) {
@@ -195,11 +336,53 @@ async function handleFacts(interaction) {
   const embed = new EmbedBuilder()
     .setTitle(`${holiday.emoji ? holiday.emoji + " " : ""}${holiday.name || "Holiday"} — fun facts`)
     .setDescription(facts.map((f) => `• ${f}`).join("\n"))
-    .setColor(0xff7a3c)
-    .setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
+    .setColor(0xff7a3c);
+  const premium = isPremium(interaction.guild, interaction.member);
+  if (!premium || getGuildConfig(interaction.guild.id).branding) {
+    embed.setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
+  }
   return interaction.reply({ embeds: [embed], components: buildButtons(holiday) });
 }
 
+async function handleTomorrow(interaction) {
+  const premium = isPremium(interaction.guild, interaction.member);
+  if (!premium) {
+    return interaction.reply({ content: "Premium only. Unlock premium via Server Subscription and retry.", ephemeral: true });
+  }
+  const now = new Date();
+  const tomorrow = new Date(now);
+  tomorrow.setDate(now.getDate() + 1);
+  const mmdd = `${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}`;
+  const hits = findByDate(mmdd);
+  if (!hits.length) return interaction.reply({ content: "No holiday found for tomorrow.", ephemeral: true });
+  const config = getGuildConfig(interaction.guild.id);
+  return interaction.reply({ embeds: [buildEmbed(hits[0], { branding: config.branding })], components: buildButtons(hits[0]) });
+}
+
+async function handleUpcoming(interaction) {
+  const premium = isPremium(interaction.guild, interaction.member);
+  if (!premium) {
+    return interaction.reply({ content: "Premium only. Unlock premium via Server Subscription and retry.", ephemeral: true });
+  }
+  const days = Math.max(1, Math.min(interaction.options.getInteger("days") || 7, 30));
+  const now = new Date();
+  const items = holidaysForRange(now, days);
+  if (!items.length) return interaction.reply({ content: "No upcoming holidays found.", ephemeral: true });
+  const fields = items.slice(0, 5).map(({ date, holiday }) => ({
+    name: `${holiday.emoji ? holiday.emoji + " " : ""}${holiday.name}`,
+    value: prettyDate(date),
+    inline: true,
+  }));
+  const config = getGuildConfig(interaction.guild.id);
+  const embed = new EmbedBuilder()
+    .setTitle("Upcoming holidays")
+    .addFields(fields)
+    .setColor(0x1c96f3);
+  if (config.branding !== false) {
+    embed.setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
+  }
+  return interaction.reply({ embeds: [embed], components: buildButtons(items[0].holiday) });
+}
 async function handleHelp(interaction) {
   return interaction.reply({
     content: [
@@ -212,6 +395,10 @@ async function handleHelp(interaction) {
       "/invite — invite the bot",
       "/support — help/landing page",
       "/app — mobile app links",
+      "/setup — configure daily posts (premium unlocks time/timezone/branding)",
+      "/premium — check your premium status",
+      "/tomorrow — tomorrow’s holiday (premium)",
+      "/upcoming — upcoming holidays (premium)",
     ].join("\n"),
     ephemeral: true,
   });
@@ -259,6 +446,56 @@ const commandDefs = [
   { name: "invite", description: "Get the bot invite link" },
   { name: "support", description: "Get help/landing page link" },
   { name: "app", description: "Get the mobile app links" },
+  {
+    name: "setup",
+    description: "Configure daily posts (channel/time). Premium unlocks timezone/hour/branding toggles.",
+    options: [
+      {
+        name: "channel",
+        description: "Channel for daily posts",
+        type: ApplicationCommandOptionType.Channel,
+        required: true,
+      },
+      {
+        name: "timezone",
+        description: "IANA timezone (e.g., America/New_York) — Premium only",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+      },
+      {
+        name: "hour",
+        description: "Hour of day 0-23 in that timezone — Premium only",
+        type: ApplicationCommandOptionType.Integer,
+        required: false,
+      },
+      {
+        name: "branding",
+        description: "Show branding footer? true/false (Premium can turn off)",
+        type: ApplicationCommandOptionType.Boolean,
+        required: false,
+      },
+    ],
+  },
+  {
+    name: "premium",
+    description: "See premium status",
+  },
+  {
+    name: "tomorrow",
+    description: "See tomorrow’s holiday (Premium only)",
+  },
+  {
+    name: "upcoming",
+    description: "See upcoming holidays (Premium only)",
+    options: [
+      {
+        name: "days",
+        description: "How many days ahead (max 30)",
+        type: ApplicationCommandOptionType.Integer,
+        required: false,
+      },
+    ],
+  },
   { name: "help", description: "List commands" },
 ];
 
@@ -305,6 +542,14 @@ client.on("interactionCreate", async (interaction) => {
         return handleRandom(interaction);
       case "facts":
         return handleFacts(interaction);
+      case "setup":
+        return handleSetup(interaction);
+      case "premium":
+        return handlePremium(interaction);
+      case "tomorrow":
+        return handleTomorrow(interaction);
+      case "upcoming":
+        return handleUpcoming(interaction);
       case "invite":
         return interaction.reply({
           content: "Invite the bot to your server:",
@@ -352,27 +597,49 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 function scheduleDailyPost() {
-  if (!DAILY_CHANNEL_ID) {
-    console.log("No DAILY_CHANNEL_ID set; skipping auto-post.");
-    return;
-  }
-  const now = new Date();
-  const next = new Date(now);
-  next.setHours(0, 5, 0, 0); // 00:05 local time to avoid rate spikes
-  if (next <= now) next.setDate(next.getDate() + 1);
-  const delay = next.getTime() - now.getTime();
-  setTimeout(() => {
-    postToday().catch((e) => console.error("Daily post failed:", e));
-    setInterval(() => {
-      postToday().catch((e) => console.error("Daily post failed:", e));
-    }, 24 * 60 * 60 * 1000);
-  }, delay);
-  console.log(`Scheduled daily post in ${Math.round(delay / 1000 / 60)} minutes`);
+  console.log("Scheduling daily posts per guild config...");
+  Object.keys(guildConfig).forEach((guildId) => scheduleForGuild(guildId));
 }
 
-async function postToday() {
-  if (!DAILY_CHANNEL_ID) return;
-  const channel = await client.channels.fetch(DAILY_CHANNEL_ID);
+const guildTimers = new Map();
+
+function nextRunTimestamp(config) {
+  const tz = config.timezone || "UTC";
+  const hour = Number.isInteger(config.hour) ? config.hour : 0;
+  const now = new Date();
+  const nowTz = new Date(now.toLocaleString("en-US", { timeZone: tz }));
+  const next = new Date(nowTz);
+  next.setHours(hour, 0, 0, 0);
+  if (next <= nowTz) next.setDate(next.getDate() + 1);
+  // Convert back to UTC timestamp
+  const offset = next.getTime() - nowTz.getTime();
+  return now.getTime() + offset;
+}
+
+function scheduleForGuild(guildId) {
+  const config = getGuildConfig(guildId);
+  if (!config.channelIds || !config.channelIds.length) return;
+  const runAt = nextRunTimestamp(config);
+  const delay = Math.max(1000, runAt - Date.now());
+  if (guildTimers.has(guildId)) clearTimeout(guildTimers.get(guildId));
+  const timer = setTimeout(async () => {
+    try {
+      await postTodayForGuild(guildId);
+    } catch (e) {
+      console.error(`Daily post failed for guild ${guildId}:`, e);
+    } finally {
+      scheduleForGuild(guildId);
+    }
+  }, delay);
+  guildTimers.set(guildId, timer);
+  console.log(`Scheduled ${guildId} in ${Math.round(delay / 1000 / 60)} minutes (${config.timezone} @ ${config.hour}:00)`);
+}
+
+async function postTodayForGuild(guildId) {
+  const config = getGuildConfig(guildId);
+  const channelId = config.channelIds[0];
+  if (!channelId) return;
+  const channel = await client.channels.fetch(channelId);
   if (!channel || !channel.isTextBased()) return;
 
   const now = new Date();
@@ -382,8 +649,10 @@ async function postToday() {
     return channel.send("No holiday found for today. Check back tomorrow!");
   }
 
+  const premium = isPremiumGuild(channel.guild);
+  const branding = !premium || config.branding;
   const topNames = hits.slice(0, 2).map((h) => h.name).join(" and ");
-  const todayEmbed = buildEmbed(hits[0]);
+  const todayEmbed = buildEmbed(hits[0], { branding });
 
   // Coming up tomorrow teaser
   const tomorrow = new Date(now);
