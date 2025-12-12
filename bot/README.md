@@ -28,6 +28,9 @@ Node.js Discord bot that answers holiday questions using `holidays.json`.
      - Optional: `DAILY_CHANNEL_ID=<channel_id>` to enable daily auto-post at 00:05.  
      - Optional: `GUILD_ID=<guild_id>` to register slash commands to one guild for instant availability (otherwise they register globally and may take a few minutes).  
      - Optional: `SUPPORT_URL=https://www.obscureholidaycalendar.com/discord-bot/` to point `/support` to your landing page.
+     - Optional: `BOT_OWNER_ID=<your_user_id>` for owner-only commands (`/grantpremium`, `/installcount`).
+     - Optional: `PREMIUM_ROLE_ID=<role_id>` if using Discord Server Subscriptions for premium.
+     - Optional: `TOPGG_TOKEN=<api_token>` to auto-post server counts to top.gg (global commands recommended; interval defaults to 30 min, override with `TOPGG_POST_INTERVAL_MIN`).
    - Run `npm start`.
 3) Invite the bot to your server using the OAuth URL with `bot` scope and at least `Send Messages` / `Embed Links` permissions.
 

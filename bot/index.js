@@ -47,6 +47,8 @@ const PREMIUM_ROLE_ID = process.env.PREMIUM_ROLE_ID || null; // Discord Server S
 const CONFIG_PATH = path.resolve(__dirname, "guild-config.json");
 const PREMIUM_PATH = path.resolve(__dirname, "premium.json"); // optional allowlist
 const BOT_OWNER_ID = process.env.BOT_OWNER_ID || null;
+const TOPGG_TOKEN = process.env.TOPGG_TOKEN || null; // for posting stats to top.gg
+const TOPGG_POST_INTERVAL_MIN = Number(process.env.TOPGG_POST_INTERVAL_MIN || "30");
 
 function readJsonSafe(filePath, fallback) {
   try {
@@ -102,6 +104,31 @@ function isPremiumGuild(guild) {
 function isOwner(userId) {
   if (!BOT_OWNER_ID) return false;
   return userId === BOT_OWNER_ID;
+}
+
+async function postTopGGStats() {
+  if (!TOPGG_TOKEN) return;
+  try {
+    const serverCount = client.guilds.cache.size;
+    const botId = client.user?.id;
+    if (!botId) return;
+    const res = await fetch(`https://top.gg/api/bots/${botId}/stats`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: TOPGG_TOKEN,
+      },
+      body: JSON.stringify({ server_count: serverCount }),
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      console.warn(`top.gg stats post failed: ${res.status} ${text}`);
+    } else {
+      console.log(`Posted stats to top.gg: ${serverCount} servers`);
+    }
+  } catch (e) {
+    console.warn("top.gg stats post failed:", e.message);
+  }
 }
 
 function getGuildConfig(guildId) {
@@ -578,6 +605,12 @@ client.once("ready", async () => {
 
   // Schedule daily auto-post
   scheduleDailyPost();
+
+  // Post stats to top.gg now and on interval
+  postTopGGStats();
+  if (TOPGG_TOKEN && TOPGG_POST_INTERVAL_MIN > 0) {
+    setInterval(postTopGGStats, TOPGG_POST_INTERVAL_MIN * 60 * 1000);
+  }
 });
 
 client.on("interactionCreate", async (interaction) => {
@@ -650,6 +683,14 @@ client.on("interactionCreate", async (interaction) => {
     }
     return interaction.reply({ content: "Something went wrong handling that request.", ephemeral: true });
   }
+});
+
+client.on("guildCreate", () => {
+  postTopGGStats();
+});
+
+client.on("guildDelete", () => {
+  postTopGGStats();
 });
 
 function scheduleDailyPost() {
