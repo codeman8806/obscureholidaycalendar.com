@@ -32,7 +32,21 @@ function resolveHolidaysPath() {
 
   // Fallback: root-level (../holidays.json)
   const root = path.resolve(__dirname, "..", "holidays.json");
-  if (fs.existsSync(root)) return root;
+  if (fs.existsSync(root)) {
+    // If running from /bot and local is missing, copy it locally so Docker/hosted envs can read it
+    try {
+      fs.copyFileSync(root, local);
+      console.log("Copied ../holidays.json into bot/holidays.json for runtime");
+      return local;
+    } catch (e) {
+      console.warn("Failed to copy ../holidays.json into bot/:", e.message);
+    }
+    return root;
+  }
+
+  // Env override: allow explicit path if provided
+  const envPath = process.env.HOLIDAYS_PATH;
+  if (envPath && fs.existsSync(envPath)) return envPath;
 
   throw new Error("holidays.json not found. Place it in bot/ or repo root.");
 }
