@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import http from "http";
 import { fileURLToPath } from "url";
 import {
   Client,
@@ -49,6 +50,7 @@ const PREMIUM_PATH = path.resolve(__dirname, "premium.json"); // optional allowl
 const BOT_OWNER_ID = process.env.BOT_OWNER_ID || null;
 const TOPGG_TOKEN = process.env.TOPGG_TOKEN || null; // for posting stats to top.gg
 const TOPGG_POST_INTERVAL_MIN = Number(process.env.TOPGG_POST_INTERVAL_MIN || "30");
+const PORT = process.env.PORT || null; // for Railway/health checks (optional)
 
 function readJsonSafe(filePath, fallback) {
   try {
@@ -104,6 +106,18 @@ function isPremiumGuild(guild) {
 function isOwner(userId) {
   if (!BOT_OWNER_ID) return false;
   return userId === BOT_OWNER_ID;
+}
+
+// Optional tiny HTTP server to satisfy platforms expecting a listening port (e.g., Railway "web" services)
+if (PORT) {
+  http
+    .createServer((_, res) => {
+      res.writeHead(200, { "Content-Type": "text/plain" });
+      res.end("ok");
+    })
+    .listen(PORT, () => {
+      console.log(`Keepalive server listening on ${PORT}`);
+    });
 }
 
 async function postTopGGStats() {
