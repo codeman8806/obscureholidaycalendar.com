@@ -73,6 +73,7 @@ const STRIPE_LOOKUP_KEY = process.env.STRIPE_LOOKUP_KEY || null; // optional loo
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || null;
 const STRIPE_SUCCESS_URL = process.env.STRIPE_SUCCESS_URL || `${SITE_URL}/discord-bot/?success=1`;
 const STRIPE_CANCEL_URL = process.env.STRIPE_CANCEL_URL || `${SITE_URL}/discord-bot/?canceled=1`;
+const STRIPE_PORTAL_RETURN_URL = process.env.STRIPE_PORTAL_RETURN_URL || `${SITE_URL}/discord-bot/`;
 
 function readJsonSafe(filePath, fallback) {
   try {
@@ -617,6 +618,26 @@ async function handleUpgrade(interaction) {
   }
 }
 
+async function handleManage(interaction) {
+  if (!stripeClient) return interaction.reply({ content: "Stripe is not configured.", ephemeral: true });
+  const premium = isPremium(interaction.guild, interaction.member);
+  if (!premium) {
+    return interaction.reply({ content: "This server is not premium yet. Use /upgrade to start a subscription.", ephemeral: true });
+  }
+  try {
+    const session = await stripeClient.billingPortal.sessions.create({
+      customer: null, // You can store/retrieve customer id via metadata if you capture it
+      return_url: STRIPE_PORTAL_RETURN_URL,
+    });
+    if (session.url) {
+      return interaction.reply({ content: `Manage your subscription here: ${session.url}`, ephemeral: true });
+    }
+  } catch (err) {
+    console.error("Stripe portal error:", err);
+  }
+  return interaction.reply({ content: "Unable to open the billing portal right now.", ephemeral: true });
+}
+
 async function handleGrantPremium(interaction) {
   if (!isOwner(interaction.user.id)) {
     return interaction.reply({ content: "Owner-only command.", ephemeral: true });
@@ -742,6 +763,14 @@ const commandDefs = [
     description: "Get a premium checkout link",
   },
   {
+    name: "manage",
+    description: "Manage your premium subscription (billing portal)",
+  },
+  {
+    name: "manage",
+    description: "Manage your premium subscription (billing portal)",
+  },
+  {
     name: "tomorrow",
     description: "See tomorrow’s holiday (Premium only)",
   },
@@ -840,6 +869,8 @@ client.on("interactionCreate", async (interaction) => {
         return handlePremiumStatus(interaction);
       case "upgrade":
         return handleUpgrade(interaction);
+      case "manage":
+        return handleManage(interaction);
       case "tomorrow":
         return handleTomorrow(interaction);
       case "upcoming":
