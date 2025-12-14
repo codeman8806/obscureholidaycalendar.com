@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 import http from "http";
+import express from "express";
+import Stripe from "stripe";
 import { fileURLToPath } from "url";
 import {
   Client,
@@ -65,6 +67,12 @@ const BOT_OWNER_ID = process.env.BOT_OWNER_ID || null;
 const TOPGG_TOKEN = process.env.TOPGG_TOKEN || null; // for posting stats to top.gg
 const TOPGG_POST_INTERVAL_MIN = Number(process.env.TOPGG_POST_INTERVAL_MIN || "30");
 const PORT = process.env.PORT || null; // for Railway/health checks (optional)
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || null;
+const STRIPE_PRICE_ID = process.env.STRIPE_PRICE_ID || null; // subscription price id
+const STRIPE_LOOKUP_KEY = process.env.STRIPE_LOOKUP_KEY || null; // optional lookup key
+const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || null;
+const STRIPE_SUCCESS_URL = process.env.STRIPE_SUCCESS_URL || `${SITE_URL}/discord-bot/?success=1`;
+const STRIPE_CANCEL_URL = process.env.STRIPE_CANCEL_URL || `${SITE_URL}/discord-bot/?canceled=1`;
 
 function readJsonSafe(filePath, fallback) {
   try {
@@ -87,6 +95,7 @@ function writeJsonSafe(filePath, data) {
 
 const guildConfig = readJsonSafe(CONFIG_PATH, {});
 const premiumAllowlist = readJsonSafe(PREMIUM_PATH, {});
+const stripeClient = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null;
 const SITE_BASE = "https://www.obscureholidaycalendar.com/holiday";
 
 function loadHolidays() {
@@ -122,17 +131,15 @@ function isOwner(userId) {
   return userId === BOT_OWNER_ID;
 }
 
-// Optional tiny HTTP server to satisfy platforms expecting a listening port (e.g., Railway "web" services)
-if (PORT) {
-  http
-    .createServer((_, res) => {
-      res.writeHead(200, { "Content-Type": "text/plain" });
-      res.end("ok");
-    })
-    .listen(PORT, () => {
-      console.log(`Keepalive server listening on ${PORT}`);
-    });
+function setPremiumGuild(guildId, enabled) {
+  if (!guildId) return;
+  if (enabled) premiumAllowlist[guildId] = true;
+  else delete premiumAllowlist[guildId];
+  writeJsonSafe(PREMIUM_PATH, premiumAllowlist);
 }
+
+// Optional tiny HTTP server to satisfy platforms expecting a listening port (e.g., Railway "web" services)
+const app = express();
 
 async function postTopGGStats() {
   if (!TOPGG_TOKEN) return;
@@ -159,6 +166,69 @@ async function postTopGGStats() {
   }
 }
 
+// Stripe Checkout session creation
+app.post("/create-checkout-session", express.json(), async (req, res) => {
+  if (!stripeClient) return res.status(400).json({ error: "Stripe not configured" });
+  try {
+    const { guild_id, user_id } = req.body || {};
+    if (!guild_id) return res.status(400).json({ error: "Missing guild_id" });
+    const priceId = STRIPE_PRICE_ID;
+    if (!priceId) return res.status(400).json({ error: "Missing STRIPE_PRICE_ID" });
+    const session = await stripeClient.checkout.sessions.create({
+      mode: "subscription",
+      line_items: [{ price: priceId, quantity: 1 }],
+      success_url: STRIPE_SUCCESS_URL,
+      cancel_url: STRIPE_CANCEL_URL,
+      metadata: { guild_id, user_id: user_id || "" },
+      subscription_data: {
+        metadata: { guild_id, user_id: user_id || "" },
+      },
+    });
+    return res.json({ url: session.url });
+  } catch (err) {
+    console.error("Stripe checkout error:", err);
+    return res.status(500).json({ error: "Stripe checkout failed" });
+  }
+});
+
+// Stripe webhook
+app.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  (req, res) => {
+    if (!stripeClient || !STRIPE_WEBHOOK_SECRET) return res.status(400).send("Stripe not configured");
+    const sig = req.headers["stripe-signature"];
+    let event;
+    try {
+      event = stripeClient.webhooks.constructEvent(req.body, sig, STRIPE_WEBHOOK_SECRET);
+    } catch (err) {
+      console.warn("Webhook signature verification failed:", err.message);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object;
+      const guildId = session.metadata?.guild_id;
+      if (guildId) {
+        setPremiumGuild(guildId, true);
+        console.log(`Premium granted via Stripe for guild ${guildId}`);
+      }
+    }
+    if (event.type === "customer.subscription.deleted" || event.type === "customer.subscription.updated") {
+      const sub = event.data.object;
+      const guildId = sub.metadata?.guild_id;
+      if (guildId) {
+        const status = sub.status;
+        if (status && (status === "canceled" || status === "unpaid" || status === "incomplete_expired")) {
+          setPremiumGuild(guildId, false);
+          console.log(`Premium revoked via Stripe for guild ${guildId} (status ${status})`);
+        }
+      }
+    }
+
+    res.json({ received: true });
+  }
+);
 function getGuildConfig(guildId) {
   if (!guildConfig[guildId]) {
     guildConfig[guildId] = {
@@ -445,6 +515,33 @@ async function handlePremiumStatus(interaction) {
   return interaction.reply({ content: lines.join("\n"), ephemeral: true });
 }
 
+async function handleUpgrade(interaction) {
+  if (!stripeClient || !STRIPE_PRICE_ID) {
+    return interaction.reply({ content: "Stripe is not configured. Try again later.", ephemeral: true });
+  }
+  const guildId = interaction.guildId;
+  const userId = interaction.user.id;
+  try {
+    const session = await stripeClient.checkout.sessions.create({
+      mode: "subscription",
+      line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
+      success_url: STRIPE_SUCCESS_URL,
+      cancel_url: STRIPE_CANCEL_URL,
+      metadata: { guild_id: guildId, user_id: userId },
+      subscription_data: {
+        metadata: { guild_id: guildId, user_id: userId },
+      },
+    });
+    return interaction.reply({
+      content: `Upgrade to premium using Stripe Checkout: ${session.url}`,
+      ephemeral: true,
+    });
+  } catch (err) {
+    console.error("Stripe checkout error:", err);
+    return interaction.reply({ content: "Unable to create checkout session right now.", ephemeral: true });
+  }
+}
+
 async function handleGrantPremium(interaction) {
   if (!isOwner(interaction.user.id)) {
     return interaction.reply({ content: "Owner-only command.", ephemeral: true });
@@ -566,6 +663,10 @@ const commandDefs = [
     description: "See premium status",
   },
   {
+    name: "upgrade",
+    description: "Get a premium checkout link",
+  },
+  {
     name: "tomorrow",
     description: "See tomorrow’s holiday (Premium only)",
   },
@@ -659,6 +760,8 @@ client.on("interactionCreate", async (interaction) => {
         return handleSetup(interaction);
       case "premium":
         return handlePremiumStatus(interaction);
+      case "upgrade":
+        return handleUpgrade(interaction);
       case "tomorrow":
         return handleTomorrow(interaction);
       case "upcoming":
@@ -792,5 +895,11 @@ async function postTodayForGuild(guildId) {
     components: buildButtons(hits[0]),
   });
 }
+
+// Start HTTP server (Stripe + health)
+const listenPort = PORT || 8080;
+http.createServer(app).listen(listenPort, () => {
+  console.log(`HTTP server listening on ${listenPort}`);
+});
 
 client.login(TOKEN);
