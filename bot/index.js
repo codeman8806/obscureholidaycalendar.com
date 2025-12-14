@@ -535,14 +535,59 @@ async function handleUpcoming(interaction) {
 async function handlePremiumStatus(interaction) {
   const premium = isPremium(interaction.guild, interaction.member);
   const config = getGuildConfig(interaction.guild.id);
-  const lines = [
-    premium ? "✅ Premium active (Server Subscription role or allowlist)." : "⚠️ Premium not active.",
-    `Daily channel(s): ${config.channelIds.length ? config.channelIds.map((c) => `<#${c}>`).join(", ") : "not set"}`,
-    `Timezone: ${config.timezone} @ ${config.hour}:00`,
-    `Branding: ${config.branding === false ? "off" : "on"}`,
+  const benefits = [
+    "✅ Multiple daily channels",
+    "✅ Custom timezone & hour",
+    "✅ Premium commands: /tomorrow, /upcoming",
+    "✅ Branding toggle",
   ];
-  if (!premium) lines.push(`Upgrade: ${SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/"}`);
-  return interaction.reply({ content: lines.join("\n"), ephemeral: true });
+
+  if (premium) {
+    const lines = [
+      "✅ Premium is active for this server.",
+      `Daily channel(s): ${config.channelIds.length ? config.channelIds.map((c) => `<#${c}>`).join(", ") : "not set"}`,
+      `Timezone: ${config.timezone} @ ${config.hour}:00`,
+      `Branding: ${config.branding === false ? "off" : "on"}`,
+      "Premium perks:",
+      ...benefits,
+    ];
+    return interaction.reply({ content: lines.join("\n"), ephemeral: true });
+  }
+
+  // Not premium: offer upgrade
+  let upgradeUrl = SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/";
+  if (stripeClient && STRIPE_PRICE_ID) {
+    try {
+      const session = await stripeClient.checkout.sessions.create({
+        mode: "subscription",
+        line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
+        success_url: STRIPE_SUCCESS_URL,
+        cancel_url: STRIPE_CANCEL_URL,
+        metadata: { guild_id: interaction.guildId, user_id: interaction.user.id },
+        subscription_data: { metadata: { guild_id: interaction.guildId, user_id: interaction.user.id } },
+      });
+      if (session.url) upgradeUrl = session.url;
+    } catch (err) {
+      console.error("Stripe checkout error (premium status):", err);
+    }
+  }
+
+  const lines = [
+    "⚠️ Premium not active.",
+    "Premium unlocks:",
+    ...benefits,
+  ];
+
+  return interaction.reply({
+    content: lines.join("\n"),
+    ephemeral: true,
+    components: [
+      new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(upgradeUrl),
+        new ButtonBuilder().setLabel("Support / Info").setStyle(ButtonStyle.Link).setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
+      ),
+    ],
+  });
 }
 
 async function handleUpgrade(interaction) {
