@@ -60,6 +60,8 @@ const BOT_INVITE_URL =
   process.env.BOT_INVITE_URL ||
   "https://discord.com/oauth2/authorize?client_id=1447955404142153789&permissions=2684438528&integration_type=0&scope=applications.commands+bot";
 const SUPPORT_URL = process.env.SUPPORT_URL || `${SITE_URL}/discord-bot/`;
+const TOPGG_VOTE_URL = process.env.TOPGG_VOTE_URL || "https://top.gg/bot/1447955404142153789/vote";
+const TOPGG_REVIEW_URL = process.env.TOPGG_REVIEW_URL || "https://top.gg/bot/1447955404142153789#reviews";
 const PREMIUM_ROLE_ID = process.env.PREMIUM_ROLE_ID || null; // Discord Server Subscription role id
 const CONFIG_PATH = path.resolve(__dirname, "guild-config.json");
 const PREMIUM_PATH = path.resolve(__dirname, "premium.json"); // optional allowlist
@@ -403,6 +405,8 @@ async function handleHelp(interaction) {
       "/facts <name|MM-DD> — quick fun facts",
       "/invite — invite the bot",
       "/support — help/landing page",
+      "/vote — vote on top.gg",
+      "/rate — leave a review on top.gg",
       "/app — mobile app links",
       "/setup — configure daily posts (premium unlocks time/timezone/branding)",
       "/premium — check your premium status",
@@ -412,6 +416,32 @@ async function handleHelp(interaction) {
       "/upcoming — upcoming holidays (premium)",
       "/help — list commands",
     ].join("\n"),
+    ephemeral: true,
+  });
+}
+
+async function handleVote(interaction) {
+  return interaction.reply({
+    content: "Thanks for supporting the bot on top.gg!",
+    components: [
+      new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setLabel("Vote on top.gg").setStyle(ButtonStyle.Link).setURL(TOPGG_VOTE_URL),
+        new ButtonBuilder().setLabel("Leave a review").setStyle(ButtonStyle.Link).setURL(TOPGG_REVIEW_URL)
+      ),
+    ],
+    ephemeral: true,
+  });
+}
+
+async function handleRate(interaction) {
+  return interaction.reply({
+    content: "If you’re enjoying ObscureHolidayBot, a quick review helps a ton.",
+    components: [
+      new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setLabel("Review on top.gg").setStyle(ButtonStyle.Link).setURL(TOPGG_REVIEW_URL),
+        new ButtonBuilder().setLabel("Vote").setStyle(ButtonStyle.Link).setURL(TOPGG_VOTE_URL)
+      ),
+    ],
     ephemeral: true,
   });
 }
@@ -734,6 +764,8 @@ const commandDefs = [
     ],
   },
   { name: "random", description: "Get a random holiday" },
+  { name: "vote", description: "Vote for the bot on top.gg" },
+  { name: "rate", description: "Leave a review on top.gg" },
   {
     name: "facts",
     description: "Get fun facts for a holiday",
@@ -882,6 +914,10 @@ client.on("interactionCreate", async (interaction) => {
         return handleSearch(interaction);
       case "random":
         return handleRandom(interaction);
+      case "vote":
+        return handleVote(interaction);
+      case "rate":
+        return handleRate(interaction);
       case "facts":
         return handleFacts(interaction);
       case "setup":
