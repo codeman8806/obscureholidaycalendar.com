@@ -624,9 +624,34 @@ async function handleManage(interaction) {
   if (!premium) {
     return interaction.reply({ content: "This server is not premium yet. Use /upgrade to start a subscription.", ephemeral: true });
   }
+  // Find the customer for this guild by looking up active subscriptions with matching metadata
+  let customerId = null;
+  try {
+    let startingAfter = null;
+    while (true) {
+      const subs = await stripeClient.subscriptions.list({
+        status: "active",
+        price: STRIPE_PRICE_ID || undefined,
+        limit: 100,
+        starting_after: startingAfter || undefined,
+      });
+      for (const sub of subs.data) {
+        const gid = sub.metadata?.guild_id || sub.items?.data?.[0]?.metadata?.guild_id;
+        if (gid === interaction.guildId) {
+          customerId = sub.customer;
+          break;
+        }
+      }
+      if (customerId || !subs.has_more) break;
+      startingAfter = subs.data[subs.data.length - 1].id;
+    }
+  } catch (err) {
+    console.error("Stripe lookup error:", err);
+  }
+
   try {
     const session = await stripeClient.billingPortal.sessions.create({
-      customer: null, // You can store/retrieve customer id via metadata if you capture it
+      customer: customerId || undefined,
       return_url: STRIPE_PORTAL_RETURN_URL,
     });
     if (session.url) {
@@ -635,7 +660,7 @@ async function handleManage(interaction) {
   } catch (err) {
     console.error("Stripe portal error:", err);
   }
-  return interaction.reply({ content: "Unable to open the billing portal right now.", ephemeral: true });
+  return interaction.reply({ content: "Unable to open the billing portal right now. If you just subscribed, give it a minute and try again.", ephemeral: true });
 }
 
 async function handleGrantPremium(interaction) {
