@@ -389,6 +389,10 @@ async function handleToday(interaction) {
   const hits = findByDate(mmdd);
   if (!hits.length) return interaction.reply({ content: "No holiday found for today.", ephemeral: true });
   const premium = isPremium(interaction.guild, interaction.member);
+  return interaction.reply({ embeds: [buildEmbed(hits[0], { branding: !premium || getGuildConfig(interaction.guild.id).branding })], components: buildButtons(hits[0]) });
+}
+
+async function handleHelp(interaction) {
   return interaction.reply({
     content: [
       "Holiday bot slash commands:",
@@ -406,11 +410,8 @@ async function handleToday(interaction) {
       "/manage — manage/cancel premium (billing portal)",
       "/tomorrow — tomorrow’s holiday (premium)",
       "/upcoming — upcoming holidays (premium)",
-      "/grantpremium — owner only",
-      "/installcount — owner only",
       "/help — list commands",
-    ].join("
-"),
+    ].join("\n"),
     ephemeral: true,
   });
 }
