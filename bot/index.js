@@ -706,28 +706,6 @@ async function handleInstallCount(interaction) {
   const count = client.guilds.cache.size;
   return interaction.reply({ content: `I am currently in ${count} server(s).`, ephemeral: true });
 }
-async function handleHelp(interaction) {
-  return interaction.reply({
-    content: [
-      "Holiday bot slash commands:",
-      "/today — today’s holiday",
-      "/date MM-DD — holiday on a date (e.g., 12-08)",
-      "/search <query> — find matching holidays",
-      "/random — surprise me",
-      "/facts <name|MM-DD> — quick fun facts",
-      "/invite — invite the bot",
-      "/support — help/landing page",
-      "/app — mobile app links",
-      "/setup — configure daily posts (premium unlocks time/timezone/branding)",
-      "/premium — check your premium status",
-      "/upgrade — start a premium checkout",
-      "/manage — manage/cancel premium (billing portal)",
-      "/tomorrow — tomorrow’s holiday (premium)",
-      "/upcoming — upcoming holidays (premium)",
-    ].join("\n"),
-    ephemeral: true,
-  });
-}
 
 const commandDefs = [
   { name: "today", description: "Show today’s holiday" },
