@@ -767,10 +767,6 @@ const commandDefs = [
     description: "Manage your premium subscription (billing portal)",
   },
   {
-    name: "manage",
-    description: "Manage your premium subscription (billing portal)",
-  },
-  {
     name: "tomorrow",
     description: "See tomorrow’s holiday (Premium only)",
   },
