@@ -166,6 +166,36 @@ async function postTopGGStats() {
   }
 }
 
+async function syncPremiumFromStripe() {
+  if (!stripeClient || !STRIPE_PRICE_ID) return;
+  try {
+    let startingAfter = null;
+    let total = 0;
+    while (true) {
+      const page = await stripeClient.subscriptions.list({
+        status: "active",
+        limit: 100,
+        starting_after: startingAfter || undefined,
+        expand: ["data.default_payment_method"],
+      });
+      for (const sub of page.data) {
+        const item = sub.items?.data?.[0];
+        const priceId = item?.price?.id;
+        const guildId = sub.metadata?.guild_id || item?.price?.metadata?.guild_id;
+        if (priceId === STRIPE_PRICE_ID && guildId) {
+          setPremiumGuild(guildId, true);
+          total++;
+        }
+      }
+      if (!page.has_more) break;
+      startingAfter = page.data[page.data.length - 1].id;
+    }
+    if (total) console.log(`Synced ${total} premium guild(s) from Stripe.`);
+  } catch (err) {
+    console.warn("Failed to sync premium from Stripe:", err.message);
+  }
+}
+
 // Stripe Checkout session creation
 app.post("/create-checkout-session", express.json(), async (req, res) => {
   if (!stripeClient) return res.status(400).json({ error: "Stripe not configured" });
@@ -731,6 +761,9 @@ client.once("ready", async () => {
   } catch (err) {
     console.error("Failed to register commands:", err);
   }
+
+  // Sync premium allowlist from Stripe on startup
+  await syncPremiumFromStripe();
 
   // Schedule daily auto-post
   scheduleDailyPost();
