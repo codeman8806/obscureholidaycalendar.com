@@ -464,11 +464,7 @@ async function handleSetup(interaction) {
   }
 
   // Premium path: allow multiple channels (cap 3), timezone/hour, branding toggle
-  const MAX_CHANNELS = 3;
   if (!config.channelIds.includes(channel.id)) {
-    if (config.channelIds.length >= MAX_CHANNELS) {
-      config.channelIds.shift();
-    }
     config.channelIds.push(channel.id);
   }
   if (tz) config.timezone = tz;
