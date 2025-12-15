@@ -441,7 +441,17 @@ async function handleToday(interaction) {
   if (!hits.length) return interaction.reply({ content: "No holiday found for today.", ephemeral: true });
   const premium = isPremium(interaction.guild, interaction.member);
   const config = getGuildConfig(interaction.guild.id);
-  const choice = Math.min(config.holidayChoice || 0, hits.length - 1);
+  const requested = interaction.options.getInteger("holiday_choice");
+  let choice = 0;
+  if (premium) {
+    if (Number.isInteger(requested)) {
+      choice = Math.min(Math.max(requested, 0), hits.length - 1);
+    } else {
+      choice = Math.min(config.holidayChoice || 0, hits.length - 1);
+    }
+  } else {
+    choice = 0; // free tier: first holiday only
+  }
   const pick = hits[choice] || hits[0];
   return interaction.reply({ embeds: [buildEmbed(pick, { branding: !premium || config.branding })], components: buildButtons(pick) });
 }
@@ -858,7 +868,22 @@ async function handleInstallCount(interaction) {
 }
 
 const commandDefs = [
-  { name: "today", description: "Show today’s holiday" },
+  {
+    name: "today",
+    description: "Show today’s holiday",
+    options: [
+      {
+        name: "holiday_choice",
+        description: "Premium: choose Holiday #1 or #2 for today",
+        type: ApplicationCommandOptionType.Integer,
+        required: false,
+        choices: [
+          { name: "Holiday #1 (default)", value: 0 },
+          { name: "Holiday #2", value: 1 },
+        ],
+      },
+    ],
+  },
   {
     name: "date",
     description: "Show holidays on a specific date",
