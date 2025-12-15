@@ -682,8 +682,7 @@ async function handlePremiumStatus(interaction) {
   const benefits = [
     "✅ Multiple daily channels",
     "✅ Custom timezone & hour",
-    "✅ Premium commands: /tomorrow, /upcoming",
-    "✅ Premium commands: /date, /search, /random, /facts, /week",
+    "✅ Premium commands: /tomorrow, /upcoming, /date, /search, /random, /facts, /week",
     "✅ Branding toggle",
     "✅ Pick which of the day’s holidays to auto-post",
     "✅ Per-channel role pings & quiet mode",
