@@ -79,6 +79,7 @@ const STRIPE_PORTAL_RETURN_URL = process.env.STRIPE_PORTAL_RETURN_URL || `${SITE
 const DEFAULT_HOLIDAY_CHOICE = 0; // which holiday of the day to schedule: 0 = first, 1 = second
 const DEFAULT_EMBED_COLOR = 0x1c96f3;
 const DEFAULT_EMBED_STYLE = "compact";
+const DEFAULT_TIMEZONE = "UTC";
 
 function readJsonSafe(filePath, fallback) {
   try {
@@ -269,7 +270,7 @@ function getGuildConfig(guildId) {
   if (!guildConfig[guildId]) {
     guildConfig[guildId] = {
       channelIds: [],
-      timezone: "UTC",
+      timezone: DEFAULT_TIMEZONE,
       hour: 0, // 00:00 UTC-ish
       branding: true,
       channelSettings: {},
@@ -279,6 +280,7 @@ function getGuildConfig(guildId) {
   if (!guildConfig[guildId].channelSettings) {
     guildConfig[guildId].channelSettings = {};
   }
+  guildConfig[guildId].timezone = normalizeTimezone(guildConfig[guildId].timezone || DEFAULT_TIMEZONE);
   if (typeof guildConfig[guildId].holidayChoice !== "number") {
     guildConfig[guildId].holidayChoice = DEFAULT_HOLIDAY_CHOICE;
   }
@@ -289,12 +291,26 @@ function saveGuildConfig() {
   writeJsonSafe(CONFIG_PATH, guildConfig);
 }
 
+function isValidTimezone(tz) {
+  if (!tz || typeof tz !== "string") return false;
+  try {
+    new Date().toLocaleString("en-US", { timeZone: tz });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function normalizeTimezone(tz) {
+  return isValidTimezone(tz) ? tz : DEFAULT_TIMEZONE;
+}
+
 function getChannelConfig(guildId, channelId) {
   const base = getGuildConfig(guildId);
   const channelSettings = base.channelSettings?.[channelId] || {};
   return {
     channelId,
-    timezone: channelSettings.timezone || base.timezone || "UTC",
+    timezone: normalizeTimezone(channelSettings.timezone || base.timezone || DEFAULT_TIMEZONE),
     hour: Number.isInteger(channelSettings.hour) ? channelSettings.hour : base.hour || 0,
     branding: channelSettings.branding ?? base.branding ?? true,
     holidayChoice: Number.isInteger(channelSettings.holidayChoice) ? channelSettings.holidayChoice : base.holidayChoice || 0,
@@ -560,7 +576,7 @@ async function handleSetup(interaction) {
 
   if (!premium) {
     config.channelIds = [channel.id];
-    config.timezone = "UTC";
+    config.timezone = DEFAULT_TIMEZONE;
     config.hour = 0;
     config.branding = true;
     config.holidayChoice = DEFAULT_HOLIDAY_CHOICE;
@@ -575,7 +591,12 @@ async function handleSetup(interaction) {
   }
   if (!config.channelSettings) config.channelSettings = {};
   const ch = config.channelSettings[channel.id] || {};
-  if (tz) ch.timezone = tz;
+  if (tz) {
+    if (!isValidTimezone(tz)) {
+      return interaction.reply({ content: "Timezone not recognized. Please use an IANA timezone like America/New_York.", ephemeral: true });
+    }
+    ch.timezone = tz;
+  }
   if (Number.isInteger(hour)) ch.hour = Math.max(0, Math.min(hour, 23));
   if (typeof brandingOpt === "boolean") ch.branding = brandingOpt;
   if (Number.isInteger(holidayChoice)) ch.holidayChoice = Math.min(Math.max(holidayChoice, 0), 1);
@@ -596,7 +617,7 @@ async function handleSetup(interaction) {
       `Daily posts set to ${config.channelIds.map((c) => `<#${c}>`).join(", ")}`,
       `Time: ${(ch.hour ?? config.hour)}:00 in ${ch.timezone || config.timezone}`,
       `Branding: ${ch.branding === false ? "off" : "on"}`,
-      `Holiday pick: ${ch.holidayChoice === 1 ? "second of the day" : "first of the day"}`,
+      `Holiday pick: ${ch.holidayChoice === 1 ? "Holiday #2 (second of the day)" : "Holiday #1 (first of the day)"}`,
       role ? `Role ping: <@&${role.id}>` : "Role ping: none",
       `Quiet mode: ${ch.quiet ? "on" : "off"}`,
       `Skip weekends: ${ch.skipWeekends ? "yes" : "no"}`,
@@ -910,12 +931,12 @@ const commandDefs = [
       },
       {
         name: "holiday_choice",
-        description: "Premium: pick which of the day’s holidays to post",
+        description: "Premium: choose which of the two holidays to auto-post",
         type: ApplicationCommandOptionType.Integer,
         required: false,
         choices: [
-          { name: "First holiday of the day", value: 0 },
-          { name: "Second holiday of the day", value: 1 },
+          { name: "Holiday #1 (top result)", value: 0 },
+          { name: "Holiday #2 (second result)", value: 1 },
         ],
       },
       {
