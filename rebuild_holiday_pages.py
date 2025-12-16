@@ -319,6 +319,29 @@ def render_page(
   <meta name="twitter:image" content="{SITE_BASE}/assets/app-icon.png" />
   <link rel="stylesheet" href="/styles.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADS_CLIENT}" crossorigin="anonymous"></script>
+  <style>
+    .breadcrumb {{
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 8px 0 14px;
+      color: #6b7280;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }}
+    .breadcrumb a {{
+      color: #374151;
+      text-decoration: none;
+    }}
+    .breadcrumb a:hover {{
+      text-decoration: underline;
+    }}
+    .breadcrumb span {{
+      color: #111827;
+      font-weight: 700;
+    }}
+  </style>
   {schema}
 </head>
 <body class="page">
@@ -340,6 +363,13 @@ def render_page(
   </header>
 
   <main class="page-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="/holiday/">Holidays</a>
+      <span aria-hidden="true">›</span>
+      <span>{html.escape(name)}</span>
+    </nav>
     <article class="holiday-card">
       <div class="eyebrow">Annual observance</div>
       <h1 class="holiday-title">{html.escape(name)} <span class="holiday-emoji" aria-hidden="true">{html.escape(emoji)}</span></h1>
