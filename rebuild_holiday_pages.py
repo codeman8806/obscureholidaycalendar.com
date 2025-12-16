@@ -488,6 +488,9 @@ def render_page(
     ]
 
     canonical = f"{SITE_BASE}/holiday/{slug}/"
+    share_url = f"{canonical}?utm_source=share&utm_medium=copy&utm_campaign=holiday_page&utm_content={slug}"
+    ios_utm = f"{IOS_URL}?utm_source=site&utm_medium=store_badge&utm_campaign=holiday_page&utm_content={slug}"
+    android_utm = f"{ANDROID_URL}?utm_source=site&utm_medium=store_badge&utm_campaign=holiday_page&utm_content={slug}"
     schema = build_structured_data(
         name,
         pretty,
@@ -1014,11 +1017,11 @@ def render_page(
       </p>
 
       <div class="store-buttons-top">
-        <a href="{IOS_URL}" target="_blank" rel="noopener">
+        <a href="{ios_utm}" target="_blank" rel="noopener">
           <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                alt="Download on the App Store" class="store-badge" />
         </a>
-        <a href="{ANDROID_URL}" target="_blank" rel="noopener">
+        <a href="{android_utm}" target="_blank" rel="noopener">
           <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
                alt="Get it on Google Play" class="store-badge" />
         </a>
@@ -1144,7 +1147,7 @@ def render_page(
       const copyBtn = document.getElementById('copy-btn');
       const feedback = document.getElementById('share-feedback');
       const recentList = document.querySelector('.recent-list');
-      const pageData = {{ slug: "{slug}", name: "{html.escape(name)}", url: "{canonical}" }};
+      const pageData = {{ slug: "{slug}", name: "{html.escape(name)}", url: "{share_url}" }};
 
       function setFeedback(msg) {{
         if (feedback) feedback.textContent = msg;
