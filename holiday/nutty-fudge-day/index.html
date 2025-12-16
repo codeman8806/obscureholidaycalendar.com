@@ -6,8 +6,59 @@
   <title>Nutty Fudge Day — Obscure Holiday Calendar</title>
   <meta name="description" content="Nutty Fudge Day, observed annually on May 12th, is an unofficial holiday celebrating the beloved confectionery that marries the rich, creamy texture of fud..." />
   <meta name="last-modified" content="2025-12-16" />
+  <meta name="theme-color" content="#2c005f" />
   <meta name="google-adsense-account" content="ca-pub-7162731177966348" />
   <link rel="canonical" href="https://www.obscureholidaycalendar.com/holiday/nutty-fudge-day/" />
+  <link rel="preload" href="/styles.css" as="style" crossorigin="anonymous" integrity="sha256-6thkjdloi9ZO0jXPomwwy5axQ9KPxbWvOcyD4umyijo=" onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Critical above-the-fold CSS -->
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", "Manrope", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 20%, #1a0c3f 0%, #0f0a2a 40%, #0b0b24 70%);
+      color: #0f172a;
+    }
+    .page-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 16px 42px;
+    }
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      margin: 8px auto;
+      max-width: 1120px;
+    }
+    .brand {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+    }
+    .holiday-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f8f5ff 100%);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 24px 64px rgba(20, 12, 70, 0.16);
+    }
+    .holiday-title {
+      margin: 8px 0 6px;
+      font-size: 2rem;
+    }
+  </style>
   <link rel="icon" href="https://www.obscureholidaycalendar.com/favicon.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="https://www.obscureholidaycalendar.com/favicon.ico" type="image/x-icon" />
   <link rel="icon" type="image/png" href="https://www.obscureholidaycalendar.com/assets/app-icon.png" />
@@ -30,7 +81,7 @@
   <meta name="twitter:title" content="Nutty Fudge Day — Obscure Holiday Calendar" />
   <meta name="twitter:description" content="Nutty Fudge Day, observed annually on May 12th, is an unofficial holiday celebrating the beloved confectionery that marries the rich, creamy texture of fud..." />
   <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png" />
-  <link rel="stylesheet" href="/styles.css">
+  <noscript><link rel="stylesheet" href="/styles.css" crossorigin="anonymous" integrity="sha256-6thkjdloi9ZO0jXPomwwy5axQ9KPxbWvOcyD4umyijo="></noscript>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7162731177966348" crossorigin="anonymous"></script>
   <style>
     :root {
@@ -43,9 +94,30 @@
       --border: #e4e7f2;
       --shadow: 0 24px 64px rgba(20, 12, 70, 0.16);
       --pill: linear-gradient(135deg, rgba(44,0,95,0.12), rgba(242,93,148,0.12));
+      --related-bg: linear-gradient(180deg, #f8f5ff 0%, #f3f9ff 100%);
     }
     body {
       background: var(--bg);
+    }
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .skip-link:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 10px 14px;
+      margin: 8px 12px;
+      background: #ffffff;
+      color: #000;
+      border-radius: 10px;
+      z-index: 1000;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
     }
     .breadcrumb {
       display: flex;
@@ -122,6 +194,140 @@
     }
     .brand-tagline {
       color: #e2e8f0;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .related-card {
+      background: var(--related-bg);
+      border: 1px solid #e8e8fb;
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: 0 14px 32px rgba(44,0,95,0.08);
+    }
+    .related-card h3 {
+      margin: 8px 0 6px;
+      color: #1f2533;
+      font-size: 1.05rem;
+    }
+    .related-card p {
+      margin: 0 0 8px;
+      color: #4b5563;
+      font-size: 0.95rem;
+    }
+    .related-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(44,0,95,0.08);
+      color: #2c005f;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid rgba(44,0,95,0.12);
+    }
+    .related-link {
+      color: var(--brand-blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .related-link:hover {
+      text-decoration: underline;
+    }
+    .share-tools {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 12px 0 4px;
+    }
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: linear-gradient(120deg, #2c005f, #f25d94);
+      color: #fff;
+      border-radius: 999px;
+      font-weight: 800;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(44,0,95,0.26);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+    .btn-pill.secondary {
+      background: linear-gradient(120deg, #1c96f3, #5ad4ff);
+      box-shadow: 0 12px 24px rgba(28,150,243,0.22);
+    }
+    .btn-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(44,0,95,0.3);
+    }
+    .btn-pill:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+    .share-feedback {
+      color: #0f172a;
+      font-weight: 700;
+      margin: 6px 0 0;
+    }
+    .recent-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+    }
+    .recent-list li a {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid #e5e7eb;
+      color: #1f2937;
+      text-decoration: none;
+      box-shadow: 0 10px 20px rgba(15,23,42,0.08);
+    }
+    .recent-list li a:hover {
+      border-color: #cbd5e1;
+    }
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+    .quick-links a {
+      background: rgba(255,255,255,0.12);
+      color: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .quick-links a:hover {
+      border-color: rgba(255,255,255,0.28);
+    }
+    .note-bar {
+      background: linear-gradient(90deg, rgba(44,0,95,0.14), rgba(28,150,243,0.14));
+      color: #0f172a;
+      border: 1px solid rgba(44,0,95,0.16);
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .note-bar strong {
+      color: var(--brand-purple);
     }
   </style>
   <script type="application/ld+json">
@@ -233,8 +439,47 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Nutty Fudge Day",
+  "url": "https://www.obscureholidaycalendar.com/holiday/nutty-fudge-day/",
+  "description": "Nutty Fudge Day, observed annually on May 12th, is an unofficial holiday celebrating the beloved confectionery that marries the rich, creamy texture of fud...",
+  "breadcrumb": {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.obscureholidaycalendar.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Holidays",
+        "item": "https://www.obscureholidaycalendar.com/holiday/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Nutty Fudge Day",
+        "item": "https://www.obscureholidaycalendar.com/holiday/nutty-fudge-day/"
+      }
+    ]
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Obscure Holiday Calendar",
+    "url": "https://www.obscureholidaycalendar.com"
+  }
+}
+</script>
 </head>
 <body class="page">
+  <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
     <a class="brand" href="/">
       <img src="/assets/app-icon.png" alt="Obscure Holiday Calendar icon" class="brand-mark" />
@@ -245,14 +490,14 @@
     </a>
     <nav class="nav-links">
       <a href="/holiday/">Holidays</a>
-      <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener">@obscureholidaycalendar</a>
+      <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener" aria-label="Follow us on Instagram">@obscureholidaycalendar</a>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
     </nav>
   </header>
 
-  <main class="page-wrap">
+  <main id="main" class="page-wrap">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span aria-hidden="true">›</span>
@@ -260,6 +505,13 @@
       <span aria-hidden="true">›</span>
       <span>Nutty Fudge Day</span>
     </nav>
+    <div class="quick-links" aria-label="Page quick links">
+      <a href="#overview">Overview</a>
+      <a href="#celebrate">Celebrate</a>
+      <a href="#fun-facts">Fun facts</a>
+      <a href="#faq">FAQ</a>
+      <a href="#related">Related</a>
+    </div>
     <article class="holiday-card">
       <div class="eyebrow">Annual observance</div>
       <h1 class="holiday-title">Nutty Fudge Day <span class="holiday-emoji" aria-hidden="true">🍫</span></h1>
@@ -269,6 +521,15 @@
         <span class="pill pill-secondary">Cultural / community observance</span>
         <span class="pill pill-secondary">Updated 2025-12-16</span>
       </div>
+      <div class="share-tools">
+        <button class="btn-pill" type="button" id="share-btn" aria-label="Share this holiday">
+          <span aria-hidden="true">🔗</span> Share this holiday
+        </button>
+        <button class="btn-pill secondary" type="button" id="copy-btn" aria-label="Copy link to clipboard">
+          <span aria-hidden="true">📋</span> Copy link
+        </button>
+      </div>
+      <div class="share-feedback" id="share-feedback" aria-live="polite"></div>
 
       <p class="lead">
         This holiday is featured in the Obscure Holiday Calendar app with emoji-style visuals, reminders, and daily fun facts.
@@ -285,11 +546,15 @@
         </a>
       </div>
 
-      <section class="section">
+      <section class="section" id="overview">
         <h2>Overview</h2>
         <p>Nutty Fudge Day, observed annually on May 12th, is an unofficial holiday celebrating the beloved confectionery that marries the rich, creamy texture of fudge with the satisfying crunch of nuts. This delightful occasion encourages individuals to indulge in or prepare batches of fudge infused with favorites like walnuts, pecans, or peanuts, highlighting the textural contrast and enhanced flavor that nuts bring to this classic sweet treat.</p>
         <p>Observed each year on May 12, Nutty Fudge Day invites people to pause, share the story, and bring a little themed joy to their day.</p>
       </section>
+
+      <div class="note-bar" role="note">
+        <strong>Why it matters:</strong> Nutty Fudge Day, observed annually on May 12th, is an unofficial holiday celebrating the beloved confectionery that marr...
+      </div>
 
       <section class="section">
         <h2>Origin and story</h2>
@@ -316,14 +581,14 @@
         </ul>
       </section>
 
-      <section class="section">
+      <section class="section" id="celebrate">
         <h2>Ways to celebrate</h2>
         <ul class="list">
           <li>Tell someone this fast fact about Nutty Fudge Day: Fudge is believed to have originated in the United States in the late 19th century, with a popular story attributing its creation to a Vassar College student in 1886.</li><li>Plan something small on May 12: a quick nod to Nutty Fudge Day with friends, family, or coworkers.</li><li>Share the story of Nutty Fudge Day on social and tag it with #nuttyfudgeday so others can join in.</li><li>Bring the theme into your day—decorate a workspace, cook or bake something inspired by Nutty Fudge, or play music that matches the mood.</li><li>Add Nutty Fudge Day to your Obscure Holiday Calendar app widget so you get a reminder next year.</li>
         </ul>
       </section>
 
-      <section class="section">
+      <section class="section" id="fun-facts">
         <h2>Fun facts</h2>
         <ul class="list">
           <li>Fudge is believed to have originated in the United States in the late 19th century, with a popular story attributing its creation to a Vassar College student in 1886.</li><li>The name &#x27;fudge&#x27; may have come from a term meaning &#x27;a botched or clumsy job,&#x27; reflecting its accidental origin as a batch of mistakenly crystallized caramels.</li><li>Walnuts and pecans are among the most popular nuts added to fudge, providing a beloved textural contrast to the smooth confectionery.</li>
@@ -335,14 +600,35 @@
         <p>Primary note: Fudge is believed to have originated in the United States in the late 19th century, with a popular story attributing its creation to a Vassar College student in 1886.</p>
       </section>
 
-      <section class="section">
+      <section class="section" id="related">
         <h2>Related holidays</h2>
-        <ul class="list">
-          <li><a href="/holiday/bring-flowers-to-someone-day/">Bring Flowers to Someone Day</a></li><li><a href="/holiday/clean-up-your-room-day/">Clean Up Your Room Day</a></li><li><a href="/holiday/pack-rat-day/">Pack Rat Day</a></li>
-        </ul>
+        <div class="related-grid">
+          
+          <article class="related-card">
+            <div class="related-pill">May 15</div>
+            <h3><a href="/holiday/bring-flowers-to-someone-day/">Bring Flowers to Someone Day</a></h3>
+            <p>Bring Flowers to Someone Day, observed annually on May 15th, is an unofficial yet heartwarming holiday that en...</p>
+            <a class="related-link" href="/holiday/bring-flowers-to-someone-day/" aria-label="Read about Bring Flowers to Someone Day">Read more →</a>
+          </article>
+        
+          <article class="related-card">
+            <div class="related-pill">May 10</div>
+            <h3><a href="/holiday/clean-up-your-room-day/">Clean Up Your Room Day</a></h3>
+            <p>Clean Up Your Room Day, observed annually on May 10th, is an unofficial holiday encouraging individuals, parti...</p>
+            <a class="related-link" href="/holiday/clean-up-your-room-day/" aria-label="Read about Clean Up Your Room Day">Read more →</a>
+          </article>
+        
+          <article class="related-card">
+            <div class="related-pill">May 17</div>
+            <h3><a href="/holiday/pack-rat-day/">Pack Rat Day</a></h3>
+            <p>Pack Rat Day, observed annually on May 17th, is an unofficial holiday that playfully acknowledges individuals...</p>
+            <a class="related-link" href="/holiday/pack-rat-day/" aria-label="Read about Pack Rat Day">Read more →</a>
+          </article>
+        
+        </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="faq">
         <h2>FAQ</h2>
         <dl class="faq">
           <div class="faq-item"><dt>When is Nutty Fudge Day?</dt><dd>It is observed on May 12 each year.</dd></div><div class="faq-item"><dt>What is Nutty Fudge Day?</dt><dd>Nutty Fudge Day, observed annually on May 12th, is an unofficial holiday celebrating the beloved confectionery that marries the rich, creamy texture of fudge with the satisfying crunch of nuts. This delightful occasion encourages individuals to indulge in or prepare batches of fudge infused with favorites like walnuts, pecans, or peanuts, highlighting the textural contrast and enhanced flavor that nuts bring to this classic sweet treat.</dd></div><div class="faq-item"><dt>How do people celebrate Nutty Fudge Day?</dt><dd>Common ideas include sharing the story, planning a small themed activity, and spreading a little joy or reflection around the theme.</dd></div>
@@ -369,12 +655,21 @@
         <ul>
           <li>Yesterday: <a href="/holiday/national-limerick-day/">National Limerick Day</a></li>
           <li>Tomorrow: <a href="/holiday/frog-jumping-day/">Frog Jumping Day</a></li>
-          <li>Random pick: <a href="/holiday/gumdrop-day/">Gumdrop Day</a></li>
+          <li>Random pick: <a href="/holiday/national-book-lovers-day/">National Book Lovers Day</a></li>
           <li>Popular: <a href="/holiday/national-pizza-day/">National Pizza Day</a></li>
         </ul>
       </section>
+
+      <section class="section" id="recently-viewed">
+        <h2>Recently viewed holidays</h2>
+        <ul class="recent-list" aria-live="polite"></ul>
+      </section>
     </article>
   </main>
+
+  <button class="btn-pill secondary" id="back-to-top" type="button" aria-label="Back to top" style="position:fixed;right:18px;bottom:18px;display:none;z-index:999;">
+    ↑ Top
+  </button>
 
   <footer class="site-footer">
     <div class="footer-links">
@@ -386,5 +681,85 @@
     </div>
     <p>&copy; 2025 Obscure Holiday Calendar</p>
   </footer>
+  <script>
+    (function() {
+      const shareBtn = document.getElementById('share-btn');
+      const copyBtn = document.getElementById('copy-btn');
+      const feedback = document.getElementById('share-feedback');
+      const recentList = document.querySelector('.recent-list');
+      const pageData = { slug: "nutty-fudge-day", name: "Nutty Fudge Day", url: "https://www.obscureholidaycalendar.com/holiday/nutty-fudge-day/" };
+
+      function setFeedback(msg) {
+        if (feedback) feedback.textContent = msg;
+      }
+
+      async function share() {
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: pageData.name, text: `Check out ${pageData.name}`, url: pageData.url });
+            setFeedback('Thanks for sharing!');
+          } catch(e) {
+            setFeedback('Share canceled.');
+          }
+        } else {
+          copy();
+        }
+      }
+
+      function copy() {
+        try {
+          navigator.clipboard.writeText(pageData.url);
+          setFeedback('Link copied to clipboard.');
+        } catch(e) {
+          setFeedback('Copy not available in this browser.');
+        }
+      }
+
+      function loadRecents() {
+        try {
+          const raw = localStorage.getItem('ohc_recent');
+          return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          return [];
+        }
+      }
+
+      function saveRecents(list) {
+        try { localStorage.setItem('ohc_recent', JSON.stringify(list)); } catch(e) {}
+      }
+
+      function addRecent() {
+        const recents = loadRecents().filter(item => item.slug !== pageData.slug);
+        recents.unshift(pageData);
+        if (recents.length > 6) recents.length = 6;
+        saveRecents(recents);
+      }
+
+      function renderRecents() {
+        const recents = loadRecents().filter(item => item.slug !== pageData.slug);
+        if (!recentList) return;
+        if (!recents.length) {
+          recentList.innerHTML = '<li><a href="/holiday/">Browse all holidays →</a></li>';
+          return;
+        }
+        recentList.innerHTML = recents.map(item => `<li><a href="${item.url}">${item.name}</a></li>`).join('');
+      }
+
+      if (shareBtn) shareBtn.addEventListener('click', share);
+      if (copyBtn) copyBtn.addEventListener('click', copy);
+      addRecent();
+      renderRecents();
+
+      // Back to top
+      const backTop = document.getElementById('back-to-top');
+      if (backTop) {
+        backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        window.addEventListener('scroll', () => {
+          const show = window.scrollY > 400;
+          backTop.style.display = show ? 'inline-flex' : 'none';
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
