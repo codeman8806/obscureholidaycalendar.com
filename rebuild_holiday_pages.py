@@ -183,6 +183,16 @@ def build_structured_data(name: str, pretty: str, canonical: str, description: s
         ],
     }
 
+    web_page = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": name,
+        "url": canonical,
+        "description": description,
+        "breadcrumb": breadcrumb_schema,
+        "isPartOf": {"@type": "WebSite", "name": "Obscure Holiday Calendar", "url": SITE_BASE},
+    }
+
     return "\n".join(
         [
             "<script type=\"application/ld+json\">",
@@ -196,6 +206,9 @@ def build_structured_data(name: str, pretty: str, canonical: str, description: s
             "</script>",
             "<script type=\"application/ld+json\">",
             json_ld(breadcrumb_schema),
+            "</script>",
+            "<script type=\"application/ld+json\">",
+            json_ld(web_page),
             "</script>",
         ]
     )
@@ -233,6 +246,7 @@ def render_page(
     random_slug: str,
     title_lookup: Dict[str, str],
     related_slugs: List[str],
+    data_lookup: Dict[str, Dict],
     last_updated: str,
 ) -> str:
     name = record.get("name") or slug.replace("-", " ").title()
@@ -280,8 +294,25 @@ def render_page(
             label = override_label
         return f'<a href="/holiday/{slug_value}/">{html.escape(label)}</a>'
 
-    # Related links (limit 3)
-    related_links = "".join(f"<li>{holiday_link(s)}</li>" for s in related_slugs[:3])
+    # Concise "why it matters"
+    why_line = shorten_for_meta(description, f"Discover why {name} is celebrated on {pretty}.", 120)
+
+    related_cards = []
+    for r_slug in related_slugs[:3]:
+        r_rec = data_lookup.get(r_slug, {})
+        r_name = title_lookup.get(r_slug) or r_slug.replace("-", " ").title()
+        r_date = pretty_date(r_rec.get("date", ""))
+        r_desc = shorten_for_meta(r_rec.get("description", "") or f"Discover {r_name}.", f"Learn about {r_name}.", 110)
+        related_cards.append(
+            f"""
+          <article class="related-card">
+            <div class="related-pill">{html.escape(r_date)}</div>
+            <h3><a href="/holiday/{r_slug}/">{html.escape(r_name)}</a></h3>
+            <p>{html.escape(r_desc)}</p>
+            <a class="related-link" href="/holiday/{r_slug}/" aria-label="Read about {html.escape(r_name)}">Read more →</a>
+          </article>
+        """
+        )
 
     badge_path = f"/assets/badges/{slug}.svg"
 
@@ -293,8 +324,59 @@ def render_page(
   <title>{html.escape(name)} — Obscure Holiday Calendar</title>
   <meta name="description" content="{html.escape(meta_desc)}" />
   <meta name="last-modified" content="{last_updated}" />
+  <meta name="theme-color" content="#2c005f" />
   <meta name="google-adsense-account" content="ca-pub-7162731177966348" />
   <link rel="canonical" href="{canonical}" />
+  <link rel="preload" href="/styles.css" as="style" crossorigin="anonymous" integrity="sha256-6thkjdloi9ZO0jXPomwwy5axQ9KPxbWvOcyD4umyijo=" onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Critical above-the-fold CSS -->
+  <style>
+    body {{
+      margin: 0;
+      font-family: "Inter", "Manrope", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 20%, #1a0c3f 0%, #0f0a2a 40%, #0b0b24 70%);
+      color: #0f172a;
+    }}
+    .page-wrap {{
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 16px 42px;
+    }}
+    .site-header {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      margin: 8px auto;
+      max-width: 1120px;
+    }}
+    .brand {{
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+    }}
+    .brand-mark {{
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+    }}
+    .holiday-card {{
+      background: linear-gradient(180deg, #ffffff 0%, #f8f5ff 100%);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 24px 64px rgba(20, 12, 70, 0.16);
+    }}
+    .holiday-title {{
+      margin: 8px 0 6px;
+      font-size: 2rem;
+    }}
+  </style>
   <link rel="icon" href="{SITE_BASE}/favicon.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="{SITE_BASE}/favicon.ico" type="image/x-icon" />
   <link rel="icon" type="image/png" href="{SITE_BASE}/assets/app-icon.png" />
@@ -317,7 +399,7 @@ def render_page(
   <meta name="twitter:title" content="{html.escape(name)} — Obscure Holiday Calendar" />
   <meta name="twitter:description" content="{html.escape(meta_desc)}" />
   <meta name="twitter:image" content="{SITE_BASE}/assets/app-icon.png" />
-  <link rel="stylesheet" href="/styles.css">
+  <noscript><link rel="stylesheet" href="/styles.css" crossorigin="anonymous" integrity="sha256-6thkjdloi9ZO0jXPomwwy5axQ9KPxbWvOcyD4umyijo="></noscript>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADS_CLIENT}" crossorigin="anonymous"></script>
   <style>
     :root {{
@@ -330,9 +412,30 @@ def render_page(
       --border: #e4e7f2;
       --shadow: 0 24px 64px rgba(20, 12, 70, 0.16);
       --pill: linear-gradient(135deg, rgba(44,0,95,0.12), rgba(242,93,148,0.12));
+      --related-bg: linear-gradient(180deg, #f8f5ff 0%, #f3f9ff 100%);
     }}
     body {{
       background: var(--bg);
+    }}
+    .skip-link {{
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }}
+    .skip-link:focus {{
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 10px 14px;
+      margin: 8px 12px;
+      background: #ffffff;
+      color: #000;
+      border-radius: 10px;
+      z-index: 1000;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
     }}
     .breadcrumb {{
       display: flex;
@@ -410,10 +513,145 @@ def render_page(
     .brand-tagline {{
       color: #e2e8f0;
     }}
+    .related-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }}
+    .related-card {{
+      background: var(--related-bg);
+      border: 1px solid #e8e8fb;
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: 0 14px 32px rgba(44,0,95,0.08);
+    }}
+    .related-card h3 {{
+      margin: 8px 0 6px;
+      color: #1f2533;
+      font-size: 1.05rem;
+    }}
+    .related-card p {{
+      margin: 0 0 8px;
+      color: #4b5563;
+      font-size: 0.95rem;
+    }}
+    .related-pill {{
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(44,0,95,0.08);
+      color: #2c005f;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid rgba(44,0,95,0.12);
+    }}
+    .related-link {{
+      color: var(--brand-blue);
+      font-weight: 700;
+      text-decoration: none;
+    }}
+    .related-link:hover {{
+      text-decoration: underline;
+    }}
+    .share-tools {{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 12px 0 4px;
+    }}
+    .btn-pill {{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: linear-gradient(120deg, #2c005f, #f25d94);
+      color: #fff;
+      border-radius: 999px;
+      font-weight: 800;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(44,0,95,0.26);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }}
+    .btn-pill.secondary {{
+      background: linear-gradient(120deg, #1c96f3, #5ad4ff);
+      box-shadow: 0 12px 24px rgba(28,150,243,0.22);
+    }}
+    .btn-pill:hover {{
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(44,0,95,0.3);
+    }}
+    .btn-pill:focus-visible {{
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }}
+    .share-feedback {{
+      color: #0f172a;
+      font-weight: 700;
+      margin: 6px 0 0;
+    }}
+    .recent-list {{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+    }}
+    .recent-list li a {{
+      display: block;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid #e5e7eb;
+      color: #1f2937;
+      text-decoration: none;
+      box-shadow: 0 10px 20px rgba(15,23,42,0.08);
+    }}
+    .recent-list li a:hover {{
+      border-color: #cbd5e1;
+    }}
+    .quick-links {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0 18px;
+    }}
+    .quick-links a {{
+      background: rgba(255,255,255,0.12);
+      color: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }}
+    .quick-links a:hover {{
+      border-color: rgba(255,255,255,0.28);
+    }}
+    .note-bar {{
+      background: linear-gradient(90deg, rgba(44,0,95,0.14), rgba(28,150,243,0.14));
+      color: #0f172a;
+      border: 1px solid rgba(44,0,95,0.16);
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }}
+    .note-bar strong {{
+      color: var(--brand-purple);
+    }}
   </style>
   {schema}
 </head>
 <body class="page">
+  <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
     <a class="brand" href="/">
       <img src="/assets/app-icon.png" alt="Obscure Holiday Calendar icon" class="brand-mark" />
@@ -424,14 +662,14 @@ def render_page(
     </a>
     <nav class="nav-links">
       <a href="/holiday/">Holidays</a>
-      <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener">@obscureholidaycalendar</a>
+      <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener" aria-label="Follow us on Instagram">@obscureholidaycalendar</a>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
     </nav>
   </header>
 
-  <main class="page-wrap">
+  <main id="main" class="page-wrap">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span aria-hidden="true">›</span>
@@ -439,6 +677,13 @@ def render_page(
       <span aria-hidden="true">›</span>
       <span>{html.escape(name)}</span>
     </nav>
+    <div class="quick-links" aria-label="Page quick links">
+      <a href="#overview">Overview</a>
+      <a href="#celebrate">Celebrate</a>
+      <a href="#fun-facts">Fun facts</a>
+      <a href="#faq">FAQ</a>
+      <a href="#related">Related</a>
+    </div>
     <article class="holiday-card">
       <div class="eyebrow">Annual observance</div>
       <h1 class="holiday-title">{html.escape(name)} <span class="holiday-emoji" aria-hidden="true">{html.escape(emoji)}</span></h1>
@@ -448,6 +693,15 @@ def render_page(
         <span class="pill pill-secondary">Cultural / community observance</span>
         <span class="pill pill-secondary">Updated {last_updated}</span>
       </div>
+      <div class="share-tools">
+        <button class="btn-pill" type="button" id="share-btn" aria-label="Share this holiday">
+          <span aria-hidden="true">🔗</span> Share this holiday
+        </button>
+        <button class="btn-pill secondary" type="button" id="copy-btn" aria-label="Copy link to clipboard">
+          <span aria-hidden="true">📋</span> Copy link
+        </button>
+      </div>
+      <div class="share-feedback" id="share-feedback" aria-live="polite"></div>
 
       <p class="lead">
         This holiday is featured in the Obscure Holiday Calendar app with emoji-style visuals, reminders, and daily fun facts.
@@ -464,11 +718,15 @@ def render_page(
         </a>
       </div>
 
-      <section class="section">
+      <section class="section" id="overview">
         <h2>Overview</h2>
         <p>{safe_text(description)}</p>
         <p>Observed each year on {html.escape(pretty)}, {html.escape(name)} invites people to pause, share the story, and bring a little themed joy to their day.</p>
       </section>
+
+      <div class="note-bar" role="note">
+        <strong>Why it matters:</strong> {html.escape(why_line)}
+      </div>
 
       <section class="section">
         <h2>Origin and story</h2>
@@ -495,14 +753,14 @@ def render_page(
         </ul>
       </section>
 
-      <section class="section">
+      <section class="section" id="celebrate">
         <h2>Ways to celebrate</h2>
         <ul class="list">
           {''.join(f'<li>{safe_text(item)}</li>' for item in celebrations)}
         </ul>
       </section>
 
-      <section class="section">
+      <section class="section" id="fun-facts">
         <h2>Fun facts</h2>
         <ul class="list">
           {''.join(f'<li>{safe_text(item)}</li>' for item in fun_facts)}
@@ -514,14 +772,14 @@ def render_page(
         <p>Primary note: {safe_text(fun_facts[0])}</p>
       </section>
 
-      <section class="section">
+      <section class="section" id="related">
         <h2>Related holidays</h2>
-        <ul class="list">
-          {related_links}
-        </ul>
+        <div class="related-grid">
+          {''.join(related_cards)}
+        </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="faq">
         <h2>FAQ</h2>
         <dl class="faq">
           {''.join(f'<div class="faq-item"><dt>{safe_text(q)}</dt><dd>{safe_text(a)}</dd></div>' for q, a in faq)}
@@ -552,8 +810,17 @@ def render_page(
           <li>Popular: {holiday_link(random_popular[0], random_popular[1])}</li>
         </ul>
       </section>
+
+      <section class="section" id="recently-viewed">
+        <h2>Recently viewed holidays</h2>
+        <ul class="recent-list" aria-live="polite"></ul>
+      </section>
     </article>
   </main>
+
+  <button class="btn-pill secondary" id="back-to-top" type="button" aria-label="Back to top" style="position:fixed;right:18px;bottom:18px;display:none;z-index:999;">
+    ↑ Top
+  </button>
 
   <footer class="site-footer">
     <div class="footer-links">
@@ -565,6 +832,86 @@ def render_page(
     </div>
     <p>&copy; {datetime.now().year} Obscure Holiday Calendar</p>
   </footer>
+  <script>
+    (function() {{
+      const shareBtn = document.getElementById('share-btn');
+      const copyBtn = document.getElementById('copy-btn');
+      const feedback = document.getElementById('share-feedback');
+      const recentList = document.querySelector('.recent-list');
+      const pageData = {{ slug: "{slug}", name: "{html.escape(name)}", url: "{canonical}" }};
+
+      function setFeedback(msg) {{
+        if (feedback) feedback.textContent = msg;
+      }}
+
+      async function share() {{
+        if (navigator.share) {{
+          try {{
+            await navigator.share({{ title: pageData.name, text: `Check out ${{pageData.name}}`, url: pageData.url }});
+            setFeedback('Thanks for sharing!');
+          }} catch(e) {{
+            setFeedback('Share canceled.');
+          }}
+        }} else {{
+          copy();
+        }}
+      }}
+
+      function copy() {{
+        try {{
+          navigator.clipboard.writeText(pageData.url);
+          setFeedback('Link copied to clipboard.');
+        }} catch(e) {{
+          setFeedback('Copy not available in this browser.');
+        }}
+      }}
+
+      function loadRecents() {{
+        try {{
+          const raw = localStorage.getItem('ohc_recent');
+          return raw ? JSON.parse(raw) : [];
+        }} catch (e) {{
+          return [];
+        }}
+      }}
+
+      function saveRecents(list) {{
+        try {{ localStorage.setItem('ohc_recent', JSON.stringify(list)); }} catch(e) {{}}
+      }}
+
+      function addRecent() {{
+        const recents = loadRecents().filter(item => item.slug !== pageData.slug);
+        recents.unshift(pageData);
+        if (recents.length > 6) recents.length = 6;
+        saveRecents(recents);
+      }}
+
+      function renderRecents() {{
+        const recents = loadRecents().filter(item => item.slug !== pageData.slug);
+        if (!recentList) return;
+        if (!recents.length) {{
+          recentList.innerHTML = '<li><a href="/holiday/">Browse all holidays →</a></li>';
+          return;
+        }}
+        recentList.innerHTML = recents.map(item => `<li><a href=\"${{item.url}}\">${{item.name}}</a></li>`).join('');
+      }}
+
+      if (shareBtn) shareBtn.addEventListener('click', share);
+      if (copyBtn) copyBtn.addEventListener('click', copy);
+      addRecent();
+      renderRecents();
+
+      // Back to top
+      const backTop = document.getElementById('back-to-top');
+      if (backTop) {{
+        backTop.addEventListener('click', () => window.scrollTo({{ top: 0, behavior: 'smooth' }}));
+        window.addEventListener('scroll', () => {{
+          const show = window.scrollY > 400;
+          backTop.style.display = show ? 'inline-flex' : 'none';
+        }});
+      }}
+    }})();
+  </script>
 </body>
 </html>
 """
@@ -619,7 +966,7 @@ def main():
             rng.shuffle(extra)
             related_slugs.extend(extra[: 3 - len(related_slugs)])
 
-        html_output = render_page(slug, record, prev_slug, next_slug, random_slug, title_lookup, related_slugs, last_updated)
+        html_output = render_page(slug, record, prev_slug, next_slug, random_slug, title_lookup, related_slugs, data, last_updated)
         out_path = HOLIDAYS_DIR / slug / "index.html"
         out_path.write_text(html_output, encoding="utf-8")
 
