@@ -122,6 +122,91 @@ def celebration_ideas(name: str, pretty: str, fun_facts: List[str]) -> List[str]
     return ideas
 
 
+# Category heuristics to tailor type, great-for, and celebrations
+CATEGORY_RULES = [
+    ("Food / Dessert", ["chocolate", "cookie", "cake", "pie", "pizza", "ice cream", "bake", "candy", "dessert", "sandwich", "taco", "burger", "bread", "soup", "coffee", "tea", "wine", "beer", "cocktail", "cheese"]),
+    ("Pets / Animals", ["cat", "dog", "pet", "kitten", "puppy"]),
+    ("Learning / Reading", ["book", "read", "poetry", "dictionary", "grammar", "library", "literacy"]),
+    ("Games & Fun", ["game", "chess", "puzzle", "crossword", "scrabble", "trivia"]),
+    ("Nature / Outdoors", ["tree", "garden", "flower", "earth", "nature", "hike", "outdoors"]),
+    ("Health / Wellness", ["fitness", "health", "run", "walk", "yoga", "meditation"]),
+    ("Kindness / Community", ["kindness", "friend", "hug", "thank", "compliment", "help", "appreciation"]),
+    ("Geek / Tech", ["tech", "computer", "internet", "coding", "science", "math", "pi", "engineer", "robot"]),
+]
+
+
+def classify_holiday(name: str, description: str) -> dict:
+    text = f"{name} {description}".lower()
+    for label, keywords in CATEGORY_RULES:
+        if any(k in text for k in keywords):
+            return {
+                "type_label": label,
+                "great_for": {
+                    "Food / Dessert": ["Foodies", "Chocolate lovers", "Home bakers"],
+                    "Pets / Animals": ["Pet parents", "Shelters", "Veterinarians"],
+                    "Learning / Reading": ["Book clubs", "Teachers", "Students"],
+                    "Games & Fun": ["Game nights", "Families", "Puzzle fans"],
+                    "Nature / Outdoors": ["Gardeners", "Hikers", "Eco clubs"],
+                    "Health / Wellness": ["Wellness groups", "Gyms", "Health classes"],
+                    "Kindness / Community": ["Community groups", "Friends", "Coworkers"],
+                    "Geek / Tech": ["Tech teams", "STEM clubs", "Developers"],
+                }.get(label, ["Friends", "Families", "Teams"]),
+            }
+    return {"type_label": "Cultural / community observance", "great_for": ["Friends", "Families", "Classrooms", "Teams"]}
+
+
+def category_celebrations(label: str, name: str) -> List[str]:
+    if "Food" in label:
+        return [
+            f"Try a playful twist: cover non-traditional foods in chocolate or sauces inspired by {name}.",
+            "Host a tasting plate with sweet and savory pairings.",
+            "Share a recipe photo, tag friends, and swap your favorite topping ideas.",
+        ]
+    if "Pets" in label:
+        return [
+            "Share photos of your pets enjoying a themed treat or outfit.",
+            "Donate supplies to a local shelter or foster program.",
+            "Schedule a short playdate or walk with a rescue in mind.",
+        ]
+    if "Learning" in label:
+        return [
+            "Set aside 15 minutes to read or learn something tied to the day’s theme.",
+            "Share a favorite quote or fact with a friend or class.",
+            "Start a tiny challenge: one page, one fact, one takeaway.",
+        ]
+    if "Games" in label:
+        return [
+            "Host a quick game round—board game, puzzle, or trivia tied to the theme.",
+            "Share a digital puzzle link with friends and compare times.",
+            "Teach someone a new game mechanic or strategy today.",
+        ]
+    if "Nature" in label:
+        return [
+            "Step outside for a themed photo or short walk, noting what fits the day.",
+            "Plant something small—herbs, seeds, or a window box.",
+            "Share a conservation tip or nature fact with friends.",
+        ]
+    if "Health" in label:
+        return [
+            "Do a 10-minute movement session inspired by the day’s theme.",
+            "Prep a simple, nutritious snack to match the day.",
+            "Share one healthy habit you’re keeping this week.",
+        ]
+    if "Kindness" in label:
+        return [
+            "Send a kind note or shout-out to someone who fits the theme.",
+            "Do one small favor quietly for a friend or coworker.",
+            "Share a feel-good story tied to the observance.",
+        ]
+    if "Geek" in label:
+        return [
+            "Share a favorite fact, meme, or tool related to the theme.",
+            "Host a mini show-and-tell: a gadget, code snippet, or STEM story.",
+            "Try a short experiment or demo that fits the day.",
+        ]
+    return celebration_ideas(name, pretty_date("00-00"), [])
+
+
 def build_faq(name: str, pretty: str, desc: str) -> List[Tuple[str, str]]:
     return [
         (f"When is {name}?", f"It is observed on {pretty} each year."),
@@ -221,9 +306,48 @@ def badge_colors(slug: str) -> Tuple[str, str]:
     return c1, c2
 
 
+def _wrap_badge_text(name: str) -> List[str]:
+    """
+    Wrap badge text into 1-2 lines so longer names still fit nicely.
+    """
+    clean = name.strip()
+    if len(clean) <= 18:
+        return [clean]
+    words = clean.split()
+    lines: List[str] = []
+    current: List[str] = []
+    for w in words:
+        candidate = " ".join(current + [w])
+        if len(candidate) <= 18:
+            current.append(w)
+        else:
+            if current:
+                lines.append(" ".join(current))
+            current = [w]
+    if current:
+        lines.append(" ".join(current))
+    if len(lines) > 2:
+        # collapse to two lines with ellipsis
+        merged = " ".join(lines[:2])
+        if len(merged) > 28:
+            merged = merged[:27] + "…"
+        return [merged, "Obscure Holiday"]
+    return lines[:2]
+
+
 def build_badge_svg(name: str, slug: str) -> str:
     c1, c2 = badge_colors(slug)
-    display = name if len(name) <= 24 else name[:22] + "..."
+    lines = _wrap_badge_text(name)
+    font_size = 20 if len(lines) == 1 else 16
+    y_start = 56 if len(lines) == 1 else 48
+    line_gap = 22
+    tspans = []
+    for i, line in enumerate(lines):
+        y = y_start + i * line_gap
+        tspans.append(
+            f'<tspan x="50%" y="{y}" fill="#ffffff" font-family="Inter, Manrope, system-ui, sans-serif" '
+            f'font-size="{font_size}" font-weight="700" text-anchor="middle">{html.escape(line)}</tspan>'
+        )
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="240" height="120" viewBox="0 0 240 120" role="img" aria-label="{html.escape(name)}">
   <defs>
     <linearGradient id="grad-{slug}" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -232,8 +356,10 @@ def build_badge_svg(name: str, slug: str) -> str:
     </linearGradient>
   </defs>
   <rect rx="16" ry="16" width="240" height="120" fill="url(#grad-{slug})"/>
-  <text x="50%" y="54%" fill="#ffffff" font-family="Inter, Manrope, system-ui, sans-serif" font-size="20" font-weight="700" text-anchor="middle">{html.escape(display)}</text>
-  <text x="50%" y="78%" fill="#f1f5f9" font-family="Inter, Manrope, system-ui, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Obscure Holiday Calendar</text>
+  <text>
+    {''.join(tspans)}
+  </text>
+  <text x="50%" y="90%" fill="#f1f5f9" font-family="Inter, Manrope, system-ui, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Obscure Holiday Calendar</text>
 </svg>
 """
 
@@ -270,6 +396,20 @@ def render_page(
     celebrations = celebration_ideas(name, pretty, fun_facts)
     faq = build_faq(name, pretty, description)
 
+    # Category-tailored labels
+    cat_info = classify_holiday(name, description)
+    type_label = cat_info["type_label"]
+    great_for = cat_info["great_for"]
+
+    # Category-driven celebrations and FAQ tweak
+    celebrations = category_celebrations(type_label, name)
+    celebrate_line = celebrations[0] if celebrations else "Share the story, plan a small themed activity, and spread a little joy."
+    faq = [
+        (f"When is {name}?", f"It is observed on {pretty} each year."),
+        (f"What is {name}?", description),
+        (f"How do people celebrate {name}?", celebrate_line),
+    ]
+
     canonical = f"{SITE_BASE}/holiday/{slug}/"
     schema = build_structured_data(
         name,
@@ -294,8 +434,8 @@ def render_page(
             label = override_label
         return f'<a href="/holiday/{slug_value}/">{html.escape(label)}</a>'
 
-    # Concise "why it matters"
-    why_line = shorten_for_meta(description, f"Discover why {name} is celebrated on {pretty}.", 120)
+    # Concise "why it matters" with a higher limit to avoid awkward cutoffs
+    why_line = shorten_for_meta(description, f"Discover why {name} is celebrated on {pretty}.", 240)
 
     related_cards = []
     for r_slug in related_slugs[:3]:
@@ -371,6 +511,12 @@ def render_page(
       border-radius: 22px;
       padding: 18px;
       box-shadow: 0 24px 64px rgba(20, 12, 70, 0.16);
+    }}
+    .hero-badge {{
+      max-width: 260px;
+      width: min(90%, 260px);
+      margin: 6px 0 4px;
+      filter: drop-shadow(0 16px 40px rgba(44,0,95,0.18));
     }}
     .holiday-title {{
       margin: 8px 0 6px;
@@ -470,6 +616,17 @@ def render_page(
     }}
     .holiday-title {{
       color: var(--brand-purple);
+      font-size: clamp(2rem, 2.4vw + 1.2rem, 2.8rem);
+      line-height: 1.1;
+      word-break: break-word;
+      hyphens: auto;
+    }}
+    .meta-line {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 16px;
+      align-items: center;
     }}
     .eyebrow {{
       color: var(--brand-pink);
@@ -647,6 +804,22 @@ def render_page(
     .note-bar strong {{
       color: var(--brand-purple);
     }}
+    .nav-links {{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }}
+    .nav-links .ig-icon {{
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+    }}
+    .nav-links .ig-link {{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }}
   </style>
   {schema}
 </head>
@@ -662,7 +835,21 @@ def render_page(
     </a>
     <nav class="nav-links">
       <a href="/holiday/">Holidays</a>
-      <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener" aria-label="Follow us on Instagram">@obscureholidaycalendar</a>
+      <a class="ig-link" href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+        <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="ig-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f77737"/>
+              <stop offset="50%" stop-color="#e1306c"/>
+              <stop offset="100%" stop-color="#4c35d3"/>
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig-grad)"/>
+          <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="2"/>
+          <circle cx="17.1" cy="6.9" r="1.3" fill="#fff"/>
+        </svg>
+        @obscureholidaycalendar
+      </a>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
@@ -690,7 +877,7 @@ def render_page(
       <img src="{badge_path}" alt="{html.escape(name)} badge" class="hero-badge" loading="lazy" decoding="async" />
       <div class="meta-line">
         <span class="pill">{html.escape(pretty)}</span>
-        <span class="pill pill-secondary">Cultural / community observance</span>
+        <span class="pill pill-secondary">{html.escape(type_label)}</span>
         <span class="pill pill-secondary">Updated {last_updated}</span>
       </div>
       <div class="share-tools">
@@ -748,8 +935,8 @@ def render_page(
         <h2>Quick facts</h2>
         <ul class="fact-list">
           <li><span>Date</span><span>{html.escape(pretty)}</span></li>
-          <li><span>Type</span><span>Unofficial / cultural observance</span></li>
-          <li><span>Great for</span><span>Friends, families, classrooms, and teams</span></li>
+          <li><span>Type</span><span>{html.escape(type_label)}</span></li>
+          <li><span>Great for</span><span>{html.escape(', '.join(great_for))}</span></li>
         </ul>
       </section>
 

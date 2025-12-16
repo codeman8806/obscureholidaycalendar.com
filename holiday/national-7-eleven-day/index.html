@@ -54,6 +54,12 @@
       padding: 18px;
       box-shadow: 0 24px 64px rgba(20, 12, 70, 0.16);
     }
+    .hero-badge {
+      max-width: 260px;
+      width: min(90%, 260px);
+      margin: 6px 0 4px;
+      filter: drop-shadow(0 16px 40px rgba(44,0,95,0.18));
+    }
     .holiday-title {
       margin: 8px 0 6px;
       font-size: 2rem;
@@ -152,6 +158,17 @@
     }
     .holiday-title {
       color: var(--brand-purple);
+      font-size: clamp(2rem, 2.4vw + 1.2rem, 2.8rem);
+      line-height: 1.1;
+      word-break: break-word;
+      hyphens: auto;
+    }
+    .meta-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 16px;
+      align-items: center;
     }
     .eyebrow {
       color: var(--brand-pink);
@@ -329,6 +346,22 @@
     .note-bar strong {
       color: var(--brand-purple);
     }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .nav-links .ig-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+    }
+    .nav-links .ig-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
   </style>
   <script type="application/ld+json">
 {
@@ -380,7 +413,7 @@
       "name": "How do people celebrate National 7-Eleven Day?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Common ideas include sharing the story, planning a small themed activity, and spreading a little joy or reflection around the theme."
+        "text": "Share photos of your pets enjoying a themed treat or outfit."
       }
     }
   ]
@@ -490,7 +523,21 @@
     </a>
     <nav class="nav-links">
       <a href="/holiday/">Holidays</a>
-      <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener" aria-label="Follow us on Instagram">@obscureholidaycalendar</a>
+      <a class="ig-link" href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+        <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="ig-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f77737"/>
+              <stop offset="50%" stop-color="#e1306c"/>
+              <stop offset="100%" stop-color="#4c35d3"/>
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig-grad)"/>
+          <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="2"/>
+          <circle cx="17.1" cy="6.9" r="1.3" fill="#fff"/>
+        </svg>
+        @obscureholidaycalendar
+      </a>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
@@ -518,7 +565,7 @@
       <img src="/assets/badges/national-7-eleven-day.svg" alt="National 7-Eleven Day badge" class="hero-badge" loading="lazy" decoding="async" />
       <div class="meta-line">
         <span class="pill">July 11</span>
-        <span class="pill pill-secondary">Cultural / community observance</span>
+        <span class="pill pill-secondary">Pets / Animals</span>
         <span class="pill pill-secondary">Updated 2025-12-16</span>
       </div>
       <div class="share-tools">
@@ -553,7 +600,7 @@
       </section>
 
       <div class="note-bar" role="note">
-        <strong>Why it matters:</strong> National 7-Eleven Day, celebrated annually on July 11th (7/11), marks the unofficial birthday of the convenience store c...
+        <strong>Why it matters:</strong> National 7-Eleven Day, celebrated annually on July 11th (7/11), marks the unofficial birthday of the convenience store chain 7-Eleven and is famously known for its tradition of offering free Slurpee drinks to customers.
       </div>
 
       <section class="section">
@@ -576,15 +623,15 @@
         <h2>Quick facts</h2>
         <ul class="fact-list">
           <li><span>Date</span><span>July 11</span></li>
-          <li><span>Type</span><span>Unofficial / cultural observance</span></li>
-          <li><span>Great for</span><span>Friends, families, classrooms, and teams</span></li>
+          <li><span>Type</span><span>Pets / Animals</span></li>
+          <li><span>Great for</span><span>Pet parents, Shelters, Veterinarians</span></li>
         </ul>
       </section>
 
       <section class="section" id="celebrate">
         <h2>Ways to celebrate</h2>
         <ul class="list">
-          <li>Tell someone this fast fact about National 7-Eleven Day: The first 7-Eleven store opened in Dallas, Texas, in 1927, originally operating as an ice house that sold milk, bread, and eggs.</li><li>Plan something small on July 11: a quick nod to National 7-Eleven Day with friends, family, or coworkers.</li><li>Share the story of National 7-Eleven Day on social and tag it with #national7elevenday so others can join in.</li><li>Bring the theme into your day—decorate a workspace, cook or bake something inspired by National 7-Eleven, or play music that matches the mood.</li><li>Add National 7-Eleven Day to your Obscure Holiday Calendar app widget so you get a reminder next year.</li>
+          <li>Share photos of your pets enjoying a themed treat or outfit.</li><li>Donate supplies to a local shelter or foster program.</li><li>Schedule a short playdate or walk with a rescue in mind.</li>
         </ul>
       </section>
 
@@ -631,7 +678,7 @@
       <section class="section" id="faq">
         <h2>FAQ</h2>
         <dl class="faq">
-          <div class="faq-item"><dt>When is National 7-Eleven Day?</dt><dd>It is observed on July 11 each year.</dd></div><div class="faq-item"><dt>What is National 7-Eleven Day?</dt><dd>National 7-Eleven Day, celebrated annually on July 11th (7/11), marks the unofficial birthday of the convenience store chain 7-Eleven and is famously known for its tradition of offering free Slurpee drinks to customers. This day is a popular marketing event created by the company to show appreciation for its customers, encouraging them to visit stores and enjoy a complimentary frozen treat, especially relevant in the heat of summer. It has become a beloved fixture in American pop culture, drawing crowds to 7-Eleven locations nationwide for their annual giveaway.</dd></div><div class="faq-item"><dt>How do people celebrate National 7-Eleven Day?</dt><dd>Common ideas include sharing the story, planning a small themed activity, and spreading a little joy or reflection around the theme.</dd></div>
+          <div class="faq-item"><dt>When is National 7-Eleven Day?</dt><dd>It is observed on July 11 each year.</dd></div><div class="faq-item"><dt>What is National 7-Eleven Day?</dt><dd>National 7-Eleven Day, celebrated annually on July 11th (7/11), marks the unofficial birthday of the convenience store chain 7-Eleven and is famously known for its tradition of offering free Slurpee drinks to customers. This day is a popular marketing event created by the company to show appreciation for its customers, encouraging them to visit stores and enjoy a complimentary frozen treat, especially relevant in the heat of summer. It has become a beloved fixture in American pop culture, drawing crowds to 7-Eleven locations nationwide for their annual giveaway.</dd></div><div class="faq-item"><dt>How do people celebrate National 7-Eleven Day?</dt><dd>Share photos of your pets enjoying a themed treat or outfit.</dd></div>
         </dl>
       </section>
 
@@ -655,7 +702,7 @@
         <ul>
           <li>Yesterday: <a href="/holiday/cheer-up-the-lonely-day/">Cheer Up the Lonely Day</a></li>
           <li>Tomorrow: <a href="/holiday/national-pecan-pie-day/">National Pecan Pie Day</a></li>
-          <li>Random pick: <a href="/holiday/national-picnic-day/">National Picnic Day</a></li>
+          <li>Random pick: <a href="/holiday/national-siblings-day/">National Siblings Day</a></li>
           <li>Popular: <a href="/holiday/pi-day/">Pi Day</a></li>
         </ul>
       </section>
