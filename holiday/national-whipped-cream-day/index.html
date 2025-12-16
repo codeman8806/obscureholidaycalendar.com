@@ -33,26 +33,95 @@
   <link rel="stylesheet" href="/styles.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7162731177966348" crossorigin="anonymous"></script>
   <style>
+    :root {
+      --brand-purple: #2c005f;
+      --brand-pink: #f25d94;
+      --brand-blue: #1c96f3;
+      --bg: radial-gradient(circle at 20% 20%, #1a0c3f 0%, #0f0a2a 40%, #0b0b24 70%);
+      --card: #ffffff;
+      --muted: #5b6174;
+      --border: #e4e7f2;
+      --shadow: 0 24px 64px rgba(20, 12, 70, 0.16);
+      --pill: linear-gradient(135deg, rgba(44,0,95,0.12), rgba(242,93,148,0.12));
+    }
+    body {
+      background: var(--bg);
+    }
     .breadcrumb {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       align-items: center;
       flex-wrap: wrap;
-      margin: 8px 0 14px;
-      color: #6b7280;
+      margin: 10px 0 16px;
+      color: #e5e7ef;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.96rem;
     }
     .breadcrumb a {
-      color: #374151;
+      color: #f5f3ff;
       text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
     }
     .breadcrumb a:hover {
-      text-decoration: underline;
+      border-color: rgba(255,255,255,0.18);
     }
     .breadcrumb span {
-      color: #111827;
+      color: #ffffff;
       font-weight: 700;
+    }
+    .holiday-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f8f5ff 100%);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 22px;
+    }
+    .holiday-title {
+      color: var(--brand-purple);
+    }
+    .eyebrow {
+      color: var(--brand-pink);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+    .pill {
+      background: var(--pill);
+      color: #1f2937;
+      border: 1px solid #ece9ff;
+    }
+    .pill-secondary {
+      background: linear-gradient(135deg, rgba(28,150,243,0.12), rgba(242,93,148,0.12));
+      border: 1px solid #dbeafe;
+    }
+    .lead {
+      color: #1f2533;
+    }
+    h2.section-title, .section h2 {
+      color: var(--brand-purple);
+    }
+    .list li::marker {
+      color: var(--brand-pink);
+    }
+    .ad-slot {
+      border: 1px dashed #d6d9ff;
+      background: linear-gradient(135deg, rgba(28,150,243,0.08), rgba(242,93,148,0.08));
+    }
+    .store-buttons-top .store-badge {
+      filter: drop-shadow(0 10px 24px rgba(44,0,95,0.12));
+    }
+    .nav-links a {
+      color: #f0f4ff;
+    }
+    .nav-links a:hover {
+      color: #fff;
+    }
+    .brand-name {
+      color: #fff;
+    }
+    .brand-tagline {
+      color: #e2e8f0;
     }
   </style>
   <script type="application/ld+json">
@@ -300,7 +369,7 @@
         <ul>
           <li>Yesterday: <a href="/holiday/national-bird-day/">National Bird Day</a></li>
           <li>Tomorrow: <a href="/holiday/cuddle-up-day/">Cuddle Up Day</a></li>
-          <li>Random pick: <a href="/holiday/virtual-vacation-day/">Virtual Vacation Day</a></li>
+          <li>Random pick: <a href="/holiday/national-raspberry-cream-pie-day/">National Raspberry Cream Pie Day</a></li>
           <li>Popular: <a href="/holiday/pi-day/">Pi Day</a></li>
         </ul>
       </section>
