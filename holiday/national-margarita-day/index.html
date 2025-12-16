@@ -54,6 +54,12 @@
       padding: 18px;
       box-shadow: 0 24px 64px rgba(20, 12, 70, 0.16);
     }
+    .hero-badge {
+      max-width: 260px;
+      width: min(90%, 260px);
+      margin: 6px 0 4px;
+      filter: drop-shadow(0 16px 40px rgba(44,0,95,0.18));
+    }
     .holiday-title {
       margin: 8px 0 6px;
       font-size: 2rem;
@@ -152,6 +158,17 @@
     }
     .holiday-title {
       color: var(--brand-purple);
+      font-size: clamp(2rem, 2.4vw + 1.2rem, 2.8rem);
+      line-height: 1.1;
+      word-break: break-word;
+      hyphens: auto;
+    }
+    .meta-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 16px;
+      align-items: center;
     }
     .eyebrow {
       color: var(--brand-pink);
@@ -329,6 +346,22 @@
     .note-bar strong {
       color: var(--brand-purple);
     }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .nav-links .ig-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+    }
+    .nav-links .ig-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
   </style>
   <script type="application/ld+json">
 {
@@ -380,7 +413,7 @@
       "name": "How do people celebrate National Margarita Day?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Common ideas include sharing the story, planning a small themed activity, and spreading a little joy or reflection around the theme."
+        "text": "Try a playful twist: cover non-traditional foods in chocolate or sauces inspired by National Margarita Day."
       }
     }
   ]
@@ -490,7 +523,21 @@
     </a>
     <nav class="nav-links">
       <a href="/holiday/">Holidays</a>
-      <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener" aria-label="Follow us on Instagram">@obscureholidaycalendar</a>
+      <a class="ig-link" href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+        <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="ig-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f77737"/>
+              <stop offset="50%" stop-color="#e1306c"/>
+              <stop offset="100%" stop-color="#4c35d3"/>
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig-grad)"/>
+          <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="2"/>
+          <circle cx="17.1" cy="6.9" r="1.3" fill="#fff"/>
+        </svg>
+        @obscureholidaycalendar
+      </a>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
@@ -518,7 +565,7 @@
       <img src="/assets/badges/national-margarita-day.svg" alt="National Margarita Day badge" class="hero-badge" loading="lazy" decoding="async" />
       <div class="meta-line">
         <span class="pill">February 22</span>
-        <span class="pill pill-secondary">Cultural / community observance</span>
+        <span class="pill pill-secondary">Food / Dessert</span>
         <span class="pill pill-secondary">Updated 2025-12-16</span>
       </div>
       <div class="share-tools">
@@ -553,7 +600,7 @@
       </section>
 
       <div class="note-bar" role="note">
-        <strong>Why it matters:</strong> National Margarita Day, observed annually on February 22nd, is an unofficial holiday dedicated to celebrating one of the...
+        <strong>Why it matters:</strong> National Margarita Day, observed annually on February 22nd, is an unofficial holiday dedicated to celebrating one of the world&#x27;s most popular and beloved cocktails.
       </div>
 
       <section class="section">
@@ -576,15 +623,15 @@
         <h2>Quick facts</h2>
         <ul class="fact-list">
           <li><span>Date</span><span>February 22</span></li>
-          <li><span>Type</span><span>Unofficial / cultural observance</span></li>
-          <li><span>Great for</span><span>Friends, families, classrooms, and teams</span></li>
+          <li><span>Type</span><span>Food / Dessert</span></li>
+          <li><span>Great for</span><span>Foodies, Chocolate lovers, Home bakers</span></li>
         </ul>
       </section>
 
       <section class="section" id="celebrate">
         <h2>Ways to celebrate</h2>
         <ul class="list">
-          <li>Tell someone this fast fact about National Margarita Day: The classic Margarita recipe typically calls for tequila, fresh lime juice, and an orange liqueur (like triple sec or Cointreau), served in a glass with a salted rim.</li><li>Plan something small on February 22: a quick nod to National Margarita Day with friends, family, or coworkers.</li><li>Share the story of National Margarita Day on social and tag it with #nationalmargaritaday so others can join in.</li><li>Bring the theme into your day—decorate a workspace, cook or bake something inspired by National Margarita, or play music that matches the mood.</li><li>Add National Margarita Day to your Obscure Holiday Calendar app widget so you get a reminder next year.</li>
+          <li>Try a playful twist: cover non-traditional foods in chocolate or sauces inspired by National Margarita Day.</li><li>Host a tasting plate with sweet and savory pairings.</li><li>Share a recipe photo, tag friends, and swap your favorite topping ideas.</li>
         </ul>
       </section>
 
@@ -631,7 +678,7 @@
       <section class="section" id="faq">
         <h2>FAQ</h2>
         <dl class="faq">
-          <div class="faq-item"><dt>When is National Margarita Day?</dt><dd>It is observed on February 22 each year.</dd></div><div class="faq-item"><dt>What is National Margarita Day?</dt><dd>National Margarita Day, observed annually on February 22nd, is an unofficial holiday dedicated to celebrating one of the world&#x27;s most popular and beloved cocktails. Enthusiasts across the globe use this day as an occasion to honor the classic blend of tequila, lime juice, and orange liqueur, often enjoyed with a salted rim, whether on the rocks, frozen, or in its many flavorful variations.</dd></div><div class="faq-item"><dt>How do people celebrate National Margarita Day?</dt><dd>Common ideas include sharing the story, planning a small themed activity, and spreading a little joy or reflection around the theme.</dd></div>
+          <div class="faq-item"><dt>When is National Margarita Day?</dt><dd>It is observed on February 22 each year.</dd></div><div class="faq-item"><dt>What is National Margarita Day?</dt><dd>National Margarita Day, observed annually on February 22nd, is an unofficial holiday dedicated to celebrating one of the world&#x27;s most popular and beloved cocktails. Enthusiasts across the globe use this day as an occasion to honor the classic blend of tequila, lime juice, and orange liqueur, often enjoyed with a salted rim, whether on the rocks, frozen, or in its many flavorful variations.</dd></div><div class="faq-item"><dt>How do people celebrate National Margarita Day?</dt><dd>Try a playful twist: cover non-traditional foods in chocolate or sauces inspired by National Margarita Day.</dd></div>
         </dl>
       </section>
 
@@ -655,7 +702,7 @@
         <ul>
           <li>Yesterday: <a href="/holiday/dolly-the-sheep-day/">Dolly the Sheep Day</a></li>
           <li>Tomorrow: <a href="/holiday/curling-day-sweden/">Curling Day (Sweden)</a></li>
-          <li>Random pick: <a href="/holiday/national-iced-tea-day/">National Iced Tea Day</a></li>
+          <li>Random pick: <a href="/holiday/national-measure-your-feet-day/">National Measure Your Feet Day</a></li>
           <li>Popular: <a href="/holiday/talk-like-a-pirate-day/">Talk Like a Pirate Day</a></li>
         </ul>
       </section>
