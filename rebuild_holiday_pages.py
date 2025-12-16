@@ -107,6 +107,15 @@ def shorten_for_meta(text: str, fallback: str, limit: int = 155) -> str:
             return cut[: pos + 1].strip()
     return cut[:limit].rstrip() + "..."
 
+def first_sentence(text: str) -> str:
+    if not text:
+        return ""
+    for sep in [". ", "! ", "? "]:
+        pos = text.find(sep)
+        if pos != -1 and pos > 30:
+            return text[: pos + 1].strip()
+    return text.strip()
+
 
 def celebration_ideas(name: str, pretty: str, fun_facts: List[str]) -> List[str]:
     keyword = name.replace("Day", "").strip()
@@ -205,6 +214,41 @@ def category_celebrations(label: str, name: str, pretty: str) -> List[str]:
             "Try a short experiment or demo that fits the day.",
         ]
     return celebration_ideas(name, pretty, [])
+
+def generate_celebrations(name: str, pretty: str, type_label: str, great_for: List[str], fun_facts: List[str], description: str) -> List[str]:
+    audience = ", ".join(great_for[:2]) if great_for else "friends and family"
+    hashtag = slugify(name)
+    fact_snip = first_sentence(fun_facts[0]) if fun_facts else ""
+    desc_snip = first_sentence(description)
+
+    ideas: List[str] = []
+    # Category-flavored starter lines
+    ideas.extend(category_celebrations(type_label, name, pretty))
+
+    # Add tailored lines using description and audience
+    if desc_snip:
+        ideas.append(f"Share a 20-second story: {desc_snip}")
+    if fact_snip and fact_snip not in ideas:
+        ideas.append(f"Open with one quick fact: {fact_snip}")
+    ideas.append(f"Host a mini nod on {pretty} with {audience}; snap a photo and tag #{hashtag}.")
+    ideas.append(f"Plan a small keepsake or note so you remember {name} next {pretty}.")
+
+    # Deduplicate while preserving order
+    seen = set()
+    unique = []
+    for line in ideas:
+        if line in seen:
+            continue
+        seen.add(line)
+        unique.append(line)
+    return unique[:5]
+
+def build_why_it_matters(name: str, pretty: str, description: str, type_label: str, great_for: List[str], celebrate_line: str) -> str:
+    intro = first_sentence(description) or f"{name} lands on {pretty} each year."
+    audience = ", ".join(great_for[:3]) if great_for else "friends and families"
+    reason = f"It resonates with {audience} and highlights {type_label.lower()} themes."
+    tie_in = celebrate_line if celebrate_line else f"People mark the day with small activities that match the spirit of {name}."
+    return shorten_for_meta(f"{intro} {reason} {tie_in}", f"Discover why {name} is celebrated on {pretty}.", 360)
 
 
 def build_faq(name: str, pretty: str, desc: str) -> List[Tuple[str, str]]:
@@ -402,7 +446,7 @@ def render_page(
     great_for = cat_info["great_for"]
 
     # Category-driven celebrations and FAQ tweak
-    celebrations = category_celebrations(type_label, name, pretty)
+    celebrations = generate_celebrations(name, pretty, type_label, great_for, fun_facts, description)
     celebrate_line = celebrations[0] if celebrations else "Share the story, plan a small themed activity, and spread a little joy."
     faq = [
         (f"When is {name}?", f"It is observed on {pretty} each year."),
@@ -434,8 +478,8 @@ def render_page(
             label = override_label
         return f'<a href="/holiday/{slug_value}/">{html.escape(label)}</a>'
 
-    # Concise "why it matters" with a higher limit to avoid awkward cutoffs for long names
-    why_line = shorten_for_meta(description, f"Discover why {name} is celebrated on {pretty}.", 320)
+    # Distinct "why it matters" using tailored summary + audience + celebrate hook
+    why_line = build_why_it_matters(name, pretty, description, type_label, great_for, celebrate_line)
 
     related_cards = []
     for r_slug in related_slugs[:3]:
