@@ -75,6 +75,48 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-JTLDP7FMGV');
+    (function() {
+      const params = new URLSearchParams(window.location.search || '');
+      const ref = document.referrer || '';
+      const refHost = (() => {
+        try { return ref ? new URL(ref).hostname : ''; } catch (_) { return ''; }
+      })();
+      const makePayload = () => ({
+        ts: Date.now(),
+        source: params.get('utm_source') || (refHost || 'direct'),
+        medium: params.get('utm_medium') || (ref ? 'referral' : 'unknown'),
+        campaign: params.get('utm_campaign') || '',
+        content: params.get('utm_content') || '',
+        term: params.get('utm_term') || '',
+        referrer: refHost,
+        landing_path: window.location.pathname || '',
+      });
+      let first = null;
+      try {
+        const stored = localStorage.getItem('ohc_first_touch');
+        if (stored) {
+          first = JSON.parse(stored);
+        } else {
+          first = makePayload();
+          localStorage.setItem('ohc_first_touch', JSON.stringify(first));
+        }
+      } catch (_) {
+        first = first || makePayload();
+      }
+      if (window.gtag && first) {
+        try {
+          gtag('set', 'user_properties', {
+            first_source: first.source || '',
+            first_medium: first.medium || '',
+            first_campaign: first.campaign || '',
+            first_content: first.content || '',
+            first_term: first.term || '',
+            first_referrer: first.referrer || '',
+            first_landing_path: first.landing_path || ''
+          });
+        } catch (_) {}
+      }
+    })();
   </script>
   <meta name="apple-itunes-app" content="app-id=6755315850">
   <meta name="google-play-app" content="app-id=com.codeman8806.obscureholidaycalendar">
@@ -702,7 +744,7 @@
         <ul>
           <li>Yesterday: <a href="/holiday/national-margarita-day/">National Margarita Day</a></li>
           <li>Tomorrow: <a href="/holiday/national-banana-bread-day/">National Banana Bread Day</a></li>
-          <li>Random pick: <a href="/holiday/blah-blah-blah-day/">Blah Blah Blah Day</a></li>
+          <li>Random pick: <a href="/holiday/donald-duck-day/">Donald Duck Day</a></li>
           <li>Popular: <a href="/holiday/pi-day/">Pi Day</a></li>
         </ul>
       </section>
