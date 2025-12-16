@@ -197,6 +197,55 @@
       align-items: center;
       gap: 10px;
     }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin: 16px auto 8px;
+      max-width: 980px;
+    }
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 10px 26px rgba(12, 18, 52, 0.1);
+    }
+    .feature-card h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      color: #0f172a;
+    }
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+    .section-heading {
+      text-align: center;
+      margin: 18px 0 6px;
+      color: #0f172a;
+      font-size: 1.2rem;
+      letter-spacing: 0.01em;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 6px auto 12px;
+      max-width: 960px;
+    }
+    .pill-row .pill {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 12px;
+      color: #0f172a;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
   </style>
 </head>
 <body class="page home">
@@ -260,6 +309,35 @@
         </div>
       </section>
     </article>
+    <section class="section">
+      <h2 class="section-heading">Built for people who love fun, quick hits of delight</h2>
+      <div class="pill-row">
+        <span class="pill">Daily fun facts</span>
+        <span class="pill">Widgets & reminders</span>
+        <span class="pill">Emoji-style visuals</span>
+        <span class="pill">Shareable cards</span>
+        <span class="pill">Discord bot for servers</span>
+        <span class="pill">iOS & Android</span>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Daily drops</h3>
+          <p>Wake up to the day’s obscure holiday with a clean, readable card plus a direct link to the page.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Reminders & widgets</h3>
+          <p>Pin the holiday to your home screen, or get nudges so you never miss the fun themes.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Share anywhere</h3>
+          <p>Send holiday links to friends, drop them in chat, or post them to your community with one tap.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Discord-ready</h3>
+          <p>The bot posts the day’s picks (including premium two-holiday choice) straight into your channels.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
