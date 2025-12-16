@@ -260,20 +260,19 @@ def generate_celebrations(name: str, pretty: str, type_label: str, great_for: Li
 
 def build_why_it_matters(name: str, pretty: str, description: str, type_label: str, great_for: List[str], celebrate_line: str, slug: str) -> str:
     rng = random.Random(f"why-{slug}")
-    intro = first_sentence(description) or f"{name} lands on {pretty} each year."
     audience = ", ".join(great_for[:3]) if great_for else "friends and families"
     type_theme = type_label.lower()
     tie_in = celebrate_line if celebrate_line else f"People mark the day with small activities that match the spirit of {name}."
 
     templates = [
-        "{intro} It resonates with {audience} and highlights the {type_theme} side of the day. {tie_in}",
-        "{intro} {name} reminds {audience} to slow down on {pretty} and celebrate in a way that fits {type_theme} traditions. {tie_in}",
-        "{intro} The day matters to {audience} because it keeps {type_theme} stories alive. {tie_in}",
+        "{name} sits on {pretty} and gives {audience} a reason to spotlight {type_theme} moments. {tie_in}",
+        "On {pretty}, {name} nudges {audience} to honor the {type_theme} side of life. {tie_in}",
+        "{name} matters because it keeps {type_theme} stories alive for {audience}, not just in theory but in simple actions. {tie_in}",
+        "Marked on {pretty}, {name} is a reminder to {audience} that small gestures keep {type_theme} traditions meaningful. {tie_in}",
     ]
     choice = rng.choice(templates)
     return shorten_for_meta(
         choice.format(
-            intro=intro,
             audience=audience,
             type_theme=type_theme,
             tie_in=tie_in,
