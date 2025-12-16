@@ -155,7 +155,7 @@ def classify_holiday(name: str, description: str) -> dict:
     return {"type_label": "Cultural / community observance", "great_for": ["Friends", "Families", "Classrooms", "Teams"]}
 
 
-def category_celebrations(label: str, name: str) -> List[str]:
+def category_celebrations(label: str, name: str, pretty: str) -> List[str]:
     if "Food" in label:
         return [
             f"Try a playful twist: cover non-traditional foods in chocolate or sauces inspired by {name}.",
@@ -204,7 +204,7 @@ def category_celebrations(label: str, name: str) -> List[str]:
             "Host a mini show-and-tell: a gadget, code snippet, or STEM story.",
             "Try a short experiment or demo that fits the day.",
         ]
-    return celebration_ideas(name, pretty_date("00-00"), [])
+    return celebration_ideas(name, pretty, [])
 
 
 def build_faq(name: str, pretty: str, desc: str) -> List[Tuple[str, str]]:
@@ -402,7 +402,7 @@ def render_page(
     great_for = cat_info["great_for"]
 
     # Category-driven celebrations and FAQ tweak
-    celebrations = category_celebrations(type_label, name)
+    celebrations = category_celebrations(type_label, name, pretty)
     celebrate_line = celebrations[0] if celebrations else "Share the story, plan a small themed activity, and spread a little joy."
     faq = [
         (f"When is {name}?", f"It is observed on {pretty} each year."),
@@ -434,8 +434,8 @@ def render_page(
             label = override_label
         return f'<a href="/holiday/{slug_value}/">{html.escape(label)}</a>'
 
-    # Concise "why it matters" with a higher limit to avoid awkward cutoffs
-    why_line = shorten_for_meta(description, f"Discover why {name} is celebrated on {pretty}.", 240)
+    # Concise "why it matters" with a higher limit to avoid awkward cutoffs for long names
+    why_line = shorten_for_meta(description, f"Discover why {name} is celebrated on {pretty}.", 320)
 
     related_cards = []
     for r_slug in related_slugs[:3]:
