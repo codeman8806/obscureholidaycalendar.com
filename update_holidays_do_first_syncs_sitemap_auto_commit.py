@@ -165,6 +165,445 @@ def date_to_pretty(date_str: str) -> str:
         return date_str
 
 
+
+
+def render_holiday_html(holiday: Dict[str, Any]) -> str:
+    """Render the full index.html content for a holiday page."""
+    name = holiday.get("name", "Holiday")
+    slug = holiday.get("slug", slugify(name))
+    date_str = holiday.get("date", "")
+    pretty_date = date_to_pretty(date_str)
+
+    description = (holiday.get("description") or "").strip()
+    meta_desc = description[:240] if description else (
+        f"{name} is one of the fun, weird holidays featured in the Obscure Holiday Calendar app. "
+        f"Celebrate {pretty_date} and discover more obscure holidays in the app."
+    )
+    og_desc = meta_desc
+
+    page_title = f"{name} — Obscure Holiday Calendar"
+    canonical_url = f"{SITE_BASE}/holiday/{slug}"
+    og_image = f"{SITE_BASE}/assets/app-icon.png"
+
+    fun_facts = holiday.get("funFacts") or []
+    fun_facts_html = ""
+    if isinstance(fun_facts, list) and fun_facts:
+        items = "".join(f"<li>{fact}</li>" for fact in fun_facts[:5])
+        fun_facts_html = f"""
+        <section class="card facts">
+          <h2>Fun facts</h2>
+          <ul>{items}</ul>
+        </section>
+        """
+
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{page_title}</title>
+
+  <link rel="canonical" href="{canonical_url}" />
+
+  <!-- Basic SEO -->
+  <meta name="description" content="{meta_desc}" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{page_title}" />
+  <meta property="og:description" content="{og_desc}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{canonical_url}" />
+  <meta property="og:image" content="{og_image}" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{page_title}" />
+  <meta name="twitter:description" content="{og_desc}" />
+  <meta name="twitter:image" content="{og_image}" />
+
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "{name}",
+    "description": "{meta_desc}",
+    "url": "{canonical_url}",
+    "datePublished": "{date_str}",
+    "publisher": {{
+      "@type": "Organization",
+      "name": "Obscure Holiday Calendar",
+      "url": "https://www.obscureholidaycalendar.com"
+    }}
+  }}
+  </script>
+
+  <link rel="icon" type="image/png" href="{SITE_BASE}/assets/app-icon.png" />
+
+  <style>
+    :root {{
+      --bg: #0f162a;
+      --panel: #ffffff;
+      --accent: #ff7a3c;
+      --accent-2: #1c96f3;
+      --text: #0f172a;
+      --muted: #4b5563;
+      --border: #e5e7eb;
+      --shadow: 0 18px 44px rgba(12, 18, 52, 0.2);
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      background: radial-gradient(circle at 20% 20%, #182040 0%, #0f152a 40%, #0c1124 70%);
+      font-family: "Manrope", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }}
+    a {{ color: var(--accent-2); text-decoration: none; }}
+    a:hover {{ text-decoration: underline; }}
+    .page-wrap {{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 28px 18px 48px;
+    }}
+    .shell {{
+      background: var(--panel);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      border: 1px solid var(--border);
+    }}
+    header {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }}
+    .brand {{
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }}
+    .brand img {{
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.28);
+    }}
+    .headline {{
+      margin: 6px 0 4px;
+      font-size: 1.9rem;
+      letter-spacing: 0.01em;
+    }}
+    .date {{
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }}
+    .desc {{
+      color: #1f2937;
+      line-height: 1.65;
+      font-size: 1.02rem;
+      margin: 0 0 14px;
+    }}
+    .tagline {{
+      color: var(--muted);
+      margin: 0 0 14px;
+      font-weight: 600;
+    }}
+    .cta-row {{
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 14px 0 20px;
+    }}
+    .btn {{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }}
+    .btn:hover {{
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.18);
+    }}
+    .btn.primary {{ background: var(--accent-2); color: #fff; }}
+    .btn.secondary {{ background: #fff; color: var(--text); border-color: var(--border); }}
+    .meta-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }}
+    .card {{
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: #fff;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+    }}
+    .card h2 {{
+      margin: 0 0 8px;
+      font-size: 1.04rem;
+      color: #0f172a;
+    }}
+    .card p {{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }}
+    .facts ul {{
+      margin: 0;
+      padding-left: 18px;
+      color: #111827;
+      line-height: 1.6;
+    }}
+    footer {{
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: flex-start;
+    }}
+    footer a {{ color: var(--accent-2); font-weight: 700; }}
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <div class="shell">
+      <header>
+        <a class="brand" href="{SITE_BASE}/">
+          <img src="{SITE_BASE}/assets/app-icon.png" alt="Obscure Holiday Calendar icon" />
+          <span>Obscure Holiday Calendar</span>
+        </a>
+        <div class="date">{pretty_date}</div>
+      </header>
+
+      <main>
+        <h1 class="headline">{name}</h1>
+        <p class="desc">{meta_desc}</p>
+        <p class="tagline">Featured in the Obscure Holiday Calendar app. Open the app for artwork, reminders, and more facts.</p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank" rel="noopener">Get it on iOS</a>
+          <a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar" target="_blank" rel="noopener">Get it on Android</a>
+          <a class="btn secondary" href="{SITE_BASE}/holiday/">Browse all holidays</a>
+        </div>
+
+        <div class="meta-grid">
+          <section class="card">
+            <h2>About this day</h2>
+            <p>{description or "This holiday is celebrated by the Obscure Holiday Calendar community."}</p>
+          </section>
+          <section class="card">
+            <h2>Want daily drops?</h2>
+            <p>Widgets, reminders, emoji-style visuals, and easy sharing in the mobile app.</p>
+          </section>
+        </div>
+
+        {fun_facts_html}
+      </main>
+
+      <footer>
+        <span>&copy; 2025 Obscure Holiday Calendar</span>
+        <a href="{SITE_BASE}/">Home</a>
+        <a href="{SITE_BASE}/holiday/">Holidays</a>
+        <a href="https://github.com/codeman8806/Privacy-Policy/wiki/Privacy-Policy-for-Obscure-Holiday-Calendar" target="_blank" rel="noopener noreferrer">Privacy</a>
+        <a href="https://github.com/codeman8806/Privacy-Policy/wiki/Support-for-Obscure-Holiday-Calendar" target="_blank" rel="noopener noreferrer">Support</a>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
+"""
+    return html
+
+
+def build_slug_index(holidays_root: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
+    """
+    Build an index of slug -> holiday_record (with date).
+    Handles both:
+      - objects that already have 'slug'
+      - objects where we need to slugify 'name'
+    """
+    idx: Dict[str, Dict[str, Any]] = {}
+
+    holidays = holidays_root.get("holidays", {})
+    for date_str, items in holidays.items():
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            slug = item.get("slug")
+            if not slug:
+                name = item.get("name")
+                if not name:
+                    continue
+                slug = slugify(name)
+
+            entry = dict(item)
+            entry["date"] = entry.get("date", date_str)
+            entry["slug"] = slug
+            idx[slug] = entry
+
+    return idx
+
+
+def compute_slug_sets(old_root: Dict[str, Any], new_root: Dict[str, Any]) -> Tuple[Set[str], Set[str], Set[str]]:
+    """Return (old_slugs, new_slugs, unchanged_slugs)."""
+    old_idx = build_slug_index(old_root)
+    new_idx = build_slug_index(new_root)
+
+    old_slugs = set(old_idx.keys())
+    new_slugs = set(new_idx.keys())
+    unchanged = old_slugs & new_slugs
+
+    return old_slugs, new_slugs, unchanged
+
+
+# ==== HTML GENERATION ====
+
+def date_to_pretty(date_str: str) -> str:
+    """
+    Convert 'MM-DD' to 'Month D'.
+    Fallbacks to the raw string if something is off.
+    """
+    try:
+        mm, dd = date_str.split("-")
+        month_name = MONTH_NAMES.get(mm, mm)
+        return f"{month_name} {int(dd)}"
+    except Exception:
+        return date_str
+
+
+
+def build_slug_index(holidays_root: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
+    """
+    Build an index of slug -> holiday_record (with date).
+    Handles both:
+      - objects that already have 'slug'
+      - objects where we need to slugify 'name'
+    """
+    idx: Dict[str, Dict[str, Any]] = {}
+
+    holidays = holidays_root.get("holidays", {})
+    for date_str, items in holidays.items():
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            slug = item.get("slug")
+            if not slug:
+                name = item.get("name")
+                if not name:
+                    continue
+                slug = slugify(name)
+
+            entry = dict(item)
+            entry["date"] = entry.get("date", date_str)
+            entry["slug"] = slug
+            idx[slug] = entry
+
+    return idx
+
+
+def compute_slug_sets(old_root: Dict[str, Any], new_root: Dict[str, Any]) -> Tuple[Set[str], Set[str], Set[str]]:
+    """Return (old_slugs, new_slugs, unchanged_slugs)."""
+    old_idx = build_slug_index(old_root)
+    new_idx = build_slug_index(new_root)
+
+    old_slugs = set(old_idx.keys())
+    new_slugs = set(new_idx.keys())
+    unchanged = old_slugs & new_slugs
+
+    return old_slugs, new_slugs, unchanged
+
+
+# ==== HTML GENERATION ====
+
+def date_to_pretty(date_str: str) -> str:
+    """
+    Convert 'MM-DD' to 'Month D'.
+    Fallbacks to the raw string if something is off.
+    """
+    try:
+        mm, dd = date_str.split("-")
+        month_name = MONTH_NAMES.get(mm, mm)
+        return f"{month_name} {int(dd)}"
+    except Exception:
+        return date_str
+
+    return html
+
+
+def build_slug_index(holidays_root: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
+    """
+    Build an index of slug -> holiday_record (with date).
+    Handles both:
+      - objects that already have 'slug'
+      - objects where we need to slugify 'name'
+    """
+    idx: Dict[str, Dict[str, Any]] = {}
+
+    holidays = holidays_root.get("holidays", {})
+    for date_str, items in holidays.items():
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            slug = item.get("slug")
+            if not slug:
+                name = item.get("name")
+                if not name:
+                    continue
+                slug = slugify(name)
+
+            entry = dict(item)
+            entry["date"] = entry.get("date", date_str)
+            entry["slug"] = slug
+            idx[slug] = entry
+
+    return idx
+
+
+def compute_slug_sets(old_root: Dict[str, Any], new_root: Dict[str, Any]) -> Tuple[Set[str], Set[str], Set[str]]:
+    """Return (old_slugs, new_slugs, unchanged_slugs)."""
+    old_idx = build_slug_index(old_root)
+    new_idx = build_slug_index(new_root)
+
+    old_slugs = set(old_idx.keys())
+    new_slugs = set(new_idx.keys())
+    unchanged = old_slugs & new_slugs
+
+    return old_slugs, new_slugs, unchanged
+
+
+# ==== HTML GENERATION ====
+
+def date_to_pretty(date_str: str) -> str:
+    """
+    Convert 'MM-DD' to 'Month D'.
+    Fallbacks to the raw string if something is off.
+    """
+    try:
+        mm, dd = date_str.split("-")
+        month_name = MONTH_NAMES.get(mm, mm)
+        return f"{month_name} {int(dd)}"
+    except Exception:
+        return date_str
+
+
 def render_holiday_html(holiday: Dict[str, Any]) -> str:
     """Render the full index.html content for a holiday page."""
     name = holiday.get("name", "Holiday")
@@ -550,4 +989,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
