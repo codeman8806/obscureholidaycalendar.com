@@ -215,40 +215,74 @@ def category_celebrations(label: str, name: str, pretty: str) -> List[str]:
         ]
     return celebration_ideas(name, pretty, [])
 
-def generate_celebrations(name: str, pretty: str, type_label: str, great_for: List[str], fun_facts: List[str], description: str) -> List[str]:
+def generate_celebrations(name: str, pretty: str, type_label: str, great_for: List[str], fun_facts: List[str], description: str, slug: str) -> List[str]:
+    rng = random.Random(f"celebrate-{slug}")
     audience = ", ".join(great_for[:2]) if great_for else "friends and family"
     hashtag = slugify(name)
     fact_snip = first_sentence(fun_facts[0]) if fun_facts else ""
     desc_snip = first_sentence(description)
+    type_lower = type_label.lower()
 
-    ideas: List[str] = []
-    # Category-flavored starter lines
-    ideas.extend(category_celebrations(type_label, name, pretty))
+    templates = [
+        "{name} lands on {pretty} — host a quick nod with {audience} and snap a photo.",
+        "Share one fast fact about {name}: {fact}",
+        "Post a story with #{hashtag} and invite others to try a tiny activity.",
+        "Plan a 10-minute activity that fits the {type} vibe and make it a mini tradition.",
+        "Bring {name} to work or school with a short shout-out in a meeting or group chat.",
+        "Pair music, snacks, or décor that match the theme and enjoy a small break.",
+        "Write a note or journal entry on why {name} matters, then set a reminder for next year.",
+    ]
 
-    # Add tailored lines using description and audience
-    if desc_snip:
-        ideas.append(f"Share a 20-second story: {desc_snip}")
-    if fact_snip and fact_snip not in ideas:
-        ideas.append(f"Open with one quick fact: {fact_snip}")
-    ideas.append(f"Host a mini nod on {pretty} with {audience}; snap a photo and tag #{hashtag}.")
-    ideas.append(f"Plan a small keepsake or note so you remember {name} next {pretty}.")
+    base = [tmpl.format(
+        name=name,
+        pretty=pretty,
+        audience=audience,
+        fact=fact_snip or desc_snip or f"it celebrates the spirit of {name}",
+        hashtag=hashtag,
+        type=type_lower,
+    ) for tmpl in templates]
 
-    # Deduplicate while preserving order
+    # Mix in category-flavored lines
+    base.extend(category_celebrations(type_label, name, pretty))
+
+    # Shuffle deterministically and pick top 5 unique
+    rng.shuffle(base)
     seen = set()
     unique = []
-    for line in ideas:
+    for line in base:
         if line in seen:
             continue
         seen.add(line)
         unique.append(line)
-    return unique[:5]
+        if len(unique) == 5:
+            break
+    return unique
 
-def build_why_it_matters(name: str, pretty: str, description: str, type_label: str, great_for: List[str], celebrate_line: str) -> str:
+def build_why_it_matters(name: str, pretty: str, description: str, type_label: str, great_for: List[str], celebrate_line: str, slug: str) -> str:
+    rng = random.Random(f"why-{slug}")
     intro = first_sentence(description) or f"{name} lands on {pretty} each year."
     audience = ", ".join(great_for[:3]) if great_for else "friends and families"
-    reason = f"It resonates with {audience} and highlights {type_label.lower()} themes."
+    type_theme = type_label.lower()
     tie_in = celebrate_line if celebrate_line else f"People mark the day with small activities that match the spirit of {name}."
-    return shorten_for_meta(f"{intro} {reason} {tie_in}", f"Discover why {name} is celebrated on {pretty}.", 360)
+
+    templates = [
+        "{intro} It resonates with {audience} and highlights the {type_theme} side of the day. {tie_in}",
+        "{intro} {name} reminds {audience} to slow down on {pretty} and celebrate in a way that fits {type_theme} traditions. {tie_in}",
+        "{intro} The day matters to {audience} because it keeps {type_theme} stories alive. {tie_in}",
+    ]
+    choice = rng.choice(templates)
+    return shorten_for_meta(
+        choice.format(
+            intro=intro,
+            audience=audience,
+            type_theme=type_theme,
+            tie_in=tie_in,
+            name=name,
+            pretty=pretty,
+        ),
+        f"Discover why {name} is celebrated on {pretty}.",
+        360,
+    )
 
 
 def build_faq(name: str, pretty: str, desc: str) -> List[Tuple[str, str]]:
@@ -446,7 +480,7 @@ def render_page(
     great_for = cat_info["great_for"]
 
     # Category-driven celebrations and FAQ tweak
-    celebrations = generate_celebrations(name, pretty, type_label, great_for, fun_facts, description)
+    celebrations = generate_celebrations(name, pretty, type_label, great_for, fun_facts, description, slug)
     celebrate_line = celebrations[0] if celebrations else "Share the story, plan a small themed activity, and spread a little joy."
     faq = [
         (f"When is {name}?", f"It is observed on {pretty} each year."),
@@ -479,7 +513,7 @@ def render_page(
         return f'<a href="/holiday/{slug_value}/">{html.escape(label)}</a>'
 
     # Distinct "why it matters" using tailored summary + audience + celebrate hook
-    why_line = build_why_it_matters(name, pretty, description, type_label, great_for, celebrate_line)
+    why_line = build_why_it_matters(name, pretty, description, type_label, great_for, celebrate_line, slug)
 
     related_cards = []
     for r_slug in related_slugs[:3]:
