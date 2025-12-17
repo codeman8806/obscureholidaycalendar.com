@@ -773,10 +773,6 @@ def render_page(
     .list li::marker {{
       color: var(--brand-pink);
     }}
-    .ad-slot {{
-      border: 1px dashed #d6d9ff;
-      background: linear-gradient(135deg, rgba(28,150,243,0.08), rgba(242,93,148,0.08));
-    }}
     .store-buttons-top .store-badge {{
       filter: drop-shadow(0 10px 24px rgba(44,0,95,0.12));
     }}
@@ -1043,16 +1039,6 @@ def render_page(
         <p>{safe_text(fun_facts[0])}</p>
         {"<p>" + safe_text(fun_facts[1]) + "</p>" if len(fun_facts) > 1 else ""}
       </section>
-
-      <div class="ad-slot">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="{ADS_CLIENT}"
-             data-ad-slot="{ADS_SLOT}"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-      </div>
 
       <section class="section">
         <h2>Quick facts</h2>
