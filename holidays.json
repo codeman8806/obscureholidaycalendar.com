@@ -1592,11 +1592,11 @@
         "description": "National Pig Day, observed annually on March 1st, is a celebration primarily held in the United States to honor the pig as one of humanity's most intelligent and domesticated animals. Initiated in 1972 by sisters Ellen Stanley and Mary Lynne Rave, the day encourages a positive appreciation for pigs, often through events and activities that highlight their unique characteristics and contributions.",
         "emoji": "🐷",
         "funFacts": [
-          "National Pig Day was established in 1972 by sisters Ellen Stanley and Mary Lynne Rave to \"give the pig its due.\"",
-          "Pigs are highly intelligent, often considered smarter than dogs and even some primates, capable of solving complex problems.",
-          "Pigs are naturally clean animals; they wallow in mud primarily to cool down and protect their skin from sunburn and insects, not out of uncleanliness."
+          "National Pig Day was established in 1972 by sisters Ellen Stanley and Mary Lynne Rave, who aimed to \"give the pig its due.\"",
+          "Pigs are highly intelligent and social animals, often considered to be as smart as, if not smarter than, dogs.",
+          "Despite popular misconceptions, pigs are naturally very clean animals; they wallow in mud primarily to regulate body temperature and protect their skin."
         ],
-        "name": "Pig Day"
+        "name": "National Pig Day"
       }
     ],
     "03-02": [
@@ -1605,9 +1605,9 @@
         "description": "Old Stuff Day, observed annually on March 2nd, is an unofficial holiday that encourages individuals to acknowledge and appreciate the past. It can be a day for reflection, reminiscing about old memories, or a prompt to explore historical items and vintage collections. Alternatively, some use the day as an opportunity for decluttering, sorting through old possessions, and making space for new beginnings.",
         "emoji": "🕰️",
         "funFacts": [
-          "The exact origin of Old Stuff Day is largely unknown, characteristic of many unofficial 'fun holidays' that gain traction through social calendars and online communities.",
-          "Activities for the day can range from visiting antique shops or historical sites to simply looking through old photo albums and sharing family stories.",
-          "While some use it to appreciate old items, others interpret Old Stuff Day as an impetus to get rid of old, unused possessions, promoting a sense of renewal and organization."
+          "The exact origin of Old Stuff Day remains largely unknown, characteristic of many informally celebrated holidays that gain recognition through popular culture and social media.",
+          "Activities commonly associated with Old Stuff Day include visiting antique shops, exploring historical sites, or engaging in personal reflection by reviewing old photographs and family heirlooms.",
+          "The day encourages a dual approach: some celebrate by appreciating vintage items and memories, while others use it as an opportunity to declutter and discard old possessions to embrace new beginnings."
         ],
         "name": "Old Stuff Day"
       },
@@ -1626,158 +1626,188 @@
     "03-03": [
       {
         "date": "03-03",
-        "description": "National Mulled Wine Day, celebrated annually on March 3rd, is a cozy observance dedicated to the aromatic and warming beverage. Typically made with red wine infused with mulling spices like cinnamon, cloves, star anise, and citrus, mulled wine is a beloved drink often associated with colder months and festive gatherings. This day encourages enthusiasts to gather, prepare, and enjoy a steaming mug of this spiced concoction, appreciating its comforting flavors and rich history.",
-        "emoji": "🍷",
+        "description": "World Wildlife Day is celebrated annually on March 3rd to raise awareness of the world's wild animals and plants. It highlights the importance of wildlife conservation and sustainable use to ensure their long-term survival and coexistence with humanity. The day also serves as a reminder of the urgent need to combat wildlife crime and human-induced reduction of species.",
+        "emoji": "🐘",
         "funFacts": [
-          "The origins of mulled wine can be traced back to ancient Roman times, where they heated wine with spices to both preserve it and improve its flavor.",
-          "It is known by various names across Europe, including Glühwein in Germany, Glögg in Nordic countries, and Vin Chaud in France.",
-          "Traditional mulling spices often include cinnamon sticks, cloves, star anise, nutmeg, and orange peel, providing its distinctive aroma and taste."
+          "The United Nations General Assembly proclaimed March 3rd as World Wildlife Day in 2013.",
+          "The date of March 3rd was chosen because it is the day of the adoption of the Convention on International Trade in Endangered Species of Wild Fauna and Flora (CITES) in 1973.",
+          "Each year, World Wildlife Day focuses on a specific theme to address various aspects of wildlife conservation, such as marine life, forest species, or digital conservation.",
+          "CITES, the convention commemorated on this day, provides a framework for regulating international trade in over 38,000 species of animals and plants to ensure their survival is not threatened.",
+          "Wildlife trafficking is a serious crime that impacts biodiversity, security, and economic development worldwide.",
+          "Engaging local communities is crucial for successful wildlife conservation efforts, as they often live closest to wildlife and natural resources."
         ],
-        "name": "National Mulled Wine Day"
+        "name": "World Wildlife Day"
       },
       {
         "date": "03-03",
-        "description": "I Want You to be Happy Day, observed annually on March 3rd, is an unofficial holiday dedicated to spreading joy and positive emotions. It encourages individuals to make an effort to bring happiness to others, whether through simple gestures, kind words, or thoughtful actions, fostering an atmosphere of well-being and cheerfulness.",
-        "emoji": "😊",
+        "description": "National Anthem Day commemorates the day 'The Star-Spangled Banner' was officially designated as the national anthem of the United States by an act of Congress in 1931. It is a day to reflect on the anthem's history, its significance, and the patriotism it represents.",
+        "emoji": "🇺",
         "funFacts": [
-          "It is an unofficial observance and not a federally recognized public holiday.",
-          "The exact origin and founder of 'I Want You to be Happy Day' are not widely documented.",
-          "The day encourages people to perform small acts of kindness or offer words of encouragement to boost others' spirits."
+          "The lyrics to 'The Star-Spangled Banner' were written by Francis Scott Key in 1814 after witnessing the bombardment of Fort McHenry during the War of 1812.",
+          "Key's poem was originally titled 'Defence of Fort M'Henry' and was set to the tune of a popular British drinking song, 'To Anacreon in Heaven'.",
+          "It was recognized for official use by the U.S. Navy in 1889 and by President Woodrow Wilson in 1916 before its official adoption by Congress.",
+          "There are four stanzas to the anthem, though typically only the first stanza is sung.",
+          "The original flag that inspired Key's poem, the Star-Spangled Banner Flag, is preserved and displayed at the Smithsonian National Museum of American History.",
+          "The bill to make 'The Star-Spangled Banner' the national anthem was signed into law by President Herbert Hoover."
         ],
-        "name": "I Want You to be Happy Day"
+        "name": "National Anthem Day"
       }
     ],
     "03-04": [
       {
         "date": "03-04",
-        "description": "National Pound Cake Day, celebrated annually on March 4th, honors the classic, rich, and dense cake known for its simple yet perfect ingredients. Traditionally made with a pound each of butter, sugar, eggs, and flour, this versatile dessert is enjoyed plain, with fruit, or as a base for various toppings, making it a beloved staple in many cuisines.",
-        "emoji": "🍰",
+        "description": "March Forth Day is an informal holiday that encourages individuals to take proactive steps towards their goals and aspirations. Playing on the phonetic pun of \"March 4th\" sounding like \"March forth,\" it serves as a fun reminder to embrace new beginnings, set intentions, and move forward with determination.",
+        "emoji": "➡",
         "funFacts": [
-          "The name \"pound cake\" originated from its traditional recipe that called for a pound each of butter, sugar, eggs, and flour.",
-          "Early pound cake recipes often relied solely on the aeration from whipping eggs and butter for leavening, predating chemical leaveners like baking powder.",
-          "Pound cake recipes have been documented since at least the early 18th century, making it one of the oldest known cake types."
+          "The holiday's name is a clever pun, encouraging people to literally \"march forth\" and take action on March 4th.",
+          "It often falls during early spring in the Northern Hemisphere, a season historically associated with renewal, growth, and new beginnings.",
+          "Many individuals use this day as an annual prompt to tackle resolutions, start new projects, or make progress on long-standing goals.",
+          "While not a nationally recognized holiday, its spirit resonates with themes of self-improvement and seizing the day.",
+          "The phrase \"march forth\" evokes a sense of determined movement and progress, inspiring people to overcome inertia and move ahead."
         ],
-        "name": "National Pound Cake Day"
+        "name": "March Forth Day"
       },
       {
         "date": "03-04",
-        "description": "Marching Music Day, observed annually on March 4th, is a celebration of the unique and dynamic art form of marching music. It honors the musicians, choreographers, and designers who create the captivating performances seen in parades, athletic events, and various public celebrations worldwide, encouraging appreciation for the power, precision, and pageantry of marching ensembles.",
-        "emoji": "🥁",
+        "description": "National Grammar Day, celebrated annually on March 4th, is a day dedicated to appreciating and promoting the importance of proper grammar, punctuation, and usage in written and spoken communication. It encourages individuals to improve their linguistic skills and recognize the clarity and precision that good grammar brings to everyday interactions.",
+        "emoji": "✍",
         "funFacts": [
-          "The date \"March 4th\" is a clever play on words, sounding like \"March forth!\", perfectly aligning with the spirit of the day.",
-          "Marching music has ancient origins, with military bands historically used to motivate troops and communicate commands on the battlefield.",
-          "Modern marching bands are renowned for their elaborate halftime shows at sporting events, often incorporating intricate formations, dance, and complex musical arrangements."
+          "National Grammar Day was established in 2008 by Martha Brockenbrough, founder of the Society for the Promotion of Good Grammar (SPOGG).",
+          "The date, March 4th, was chosen because it's a command: 'March forth!' emphasizing forward movement in linguistic improvement.",
+          "Many schools and libraries across the United States participate by holding grammar contests, workshops, and educational events.",
+          "A common activity on this day is to identify and correct grammatical errors found in public signage or online.",
+          "Even technology giants like Google often highlight grammar-related features or tips on this day.",
+          "Advocates argue that good grammar is essential for clear communication, professional success, and avoiding misunderstandings."
         ],
-        "name": "Marching Music Day"
+        "name": "National Grammar Day"
       }
     ],
     "03-05": [
       {
         "date": "03-05",
-        "description": "National Absinthe Day, observed annually on March 5th, is an unofficial celebration dedicated to the historically controversial yet culturally significant anise-flavored spirit known as \"the Green Fairy.\" This day encourages enthusiasts and the curious alike to explore absinthe's unique history, its distinctive traditional preparation ritual involving a sugar cube and cold water, and its deep association with the art and literary movements of the Belle Époque.",
-        "emoji": "🧚‍♀️",
+        "description": "National Poutine Day celebrates the beloved Canadian dish of crispy french fries, fresh cheese curds, and hot gravy. It's an occasion to indulge in this comforting and uniquely flavorful treat, a true staple of Canadian cuisine.",
+        "emoji": "🍟",
         "funFacts": [
-          "The traditional serving ritual, known as 'louching,' involves slowly dripping ice water over a sugar cube on a slotted spoon into the absinthe, which causes it to turn milky white.",
-          "Absinthe was banned in the United States for nearly a century (1912-2007) due to exaggerated fears of its psychoactive properties and a compound called thujone.",
-          "Many famous artists and writers, including Vincent van Gogh, Oscar Wilde, and Ernest Hemingway, were known to be absinthe enthusiasts during its Belle Époque heyday."
+          "Poutine originated in rural Quebec in the late 1950s.",
+          "The exact creator of poutine is debated, with several restaurants in Quebec claiming to be the first.",
+          "The word 'poutine' is likely derived from the English word 'pudding' or could be a Quebec slang term for 'mess' or 'a mixture'.",
+          "There are countless variations of poutine, including those with pulled pork, bacon, lobster, and various gourmet gravies.",
+          "March 5th is widely celebrated as National Poutine Day, a tradition that gained popularity around 2007.",
+          "Poutine has gained international popularity, with restaurants serving it across the United States, Europe, and Asia."
         ],
-        "name": "National Absinthe Day"
+        "name": "National Poutine Day"
       },
       {
         "date": "03-05",
-        "description": "The holiday 'Cinco de Marcho' on March 5th is not a recognized or widely celebrated holiday. The name 'Cinco de Marcho' literally translates to 'Fifth of March' from Spanish, and it appears to be a mistaken reference or a linguistic play on 'Cinco de Mayo' (Fifth of May), a significant historical and cultural observance.",
-        "emoji": "❓",
+        "description": "This day commemorates the remarkable achievement of Guglielmo Marconi on March 5, 1900, when he successfully established the first two-way wireless communication across the Atlantic Ocean, exchanging messages between stations in England and the United States. This breakthrough laid a crucial foundation for modern global telecommunications.",
+        "emoji": "📻",
         "funFacts": [
-          "There are no official or widely observed traditions, historical events, or cultural celebrations specifically associated with a 'Cinco de Marcho'.",
-          "The name is a direct linguistic parallel to 'Cinco de Mayo', which commemorates the Battle of Puebla on May 5th.",
-          "While March 5th may hold local significance in some areas, it is not internationally or nationally recognized as 'Cinco de Marcho'."
+          "While Marconi achieved a one-way transatlantic signal (the letter \"S\") in December 1901, the March 5, 1900, event marked the first successful two-way exchange of messages.",
+          "The historic communication occurred between St. Catherine's Point on the Isle of Wight, England, and the Nantucket Lightship stationed off the coast of Massachusetts, USA.",
+          "This pioneering demonstration of long-distance wireless communication proved the practical viability of radio waves for global messaging, profoundly influencing subsequent technological developments."
         ],
-        "name": "Cinco de Marcho"
+        "name": "First Transatlantic Two-Way Radio Day"
       }
     ],
     "03-06": [
       {
         "date": "03-06",
-        "description": "National Oreo Cookie Day, observed annually on March 6th, is a day dedicated to celebrating America's best-selling cookie. Since its introduction in 1912, the iconic sandwich cookie, consisting of two chocolate wafers with a sweet creme filling, has captured hearts worldwide. It's a day for enthusiasts to enjoy their favorite Oreos in various ways, whether twisted apart, dunked in milk, or simply eaten whole, honoring its enduring legacy as a beloved treat.",
+        "description": "Oreo Cookie Day, celebrated annually on March 6th, is a delicious occasion dedicated to America's favorite cookie. It's a day to honor the iconic chocolate sandwich cookie with its creamy filling by twisting, dunking, and savoring this beloved treat.",
         "emoji": "🍪",
         "funFacts": [
-          "The first Oreo cookie was sold on March 6, 1912, by Nabisco (National Biscuit Company).",
-          "More than 450 billion Oreo cookies have been sold worldwide, making it the best-selling cookie of the 20th and 21st centuries.",
-          "The word 'Oreo' has no known meaning, with various theories suggesting it comes from the Greek word 'oros' (mountain) or 'oreo' (beautiful, nice)."
+          "The first Oreo cookie was sold on March 6, 1912, by Nabisco.",
+          "Over 450 billion Oreo cookies have been sold worldwide, making it the best-selling cookie of the 20th century.",
+          "The original design on the Oreo cookie has been updated only a few times, with the current design dating back to 1952.",
+          "The cookie-to-cream ratio of an original Oreo is precisely 71% cookie and 29% cream.",
+          "More than 100 different flavors of Oreo cookies have been introduced globally, including regional specialties like Wasabi and Hot & Spicy Chicken wings."
         ],
-        "name": "National Oreo Cookie Day"
+        "name": "Oreo Cookie Day"
       },
       {
         "date": "03-06",
-        "description": "White Chocolate Cheesecake Day, observed annually on March 6th, is an unofficial food holiday dedicated to celebrating the rich, creamy delight of white chocolate cheesecake. This decadent dessert combines the classic tangy and smooth texture of cheesecake with the distinct, sweet, and buttery flavor profile of white chocolate, creating a beloved treat for dessert enthusiasts.",
-        "emoji": "🍰",
+        "description": "World Mathematics Day is an international celebration dedicated to the universal language of numbers and logic. It aims to highlight the beauty, power, and importance of mathematics in all aspects of life, from scientific discovery to everyday problem-solving, and to inspire curiosity and passion for the subject among students worldwide.",
+        "emoji": "📐",
         "funFacts": [
-          "Cheesecake's origins trace back to ancient Greece, where it was served to athletes during the Olympic Games as an energy source.",
-          "White chocolate is technically not considered \"true\" chocolate because it contains no cocoa solids, deriving its flavor and color primarily from cocoa butter.",
-          "The distinct sweet flavor of white chocolate comes from a blend of cocoa butter, sugar, milk solids, and often vanilla, which gives white chocolate cheesecake its unique taste."
+          "The concept of zero was independently developed by several ancient civilizations, including the Mayans and the Indians.",
+          "Pi (π), the ratio of a circle's circumference to its diameter, is an irrational number with an infinite, non-repeating decimal expansion.",
+          "The word \"algebra\" comes from the Arabic word \"al-jabr,\" meaning \"the reunion of broken parts.\"",
+          "Mathematics is crucial for advancements in technology, engineering, medicine, and space exploration.",
+          "The Fibonacci sequence, where each number is the sum of the two preceding ones (e.g., 0, 1, 1, 2, 3, 5...), appears frequently in nature, from pinecones to sunflowers.",
+          "Many puzzles and games, like Sudoku and chess, are deeply rooted in mathematical principles and logic."
         ],
-        "name": "White Chocolate Cheesecake Day"
+        "name": "World Mathematics Day"
       }
     ],
     "03-07": [
       {
         "date": "03-07",
-        "description": "National Cereal Day, observed annually on March 7th, is a celebration dedicated to one of the world's most popular and versatile breakfast foods. This unofficial holiday encourages people to enjoy their favorite crunchy, flaky, or puffed grains, often served with milk, as a convenient and beloved start to the day. It's a chance to appreciate the vast variety of cereals available, from classic oats to sugary delights, that have become a staple in countless households globally.",
+        "description": "National Cereal Day, observed annually on March 7th, is a day dedicated to celebrating one of the most popular breakfast foods worldwide. It's a perfect occasion to pour yourself a bowl of your favorite cereal, whether it's a classic sugary treat, a healthy whole-grain option, or a new flavor you've been meaning to try.",
         "emoji": "🥣",
         "funFacts": [
-          "The first ready-to-eat breakfast cereals were developed in the late 19th century by health reformers like John Harvey Kellogg, originally marketed as digestive aids.",
-          "The average American consumes approximately 160 bowls of cereal per year.",
-          "Honey Nut Cheerios is consistently one of the best-selling cereals in the United States."
+          "The first breakfast cereal, Granula, was invented in 1863 by James Caleb Jackson, a health reformer.",
+          "Dr. John Harvey Kellogg invented cornflakes in 1894 while trying to create healthy food for patients at the Battle Creek Sanitarium.",
+          "The 'snap, crackle, pop' jingle for Rice Krispies was first introduced in 1932.",
+          "More than 2.7 billion boxes of cereal are sold annually in the United States alone.",
+          "Breakfast cereal sales often spike during economic downturns as it's a relatively inexpensive meal option.",
+          "The word 'cereal' comes from 'Ceres,' the Roman goddess of agriculture and grain."
         ],
         "name": "National Cereal Day"
       },
       {
         "date": "03-07",
-        "description": "National Flapjack Day, observed annually on March 7th, is a delightful occasion dedicated to celebrating the humble yet beloved flapjack, another name for a pancake. This unofficial food holiday encourages people to enjoy stacks of these griddle-cooked treats, often served with butter, syrup, fruits, or other toppings, as a breakfast staple or a celebratory meal throughout the day.",
-        "emoji": "🥞",
+        "description": "Alexander Graham Bell Day commemorates the life and extraordinary contributions of the renowned inventor. Celebrated on March 7th, the day his patent for the telephone was officially granted in 1876, it honors Bell's innovative spirit, his groundbreaking work in telecommunications, and his lesser-known efforts in fields ranging from aviation to audiology. It's a day to reflect on how his inventions transformed global communication and to appreciate the impact of scientific discovery.",
+        "emoji": "📞",
         "funFacts": [
-          "While 'flapjack' is an older term for a pancake in North America, in some regions, particularly the UK, a 'flapjack' refers to a baked oat bar, distinct from the griddle-cooked variety celebrated on this day.",
-          "The earliest known recipe for a pancake-like dish dates back to ancient Greece, where they were called 'Tagenites' and were made with wheat flour, olive oil, honey, and curdled milk.",
-          "Pancakes are a globally diverse food, with variations found in nearly every culture, such as French crêpes, Russian blini, and Japanese dorayaki."
+          "Alexander Graham Bell was born in Edinburgh, Scotland, on March 3, 1847.",
+          "His mother and wife were both deaf, which profoundly influenced his lifelong work on hearing and speech devices.",
+          "Bell considered the telephone an intrusion on his work and often refused to have one in his study.",
+          "The first words ever spoken through the telephone were 'Mr. Watson, come here, I want to see you,' on March 10, 1876.",
+          "He not only invented the telephone but also contributed significantly to the photophone (a device that transmits speech on a beam of light), the audiometer (to detect minor hearing problems), and early flight research.",
+          "Bell helped found the National Geographic Society and served as its second president."
         ],
-        "name": "Flapjack Day"
+        "name": "Alexander Graham Bell Day"
       }
     ],
     "03-08": [
       {
         "date": "03-08",
-        "description": "There is no recognized or verifiable holiday known as 'Be Nasty Day' celebrated on March 8th or any other date. March 8th is internationally recognized as International Women's Day, a global day dedicated to celebrating the social, economic, cultural, and political achievements of women, and advocating for gender equality. The concept of 'Be Nasty Day' does not appear in official calendars of holidays or widely referenced historical or cultural records.",
-        "emoji": "❓",
+        "description": "International Women's Day is a global day celebrating the social, economic, cultural, and political achievements of women. The day also marks a call to action for accelerating gender parity.",
+        "emoji": "♀",
         "funFacts": [
-          "The designation 'Be Nasty Day' is not found in any reputable calendars of observances or national holiday lists.",
-          "March 8th is officially recognized worldwide as International Women's Day, a significant global event for women's rights.",
-          "While many unofficial and quirky daily observances exist, 'Be Nasty Day' is not a commonly cited or verifiable one."
+          "The first National Woman's Day was observed in the United States on February 28, 1909.",
+          "In 1910, at the second International Conference of Working Women in Copenhagen, Clara Zetkin proposed an International Women's Day.",
+          "The first International Women's Day was celebrated on March 19, 1911, in Austria, Denmark, Germany, and Switzerland.",
+          "In 1975, the United Nations officially recognized and began celebrating International Women's Day on March 8.",
+          "International Women's Day is a public holiday in many countries, including Afghanistan, Cuba, Laos, Mongolia, Russia, and Vietnam.",
+          "Each year, IWD has a specific theme chosen by the UN to focus global attention on critical areas relating to women's rights and gender equality."
         ],
-        "name": "Be Nasty Day"
+        "name": "International Women's Day"
       },
       {
         "date": "03-08",
-        "description": "Peanut Cluster Day, observed annually on March 8th, is a sweet occasion dedicated to celebrating the simple yet satisfying confection made from roasted peanuts bound together by chocolate or another sweet coating. This unofficial food holiday encourages enthusiasts to enjoy, share, or even try making their own peanut clusters, appreciating the delightful combination of salty peanuts and sweet chocolate that makes this treat a perennial favorite.",
-        "emoji": "🥜",
+        "description": "Be Nasty Day is a tongue-in-cheek holiday encouraging people to playfully 'be nasty' by indulging in guilty pleasures, breaking from routines, or engaging in harmless mischief. It's a day to embrace your inner rebel in a fun, non-malicious way, perhaps by eating dessert first or wearing mismatched socks. It's about lighthearted disruption, not genuine unkindness.",
+        "emoji": "😈",
         "funFacts": [
-          "Peanut clusters are incredibly versatile and can be made with various types of chocolate, including milk, dark, or white.",
-          "Despite their name, peanuts are not true nuts but are legumes, belonging to the same family as beans and lentils.",
-          "The salty-sweet combination of peanuts and chocolate makes peanut clusters a popular choice for easy homemade candies and holiday treats."
+          "The 'nastiness' celebrated on this day is typically interpreted as mischievous, cheeky, or a bit rebellious, rather than truly mean-spirited.",
+          "Activities might include indulging in 'nasty' food like excessive junk food, staying up late, or telling playful jokes.",
+          "It's an unofficial holiday, often celebrated with a sense of humor and irony.",
+          "Some interpret 'nasty' as being 'fiendishly good' at something, like a 'nasty' guitar solo or a 'nasty' good meal.",
+          "The origin of 'Be Nasty Day' is obscure, likely emerging from internet culture or a small group's whimsical idea."
         ],
-        "name": "Peanut Cluster Day"
+        "name": "Be Nasty Day"
       }
     ],
     "03-09": [
       {
         "date": "03-09",
-        "description": "National Barbie Day, celebrated annually on March 9th, commemorates the official debut of the iconic Barbie doll at the American International Toy Fair in New York City in 1959. This day honors the enduring cultural impact of the fashion doll, created by Ruth Handler, and her journey from a simple toy to a global phenomenon representing diverse careers and aspirations for generations worldwide.",
-        "emoji": "🎀",
+        "description": "Celebrated annually on March 9th, the International Day of Awesomeness is an unofficial holiday that encourages individuals to recognize and celebrate the exceptional and positive aspects of life and human achievement. It's a day to appreciate all things awesome, from personal accomplishments to acts of kindness and groundbreaking innovations.",
+        "emoji": "✨",
         "funFacts": [
-          "Barbie's full name is Barbara Millicent Roberts, named after creator Ruth Handler's daughter.",
-          "The very first Barbie doll, released in 1959, wore a black-and-white striped swimsuit.",
-          "Barbie has had over 200 different careers, ranging from astronaut and doctor to president."
+          "The date, March 9th, was chosen by enthusiasts partly because it is the birthday of actor Chuck Norris, a figure often associated with 'awesomeness' in popular culture memes.",
+          "The holiday, while unofficial, gained traction through online communities and social media as a way to promote positivity.",
+          "Activities on this day often include sharing what one finds awesome, performing acts of kindness, or simply taking a moment to appreciate the good."
         ],
-        "name": "National Barbie Day"
+        "name": "International Day of Awesomeness"
       },
       {
         "date": "03-09",
@@ -1786,7 +1816,7 @@
         "funFacts": [
           "It is an unofficial holiday, often referred to as 'National Get Over It Day' in the U.S., without any formal governmental recognition.",
           "The exact origin of 'Get Over It Day' is largely unknown, believed to have emerged from popular culture and the internet rather than a single founder.",
-          "The day promotes mental well-being by encouraging people to release negative emotions like grudges, anger, or sadness related to past events."
+          "The day encourages practices such as journaling, meditation, or engaging in constructive conversations to help process and release past emotional burdens."
         ],
         "name": "Get Over It Day"
       }
@@ -1805,86 +1835,99 @@
       },
       {
         "date": "03-10",
-        "description": "International Bagpipe Day, observed annually on March 10th, is a global celebration dedicated to the diverse history, culture, and artistry of bagpipes from around the world. It aims to raise awareness and appreciation for this ancient and complex instrument, highlighting its numerous forms, musical traditions, and the communities that keep its legacy alive through performances, education, and cultural exchange.",
-        "emoji": "🪚",
+        "description": "First Greenback Day commemorates March 10, 1862, when the United States government issued its first paper money, known as \"greenbacks,\" marking a significant shift in the nation's financial system during the Civil War. This day recognizes the origins and impact of fiat currency in American history.",
+        "emoji": "💵",
         "funFacts": [
-          "Bagpipes are not exclusive to Scotland; variations of the instrument are found in many cultures across Europe, the Middle East, and North Africa.",
-          "The earliest archaeological evidence suggests that bagpipes may have originated in the ancient world, with references potentially dating back to the Roman Empire.",
-          "Historically, bagpipes have been used for a variety of purposes beyond music, including signalling in battle, accompanying dancing, and as a solo performance instrument."
+          "The term \"greenback\" originated from the distinctive green ink used on the reverse side of the notes, designed to deter counterfeiting and signify their governmental origin.",
+          "The Legal Tender Act of 1862 authorized the issuance of these non-interest-bearing United States Notes, allowing the Union government to finance the Civil War without relying solely on specie (gold and silver).",
+          "Before greenbacks, currency in the U.S. was primarily gold and silver coins or notes issued by individual banks, lacking a unified national standard and often varying in value."
         ],
-        "name": "International Bagpipe Day"
+        "name": "First Greenback Day"
       }
     ],
     "03-11": [
       {
         "date": "03-11",
-        "description": "Napping Day is an unofficial holiday observed annually on the day after Daylight Saving Time begins in the United States. Conceived by Boston University professor William Anthony and his wife, Camille, in 1999, the day serves as a lighthearted encouragement for people to take a nap to recover from the lost hour of sleep. It promotes the benefits of napping for improved alertness, mood, and productivity, offering a gentle reminder to prioritize rest in a busy world.",
-        "emoji": "😴",
+        "description": "Worship of Tools Day is an annual observance dedicated to appreciating the indispensable tools that aid humanity in construction, repair, and innovation. It's a day to acknowledge the ingenuity behind these devices, from simple hand tools to complex machinery, and to reflect on their role in shaping civilization. Activities can include tool maintenance, learning new practical skills, or visiting a museum to explore the history of tools.",
+        "emoji": "🔧",
         "funFacts": [
-          "It was created in 1999 by Boston University professor William Anthony and his wife, Camille, to highlight the health benefits of napping.",
-          "The holiday's date is specifically chosen to be the day after Daylight Saving Time begins in the U.S., compensating for the 'lost' hour of sleep.",
-          "Studies have shown that a short nap, often called a 'power nap,' can significantly improve alertness, cognitive performance, and mood."
+          "The earliest known tools, simple stone implements, date back over 3 million years, found in East Africa.",
+          "Ancient civilizations often attributed divine qualities to tools, seeing them as gifts from gods or symbols of creation.",
+          "The invention of various tools directly led to advancements in agriculture, architecture, and art throughout human history.",
+          "Many tools are considered fundamental machines, such as the lever, wheel, and inclined plane, which multiply human effort.",
+          "The opposable thumb is a key evolutionary trait that allowed humans to develop and effectively use a vast array of tools.",
+          "Some tools have become iconic symbols, like the hammer and sickle representing industrial and agricultural labor."
         ],
-        "name": "Napping Day"
+        "name": "Worship of Tools Day"
       },
       {
         "date": "03-11",
-        "description": "Johnny Appleseed Day, celebrated annually on March 11th (and sometimes September 26th), honors the American pioneer nurseryman John Chapman, popularly known as Johnny Appleseed. He traveled extensively across the Midwest in the late 18th and early 19th centuries, planting apple orchards and introducing apple trees to many areas, significantly contributing to westward expansion and the availability of fruit for settlers.",
-        "emoji": "🍎",
+        "description": "National Promposal Day celebrates the imaginative and often elaborate ways high school students ask each other to prom. It's a day to appreciate the creativity, effort, and sometimes humorous public displays involved in crafting the perfect 'promposal,' making the invitation as memorable as the dance itself.",
+        "emoji": "💖",
         "funFacts": [
-          "Johnny Appleseed's real name was John Chapman.",
-          "He primarily planted apple seeds to grow trees for hard cider production, not for eating apples.",
-          "He was a missionary for the New Church (Swedenborgianism) and often shared his faith along with his apple seeds."
+          "The term 'promposal' is a blend of 'prom' and 'proposal,' highlighting the often grand and romanticized nature of the invitation.",
+          "Promposals gained significant popularity in the early 2000s, evolving from simple requests into elaborate spectacles.",
+          "Many promposals go viral on social media, showcasing everything from witty signs and themed costumes to flash mobs and celebrity cameos.",
+          "While some promposals are simple and heartfelt, others can involve significant planning and expense, often becoming a competitive art form among students.",
+          "The trend encourages personalized gestures, turning the act of asking to prom into a unique and unforgettable high school experience."
         ],
-        "name": "Johnny Appleseed Day"
+        "name": "National Promposal Day"
       }
     ],
     "03-12": [
       {
         "date": "03-12",
-        "description": "Plant a Flower Day, observed annually on March 12th, is an unofficial holiday that encourages individuals to celebrate the arrival of spring by planting flowers. It's a day to beautify surroundings, embrace the joy of gardening, and contribute to local ecosystems, whether by planting in a garden, a pot, or a public space, fostering appreciation for nature and growth.",
+        "description": "Plant a Flower Day, observed annually on March 12th, encourages individuals to celebrate the arrival of spring by planting flowers. It’s a day dedicated to beautifying our surroundings, embracing the joy of gardening, and contributing positively to local ecosystems—whether planting in a garden, a pot, or a public area, enhancing appreciation for nature and growth.",
         "emoji": "🌸",
         "funFacts": [
-          "Engaging in gardening activities, such as planting flowers, has been scientifically linked to reduced stress levels and improved mood.",
-          "Many popular garden flowers, including pansies, nasturtiums, and daylilies, have edible petals and can be used to garnish salads or desserts.",
-          "Planting native flowers is crucial for supporting local pollinator populations, providing essential food and habitat for bees, butterflies, and other beneficial insects."
+          "Engaging in gardening activities has been linked to reduced stress levels and improved mood.",
+          "Many popular garden flowers, such as pansies, nasturtiums, and daylilies, have edible petals and can be used to garnish salads or desserts.",
+          "Planting native flowers is vital for supporting local pollinator populations, providing essential food and habitat for bees, butterflies, and other beneficial insects.",
+          "In the U.S., National Plant a Flower Day is often associated with National Gardening Week.",
+          "Participating in Plant a Flower Day can encourage community bonding through group planting events."
         ],
         "name": "Plant a Flower Day"
       },
       {
         "date": "03-12",
-        "description": "National Baked Scallops Day, observed annually on March 12th, is a culinary holiday dedicated to celebrating the exquisite flavor and versatility of scallops prepared through baking. This day encourages food enthusiasts and home cooks alike to savor the delicate, sweet taste of baked scallops, often seasoned with herbs, butter, or breadcrumbs, offering a delicious and relatively healthy way to enjoy this popular seafood.",
-        "emoji": "🦪",
+        "description": "Girl Scout Day celebrates the founding of the Girl Scouts of the USA on March 12, 1912, by Juliette Gordon Low in Savannah, Georgia. This day honors the contributions of Girl Scouts to community service and leadership for girls.",
+        "emoji": "🌲",
         "funFacts": [
-          "Scallops are the only migratory bivalve mollusk, capable of swimming by rapidly opening and closing their shells.",
-          "The edible part of a scallop is primarily the adductor muscle, which is responsible for opening and closing its shell.",
-          "Baking scallops is a popular method that helps to caramelize their natural sugars, enhancing their sweet flavor while keeping them tender."
+          "Juliette Gordon Low started the first Girl Scout troop with just 18 girls.",
+          "The organization now has millions of members worldwide.",
+          "Girl Scouts sell cookies annually as a major fundraising activity.",
+          "The Girl Scouts were the first organization to allow girls to earn badges in outdoor skills.",
+          "Girl Scouts has a global counterpart called the World Association of Girl Guides and Girl Scouts."
         ],
-        "name": "National Baked Scallops Day"
+        "name": "Girl Scout Day"
       }
     ],
     "03-13": [
       {
         "date": "03-13",
-        "description": "National Earmuff Day, observed annually on March 13th, celebrates the clever invention of the earmuff and its youthful creator, Chester Greenwood. Frustrated with cold ears while ice skating, 15-year-old Greenwood, living in Farmington, Maine, designed a solution in 1873, which evolved into the patented ear-protectors that became widely popular.",
-        "emoji": "🎧",
+        "description": "World Sleep Day is an annual event that aims to raise awareness about the importance of sleep for overall health and well-being. Observed on the Friday before the March Equinox, this day encourages individuals to appreciate the benefits of good sleep and promote better sleep practices worldwide.",
+        "emoji": "😴",
         "funFacts": [
-          "Chester Greenwood was only 15 years old when he invented the earmuff in 1873, initially using wire, beaver fur, and cloth.",
-          "Earmuffs are the official state historical artifact of Maine, and Greenwood's hometown of Farmington annually celebrates 'Chester Greenwood Day' with a parade.",
-          "Greenwood patented his invention in 1877 and produced millions of earmuffs over his lifetime, supplying soldiers during World War I."
+          "The first World Sleep Day was celebrated in 2008 by the World Sleep Society.",
+          "Sleep loss is linked to numerous health issues, including obesity, diabetes, and heart disease.",
+          "Naps, when taken properly, can improve alertness and cognitive function.",
+          "The global theme for World Sleep Day changes every year, focusing on different sleep issues.",
+          "Around 60% of adults report having sleep problems at some point in their lives."
         ],
-        "name": "National Earmuff Day"
+        "name": "World Sleep Day"
       },
       {
         "date": "03-13",
-        "description": "National Jewel Day, observed annually on March 13th, is an unofficial celebration in the United States dedicated to the appreciation of jewelry, gemstones, and precious metals. It's a day for enthusiasts, jewelers, and collectors to admire the artistry, craftsmanship, and natural beauty found in various forms of adornment, from ancient treasures to contemporary designs. While not a public holiday, it serves as an occasion to recognize the allure and value that jewels add to culture, fashion, and personal expression.",
-        "emoji": "💎",
+        "description": "Good Samaritan Day is celebrated on March 13 to honor those who selflessly help others in times of need, embodying the spirit of kindness and charity as exemplified by the Biblical Good Samaritan.",
+        "emoji": "🤝",
         "funFacts": [
-          "It is an unofficial observance, primarily celebrated in the United States within the jewelry industry and by enthusiasts.",
-          "Many people mark the day by wearing their favorite jewelry, learning about different gemstones, or admiring craftsmanship.",
-          "The word 'jewel' originates from the Old French 'jouel', a diminutive of 'joie', meaning 'joy'."
+          "The holiday is observed in several countries under different names.",
+          "It encourages acts of kindness and helping others in the community.",
+          "Many organizations use this day to promote volunteerism.",
+          "The Good Samaritan story is found in the Gospel of Luke.",
+          "The day serves as a reminder to be compassionate and empathetic."
         ],
-        "name": "Jewel Day"
+        "name": "Good Samaritan Day"
       }
     ],
     "03-14": [
@@ -1895,7 +1938,9 @@
         "funFacts": [
           "Pi Day is also the birthday of renowned physicist Albert Einstein.",
           "The first known large-scale celebration of Pi Day was organized by physicist Larry Shaw at the San Francisco Exploratorium in 1988.",
-          "In 2009, the U.S. House of Representatives passed a non-binding resolution recognizing March 14th as National Pi Day."
+          "In 2009, the U.S. House of Representatives passed a non-binding resolution recognizing March 14th as National Pi Day.",
+          "Pi is an irrational number, which means it has an infinite number of digits that do not repeat in a pattern.",
+          "March 14th also coincides with International Day of Mathematics, celebrated by UNESCO."
         ],
         "name": "Pi Day"
       },
@@ -1906,7 +1951,9 @@
         "funFacts": [
           "The very first Google Doodle, created in 1998, depicted a stick figure for the Burning Man festival.",
           "March 14th, also Pi Day, frequently inspires Google Doodles that celebrate mathematics and science in a creative way.",
-          "Research indicates that doodling can help improve concentration and memory retention, even during mundane tasks."
+          "Research indicates that doodling can help improve concentration and memory retention, even during mundane tasks.",
+          "Doodles have been used as a form of therapy to aid mental wellness and creativity.",
+          "Some famous artists, including Picasso, considered doodling an essential part of their creative process."
         ],
         "name": "Doodle Day"
       }
@@ -1914,23 +1961,27 @@
     "03-15": [
       {
         "date": "03-15",
-        "description": "Brutus Day, observed on March 15th, is an informal, modern moniker for the Ides of March, the date in 44 BCE when Roman dictator Julius Caesar was assassinated by a group of senators, including his close associate Marcus Junius Brutus. The event, popularized by William Shakespeare's play *Julius Caesar* with the famous line \"Et tu, Brute?\", has since become a potent symbol of betrayal and political intrigue.",
-        "emoji": "🗡️",
+        "description": "World Contact Day is celebrated on March 15 each year to promote the awareness of extraterrestrial life and the possibility of contact with other civilizations. It encourages discussions about our place in the universe and allows enthusiasts to share their experiences and thoughts about potential alien life.",
+        "emoji": "👽",
         "funFacts": [
-          "The famous warning, \"Beware the Ides of March,\" originates from William Shakespeare's play *Julius Caesar*.",
-          "In the Roman calendar, the 'Ides' referred to a specific day midway through the month, falling on the 15th for March, May, July, and October, and the 13th for other months.",
-          "Julius Caesar was reportedly stabbed 23 times during his assassination."
+          "World Contact Day was first celebrated in 1953 by a group of UFO enthusiasts.",
+          "The day encourages people to send signals or messages into space to attract extraterrestrial beings.",
+          "It aims to promote peaceful communication between humanity and potential extraterrestrial civilizations.",
+          "Various organizations participate by hosting events and discussions related to UFO sightings and alien encounters.",
+          "The day also inspires creative projects, including art and literature focusing on science fiction themes."
         ],
-        "name": "Brutus Day"
+        "name": "World Contact Day"
       },
       {
         "date": "03-15",
         "description": "The Ides of March is a day on the Roman calendar that corresponds to March 15. While it was originally an ordinary day for settling debts and marked various religious observances, it gained infamous notoriety as the date of Julius Caesar's assassination in 44 BC. This event, which took place at a meeting of the Senate, was a pivotal moment that ultimately led to the demise of the Roman Republic and the rise of the Roman Empire. Due to William Shakespeare's play \"Julius Caesar,\" the phrase \"Beware the Ides of March\" has become a widespread cultural reference for impending doom or betrayal.",
-        "emoji": "🗡️",
+        "emoji": "🗡",
         "funFacts": [
           "In the Roman calendar, the 'Ides' referred to the middle of the month, typically the 13th for most months, but the 15th for March, May, July, and October.",
           "Prior to Caesar's assassination, the Ides of March was also a day for a festival honoring Anna Perenna, a Roman goddess of the New Year and abundance.",
-          "Julius Caesar was reportedly warned by a soothsayer to 'beware the Ides of March' but dismissed the prophecy on his way to the Senate on that fateful day."
+          "Julius Caesar was reportedly warned by a soothsayer to 'beware the Ides of March' but dismissed the prophecy on his way to the Senate on that fateful day.",
+          "March 15 is also recognized as the anniversary of the foundation of the city of Rome, which adds historical significance to the date.",
+          "Many people commemorate the Ides of March by discussing its historical implications and reflecting on themes of betrayal and power. They often read passages from Shakespeare's play."
         ],
         "name": "Ides of March"
       }
@@ -1941,9 +1992,11 @@
         "description": "National Panda Day, observed annually on March 16, is dedicated to raising awareness about the plight of giant pandas and the critical need for their conservation. The day highlights the ongoing efforts to protect these iconic, charismatic bears, their habitats, and to support breeding programs aimed at increasing their populations worldwide. It encourages people to learn more about pandas and contribute to their survival.",
         "emoji": "🐼",
         "funFacts": [
-          "Giant pandas consume up to 30 pounds (13.6 kg) or more of bamboo daily, making up about 99% of their diet.",
+          "Giant pandas consume up to 30 pounds (13.6 kg) of bamboo daily, making up about 99% of their diet.",
           "Despite their large size, pandas are skilled tree climbers and can also swim.",
-          "A newborn panda cub is remarkably small, weighing only about 3 to 5 ounces (85 to 140 grams), roughly the size of a stick of butter."
+          "A newborn panda cub is remarkably small, weighing only about 3 to 5 ounces (85 to 140 grams), roughly the size of a stick of butter.",
+          "Pandas have a special bone structure in their wrist, which acts like an opposable thumb, aiding in their ability to grasp bamboo.",
+          "Conservation efforts have successfully increased the giant panda population, leading to their classification as 'vulnerable' rather than 'endangered'."
         ],
         "name": "National Panda Day"
       },
@@ -1954,7 +2007,9 @@
         "funFacts": [
           "This holiday is purely fictional and does not appear on any official calendars of recognized observances.",
           "There are no known historical origins, traditional customs, or documented public celebrations associated with 'Everything You Do Is Right Day'.",
-          "The concept behind such a day encourages a humorous and forgiving perspective on one's own actions, promoting a temporary sense of infallibility."
+          "The concept behind such a day encourages a humorous and forgiving perspective on one's own actions, promoting a temporary sense of infallibility.",
+          "Imagining a day where everything you do is right can inspire creativity and confidence in daily decisions.",
+          "People may celebrate this day by treating themselves kindly, making playful choices, and avoiding self-judgment."
         ],
         "name": "Everything You Do Is Right Day"
       }
@@ -1967,18 +2022,22 @@
         "funFacts": [
           "Saint Patrick was not Irish; he was born in Roman Britain in the late 4th century.",
           "The original color associated with St. Patrick was blue, not green, which became popular later.",
-          "The shamrock, a three-leaf clover, was used by St. Patrick to explain the Holy Trinity to the pagan Irish."
+          "The shamrock, a three-leaf clover, was used by St. Patrick to explain the Holy Trinity to the pagan Irish.",
+          "In Chicago, it is a tradition to dye the river green for St. Patrick's Day.",
+          "Nearly 13 million pints of Guinness are consumed on St. Patrick's Day worldwide."
         ],
         "name": "St. Patrick's Day"
       },
       {
         "date": "03-17",
         "description": "Submarine Day, observed annually on March 17th, commemorates a pivotal moment in naval history: the purchase of the USS Holland (SS-1) by the U.S. Navy in 1900. This event marked the official beginning of the U.S. Navy's submarine force, ushering in a new era of underwater warfare and reconnaissance that profoundly impacted maritime strategy and technology worldwide.",
-        "emoji": " submariner",
+        "emoji": "🚢",
         "funFacts": [
           "The USS Holland (SS-1), purchased on this day in 1900, was the first submarine officially commissioned by the U.S. Navy.",
           "It was designed by Irish-American engineer John Philip Holland, who had spent years developing his practical submarine designs.",
-          "Before the Holland, earlier experimental submarines existed, but its successful trials and practical design led to its adoption and the subsequent formation of the U.S. Navy's submarine fleet."
+          "Before the Holland, earlier experimental submarines existed, but its successful trials and practical design led to its adoption and the subsequent formation of the U.S. Navy's submarine fleet.",
+          "The USS Holland had a maximum speed of about 5.5 knots and could operate at depths of up to 75 feet.",
+          "The introduction of submarines changed naval warfare, providing nations with new strategic options during conflicts."
         ],
         "name": "Submarine Day"
       }
@@ -1991,20 +2050,24 @@
         "funFacts": [
           "The physical sensation of awkwardness, like blushing or an increased heart rate, is a common physiological response to social discomfort.",
           "Studies suggest that acknowledging an awkward moment can often help to diffuse tension and even build rapport between individuals.",
-          "The word \"awkward\" originated in the 14th century from the Old Norse \"afugr,\" meaning \"turned the wrong way\" or \"backwards.\""
+          "The word \"awkward\" originated in the 14th century from the Old Norse \"afugr,\" meaning \"turned the wrong way\" or \"backwards.\"",
+          "The average person experiences an awkward moment at least a few times a week, according to surveys.",
+          "Social media has popularized the sharing of embarrassing moments, making them more relatable and less isolating."
         ],
         "name": "Awkward Moments Day"
       },
       {
         "date": "03-18",
-        "description": "Forgive Mom and Dad Day, observed annually on March 18th, is an unofficial holiday dedicated to fostering reconciliation and understanding within families. It encourages individuals to release past resentments or grievances held against their parents, acknowledge their efforts, and move towards a more harmonious relationship. The day serves as a reminder to reflect on the complexities of parent-child dynamics and the importance of forgiveness for personal and familial well-being.",
-        "emoji": "🙏",
+        "description": "National Sloppy Joe Day, celebrated on March 18th, honors the beloved sandwich that consists of ground beef, onions, and a tangy tomato sauce, served on a bun. This day is perfect for food enthusiasts to explore various recipes and enjoy this classic comfort food. Whether homemade or from a local diner, Sloppy Joes are a nostalgic treat for many across the United States. The day encourages gatherings and cookouts centered around this messy yet delicious meal.",
+        "emoji": "🍔",
         "funFacts": [
-          "It is observed every year on March 18th.",
-          "The day is an unofficial observance, primarily promoted through online calendars of unique holidays.",
-          "Its core purpose is to encourage individuals to let go of old grudges and embrace forgiveness towards their parents."
+          "The Sloppy Joe is said to have originated in the 1930s at a diner in Key West, Florida.",
+          "It is named after a café owned by a man named Joe, who created the dish as a way to use leftover ground beef.",
+          "There are many variations of Sloppy Joes, including turkey and vegetarian versions.",
+          "March 18th was designated as National Sloppy Joe Day to celebrate this messy but delicious sandwich.",
+          "The average Sloppy Joe contains around 500 calories, making it a hearty meal choice."
         ],
-        "name": "Forgive Mom and Dad Day"
+        "name": "National Sloppy Joe Day"
       }
     ],
     "03-19": [
@@ -2015,7 +2078,9 @@
         "funFacts": [
           "Laughter triggers the release of endorphins, the body's natural feel-good chemicals, which can reduce stress and elevate mood.",
           "A hearty laugh can engage muscles in the face, diaphragm, and even provide a light cardio workout by increasing heart rate and oxygen intake.",
-          "Children typically laugh hundreds of times a day, while adults average about 15-20 laughs, highlighting the importance of consciously seeking humor."
+          "Children typically laugh hundreds of times a day, while adults average about 15-20 laughs, highlighting the importance of consciously seeking humor.",
+          "Laughter can strengthen relationships by fostering a sense of belonging and improving teamwork.",
+          "Not only does laughter boost mood, but it can also enhance immune function and decrease pain perception."
         ],
         "name": "National Let's Laugh Day"
       },
@@ -2025,7 +2090,10 @@
         "emoji": "🐔",
         "funFacts": [
           "Chicken is the most widely consumed meat globally, surpassing pork and beef in popularity.",
-          "A single laying hen can produce over 300 eggs per year, making eggs one of the most accessible protein sources."
+          "A single laying hen can produce over 300 eggs per year, making eggs one of the most accessible protein sources.",
+          "The global poultry market is valued at over $300 billion.",
+          "Turkeys were domesticated in Mesoamerica long before the arrival of Europeans.",
+          "Ducks have been raised for thousands of years for meat and eggs in various cultures."
         ],
         "name": "Poultry Day"
       }
@@ -2033,14 +2101,16 @@
     "03-20": [
       {
         "date": "03-20",
-        "description": "World Frog Day, observed annually on March 20th, is a global event dedicated to celebrating these fascinating amphibians and raising awareness about their crucial role in ecosystems. It highlights the significant threats frogs face, such as habitat loss, climate change, and disease, encouraging conservation efforts to protect their diverse species worldwide.",
-        "emoji": "🐸",
+        "description": "Celebrated on March 20th, the International Day of Happiness is a UN-recognized holiday promoting happiness as a fundamental human goal. It encourages nations to adopt policies that improve the well-being of individuals and communities, fostering happiness and positive mental health worldwide.",
+        "emoji": "😊",
         "funFacts": [
-          "Frogs are amphibians, meaning they can live both in water and on land, and breathe through their skin as well as lungs.",
-          "There are over 7,000 known species of frogs, found on every continent except Antarctica.",
-          "Many frog populations are in decline due to environmental factors, including the widespread chytrid fungus, habitat destruction, and pollution."
+          "The International Day of Happiness was established by the United Nations in 2012.",
+          "The day highlights the importance of happiness in people's lives and the pursuit of happiness as a universal goal.",
+          "Happiness is linked to improved health, better relationships, and increased productivity.",
+          "Countries around the world use metrics like the Gross National Happiness Index to measure their citizens' happiness levels.",
+          "Various activities and events are organized globally on this day to promote well-being and positivity."
         ],
-        "name": "World Frog Day"
+        "name": "International Day of Happiness"
       },
       {
         "date": "03-20",
@@ -2049,7 +2119,9 @@
         "funFacts": [
           "The concept of alien abduction became a prominent part of modern folklore after the 1961 Betty and Barney Hill incident, one of the earliest widely publicized alleged abductions.",
           "Reports of alien abductions often share common elements, such as bright lights, missing time, medical examinations by extraterrestrials, and subsequent memories recovered through hypnosis.",
-          "The holiday is often celebrated with themed parties, discussions of UFO sightings, and viewing of alien-related movies or documentaries, embracing its role in popular culture."
+          "The holiday is often celebrated with themed parties, discussions of UFO sightings, and viewing of alien-related movies or documentaries, embracing its role in popular culture.",
+          "The term 'ufology' describes the study of UFOs and alien abduction phenomena, often encompassing a community of enthusiasts and researchers.",
+          "In popular media, alien abduction has influenced numerous films, books, and television shows, integrating it into the fabric of contemporary storytelling."
         ],
         "name": "National Alien Abduction Day"
       }
@@ -2057,25 +2129,29 @@
     "03-21": [
       {
         "date": "03-21",
-        "description": "National Crunchy Taco Day, observed annually on March 21st, is an unofficial culinary holiday dedicated to celebrating the beloved hard-shell taco. This day encourages enthusiasts to savor the crispy, flavorful experience of a fried corn tortilla filled with seasoned meat, cheese, lettuce, and other toppings. It's a popular occasion for enjoying this iconic fast-food staple, whether at home, a local taqueria, or a popular chain.",
-        "emoji": "🌮",
+        "description": "Celebrated on March 21st, International Poetry Day aims to promote the reading, writing, and teaching of poetry worldwide. This day encourages individuals to engage with various forms of poetry, discover new poets, and appreciate the art of words. Schools, libraries, and cultural organizations often host poetry readings, workshops, and contests, making poetry accessible and enjoyable for all ages.",
+        "emoji": "📜",
         "funFacts": [
-          "While tacos have ancient Mexican origins, the hard-shell taco as widely known today gained significant popularity in the United States, notably popularized by entrepreneurs like Glen Bell, founder of Taco Bell, in the 1950s.",
-          "Crunchy taco shells are typically made from corn tortillas that are deep-fried until they become firm and crispy, often folded into their characteristic U-shape during the process.",
-          "The word 'taco' is believed to have originated from Mexican silver miners in the 18th century, referring to the paper wraps containing gunpowder used for blasting, which resembled the shape of the rolled food."
+          "International Poetry Day was established by UNESCO in 1999.",
+          "The day aligns with the arrival of spring in many regions, symbolizing renewal and creativity.",
+          "Poetry's roots extend back to ancient civilizations, including Mesopotamia and Greece.",
+          "Famous poets celebrated on this day include William Shakespeare and Maya Angelou.",
+          "Poetry slams and open mic events often occur on this day, allowing poets to share their work in public settings."
         ],
-        "name": "National Crunchy Taco Day"
+        "name": "International Poetry Day"
       },
       {
         "date": "03-21",
-        "description": "\"Absolutely Incredible Kid Day\" is an annual holiday observed on March 21st, encouraging adults to write letters of encouragement, praise, and support to the young people in their lives. Founded by the Camp Fire organization, the day aims to boost children's self-esteem and remind them of their value and potential, fostering positive relationships and development through simple, heartfelt communication.",
-        "emoji": "⭐",
+        "description": "International Day of Forests, observed on March 21st, celebrates the importance of forests and trees and their role in sustaining life on Earth. This day encourages awareness about the need for sustainable management of the world's forests and the conservation of trees. Various activities and events are organized globally, focusing on themes related to forest conservation, biodiversity, and ecological balance.",
+        "emoji": "🌳",
         "funFacts": [
-          "The holiday was first celebrated in 1993.",
-          "It was established by the Camp Fire organization, a youth development nonprofit.",
-          "The tradition encourages adults to send letters, emails, or notes to kids, affirming their strengths and dreams."
+          "The United Nations established International Day of Forests in 2012 to raise awareness about the importance of forests.",
+          "Each year focuses on a specific theme; for 2023, it is \"Forests and Health.\"",
+          "Forests cover about 31% of the world's land area, providing habitat for 80% of terrestrial species.",
+          "Forests play a crucial role in combating climate change by absorbing carbon dioxide from the atmosphere.",
+          "In many cultures, trees are considered sacred and hold significant cultural importance."
         ],
-        "name": "Absolutely Incredible Kid Day"
+        "name": "International Day of Forests"
       }
     ],
     "03-22": [
@@ -2086,20 +2162,24 @@
         "funFacts": [
           "It is widely believed to have been created by comedian and author Joey Green in the early 1980s.",
           "The day encourages people to momentarily set aside work and responsibilities to enjoy leisure, pursue hobbies, or simply relax.",
-          "Despite its 'International' title, it remains an unofficial observance, not recognized as a public holiday in any country."
+          "Despite its 'International' title, it remains an unofficial observance, not recognized as a public holiday in any country.",
+          "Many people celebrate by engaging in their favorite pastimes, playing games, or simply taking a nap.",
+          "This day highlights the necessity of relaxation for mental health and overall well-being."
         ],
         "name": "International Goof Off Day"
       },
       {
         "date": "03-22",
-        "description": "National Bavarian Crepes Day, observed annually on March 22nd, invites enthusiasts to celebrate and enjoy crepes, particularly those filled with Bavarian-inspired ingredients or, most famously, rich Bavarian cream. This unofficial food holiday blends the delicate French crepe with the creamy, custard-like dessert filling, offering a delightful culinary experience.",
-        "emoji": "🥞",
+        "description": "World Frog Day, observed on March 22, is dedicated to raising awareness about the conservation of frogs and their habitats. It highlights the vital role frogs play in our ecosystem as both predators and prey, as well as their sensitivity to environmental changes. Communities and organizations around the globe engage in activities that educate the public about frogs' declining populations and encourage protective measures.",
+        "emoji": "🐸",
         "funFacts": [
-          "Bavarian cream is a dessert made from milk, sugar, eggs, and gelatin, often flavored with vanilla and lightened with whipped cream.",
-          "Crepes originated in Brittany, France, and are traditionally much thinner than their American pancake counterparts.",
-          "While called 'Bavarian' crepes, the term most commonly refers to the Bavarian cream filling rather than a specific regional crepe style from Bavaria."
+          "There are over 6,000 known species of frogs worldwide.",
+          "Frogs can absorb water through their skin, which helps keep them hydrated.",
+          "Some species of frogs can jump over 20 times their body length.",
+          "Frogs are considered bioindicators, as their health reflects the state of their environment.",
+          "Many frog species have been declining due to habitat loss, pollution, and climate change."
         ],
-        "name": "National Bavarian Crepes Day"
+        "name": "World Frog Day"
       }
     ],
     "03-23": [
@@ -2110,20 +2190,24 @@
         "funFacts": [
           "National Puppy Day was founded in 2007 by celebrity pet and family lifestyle expert Colleen Paige, who also established National Dog Day and National Cat Day.",
           "Puppies are born blind and deaf, with their eyes and ear canals closed, and rely completely on their mother for survival during their first few weeks.",
-          "Much like a human fingerprint, a puppy's nose print is unique, meaning no two puppies have identical nose prints."
+          "Much like a human fingerprint, a puppy's nose print is unique, meaning no two puppies have identical nose prints.",
+          "The average puppy will sleep for up to 18-20 hours a day, allowing them to grow and develop properly.",
+          "Puppies start to walk at about three weeks old, and that is when their personalities begin to show."
         ],
         "name": "National Puppy Day"
       },
       {
         "date": "03-23",
-        "description": "Cuddly Kitten Day, observed annually on March 23rd, is a heartwarming occasion dedicated to celebrating the undeniable cuteness, playfulness, and pure joy that young felines bring into the world. It encourages people to appreciate these adorable creatures, whether by spending extra quality time with their own furry companions, considering adoption from a local animal shelter, or simply enjoying the delightful presence of kittens and promoting responsible pet ownership.",
-        "emoji": "🐱",
+        "description": "Near Miss Day is observed on March 23 every year to remind people of the close calls we experience in life and to raise awareness about safety precautions. The day encourages individuals to reflect on near miss incidents, whether in daily life or in professions, and to consider how better practices can prevent accidents in the future.",
+        "emoji": "🚨",
         "funFacts": [
-          "Kittens are born blind and deaf, with their eyes typically opening between 7 to 14 days after birth.",
-          "Most kittens are born with blue eyes, which usually change to their permanent adult color around 6 to 7 weeks of age.",
-          "A group of kittens born to the same mother at the same time is commonly referred to as a \"litter\" or, more playfully, a \"kindle.\""
+          "Near Miss Day marks the anniversary of a significant near miss event: the one in 1989 when a spacecraft narrowly avoided colliding with the Earth.",
+          "The term 'near miss' is often used in aviation, where close calls have led to stricter safety regulations.",
+          "The day promotes communication and sharing of near miss incidents to improve safety in workplaces.",
+          "Near Miss Day is also an opportunity for communities to organize safety workshops and drills.",
+          "People are encouraged to share their near miss stories on social media to raise awareness."
         ],
-        "name": "Cuddly Kitten Day"
+        "name": "Near Miss Day"
       }
     ],
     "03-24": [
@@ -2132,9 +2216,11 @@
         "description": "National Cocktail Day, observed annually on March 24th, is an unofficial holiday celebrating the diverse and delicious world of mixed alcoholic beverages. It's an occasion for enthusiasts to appreciate the artistry of mixology, whether by enjoying classic recipes, experimenting with new concoctions, or visiting their favorite establishments to savor expertly crafted drinks. The day encourages exploration of the rich history and cultural significance that cocktails hold across various societies.",
         "emoji": "🍹",
         "funFacts": [
-          "The word \"cocktail\" was first formally defined in print in an 1806 American newspaper as \"a stimulating liquor, composed of spirits of any kind, sugar, water, and bitters.\"",
-          "The first comprehensive cocktail recipe book, \"How to Mix Drinks, or The Bon-Vivant's Companion,\" was published in 1862 by Jerry Thomas, often referred to as \"the father of American mixology.\"",
-          "Many iconic cocktails, such as the Old Fashioned, Martini, and Manhattan, emerged in the late 19th and early 20th centuries and remain popular staples today."
+          "The word \"cocktail\" was first formally defined in print in an 1806 American newspaper as \"a stimulating liquor, composed of spirits of any kind, sugar, water, and bitters.\",",
+          "The first comprehensive cocktail recipe book, \"How to Mix Drinks, or The Bon-Vivant's Companion,\" was published in 1862 by Jerry Thomas, often referred to as \"the father of American mixology.\",",
+          "Many iconic cocktails, such as the Old Fashioned, Martini, and Manhattan, emerged in the late 19th and early 20th centuries and remain popular staples today.",
+          "National Cocktail Day is celebrated with various events across the country, including cocktail tastings and mixology competitions.",
+          "Some bars offer special menus and discounts in honor of National Cocktail Day, inviting customers to try something new."
         ],
         "name": "National Cocktail Day"
       },
@@ -2145,7 +2231,9 @@
         "funFacts": [
           "Raisinets, a widely recognized brand of chocolate-covered raisins, were first introduced by the Blumenthal Chocolate Company in 1927.",
           "The uniform coating of chocolate on raisins is often achieved through a process called 'panning,' where the raisins are tumbled in a rotating drum while liquid chocolate is gradually added and allowed to set.",
-          "While an indulgent treat, chocolate-covered raisins are sometimes perceived as a slightly 'healthier' candy option due to the nutritional benefits of raisins, which include fiber and antioxidants."
+          "While an indulgent treat, chocolate-covered raisins are sometimes perceived as a slightly 'healthier' candy option due to the nutritional benefits of raisins, which include fiber and antioxidants.",
+          "There are various recipes that incorporate chocolate-covered raisins into baked goods, such as cookies and brownies, adding a sweet and chewy texture.",
+          "Chocolate-covered raisins are often mixed with nuts or other dried fruits to create a popular trail mix."
         ],
         "name": "Chocolate Covered Raisin Day"
       }
@@ -2158,7 +2246,9 @@
         "funFacts": [
           "The Swedish Waffle Day is not related to the U.S. National Waffle Day, which is celebrated on August 24th to commemorate the patenting of the first waffle iron.",
           "March 25th is exactly nine months before Christmas, corresponding to the Annunciation of the Lord, which is the 'Our Lady's Day' from which Waffle Day evolved.",
-          "Traditional Swedish waffles are typically thinner and crispier than Belgian waffles and are often cooked in a heart-shaped waffle iron."
+          "Traditional Swedish waffles are typically thinner and crispier than Belgian waffles and are often cooked in a heart-shaped waffle iron.",
+          "In Sweden, it's common to enjoy waffles not only on Waffle Day but also throughout the spring as a delightful treat.",
+          "Many Swedish cafes and restaurants offer special waffle menus on this day, turning it into a festive occasion for locals and tourists alike."
         ],
         "name": "Waffle Day"
       },
@@ -2169,7 +2259,9 @@
         "funFacts": [
           "The date March 25th was chosen because it marks the downfall of Sauron and the destruction of the One Ring in *The Lord of the Rings*.",
           "Each year, The Tolkien Society suggests a specific theme for the readings, such as 'Friendship', 'Nature', or 'Good and Evil'.",
-          "Tolkien Reading Day has been celebrated annually since 2003, making it a long-standing tradition among Tolkien enthusiasts."
+          "Tolkien Reading Day has been celebrated annually since 2003, making it a long-standing tradition among Tolkien enthusiasts.",
+          "J.R.R. Tolkien was a professor of Anglo-Saxon at Oxford University, which greatly influenced his literary works.",
+          "The Silmarillion, published posthumously in 1977, provides extensive backstory to the world of *The Hobbit* and *The Lord of the Rings*."
         ],
         "name": "Tolkien Reading Day"
       }
@@ -2182,66 +2274,78 @@
         "funFacts": [
           "Many established holidays, such as Halloween or Valentine's Day, have origins in ancient pagan or Roman festivals, evolving significantly over centuries.",
           "The word 'holiday' derives from 'holy day,' reflecting its original religious significance before secular celebrations became common.",
-          "The concept of numerous 'national days' (e.g., National Pizza Day) is often created by industry groups or individuals to promote specific items or ideas."
+          "The concept of numerous 'national days' (e.g., National Pizza Day) is often created by industry groups or individuals to promote specific items or ideas.",
+          "In the U.S., there are over 1,500 recognized national and international days each year.",
+          "Inventing your own holiday may result in fun family traditions and community events that can be celebrated each year."
         ],
         "name": "Make Up Your Own Holiday Day"
       },
       {
         "date": "03-26",
-        "description": "Spinach Day, celebrated annually on March 26th, is an unofficial holiday dedicated to honoring the versatile and nutrient-packed leafy green vegetable. It encourages people to enjoy spinach's health benefits, explore its many culinary applications, and appreciate its role in various cuisines worldwide. The day serves as a reminder of spinach's reputation as a superfood, often associated with vitality and good health.",
-        "emoji": "🥬",
+        "description": "International Trampoline Day, celebrated on March 26th, promotes the excitement and joy of trampoline jumping. This fun day is all about encouraging people of all ages to bounce up and down on trampolines, an activity that provides not only joy but also health benefits like improved cardiovascular fitness and coordination.",
+        "emoji": "🤸",
         "funFacts": [
-          "Spinach is believed to have originated in ancient Persia (modern-day Iran) and was introduced to China in the 7th century.",
-          "The popular cartoon character Popeye the Sailor Man is often credited with boosting spinach consumption by 33% in the 1930s due to his affinity for the vegetable.",
-          "Despite common belief, the 'iron myth' surrounding spinach, which suggested it contained ten times more iron than it does, originated from a misplaced decimal point in an 1870 German analysis."
+          "Trampolines were invented in the 1930s and were originally used as training devices for acrobats.",
+          "The word 'trampoline' comes from the Spanish word 'trampolín', meaning 'diving board'.",
+          "In 2000, trampoline gymnastics became an official Olympic sport, adding to its popularity.",
+          "There are numerous trampoline parks worldwide, where people can enjoy recreational jumping and trampoline-based fitness classes.",
+          "Jumping on a trampoline can burn approximately 300 calories in just 30 minutes, making it an effective workout option."
         ],
-        "name": "Spinach Day"
+        "name": "International Trampoline Day"
       }
     ],
     "03-27": [
       {
         "date": "03-27",
-        "description": "National \"Joe\" Day, observed annually on March 27th, is an unofficial holiday dedicated to celebrating individuals named Joe, Joseph, Josephine, or any variation of the popular name. It's also a day to acknowledge the 'average Joe' – a term for the common person – recognizing their everyday contributions and spirit, often encouraging appreciation for the 'Joes' in one's life, whether through a simple greeting or by enjoying a 'cup of Joe'.",
-        "emoji": "🧑",
+        "description": "World Theatre Day, celebrated on March 27th, is an international observance that highlights the importance of theatre arts in fostering cultural diversity and promoting peace. Established in 1961 by the International Theatre Institute, this day invites theatre professionals and enthusiasts to reflect on the power of theatre to inspire, entertain, and unite people from all walks of life.",
+        "emoji": "🎭",
         "funFacts": [
-          "The name Joseph, from which Joe is derived, has ancient biblical origins and remains one of the most consistently popular male names globally.",
-          "One popular theory for the origin of the colloquial term 'cup of Joe' for coffee links it to Josephus Daniels, Secretary of the Navy, who famously banned alcohol on naval ships in 1914.",
-          "Many notable figures across history, sports, and popular culture have carried the name Joe, Joseph, or Josephine, including U.S. presidents, legendary athletes, and acclaimed artists."
+          "World Theatre Day was first celebrated in 1962, promoting global cooperation through the medium of theatre.",
+          "The day is recognized in over 100 countries, with events like performances and discussions held to honor theatre.",
+          "Each year, a message is written by a prominent theatre figure to commemorate the day; past writers include notable directors and playwrights.",
+          "World Theatre Day celebrates not just traditional theatre but also modern forms such as street theatre and experimental performances.",
+          "The impact of theatre extends to social issues, often sparking dialogue around themes like equality, justice, and human rights."
         ],
-        "name": "National \"Joe\" Day"
+        "name": "World Theatre Day"
       },
       {
         "date": "03-27",
-        "description": "Spanish Paella Day, observed annually on March 27th, celebrates one of Spain's most iconic and beloved dishes. Paella is a traditional Valencian rice dish prepared in a wide, shallow pan, characterized by its saffron-infused rice and a variety of ingredients that can include vegetables, meat (like chicken or rabbit), or seafood. This global observance encourages people to enjoy, prepare, and learn about this flavorful and communal culinary masterpiece, highlighting its rich cultural heritage and versatility.",
-        "emoji": "🥘",
+        "description": "Celebrated on March 27th, National Joe Day honors everyone named Joe. This day invites people to express their appreciation for their friends and loved ones named Joe by sharing a cup of coffee—or 'joe'—as a token of celebration and camaraderie.",
+        "emoji": "☕",
         "funFacts": [
-          "Paella originated in the fields of Valencia, Spain, as a humble farmers' dish cooked over an open fire.",
-          "The most traditional Valencian paella (Paella Valenciana) typically includes chicken, rabbit, green beans, and garrofó beans, but not seafood.",
-          "The 'socarrat' is the coveted crispy, caramelized layer of rice that forms at the bottom of the paella pan and is considered a delicacy."
+          "The tradition of National Joe Day dates back to at least the 1990s.",
+          "The name 'Joe' is often associated with coffee, hence the day’s celebratory drink.",
+          "Many people use this day to do something special for their friends named Joe, such as sending messages or having gatherings.",
+          "It's common to see coffee shops offering specials or discounts on this day.",
+          "This holiday promotes friendship and appreciation, bringing people together over a shared love for coffee."
         ],
-        "name": "Spanish Paella Day"
+        "name": "National Joe Day"
       }
     ],
     "03-28": [
       {
         "date": "03-28",
-        "description": "Weed Appreciation Day on March 28th is an unofficial observance dedicated to celebrating cannabis in its various forms. Distinct from the more widely recognized 4/20, this day encourages reflection on the plant's diverse applications, from medicinal and recreational use to its industrial potential as hemp, often serving as an informal occasion for advocacy around cannabis legalization and destigmatization.",
-        "emoji": "🌿",
+        "description": "A special day dedicated to honoring our furry companions, Respect Your Cat Day encourages pet owners to show appreciation for their cats. On this day, cat lovers are motivated to provide their pets with extra affection, engaging activities, and a cozy environment where they can feel safe and cherished.",
+        "emoji": "🐱",
         "funFacts": [
-          "The term 'weed' became a common slang term for cannabis in the 20th century, though its exact etymology as applied to cannabis is debated.",
-          "Industrial hemp, a variety of the Cannabis sativa plant, has been cultivated for over 10,000 years for its durable fibers, nutritious seeds, and oil.",
-          "While March 28th is a lesser-known observance, April 20th (4/20) is the most globally recognized unofficial holiday celebrating cannabis culture."
+          "Cats are known to sleep for an average of 15 hours a day, some up to 20 hours.",
+          "A cat’s nose print is unique, much like a human fingerprint.",
+          "The oldest known pet cat lived to be 38 years old, named Creme Puff.",
+          "Cats can rotate their ears 180 degrees thanks to 32 muscles in each ear.",
+          "A cat's purring can have a calming effect on humans, reducing stress and anxiety."
         ],
-        "name": "Weed Appreciation Day"
+        "name": "Respect Your Cat Day"
       },
       {
         "date": "03-28",
-        "description": "Something on a Stick Day, celebrated annually on March 28th, is an unofficial and whimsical holiday dedicated to enjoying or creating anything that can be served, eaten, or presented \"on a stick.\" From classic treats like lollipops and corn dogs to more imaginative culinary creations, the day embraces the fun and convenience of handheld items, encouraging creativity and simple pleasures.",
+        "description": "Something on a Stick Day, celebrated annually on March 28th, is an unofficial and whimsical holiday dedicated to enjoying or creating anything that can be served, eaten, or presented 'on a stick.' From classic treats like lollipops and corn dogs to more imaginative culinary creations, the day embraces the fun and convenience of handheld items, encouraging creativity and simple pleasures.",
         "emoji": "🍢",
         "funFacts": [
           "The corn dog's popularization is often attributed to German immigrants in the American Midwest in the early 20th century.",
-          "The word \"lollipop\" is believed to have been coined by George Smith in 1908, reportedly named after a racehorse.",
-          "The popsicle was accidentally invented in 1905 by 11-year-old Frank Epperson, who left a sugary drink with a stirring stick outside overnight, which froze."
+          "The word 'lollipop' is believed to have been coined by George Smith in 1908, reportedly named after a racehorse.",
+          "The popsicle was accidentally invented in 1905 by 11-year-old Frank Epperson, who left a sugary drink with a stirring stick outside overnight, which froze.",
+          "In Japan, yakitori, a popular dish of grilled chicken skewers, is widely enjoyed and is often served with a variety of sauces and seasonings.",
+          "The first food on a stick is believed to be the ancient Egyptian meat skewers, enjoyed by pharaohs as early as 3000 B.C."
         ],
         "name": "Something on a Stick Day"
       }
@@ -2249,14 +2353,16 @@
     "03-29": [
       {
         "date": "03-29",
-        "description": "March 29th marks the anniversary of a unique event in 1969 when the American Falls, one of the three waterfalls that make up Niagara Falls, was intentionally dewatered for several months. This was not a natural occurrence or an annual holiday, but a significant engineering project undertaken by the U.S. Army Corps of Engineers to study the erosion of the cliff face and consider options for stabilization, offering a rare glimpse of the exposed riverbed.",
-        "emoji": "🚧",
+        "description": "Piano Day is celebrated on March 29th, as it is the 88th day of the year, corresponding to the number of keys on a standard piano. This day encourages individuals to appreciate the beauty of piano music, whether by playing the instrument, attending concerts, or listening to piano compositions.",
+        "emoji": "🎹",
         "funFacts": [
-          "Only the American Falls were dewatered; the larger Canadian Horseshoe Falls continued to flow uninterrupted.",
-          "A 600-foot-long temporary rock and earth dam was constructed upstream to divert the Niagara River's flow away from the American Falls.",
-          "During the dewatering, engineers removed tons of rock and debris from the falls' base and explored potential solutions for erosion control."
+          "The first Piano Day was celebrated in 2015.",
+          "March 29 falls on the 88th day of the year in a non-leap year.",
+          "The idea for Piano Day was founded by a musician named Nils Frahm.",
+          "On this day, many musicians host free piano concerts worldwide.",
+          "Piano Day is also used to promote music education and appreciation for classical music."
         ],
-        "name": "Niagara Falls Runs Dry Day"
+        "name": "Piano Day"
       },
       {
         "date": "03-29",
@@ -2265,7 +2371,9 @@
         "funFacts": [
           "The phrase 'smoke and mirrors' originated from early theatrical magic acts that literally used smoke to obscure a stage and mirrors to create illusions, making things disappear or appear.",
           "A core component of 'smoke and mirrors' in magic is misdirection, a technique used to divert an audience's attention from the true method of a trick.",
-          "Beyond magic, the term is widely used metaphorically in politics, business, and media to describe misleading tactics or superficial presentations."
+          "Beyond magic, the term is widely used metaphorically in politics, business, and media to describe misleading tactics or superficial presentations.",
+          "The usage of 'smoke and mirrors' in contemporary language often indicates a sense of skepticism towards media narratives and advertising.",
+          "Smoke and Mirrors Day encourages people to share their own experiences of discovering the truth behind illusions or misleading situations."
         ],
         "name": "Smoke and Mirrors Day"
       }
@@ -2278,44 +2386,52 @@
         "funFacts": [
           "It gained significant popularity during the COVID-19 pandemic as a creative way to 'travel' when physical movement was restricted.",
           "Virtual vacations can range from exploring the surface of Mars with NASA's online tools to taking a 360-degree tour of the Louvre Museum.",
-          "Celebrating this day is entirely free and eco-friendly, offering an accessible alternative to traditional tourism without the carbon footprint."
+          "Celebrating this day is entirely free and eco-friendly, offering an accessible alternative to traditional tourism without the carbon footprint.",
+          "Many museums and cultural institutions worldwide now offer regular virtual tours, making art and history accessible to all.",
+          "Virtual Vacation Day provides an opportunity for those with mobility challenges to experience destinations they might not be able to visit physically."
         ],
         "name": "Virtual Vacation Day"
       },
       {
         "date": "03-30",
-        "description": "Pencil Day, observed annually on March 30th, celebrates the versatile and enduring writing instrument. This date commemorates the day in 1858 when Hymen L. Lipman received the patent for attaching an eraser to the end of a pencil, greatly enhancing its practicality. It's a day to appreciate the humble pencil's role in education, art, and everyday communication, from sketching masterpieces to jotting down notes.",
-        "emoji": "✏️",
+        "description": "Cacti Appreciation Day, observed on March 30th, is dedicated to celebrating the unique beauty and resilience of cacti. This day encourages plant lovers to acknowledge the diverse species of cacti, their habitats, and their role in various ecosystems. It's an opportunity for enthusiasts to share care tips, showcase their collections, and raise awareness about the preservation of these remarkable plants.",
+        "emoji": "🌵",
         "funFacts": [
-          "The 'lead' in a pencil is actually a mixture of finely ground graphite and clay, not the toxic metal lead.",
-          "A typical pencil can draw a line approximately 35 miles long or write about 45,000 words.",
-          "Pencils can write in zero gravity, underwater, and even upside down, making them more versatile than most pens."
+          "Cacti are native to the Americas, with over 1,500 different species found in a variety of environments.",
+          "Some cacti can live for up to 200 years, thriving in harsh conditions where most other plants cannot survive.",
+          "The tallest cactus in the world is the Carnegiea gigantea, or saguaro cactus, which can grow to be over 40 feet tall.",
+          "Cacti can store up to 200 liters of water, allowing them to survive long periods of drought.",
+          "In addition to their ornamental uses, certain cacti are edible and have been used in traditional dishes and medicine for centuries."
         ],
-        "name": "Pencil Day"
+        "name": "Cacti Appreciation Day"
       }
     ],
     "03-31": [
       {
         "date": "03-31",
-        "description": "National Tater Day, observed annually on March 31st, is an unofficial but widely celebrated holiday dedicated to the humble potato. This day encourages people to appreciate and enjoy potatoes in all their versatile forms, from crispy fries and creamy mashed potatoes to baked, roasted, or chipped. It's a culinary celebration of one of the world's most beloved and economically important food crops.",
-        "emoji": "🥔",
+        "description": "National Crayon Day, celebrated on March 31st, is a fun holiday that honors the colorful influence of crayons in art and education. This day encourages people of all ages to unleash their creativity, whether through drawing, coloring, or crafting. Schools often integrate activities revolving around crayons to inspire artistic expression and innovation in young minds.",
+        "emoji": "🖍",
         "funFacts": [
-          "Potatoes were first domesticated in the Andes region of South America between 7,000 and 10,000 years ago.",
-          "There are over 4,000 known varieties of potatoes, though only a fraction are commercially available.",
-          "The term 'tater' is an American colloquialism for potato, often associated with southern US dialect, and is the root of dishes like 'tater tots'."
+          "The first Crayola crayons were made in 1903 and were sold for just five cents a box.",
+          "Crayons come in a variety of colors, with Crayola offering over 120 unique shades.",
+          "The world's largest crayon, measuring 15 feet long and 3 feet in diameter, is located in Germany.",
+          "The average child goes through about 12 boxes of crayons during their early years of schooling.",
+          "Crayons are made from a mixture of paraffin wax and colored pigments, making them non-toxic and safe for kids."
         ],
-        "name": "National Tater Day"
+        "name": "National Crayon Day"
       },
       {
         "date": "03-31",
-        "description": "Crayola Crayon Day, celebrated annually on March 31st, commemorates the enduring legacy and simple joy of the iconic coloring tool. It marks the date in 1903 when Binney & Smith, the company that would become Crayola, sold its first box of crayons. The day encourages creativity, artistic expression, and a nostalgic appreciation for the vibrant colors that have sparked imagination for generations.",
-        "emoji": "🖍️",
+        "description": "World Backup Day is observed on March 31st to encourage individuals and organizations to back up their data to prevent loss. It's a reminder to safeguard important files and digital memories from unexpected disasters.",
+        "emoji": "💾",
         "funFacts": [
-          "The first box of Crayola crayons, sold in 1903, contained eight colors and retailed for a nickel.",
-          "Crayola produces approximately 3 billion crayons each year, enough to circle the globe 10 times.",
-          "The average child in the United States wears down 730 crayons by their tenth birthday."
+          "Over 60% of people have never backed up their data.",
+          "Data loss can occur due to hardware failure, accidental deletion, or malware.",
+          "Regular backups can save you from losing up to 7 years of your digital life.",
+          "The holiday was founded in 2011 by a group of tech-savvy enthusiasts.",
+          "The campaign promotes using multiple backup methods, such as cloud storage and external hard drives."
         ],
-        "name": "Crayola Crayon Day"
+        "name": "World Backup Day"
       }
     ],
     "04-01": [
