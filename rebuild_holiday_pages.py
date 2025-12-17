@@ -957,7 +957,7 @@ def render_page(
     </a>
     <nav class="nav-links">
       <a href="/holiday/">Holidays</a>
-      <a href="https://shop.obscureholidaycalendar.com/?utm_source=site&utm_medium=nav&utm_campaign=shop" target="_blank" rel="noopener">Shop</a>
+      <a class="shop-link" href="https://shop.obscureholidaycalendar.com/?utm_source=site&utm_medium=nav&utm_campaign=shop" target="_blank" rel="noopener">Shop</a>
       <a class="ig-link" href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
         <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true">
           <defs>
@@ -1149,6 +1149,7 @@ def render_page(
       const feedback = document.getElementById('share-feedback');
       const recentList = document.querySelector('.recent-list');
       const pageData = {{ slug: "{slug}", name: "{html.escape(name)}", url: "{share_url}" }};
+      const shopLink = document.querySelector('.shop-link');
 
       function setFeedback(msg) {{
         if (feedback) feedback.textContent = msg;
@@ -1208,6 +1209,15 @@ def render_page(
 
       if (shareBtn) shareBtn.addEventListener('click', share);
       if (copyBtn) copyBtn.addEventListener('click', copy);
+      if (shopLink && window.gtag) {{
+        shopLink.addEventListener('click', () => {{
+          gtag('event', 'shop_click', {{
+            link_url: shopLink.href,
+            link_text: 'Shop',
+            source_page: "{slug}"
+          }});
+        }});
+      }}
       addRecent();
       renderRecents();
 
