@@ -547,7 +547,7 @@ def render_page(
   <meta name="theme-color" content="#2c005f" />
   <meta name="google-adsense-account" content="ca-pub-7162731177966348" />
   <link rel="canonical" href="{canonical}" />
-  <link rel="preload" href="/styles.css" as="style" crossorigin="anonymous" integrity="sha256-6thkjdloi9ZO0jXPomwwy5axQ9KPxbWvOcyD4umyijo=" onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload" href="/styles.css" as="style" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
   <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
@@ -557,7 +557,7 @@ def render_page(
   <style>
     body {{
       margin: 0;
-      font-family: "Inter", "Manrope", system-ui, -apple-system, sans-serif;
+      font-family: "Manrope", "Inter", system-ui, -apple-system, sans-serif;
       background: radial-gradient(circle at 20% 20%, #1a0c3f 0%, #0f0a2a 40%, #0b0b24 70%);
       color: #0f172a;
     }}
@@ -589,18 +589,46 @@ def render_page(
     .holiday-card {{
       background: linear-gradient(180deg, #ffffff 0%, #f8f5ff 100%);
       border-radius: 22px;
-      padding: 18px;
+      padding: 32px;
       box-shadow: 0 24px 64px rgba(20, 12, 70, 0.16);
     }}
+    .hero {{
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 240px;
+      gap: 28px;
+      align-items: start;
+    }}
+    .hero-aside {{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }}
+    .badge-frame {{
+      padding: 12px;
+      border-radius: 18px;
+      background: #f9f6ff;
+      border: 1px solid #ece9ff;
+      box-shadow: 0 16px 34px rgba(44, 0, 95, 0.12);
+    }}
     .hero-badge {{
-      max-width: 260px;
-      width: min(90%, 260px);
-      margin: 6px 0 4px;
-      filter: drop-shadow(0 16px 40px rgba(44,0,95,0.18));
+      max-width: 220px;
+      width: min(90%, 220px);
+      margin: 0;
+      filter: drop-shadow(0 12px 30px rgba(44,0,95,0.18));
     }}
     .holiday-title {{
       margin: 8px 0 6px;
-      font-size: 2rem;
+      font-size: 2.3rem;
+      line-height: 1.08;
+    }}
+    @media (max-width: 900px) {{
+      .hero {{
+        grid-template-columns: 1fr;
+      }}
+      .hero-aside {{
+        order: -1;
+      }}
     }}
   </style>
   <link rel="icon" href="{SITE_BASE}/favicon.ico" type="image/x-icon" />
@@ -667,7 +695,7 @@ def render_page(
   <meta name="twitter:title" content="{html.escape(name)} — Obscure Holiday Calendar" />
   <meta name="twitter:description" content="{html.escape(meta_desc)}" />
   <meta name="twitter:image" content="{SITE_BASE}/assets/app-icon.png" />
-  <noscript><link rel="stylesheet" href="/styles.css" crossorigin="anonymous" integrity="sha256-6thkjdloi9ZO0jXPomwwy5axQ9KPxbWvOcyD4umyijo="></noscript>
+  <noscript><link rel="stylesheet" href="/styles.css" crossorigin="anonymous"></noscript>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADS_CLIENT}" crossorigin="anonymous"></script>
   <style>
     :root {{
@@ -991,38 +1019,45 @@ def render_page(
       <a href="#related">Related</a>
     </div>
     <article class="holiday-card">
-      <div class="eyebrow">Annual observance</div>
-      <h1 class="holiday-title">{html.escape(name)} <span class="holiday-emoji" aria-hidden="true">{html.escape(emoji)}</span></h1>
-      <img src="{badge_path}" alt="{html.escape(name)} badge" class="hero-badge" loading="lazy" decoding="async" />
-      <div class="meta-line">
-        <span class="pill">{html.escape(pretty)}</span>
-        <span class="pill pill-secondary">{html.escape(type_label)}</span>
-        <span class="pill pill-secondary">Updated {last_updated}</span>
-      </div>
-      <div class="share-tools">
-        <button class="btn-pill" type="button" id="share-btn" aria-label="Share this holiday">
-          <span aria-hidden="true">🔗</span> Share this holiday
-        </button>
-        <button class="btn-pill secondary" type="button" id="copy-btn" aria-label="Copy link to clipboard">
-          <span aria-hidden="true">📋</span> Copy link
-        </button>
-      </div>
-      <div class="share-feedback" id="share-feedback" aria-live="polite"></div>
-
-      <p class="lead">
-        This holiday is featured in the Obscure Holiday Calendar app with emoji-style visuals, reminders, and daily fun facts.
-      </p>
-
-      <div class="store-buttons-top">
-        <a href="{ios_utm}" target="_blank" rel="noopener">
-          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-               alt="Download on the App Store" class="store-badge" />
-        </a>
-        <a href="{android_utm}" target="_blank" rel="noopener">
-          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-               alt="Get it on Google Play" class="store-badge" />
-        </a>
-      </div>
+      <header class="hero">
+        <div class="hero-content">
+          <div class="eyebrow">Annual observance</div>
+          <h1 class="holiday-title">{html.escape(name)} <span class="holiday-emoji" aria-hidden="true">{html.escape(emoji)}</span></h1>
+          <div class="meta-line">
+            <span class="pill">{html.escape(pretty)}</span>
+            <span class="pill pill-secondary">{html.escape(type_label)}</span>
+            <span class="pill pill-secondary">Updated {last_updated}</span>
+          </div>
+          <p class="lead">
+            This holiday is featured in the Obscure Holiday Calendar app with emoji-style visuals, reminders, and daily fun facts.
+          </p>
+          <div class="share-tools">
+            <button class="btn-pill" type="button" id="share-btn" aria-label="Share this holiday">
+              <span aria-hidden="true">🔗</span> Share this holiday
+            </button>
+            <button class="btn-pill secondary" type="button" id="copy-btn" aria-label="Copy link to clipboard">
+              <span aria-hidden="true">📋</span> Copy link
+            </button>
+          </div>
+          <div class="share-feedback" id="share-feedback" aria-live="polite"></div>
+          <div class="store-buttons-top">
+            <a href="{ios_utm}" target="_blank" rel="noopener">
+              <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                   alt="Download on the App Store" class="store-badge" />
+            </a>
+            <a href="{android_utm}" target="_blank" rel="noopener">
+              <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                   alt="Get it on Google Play" class="store-badge" />
+            </a>
+          </div>
+        </div>
+        <aside class="hero-aside">
+          <div class="badge-frame">
+            <img src="{badge_path}" alt="{html.escape(name)} badge" class="hero-badge" loading="lazy" decoding="async" />
+          </div>
+          <p class="badge-caption">Shareable holiday card preview</p>
+        </aside>
+      </header>
 
       <section class="section" id="overview">
         <h2>Overview</h2>
