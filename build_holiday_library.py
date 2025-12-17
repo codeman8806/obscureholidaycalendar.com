@@ -114,7 +114,7 @@ def main():
     </a>
     <nav class="nav-links">
       <a href="/holiday/">Holidays</a>
-      <a href="/shop/?utm_source=site&utm_medium=nav&utm_campaign=shop">Shop</a>
+      <a href="https://shop.obscureholidaycalendar.com/?utm_source=site&utm_medium=nav&utm_campaign=shop" target="_blank" rel="noopener">Shop</a>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
