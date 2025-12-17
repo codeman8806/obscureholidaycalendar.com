@@ -4,7 +4,6 @@ from pathlib import Path
 
 DOMAIN = "https://www.obscureholidaycalendar.com"
 ADSENSE_CLIENT = "ca-pub-7162731177966348"
-AD_SLOT = "7747026448"
 
 IOS_URL = "https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850"
 ANDROID_URL = "https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar"
@@ -47,19 +46,6 @@ APP_BACKLINKS = f"""
   </p>
 </div>
 """
-
-# Safe JS banner block
-BANNER_TEMPLATE = (
-    "<!-- ASO/SEO Banner Block -->\n"
-    "<ins class=\"adsbygoogle\" style=\"display:block\" "
-    f"data-ad-client=\"{ADSENSE_CLIENT}\" "
-    f"data-ad-slot=\"{AD_SLOT}\" "
-    "data-ad-format=\"auto\" "
-    "data-full-width-responsive=\"true\"></ins>\n"
-    "<script>\n"
-    "    (adsbygoogle = window.adsbygoogle || []).push({});\n"
-    "</script>\n"
-)
 
 ADSENSE_LOADER = f"""
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}" crossorigin="anonymous"></script>
@@ -198,12 +184,6 @@ def inject_after_h1(html: str, block: str, marker: str) -> str:
     return html[:m.end()] + "\n" + block + "\n" + html[m.end():]
 
 
-def inject_banner_after_date(html: str) -> str:
-    if BANNER_TEMPLATE in html:
-        return html
-    return html.replace('<div class="date">', BANNER_TEMPLATE + "\n<div class=\"date\">")
-
-
 def add_backlinks_to_bottom(html: str) -> str:
     if "app-backlinks" in html:
         return html
@@ -332,11 +312,7 @@ def main():
             faq_schema = build_faq_schema(headline, date_text)
             html = inject_into_head(html, faq_schema, '"FAQPage"')
 
-        # 7) Banner after date (if date marker exists)
-        if '<div class="date">' in html:
-            html = inject_banner_after_date(html)
-
-        # 8) App backlinks at bottom
+        # 7) App backlinks at bottom
         html = add_backlinks_to_bottom(html)
 
         path.write_text(html, encoding="utf-8")
@@ -347,4 +323,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

@@ -331,14 +331,6 @@ def render_holiday_html(holiday: Dict[str, Any]) -> str:
       align-items: center;
       margin: 14px 0 20px;
     }}
-    .ad-block {{
-      margin: 12px 0 18px;
-      background: #f8fafc;
-      border: 1px dashed #cbd5e1;
-      padding: 12px;
-      border-radius: 12px;
-      text-align: center;
-    }}
     .btn {{
       display: inline-flex;
       align-items: center;
@@ -419,11 +411,6 @@ def render_holiday_html(holiday: Dict[str, Any]) -> str:
           <a class="btn secondary" href="{SITE_BASE}/holiday/">Holidays</a>
           <span class="btn secondary" style="background:#f8fafc;border-color:#e5e7eb;box-shadow:none;color:#0f172a;">{name}</span>
         </nav>
-
-        <div class="ad-block">
-          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7162731177966348" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-          <script>(adsbygoogle=window.adsbygoogle||[]).push({{}});</script>
-        </div>
 
         <div class="cta-row">
           <a class="btn primary" href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank" rel="noopener">Get it on iOS</a>
