@@ -2,14 +2,18 @@
 """
 Rebuild all holiday landing pages with richer on-page content, aligned SEO/ASO
 markup, and AdSense-friendly placement. Uses the existing local holidays.json
-data (no network calls) and rewrites every /holiday/<slug>/index.html that
-already exists on disk.
+data and rewrites every /holiday/<slug>/index.html that already exists on disk.
+Optionally uses OpenAI for "why it matters" copy if OPENAI_USE=1 and
+OPENAI_API_KEY is set.
 """
 import html
 import json
+import os
 import random
 import re
 import hashlib
+import urllib.error
+import urllib.request
 from datetime import datetime, date
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -27,6 +31,13 @@ ADS_SLOT = "7747026448"
 IOS_URL = "https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850"
 ANDROID_URL = "https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar"
 APP_URL = f"{SITE_BASE}/app/"
+
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
+OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
+OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
+OPENAI_TIMEOUT = float(os.environ.get("OPENAI_TIMEOUT", "30"))
+OPENAI_DEBUG = os.environ.get("OPENAI_DEBUG", "").lower() in ("1", "true", "yes")
+OPENAI_ENABLED = bool(OPENAI_API_KEY) and os.environ.get("OPENAI_USE", "").lower() in ("1", "true", "yes")
 
 POPULAR = [
     ("pi-day", "Pi Day"),
@@ -116,6 +127,70 @@ def first_sentence(text: str) -> str:
             return text[: pos + 1].strip()
     return text.strip()
 
+def log_openai(message: str) -> None:
+    if OPENAI_DEBUG:
+        print(message)
+
+def openai_why_it_matters(name: str, pretty: str, description: str, type_label: str, great_for: List[str], fun_facts: List[str]) -> str:
+    if not OPENAI_ENABLED:
+        return ""
+
+    audience = ", ".join(great_for[:3]) if great_for else "friends and families"
+    fact_snip = first_sentence(fun_facts[0]) if fun_facts else ""
+    prompt = (
+        "Write 1-2 sentences explaining why this holiday matters. "
+        "Mention the date. Be specific to the holiday's meaning. "
+        "No calls to action, no hashtags, no quotes, no emojis."
+        "\n\n"
+        f"Holiday: {name}\n"
+        f"Date: {pretty}\n"
+        f"Category: {type_label}\n"
+        f"Audience: {audience}\n"
+        f"Description: {description}\n"
+        f"Fun fact: {fact_snip}\n"
+    )
+
+    payload = json.dumps({
+        "model": OPENAI_MODEL,
+        "messages": [
+            {"role": "system", "content": "You write concise, specific 'why it matters' copy for holiday pages."},
+            {"role": "user", "content": prompt},
+        ],
+        "temperature": 0.4,
+        "max_tokens": 120,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        f"{OPENAI_BASE_URL}/chat/completions",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=OPENAI_TIMEOUT) as resp:
+            raw = resp.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        log_openai(f"OpenAI HTTP error: {exc}")
+        return ""
+    except Exception as exc:  # pragma: no cover
+        log_openai(f"OpenAI request failed: {exc}")
+        return ""
+
+    try:
+        data = json.loads(raw)
+        content = data["choices"][0]["message"]["content"]
+    except Exception as exc:  # pragma: no cover
+        log_openai(f"OpenAI response parse failed: {exc}")
+        return ""
+
+    line = content.strip().strip('"').strip()
+    line = re.sub(r"^Why it matters:\\s*", "", line, flags=re.IGNORECASE)
+    return line
+
 
 def celebration_ideas(name: str, pretty: str, fun_facts: List[str]) -> List[str]:
     keyword = name.replace("Day", "").strip()
@@ -143,11 +218,29 @@ CATEGORY_RULES = [
     ("Geek / Tech", ["tech", "computer", "internet", "coding", "science", "math", "pi", "engineer", "robot"]),
 ]
 
+def compile_keyword_pattern(keyword: str) -> re.Pattern:
+    parts = keyword.lower().split()
+    last = parts[-1]
+    suffix = "" if last.endswith("s") else "s?"
+    sep = r"(?:\s+|-)"
+    if len(parts) == 1:
+        pattern = rf"\b{re.escape(last)}{suffix}\b"
+    else:
+        tokens = [re.escape(p) for p in parts[:-1]] + [re.escape(last) + suffix]
+        pattern = r"\b" + sep.join(tokens) + r"\b"
+    return re.compile(pattern)
+
+
+CATEGORY_PATTERNS = [
+    (label, [compile_keyword_pattern(k) for k in keywords])
+    for label, keywords in CATEGORY_RULES
+]
+
 
 def classify_holiday(name: str, description: str) -> dict:
     text = f"{name} {description}".lower()
-    for label, keywords in CATEGORY_RULES:
-        if any(k in text for k in keywords):
+    for label, patterns in CATEGORY_PATTERNS:
+        if any(p.search(text) for p in patterns):
             return {
                 "type_label": label,
                 "great_for": {
@@ -258,11 +351,26 @@ def generate_celebrations(name: str, pretty: str, type_label: str, great_for: Li
             break
     return unique
 
-def build_why_it_matters(name: str, pretty: str, description: str, type_label: str, great_for: List[str], celebrate_line: str, slug: str) -> str:
+def build_why_it_matters(name: str, pretty: str, description: str, type_label: str, great_for: List[str], fun_facts: List[str], slug: str) -> str:
     rng = random.Random(f"why-{slug}")
     audience = ", ".join(great_for[:3]) if great_for else "friends and families"
     type_theme = type_label.lower()
-    tie_in = celebrate_line if celebrate_line else f"People mark the day with small activities that match the spirit of {name}."
+    desc_snip = first_sentence(description)
+    fact_snip = first_sentence(fun_facts[0]) if fun_facts else ""
+    tie_ins = []
+    if fact_snip:
+        tie_ins.append(f"For example: {fact_snip}")
+    if desc_snip:
+        tie_ins.append(desc_snip)
+    tie_in = rng.choice(tie_ins) if tie_ins else f"People mark the day with small activities that match the spirit of {name}."
+
+    openai_line = openai_why_it_matters(name, pretty, description, type_label, great_for, fun_facts)
+    if openai_line:
+        return shorten_for_meta(
+            openai_line,
+            f"Discover why {name} is celebrated on {pretty}.",
+            360,
+        )
 
     templates = [
         "{name} sits on {pretty} and gives {audience} a reason to spotlight {type_theme} moments. {tie_in}",
@@ -515,7 +623,7 @@ def render_page(
         return f'<a href="/holiday/{slug_value}/">{html.escape(label)}</a>'
 
     # Distinct "why it matters" using tailored summary + audience + celebrate hook
-    why_line = build_why_it_matters(name, pretty, description, type_label, great_for, celebrate_line, slug)
+    why_line = build_why_it_matters(name, pretty, description, type_label, great_for, fun_facts, slug)
 
     related_cards = []
     for r_slug in related_slugs[:3]:
@@ -1285,6 +1393,14 @@ def main():
         mm = date_raw.split("-")[0] if "-" in date_raw else "00"
         slugs_by_month.setdefault(mm, []).append(slug)
 
+    target_months = {
+        m.strip().zfill(2)
+        for m in os.environ.get("REBUILD_MONTHS", "").split(",")
+        if m.strip()
+    }
+    if target_months:
+        print(f"Filtering rebuild to months: {', '.join(sorted(target_months))}")
+
     BADGE_DIR.mkdir(parents=True, exist_ok=True)
 
     for idx, slug in enumerate(slugs_sorted):
@@ -1292,12 +1408,15 @@ def main():
         prev_slug = slugs_sorted[idx - 1] if idx > 0 else slugs_sorted[-1]
         next_slug = slugs_sorted[idx + 1] if idx < len(slugs_sorted) - 1 else slugs_sorted[0]
 
+        date_raw = record.get("date", "")
+        mm = date_raw.split("-")[0] if "-" in date_raw else "00"
+        if target_months and mm not in target_months:
+            continue
+
         options = [s for s in slugs_sorted if s != slug]
         random_slug = random.choice(options) if options else slug
 
         # Related: prefer same-month items
-        date_raw = record.get("date", "")
-        mm = date_raw.split("-")[0] if "-" in date_raw else "00"
         related_pool = [s for s in slugs_by_month.get(mm, []) if s != slug]
         rng = random.Random(f"related-{slug}")
         rng.shuffle(related_pool)
