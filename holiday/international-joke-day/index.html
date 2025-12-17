@@ -565,7 +565,7 @@
     </a>
     <nav class="nav-links">
       <a href="/holiday/">Holidays</a>
-      <a href="https://shop.obscureholidaycalendar.com/?utm_source=site&utm_medium=nav&utm_campaign=shop" target="_blank" rel="noopener">Shop</a>
+      <a class="shop-link" href="https://shop.obscureholidaycalendar.com/?utm_source=site&utm_medium=nav&utm_campaign=shop" target="_blank" rel="noopener">Shop</a>
       <a class="ig-link" href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
         <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true">
           <defs>
@@ -745,7 +745,7 @@
         <ul>
           <li>Yesterday: <a href="/holiday/creative-ice-cream-flavors-day/">Creative Ice Cream Flavors Day</a></li>
           <li>Tomorrow: <a href="/holiday/i-forgot-day/">I Forgot Day</a></li>
-          <li>Random pick: <a href="/holiday/guy-fawkes-day/">Guy Fawkes Day</a></li>
+          <li>Random pick: <a href="/holiday/brothers-day/">Brothers Day</a></li>
           <li>Popular: <a href="/holiday/talk-like-a-pirate-day/">Talk Like a Pirate Day</a></li>
         </ul>
       </section>
@@ -778,6 +778,7 @@
       const feedback = document.getElementById('share-feedback');
       const recentList = document.querySelector('.recent-list');
       const pageData = { slug: "international-joke-day", name: "International Joke Day", url: "https://www.obscureholidaycalendar.com/holiday/international-joke-day/?utm_source=share&utm_medium=copy&utm_campaign=holiday_page&utm_content=international-joke-day" };
+      const shopLink = document.querySelector('.shop-link');
 
       function setFeedback(msg) {
         if (feedback) feedback.textContent = msg;
@@ -837,6 +838,15 @@
 
       if (shareBtn) shareBtn.addEventListener('click', share);
       if (copyBtn) copyBtn.addEventListener('click', copy);
+      if (shopLink && window.gtag) {
+        shopLink.addEventListener('click', () => {
+          gtag('event', 'shop_click', {
+            link_url: shopLink.href,
+            link_text: 'Shop',
+            source_page: "international-joke-day"
+          });
+        });
+      }
       addRecent();
       renderRecents();
 

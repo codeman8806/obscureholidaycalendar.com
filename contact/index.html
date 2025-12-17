@@ -45,7 +45,7 @@
     </a>
     <nav class="nav-links">
       <a href="/holiday/">Holidays</a>
-      <a href="https://shop.obscureholidaycalendar.com/?utm_source=site&utm_medium=nav&utm_campaign=shop" target="_blank" rel="noopener">Shop</a>
+      <a class="shop-link" href="https://shop.obscureholidaycalendar.com/?utm_source=site&utm_medium=nav&utm_campaign=shop" target="_blank" rel="noopener">Shop</a>
       <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener">@obscureholidaycalendar</a>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
@@ -82,5 +82,19 @@
     </div>
     <p>&copy; 2025 Obscure Holiday Calendar</p>
   </footer>
+  <script>
+    (function() {
+      const shopLink = document.querySelector(".shop-link");
+      if (shopLink && window.gtag) {
+        shopLink.addEventListener("click", () => {
+          gtag("event", "shop_click", {
+            link_url: shopLink.href,
+            link_text: "Shop",
+            source_page: "contact"
+          });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
