@@ -957,6 +957,7 @@ def render_page(
     </a>
     <nav class="nav-links">
       <a href="/holiday/">Holidays</a>
+      <a href="/shop/?utm_source=site&utm_medium=nav&utm_campaign=shop">Shop</a>
       <a class="ig-link" href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
         <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true">
           <defs>
