@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="120" viewBox="0 0 240 120" role="img" aria-label="International Potato Chip Day">
+  <defs>
+    <linearGradient id="grad-international-potato-chip-day" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b75ca7"/>
+      <stop offset="100%" stop-color="#696d3c"/>
+    </linearGradient>
+  </defs>
+  <rect rx="16" ry="16" width="240" height="120" fill="url(#grad-international-potato-chip-day)"/>
+  <text>
+    <tspan x="50%" y="48" fill="#ffffff" font-family="Inter, Manrope, system-ui, sans-serif" font-size="16" font-weight="700" text-anchor="middle">International</tspan><tspan x="50%" y="70" fill="#ffffff" font-family="Inter, Manrope, system-ui, sans-serif" font-size="16" font-weight="700" text-anchor="middle">Potato Chip Day</tspan>
+  </text>
+  <text x="50%" y="90%" fill="#f1f5f9" font-family="Inter, Manrope, system-ui, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Obscure Holiday Calendar</text>
+</svg>
