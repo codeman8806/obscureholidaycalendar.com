@@ -3,8 +3,8 @@
 Rebuild all holiday landing pages with richer on-page content, aligned SEO/ASO
 markup, and AdSense-friendly placement. Uses the existing local holidays.json
 data and rewrites every /holiday/<slug>/index.html that already exists on disk.
-Optionally uses OpenAI for "why it matters" copy if OPENAI_USE=1 and
-OPENAI_API_KEY is set.
+Optionally uses OpenAI for richer copy (why it matters, origin, celebrate ideas,
+sources, FAQ) if OPENAI_USE=1 and OPENAI_API_KEY is set.
 """
 import html
 import json
@@ -16,7 +16,7 @@ import urllib.error
 import urllib.request
 from datetime import datetime, date
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any
 
 
 ROOT = Path(__file__).resolve().parent
@@ -190,6 +190,62 @@ def openai_why_it_matters(name: str, pretty: str, description: str, type_label: 
     line = content.strip().strip('"').strip()
     line = re.sub(r"^Why it matters:\\s*", "", line, flags=re.IGNORECASE)
     return line
+
+
+def openai_enrich_holiday(name: str, pretty: str, description: str, fun_facts: List[str]) -> Dict[str, Any]:
+    """
+    Single OpenAI call to fetch richer content:
+      - why_it_matters (1-2 sentences)
+      - origin_story (1 paragraph)
+      - celebrations (3-5 concise bullets)
+      - sources: [{title, url}]
+      - faq: [{q,a}]
+    """
+    if not OPENAI_ENABLED:
+        return {}
+
+    facts_joined = "; ".join(fun_facts[:5])
+    prompt = (
+        "You are curating a short holiday page. Respond ONLY with JSON.\n"
+        "Fields: why_it_matters (1-2 sentences), origin_story (<=2 sentences), "
+        "celebrations (3-5 concise bullets), sources (1-3 items with title+url), "
+        "faq (2-3 Q&A pairs, concise). Keep it factual, verifiable, and on-topic. "
+        "No emojis, no fluff.\n\n"
+        f"Holiday: {name}\n"
+        f"Date: {pretty}\n"
+        f"Description: {description}\n"
+        f"Fun facts: {facts_joined or 'N/A'}\n"
+    )
+
+    payload = {
+        "model": OPENAI_MODEL,
+        "messages": [
+            {"role": "system", "content": "You write concise, factual holiday page copy. Respond ONLY with JSON."},
+            {"role": "user", "content": prompt},
+        ],
+        "temperature": 0.35,
+        "max_tokens": 260,
+    }
+
+    req = urllib.request.Request(
+        f"{OPENAI_BASE_URL}/chat/completions",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=OPENAI_TIMEOUT) as resp:
+            raw = resp.read().decode("utf-8")
+        data = json.loads(raw)
+        content = data["choices"][0]["message"]["content"]
+        return json.loads(content)
+    except Exception as exc:  # pragma: no cover
+        log_openai(f"OpenAI enrich failed: {exc}")
+        return {}
 
 
 def celebration_ideas(name: str, pretty: str, fun_facts: List[str]) -> List[str]:
@@ -595,6 +651,37 @@ def render_page(
         (f"How do people celebrate {name}?", celebrate_line),
     ]
 
+    # Optional OpenAI enrichment
+    ai_data = openai_enrich_holiday(name, pretty, description, fun_facts)
+    ai_why = ai_data.get("why_it_matters") if isinstance(ai_data, dict) else ""
+    ai_origin = ai_data.get("origin_story") if isinstance(ai_data, dict) else ""
+    ai_celebrations = ai_data.get("celebrations") if isinstance(ai_data, dict) and isinstance(ai_data.get("celebrations"), list) else None
+    ai_sources = ai_data.get("sources") if isinstance(ai_data, dict) and isinstance(ai_data.get("sources"), list) else None
+    ai_faq = ai_data.get("faq") if isinstance(ai_data, dict) and isinstance(ai_data.get("faq"), list) else None
+
+    if ai_celebrations:
+        celebrations = [str(c).strip() for c in ai_celebrations if str(c).strip()]
+    if ai_faq:
+        faq = []
+        for item in ai_faq:
+            if isinstance(item, dict):
+                q = item.get("q") or item.get("question")
+                a = item.get("a") or item.get("answer")
+                if q and a:
+                    faq.append((q, a))
+    origin_story = ai_origin or (fun_facts[0] if fun_facts else description)
+    sources_list = []
+    if ai_sources:
+        for src in ai_sources:
+            if not isinstance(src, dict):
+                continue
+            title = str(src.get("title") or "").strip()
+            url = str(src.get("url") or "").strip()
+            if title or url:
+                sources_list.append({"title": title or "Source", "url": url})
+    if not sources_list and record.get("sourceUrl"):
+        sources_list.append({"title": name, "url": str(record.get("sourceUrl"))})
+
     canonical = f"{SITE_BASE}/holiday/{slug}/"
     share_url = f"{canonical}?utm_source=share&utm_medium=copy&utm_campaign=holiday_page&utm_content={slug}"
     ios_utm = f"{IOS_URL}?utm_source=site&utm_medium=store_badge&utm_campaign=holiday_page&utm_content={slug}"
@@ -623,7 +710,7 @@ def render_page(
         return f'<a href="/holiday/{slug_value}/">{html.escape(label)}</a>'
 
     # Distinct "why it matters" using tailored summary + audience + celebrate hook
-    why_line = build_why_it_matters(name, pretty, description, type_label, great_for, fun_facts, slug)
+    why_line = ai_why or build_why_it_matters(name, pretty, description, type_label, great_for, fun_facts, slug)
 
     related_cards = []
     for r_slug in related_slugs[:3]:
@@ -641,6 +728,23 @@ def render_page(
           </article>
         """
         )
+
+    def build_sources_html() -> str:
+        if not sources_list:
+            return "<p>Source not provided.</p>"
+        parts = []
+        for src in sources_list:
+            if not isinstance(src, dict):
+                continue
+            title = safe_text(src.get("title", "Source"))
+            url = html.escape(src.get("url", ""))
+            if url:
+                parts.append(f'<p><a href="{url}" target="_blank" rel="noopener">{title}</a></p>')
+            else:
+                parts.append(f"<p>{title}</p>")
+        return "".join(parts) if parts else "<p>Source not provided.</p>"
+
+    sources_html = build_sources_html()
 
     badge_path = f"/assets/badges/{slug}.svg"
 
@@ -1179,8 +1283,8 @@ def render_page(
 
       <section class="section">
         <h2>Origin and story</h2>
-        <p>{safe_text(fun_facts[0])}</p>
-        {"<p>" + safe_text(fun_facts[1]) + "</p>" if len(fun_facts) > 1 else ""}
+        <p>{safe_text(origin_story)}</p>
+        {"<p>" + safe_text(fun_facts[1]) + "</p>" if len(fun_facts) > 1 and not ai_origin else ""}
       </section>
 
       <section class="section">
@@ -1208,7 +1312,7 @@ def render_page(
 
       <section class="section">
         <h2>Sources and attribution</h2>
-        <p>Primary note: {safe_text(fun_facts[0])}</p>
+        {sources_html}
       </section>
 
       <section class="section" id="related">
@@ -1385,6 +1489,18 @@ def main():
 
     slugs_sorted = [slug for _, _, slug in sorted(dated_slugs)]
 
+    # Map slug -> date and date -> list of slugs (order preserved)
+    date_by_slug: Dict[str, str] = {}
+    date_to_slugs: Dict[str, List[str]] = {}
+    date_order: List[str] = []
+    for mm, dd, slug in sorted(dated_slugs):
+        rec = data.get(slug, {})
+        date_raw = rec.get("date", "")
+        date_by_slug[slug] = date_raw
+        date_to_slugs.setdefault(date_raw, []).append(slug)
+        if date_raw not in date_order:
+            date_order.append(date_raw)
+
     # Build month -> slugs map for related links
     slugs_by_month: Dict[str, List[str]] = {}
     for slug in slugs_sorted:
@@ -1405,8 +1521,16 @@ def main():
 
     for idx, slug in enumerate(slugs_sorted):
         record = data.get(slug, {})
-        prev_slug = slugs_sorted[idx - 1] if idx > 0 else slugs_sorted[-1]
-        next_slug = slugs_sorted[idx + 1] if idx < len(slugs_sorted) - 1 else slugs_sorted[0]
+        date_raw = record.get("date", "")
+        try:
+            date_idx = date_order.index(date_raw)
+            prev_date = date_order[date_idx - 1] if date_idx > 0 else date_order[-1]
+            next_date = date_order[date_idx + 1] if date_idx < len(date_order) - 1 else date_order[0]
+        except ValueError:
+            prev_date = date_raw
+            next_date = date_raw
+        prev_slug = date_to_slugs.get(prev_date, [slug])[0]
+        next_slug = date_to_slugs.get(next_date, [slug])[0]
 
         date_raw = record.get("date", "")
         mm = date_raw.split("-")[0] if "-" in date_raw else "00"

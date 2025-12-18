@@ -412,8 +412,7 @@
           "The idea for the holiday was initially promoted by the Congressional Black Caucus and supported by labor unions in the 1970s, eventually signed into law by President Ronald Reagan in 1983.",
           "The first observance of the federal holiday took place on January 20, 1986.",
           "Many states initially resisted observing the holiday, with some combining it with other holidays or giving it alternative names before widespread adoption.",
-          "Since 1994, the holiday has been designated as a national day of service, encouraging Americans to volunteer and improve their communities.",
-          "King was the youngest person at the time to receive the Nobel Peace Prize in 1964 for his fight against racial inequality through nonviolent resistance."
+          "Since 1994, the holiday has been designated as a national day of service, encouraging Americans to volunteer and improve their communities."
         ],
         "name": "Martin Luther King Jr.'s Birthday"
       },
@@ -423,9 +422,10 @@
         "emoji": "🌐",
         "funFacts": [
           "Wikipedia was officially launched by Jimmy Wales and Larry Sanger.",
-          "The name \"Wikipedia\" is a blend of \"wiki,\" a Hawaiian word meaning \"quick,\" and \"encyclopedia.\"",
+          "The name 'Wikipedia' is a blend of 'wiki,' a Hawaiian word meaning 'quick,' and 'encyclopedia.'",
           "As of early 2024, the English Wikipedia contains over 6.8 million articles.",
-          "It is consistently ranked among the most visited websites worldwide, providing information across nearly 300 languages."
+          "It is consistently ranked among the most visited websites worldwide, providing information across nearly 300 languages.",
+          "Wikipedia operates under a model of open collaboration, allowing anyone with internet access to write and edit articles."
         ],
         "name": "Wikipedia Day"
       }
@@ -859,20 +859,24 @@
         "funFacts": [
           "Dark chocolate typically contains at least 70% cocoa solids, which contributes to its intense flavor and higher concentration of beneficial compounds.",
           "Rich in antioxidants called flavanols, dark chocolate has been linked to potential cardiovascular benefits, including improved blood flow and reduced blood pressure.",
-          "Theobroma cacao, the tree from which chocolate is derived, translates to 'food of the gods' in Greek, highlighting its historical reverence."
+          "Theobroma cacao, the tree from which chocolate is derived, translates to 'food of the gods' in Greek, highlighting its historical reverence.",
+          "Dark chocolate can also improve brain function by increasing blood flow to the brain.",
+          "Some studies suggest that consuming dark chocolate may help improve mood due to its ability to stimulate the production of endorphins."
         ],
         "name": "National Dark Chocolate Day"
       },
       {
         "date": "02-01",
-        "description": "February 1st, while not a traditionally established 'Serpent Day,' serves as an opportune moment to acknowledge the profound and enduring symbolism of serpents across diverse cultures throughout history. These ancient creatures are widely revered as potent emblems of renewal, transformation, wisdom, and primordial energy, frequently associated with fertility, healing, and the cyclical nature of life and death, themes that resonate with the subtle awakenings of early February.",
-        "emoji": "🐍",
+        "description": "Change Your Password Day encourages individuals to regularly update their passwords to enhance security and protect sensitive information. It's a reminder to refresh not just passwords but also security practices, ensuring safe online experiences.",
+        "emoji": "🔑",
         "funFacts": [
-          "Many cultures associate serpents with regeneration and immortality due to their ability to shed their skin, symbolizing rebirth.",
-          "The Ouroboros, an ancient symbol depicting a serpent eating its own tail, represents cyclicality, unity, and eternal renewal.",
-          "The Rod of Asclepius, a serpent-entwined staff, is an ancient Greek symbol widely recognized today as the emblem of medicine and healthcare."
+          "Changing passwords regularly reduces the risk of unauthorized access.",
+          "Using a password manager can help you create and manage stronger passwords.",
+          "Over 80% of data breaches are due to weak or stolen passwords.",
+          "The longer and more complex a password, the harder it is to crack.",
+          "Many experts recommend using two-factor authentication alongside strong passwords."
         ],
-        "name": "Serpent Day"
+        "name": "Change Your Password Day"
       }
     ],
     "02-02": [
@@ -1685,28 +1689,29 @@
     "03-05": [
       {
         "date": "03-05",
-        "description": "National Poutine Day celebrates the beloved Canadian dish of crispy french fries, fresh cheese curds, and hot gravy. It's an occasion to indulge in this comforting and uniquely flavorful treat, a true staple of Canadian cuisine.",
-        "emoji": "🍟",
+        "description": "On Learn What Your Name Means Day, individuals are encouraged to explore the origins, meanings, and historical significance of their names. This day serves as a reminder of the personal stories and cultural heritage behind names, fostering a deeper understanding and appreciation of one’s identity.",
+        "emoji": "📚",
         "funFacts": [
-          "Poutine originated in rural Quebec in the late 1950s.",
-          "The exact creator of poutine is debated, with several restaurants in Quebec claiming to be the first.",
-          "The word 'poutine' is likely derived from the English word 'pudding' or could be a Quebec slang term for 'mess' or 'a mixture'.",
-          "There are countless variations of poutine, including those with pulled pork, bacon, lobster, and various gourmet gravies.",
-          "March 5th is widely celebrated as National Poutine Day, a tradition that gained popularity around 2007.",
-          "Poutine has gained international popularity, with restaurants serving it across the United States, Europe, and Asia."
+          "The word 'name' comes from the Old English 'nama' and the Latin 'nomen'.",
+          "Many names have meanings rooted in ancient languages, reflecting characteristics or occupations.",
+          "In some cultures, names are believed to hold powerful significance, influencing a person's destiny.",
+          "The practice of naming dates back to ancient civilizations where names often conveyed social status or lineage.",
+          "Some names, like 'John' and 'Mary', have been popular for centuries and have numerous variations across different cultures."
         ],
-        "name": "National Poutine Day"
+        "name": "Learn What Your Name Means Day"
       },
       {
         "date": "03-05",
-        "description": "This day commemorates the remarkable achievement of Guglielmo Marconi on March 5, 1900, when he successfully established the first two-way wireless communication across the Atlantic Ocean, exchanging messages between stations in England and the United States. This breakthrough laid a crucial foundation for modern global telecommunications.",
-        "emoji": "📻",
+        "description": "International Birdhouse Day is celebrated on March 5th to encourage bird lovers and hobbyists to create and install birdhouses in their gardens or yards. This day promotes the importance of providing shelter for local bird species, fostering a sense of community among nature enthusiasts. People often participate in workshops, build birdhouses, and share tips on attracting various birds to their outdoor spaces. Events may include birdwatching, educational talks about avian habitats, and even competitions for the most creatively designed birdhouses.",
+        "emoji": "🏡",
         "funFacts": [
-          "While Marconi achieved a one-way transatlantic signal (the letter \"S\") in December 1901, the March 5, 1900, event marked the first successful two-way exchange of messages.",
-          "The historic communication occurred between St. Catherine's Point on the Isle of Wight, England, and the Nantucket Lightship stationed off the coast of Massachusetts, USA.",
-          "This pioneering demonstration of long-distance wireless communication proved the practical viability of radio waves for global messaging, profoundly influencing subsequent technological developments."
+          "Birdhouses can provide safe nesting sites for birds, protecting them from predators.",
+          "Different species of birds require specific dimensions and designs for their houses.",
+          "Some birdhouses can attract multiple species of birds, creating diverse backyard wildlife.",
+          "The practice of building birdhouses dates back to ancient civilizations across the globe.",
+          "Birdhouses can also help in managing pest control as certain bird species feed on insects."
         ],
-        "name": "First Transatlantic Two-Way Radio Day"
+        "name": "International Birdhouse Day"
       }
     ],
     "03-06": [
@@ -2002,16 +2007,16 @@
       },
       {
         "date": "03-16",
-        "description": "\"Everything You Do Is Right Day,\" hypothetically observed on March 16th, is not an officially recognized or widely celebrated holiday. It exists purely as a whimsical, conceptual day, often imagined as a lighthearted occasion where every action or decision one makes is playfully considered correct, free from error or judgment. This idea serves as a humorous prompt for self-acceptance or a temporary break from self-criticism, rather than a genuine observance with historical roots or established traditions.",
-        "emoji": "✨",
+        "description": "International Potato Chip Day, celebrated on March 16, honors one of the world's favorite snacks – the potato chip. This fun food holiday encourages everyone to enjoy this crispy treat in various flavors, from classic salted to gourmet varieties. Additionally, the day invites people to share their favorite chip brands, recipes, and even innovative ways to enjoy them with dips and toppings.",
+        "emoji": "🥔",
         "funFacts": [
-          "This holiday is purely fictional and does not appear on any official calendars of recognized observances.",
-          "There are no known historical origins, traditional customs, or documented public celebrations associated with 'Everything You Do Is Right Day'.",
-          "The concept behind such a day encourages a humorous and forgiving perspective on one's own actions, promoting a temporary sense of infallibility.",
-          "Imagining a day where everything you do is right can inspire creativity and confidence in daily decisions.",
-          "People may celebrate this day by treating themselves kindly, making playful choices, and avoiding self-judgment."
+          "Potato chips were invented in 1853 by Chef George Crum in Saratoga Springs, New York.",
+          "The average American eats about 6.4 kilograms (14 pounds) of potato chips each year.",
+          "In 2018, potato chips were the most popular snack in the United States, surpassing cookies and candy.",
+          "There are more than 100 flavors of potato chips available worldwide, including unique flavors like dill pickle and sriracha.",
+          "In 1960, Lay's Potato Chips introduced the first-ever flavored potato chip – sour cream and onion!"
         ],
-        "name": "Everything You Do Is Right Day"
+        "name": "International Potato Chip Day"
       }
     ],
     "03-17": [
@@ -3474,20 +3479,24 @@
         "funFacts": [
           "The Chicken Dance originated in Switzerland in the 1950s, composed by accordion player Werner Thomas, and was initially known as \"Der Ententanz\" (The Duck Dance).",
           "It was first introduced to the United States by polka bands in the late 1970s and early 1980s, quickly gaining popularity at German-themed events.",
-          "The largest Chicken Dance ever recorded took place at Oktoberfest in Cincinnati, Ohio, in 1994, with approximately 72,000 participants."
+          "The largest Chicken Dance ever recorded took place at Oktoberfest in Cincinnati, Ohio, in 1994, with approximately 72,000 participants.",
+          "In 2001, the Chicken Dance was inducted into the National Toy Hall of Fame as a symbol of interactive play.",
+          "The Chicken Dance remains a popular choice for school functions, community events, and family reunions, promoting fun and togetherness."
         ],
         "name": "Dance Like a Chicken Day"
       },
       {
         "date": "05-14",
-        "description": "There is no officially recognized or widely celebrated holiday known as \"Underground America Day\" on May 14th. As a factual encyclopedia, information cannot be provided for an observance that does not exist in historical, cultural, or official records. It appears to be a fictional or hypothetical concept.",
-        "emoji": "❓",
+        "description": "National Llama Awareness Day focuses on educating the public about llamas, their role in ecosystems, and their significance in various cultures. It promotes understanding of these gentle animals, their behavioral traits, and how they contribute to agriculture and tourism. Communities celebrate this day with events that showcase llamas, including farm tours, educational workshops, and fleece shearing demonstrations, encouraging a greater appreciation for these unique creatures.",
+        "emoji": "🦙",
         "funFacts": [
-          "Extensive research across historical documents, cultural calendars, and official government records yields no mention of an \"Underground America Day\" on May 14th.",
-          "Unlike recognized holidays, there are no documented traditions, origins, or public celebrations associated with this purported day.",
-          "The name \"Underground America Day\" does not correspond to any known academic, pop culture, or historical events typically commemorated by a holiday."
+          "Llamas are social animals and live in groups called herds.",
+          "They can weigh between 250 to 450 pounds and can reach heights of 5 to 6 feet at the head.",
+          "Llamas communicate through their body language, making various sounds to express emotions.",
+          "The average lifespan of a llama is around 15 to 25 years.",
+          "Llamas have excellent eyesight and can see almost 360 degrees around them."
         ],
-        "name": "Underground America Day"
+        "name": "National Llama Awareness Day"
       }
     ],
     "05-15": [
@@ -4411,20 +4420,24 @@
         "funFacts": [
           "While their exact origin is debated, a recipe for 'fried onions with Parmesan cheese' appeared in a British cookbook as early as 1802, resembling modern onion rings.",
           "Large, sweet onions, such as Vidalia or yellow onions, are commonly preferred for making onion rings due to their mild flavor and ability to form substantial rings.",
-          "Onion rings are a classic American diner food, frequently served as a popular side dish or appetizer with burgers, hot dogs, and sandwiches."
+          "Onion rings are a classic American diner food, frequently served as a popular side dish or appetizer with burgers, hot dogs, and sandwiches.",
+          "The popularity of onion rings soared in the U.S. during the 1930s and 1940s, often featured on restaurant menus across the country.",
+          "Some restaurants go beyond the classic onion ring, experimenting with different batters and toppings, including spicy seasonings or unique dipping sauces."
         ],
         "name": "National Onion Rings Day"
       },
       {
         "date": "06-22",
-        "description": "\"Stupid Guy Thing Day\" is a fictional, humorous \"holiday\" invented by the character Michael Scott in the American television series *The Office*. As described by Michael, it supposedly falls on June 22nd and is a day when men can engage in foolish or nonsensical activities and \"get away with it.\" It is not an officially recognized public or cultural holiday but serves as a comedic element within the show.",
-        "emoji": "🤦‍♂️",
+        "description": "World Rainforest Day, observed on June 22nd, aims to raise awareness about the importance of rainforests and the urgent need to protect them. This day encourages individuals and organizations to engage in activities that promote rainforest conservation, education, and sustainable practices. Events often include tree-planting initiatives, educational workshops, and discussions about biodiversity and the role of rainforests in mitigating climate change.",
+        "emoji": "🌳",
         "funFacts": [
-          "The \"holiday\" was first introduced in \"The Job, Part 2,\" the third-season finale of *The Office* (US).",
-          "Michael Scott created the concept to explain an activity he had scheduled on June 22nd.",
-          "The episode in which it was mentioned originally aired on May 17, 2007."
+          "Rainforests cover only about 6% of the Earth's surface but are home to more than half of the world's plant and animal species.",
+          "Every minute, an area equivalent to 48 football fields of rainforest is lost due to deforestation.",
+          "Rainforests produce approximately 20% of the world's oxygen.",
+          "The Amazon rainforest is the largest rainforest in the world, spanning over 5.5 million square kilometers.",
+          "Many modern medicines are derived from the unique plant species found in rainforests, highlighting their importance in medical research."
         ],
-        "name": "Stupid Guy Thing Day"
+        "name": "World Rainforest Day"
       }
     ],
     "06-23": [
@@ -5707,20 +5720,24 @@
         "funFacts": [
           "Leatherworking is one of humanity's oldest crafts, with evidence dating back to prehistoric times when it was essential for clothing, shelter, and tools.",
           "Common leathercraft techniques include tooling, carving, dyeing, stamping, lacing, and stitching, allowing for a wide range of decorative and functional finishes.",
-          "Products made through leathercraft range from everyday items like belts, wallets, and shoes to intricate artwork, saddles, and specialized equipment."
+          "Products made through leathercraft range from everyday items like belts, wallets, and shoes to intricate artwork, saddles, and specialized equipment.",
+          "The largest leather show in the world, the \"All Japan Leathercraft Fair,\" is held annually in Tokyo, featuring artisans and products from across the globe.",
+          "Vegetable tanning is a traditional method of leather processing that uses tannins found in plant matter, resulting in eco-friendly and durable leather."
         ],
         "name": "National Leathercraft Day"
       },
       {
         "date": "08-15",
-        "description": "The holiday 'Chauvin Day' on August 15th is not a recognized or established celebration in any factual, historical, or cultural context. There is no verifiable evidence of such a day being observed.",
-        "emoji": "❓",
+        "description": "National Relaxation Day encourages individuals to take a break from their busy lives and indulge in self-care and relaxation. It’s a day dedicated to stepping back from daily stresses and focusing on mental well-being through activities like meditation, enjoying nature, or simply lounging at home.",
+        "emoji": "😌",
         "funFacts": [
-          "The term 'chauvinism,' denoting excessive or blind patriotism, is attributed to Nicolas Chauvin, a legendary soldier of Napoleon Bonaparte's army.",
-          "August 15th is widely recognized as Assumption Day by Roman Catholics and Orthodox Christians, commemorating the belief in the Virgin Mary's bodily assumption into Heaven.",
-          "Several nations observe national holidays on August 15th, including India's Independence Day, South Korea's Gwangbokjeol (National Liberation Day), and various countries celebrating Assumption Day."
+          "The concept of relaxation can be traced back to ancient civilizations, including the Greeks and Romans, who emphasized the importance of leisure time.",
+          "Studies show that taking regular breaks can significantly boost productivity and creativity.",
+          "Relaxation techniques like yoga and meditation have been scientifically proven to reduce stress and improve mental health.",
+          "In some cultures, relaxation days are tied to specific rituals and festivals, emphasizing community and rest.",
+          "Spa days and wellness retreats have become popular ways to celebrate relaxation and self-care internationally."
         ],
-        "name": "Chauvin Day"
+        "name": "National Relaxation Day"
       }
     ],
     "08-16": [
@@ -5990,23 +6007,27 @@
     "08-27": [
       {
         "date": "08-27",
-        "description": "There is no recognized holiday known as 'The Duchess Who Wasn't Day' on August 27th or any other date in historical records, cultural traditions, or official calendars. This 'holiday' appears to be fictional or non-existent, and no factual information about its observance can be provided.",
-        "emoji": "❓",
+        "description": "Lizard Appreciation Day is a fun and unique holiday dedicated to recognizing and celebrating the diverse world of lizards. Whether you keep them as pets, observe them in the wild, or simply find them fascinating, this day encourages everyone to learn more about these reptiles and promote their conservation.",
+        "emoji": "🦎",
         "funFacts": [
-          "No historical records or cultural traditions support the existence of 'The Duchess Who Wasn't Day'.",
-          "This 'holiday' is not listed by major holiday calendars or recognized by any national or international bodies.",
-          "The name 'The Duchess Who Wasn't' suggests a fictional or metaphorical concept rather than a historical or celebrated event."
+          "There are over 6,000 species of lizards found worldwide, varying greatly in size and color.",
+          "Lizards can regrow their tails as a survival mechanism when they are threatened by predators.",
+          "Many lizards, like the chameleon, can change color to communicate or regulate their body temperature.",
+          "The largest lizard in the world is the Komodo dragon, which can grow up to 10 feet long.",
+          "Lizards communicate through various means, including body language, head-bobbing, and even changing colors."
         ],
-        "name": "The Duchess Who Wasn't Day"
+        "name": "Lizard Appreciation Day"
       },
       {
         "date": "08-27",
         "description": "Just Because Day, celebrated annually on August 27th, is an unofficial holiday that encourages individuals to act spontaneously and perform deeds simply for the sake of it, without requiring a specific reason or occasion. It promotes the idea of engaging in random acts of kindness, treating oneself to something special, or doing something out of the ordinary, all with the aim of spreading joy, fostering goodwill, or simply enjoying the moment for no reason other than 'just because.'",
         "emoji": "✨",
         "funFacts": [
-          "The exact origins of Just Because Day are largely unrecorded, suggesting it evolved organically as a concept rather than being formally instituted.",
-          "It encourages breaking from routine and embracing spontaneity, promoting both self-care and generosity without expectation of return.",
-          "Popular activities include sending an unexpected card, giving a surprise gift, or performing a random act of kindness for a stranger."
+          "The holiday emphasizes the joy of spontaneity, encouraging actions taken purely for pleasure.",
+          "It has gained popularity in social media, with people sharing their spontaneous acts.",
+          "Many people choose to celebrate by treating themselves to a small luxury, like a favorite dessert.",
+          "Just Because Day serves as a reminder to appreciate life's simple pleasures and live in the moment.",
+          "The concept reflects the idea that sometimes the best reasons to do something are no reasons at all."
         ],
         "name": "Just Because Day"
       }
@@ -6933,18 +6954,22 @@
         "funFacts": [
           "The 'Betty' in dessert names like Apple Betty or Brown Betty typically refers to a baked fruit pudding layered with breadcrumbs or bread pieces, popular in American cuisine since the 19th century.",
           "A key characteristic that distinguishes an Apple Betty is its topping, which traditionally uses buttered bread or breadcrumbs, contrasting with the oat-based streusel of an apple crisp.",
-          "Recipes for fruit 'Betties' have been documented in American cookbooks as early as the 1860s, predating many modern fruit crisp variations."
+          "Recipes for fruit 'Betties' have been documented in American cookbooks as early as the 1860s, predating many modern fruit crisp variations.",
+          "Apple Betty is often served warm, sometimes with a scoop of vanilla ice cream or a dollop of whipped cream, enhancing its comforting qualities.",
+          "The dish is considered a regional favorite in New England, where apple orchards are plentiful and fresh apple harvests contribute to its popularity."
         ],
         "name": "National Apple Betty Day"
       },
       {
         "date": "10-05",
-        "description": "Do Something Nice Day, widely observed annually on May 10th, encourages individuals to perform acts of kindness, whether big or small, to spread positivity and make a meaningful difference in the lives of others. It serves as a heartwarming reminder that simple gestures of goodwill can create a significant ripple effect throughout communities, fostering a more compassionate and connected world.",
-        "emoji": "❤️",
+        "description": "Do Something Nice Day is all about encouraging individuals to engage in acts of kindness that create ripples of positivity in their communities. This celebration inspires people to consider how a single kind gesture can brighten someone’s day, promote goodwill, and enhance social bonds among neighbors and friends.",
+        "emoji": "🤝",
         "funFacts": [
-          "While the precise origins of this particular observance are not widely documented, its spirit aligns with global movements promoting kindness and altruism.",
-          "Engaging in acts of kindness is scientifically linked to improved well-being for both the giver and the receiver, boosting mood and reducing stress.",
-          "Suggested activities often range from holding a door open or offering a compliment to volunteering time or donating to a cherished cause."
+          "The holiday originated in the United States in the early 2000s.",
+          "Acts of kindness can include anything from helping a stranger to writing a heartfelt note.",
+          "Research shows that performing acts of kindness can boost your own happiness.",
+          "The day emphasizes the importance of community and connection through small, meaningful actions.",
+          "Some people celebrate this day by volunteering or donating to charitable organizations."
         ],
         "name": "Do Something Nice Day"
       }
