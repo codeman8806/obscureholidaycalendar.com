@@ -1241,7 +1241,7 @@ def render_page(
             <span class="pill pill-secondary">Updated {last_updated}</span>
           </div>
           <p class="lead">
-            This holiday is featured in the Obscure Holiday Calendar app with emoji-style visuals, reminders, and daily fun facts.
+            This holiday is featured in the <a class="inline-link" href="{APP_URL}" target="_blank" rel="noopener">Obscure Holiday Calendar app</a> with emoji-style visuals, reminders, and daily fun facts.
           </p>
           <div class="share-tools">
             <button class="btn-pill" type="button" id="share-btn" aria-label="Share this holiday">
