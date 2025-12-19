@@ -82,6 +82,8 @@ const DEFAULT_HOLIDAY_CHOICE = 0; // which holiday of the day to schedule: 0 = f
 const DEFAULT_EMBED_COLOR = 0x1c96f3;
 const DEFAULT_EMBED_STYLE = "compact";
 const DEFAULT_TIMEZONE = "UTC";
+const PROMO_VOTE_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000; // once per week per guild
+const PROMO_RATE_INTERVAL_MS = 30 * 24 * 60 * 60 * 1000; // once per 30 days per guild
 
 function readJsonSafe(filePath, fallback) {
   try {
@@ -316,6 +318,15 @@ function getGuildConfig(guildId) {
   if (typeof guildConfig[guildId].holidayChoice !== "number") {
     guildConfig[guildId].holidayChoice = DEFAULT_HOLIDAY_CHOICE;
   }
+  if (typeof guildConfig[guildId].promotionsEnabled !== "boolean") {
+    guildConfig[guildId].promotionsEnabled = true;
+  }
+  if (!guildConfig[guildId].lastVotePromptAt) {
+    guildConfig[guildId].lastVotePromptAt = 0;
+  }
+  if (!guildConfig[guildId].lastRatePromptAt) {
+    guildConfig[guildId].lastRatePromptAt = 0;
+  }
   return guildConfig[guildId];
 }
 
@@ -356,6 +367,56 @@ function getChannelConfig(guildId, channelId) {
 
 function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+function canShowVotePrompt(guildId) {
+  const cfg = getGuildConfig(guildId);
+  if (cfg.promotionsEnabled === false) return false;
+  const last = Number(cfg.lastVotePromptAt || 0);
+  return Date.now() - last >= PROMO_VOTE_INTERVAL_MS;
+}
+
+function canShowRatePrompt(guildId) {
+  const cfg = getGuildConfig(guildId);
+  if (cfg.promotionsEnabled === false) return false;
+  const last = Number(cfg.lastRatePromptAt || 0);
+  return Date.now() - last >= PROMO_RATE_INTERVAL_MS;
+}
+
+function markVotePrompt(guildId) {
+  const cfg = getGuildConfig(guildId);
+  cfg.lastVotePromptAt = Date.now();
+  saveGuildConfig();
+}
+
+function markRatePrompt(guildId) {
+  const cfg = getGuildConfig(guildId);
+  cfg.lastRatePromptAt = Date.now();
+  saveGuildConfig();
+}
+
+function buildPromoComponents(guildId, opts = {}) {
+  const rows = [];
+  const noteParts = [];
+  const includeRate = !!opts.includeRate;
+  const voteOk = canShowVotePrompt(guildId);
+  const rateOk = includeRate && canShowRatePrompt(guildId);
+
+  if (!voteOk && !rateOk) return { rows, note: "" };
+
+  const row = new ActionRowBuilder();
+  if (voteOk) {
+    row.addComponents(new ButtonBuilder().setLabel("Vote on top.gg").setStyle(ButtonStyle.Link).setURL(TOPGG_VOTE_URL));
+    noteParts.push("Optional: support the bot with a quick vote.");
+    markVotePrompt(guildId);
+  }
+  if (rateOk) {
+    row.addComponents(new ButtonBuilder().setLabel("Leave a review").setStyle(ButtonStyle.Link).setURL(TOPGG_REVIEW_URL));
+    noteParts.push("Reviews help discovery—thanks!");
+    markRatePrompt(guildId);
+  }
+  if (row.components.length) rows.push(row);
+  return { rows, note: noteParts.join(" ") };
 }
 
 function pad(num) {
@@ -485,7 +546,13 @@ async function handleToday(interaction) {
     choice = 0; // free tier: first holiday only
   }
   const pick = hits[choice] || hits[0];
-  return interaction.reply({ embeds: [buildEmbed(pick, { branding: !premium || config.branding })], components: buildButtons(pick) });
+  const baseComponents = buildButtons(pick);
+  const { rows: promoRows, note: promoNote } = buildPromoComponents(interaction.guild.id, { includeRate: false });
+  return interaction.reply({
+    content: promoNote || undefined,
+    embeds: [buildEmbed(pick, { branding: !premium || config.branding })],
+    components: [...baseComponents, ...promoRows],
+  });
 }
 
 async function handleHelp(interaction) {
@@ -594,7 +661,8 @@ async function handleWeek(interaction) {
   }));
   embed.addFields(fields);
   embed.setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
-  return interaction.reply({ embeds: [embed] });
+  const { rows: promoRows, note: promoNote } = buildPromoComponents(interaction.guild.id, { includeRate: true });
+  return interaction.reply({ content: promoNote || undefined, embeds: [embed], components: promoRows });
 }
 
 async function handleSetup(interaction) {
@@ -610,6 +678,7 @@ async function handleSetup(interaction) {
   const embedStyle = interaction.options.getString("embed_style");
   const embedColor = interaction.options.getString("embed_color");
   const skipWeekends = interaction.options.getBoolean("skip_weekends");
+  const promotionsEnabled = interaction.options.getBoolean("promotions");
   const premium = isPremium(interaction.guild, interaction.member);
 
   if (!channel.isTextBased()) {
@@ -622,9 +691,17 @@ async function handleSetup(interaction) {
     config.hour = 0;
     config.branding = true;
     config.holidayChoice = DEFAULT_HOLIDAY_CHOICE;
+    if (typeof promotionsEnabled === "boolean") config.promotionsEnabled = promotionsEnabled;
     saveGuildConfig();
     scheduleForChannel(guildId, channel.id);
-    return interaction.reply({ content: `Daily posts set to <#${channel.id}> at 00:00 UTC. Premium unlocks timezone/hour/branding toggles.`, ephemeral: true });
+    return interaction.reply({
+      content: [
+        `Daily posts set to <#${channel.id}> at 00:00 UTC.`,
+        `Promotions: ${config.promotionsEnabled === false ? "off" : "on (weekly vote / monthly review)"}`,
+        "Premium unlocks timezone/hour/branding toggles.",
+      ].join("\n"),
+      ephemeral: true,
+    });
   }
 
   // Premium path: allow multiple channels, timezone/hour, branding toggle, holiday choice, role mention, quiet, style, color, skip weekends
@@ -644,6 +721,7 @@ async function handleSetup(interaction) {
   if (Number.isInteger(holidayChoice)) ch.holidayChoice = Math.min(Math.max(holidayChoice, 0), 1);
   if (role) ch.roleId = role.id;
   if (typeof quiet === "boolean") ch.quiet = quiet;
+  if (typeof promotionsEnabled === "boolean") config.promotionsEnabled = promotionsEnabled;
   if (embedStyle) ch.style = embedStyle;
   if (embedColor && /^#?[0-9a-fA-F]{6}$/.test(embedColor)) {
     ch.color = Number.parseInt(embedColor.replace("#", ""), 16);
@@ -663,6 +741,7 @@ async function handleSetup(interaction) {
       role ? `Role ping: <@&${role.id}>` : "Role ping: none",
       `Quiet mode: ${ch.quiet ? "on" : "off"}`,
       `Skip weekends: ${ch.skipWeekends ? "yes" : "no"}`,
+      `Promotions: ${config.promotionsEnabled === false ? "off" : "on (weekly vote / monthly review)"}`,
     ].join("\n"),
     ephemeral: true,
   });
@@ -1111,10 +1190,12 @@ async function postTodayForChannel(guildId, channelId) {
 
   const mention = channelSettings.quiet ? "" : channelSettings.roleId ? `<@&${channelSettings.roleId}> ` : "";
 
+  const { rows: promoRows, note: promoNote } = buildPromoComponents(guildId, { includeRate: true });
+  const components = [...buildButtons(pick), ...promoRows];
   await channel.send({
-    content: `${mention}🎉 Today’s holidays: ${topNames}${teaser ? `\n${teaser}` : ""}`,
+    content: `${mention}🎉 Today’s holidays: ${topNames}${teaser ? `\n${teaser}` : ""}${promoNote ? `\n\n${promoNote}` : ""}`,
     embeds: [todayEmbed],
-    components: buildButtons(pick),
+    components,
   });
 }
 

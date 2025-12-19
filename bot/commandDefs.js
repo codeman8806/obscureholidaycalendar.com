@@ -110,6 +110,12 @@ export const commandDefs = [
         required: false,
       },
       {
+        name: "promotions",
+        description: "Enable optional vote/review prompts (default on)",
+        type: ApplicationCommandOptionType.Boolean,
+        required: false,
+      },
+      {
         name: "embed_style",
         description: "Premium: choose compact vs rich content",
         type: ApplicationCommandOptionType.String,
