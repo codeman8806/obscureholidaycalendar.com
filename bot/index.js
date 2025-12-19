@@ -181,13 +181,18 @@ async function postDiscordServicesStats() {
     const serverCount = client.guilds.cache.size;
     const botId = client.user?.id;
     if (!botId) return;
+    const shardCount = Number(process.env.DISCORDSERVICES_SHARDS || "1");
+    const payload = {
+      servers: serverCount,
+      shards: shardCount,
+    };
     const res = await fetch(`https://api.discordservices.net/bot/${botId}/stats`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: DISCORDSERVICES_TOKEN,
       },
-      body: JSON.stringify({ server_count: serverCount }),
+      body: JSON.stringify(payload),
     });
     if (!res.ok) {
       const text = await res.text();
