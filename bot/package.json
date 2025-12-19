@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "node index.js"
+    "dev": "node index.js",
+    "post:dbl": "node post_dbl_commands.js"
   },
   "dependencies": {
     "discord.js": "^14.16.3",
