@@ -67,7 +67,9 @@ const CONFIG_PATH = path.resolve(__dirname, "guild-config.json");
 const PREMIUM_PATH = path.resolve(__dirname, "premium.json"); // optional allowlist
 const BOT_OWNER_ID = process.env.BOT_OWNER_ID || null;
 const TOPGG_TOKEN = process.env.TOPGG_TOKEN || null; // for posting stats to top.gg
+const DISCORDSERVICES_TOKEN = process.env.DISCORDSERVICES_TOKEN || null; // for posting stats to api.discordservices.net
 const TOPGG_POST_INTERVAL_MIN = Number(process.env.TOPGG_POST_INTERVAL_MIN || "30");
+const DISCORDSERVICES_POST_INTERVAL_MIN = Number(process.env.DISCORDSERVICES_POST_INTERVAL_MIN || TOPGG_POST_INTERVAL_MIN || "30");
 const PORT = process.env.PORT || null; // for Railway/health checks (optional)
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || null;
 const STRIPE_PRICE_ID = process.env.STRIPE_PRICE_ID || null; // subscription price id
@@ -170,6 +172,31 @@ async function postTopGGStats() {
     }
   } catch (e) {
     console.warn("top.gg stats post failed:", e.message);
+  }
+}
+
+async function postDiscordServicesStats() {
+  if (!DISCORDSERVICES_TOKEN) return;
+  try {
+    const serverCount = client.guilds.cache.size;
+    const botId = client.user?.id;
+    if (!botId) return;
+    const res = await fetch(`https://api.discordservices.net/bot/${botId}/stats`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: DISCORDSERVICES_TOKEN,
+      },
+      body: JSON.stringify({ server_count: serverCount }),
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      console.warn(`discordservices stats post failed: ${res.status} ${text}`);
+    } else {
+      console.log(`Posted stats to discordservices.net: ${serverCount} servers`);
+    }
+  } catch (e) {
+    console.warn("discordservices stats post failed:", e.message);
   }
 }
 
@@ -902,6 +929,12 @@ client.once("ready", async () => {
   postTopGGStats();
   if (TOPGG_TOKEN && TOPGG_POST_INTERVAL_MIN > 0) {
     setInterval(postTopGGStats, TOPGG_POST_INTERVAL_MIN * 60 * 1000);
+  }
+
+  // Post stats to discordservices.net now and on interval
+  postDiscordServicesStats();
+  if (DISCORDSERVICES_TOKEN && DISCORDSERVICES_POST_INTERVAL_MIN > 0) {
+    setInterval(postDiscordServicesStats, DISCORDSERVICES_POST_INTERVAL_MIN * 60 * 1000);
   }
 });
 
