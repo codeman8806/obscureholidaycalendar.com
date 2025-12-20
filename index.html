@@ -62,17 +62,25 @@
   <link rel="stylesheet" href="/styles.css">
   <style>
     body.page.home {
-      /* Large icon backdrop with soft gradients behind everything */
+      /* Gradient field for depth */
       background-color: #0c0b1f;
       background-image:
-        url("/assets/app-icon.png"),
         radial-gradient(circle at 18% 14%, rgba(109,31,175,0.32), rgba(14,17,48,0.9)),
         radial-gradient(circle at 82% 18%, rgba(224,75,156,0.26), rgba(10,12,32,0.9)),
         radial-gradient(circle at 50% 88%, rgba(20,184,166,0.22), rgba(12,14,36,0.9));
-      background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-      background-position: center 140px, 12% 8%, 88% 12%, 50% 92%;
-      background-size: 820px, 820px, 880px, 820px;
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-position: 12% 8%, 88% 12%, 50% 92%;
+      background-size: 820px, 880px, 820px;
       color: #0f172a;
+    }
+    body.page.home::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("/assets/app-icon.png") center 120px / 70vmin no-repeat;
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: 0;
     }
     .home .bg-accent {
       position: absolute;
