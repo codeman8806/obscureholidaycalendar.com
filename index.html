@@ -61,12 +61,18 @@
 
   <link rel="stylesheet" href="/styles.css">
   <style>
+    body.page.home {
+      background: radial-gradient(circle at 20% 20%, #f8e8ff 0%, #eef4ff 40%, #fef6f1 100%);
+    }
     /* Home page size tweaks to avoid oversized hero */
     .home .holiday-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f7f1ff 45%, #eef7ff 100%);
+      border: 1px solid #e3dbff;
       max-width: 820px;
       padding: 16px 14px 16px;
       margin: 0 auto;
       text-align: center;
+      box-shadow: 0 24px 54px rgba(80, 46, 130, 0.14);
     }
     .home .brand-icon {
       width: 72px;
@@ -133,14 +139,14 @@
       gap: 6px;
       padding: 8px 14px;
       border-radius: 999px;
-      background: #0f172a;
+      background: linear-gradient(120deg, #7c3aed, #2563eb);
       color: #fff;
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
+      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
     }
     .home #learn-more:hover {
-      background: #111827;
+      background: #1f2937;
       text-decoration: none;
     }
     .home .qr-block {
@@ -197,11 +203,11 @@
       font-weight: 700;
       text-decoration: none;
       color: #fff;
-      background: linear-gradient(120deg, #111827, #1f2937);
+      background: linear-gradient(120deg, #ec4899, #8b5cf6);
       box-shadow: 0 10px 22px rgba(15, 23, 42, 0.16);
     }
     .home .action-buttons a.secondary {
-      background: #0f172a;
+      background: linear-gradient(120deg, #0ea5e9, #2563eb);
     }
     .home .quick-links-grid {
       max-width: 820px;
@@ -351,6 +357,13 @@
         <h2>Scan to download</h2>
         <div class="qr-block">
           <img src="/assets/qr-combined.png" alt="QR code" style="height:150px;">
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-heading">Follow for daily holiday drops</h2>
+        <div class="action-buttons">
+          <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener">Follow on Instagram</a>
         </div>
       </section>
 
