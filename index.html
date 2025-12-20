@@ -509,6 +509,18 @@
           });
         });
       }
+      const igLinks = document.querySelectorAll('a[href*="instagram.com/obscureholidaycalendar"]');
+      if (igLinks && igLinks.length && window.gtag) {
+        igLinks.forEach((ig) => {
+          ig.addEventListener("click", () => {
+            gtag("event", "instagram_follow_click", {
+              link_url: ig.href,
+              placement: ig.classList.contains("ig-link") ? "nav" : "cta",
+              source_page: "home"
+            });
+          });
+        });
+      }
       const nameEl = document.getElementById("name");
       const dateEl = document.getElementById("date");
       const linkEl = document.getElementById("learn-more");
