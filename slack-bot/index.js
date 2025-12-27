@@ -1,0 +1,532 @@
+import crypto from "crypto";
+import express from "express";
+import fs from "fs";
+import path from "path";
+import Stripe from "stripe";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const PORT = process.env.PORT || 8080;
+const SLACK_BOT_TOKEN = (process.env.SLACK_BOT_TOKEN || "").trim() || null;
+const SLACK_SIGNING_SECRET = (process.env.SLACK_SIGNING_SECRET || "").trim() || null;
+const SLACK_APP_NAME = process.env.SLACK_APP_NAME || "ObscureHolidayCalendar";
+
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || null;
+const STRIPE_PRICE_ID_INTRO = process.env.STRIPE_PRICE_ID_INTRO || null;
+const STRIPE_PRICE_ID_STANDARD = process.env.STRIPE_PRICE_ID_STANDARD || process.env.STRIPE_PRICE_ID || null;
+const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || null;
+const STRIPE_SUCCESS_URL = process.env.STRIPE_SUCCESS_URL || "https://www.obscureholidaycalendar.com/discord-bot/?success=1";
+const STRIPE_CANCEL_URL = process.env.STRIPE_CANCEL_URL || "https://www.obscureholidaycalendar.com/discord-bot/?canceled=1";
+const STRIPE_PORTAL_RETURN_URL = process.env.STRIPE_PORTAL_RETURN_URL || "https://www.obscureholidaycalendar.com/discord-bot/";
+
+const stripeClient = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null;
+
+const SITE_URL = "https://www.obscureholidaycalendar.com";
+const SITE_BASE = `${SITE_URL}/holiday`;
+const APP_URL = `${SITE_URL}/app/`;
+const SUPPORT_URL = `${SITE_URL}/discord-bot/`;
+const TOPGG_VOTE_URL = "https://top.gg/bot/1447955404142153789/vote";
+const TOPGG_REVIEW_URL = "https://top.gg/bot/1447955404142153789#reviews";
+
+const CONFIG_PATH = path.resolve(__dirname, "workspace-config.json");
+const PREMIUM_PATH = path.resolve(__dirname, "premium.json");
+
+const DEFAULT_TIMEZONE = "UTC";
+const DEFAULT_HOUR = 9;
+const DEFAULT_HOLIDAY_CHOICE = 0;
+
+function readJsonSafe(filePath, fallback) {
+  try {
+    if (fs.existsSync(filePath)) {
+      return JSON.parse(fs.readFileSync(filePath, "utf8"));
+    }
+  } catch (e) {
+    console.error(`Failed to read ${filePath}:`, e.message);
+  }
+  return fallback;
+}
+
+function writeJsonSafe(filePath, data) {
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
+  } catch (e) {
+    console.error(`Failed to write ${filePath}:`, e.message);
+  }
+}
+
+const workspaceConfig = readJsonSafe(CONFIG_PATH, {});
+const premiumAllowlist = readJsonSafe(PREMIUM_PATH, {});
+
+function resolveHolidaysPath() {
+  const local = path.resolve(__dirname, "holidays.json");
+  if (fs.existsSync(local)) return local;
+  const root = path.resolve(__dirname, "..", "holidays.json");
+  if (fs.existsSync(root)) return root;
+  throw new Error("holidays.json not found. Place it in slack-bot/ or repo root.");
+}
+
+function loadHolidays() {
+  const raw = fs.readFileSync(resolveHolidaysPath(), "utf8");
+  const data = JSON.parse(raw);
+  return data.holidays || {};
+}
+
+const holidaysByDate = loadHolidays();
+const allHolidays = Object.values(holidaysByDate).flat();
+
+function normalizeName(text) {
+  return (text || "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/['’]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function buildNameToSlug() {
+  const map = {};
+  const holidayDir = path.resolve(__dirname, "..", "holiday");
+  if (!fs.existsSync(holidayDir)) return map;
+  for (const entry of fs.readdirSync(holidayDir)) {
+    const page = path.join(holidayDir, entry, "index.html");
+    if (!fs.existsSync(page)) continue;
+    const html = fs.readFileSync(page, "utf8");
+    const h1 = html.match(/<h1[^>]*>(.*?)<\/h1>/s);
+    const title = h1 ? h1[1].replace(/<[^>]+>/g, "").trim() : null;
+    if (title) map[normalizeName(title)] = entry;
+  }
+  return map;
+}
+
+const nameToSlug = buildNameToSlug();
+
+function findByDate(mmdd) {
+  return holidaysByDate[mmdd] || [];
+}
+
+function findByName(query) {
+  const q = normalizeName(query);
+  if (!q) return [];
+  return allHolidays.filter((h) => normalizeName(h.name || "").includes(q));
+}
+
+function toMMDD(date) {
+  const mm = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(date.getUTCDate()).padStart(2, "0");
+  return `${mm}-${dd}`;
+}
+
+function parseDateInput(input) {
+  if (!input) return null;
+  const match = input.trim().match(/^(\d{1,2})[/-](\d{1,2})$/);
+  if (!match) return null;
+  const mm = String(match[1]).padStart(2, "0");
+  const dd = String(match[2]).padStart(2, "0");
+  return `${mm}-${dd}`;
+}
+
+function holidayUrl(holiday) {
+  const slug = nameToSlug[normalizeName(holiday.name || "")];
+  return slug ? `${SITE_BASE}/${slug}/` : SITE_URL;
+}
+
+function formatHoliday(holiday, mmdd) {
+  if (!holiday) return "No holiday found.";
+  const emoji = holiday.emoji ? `${holiday.emoji} ` : "";
+  const dateLine = mmdd ? `(${mmdd})` : "";
+  const link = holidayUrl(holiday);
+  return `${emoji}*${holiday.name || "Holiday"}* ${dateLine}\n${holiday.description || ""}\n${link}`;
+}
+
+function isPremiumTeam(teamId) {
+  return Boolean(premiumAllowlist[teamId]);
+}
+
+function ensureWorkspace(teamId) {
+  if (!workspaceConfig[teamId]) {
+    workspaceConfig[teamId] = {
+      channelId: null,
+      timezone: DEFAULT_TIMEZONE,
+      hour: DEFAULT_HOUR,
+      holidayChoice: DEFAULT_HOLIDAY_CHOICE,
+      skipWeekends: false,
+      promotionsEnabled: true,
+      lastPostedDate: null,
+    };
+  }
+  return workspaceConfig[teamId];
+}
+
+function parseSetupArgs(text) {
+  const out = {};
+  if (!text) return out;
+  const parts = text.split(/\s+/);
+  for (const part of parts) {
+    const [key, rawVal] = part.split("=");
+    if (!key || rawVal == null) continue;
+    const val = rawVal.trim();
+    out[key.toLowerCase()] = val;
+  }
+  return out;
+}
+
+function getLocalParts(timeZone) {
+  const now = new Date();
+  const fmt = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(now);
+  const get = (type) => fmt.find((p) => p.type === type)?.value || "";
+  return {
+    year: get("year"),
+    month: get("month"),
+    day: get("day"),
+    hour: Number(get("hour")),
+    minute: Number(get("minute")),
+    ymd: `${get("year")}-${get("month")}-${get("day")}`,
+    weekday: new Intl.DateTimeFormat("en-US", { timeZone, weekday: "short" }).format(now),
+  };
+}
+
+async function slackPostMessage(channel, text) {
+  if (!SLACK_BOT_TOKEN) return;
+  await fetch("https://slack.com/api/chat.postMessage", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${SLACK_BOT_TOKEN}`,
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({ channel, text }),
+  });
+}
+
+async function handleDailyPosts() {
+  for (const [teamId, config] of Object.entries(workspaceConfig)) {
+    if (!config.channelId) continue;
+    const tz = config.timezone || DEFAULT_TIMEZONE;
+    const parts = getLocalParts(tz);
+    if (config.skipWeekends && (parts.weekday === "Sat" || parts.weekday === "Sun")) continue;
+    if (parts.hour !== Number(config.hour) || parts.minute !== 0) continue;
+    if (config.lastPostedDate === parts.ymd) continue;
+
+    const mmdd = `${parts.month}-${parts.day}`;
+    const hits = findByDate(mmdd);
+    if (!hits.length) continue;
+    const choice = Math.min(config.holidayChoice || 0, hits.length - 1);
+    const holiday = hits[choice];
+    const text = formatHoliday(holiday, mmdd);
+    await slackPostMessage(config.channelId, text);
+    config.lastPostedDate = parts.ymd;
+    writeJsonSafe(CONFIG_PATH, workspaceConfig);
+  }
+}
+
+async function createPremiumCheckoutSession({ teamId, userId }) {
+  if (!stripeClient || !STRIPE_PRICE_ID_INTRO || !STRIPE_PRICE_ID_STANDARD) return null;
+  return stripeClient.checkout.sessions.create({
+    mode: "subscription",
+    line_items: [{ price: STRIPE_PRICE_ID_INTRO, quantity: 1 }],
+    success_url: STRIPE_SUCCESS_URL,
+    cancel_url: STRIPE_CANCEL_URL,
+    metadata: { team_id: teamId, user_id: userId || "" },
+    subscription_data: { metadata: { team_id: teamId, user_id: userId || "" } },
+  });
+}
+
+function subscriptionNeedsUpgrade(sub) {
+  const items = sub.items?.data || [];
+  const hasIntro = items.some((item) => item?.price?.id === STRIPE_PRICE_ID_INTRO);
+  const hasStandard = items.some((item) => item?.price?.id === STRIPE_PRICE_ID_STANDARD);
+  return hasIntro && !hasStandard;
+}
+
+async function upgradeSubscriptionToStandard(subId) {
+  if (!stripeClient || !STRIPE_PRICE_ID_STANDARD || !STRIPE_PRICE_ID_INTRO) return;
+  const sub = await stripeClient.subscriptions.retrieve(subId);
+  if (!subscriptionNeedsUpgrade(sub)) return;
+  const introItem = sub.items?.data?.find((item) => item?.price?.id === STRIPE_PRICE_ID_INTRO);
+  if (!introItem) return;
+  await stripeClient.subscriptions.update(subId, {
+    items: [{ id: introItem.id, price: STRIPE_PRICE_ID_STANDARD }],
+    proration_behavior: "none",
+  });
+}
+
+async function listSubscriptionsByPrice(priceId) {
+  if (!stripeClient || !priceId) return [];
+  const subs = [];
+  let startingAfter = null;
+  while (true) {
+    const page = await stripeClient.subscriptions.list({
+      status: "active",
+      price: priceId,
+      limit: 100,
+      starting_after: startingAfter || undefined,
+    });
+    subs.push(...page.data);
+    if (!page.has_more) break;
+    startingAfter = page.data[page.data.length - 1].id;
+  }
+  return subs;
+}
+
+async function syncPremiumFromStripe() {
+  if (!stripeClient || !STRIPE_PRICE_ID_STANDARD) return;
+  try {
+    const standardSubs = await listSubscriptionsByPrice(STRIPE_PRICE_ID_STANDARD);
+    const introSubs = STRIPE_PRICE_ID_INTRO ? await listSubscriptionsByPrice(STRIPE_PRICE_ID_INTRO) : [];
+    for (const sub of [...standardSubs, ...introSubs]) {
+      const teamId = sub.metadata?.team_id;
+      if (teamId) {
+        premiumAllowlist[teamId] = true;
+      }
+    }
+    writeJsonSafe(PREMIUM_PATH, premiumAllowlist);
+  } catch (err) {
+    console.warn("Stripe sync failed:", err.message);
+  }
+}
+
+function verifySlackSignature(req) {
+  if (!SLACK_SIGNING_SECRET) return false;
+  const timestamp = req.headers["x-slack-request-timestamp"];
+  const signature = req.headers["x-slack-signature"];
+  if (!timestamp || !signature) return false;
+  const fiveMinutes = 60 * 5;
+  const now = Math.floor(Date.now() / 1000);
+  if (Math.abs(now - Number(timestamp)) > fiveMinutes) return false;
+  const sigBase = `v0:${timestamp}:${req.rawBody || ""}`;
+  const hmac = crypto.createHmac("sha256", SLACK_SIGNING_SECRET).update(sigBase).digest("hex");
+  const computed = `v0=${hmac}`;
+  return crypto.timingSafeEqual(Buffer.from(computed), Buffer.from(signature));
+}
+
+const app = express();
+
+app.use(
+  "/slack/commands",
+  express.urlencoded({
+    extended: false,
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString("utf8");
+    },
+  })
+);
+
+app.use("/stripe/webhook", express.raw({ type: "application/json" }));
+
+app.post("/slack/commands", async (req, res) => {
+  if (!verifySlackSignature(req)) return res.status(401).send("Invalid signature");
+  const { command, text, team_id, user_id, channel_id } = req.body || {};
+  const teamId = team_id || "unknown";
+  const config = ensureWorkspace(teamId);
+
+  const respond = (message) => res.json({ response_type: "ephemeral", text: message });
+
+  if (!command) return respond("Missing command.");
+
+  const cmd = command.replace("/", "");
+  const isPremium = isPremiumTeam(teamId);
+
+  if (cmd === "help") {
+    return respond(
+      [
+        "Holiday bot commands:",
+        "/today",
+        "/tomorrow (premium)",
+        "/week [days] (premium)",
+        "/upcoming [days] (premium)",
+        "/date MM-DD (premium)",
+        "/search <query> (premium)",
+        "/random (premium)",
+        "/facts [name or MM-DD] (premium)",
+        "/setup key=value ...",
+        "/premium",
+        "/upgrade",
+        "/manage",
+        "/invite",
+        "/vote",
+        "/rate",
+        "/support",
+        "/app",
+      ].join("\n")
+    );
+  }
+
+  if (cmd === "support") return respond(`Support: ${SUPPORT_URL}`);
+  if (cmd === "app") return respond(`App: ${APP_URL}`);
+  if (cmd === "invite") return respond(`Invite and setup: ${SUPPORT_URL}`);
+  if (cmd === "vote") return respond(`Vote on top.gg: ${TOPGG_VOTE_URL}`);
+  if (cmd === "rate") return respond(`Leave a review: ${TOPGG_REVIEW_URL}`);
+
+  if (cmd === "premium") {
+    if (isPremium) {
+      return respond("✅ Premium is active for this workspace.");
+    }
+    return respond("⚠️ Premium not active. Use /upgrade to subscribe.");
+  }
+
+  if (cmd === "upgrade") {
+    if (!stripeClient || !STRIPE_PRICE_ID_INTRO || !STRIPE_PRICE_ID_STANDARD) {
+      return respond("Stripe is not configured.");
+    }
+    try {
+      const session = await createPremiumCheckoutSession({ teamId, userId: user_id });
+      return respond(`Upgrade to premium: ${session.url}`);
+    } catch (e) {
+      return respond("Unable to create checkout session right now.");
+    }
+  }
+
+  if (cmd === "manage") {
+    if (!stripeClient) return respond("Stripe is not configured.");
+    try {
+      const subs = await stripeClient.subscriptions.list({ status: "active", limit: 100 });
+      const sub = subs.data.find((s) => s.metadata?.team_id === teamId);
+      const customerId = sub?.customer;
+      if (!customerId) return respond("No active subscription found.");
+      const portal = await stripeClient.billingPortal.sessions.create({
+        customer: customerId,
+        return_url: STRIPE_PORTAL_RETURN_URL,
+      });
+      return respond(`Manage your subscription: ${portal.url}`);
+    } catch (e) {
+      return respond("Unable to open the billing portal right now.");
+    }
+  }
+
+  if (cmd === "setup") {
+    const args = parseSetupArgs(text || "");
+    config.channelId = channel_id;
+    if (args.timezone && isPremium) config.timezone = args.timezone;
+    if (args.hour && isPremium) config.hour = Math.min(Math.max(Number(args.hour), 0), 23);
+    if (args.holiday_choice && isPremium) config.holidayChoice = Number(args.holiday_choice) ? 1 : 0;
+    if (args.skip_weekends && isPremium) config.skipWeekends = args.skip_weekends === "true";
+    if (args.promotions && isPremium) config.promotionsEnabled = args.promotions === "true";
+    writeJsonSafe(CONFIG_PATH, workspaceConfig);
+    return respond(
+      `Saved. Channel: <#${config.channelId}>, timezone: ${config.timezone}, hour: ${config.hour}, holiday_choice: ${config.holidayChoice}`
+    );
+  }
+
+  if (cmd === "today") {
+    const mmdd = toMMDD(new Date());
+    const hits = findByDate(mmdd);
+    if (!hits.length) return respond("No holiday found for today.");
+    const choice = text && isPremium ? Math.min(Number(text) ? 1 : 0, hits.length - 1) : 0;
+    return respond(formatHoliday(hits[choice], mmdd));
+  }
+
+  if (cmd === "tomorrow") {
+    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    const d = new Date();
+    d.setUTCDate(d.getUTCDate() + 1);
+    const mmdd = toMMDD(d);
+    const hits = findByDate(mmdd);
+    if (!hits.length) return respond("No holiday found for tomorrow.");
+    return respond(formatHoliday(hits[0], mmdd));
+  }
+
+  if (cmd === "date") {
+    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    const mmdd = parseDateInput(text);
+    if (!mmdd) return respond("Use MM-DD (e.g., 12-25).");
+    const hits = findByDate(mmdd);
+    if (!hits.length) return respond(`No holidays found on ${mmdd}.`);
+    return respond(formatHoliday(hits[0], mmdd));
+  }
+
+  if (cmd === "search") {
+    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    if (!text) return respond("Provide a search query.");
+    const hits = findByName(text).slice(0, 5);
+    if (!hits.length) return respond("No matches found.");
+    const lines = hits.map((h) => `• ${h.emoji || ""} ${h.name} — ${holidayUrl(h)}`);
+    return respond(lines.join("\n"));
+  }
+
+  if (cmd === "random") {
+    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    const pick = allHolidays[Math.floor(Math.random() * allHolidays.length)];
+    return respond(formatHoliday(pick));
+  }
+
+  if (cmd === "facts") {
+    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    let holiday = null;
+    const parsed = parseDateInput(text || "");
+    if (parsed) holiday = findByDate(parsed)[0];
+    if (!holiday && text) holiday = findByName(text)[0];
+    if (!holiday) holiday = findByDate(toMMDD(new Date()))[0];
+    if (!holiday) return respond("No facts found.");
+    const facts = Array.isArray(holiday.funFacts) ? holiday.funFacts.slice(0, 5) : [];
+    if (!facts.length) return respond("No facts found.");
+    const lines = facts.map((f) => `• ${f}`);
+    return respond(`*${holiday.name}* fun facts:\n${lines.join("\n")}`);
+  }
+
+  if (cmd === "week" || cmd === "upcoming") {
+    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    const days = Math.min(Math.max(Number(text || "7"), 3), 30);
+    const list = [];
+    const now = new Date();
+    for (let i = 0; i < days; i++) {
+      const d = new Date(now);
+      d.setUTCDate(now.getUTCDate() + i);
+      const mmdd = toMMDD(d);
+      const hits = findByDate(mmdd);
+      if (hits.length) list.push({ mmdd, holiday: hits[0] });
+    }
+    if (!list.length) return respond("No upcoming holidays found.");
+    const lines = list.slice(0, 10).map(({ mmdd, holiday }) => `• ${mmdd} — ${holiday.emoji || ""} ${holiday.name}`);
+    return respond(lines.join("\n"));
+  }
+
+  return respond(`Unknown command: ${cmd}`);
+});
+
+app.post("/stripe/webhook", async (req, res) => {
+  if (!stripeClient || !STRIPE_WEBHOOK_SECRET) return res.status(400).send("Stripe not configured");
+  const sig = req.headers["stripe-signature"];
+  let event;
+  try {
+    event = stripeClient.webhooks.constructEvent(req.body, sig, STRIPE_WEBHOOK_SECRET);
+  } catch (err) {
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+  if (event.type === "checkout.session.completed") {
+    const session = event.data.object;
+    const teamId = session.metadata?.team_id;
+    if (teamId) {
+      premiumAllowlist[teamId] = true;
+      writeJsonSafe(PREMIUM_PATH, premiumAllowlist);
+    }
+  }
+  if (event.type === "invoice.paid") {
+    const invoice = event.data.object;
+    const subId = invoice.subscription;
+    if (subId && STRIPE_PRICE_ID_INTRO && STRIPE_PRICE_ID_STANDARD) {
+      try {
+        await upgradeSubscriptionToStandard(subId);
+      } catch (err) {
+        console.warn("Stripe subscription upgrade failed:", err.message);
+      }
+    }
+  }
+  res.json({ received: true });
+});
+
+app.get("/health", (req, res) => res.send("ok"));
+
+app.listen(PORT, async () => {
+  if (stripeClient) await syncPremiumFromStripe();
+  setInterval(handleDailyPosts, 60 * 1000);
+  console.log(`${SLACK_APP_NAME} Slack bot running on ${PORT}`);
+});
