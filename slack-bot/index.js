@@ -9,7 +9,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 8080;
-const SLACK_BOT_TOKEN = (process.env.SLACK_BOT_TOKEN || "").trim() || null;
 const SLACK_SIGNING_SECRET = (process.env.SLACK_SIGNING_SECRET || "").trim() || null;
 const SLACK_APP_NAME = process.env.SLACK_APP_NAME || "ObscureHolidayCalendar";
 const SLACK_CLIENT_ID = process.env.SLACK_CLIENT_ID || null;
@@ -21,18 +20,18 @@ const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || null;
 const STRIPE_PRICE_ID_INTRO = process.env.STRIPE_PRICE_ID_INTRO || null;
 const STRIPE_PRICE_ID_STANDARD = process.env.STRIPE_PRICE_ID_STANDARD || process.env.STRIPE_PRICE_ID || null;
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || null;
-const STRIPE_SUCCESS_URL = process.env.STRIPE_SUCCESS_URL || "https://www.obscureholidaycalendar.com/discord-bot/?success=1";
-const STRIPE_CANCEL_URL = process.env.STRIPE_CANCEL_URL || "https://www.obscureholidaycalendar.com/discord-bot/?canceled=1";
-const STRIPE_PORTAL_RETURN_URL = process.env.STRIPE_PORTAL_RETURN_URL || "https://www.obscureholidaycalendar.com/discord-bot/";
+const STRIPE_SUCCESS_URL = process.env.STRIPE_SUCCESS_URL || null;
+const STRIPE_CANCEL_URL = process.env.STRIPE_CANCEL_URL || null;
+const STRIPE_PORTAL_RETURN_URL = process.env.STRIPE_PORTAL_RETURN_URL || null;
 
 const stripeClient = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null;
 
-const SITE_URL = "https://www.obscureholidaycalendar.com";
-const SITE_BASE = `${SITE_URL}/holiday`;
-const APP_URL = `${SITE_URL}/app/`;
-const SUPPORT_URL = `${SITE_URL}/discord-bot/`;
-const TOPGG_VOTE_URL = "https://top.gg/bot/1447955404142153789/vote";
-const TOPGG_REVIEW_URL = "https://top.gg/bot/1447955404142153789#reviews";
+const SITE_URL = process.env.SITE_URL || null;
+const SITE_BASE = SITE_URL ? `${SITE_URL}/holiday` : null;
+const APP_URL = process.env.APP_URL || (SITE_URL ? `${SITE_URL}/app/` : null);
+const SUPPORT_URL = process.env.SLACK_SUPPORT_URL || (SITE_URL ? `${SITE_URL}/slack-bot/` : null);
+const TOPGG_VOTE_URL = process.env.SLACK_VOTE_URL || null;
+const TOPGG_REVIEW_URL = process.env.SLACK_REVIEW_URL || null;
 
 const CONFIG_PATH = path.resolve(__dirname, "workspace-config.json");
 const PREMIUM_PATH = path.resolve(__dirname, "premium.json");
@@ -135,7 +134,8 @@ function parseDateInput(input) {
 
 function holidayUrl(holiday) {
   const slug = nameToSlug[normalizeName(holiday.name || "")];
-  return slug ? `${SITE_BASE}/${slug}/` : SITE_URL;
+  if (!SITE_BASE) return SITE_URL || "";
+  return slug ? `${SITE_BASE}/${slug}/` : SITE_URL || "";
 }
 
 function formatHoliday(holiday, mmdd) {
@@ -210,9 +210,7 @@ function getLocalParts(timeZone) {
 }
 
 async function slackPostMessage(channel, text) {
-  const token = channel.teamId
-    ? (workspaceTokens[channel.teamId]?.access_token || SLACK_BOT_TOKEN)
-    : SLACK_BOT_TOKEN;
+  const token = channel.teamId ? workspaceTokens[channel.teamId]?.access_token : null;
   if (!token) return;
   await fetch("https://slack.com/api/chat.postMessage", {
     method: "POST",
@@ -227,7 +225,7 @@ async function slackPostMessage(channel, text) {
 async function handleDailyPosts() {
   for (const [teamId, config] of Object.entries(workspaceConfig)) {
     if (!config.channelId) continue;
-    if (!workspaceTokens[teamId]?.access_token && !SLACK_BOT_TOKEN) continue;
+    if (!workspaceTokens[teamId]?.access_token) continue;
     const tz = config.timezone || DEFAULT_TIMEZONE;
     const parts = getLocalParts(tz);
     if (config.skipWeekends && (parts.weekday === "Sat" || parts.weekday === "Sun")) continue;
@@ -247,7 +245,14 @@ async function handleDailyPosts() {
 }
 
 async function createPremiumCheckoutSession({ teamId, userId }) {
-  if (!stripeClient || !STRIPE_PRICE_ID_INTRO || !STRIPE_PRICE_ID_STANDARD) return null;
+  if (
+    !stripeClient ||
+    !STRIPE_PRICE_ID_INTRO ||
+    !STRIPE_PRICE_ID_STANDARD ||
+    !STRIPE_SUCCESS_URL ||
+    !STRIPE_CANCEL_URL
+  )
+    return null;
   return stripeClient.checkout.sessions.create({
     mode: "subscription",
     line_items: [{ price: STRIPE_PRICE_ID_INTRO, quantity: 1 }],
@@ -404,6 +409,7 @@ app.get("/slack/oauth/callback", async (req, res) => {
       writeJsonSafe(CONFIG_PATH, workspaceConfig);
       console.log(`Slack OAuth installed for team ${teamId}`);
     }
+    if (!SITE_URL) return res.status(500).send("SITE_URL not configured.");
     return res.redirect(`${SITE_URL}/slack-bot/success.html`);
   } catch (err) {
     console.warn("Slack OAuth error:", err.message);
@@ -456,11 +462,11 @@ app.post("/slack/commands", async (req, res) => {
     );
   }
 
-  if (cmd === "support") return respond(`Support: ${SUPPORT_URL}`);
-  if (cmd === "app") return respond(`App: ${APP_URL}`);
-  if (cmd === "invite") return respond(`Invite and setup: ${SUPPORT_URL}`);
-  if (cmd === "vote") return respond(`Vote on top.gg: ${TOPGG_VOTE_URL}`);
-  if (cmd === "rate") return respond(`Leave a review: ${TOPGG_REVIEW_URL}`);
+  if (cmd === "support") return respond(SUPPORT_URL ? `Support: ${SUPPORT_URL}` : "Support link not configured.");
+  if (cmd === "app") return respond(APP_URL ? `App: ${APP_URL}` : "App link not configured.");
+  if (cmd === "invite") return respond(SUPPORT_URL ? `Invite and setup: ${SUPPORT_URL}` : "Invite link not configured.");
+  if (cmd === "vote") return respond(TOPGG_VOTE_URL ? `Vote: ${TOPGG_VOTE_URL}` : "Vote link not configured.");
+  if (cmd === "rate") return respond(TOPGG_REVIEW_URL ? `Review: ${TOPGG_REVIEW_URL}` : "Review link not configured.");
 
   if (cmd === "premium") {
     if (isPremium) {
@@ -486,7 +492,7 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "upgrade") {
-    if (!stripeClient || !STRIPE_PRICE_ID_INTRO || !STRIPE_PRICE_ID_STANDARD) {
+    if (!stripeClient || !STRIPE_PRICE_ID_INTRO || !STRIPE_PRICE_ID_STANDARD || !STRIPE_SUCCESS_URL || !STRIPE_CANCEL_URL) {
       return respond("Stripe is not configured.");
     }
     try {
@@ -498,7 +504,7 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "manage") {
-    if (!stripeClient) return respond("Stripe is not configured.");
+    if (!stripeClient || !STRIPE_PORTAL_RETURN_URL) return respond("Stripe is not configured.");
     try {
       const subs = await stripeClient.subscriptions.list({ status: "active", limit: 100 });
       const sub = subs.data.find((s) => s.metadata?.team_id === teamId);
