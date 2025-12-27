@@ -38,12 +38,13 @@ Node.js Discord bot that answers holiday questions using `holidays.json`.
      - Optional: `BOT_OWNER_ID=<your_user_id>` for owner-only commands (`/grantpremium`, `/installcount`).
      - Optional: `PREMIUM_ROLE_ID=<role_id>` if using Discord Server Subscriptions for premium.
      - Optional: `TOPGG_TOKEN=<api_token>` to auto-post server counts to top.gg (global commands recommended; interval defaults to 30 min, override with `TOPGG_POST_INTERVAL_MIN`).
-     - Optional Stripe (for paid premium):  
-       - `STRIPE_SECRET_KEY=<sk_live_or_test>`  
-       - `STRIPE_PRICE_ID=<price_...>`  
-       - `STRIPE_WEBHOOK_SECRET=<whsec_...>`  
-       - `STRIPE_SUCCESS_URL` / `STRIPE_CANCEL_URL` (defaults to your discord-bot page)  
-       - `PORT` (Railway injects this; HTTP server listens here for Stripe/webhook)  
+    - Optional Stripe (for paid premium):  
+      - `STRIPE_SECRET_KEY=<sk_live_or_test>`  
+      - `STRIPE_PRICE_ID_INTRO=<price_0_99>`  
+      - `STRIPE_PRICE_ID_STANDARD=<price_3_99>`  
+      - `STRIPE_WEBHOOK_SECRET=<whsec_...>`  
+      - `STRIPE_SUCCESS_URL` / `STRIPE_CANCEL_URL` (defaults to your discord-bot page)  
+      - `PORT` (Railway injects this; HTTP server listens here for Stripe/webhook)  
    - Run `npm start`.
 3) Invite the bot to your server using the OAuth URL with `bot` scope and at least `Send Messages` / `Embed Links` permissions.
 

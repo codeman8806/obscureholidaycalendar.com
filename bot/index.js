@@ -72,7 +72,8 @@ const TOPGG_POST_INTERVAL_MIN = Number(process.env.TOPGG_POST_INTERVAL_MIN || "3
 const DISCORDSERVICES_POST_INTERVAL_MIN = Number(process.env.DISCORDSERVICES_POST_INTERVAL_MIN || TOPGG_POST_INTERVAL_MIN || "30");
 const PORT = process.env.PORT || null; // for Railway/health checks (optional)
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || null;
-const STRIPE_PRICE_ID = process.env.STRIPE_PRICE_ID || null; // subscription price id
+const STRIPE_PRICE_ID_STANDARD = process.env.STRIPE_PRICE_ID_STANDARD || process.env.STRIPE_PRICE_ID || null; // $3.99/month
+const STRIPE_PRICE_ID_INTRO = process.env.STRIPE_PRICE_ID_INTRO || null; // $0.99 first month
 const STRIPE_LOOKUP_KEY = process.env.STRIPE_LOOKUP_KEY || null; // optional lookup key
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || null;
 const STRIPE_SUCCESS_URL = process.env.STRIPE_SUCCESS_URL || `${SITE_URL}/discord-bot/?success=1`;
@@ -207,34 +208,70 @@ async function postDiscordServicesStats() {
   }
 }
 
+async function listSubscriptionsByPrice(priceId) {
+  if (!stripeClient || !priceId) return [];
+  const subs = [];
+  let startingAfter = null;
+  while (true) {
+    const page = await stripeClient.subscriptions.list({
+      status: "active",
+      price: priceId,
+      limit: 100,
+      starting_after: startingAfter || undefined,
+      expand: ["data.default_payment_method"],
+    });
+    subs.push(...page.data);
+    if (!page.has_more) break;
+    startingAfter = page.data[page.data.length - 1].id;
+  }
+  return subs;
+}
+
+function subscriptionHasPremiumPrice(sub) {
+  const items = sub.items?.data || [];
+  return items.some((item) => {
+    const priceId = item?.price?.id;
+    return priceId === STRIPE_PRICE_ID_STANDARD || priceId === STRIPE_PRICE_ID_INTRO;
+  });
+}
+
 async function syncPremiumFromStripe() {
-  if (!stripeClient || !STRIPE_PRICE_ID) return;
+  if (!stripeClient || !STRIPE_PRICE_ID_STANDARD) return;
   try {
-    let startingAfter = null;
+    const standardSubs = await listSubscriptionsByPrice(STRIPE_PRICE_ID_STANDARD);
+    const introSubs = STRIPE_PRICE_ID_INTRO ? await listSubscriptionsByPrice(STRIPE_PRICE_ID_INTRO) : [];
+    const allSubs = new Map();
+    for (const sub of [...standardSubs, ...introSubs]) allSubs.set(sub.id, sub);
     let total = 0;
-    while (true) {
-      const page = await stripeClient.subscriptions.list({
-        status: "active",
-        limit: 100,
-        starting_after: startingAfter || undefined,
-        expand: ["data.default_payment_method"],
-      });
-      for (const sub of page.data) {
-        const item = sub.items?.data?.[0];
-        const priceId = item?.price?.id;
-        const guildId = sub.metadata?.guild_id || item?.price?.metadata?.guild_id;
-        if (priceId === STRIPE_PRICE_ID && guildId) {
-          setPremiumGuild(guildId, true);
-          total++;
-        }
+    for (const sub of allSubs.values()) {
+      const guildId = sub.metadata?.guild_id || sub.items?.data?.[0]?.price?.metadata?.guild_id;
+      if (guildId && subscriptionHasPremiumPrice(sub)) {
+        setPremiumGuild(guildId, true);
+        total++;
       }
-      if (!page.has_more) break;
-      startingAfter = page.data[page.data.length - 1].id;
     }
     if (total) console.log(`Synced ${total} premium guild(s) from Stripe.`);
   } catch (err) {
     console.warn("Failed to sync premium from Stripe:", err.message);
   }
+}
+
+async function createPremiumCheckoutSession({ guildId, userId, customerEmail }) {
+  if (!stripeClient || !STRIPE_PRICE_ID_STANDARD || !STRIPE_PRICE_ID_INTRO) return null;
+  const metadata = { guild_id: guildId, user_id: userId || "" };
+  return stripeClient.checkout.sessions.create({
+    mode: "subscription",
+    customer_email: customerEmail || undefined,
+    line_items: [{ price: STRIPE_PRICE_ID_INTRO, quantity: 1 }],
+    success_url: STRIPE_SUCCESS_URL,
+    cancel_url: STRIPE_CANCEL_URL,
+    metadata,
+    subscription_data: {
+      metadata,
+      trial_end: Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60,
+      items: [{ price: STRIPE_PRICE_ID_STANDARD, quantity: 1 }],
+    },
+  });
 }
 
 // Stripe Checkout session creation
@@ -243,17 +280,12 @@ app.post("/create-checkout-session", express.json(), async (req, res) => {
   try {
     const { guild_id, user_id } = req.body || {};
     if (!guild_id) return res.status(400).json({ error: "Missing guild_id" });
-    const priceId = STRIPE_PRICE_ID;
-    if (!priceId) return res.status(400).json({ error: "Missing STRIPE_PRICE_ID" });
-    const session = await stripeClient.checkout.sessions.create({
-      mode: "subscription",
-      line_items: [{ price: priceId, quantity: 1 }],
-      success_url: STRIPE_SUCCESS_URL,
-      cancel_url: STRIPE_CANCEL_URL,
-      metadata: { guild_id, user_id: user_id || "" },
-      subscription_data: {
-        metadata: { guild_id, user_id: user_id || "" },
-      },
+    if (!STRIPE_PRICE_ID_INTRO || !STRIPE_PRICE_ID_STANDARD) {
+      return res.status(400).json({ error: "Missing Stripe price IDs" });
+    }
+    const session = await createPremiumCheckoutSession({
+      guildId: guild_id,
+      userId: user_id,
     });
     return res.json({ url: session.url });
   } catch (err) {
@@ -848,15 +880,11 @@ async function handlePremiumStatus(interaction) {
 
   // Not premium: offer upgrade
   let upgradeUrl = SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/";
-  if (stripeClient && STRIPE_PRICE_ID) {
+  if (stripeClient && STRIPE_PRICE_ID_STANDARD && STRIPE_PRICE_ID_INTRO) {
     try {
-      const session = await stripeClient.checkout.sessions.create({
-        mode: "subscription",
-        line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
-        success_url: STRIPE_SUCCESS_URL,
-        cancel_url: STRIPE_CANCEL_URL,
-        metadata: { guild_id: interaction.guildId, user_id: interaction.user.id },
-        subscription_data: { metadata: { guild_id: interaction.guildId, user_id: interaction.user.id } },
+      const session = await createPremiumCheckoutSession({
+        guildId: interaction.guildId,
+        userId: interaction.user.id,
       });
       if (session.url) upgradeUrl = session.url;
     } catch (err) {
@@ -866,6 +894,7 @@ async function handlePremiumStatus(interaction) {
 
   const lines = [
     "⚠️ Premium not active.",
+    "Intro offer: $0.99 for your first month, then $3.99/month. Cancel anytime.",
     "Premium unlocks:",
     ...benefits,
   ];
@@ -883,22 +912,13 @@ async function handlePremiumStatus(interaction) {
 }
 
 async function handleUpgrade(interaction) {
-  if (!stripeClient || !STRIPE_PRICE_ID) {
+  if (!stripeClient || !STRIPE_PRICE_ID_STANDARD || !STRIPE_PRICE_ID_INTRO) {
     return interaction.reply({ content: "Stripe is not configured. Try again later.", ephemeral: true });
   }
   const guildId = interaction.guildId;
   const userId = interaction.user.id;
   try {
-    const session = await stripeClient.checkout.sessions.create({
-      mode: "subscription",
-      line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
-      success_url: STRIPE_SUCCESS_URL,
-      cancel_url: STRIPE_CANCEL_URL,
-      metadata: { guild_id: guildId, user_id: userId },
-      subscription_data: {
-        metadata: { guild_id: guildId, user_id: userId },
-      },
-    });
+    const session = await createPremiumCheckoutSession({ guildId, userId });
     return interaction.reply({
       content: `Upgrade to premium using Stripe Checkout: ${session.url}`,
       ephemeral: true,
@@ -922,13 +942,12 @@ async function handleManage(interaction) {
     while (true) {
       const subs = await stripeClient.subscriptions.list({
         status: "active",
-        price: STRIPE_PRICE_ID || undefined,
         limit: 100,
         starting_after: startingAfter || undefined,
       });
       for (const sub of subs.data) {
         const gid = sub.metadata?.guild_id || sub.items?.data?.[0]?.metadata?.guild_id;
-        if (gid === interaction.guildId) {
+        if (gid === interaction.guildId && subscriptionHasPremiumPrice(sub)) {
           customerId = sub.customer;
           break;
         }
