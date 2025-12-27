@@ -23,6 +23,7 @@ const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || null;
 const STRIPE_SUCCESS_URL = process.env.STRIPE_SUCCESS_URL || null;
 const STRIPE_CANCEL_URL = process.env.STRIPE_CANCEL_URL || null;
 const STRIPE_PORTAL_RETURN_URL = process.env.STRIPE_PORTAL_RETURN_URL || null;
+const SLACK_ADMIN_TOKEN = process.env.SLACK_ADMIN_TOKEN || null;
 
 const stripeClient = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null;
 
@@ -656,6 +657,22 @@ app.post("/stripe/webhook", async (req, res) => {
 });
 
 app.get("/health", (req, res) => res.send("ok"));
+
+app.get("/admin/installs", (req, res) => {
+  const token = req.query.token || req.headers["x-admin-token"];
+  if (!SLACK_ADMIN_TOKEN || token !== SLACK_ADMIN_TOKEN) {
+    return res.status(403).send("Forbidden");
+  }
+  const installs = Object.entries(workspaceTokens).map(([teamId, data]) => ({
+    team_id: teamId,
+    team_name: data.team_name || "",
+    bot_user_id: data.bot_user_id || "",
+  }));
+  return res.json({
+    count: installs.length,
+    installs,
+  });
+});
 
 app.listen(PORT, async () => {
   if (stripeClient) await syncPremiumFromStripe();

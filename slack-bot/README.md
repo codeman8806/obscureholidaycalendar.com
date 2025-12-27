@@ -16,6 +16,7 @@
    - `SLACK_SUPPORT_URL=https://www.obscureholidaycalendar.com/slack-bot/` (optional)
    - `SLACK_VOTE_URL=<optional>`
    - `SLACK_REVIEW_URL=<optional>`
+   - `SLACK_ADMIN_TOKEN=<random_string_for_admin_endpoint>`
    - `PORT=8080` (Railway injects this)
    - Stripe (optional, for premium):
      - `STRIPE_SECRET_KEY=<sk_live_or_test>`
@@ -36,6 +37,9 @@
    - Enable Stripe events: `checkout.session.completed`, `invoice.paid`, `customer.subscription.updated`, `customer.subscription.deleted`
 
 Note: install the app via the OAuth flow (Install URL) in your own workspace too, so tokens are created exactly the same way as public installs.
+
+Admin endpoint:
+- `GET /admin/installs?token=<SLACK_ADMIN_TOKEN>` returns install count and list.
 
 ## Slash commands
 - `/today`
