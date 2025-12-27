@@ -6,19 +6,24 @@
    - `npm install`
 
 2) Set env vars:
-   - `SLACK_BOT_TOKEN=<xoxb_...>`
    - `SLACK_SIGNING_SECRET=<signing_secret>`
    - `SLACK_APP_NAME=ObscureHolidayCalendar` (optional)
    - `SLACK_CLIENT_ID=<client_id>` (for public installs)
    - `SLACK_CLIENT_SECRET=<client_secret>` (for public installs)
    - `SLACK_REDIRECT_URI=https://<your-host>/slack/oauth/callback`
+   - `SITE_URL=https://www.obscureholidaycalendar.com`
+   - `APP_URL=https://www.obscureholidaycalendar.com/app/` (optional)
+   - `SLACK_SUPPORT_URL=https://www.obscureholidaycalendar.com/slack-bot/` (optional)
+   - `SLACK_VOTE_URL=<optional>`
+   - `SLACK_REVIEW_URL=<optional>`
    - `PORT=8080` (Railway injects this)
    - Stripe (optional, for premium):
      - `STRIPE_SECRET_KEY=<sk_live_or_test>`
      - `STRIPE_PRICE_ID_INTRO=<price_0_99>`
      - `STRIPE_PRICE_ID_STANDARD=<price_3_99>`
      - `STRIPE_WEBHOOK_SECRET=<whsec_...>`
-     - `STRIPE_SUCCESS_URL` / `STRIPE_CANCEL_URL`
+     - `STRIPE_SUCCESS_URL`
+     - `STRIPE_CANCEL_URL`
      - `STRIPE_PORTAL_RETURN_URL`
 
 3) Slack app config:
@@ -29,6 +34,8 @@
    - Install URL: `https://<your-host>/slack/install`
    - Stripe webhook endpoint: `https://<your-host>/stripe/webhook`
    - Enable Stripe events: `checkout.session.completed`, `invoice.paid`, `customer.subscription.updated`, `customer.subscription.deleted`
+
+Note: install the app via the OAuth flow (Install URL) in your own workspace too, so tokens are created exactly the same way as public installs.
 
 ## Slash commands
 - `/today`
