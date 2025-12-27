@@ -332,7 +332,13 @@ app.post("/slack/commands", async (req, res) => {
 
   if (!command) return respond("Missing command.");
 
-  const cmd = command.replace("/", "");
+  const rawCmd = command.replace("/", "");
+  const aliasMap = {
+    ohsearch: "search",
+    ohinvite: "invite",
+    ohapp: "app",
+  };
+  const cmd = aliasMap[rawCmd] || rawCmd;
   const isPremium = isPremiumTeam(teamId);
 
   if (cmd === "help") {
@@ -344,18 +350,18 @@ app.post("/slack/commands", async (req, res) => {
         "/week [days] (premium)",
         "/upcoming [days] (premium)",
         "/date MM-DD (premium)",
-        "/search <query> (premium)",
+        "/search <query> (premium) — or /ohsearch if /search is taken",
         "/random (premium)",
         "/facts [name or MM-DD] (premium)",
         "/setup key=value ...",
         "/premium",
         "/upgrade",
         "/manage",
-        "/invite",
+        "/invite — or /ohinvite if /invite is taken",
         "/vote",
         "/rate",
         "/support",
-        "/app",
+        "/app — or /ohapp if /app is taken",
       ].join("\n")
     );
   }
