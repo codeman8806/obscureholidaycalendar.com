@@ -12,6 +12,10 @@ const PORT = process.env.PORT || 8080;
 const SLACK_BOT_TOKEN = (process.env.SLACK_BOT_TOKEN || "").trim() || null;
 const SLACK_SIGNING_SECRET = (process.env.SLACK_SIGNING_SECRET || "").trim() || null;
 const SLACK_APP_NAME = process.env.SLACK_APP_NAME || "ObscureHolidayCalendar";
+const SLACK_CLIENT_ID = process.env.SLACK_CLIENT_ID || null;
+const SLACK_CLIENT_SECRET = process.env.SLACK_CLIENT_SECRET || null;
+const SLACK_OAUTH_SCOPES = process.env.SLACK_OAUTH_SCOPES || "commands,chat:write";
+const SLACK_REDIRECT_URI = process.env.SLACK_REDIRECT_URI || null;
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || null;
 const STRIPE_PRICE_ID_INTRO = process.env.STRIPE_PRICE_ID_INTRO || null;
@@ -32,6 +36,7 @@ const TOPGG_REVIEW_URL = "https://top.gg/bot/1447955404142153789#reviews";
 
 const CONFIG_PATH = path.resolve(__dirname, "workspace-config.json");
 const PREMIUM_PATH = path.resolve(__dirname, "premium.json");
+const WORKSPACE_TOKENS_PATH = path.resolve(__dirname, "workspace-tokens.json");
 
 const DEFAULT_TIMEZONE = "UTC";
 const DEFAULT_HOUR = 9;
@@ -58,6 +63,7 @@ function writeJsonSafe(filePath, data) {
 
 const workspaceConfig = readJsonSafe(CONFIG_PATH, {});
 const premiumAllowlist = readJsonSafe(PREMIUM_PATH, {});
+const workspaceTokens = readJsonSafe(WORKSPACE_TOKENS_PATH, {});
 
 function resolveHolidaysPath() {
   const local = path.resolve(__dirname, "holidays.json");
@@ -204,20 +210,24 @@ function getLocalParts(timeZone) {
 }
 
 async function slackPostMessage(channel, text) {
-  if (!SLACK_BOT_TOKEN) return;
+  const token = channel.teamId
+    ? (workspaceTokens[channel.teamId]?.access_token || SLACK_BOT_TOKEN)
+    : SLACK_BOT_TOKEN;
+  if (!token) return;
   await fetch("https://slack.com/api/chat.postMessage", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${SLACK_BOT_TOKEN}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json; charset=utf-8",
     },
-    body: JSON.stringify({ channel, text }),
+    body: JSON.stringify({ channel: channel.id || channel, text }),
   });
 }
 
 async function handleDailyPosts() {
   for (const [teamId, config] of Object.entries(workspaceConfig)) {
     if (!config.channelId) continue;
+    if (!workspaceTokens[teamId]?.access_token && !SLACK_BOT_TOKEN) continue;
     const tz = config.timezone || DEFAULT_TIMEZONE;
     const parts = getLocalParts(tz);
     if (config.skipWeekends && (parts.weekday === "Sat" || parts.weekday === "Sun")) continue;
@@ -230,7 +240,7 @@ async function handleDailyPosts() {
     const choice = Math.min(config.holidayChoice || 0, hits.length - 1);
     const holiday = hits[choice];
     const text = formatHoliday(holiday, mmdd);
-    await slackPostMessage(config.channelId, text);
+    await slackPostMessage({ id: config.channelId, teamId }, text);
     config.lastPostedDate = parts.ymd;
     writeJsonSafe(CONFIG_PATH, workspaceConfig);
   }
@@ -347,6 +357,59 @@ app.use(
 );
 
 app.use("/stripe/webhook", express.raw({ type: "application/json" }));
+
+app.get("/slack/install", (req, res) => {
+  if (!SLACK_CLIENT_ID || !SLACK_REDIRECT_URI) {
+    return res.status(400).send("Slack OAuth not configured.");
+  }
+  const url = new URL("https://slack.com/oauth/v2/authorize");
+  url.searchParams.set("client_id", SLACK_CLIENT_ID);
+  url.searchParams.set("scope", SLACK_OAUTH_SCOPES);
+  url.searchParams.set("redirect_uri", SLACK_REDIRECT_URI);
+  return res.redirect(url.toString());
+});
+
+app.get("/slack/oauth/callback", async (req, res) => {
+  if (!SLACK_CLIENT_ID || !SLACK_CLIENT_SECRET || !SLACK_REDIRECT_URI) {
+    return res.status(400).send("Slack OAuth not configured.");
+  }
+  const code = req.query.code;
+  if (!code) return res.status(400).send("Missing code.");
+  try {
+    const body = new URLSearchParams({
+      client_id: SLACK_CLIENT_ID,
+      client_secret: SLACK_CLIENT_SECRET,
+      code: String(code),
+      redirect_uri: SLACK_REDIRECT_URI,
+    });
+    const resp = await fetch("https://slack.com/api/oauth.v2.access", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body,
+    });
+    const data = await resp.json();
+    if (!data.ok) {
+      console.warn("Slack OAuth failed:", data.error);
+      return res.status(400).send("Slack OAuth failed.");
+    }
+    const teamId = data.team?.id;
+    if (teamId) {
+      workspaceTokens[teamId] = {
+        access_token: data.access_token,
+        bot_user_id: data.bot_user_id,
+        team_name: data.team?.name || "",
+      };
+      writeJsonSafe(WORKSPACE_TOKENS_PATH, workspaceTokens);
+      ensureWorkspace(teamId);
+      writeJsonSafe(CONFIG_PATH, workspaceConfig);
+      console.log(`Slack OAuth installed for team ${teamId}`);
+    }
+    return res.redirect(`${SITE_URL}/slack-bot/success.html`);
+  } catch (err) {
+    console.warn("Slack OAuth error:", err.message);
+    return res.status(500).send("Slack OAuth error.");
+  }
+});
 
 app.post("/slack/commands", async (req, res) => {
   if (!verifySlackSignature(req)) return res.status(401).send("Invalid signature");
