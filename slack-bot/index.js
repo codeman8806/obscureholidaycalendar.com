@@ -172,6 +172,14 @@ function parseSetupArgs(text) {
   return out;
 }
 
+function parseHolidayChoice(text) {
+  if (!text) return null;
+  const lower = text.toLowerCase();
+  if (lower.includes("2") || lower.includes("second")) return 1;
+  if (lower.includes("1") || lower.includes("first")) return 0;
+  return null;
+}
+
 function getLocalParts(timeZone) {
   const now = new Date();
   const fmt = new Intl.DateTimeFormat("en-US", {
@@ -364,15 +372,16 @@ app.post("/slack/commands", async (req, res) => {
       [
         "Holiday bot commands:",
         "/today",
-        "/tomorrow (premium)",
+        "/today 2 (premium: second holiday)",
+        "/tomorrow (premium: add 2 for second holiday)",
         "/week [days] (premium)",
         "/upcoming [days] (premium)",
-        "/date MM-DD (premium)",
+        "/date MM-DD (premium: add 2 for second holiday)",
         "/search <query> (premium) — or /ohsearch if /search is taken",
         "/random (premium)",
         "/facts [name or MM-DD] (premium)",
         "/setup key=value ...",
-        "/premium",
+        "/premium [refresh]",
         "/upgrade",
         "/manage",
         "/invite — or /ohinvite if /invite is taken",
@@ -394,15 +403,19 @@ app.post("/slack/commands", async (req, res) => {
     if (isPremium) {
       return respond("✅ Premium is active for this workspace.");
     }
-    if (stripeClient) {
+    const wantsRefresh = (text || "").toLowerCase().includes("refresh");
+    if (stripeClient && wantsRefresh) {
       try {
         const sub = await findActiveSubscriptionForTeam(teamId);
         if (sub) {
           premiumAllowlist[teamId] = true;
           writeJsonSafe(PREMIUM_PATH, premiumAllowlist);
+          console.log(`Premium refreshed from Stripe for team ${teamId}`);
           return respond("✅ Premium is active for this workspace.");
         }
+        console.log(`Premium refresh found no active subscription for team ${teamId}`);
       } catch (e) {
+        console.warn(`Premium refresh failed for team ${teamId}:`, e.message);
         // Ignore and fall through to default message.
       }
     }
@@ -456,7 +469,12 @@ app.post("/slack/commands", async (req, res) => {
     const mmdd = toMMDD(new Date());
     const hits = findByDate(mmdd);
     if (!hits.length) return respond("No holiday found for today.");
-    const choice = text && isPremium ? Math.min(Number(text) ? 1 : 0, hits.length - 1) : 0;
+    let choice = 0;
+    if (isPremium) {
+      const requested = parseHolidayChoice(text);
+      if (requested !== null) choice = Math.min(requested, hits.length - 1);
+      else choice = Math.min(config.holidayChoice || 0, hits.length - 1);
+    }
     return respond(formatHoliday(hits[choice], mmdd));
   }
 
@@ -467,7 +485,11 @@ app.post("/slack/commands", async (req, res) => {
     const mmdd = toMMDD(d);
     const hits = findByDate(mmdd);
     if (!hits.length) return respond("No holiday found for tomorrow.");
-    return respond(formatHoliday(hits[0], mmdd));
+    let choice = 0;
+    const requested = parseHolidayChoice(text);
+    if (requested !== null) choice = Math.min(requested, hits.length - 1);
+    else choice = Math.min(config.holidayChoice || 0, hits.length - 1);
+    return respond(formatHoliday(hits[choice], mmdd));
   }
 
   if (cmd === "date") {
@@ -476,7 +498,11 @@ app.post("/slack/commands", async (req, res) => {
     if (!mmdd) return respond("Use MM-DD (e.g., 12-25).");
     const hits = findByDate(mmdd);
     if (!hits.length) return respond(`No holidays found on ${mmdd}.`);
-    return respond(formatHoliday(hits[0], mmdd));
+    let choice = 0;
+    const requested = parseHolidayChoice(text);
+    if (requested !== null) choice = Math.min(requested, hits.length - 1);
+    else choice = Math.min(config.holidayChoice || 0, hits.length - 1);
+    return respond(formatHoliday(hits[choice], mmdd));
   }
 
   if (cmd === "search") {
@@ -543,6 +569,7 @@ app.post("/stripe/webhook", async (req, res) => {
     if (teamId) {
       premiumAllowlist[teamId] = true;
       writeJsonSafe(PREMIUM_PATH, premiumAllowlist);
+      console.log(`Premium granted via Stripe for team ${teamId}`);
     }
   }
   if (event.type === "invoice.paid") {
