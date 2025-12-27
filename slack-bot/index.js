@@ -410,7 +410,7 @@ app.get("/slack/oauth/callback", async (req, res) => {
       console.log(`Slack OAuth installed for team ${teamId}`);
     }
     if (!SITE_URL) return res.status(500).send("SITE_URL not configured.");
-    return res.redirect(`${SITE_URL}/slack-bot/success.html`);
+    return res.redirect(`${SITE_URL}/slack-bot/installed.html`);
   } catch (err) {
     console.warn("Slack OAuth error:", err.message);
     return res.status(500).send("Slack OAuth error.");
