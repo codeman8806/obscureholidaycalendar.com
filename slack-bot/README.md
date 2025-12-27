@@ -9,6 +9,9 @@
    - `SLACK_BOT_TOKEN=<xoxb_...>`
    - `SLACK_SIGNING_SECRET=<signing_secret>`
    - `SLACK_APP_NAME=ObscureHolidayCalendar` (optional)
+   - `SLACK_CLIENT_ID=<client_id>` (for public installs)
+   - `SLACK_CLIENT_SECRET=<client_secret>` (for public installs)
+   - `SLACK_REDIRECT_URI=https://<your-host>/slack/oauth/callback`
    - `PORT=8080` (Railway injects this)
    - Stripe (optional, for premium):
      - `STRIPE_SECRET_KEY=<sk_live_or_test>`
@@ -19,7 +22,11 @@
      - `STRIPE_PORTAL_RETURN_URL`
 
 3) Slack app config:
+   - OAuth & Permissions:
+     - Redirect URL: `https://<your-host>/slack/oauth/callback`
+     - Scopes: `commands`, `chat:write`
    - Slash commands: point to `https://<your-host>/slack/commands`
+   - Install URL: `https://<your-host>/slack/install`
    - Stripe webhook endpoint: `https://<your-host>/stripe/webhook`
    - Enable Stripe events: `checkout.session.completed`, `invoice.paid`, `customer.subscription.updated`, `customer.subscription.deleted`
 
