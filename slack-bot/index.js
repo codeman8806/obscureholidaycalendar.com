@@ -277,6 +277,24 @@ async function listSubscriptionsByPrice(priceId) {
   return subs;
 }
 
+async function findActiveSubscriptionForTeam(teamId) {
+  if (!stripeClient || !teamId) return null;
+  let startingAfter = null;
+  while (true) {
+    const page = await stripeClient.subscriptions.list({
+      status: "active",
+      limit: 100,
+      starting_after: startingAfter || undefined,
+    });
+    for (const sub of page.data) {
+      if (sub.metadata?.team_id === teamId) return sub;
+    }
+    if (!page.has_more) break;
+    startingAfter = page.data[page.data.length - 1].id;
+  }
+  return null;
+}
+
 async function syncPremiumFromStripe() {
   if (!stripeClient || !STRIPE_PRICE_ID_STANDARD) return;
   try {
@@ -375,6 +393,18 @@ app.post("/slack/commands", async (req, res) => {
   if (cmd === "premium") {
     if (isPremium) {
       return respond("✅ Premium is active for this workspace.");
+    }
+    if (stripeClient) {
+      try {
+        const sub = await findActiveSubscriptionForTeam(teamId);
+        if (sub) {
+          premiumAllowlist[teamId] = true;
+          writeJsonSafe(PREMIUM_PATH, premiumAllowlist);
+          return respond("✅ Premium is active for this workspace.");
+        }
+      } catch (e) {
+        // Ignore and fall through to default message.
+      }
     }
     return respond("⚠️ Premium not active. Use /upgrade to subscribe.");
   }
