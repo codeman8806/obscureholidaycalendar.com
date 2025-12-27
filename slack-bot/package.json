@@ -1,0 +1,13 @@
+{
+  "name": "obscure-holiday-slack-bot",
+  "version": "1.0.0",
+  "description": "Slack bot for Obscure Holiday Calendar",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
