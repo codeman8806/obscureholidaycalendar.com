@@ -268,9 +268,26 @@ async function createPremiumCheckoutSession({ guildId, userId, customerEmail }) 
     metadata,
     subscription_data: {
       metadata,
-      trial_end: Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60,
-      items: [{ price: STRIPE_PRICE_ID_STANDARD, quantity: 1 }],
     },
+  });
+}
+
+function subscriptionNeedsUpgrade(sub) {
+  const items = sub.items?.data || [];
+  const hasIntro = items.some((item) => item?.price?.id === STRIPE_PRICE_ID_INTRO);
+  const hasStandard = items.some((item) => item?.price?.id === STRIPE_PRICE_ID_STANDARD);
+  return hasIntro && !hasStandard;
+}
+
+async function upgradeSubscriptionToStandard(subId) {
+  if (!stripeClient || !STRIPE_PRICE_ID_STANDARD || !STRIPE_PRICE_ID_INTRO) return;
+  const sub = await stripeClient.subscriptions.retrieve(subId);
+  if (!subscriptionNeedsUpgrade(sub)) return;
+  const introItem = sub.items?.data?.find((item) => item?.price?.id === STRIPE_PRICE_ID_INTRO);
+  if (!introItem) return;
+  await stripeClient.subscriptions.update(subId, {
+    items: [{ id: introItem.id, price: STRIPE_PRICE_ID_STANDARD }],
+    proration_behavior: "none",
   });
 }
 
@@ -298,7 +315,7 @@ app.post("/create-checkout-session", express.json(), async (req, res) => {
 app.post(
   "/webhook",
   express.raw({ type: "application/json" }),
-  (req, res) => {
+  async (req, res) => {
     if (!stripeClient || !STRIPE_WEBHOOK_SECRET) return res.status(400).send("Stripe not configured");
     const sig = req.headers["stripe-signature"];
     let event;
@@ -315,6 +332,17 @@ app.post(
       if (guildId) {
         setPremiumGuild(guildId, true);
         console.log(`Premium granted via Stripe for guild ${guildId}`);
+      }
+    }
+    if (event.type === "invoice.paid") {
+      const invoice = event.data.object;
+      const subId = invoice.subscription;
+      if (subId && STRIPE_PRICE_ID_INTRO && STRIPE_PRICE_ID_STANDARD) {
+        try {
+          await upgradeSubscriptionToStandard(subId);
+        } catch (err) {
+          console.warn("Stripe subscription upgrade failed:", err.message);
+        }
       }
     }
     if (event.type === "customer.subscription.deleted" || event.type === "customer.subscription.updated") {
