@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Slack Bot Installs</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; color: #0f172a; }
+    h1 { margin-bottom: 8px; }
+    .muted { color: #64748b; }
+    .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; max-width: 720px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { text-align: left; padding: 8px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+    th { background: #f8fafc; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Slack Bot Installs</h1>
+    <p class="muted">This page uses basic auth. Bookmark it and reuse your browser login.</p>
+    <p><strong>Total installs:</strong> <span id="count">—</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Workspace</th>
+          <th>Team ID</th>
+          <th>Bot User ID</th>
+        </tr>
+      </thead>
+      <tbody id="rows">
+        <tr><td colspan="3" class="muted">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    fetch("/admin/installs", { credentials: "same-origin" })
+      .then((res) => res.json())
+      .then((data) => {
+        const countEl = document.getElementById("count");
+        const rowsEl = document.getElementById("rows");
+        countEl.textContent = data.count || 0;
+        rowsEl.innerHTML = "";
+        (data.installs || []).forEach((row) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${row.team_name || ""}</td><td>${row.team_id || ""}</td><td>${row.bot_user_id || ""}</td>`;
+          rowsEl.appendChild(tr);
+        });
+        if (!data.installs || !data.installs.length) {
+          rowsEl.innerHTML = '<tr><td colspan="3" class="muted">No installs yet.</td></tr>';
+        }
+      })
+      .catch(() => {
+        document.getElementById("rows").innerHTML = '<tr><td colspan="3" class="muted">Failed to load installs.</td></tr>';
+      });
+  </script>
+</body>
+</html>

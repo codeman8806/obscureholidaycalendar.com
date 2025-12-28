@@ -17,6 +17,8 @@
    - `SLACK_VOTE_URL=<optional>`
    - `SLACK_REVIEW_URL=<optional>`
    - `SLACK_ADMIN_TOKEN=<random_string_for_admin_endpoint>`
+   - `SLACK_ADMIN_USER=<admin_username>` (for basic auth)
+   - `SLACK_ADMIN_PASS=<admin_password>` (for basic auth)
    - `PORT=8080` (Railway injects this)
    - Stripe (optional, for premium):
      - `STRIPE_SECRET_KEY=<sk_live_or_test>`
@@ -38,8 +40,9 @@
 
 Note: install the app via the OAuth flow (Install URL) in your own workspace too, so tokens are created exactly the same way as public installs.
 
-Admin endpoint:
+Admin endpoints:
 - `GET /admin/installs?token=<SLACK_ADMIN_TOKEN>` returns install count and list.
+- `GET /admin/installs.html` (basic auth if `SLACK_ADMIN_USER`/`SLACK_ADMIN_PASS` set).
 
 ## Slash commands
 - `/today`

@@ -24,6 +24,8 @@ const STRIPE_SUCCESS_URL = process.env.STRIPE_SUCCESS_URL || null;
 const STRIPE_CANCEL_URL = process.env.STRIPE_CANCEL_URL || null;
 const STRIPE_PORTAL_RETURN_URL = process.env.STRIPE_PORTAL_RETURN_URL || null;
 const SLACK_ADMIN_TOKEN = process.env.SLACK_ADMIN_TOKEN || null;
+const SLACK_ADMIN_USER = process.env.SLACK_ADMIN_USER || null;
+const SLACK_ADMIN_PASS = process.env.SLACK_ADMIN_PASS || null;
 
 const stripeClient = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null;
 
@@ -350,6 +352,30 @@ function verifySlackSignature(req) {
   return crypto.timingSafeEqual(Buffer.from(computed), Buffer.from(signature));
 }
 
+function checkBasicAuth(req) {
+  if (!SLACK_ADMIN_USER || !SLACK_ADMIN_PASS) return false;
+  const header = req.headers.authorization || "";
+  if (!header.startsWith("Basic ")) return false;
+  const decoded = Buffer.from(header.slice(6), "base64").toString("utf8");
+  const [user, pass] = decoded.split(":", 2);
+  return user === SLACK_ADMIN_USER && pass === SLACK_ADMIN_PASS;
+}
+
+function requireAdminAuth(req, res, next) {
+  if (SLACK_ADMIN_USER && SLACK_ADMIN_PASS) {
+    if (!checkBasicAuth(req)) {
+      res.set("WWW-Authenticate", 'Basic realm="Admin"');
+      return res.status(401).send("Unauthorized");
+    }
+    return next();
+  }
+  const token = req.query.token || req.headers["x-admin-token"];
+  if (!SLACK_ADMIN_TOKEN || token !== SLACK_ADMIN_TOKEN) {
+    return res.status(403).send("Forbidden");
+  }
+  return next();
+}
+
 const app = express();
 
 app.use(
@@ -658,11 +684,7 @@ app.post("/stripe/webhook", async (req, res) => {
 
 app.get("/health", (req, res) => res.send("ok"));
 
-app.get("/admin/installs", (req, res) => {
-  const token = req.query.token || req.headers["x-admin-token"];
-  if (!SLACK_ADMIN_TOKEN || token !== SLACK_ADMIN_TOKEN) {
-    return res.status(403).send("Forbidden");
-  }
+app.get("/admin/installs", requireAdminAuth, (req, res) => {
   const installs = Object.entries(workspaceTokens).map(([teamId, data]) => ({
     team_id: teamId,
     team_name: data.team_name || "",
@@ -672,6 +694,11 @@ app.get("/admin/installs", (req, res) => {
     count: installs.length,
     installs,
   });
+});
+
+app.get("/admin/installs.html", requireAdminAuth, (req, res) => {
+  const pagePath = path.resolve(__dirname, "admin-installs.html");
+  res.sendFile(pagePath);
 });
 
 app.listen(PORT, async () => {
