@@ -251,29 +251,6 @@
     .home .action-buttons a.secondary {
       background: linear-gradient(120deg, #14b8a6, #2563eb);
     }
-    .home .icon-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
-    .home .icon-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(15, 23, 42, 0.12);
-      background: #fff;
-      color: #0f172a;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 8px 18px rgba(12,18,52,0.12);
-    }
-    .home .icon-button svg {
-      width: 18px;
-      height: 18px;
-    }
     .home .quick-links-grid {
       max-width: 820px;
       margin: 16px auto 8px;
@@ -358,6 +335,17 @@
 </head>
 <body class="page home">
   <header class="site-header">
+    <div class="bot-banner">
+      <span>Now available for Slack and Discord</span>
+      <a class="bot-banner-link" href="/slack-bot/">
+        <img class="bot-banner-icon" src="/assets/brands/slack.svg" alt="Slack" />
+        Slack
+      </a>
+      <a class="bot-banner-link" href="/discord-bot/">
+        <img class="bot-banner-icon" src="/assets/brands/discord.svg" alt="Discord" />
+        Discord
+      </a>
+    </div>
     <a class="brand" href="/">
       <img src="/assets/app-icon.png" alt="Obscure Holiday Calendar icon" class="brand-mark" />
       <div class="brand-text">
@@ -423,29 +411,8 @@
         </div>
         <div class="action-buttons">
           <a href="/holiday/">Browse all holidays</a>
-          <a class="secondary" href="/holiday/#December">See this month</a>
           <a class="secondary" href="/discord-bot/">Add Discord bot</a>
           <a class="secondary" href="/slack-bot/">Add to Slack</a>
-        </div>
-        <div class="icon-row">
-          <a class="icon-button" href="/discord-bot/">
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19.46 5.35A17.14 17.14 0 0 0 15.93 4c-.14.26-.3.6-.4.88a15.5 15.5 0 0 0-4.06 0A9.4 9.4 0 0 0 11.06 4c-1.24.22-2.45.64-3.53 1.36C5.32 8.1 4.78 10.7 5 13.26a17.36 17.36 0 0 0 5.07 2.6c.4-.54.76-1.12 1.06-1.72-.58-.22-1.14-.5-1.67-.82.14-.1.28-.2.4-.32 3.26 1.52 6.8 1.52 10.02 0 .14.12.28.22.4.32-.53.32-1.08.6-1.67.82.3.6.66 1.18 1.06 1.72a17.3 17.3 0 0 0 5.07-2.6c.3-3.07-.6-5.66-2.68-7.9ZM9.2 12.8c-.75 0-1.36-.7-1.36-1.57 0-.86.6-1.56 1.36-1.56s1.36.7 1.36 1.56c0 .87-.6 1.57-1.36 1.57Zm5.6 0c-.75 0-1.36-.7-1.36-1.57 0-.86.6-1.56 1.36-1.56s1.36.7 1.36 1.56c0 .87-.6 1.57-1.36 1.57Z"/>
-            </svg>
-            Discord bot
-          </a>
-          <a class="icon-button" href="/slack-bot/">
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M7.2 13.2a1.8 1.8 0 1 1 0 3.6H5.4a1.8 1.8 0 1 1 0-3.6h1.8ZM8.4 13.2a1.8 1.8 0 1 1 3.6 0v5.4a1.8 1.8 0 1 1-3.6 0v-5.4ZM10.8 7.2a1.8 1.8 0 1 1-3.6 0V5.4a1.8 1.8 0 1 1 3.6 0v1.8ZM10.8 8.4a1.8 1.8 0 1 1 0 3.6H5.4a1.8 1.8 0 1 1 0-3.6h5.4ZM16.8 10.8a1.8 1.8 0 1 1 0-3.6h1.8a1.8 1.8 0 1 1 0 3.6h-1.8ZM15.6 10.8a1.8 1.8 0 1 1-3.6 0V5.4a1.8 1.8 0 1 1 3.6 0v5.4ZM13.2 16.8a1.8 1.8 0 1 1 3.6 0v1.8a1.8 1.8 0 1 1-3.6 0v-1.8ZM13.2 15.6a1.8 1.8 0 1 1 0-3.6h5.4a1.8 1.8 0 1 1 0 3.6h-5.4Z"/>
-            </svg>
-            Slack bot
-          </a>
-          <a class="icon-button" href="https://shop.obscureholidaycalendar.com/?utm_source=site&utm_medium=home&utm_campaign=icon_row" target="_blank" rel="noopener">
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M7 7V6a5 5 0 0 1 10 0v1h3a1 1 0 0 1 1 1l-1.5 12a2 2 0 0 1-2 1.8H6.5a2 2 0 0 1-2-1.8L3 8a1 1 0 0 1 1-1h3Zm2 0h6V6a3 3 0 0 0-6 0v1Z"/>
-            </svg>
-            Shop
-          </a>
         </div>
       </div>
 
