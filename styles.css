@@ -65,13 +65,13 @@ a:hover {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 8px 14px;
+  padding: 10px 18px;
   margin: 0 auto 12px;
   border-radius: 999px;
-  background: linear-gradient(120deg, rgba(88, 101, 242, 0.3), rgba(54, 197, 240, 0.26), rgba(224, 30, 90, 0.24));
-  border: 1px solid rgba(15, 23, 42, 0.2);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.22);
-  color: #0f172a;
+  background: linear-gradient(120deg, rgba(88, 101, 242, 0.55), rgba(54, 197, 240, 0.45), rgba(224, 30, 90, 0.45));
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.35);
+  color: #ffffff;
   font-weight: 700;
   font-size: 0.95rem;
   text-align: center;
@@ -110,13 +110,13 @@ a:hover {
 
 .bot-banner-link img {
   width: auto;
-  height: 30px;
-  max-height: 30px;
+  height: 34px;
+  max-height: 34px;
   object-fit: contain;
 }
 
 .bot-banner-badge {
-  height: 30px;
+  height: 34px;
 }
 
 .brand {
