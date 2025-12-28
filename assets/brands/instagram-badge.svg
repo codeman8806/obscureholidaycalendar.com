@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="190" height="36" viewBox="0 0 190 36" role="img" aria-label="Follow on Instagram">
+  <title>Follow on Instagram</title>
+  <defs>
+    <linearGradient id="igGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f58529"/>
+      <stop offset="35%" stop-color="#dd2a7b"/>
+      <stop offset="70%" stop-color="#8134af"/>
+      <stop offset="100%" stop-color="#515bd4"/>
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="189" height="35" rx="18" fill="#ffffff" stroke="#d0d7de"/>
+  <g transform="translate(10 7)">
+    <rect x="0" y="0" width="22" height="22" rx="6" fill="url(#igGradient)"/>
+    <rect x="5.2" y="5.2" width="11.6" height="11.6" rx="3.5" fill="none" stroke="#ffffff" stroke-width="1.6"/>
+    <circle cx="11" cy="11" r="3.2" fill="none" stroke="#ffffff" stroke-width="1.6"/>
+    <circle cx="16.7" cy="5.6" r="1.2" fill="#ffffff"/>
+  </g>
+  <text x="44" y="22" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#111827">Follow on Instagram</text>
+</svg>
