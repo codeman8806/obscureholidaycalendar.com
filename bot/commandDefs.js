@@ -59,6 +59,7 @@ export const commandDefs = [
   { name: "invite", description: "Get the bot invite link" },
   { name: "support", description: "Get help/landing page link" },
   { name: "app", description: "Get the mobile app links" },
+  { name: "slack", description: "Get the Slack bot link" },
   {
     name: "setup",
     description: "Configure daily posts (channel/time). Premium unlocks timezone/hour/branding toggles.",

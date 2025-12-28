@@ -12,6 +12,7 @@ Node.js Discord bot that answers holiday questions using `holidays.json`.
   - `/invite` — get the bot invite link
   - `/support` — landing/help link
   - `/app` — app store/site links
+  - `/slack` — Slack bot link
   - `/setup` — configure daily posts (premium unlocks time/timezone/branding)
   - `/premium` — check your premium status
   - `/upgrade` — get a Stripe checkout link to upgrade

@@ -60,6 +60,7 @@ const BOT_INVITE_URL =
   process.env.BOT_INVITE_URL ||
   "https://discord.com/oauth2/authorize?client_id=1447955404142153789&permissions=2684438528&integration_type=0&scope=applications.commands+bot";
 const SUPPORT_URL = process.env.SUPPORT_URL || `${SITE_URL}/discord-bot/`;
+const SLACK_BOT_URL = process.env.SLACK_BOT_URL || `${SITE_URL}/slack-bot/`;
 const TOPGG_VOTE_URL = process.env.TOPGG_VOTE_URL || "https://top.gg/bot/1447955404142153789/vote";
 const TOPGG_REVIEW_URL = process.env.TOPGG_REVIEW_URL || "https://top.gg/bot/1447955404142153789#reviews";
 const PREMIUM_ROLE_ID = process.env.PREMIUM_ROLE_ID || null; // Discord Server Subscription role id
@@ -629,6 +630,7 @@ async function handleHelp(interaction) {
       "/vote — vote on top.gg",
       "/rate — leave a review on top.gg",
       "/app — mobile app links",
+      "/slack — Slack bot link",
       "/setup — configure daily posts (premium unlocks time/timezone/branding)",
       "/premium — check your premium status",
       "/upgrade — start a premium checkout",
@@ -1133,6 +1135,16 @@ client.on("interactionCreate", async (interaction) => {
             new ActionRowBuilder().addComponents(
               new ButtonBuilder().setLabel("Get the App").setStyle(ButtonStyle.Link).setURL(APP_URL),
               new ButtonBuilder().setLabel("View Website").setStyle(ButtonStyle.Link).setURL(SITE_URL)
+            ),
+          ],
+          ephemeral: true,
+        });
+      case "slack":
+        return interaction.reply({
+          content: "We also have a Slack bot for daily holiday posts:",
+          components: [
+            new ActionRowBuilder().addComponents(
+              new ButtonBuilder().setLabel("Slack Bot Info").setStyle(ButtonStyle.Link).setURL(SLACK_BOT_URL)
             ),
           ],
           ephemeral: true,
