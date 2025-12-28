@@ -68,27 +68,29 @@ a:hover {
   padding: 8px 14px;
   margin: 0 auto 12px;
   border-radius: 999px;
-  background: linear-gradient(120deg, rgba(20, 184, 166, 0.16), rgba(37, 99, 235, 0.16));
-  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: linear-gradient(120deg, rgba(88, 101, 242, 0.3), rgba(54, 197, 240, 0.26), rgba(224, 30, 90, 0.24));
+  border: 1px solid rgba(15, 23, 42, 0.2);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.22);
   color: #0f172a;
   font-weight: 700;
   font-size: 0.95rem;
   text-align: center;
   flex: 1 1 100%;
   order: -1;
+  backdrop-filter: blur(6px);
 }
 
 .bot-banner-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 0;
   border-radius: 999px;
-  background: #ffffff;
+  background: transparent;
   color: #0f172a;
   text-decoration: none;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  box-shadow: 0 6px 14px rgba(12, 18, 52, 0.12);
+  border: none;
+  box-shadow: none;
   line-height: 1;
 }
 
@@ -107,11 +109,14 @@ a:hover {
 }
 
 .bot-banner-link img {
-  width: 16px;
-  height: 16px;
-  max-width: 16px;
-  max-height: 16px;
+  width: auto;
+  height: 30px;
+  max-height: 30px;
   object-fit: contain;
+}
+
+.bot-banner-badge {
+  height: 30px;
 }
 
 .brand {
