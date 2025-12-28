@@ -68,12 +68,13 @@ a:hover {
   padding: 10px 18px;
   margin: 0 auto 12px;
   border-radius: 999px;
-  background: linear-gradient(120deg, rgba(88, 101, 242, 0.55), rgba(54, 197, 240, 0.45), rgba(224, 30, 90, 0.45));
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.35);
+  background: linear-gradient(120deg, #5865F2, #36C5F0, #E01E5A);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
   color: #ffffff;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
   text-align: center;
   flex: 1 1 100%;
   order: -1;
