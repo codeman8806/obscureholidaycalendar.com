@@ -51,6 +51,7 @@ const LEGACY_WORKSPACE_TOKENS_PATH = path.resolve(__dirname, "workspace-tokens.j
 
 const DEFAULT_TIMEZONE = "UTC";
 const DEFAULT_HOUR = 9;
+const DEFAULT_MINUTE = 0;
 const DEFAULT_HOLIDAY_CHOICE = 0;
 
 function readJsonSafe(filePath, fallback, legacyPaths = []) {
@@ -175,6 +176,7 @@ function ensureWorkspace(teamId) {
       channelId: null,
       timezone: DEFAULT_TIMEZONE,
       hour: DEFAULT_HOUR,
+      minute: DEFAULT_MINUTE,
       holidayChoice: DEFAULT_HOLIDAY_CHOICE,
       skipWeekends: false,
       promotionsEnabled: true,
@@ -248,7 +250,7 @@ async function handleDailyPosts() {
     const tz = config.timezone || DEFAULT_TIMEZONE;
     const parts = getLocalParts(tz);
     if (config.skipWeekends && (parts.weekday === "Sat" || parts.weekday === "Sun")) continue;
-    if (parts.hour !== Number(config.hour) || parts.minute !== 0) continue;
+    if (parts.hour !== Number(config.hour) || parts.minute !== Number(config.minute ?? 0)) continue;
     if (config.lastPostedDate === parts.ymd) continue;
 
     const mmdd = `${parts.month}-${parts.day}`;
@@ -571,15 +573,16 @@ app.post("/slack/commands", async (req, res) => {
           "channel=#your-channel (optional; posts to this channel)",
           "timezone=America/New_York",
           "hour=9 (0-23)",
+          "minute=30 (0-59)",
           "holiday_choice=1 (0=first, 1=second, premium)",
           "skip_weekends=true|false (premium)",
           "promotions=true|false (premium)",
           "",
           "Example:",
-          "/setup channel=#general timezone=America/New_York hour=9 holiday_choice=1 skip_weekends=true",
+          "/setup channel=#general timezone=America/New_York hour=6 minute=45 holiday_choice=1 skip_weekends=true",
           "",
           "Template:",
-          "timezone= hour= holiday_choice= skip_weekends= promotions=",
+          "timezone= hour= minute= holiday_choice= skip_weekends= promotions=",
         ].join("\n")
       );
     }
@@ -591,12 +594,13 @@ app.post("/slack/commands", async (req, res) => {
     }
     if (args.timezone && isPremium) config.timezone = args.timezone;
     if (args.hour && isPremium) config.hour = Math.min(Math.max(Number(args.hour), 0), 23);
+    if (args.minute && isPremium) config.minute = Math.min(Math.max(Number(args.minute), 0), 59);
     if (args.holiday_choice && isPremium) config.holidayChoice = Number(args.holiday_choice) ? 1 : 0;
     if (args.skip_weekends && isPremium) config.skipWeekends = args.skip_weekends === "true";
     if (args.promotions && isPremium) config.promotionsEnabled = args.promotions === "true";
     writeJsonSafe(CONFIG_PATH, workspaceConfig);
     return respond(
-      `Saved. Channel: <#${config.channelId}>, timezone: ${config.timezone}, hour: ${config.hour}, holiday_choice: ${config.holidayChoice}`
+      `Saved. Channel: <#${config.channelId}>, timezone: ${config.timezone}, hour: ${config.hour}, minute: ${config.minute ?? 0}, holiday_choice: ${config.holidayChoice}`
     );
   }
 
