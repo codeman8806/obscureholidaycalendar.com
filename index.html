@@ -65,8 +65,8 @@
       --home-bg: #f8fafc;
       --home-ink: #0f172a;
       --home-muted: #475569;
-      --home-accent: #1d4ed8;
-      --home-accent-2: #0ea5e9;
+      --home-accent: #6d28d9;
+      --home-accent-2: #a855f7;
       --home-panel: #ffffff;
       --home-line: #e2e8f0;
       --home-soft: #eef2ff;
@@ -100,6 +100,9 @@
       gap: 32px;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       align-items: center;
+      padding: 26px;
+      border-radius: 28px;
+      background: linear-gradient(120deg, rgba(109, 40, 217, 0.08), rgba(59, 130, 246, 0.05));
     }
     .hero-kicker {
       font-weight: 700;
@@ -139,12 +142,16 @@
     .hero-actions .btn.primary {
       background: var(--home-accent);
       color: #fff;
-      box-shadow: 0 12px 24px rgba(29, 78, 216, 0.25);
+      box-shadow: 0 12px 24px rgba(109, 40, 217, 0.25);
     }
     .hero-actions .btn.secondary {
       border-color: var(--home-line);
       color: var(--home-ink);
       background: #fff;
+    }
+    .hero-actions .btn.is-disabled {
+      opacity: 0.55;
+      pointer-events: none;
     }
     .hero-badges {
       display: flex;
@@ -235,6 +242,10 @@
       height: 44px;
       width: auto;
       display: inline-block;
+    }
+    .store-badges .badge-play {
+      height: 48px;
+      transform: translateY(1px);
     }
     .home-steps {
       display: grid;
@@ -392,7 +403,7 @@
           <p>Obscure Holiday Calendar brings weird, fun, and surprisingly delightful observances to your day with quick facts, reminders, and shareable cards.</p>
           <div class="hero-actions">
             <a class="btn primary" href="/holiday/">Browse all holidays</a>
-            <a class="btn secondary" href="/holiday/#December">See this month</a>
+            <a class="btn secondary" id="alt-holiday" href="/holiday/">See today’s alternate holiday</a>
           </div>
         </div>
         <div class="hero-right">
@@ -429,10 +440,10 @@
           <h3>Download the app</h3>
           <div class="store-badges">
             <a href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank" rel="noopener">
-              <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" />
+              <img class="badge-apple" src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" />
             </a>
             <a href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar" target="_blank" rel="noopener">
-              <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" />
+              <img class="badge-play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" />
             </a>
           </div>
         </div>
@@ -545,6 +556,7 @@
       const dateEl = document.getElementById("date");
       const linkEl = document.getElementById("learn-more");
       const emojiEl = document.getElementById("emoji");
+      const altEl = document.getElementById("alt-holiday");
       if (!nameEl || !dateEl || !linkEl) return;
 
       function slugify(text) {
@@ -566,6 +578,11 @@
             dateEl.textContent = "";
             linkEl.textContent = "";
             linkEl.removeAttribute("href");
+            if (altEl) {
+              altEl.textContent = "No alternate holiday today";
+              altEl.classList.add("is-disabled");
+              altEl.removeAttribute("href");
+            }
             return;
           }
           const name = first.name || "Today's holiday";
@@ -576,11 +593,29 @@
           if (emojiEl) emojiEl.textContent = emoji;
           linkEl.textContent = "View the holiday page";
           linkEl.href = `/holiday/${slug}/`;
+          const second = holidays[1];
+          if (altEl) {
+            if (second) {
+              const altName = second.name || "Alternate holiday";
+              const altSlug = second.slug || slugify(altName);
+              altEl.textContent = "See today’s alternate holiday";
+              altEl.href = `/holiday/${altSlug}/`;
+            } else {
+              altEl.textContent = "No alternate holiday today";
+              altEl.classList.add("is-disabled");
+              altEl.removeAttribute("href");
+            }
+          }
         })
         .catch(() => {
           nameEl.textContent = "Unable to load today's holiday.";
           dateEl.textContent = "";
           linkEl.textContent = "";
+          if (altEl) {
+            altEl.textContent = "No alternate holiday today";
+            altEl.classList.add("is-disabled");
+            altEl.removeAttribute("href");
+          }
         });
     })();
   </script>
