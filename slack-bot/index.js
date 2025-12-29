@@ -1228,11 +1228,13 @@ app.post("/slack/interactions", async (req, res) => {
 app.post("/slack/events", async (req, res) => {
   if (!verifySlackSignature(req)) return res.status(401).send("Invalid signature");
   const payload = req.body || {};
+  console.log("Slack events payload type:", payload.type);
   if (payload.type === "url_verification") {
     return res.json({ challenge: payload.challenge });
   }
   if (payload.type === "event_callback") {
     const event = payload.event;
+    console.log("Slack event received:", event?.type);
     if (event?.type === "app_home_opened") {
       const teamId = event.team;
       const userId = event.user;
