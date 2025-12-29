@@ -62,17 +62,17 @@
   <link rel="stylesheet" href="/styles.css">
   <style>
     :root {
-      --home-bg: #f8fafc;
+      --home-bg: #f4edff;
       --home-ink: #0f172a;
       --home-muted: #475569;
       --home-accent: #6d28d9;
       --home-accent-2: #a855f7;
       --home-panel: #ffffff;
-      --home-line: #e2e8f0;
-      --home-soft: #eef2ff;
+      --home-line: #ddd6fe;
+      --home-soft: #ede9fe;
     }
     body.page.home {
-      background: var(--home-bg);
+      background: linear-gradient(180deg, #efe6ff 0%, #f7f0ff 45%, #ffffff 100%);
       color: var(--home-ink);
     }
     .page.home .site-header {
@@ -102,7 +102,7 @@
       align-items: center;
       padding: 26px;
       border-radius: 28px;
-      background: linear-gradient(120deg, rgba(109, 40, 217, 0.08), rgba(59, 130, 246, 0.05));
+      background: linear-gradient(120deg, rgba(109, 40, 217, 0.12), rgba(168, 85, 247, 0.08));
     }
     .hero-kicker {
       font-weight: 700;
@@ -216,8 +216,8 @@
       width: fit-content;
     }
     .download-panel {
-      background: #e8f2ff;
-      border: 1px solid #c7defa;
+      background: linear-gradient(120deg, #6d28d9, #a855f7);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 18px;
       padding: 22px;
       text-align: center;
@@ -230,7 +230,7 @@
       font-size: 1.05rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--home-ink);
+      color: #fff;
     }
     .store-badges {
       display: flex;
@@ -239,13 +239,10 @@
       gap: 12px;
     }
     .store-badges img {
-      height: 44px;
-      width: auto;
+      width: 180px;
+      height: 52px;
+      object-fit: cover;
       display: inline-block;
-    }
-    .store-badges .badge-play {
-      height: 48px;
-      transform: translateY(1px);
     }
     .home-steps {
       display: grid;
