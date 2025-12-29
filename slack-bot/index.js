@@ -244,6 +244,36 @@ async function slackPostMessage(channel, text) {
   });
 }
 
+async function resolveChannelId(teamId, rawChannel) {
+  if (!rawChannel) return null;
+  if (rawChannel.startsWith("<#") && rawChannel.includes("|")) {
+    return rawChannel.split("|")[0].replace("<#", "");
+  }
+  const trimmed = rawChannel.trim();
+  if (trimmed.startsWith("C") || trimmed.startsWith("G")) return trimmed;
+  const name = trimmed.replace(/^#/, "").toLowerCase();
+  const token = teamId ? workspaceTokens[teamId]?.access_token : null;
+  if (!token) return null;
+  let cursor;
+  do {
+    const resp = await fetch(
+      `https://slack.com/api/conversations.list?types=public_channel,private_channel&limit=200${cursor ? `&cursor=${cursor}` : ""}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      }
+    );
+    const data = await resp.json();
+    if (!data.ok) return null;
+    const match = (data.channels || []).find((c) => c.name === name);
+    if (match) return match.id;
+    cursor = data.response_metadata?.next_cursor || "";
+  } while (cursor);
+  return null;
+}
+
 async function handleDailyPosts() {
   for (const [teamId, config] of Object.entries(workspaceConfig)) {
     if (!config.channelId) continue;
@@ -588,8 +618,9 @@ app.post("/slack/commands", async (req, res) => {
       );
     }
     const args = parseSetupArgs(text || "");
-    if (args.channel && args.channel.startsWith("<#") && args.channel.includes("|")) {
-      config.channelId = args.channel.split("|")[0].replace("<#", "");
+    if (args.channel) {
+      const resolved = await resolveChannelId(teamId, args.channel);
+      config.channelId = resolved || channel_id;
     } else {
       config.channelId = channel_id;
     }
