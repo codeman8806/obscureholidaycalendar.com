@@ -1245,7 +1245,7 @@ app.post("/slack/events", async (req, res) => {
     const event = payload.event;
     console.log("Slack event received:", event?.type);
     if (event?.type === "app_home_opened") {
-      const teamId = event.team;
+      const teamId = event.team_id || payload.team_id;
       const userId = event.user;
       console.log("App Home open for team", teamId, "user", userId);
       await slackPublishHome(teamId, userId);
