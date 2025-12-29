@@ -690,6 +690,29 @@ app.post("/slack/commands", async (req, res) => {
     return respond(lines.join("\n"));
   }
 
+  if (cmd === "schedule") {
+    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    if (!(text || "").toLowerCase().includes("test")) {
+      return respond("Use `/schedule test` to post today's holiday right now.");
+    }
+    if (!config.channelId) {
+      return respond("No channel is configured. Run /setup first.");
+    }
+    const mmdd = toMMDD(new Date());
+    const hits = findByDate(mmdd);
+    if (!hits.length) return respond("No holiday found for today.");
+    const choice = Math.min(config.holidayChoice || 0, hits.length - 1);
+    const holiday = hits[choice];
+    const textOut = formatHoliday(holiday, mmdd);
+    try {
+      await slackPostMessage({ id: config.channelId, teamId }, textOut);
+      return respond("✅ Test post sent.");
+    } catch (err) {
+      console.warn("Schedule test post failed:", err.message);
+      return respond("Unable to send test post right now.");
+    }
+  }
+
   return respond(`Unknown command: ${cmd}`);
 });
 
