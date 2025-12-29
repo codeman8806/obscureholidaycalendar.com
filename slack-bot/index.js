@@ -295,7 +295,10 @@ async function slackOpenModal(teamId, triggerId, view) {
 
 async function slackPublishHome(teamId, userId) {
   const token = teamId ? workspaceTokens[teamId]?.access_token : null;
-  if (!token) return;
+  if (!token) {
+    console.warn(`Slack Home publish skipped: missing token for team ${teamId}`);
+    return;
+  }
   const mmdd = toMMDD(new Date());
   const todayHits = findByDate(mmdd);
   const todayHoliday = todayHits[0];
@@ -361,6 +364,8 @@ async function slackPublishHome(teamId, userId) {
   const data = await resp.json().catch(() => ({}));
   if (!data.ok) {
     console.warn("Slack Home publish failed:", data.error || "unknown_error");
+  } else {
+    console.log("Slack Home published for user", userId);
   }
 }
 
@@ -1242,6 +1247,7 @@ app.post("/slack/events", async (req, res) => {
     if (event?.type === "app_home_opened") {
       const teamId = event.team;
       const userId = event.user;
+      console.log("App Home open for team", teamId, "user", userId);
       await slackPublishHome(teamId, userId);
       const config = ensureWorkspace(teamId);
       config.welcomedUsers = config.welcomedUsers || {};
