@@ -233,8 +233,8 @@ function getLocalParts(timeZone) {
 
 async function slackPostMessage(channel, text) {
   const token = channel.teamId ? workspaceTokens[channel.teamId]?.access_token : null;
-  if (!token) return;
-  await fetch("https://slack.com/api/chat.postMessage", {
+  if (!token) return { ok: false, error: "missing_token" };
+  const resp = await fetch("https://slack.com/api/chat.postMessage", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -242,6 +242,12 @@ async function slackPostMessage(channel, text) {
     },
     body: JSON.stringify({ channel: channel.id || channel, text }),
   });
+  const data = await resp.json().catch(() => ({}));
+  if (!data.ok) {
+    console.warn("Slack post failed:", data.error || "unknown_error");
+    return { ok: false, error: data.error || "unknown_error" };
+  }
+  return { ok: true };
 }
 
 async function resolveChannelId(teamId, rawChannel) {
@@ -290,7 +296,11 @@ async function handleDailyPosts() {
     const choice = Math.min(config.holidayChoice || 0, hits.length - 1);
     const holiday = hits[choice];
     const text = formatHoliday(holiday, mmdd);
-    await slackPostMessage({ id: config.channelId, teamId }, text);
+    const postResult = await slackPostMessage({ id: config.channelId, teamId }, text);
+    if (!postResult.ok) {
+      console.warn(`Daily post failed for team ${teamId}: ${postResult.error}`);
+      continue;
+    }
     config.lastPostedDate = parts.ymd;
     writeJsonSafe(CONFIG_PATH, workspaceConfig);
   }
@@ -736,7 +746,13 @@ app.post("/slack/commands", async (req, res) => {
     const choice = Math.min(config.holidayChoice || 0, hits.length - 1);
     const holiday = hits[choice];
     const textOut = formatHoliday(holiday, mmdd);
-    await slackPostMessage({ id: config.channelId, teamId }, textOut);
+    const postResult = await slackPostMessage({ id: config.channelId, teamId }, textOut);
+    if (!postResult.ok) {
+      if (postResult.error === "missing_token") {
+        return respond("Missing Slack token. Reinstall the app via /slack/install and try again.");
+      }
+      return respond(`Unable to send test post: ${postResult.error}`);
+    }
     return respond("✅ Test post sent.");
   }
 
