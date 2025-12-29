@@ -153,9 +153,10 @@ function parseDateInput(input) {
 }
 
 function holidayUrl(holiday) {
-  const slug = nameToSlug[normalizeName(holiday.name || "")];
-  if (!SITE_BASE) return SITE_URL || "";
-  return slug ? `${SITE_BASE}/${slug}/` : SITE_URL || "";
+  const base = SITE_BASE || SITE_URL || "";
+  if (!base) return "";
+  const bareBase = base.replace(/^https?:\/\//, "").replace(/^www\./, "");
+  return bareBase;
 }
 
 function formatHoliday(holiday, mmdd) {
@@ -704,13 +705,8 @@ app.post("/slack/commands", async (req, res) => {
     const choice = Math.min(config.holidayChoice || 0, hits.length - 1);
     const holiday = hits[choice];
     const textOut = formatHoliday(holiday, mmdd);
-    try {
-      await slackPostMessage({ id: config.channelId, teamId }, textOut);
-      return respond("✅ Test post sent.");
-    } catch (err) {
-      console.warn("Schedule test post failed:", err.message);
-      return respond("Unable to send test post right now.");
-    }
+    await slackPostMessage({ id: config.channelId, teamId }, textOut);
+    return respond("✅ Test post sent.");
   }
 
   return respond(`Unknown command: ${cmd}`);

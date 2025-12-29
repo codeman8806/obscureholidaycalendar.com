@@ -221,6 +221,22 @@
       border-radius: 10px;
       border: 1px solid var(--slack-line);
     }
+    .slack-faq {
+      background: #fff;
+      border: 1px solid var(--slack-line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+      display: grid;
+      gap: 12px;
+    }
+    .slack-faq h3 {
+      margin: 0 0 6px;
+    }
+    .slack-faq p {
+      margin: 0;
+      color: var(--slack-muted);
+    }
   </style>
 </head>
 <body class="page slack">
@@ -338,6 +354,14 @@
             <img src="/assets/slack-bot/FunFacts_Screenshot.png" alt="Slack bot preview showing fun facts" />
             <span>Fun facts</span>
           </div>
+        </div>
+      </section>
+
+      <section class="slack-faq">
+        <h2>FAQ</h2>
+        <div>
+          <h3>Why didn’t the scheduled post show up?</h3>
+          <p>Make sure the bot is invited to the target channel (e.g., <strong>/invite @ObscureHolidayBot</strong>). Slack won’t post to channels the bot isn’t a member of.</p>
         </div>
       </section>
     </article>
