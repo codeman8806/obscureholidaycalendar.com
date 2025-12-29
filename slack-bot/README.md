@@ -19,6 +19,7 @@
    - `SLACK_ADMIN_TOKEN=<random_string_for_admin_endpoint>`
    - `SLACK_ADMIN_USER=<admin_username>` (for basic auth)
    - `SLACK_ADMIN_PASS=<admin_password>` (for basic auth)
+   - `DATA_DIR=/app/data` (optional; use a Railway volume for persistent installs/config)
    - `PORT=8080` (Railway injects this)
    - Stripe (optional, for premium):
      - `STRIPE_SECRET_KEY=<sk_live_or_test>`

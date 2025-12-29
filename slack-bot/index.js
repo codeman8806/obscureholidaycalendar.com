@@ -36,18 +36,34 @@ const SUPPORT_URL = process.env.SLACK_SUPPORT_URL || (SITE_URL ? `${SITE_URL}/sl
 const TOPGG_VOTE_URL = process.env.SLACK_VOTE_URL || null;
 const TOPGG_REVIEW_URL = process.env.SLACK_REVIEW_URL || null;
 
-const CONFIG_PATH = path.resolve(__dirname, "workspace-config.json");
-const PREMIUM_PATH = path.resolve(__dirname, "premium.json");
-const WORKSPACE_TOKENS_PATH = path.resolve(__dirname, "workspace-tokens.json");
+const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : __dirname;
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
+const CONFIG_PATH = path.resolve(DATA_DIR, "workspace-config.json");
+const PREMIUM_PATH = path.resolve(DATA_DIR, "premium.json");
+const WORKSPACE_TOKENS_PATH = path.resolve(DATA_DIR, "workspace-tokens.json");
+
+const LEGACY_CONFIG_PATH = path.resolve(__dirname, "workspace-config.json");
+const LEGACY_PREMIUM_PATH = path.resolve(__dirname, "premium.json");
+const LEGACY_WORKSPACE_TOKENS_PATH = path.resolve(__dirname, "workspace-tokens.json");
 
 const DEFAULT_TIMEZONE = "UTC";
 const DEFAULT_HOUR = 9;
 const DEFAULT_HOLIDAY_CHOICE = 0;
 
-function readJsonSafe(filePath, fallback) {
+function readJsonSafe(filePath, fallback, legacyPaths = []) {
   try {
     if (fs.existsSync(filePath)) {
       return JSON.parse(fs.readFileSync(filePath, "utf8"));
+    }
+    for (const legacyPath of legacyPaths) {
+      if (fs.existsSync(legacyPath)) {
+        const data = JSON.parse(fs.readFileSync(legacyPath, "utf8"));
+        writeJsonSafe(filePath, data);
+        return data;
+      }
     }
   } catch (e) {
     console.error(`Failed to read ${filePath}:`, e.message);
@@ -63,9 +79,9 @@ function writeJsonSafe(filePath, data) {
   }
 }
 
-const workspaceConfig = readJsonSafe(CONFIG_PATH, {});
-const premiumAllowlist = readJsonSafe(PREMIUM_PATH, {});
-const workspaceTokens = readJsonSafe(WORKSPACE_TOKENS_PATH, {});
+const workspaceConfig = readJsonSafe(CONFIG_PATH, {}, [LEGACY_CONFIG_PATH]);
+const premiumAllowlist = readJsonSafe(PREMIUM_PATH, {}, [LEGACY_PREMIUM_PATH]);
+const workspaceTokens = readJsonSafe(WORKSPACE_TOKENS_PATH, {}, [LEGACY_WORKSPACE_TOKENS_PATH]);
 
 function resolveHolidaysPath() {
   const local = path.resolve(__dirname, "holidays.json");
