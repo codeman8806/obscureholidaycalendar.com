@@ -68,9 +68,11 @@ Admin endpoints:
 ## /setup examples
 - `/setup timezone=America/New_York hour=9 promotions=true`
 - `/setup holiday_choice=1 skip_weekends=true`
+- `/setup channel=#general timezone=America/Los_Angeles hour=6 minute=45`
 
 Defaults:
 - timezone: `UTC`
 - hour: `9`
+- minute: `0`
 - holiday_choice: `0` (first holiday)
 - skip_weekends: `false`
