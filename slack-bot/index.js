@@ -208,6 +208,15 @@ function parseHolidayChoice(text) {
   return null;
 }
 
+function isValidTimeZone(timeZone) {
+  try {
+    Intl.DateTimeFormat("en-US", { timeZone }).format(new Date());
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function getLocalParts(timeZone) {
   const now = new Date();
   const fmt = new Intl.DateTimeFormat("en-US", {
@@ -632,9 +641,44 @@ app.post("/slack/commands", async (req, res) => {
       );
     }
     const args = parseSetupArgs(text || "");
+    const errors = [];
+    let resolvedChannel = null;
+
     if (args.channel) {
-      const resolved = await resolveChannelId(teamId, args.channel);
-      config.channelId = resolved || channel_id;
+      resolvedChannel = await resolveChannelId(teamId, args.channel);
+      if (!resolvedChannel) {
+        errors.push("Channel not found. Use #channel or a valid channel ID.");
+      }
+    }
+    if (args.timezone && !isValidTimeZone(args.timezone)) {
+      errors.push("Invalid timezone. Example: America/New_York");
+    }
+    if (args.hour) {
+      const hourVal = Number(args.hour);
+      if (!Number.isInteger(hourVal) || hourVal < 0 || hourVal > 23) {
+        errors.push("Hour must be an integer from 0 to 23.");
+      }
+    }
+    if (args.minute) {
+      const minuteVal = Number(args.minute);
+      if (!Number.isInteger(minuteVal) || minuteVal < 0 || minuteVal > 59) {
+        errors.push("Minute must be an integer from 0 to 59.");
+      }
+    }
+    if (args.holiday_choice && !["0", "1"].includes(String(args.holiday_choice))) {
+      errors.push("holiday_choice must be 0 (first) or 1 (second).");
+    }
+    if (args.skip_weekends && !["true", "false"].includes(String(args.skip_weekends).toLowerCase())) {
+      errors.push("skip_weekends must be true or false.");
+    }
+    if (args.promotions && !["true", "false"].includes(String(args.promotions).toLowerCase())) {
+      errors.push("promotions must be true or false.");
+    }
+    if (errors.length) {
+      return respond(`Setup errors:\n• ${errors.join("\n• ")}`);
+    }
+    if (args.channel) {
+      config.channelId = resolvedChannel || channel_id;
     } else {
       config.channelId = channel_id;
     }
@@ -753,8 +797,37 @@ app.post("/slack/commands", async (req, res) => {
         ].join("\n")
       );
     }
+    if (lower.includes("debug")) {
+      const parts = getLocalParts(config.timezone || DEFAULT_TIMEZONE);
+      const hasToken = Boolean(workspaceTokens[teamId]?.access_token);
+      const reasons = [];
+      if (!config.channelId) reasons.push("no channel set");
+      if (!hasToken) reasons.push("missing token");
+      if (config.skipWeekends && (parts.weekday === "Sat" || parts.weekday === "Sun")) {
+        reasons.push("skip weekends enabled");
+      }
+      if (config.lastPostedDate === parts.ymd) reasons.push("already posted today");
+      const scheduledHour = Number(config.hour);
+      const scheduledMinute = Number(config.minute ?? 0);
+      if (parts.hour !== scheduledHour) reasons.push(`hour mismatch (now ${parts.hour})`);
+      const minuteDelta = parts.minute - scheduledMinute;
+      if (minuteDelta < 0 || minuteDelta > 5) {
+        reasons.push(`minute outside window (now ${parts.minute}, scheduled ${scheduledMinute})`);
+      }
+      return respond(
+        [
+          `Channel: ${config.channelId ? `<#${config.channelId}>` : "not set"}`,
+          `Timezone: ${config.timezone || DEFAULT_TIMEZONE}`,
+          `Scheduled: ${String(config.hour).padStart(2, "0")}:${String(config.minute ?? 0).padStart(2, "0")}`,
+          `Now: ${parts.year}-${parts.month}-${parts.day} ${String(parts.hour).padStart(2, "0")}:${String(parts.minute).padStart(2, "0")} (${parts.weekday})`,
+          `Last posted: ${config.lastPostedDate || "never"}`,
+          `Token: ${hasToken ? "ok" : "missing"}`,
+          reasons.length ? `Blocked: ${reasons.join(", ")}` : "Eligible: would post now",
+        ].join("\n")
+      );
+    }
     if (!lower.includes("test")) {
-      return respond("Use `/schedule test` to post today's holiday right now, or `/schedule status` to debug.");
+      return respond("Use `/schedule test` to post today's holiday right now, `/schedule status`, or `/schedule debug`.");
     }
     if (!config.channelId) {
       return respond("No channel is configured. Run /setup first.");
