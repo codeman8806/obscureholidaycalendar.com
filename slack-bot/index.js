@@ -564,6 +564,21 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "setup") {
+    if (!text || text.toLowerCase().includes("help")) {
+      return respond(
+        [
+          "Setup options (key=value):",
+          "timezone=America/New_York",
+          "hour=9 (0-23)",
+          "holiday_choice=1 (0=first, 1=second, premium)",
+          "skip_weekends=true|false (premium)",
+          "promotions=true|false (premium)",
+          "",
+          "Example:",
+          "/setup timezone=America/New_York hour=9 holiday_choice=1 skip_weekends=true",
+        ].join("\n")
+      );
+    }
     const args = parseSetupArgs(text || "");
     config.channelId = channel_id;
     if (args.timezone && isPremium) config.timezone = args.timezone;
