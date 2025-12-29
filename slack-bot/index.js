@@ -287,8 +287,12 @@ async function handleDailyPosts() {
     const tz = config.timezone || DEFAULT_TIMEZONE;
     const parts = getLocalParts(tz);
     if (config.skipWeekends && (parts.weekday === "Sat" || parts.weekday === "Sun")) continue;
-    if (parts.hour !== Number(config.hour) || parts.minute !== Number(config.minute ?? 0)) continue;
     if (config.lastPostedDate === parts.ymd) continue;
+    const scheduledMinute = Number(config.minute ?? 0);
+    const scheduledHour = Number(config.hour);
+    if (parts.hour !== scheduledHour) continue;
+    const minuteDelta = parts.minute - scheduledMinute;
+    if (minuteDelta < 0 || minuteDelta > 5) continue;
 
     const mmdd = `${parts.month}-${parts.day}`;
     const hits = findByDate(mmdd);
@@ -807,6 +811,16 @@ app.post("/stripe/webhook", async (req, res) => {
 });
 
 app.get("/health", (req, res) => res.send("ok"));
+
+app.post("/run-schedule", requireAdminAuth, async (req, res) => {
+  try {
+    await handleDailyPosts();
+    return res.json({ ok: true });
+  } catch (err) {
+    console.warn("Manual schedule run failed:", err.message);
+    return res.status(500).json({ ok: false, error: "schedule_failed" });
+  }
+});
 
 app.get("/admin/installs", requireAdminAuth, (req, res) => {
   const installs = Object.entries(workspaceTokens).map(([teamId, data]) => ({

@@ -44,6 +44,7 @@ Note: install the app via the OAuth flow (Install URL) in your own workspace too
 Admin endpoints:
 - `GET /admin/installs?token=<SLACK_ADMIN_TOKEN>` returns install count and list.
 - `GET /admin/installs.html` (basic auth if `SLACK_ADMIN_USER`/`SLACK_ADMIN_PASS` set).
+- `POST /run-schedule` (basic auth or `SLACK_ADMIN_TOKEN`) triggers the scheduler once.
 
 ## Slash commands
 - `/today`
