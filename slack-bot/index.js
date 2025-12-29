@@ -350,7 +350,7 @@ async function slackPublishHome(teamId, userId) {
       },
     ],
   };
-  await fetch("https://slack.com/api/views.publish", {
+  const resp = await fetch("https://slack.com/api/views.publish", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -358,6 +358,10 @@ async function slackPublishHome(teamId, userId) {
     },
     body: JSON.stringify({ user_id: userId, view }),
   });
+  const data = await resp.json().catch(() => ({}));
+  if (!data.ok) {
+    console.warn("Slack Home publish failed:", data.error || "unknown_error");
+  }
 }
 
 function buildSetupModal(config, isPremium, metadata) {
