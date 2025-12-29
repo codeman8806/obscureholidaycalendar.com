@@ -181,7 +181,7 @@ function ensureWorkspace(teamId) {
       holidayChoice: DEFAULT_HOLIDAY_CHOICE,
       skipWeekends: false,
       promotionsEnabled: true,
-      lastPostedDate: null,
+      lastPostedByChannel: {},
     };
   }
   return workspaceConfig[teamId];
@@ -296,7 +296,8 @@ async function handleDailyPosts() {
     const tz = config.timezone || DEFAULT_TIMEZONE;
     const parts = getLocalParts(tz);
     if (config.skipWeekends && (parts.weekday === "Sat" || parts.weekday === "Sun")) continue;
-    if (config.lastPostedDate === parts.ymd) continue;
+    const lastPostedByChannel = config.lastPostedByChannel || {};
+    if (lastPostedByChannel[config.channelId] === parts.ymd) continue;
     const scheduledMinute = Number(config.minute ?? 0);
     const scheduledHour = Number(config.hour);
     if (parts.hour !== scheduledHour) continue;
@@ -314,7 +315,10 @@ async function handleDailyPosts() {
       console.warn(`Daily post failed for team ${teamId}: ${postResult.error}`);
       continue;
     }
-    config.lastPostedDate = parts.ymd;
+    config.lastPostedByChannel = {
+      ...(config.lastPostedByChannel || {}),
+      [config.channelId]: parts.ymd,
+    };
     writeJsonSafe(CONFIG_PATH, workspaceConfig);
   }
 }
@@ -786,13 +790,17 @@ app.post("/slack/commands", async (req, res) => {
     if (lower.includes("status")) {
       const parts = getLocalParts(config.timezone || DEFAULT_TIMEZONE);
       const hasToken = Boolean(workspaceTokens[teamId]?.access_token);
+      const lastPosted =
+        (config.lastPostedByChannel && config.lastPostedByChannel[config.channelId]) ||
+        config.lastPostedDate ||
+        "never";
       return respond(
         [
           `Channel: ${config.channelId ? `<#${config.channelId}>` : "not set"}`,
           `Timezone: ${config.timezone || DEFAULT_TIMEZONE}`,
           `Scheduled: ${String(config.hour).padStart(2, "0")}:${String(config.minute ?? 0).padStart(2, "0")}`,
           `Now: ${parts.year}-${parts.month}-${parts.day} ${String(parts.hour).padStart(2, "0")}:${String(parts.minute).padStart(2, "0")} (${parts.weekday})`,
-          `Last posted: ${config.lastPostedDate || "never"}`,
+          `Last posted: ${lastPosted}`,
           `Token: ${hasToken ? "ok" : "missing"}`,
         ].join("\n")
       );
@@ -806,7 +814,11 @@ app.post("/slack/commands", async (req, res) => {
       if (config.skipWeekends && (parts.weekday === "Sat" || parts.weekday === "Sun")) {
         reasons.push("skip weekends enabled");
       }
-      if (config.lastPostedDate === parts.ymd) reasons.push("already posted today");
+      const lastPosted =
+        (config.lastPostedByChannel && config.lastPostedByChannel[config.channelId]) ||
+        config.lastPostedDate ||
+        null;
+      if (lastPosted === parts.ymd) reasons.push("already posted today (channel)");
       const scheduledHour = Number(config.hour);
       const scheduledMinute = Number(config.minute ?? 0);
       if (parts.hour !== scheduledHour) reasons.push(`hour mismatch (now ${parts.hour})`);
@@ -820,7 +832,7 @@ app.post("/slack/commands", async (req, res) => {
           `Timezone: ${config.timezone || DEFAULT_TIMEZONE}`,
           `Scheduled: ${String(config.hour).padStart(2, "0")}:${String(config.minute ?? 0).padStart(2, "0")}`,
           `Now: ${parts.year}-${parts.month}-${parts.day} ${String(parts.hour).padStart(2, "0")}:${String(parts.minute).padStart(2, "0")} (${parts.weekday})`,
-          `Last posted: ${config.lastPostedDate || "never"}`,
+          `Last posted: ${lastPosted || "never"}`,
           `Token: ${hasToken ? "ok" : "missing"}`,
           reasons.length ? `Blocked: ${reasons.join(", ")}` : "Eligible: would post now",
         ].join("\n")
