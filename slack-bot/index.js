@@ -734,8 +734,23 @@ app.post("/slack/commands", async (req, res) => {
 
   if (cmd === "schedule") {
     if (!isPremium) return respond("Premium required. Use /upgrade.");
-    if (!(text || "").toLowerCase().includes("test")) {
-      return respond("Use `/schedule test` to post today's holiday right now.");
+    const lower = (text || "").toLowerCase();
+    if (lower.includes("status")) {
+      const parts = getLocalParts(config.timezone || DEFAULT_TIMEZONE);
+      const hasToken = Boolean(workspaceTokens[teamId]?.access_token);
+      return respond(
+        [
+          `Channel: ${config.channelId ? `<#${config.channelId}>` : "not set"}`,
+          `Timezone: ${config.timezone || DEFAULT_TIMEZONE}`,
+          `Scheduled: ${String(config.hour).padStart(2, "0")}:${String(config.minute ?? 0).padStart(2, "0")}`,
+          `Now: ${parts.year}-${parts.month}-${parts.day} ${String(parts.hour).padStart(2, "0")}:${String(parts.minute).padStart(2, "0")} (${parts.weekday})`,
+          `Last posted: ${config.lastPostedDate || "never"}`,
+          `Token: ${hasToken ? "ok" : "missing"}`,
+        ].join("\n")
+      );
+    }
+    if (!lower.includes("test")) {
+      return respond("Use `/schedule test` to post today's holiday right now, or `/schedule status` to debug.");
     }
     if (!config.channelId) {
       return respond("No channel is configured. Run /setup first.");
