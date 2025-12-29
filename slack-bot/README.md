@@ -14,6 +14,7 @@
    - `SITE_URL=https://www.obscureholidaycalendar.com`
    - `APP_URL=https://www.obscureholidaycalendar.com/app/` (optional)
    - `SLACK_SUPPORT_URL=https://www.obscureholidaycalendar.com/slack-bot/` (optional)
+   - `SLACK_INSTALL_URL=https://your-slack-bot-domain/slack/install` (optional)
    - `SLACK_VOTE_URL=<optional>`
    - `SLACK_REVIEW_URL=<optional>`
    - `SLACK_ADMIN_TOKEN=<random_string_for_admin_endpoint>`
@@ -34,7 +35,10 @@
    - OAuth & Permissions:
      - Redirect URL: `https://<your-host>/slack/oauth/callback`
      - Scopes: `commands`, `chat:write`
+     - (Recommended) Enable App Home and events for a welcome message and buttons.
    - Slash commands: point to `https://<your-host>/slack/commands`
+   - Interactivity & Shortcuts: Request URL `https://<your-host>/slack/interactions`
+   - Event Subscriptions: Request URL `https://<your-host>/slack/events` (subscribe to `app_home_opened`)
    - Install URL: `https://<your-host>/slack/install`
    - Stripe webhook endpoint: `https://<your-host>/stripe/webhook`
    - Enable Stripe events: `checkout.session.completed`, `invoice.paid`, `customer.subscription.updated`, `customer.subscription.deleted`

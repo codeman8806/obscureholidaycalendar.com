@@ -33,6 +33,10 @@ const SITE_URL = process.env.SITE_URL || null;
 const SITE_BASE = SITE_URL ? `${SITE_URL}/holiday` : null;
 const APP_URL = process.env.APP_URL || (SITE_URL ? `${SITE_URL}/app/` : null);
 const SUPPORT_URL = process.env.SLACK_SUPPORT_URL || (SITE_URL ? `${SITE_URL}/slack-bot/` : null);
+const SLACK_INSTALL_URL =
+  process.env.SLACK_INSTALL_URL ||
+  (SLACK_REDIRECT_URI ? SLACK_REDIRECT_URI.replace(/\/oauth\/callback$/, "/install") : null) ||
+  SUPPORT_URL;
 const TOPGG_VOTE_URL = process.env.SLACK_VOTE_URL || null;
 const TOPGG_REVIEW_URL = process.env.SLACK_REVIEW_URL || null;
 
@@ -259,6 +263,227 @@ async function slackPostMessage(channel, text) {
   return { ok: true };
 }
 
+async function slackPostEphemeral(teamId, channel, user, text, blocks) {
+  const token = teamId ? workspaceTokens[teamId]?.access_token : null;
+  if (!token) return { ok: false, error: "missing_token" };
+  const resp = await fetch("https://slack.com/api/chat.postEphemeral", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({ channel, user, text, blocks }),
+  });
+  const data = await resp.json().catch(() => ({}));
+  return data.ok ? { ok: true } : { ok: false, error: data.error || "unknown_error" };
+}
+
+async function slackOpenModal(teamId, triggerId, view) {
+  const token = teamId ? workspaceTokens[teamId]?.access_token : null;
+  if (!token) return { ok: false, error: "missing_token" };
+  const resp = await fetch("https://slack.com/api/views.open", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({ trigger_id: triggerId, view }),
+  });
+  const data = await resp.json().catch(() => ({}));
+  return data.ok ? { ok: true } : { ok: false, error: data.error || "unknown_error" };
+}
+
+async function slackPublishHome(teamId, userId) {
+  const token = teamId ? workspaceTokens[teamId]?.access_token : null;
+  if (!token) return;
+  const mmdd = toMMDD(new Date());
+  const todayHits = findByDate(mmdd);
+  const todayHoliday = todayHits[0];
+  const todayFact =
+    todayHoliday && Array.isArray(todayHoliday.funFacts) && todayHoliday.funFacts.length
+      ? todayHoliday.funFacts[0]
+      : null;
+  const view = {
+    type: "home",
+    blocks: [
+      {
+        type: "header",
+        text: { type: "plain_text", text: "Obscure Holiday Calendar", emoji: true },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: "Daily holiday posts, quick facts, and slash commands right inside Slack.",
+        },
+      },
+      ...(todayHoliday
+        ? [
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `*Today’s holiday:* ${todayHoliday.emoji || ""} ${todayHoliday.name}`,
+              },
+            },
+            ...(todayFact
+              ? [
+                  {
+                    type: "context",
+                    elements: [{ type: "mrkdwn", text: `Fun fact: ${todayFact}` }],
+                  },
+                ]
+              : []),
+          ]
+        : []),
+      {
+        type: "actions",
+        elements: [
+          { type: "button", text: { type: "plain_text", text: "Post today’s holiday" }, action_id: "post_today" },
+          { type: "button", text: { type: "plain_text", text: "Set up schedule" }, action_id: "setup_modal" },
+          { type: "button", text: { type: "plain_text", text: "Upgrade" }, action_id: "upgrade_link" },
+        ],
+      },
+      {
+        type: "context",
+        elements: [{ type: "mrkdwn", text: "Need help? Use `/help` anytime." }],
+      },
+    ],
+  };
+  await fetch("https://slack.com/api/views.publish", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({ user_id: userId, view }),
+  });
+}
+
+function buildSetupModal(config, isPremium, metadata) {
+  const hourOptions = Array.from({ length: 24 }, (_, i) => ({
+    text: { type: "plain_text", text: String(i).padStart(2, "0") },
+    value: String(i),
+  }));
+  const minuteOptions = Array.from({ length: 60 }, (_, i) => ({
+    text: { type: "plain_text", text: String(i).padStart(2, "0") },
+    value: String(i),
+  }));
+  return {
+    type: "modal",
+    callback_id: "setup_modal",
+    title: { type: "plain_text", text: "Set up schedule" },
+    submit: { type: "plain_text", text: "Save" },
+    close: { type: "plain_text", text: "Cancel" },
+    private_metadata: JSON.stringify(metadata || {}),
+    blocks: [
+      {
+        type: "input",
+        block_id: "channel_block",
+        label: { type: "plain_text", text: "Post to channel" },
+        element: {
+          type: "conversations_select",
+          action_id: "channel",
+          default_to_current_conversation: true,
+        },
+      },
+      {
+        type: "input",
+        block_id: "timezone_block",
+        label: { type: "plain_text", text: "Timezone" },
+        element: {
+          type: "plain_text_input",
+          action_id: "timezone",
+          initial_value: config.timezone || DEFAULT_TIMEZONE,
+          placeholder: { type: "plain_text", text: "America/New_York" },
+        },
+      },
+      {
+        type: "input",
+        block_id: "hour_block",
+        label: { type: "plain_text", text: "Hour (0-23)" },
+        element: {
+          type: "static_select",
+          action_id: "hour",
+          options: hourOptions,
+          initial_option: hourOptions.find((opt) => opt.value === String(config.hour ?? DEFAULT_HOUR)),
+        },
+      },
+      {
+        type: "input",
+        block_id: "minute_block",
+        label: { type: "plain_text", text: "Minute (0-59)" },
+        element: {
+          type: "static_select",
+          action_id: "minute",
+          options: minuteOptions,
+          initial_option: minuteOptions.find((opt) => opt.value === String(config.minute ?? DEFAULT_MINUTE)),
+        },
+      },
+      {
+        type: "input",
+        block_id: "choice_block",
+        label: { type: "plain_text", text: "Holiday choice" },
+        element: {
+          type: "static_select",
+          action_id: "holiday_choice",
+          options: [
+            { text: { type: "plain_text", text: "First holiday" }, value: "0" },
+            { text: { type: "plain_text", text: "Second holiday (Premium)" }, value: "1" },
+          ],
+          initial_option: {
+            text: {
+              type: "plain_text",
+              text: (config.holidayChoice || 0) === 1 ? "Second holiday (Premium)" : "First holiday",
+            },
+            value: String(config.holidayChoice || 0),
+          },
+        },
+      },
+      {
+        type: "input",
+        block_id: "options_block",
+        optional: true,
+        label: { type: "plain_text", text: "Options" },
+        element: {
+          type: "checkboxes",
+          action_id: "options",
+          options: [
+            { text: { type: "plain_text", text: "Skip weekends (Premium)" }, value: "skip_weekends" },
+            { text: { type: "plain_text", text: "Allow promotions (Premium)" }, value: "promotions" },
+          ],
+          initial_options: [
+            config.skipWeekends
+              ? { text: { type: "plain_text", text: "Skip weekends (Premium)" }, value: "skip_weekends" }
+              : null,
+            config.promotionsEnabled
+              ? { text: { type: "plain_text", text: "Allow promotions (Premium)" }, value: "promotions" }
+              : null,
+          ].filter(Boolean),
+        },
+      },
+      {
+        type: "context",
+        elements: [
+          {
+            type: "mrkdwn",
+            text: isPremium
+              ? "Premium settings are enabled for this workspace."
+              : "Premium settings require an upgrade to take effect.",
+          },
+        ],
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: "*Free vs Premium*\n• Free: /today + daily posts (UTC)\n• Premium: /date, /search, /random, /facts, /tomorrow, /upcoming, /week + custom schedule",
+        },
+      },
+    ],
+  };
+}
+
 async function resolveChannelId(teamId, rawChannel) {
   if (!rawChannel) return null;
   if (rawChannel.startsWith("<#") && rawChannel.includes("|")) {
@@ -464,6 +689,25 @@ app.use(
   })
 );
 
+app.use(
+  "/slack/interactions",
+  express.urlencoded({
+    extended: false,
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString("utf8");
+    },
+  })
+);
+
+app.use(
+  "/slack/events",
+  express.json({
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString("utf8");
+    },
+  })
+);
+
 app.use("/stripe/webhook", express.raw({ type: "application/json" }));
 
 app.get("/slack/install", (req, res) => {
@@ -522,7 +766,7 @@ app.get("/slack/oauth/callback", async (req, res) => {
 
 app.post("/slack/commands", async (req, res) => {
   if (!verifySlackSignature(req)) return res.status(401).send("Invalid signature");
-  const { command, text, team_id, user_id, channel_id } = req.body || {};
+  const { command, text, team_id, user_id, channel_id, trigger_id } = req.body || {};
   const teamId = team_id || "unknown";
   const config = ensureWorkspace(teamId);
 
@@ -539,35 +783,74 @@ app.post("/slack/commands", async (req, res) => {
   const cmd = aliasMap[rawCmd] || rawCmd;
   const isPremium = isPremiumTeam(teamId);
 
-    if (cmd === "help") {
-      return respond(
-        [
-          "Holiday bot commands:",
-          "/today",
-          "/today 2 *(Premium)*: second holiday",
-          "/tomorrow *(Premium)* add 2 for second holiday",
-          "/week [days] *(Premium)*",
-          "/upcoming [days] *(Premium)*",
-          "/date MM-DD *(Premium)* add 2 for second holiday",
-          "/search <query> *(Premium)* — or /ohsearch if /search is taken",
-          "/random *(Premium)*",
-          "/facts [name or MM-DD] *(Premium)*",
-          "/setup key=value ...",
-          "/premium [refresh]",
-          "/upgrade",
-          "/manage",
+  if (cmd === "help") {
+    if (trigger_id) {
+      const blocks = [
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: [
+              "*Holiday bot commands:*",
+              "• /today",
+              "• /today 2 *(Premium)*",
+              "• /tomorrow *(Premium)*",
+              "• /week [days] *(Premium)*",
+              "• /upcoming [days] *(Premium)*",
+              "• /date MM-DD *(Premium)*",
+              "• /search <query> *(Premium)*",
+              "• /random *(Premium)*",
+              "• /facts [name or MM-DD] *(Premium)*",
+              "• /setup",
+              "• /premium [refresh]",
+              "• /upgrade",
+              "• /manage",
+              "• /invite — or /ohinvite",
+              "• /support, /app",
+            ].join("\n"),
+          },
+        },
+        {
+          type: "actions",
+          elements: [
+            { type: "button", text: { type: "plain_text", text: "Open setup" }, action_id: "setup_modal" },
+            { type: "button", text: { type: "plain_text", text: "Post today" }, action_id: "post_today" },
+          ],
+        },
+      ];
+      const sent = await slackPostEphemeral(teamId, channel_id, user_id, "Help menu", blocks);
+      if (sent.ok) return res.json({ response_type: "ephemeral", text: "✅ Help sent." });
+    }
+    return respond(
+      [
+        "Holiday bot commands:",
+        "/today",
+        "/today 2 *(Premium)*: second holiday",
+        "/tomorrow *(Premium)* add 2 for second holiday",
+        "/week [days] *(Premium)*",
+        "/upcoming [days] *(Premium)*",
+        "/date MM-DD *(Premium)* add 2 for second holiday",
+        "/search <query> *(Premium)* — or /ohsearch if /search is taken",
+        "/random *(Premium)*",
+        "/facts [name or MM-DD] *(Premium)*",
+        "/setup key=value ...",
+        "/premium [refresh]",
+        "/upgrade",
+        "/manage",
         "/invite — or /ohinvite if /invite is taken",
         "/vote",
         "/rate",
         "/support",
         "/app — or /ohapp if /app is taken",
+        "",
+        "Tip: Use `/setup` to open the guided setup modal.",
       ].join("\n")
     );
   }
 
   if (cmd === "support") return respond(SUPPORT_URL ? `Support: ${SUPPORT_URL}` : "Support link not configured.");
   if (cmd === "app") return respond(APP_URL ? `App: ${APP_URL}` : "App link not configured.");
-  if (cmd === "invite") return respond(SUPPORT_URL ? `Invite and setup: ${SUPPORT_URL}` : "Invite link not configured.");
+  if (cmd === "invite") return respond(SLACK_INSTALL_URL ? `Install the Slack bot: ${SLACK_INSTALL_URL}` : "Invite link not configured.");
   if (cmd === "vote") return respond(TOPGG_VOTE_URL ? `Vote: ${TOPGG_VOTE_URL}` : "Vote link not configured.");
   if (cmd === "rate") return respond(TOPGG_REVIEW_URL ? `Review: ${TOPGG_REVIEW_URL}` : "Review link not configured.");
 
@@ -625,6 +908,14 @@ app.post("/slack/commands", async (req, res) => {
 
   if (cmd === "setup") {
     if (!text || text.toLowerCase().includes("help")) {
+      if (trigger_id) {
+        const open = await slackOpenModal(teamId, trigger_id, buildSetupModal(config, isPremium, { channel_id, user_id }));
+        if (open.ok) return respond("Opening setup...");
+      }
+      const modalHint =
+        trigger_id
+          ? ""
+          : "\nTip: Open the App Home tab and tap “Set up schedule” for the guided setup modal.";
       return respond(
         [
           "Setup options (key=value):",
@@ -641,6 +932,7 @@ app.post("/slack/commands", async (req, res) => {
           "",
           "Template:",
           "timezone= hour= minute= holiday_choice= skip_weekends= promotions=",
+          modalHint,
         ].join("\n")
       );
     }
@@ -861,6 +1153,103 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   return respond(`Unknown command: ${cmd}`);
+});
+
+app.post("/slack/interactions", async (req, res) => {
+  if (!verifySlackSignature(req)) return res.status(401).send("Invalid signature");
+  const payload = req.body?.payload ? JSON.parse(req.body.payload) : null;
+  if (!payload) return res.status(400).send("Missing payload");
+
+  if (payload.type === "block_actions") {
+    const teamId = payload.team?.id;
+    const userId = payload.user?.id;
+    const triggerId = payload.trigger_id;
+    const actionId = payload.actions?.[0]?.action_id;
+    if (actionId === "setup_modal") {
+      const config = ensureWorkspace(teamId);
+      const isPremium = isPremiumTeam(teamId);
+      await slackOpenModal(teamId, triggerId, buildSetupModal(config, isPremium, { channel_id: null, user_id: userId }));
+    }
+    if (actionId === "post_today") {
+      const mmdd = toMMDD(new Date());
+      const hits = findByDate(mmdd);
+      if (hits.length) {
+        const holiday = hits[0];
+        await slackPostMessage({ id: userId, teamId }, formatHoliday(holiday, mmdd));
+      }
+    }
+    if (actionId === "upgrade_link" && STRIPE_SUCCESS_URL) {
+      await slackPostMessage({ id: userId, teamId }, `Upgrade to premium: ${STRIPE_SUCCESS_URL}`);
+    }
+    return res.json({ ok: true });
+  }
+
+  if (payload.type === "view_submission" && payload.view?.callback_id === "setup_modal") {
+    const teamId = payload.team?.id;
+    const userId = payload.user?.id;
+    const state = payload.view?.state?.values || {};
+    const config = ensureWorkspace(teamId);
+    const isPremium = isPremiumTeam(teamId);
+    const channelId = state.channel_block?.channel?.selected_conversation || null;
+    const timezone = state.timezone_block?.timezone?.value;
+    const hour = state.hour_block?.hour?.selected_option?.value;
+    const minute = state.minute_block?.minute?.selected_option?.value;
+    const choice = state.choice_block?.holiday_choice?.selected_option?.value;
+    const options = state.options_block?.options?.selected_options?.map((opt) => opt.value) || [];
+
+    const errors = {};
+    if (timezone && !isValidTimeZone(timezone)) errors.timezone_block = "Invalid timezone.";
+    if (hour && (Number(hour) < 0 || Number(hour) > 23)) errors.hour_block = "Hour must be 0-23.";
+    if (minute && (Number(minute) < 0 || Number(minute) > 59)) errors.minute_block = "Minute must be 0-59.";
+    if (Object.keys(errors).length) {
+      return res.json({ response_action: "errors", errors });
+    }
+
+    if (channelId) config.channelId = channelId;
+    if (timezone && isPremium) config.timezone = timezone;
+    if (hour && isPremium) config.hour = Number(hour);
+    if (minute && isPremium) config.minute = Number(minute);
+    if (choice && isPremium) config.holidayChoice = Number(choice);
+    if (isPremium) {
+      config.skipWeekends = options.includes("skip_weekends");
+      config.promotionsEnabled = options.includes("promotions");
+    }
+    writeJsonSafe(CONFIG_PATH, workspaceConfig);
+
+    if (channelId && userId) {
+      await slackPostEphemeral(teamId, channelId, userId, "✅ Schedule saved. You can update anytime with /setup.");
+    }
+    return res.json({});
+  }
+
+  return res.json({ ok: true });
+});
+
+app.post("/slack/events", async (req, res) => {
+  if (!verifySlackSignature(req)) return res.status(401).send("Invalid signature");
+  const payload = req.body || {};
+  if (payload.type === "url_verification") {
+    return res.json({ challenge: payload.challenge });
+  }
+  if (payload.type === "event_callback") {
+    const event = payload.event;
+    if (event?.type === "app_home_opened") {
+      const teamId = event.team;
+      const userId = event.user;
+      await slackPublishHome(teamId, userId);
+      const config = ensureWorkspace(teamId);
+      config.welcomedUsers = config.welcomedUsers || {};
+      if (!config.welcomedUsers[userId]) {
+        config.welcomedUsers[userId] = true;
+        writeJsonSafe(CONFIG_PATH, workspaceConfig);
+        await slackPostMessage(
+          { id: userId, teamId },
+          "👋 Welcome! Use /setup to schedule daily posts, or open the App Home tab for buttons."
+        );
+      }
+    }
+  }
+  res.json({ ok: true });
 });
 
 app.post("/stripe/webhook", async (req, res) => {
