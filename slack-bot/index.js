@@ -479,23 +479,23 @@ app.post("/slack/commands", async (req, res) => {
   const cmd = aliasMap[rawCmd] || rawCmd;
   const isPremium = isPremiumTeam(teamId);
 
-  if (cmd === "help") {
-    return respond(
-      [
-        "Holiday bot commands:",
-        "/today",
-        "/today 2 (premium: second holiday)",
-        "/tomorrow (premium: add 2 for second holiday)",
-        "/week [days] (premium)",
-        "/upcoming [days] (premium)",
-        "/date MM-DD (premium: add 2 for second holiday)",
-        "/search <query> (premium) — or /ohsearch if /search is taken",
-        "/random (premium)",
-        "/facts [name or MM-DD] (premium)",
-        "/setup key=value ...",
-        "/premium [refresh]",
-        "/upgrade",
-        "/manage",
+    if (cmd === "help") {
+      return respond(
+        [
+          "Holiday bot commands:",
+          "/today",
+          "/today 2 *(Premium)*: second holiday",
+          "/tomorrow *(Premium)* add 2 for second holiday",
+          "/week [days] *(Premium)*",
+          "/upcoming [days] *(Premium)*",
+          "/date MM-DD *(Premium)* add 2 for second holiday",
+          "/search <query> *(Premium)* — or /ohsearch if /search is taken",
+          "/random *(Premium)*",
+          "/facts [name or MM-DD] *(Premium)*",
+          "/setup key=value ...",
+          "/premium [refresh]",
+          "/upgrade",
+          "/manage",
         "/invite — or /ohinvite if /invite is taken",
         "/vote",
         "/rate",
@@ -568,6 +568,7 @@ app.post("/slack/commands", async (req, res) => {
       return respond(
         [
           "Setup options (key=value):",
+          "channel=#your-channel (optional; posts to this channel)",
           "timezone=America/New_York",
           "hour=9 (0-23)",
           "holiday_choice=1 (0=first, 1=second, premium)",
@@ -575,12 +576,19 @@ app.post("/slack/commands", async (req, res) => {
           "promotions=true|false (premium)",
           "",
           "Example:",
-          "/setup timezone=America/New_York hour=9 holiday_choice=1 skip_weekends=true",
+          "/setup channel=#general timezone=America/New_York hour=9 holiday_choice=1 skip_weekends=true",
+          "",
+          "Template:",
+          "timezone= hour= holiday_choice= skip_weekends= promotions=",
         ].join("\n")
       );
     }
     const args = parseSetupArgs(text || "");
-    config.channelId = channel_id;
+    if (args.channel && args.channel.startsWith("<#") && args.channel.includes("|")) {
+      config.channelId = args.channel.split("|")[0].replace("<#", "");
+    } else {
+      config.channelId = channel_id;
+    }
     if (args.timezone && isPremium) config.timezone = args.timezone;
     if (args.hour && isPremium) config.hour = Math.min(Math.max(Number(args.hour), 0), 23);
     if (args.holiday_choice && isPremium) config.holidayChoice = Number(args.holiday_choice) ? 1 : 0;

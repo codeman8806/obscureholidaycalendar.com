@@ -33,51 +33,197 @@
   </script>
   <link rel="stylesheet" href="/styles.css">
   <style>
-    .bot-hero {
-      text-align: center;
-      margin-bottom: 18px;
+    :root {
+      --slack-bg: #f5efff;
+      --slack-ink: #0f172a;
+      --slack-muted: #475569;
+      --slack-accent: #6d28d9;
+      --slack-accent-2: #a855f7;
+      --slack-panel: #ffffff;
+      --slack-line: #ddd6fe;
     }
-    .bot-cta {
-      display: inline-flex;
-      gap: 10px;
+    body.page.slack {
+      background: linear-gradient(180deg, #efe6ff 0%, #f7f0ff 45%, #ffffff 100%);
+      color: var(--slack-ink);
+    }
+    .page.slack .nav-links a {
+      color: #1f2937;
+    }
+    .page.slack .nav-links a:hover {
+      color: #111827;
+    }
+    .page.slack .brand-tagline {
+      color: var(--slack-muted);
+    }
+    .slack-wrap {
+      max-width: 1100px;
+      padding: 28px 18px 70px;
+      margin: 0 auto;
+    }
+    .slack-shell {
+      display: grid;
+      gap: 36px;
+    }
+    .slack-hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: center;
+      padding: 26px;
+      border-radius: 26px;
+      background: linear-gradient(120deg, rgba(109, 40, 217, 0.12), rgba(168, 85, 247, 0.08));
+      border: 1px solid var(--slack-line);
+    }
+    .slack-kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--slack-accent);
+    }
+    .slack-copy h1 {
+      margin: 8px 0 12px;
+      font-size: clamp(2.1rem, 3.6vw, 3rem);
+      letter-spacing: -0.02em;
+    }
+    .slack-copy p {
+      margin: 0 0 18px;
+      color: var(--slack-muted);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+    .slack-cta {
+      display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      margin: 12px auto 18px;
+      gap: 12px;
+      align-items: center;
     }
-    .bot-button {
+    .slack-cta .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 18px;
-      border-radius: 12px;
-      font-weight: 800;
-      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+      border: 1px solid transparent;
     }
-    .bot-button.secondary { background: #0f172a; }
+    .slack-cta .btn.secondary {
+      border-color: var(--slack-line);
+      background: #fff;
+      color: var(--slack-ink);
+    }
+    .slack-panel {
+      background: var(--slack-panel);
+      border: 1px solid var(--slack-line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+      display: grid;
+      gap: 12px;
+    }
+    .slack-panel h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    .slack-panel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--slack-muted);
+    }
+    .slack-badge {
+      height: 48px;
+      width: auto;
+    }
+    .slack-features {
+      display: grid;
+      gap: 16px;
+    }
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 14px;
-      margin-top: 16px;
     }
     .feature-card {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      background: #f8fafc;
+      border: 1px solid var(--slack-line);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fff;
       box-shadow: 0 10px 20px rgba(12,18,52,0.08);
     }
-    .hero-badge {
-      width: 140px;
+    .feature-card strong {
+      display: block;
+      margin-bottom: 6px;
     }
-    .slack-badge {
-      height: 48px;
+    .command-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .command-pills .pill {
+      border: 1px solid var(--slack-line);
+      background: #fff;
+      font-weight: 600;
+    }
+    .slack-steps {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .step-card {
+      background: #fff;
+      border: 1px solid var(--slack-line);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 10px 20px rgba(12,18,52,0.08);
+    }
+    .step-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: #ede9fe;
+      color: var(--slack-accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .slack-preview {
+      background: #fff;
+      border: 1px solid var(--slack-line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+      text-align: center;
+    }
+    .slack-preview-grid {
+      width: 100%;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .slack-preview-card {
+      background: #f8fafc;
+      border: 1px solid var(--slack-line);
+      border-radius: 14px;
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+      text-align: center;
+    }
+    .slack-preview-card img {
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--slack-line);
     }
   </style>
 </head>
-<body class="page">
+<body class="page slack">
   <header class="site-header">
     <div class="bot-banner">
       <span>Now available for Slack and Discord</span>
@@ -107,34 +253,37 @@
     </nav>
   </header>
 
-  <main class="page-wrap">
-    <article class="holiday-card">
-      <div class="bot-hero">
-        <img src="/assets/app-icon.png" alt="Bot icon" class="hero-badge" />
-        <h1 class="holiday-title">Obscure Holiday Calendar Slack Bot for Daily Holiday Posts</h1>
-        <div class="meta-line" style="justify-content: center;">
-          <span class="pill">/today</span>
-          <span class="pill pill-secondary">/date</span>
-          <span class="pill pill-secondary">/search</span>
-          <span class="pill">Daily posts</span>
+  <main class="slack-wrap">
+    <article class="slack-shell">
+      <section class="slack-hero">
+        <div class="slack-copy">
+          <span class="slack-kicker">Slack bot</span>
+          <h1>Daily holiday posts for your Slack workspace.</h1>
+          <p>Obscure Holiday Calendar delivers a fun holiday every day, plus quick slash commands for /today, /date, /search, and more.</p>
+          <div class="slack-cta">
+            <a href="https://serene-curiosity-production.up.railway.app/slack/install">
+              <img class="slack-badge" alt="Add to Slack" src="https://platform.slack-edge.com/img/add_to_slack.png">
+            </a>
+            <a class="btn secondary" href="https://www.obscureholidaycalendar.com/app/">Get the Mobile App</a>
+          </div>
         </div>
-        <p class="lead" style="margin: 8px auto 12px; max-width: 640px;">
-          Bring daily holiday posts, random picks, and fun facts into your Slack workspace with a simple Slack holiday bot.
-        </p>
-        <div class="bot-cta">
-          <a href="https://serene-curiosity-production.up.railway.app/slack/install">
-            <img class="slack-badge" alt="Add to Slack" src="https://platform.slack-edge.com/img/add_to_slack.png">
-          </a>
-          <a class="bot-button secondary" href="https://www.obscureholidaycalendar.com/app/">
-            Get the Mobile App
-          </a>
-        </div>
-        <p style="margin: 6px auto 0; max-width: 720px;">
-          Free includes /today and basic setup. Premium unlocks /date, /search, /random, /facts, /tomorrow, /upcoming, and /week.
-        </p>
-      </div>
+        <aside class="slack-panel">
+          <h3>Free vs Premium</h3>
+          <ul>
+            <li>Free: /today, basic setup, daily posts (UTC).</li>
+            <li>Premium: /date, /search, /random, /facts, /tomorrow, /upcoming, /week.</li>
+            <li>Premium scheduling: timezone, hour, skip weekends, holiday choice.</li>
+          </ul>
+          <div class="command-pills">
+            <span class="pill">/today</span>
+            <span class="pill pill-secondary">/date</span>
+            <span class="pill pill-secondary">/search</span>
+            <span class="pill">Daily posts</span>
+          </div>
+        </aside>
+      </section>
 
-      <section class="section">
+      <section class="slack-features">
         <h2>Slack bot highlights</h2>
         <div class="feature-grid">
           <div class="feature-card">
@@ -152,6 +301,42 @@
           <div class="feature-card">
             <strong>Daily channel posts</strong>
             <p>Free tier posts once daily at 00:00 UTC; premium adds timezone/hour, skip weekends, and holiday choice.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>How it works</h2>
+        <div class="slack-steps">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Install the bot</h3>
+            <p>Add the app to your workspace and authorize the Slack permissions.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Run /setup</h3>
+            <p>Pick a channel, set a time, and decide which holiday to post.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Share daily holidays</h3>
+            <p>Automatic posts plus slash commands keep the team in the loop.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slack-preview">
+        <h2>Preview in Slack</h2>
+        <p>See how daily holiday posts and fun facts look inside your channels.</p>
+        <div class="slack-preview-grid">
+          <div class="slack-preview-card">
+            <img src="/assets/slack-bot/Today_Screenshot.png" alt="Slack bot preview showing today's holiday" />
+            <span>Today’s holiday</span>
+          </div>
+          <div class="slack-preview-card">
+            <img src="/assets/slack-bot/FunFacts_Screenshot.png" alt="Slack bot preview showing fun facts" />
+            <span>Fun facts</span>
           </div>
         </div>
       </section>
