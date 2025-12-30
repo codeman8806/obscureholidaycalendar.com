@@ -237,6 +237,37 @@
       margin: 0;
       color: var(--slack-muted);
     }
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .float-subtle {
+      animation: floatSubtle 6s ease-in-out infinite;
+    }
+    @keyframes floatSubtle {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .float-subtle {
+        animation: none;
+      }
+    }
   </style>
 </head>
 <body class="page slack">
@@ -271,7 +302,7 @@
 
   <main class="slack-wrap">
     <article class="slack-shell">
-      <section class="slack-hero">
+      <section class="slack-hero reveal">
         <div class="slack-copy">
           <span class="slack-kicker">Slack bot</span>
           <h1>Daily holiday posts for your Slack workspace.</h1>
@@ -283,7 +314,7 @@
             <a class="btn secondary" href="https://www.obscureholidaycalendar.com/app/">Get the Mobile App</a>
           </div>
         </div>
-        <aside class="slack-panel">
+        <aside class="slack-panel float-subtle">
           <h3>Free vs Premium</h3>
           <ul>
             <li>Free: /today, basic setup, daily posts (UTC).</li>
@@ -299,7 +330,7 @@
         </aside>
       </section>
 
-      <section class="slack-features">
+      <section class="slack-features reveal">
         <h2>Slack bot highlights</h2>
         <div class="feature-grid">
           <div class="feature-card">
@@ -321,7 +352,7 @@
         </div>
       </section>
 
-      <section>
+      <section class="reveal">
         <h2>How it works</h2>
         <div class="slack-steps">
           <div class="step-card">
@@ -342,7 +373,7 @@
         </div>
       </section>
 
-      <section class="slack-preview">
+      <section class="slack-preview reveal">
         <h2>Preview in Slack</h2>
         <p>See how daily holiday posts and fun facts look inside your channels.</p>
         <div class="slack-preview-grid">
@@ -357,7 +388,7 @@
         </div>
       </section>
 
-      <section class="slack-faq">
+      <section class="slack-faq reveal">
         <h2>FAQ</h2>
         <div>
           <h3>Why didn’t the scheduled post show up?</h3>
@@ -379,5 +410,26 @@
     </div>
     <p>&copy; 2025 Obscure Holiday Calendar</p>
   </footer>
+  <script>
+    (function() {
+      const reveals = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window) || !reveals.length) {
+        reveals.forEach((el) => el.classList.add("is-visible"));
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+      reveals.forEach((el) => io.observe(el));
+    })();
+  </script>
 </body>
 </html>

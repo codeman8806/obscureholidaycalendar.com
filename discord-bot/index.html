@@ -143,77 +143,210 @@
   </script>
   <link rel="stylesheet" href="/styles.css">
   <style>
-    .bot-hero {
-      text-align: center;
-      margin-bottom: 18px;
+    :root {
+      --discord-bg: #f5efff;
+      --discord-ink: #0f172a;
+      --discord-muted: #475569;
+      --discord-accent: #5865f2;
+      --discord-accent-2: #7c3aed;
+      --discord-panel: #ffffff;
+      --discord-line: #ddd6fe;
     }
-    .bot-cta {
-      display: inline-flex;
-      gap: 10px;
+    body.page.discord {
+      background: linear-gradient(180deg, #efe6ff 0%, #f7f0ff 45%, #ffffff 100%);
+      color: var(--discord-ink);
+    }
+    .page.discord .nav-links a {
+      color: #1f2937;
+    }
+    .page.discord .nav-links a:hover {
+      color: #111827;
+    }
+    .page.discord .brand-tagline {
+      color: var(--discord-muted);
+    }
+    .discord-wrap {
+      max-width: 1100px;
+      padding: 28px 18px 70px;
+      margin: 0 auto;
+    }
+    .discord-shell {
+      display: grid;
+      gap: 36px;
+    }
+    .discord-hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: center;
+      padding: 26px;
+      border-radius: 26px;
+      background: linear-gradient(120deg, rgba(88, 101, 242, 0.12), rgba(124, 58, 237, 0.1));
+      border: 1px solid var(--discord-line);
+    }
+    .discord-kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--discord-accent);
+    }
+    .discord-copy h1 {
+      margin: 8px 0 12px;
+      font-size: clamp(2.1rem, 3.6vw, 3rem);
+      letter-spacing: -0.02em;
+    }
+    .discord-copy p {
+      margin: 0 0 12px;
+      color: var(--discord-muted);
+      line-height: 1.6;
+      max-width: 560px;
+    }
+    .discord-cta {
+      display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      margin: 12px auto 18px;
+      gap: 12px;
+      align-items: center;
+      margin-top: 10px;
     }
-    .bot-button {
+    .discord-cta .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 18px;
-      border-radius: 12px;
-      font-weight: 800;
-      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+      border: 1px solid transparent;
     }
-    .bot-button.invite { background: linear-gradient(120deg, #5865f2, #4552d9); }
-    .bot-button.secondary { background: #0f172a; }
+    .discord-cta .btn.primary {
+      background: var(--discord-accent);
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(88, 101, 242, 0.25);
+    }
+    .discord-cta .btn.secondary {
+      border-color: var(--discord-line);
+      background: #fff;
+      color: var(--discord-ink);
+    }
+    .discord-panel {
+      background: var(--discord-panel);
+      border: 1px solid var(--discord-line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+      display: grid;
+      gap: 12px;
+    }
+    .discord-panel h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    .discord-panel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--discord-muted);
+    }
+    .command-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .command-pills .pill {
+      border: 1px solid var(--discord-line);
+      background: #fff;
+      font-weight: 600;
+    }
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 14px;
-      margin-top: 16px;
     }
     .feature-card {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      background: #f8fafc;
-      box-shadow: 0 10px 20px rgba(12,18,52,0.08);
-    }
-    .steps {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 10px;
-    }
-    .steps li {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 12px;
-      background: #fff;
-      box-shadow: 0 8px 18px rgba(12,18,52,0.06);
-    }
-    .screenshots {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 12px;
-    }
-    .screenshots img {
-      width: 220px;
+      border: 1px solid var(--discord-line);
       border-radius: 14px;
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+      padding: 16px;
+      background: #fff;
+      box-shadow: 0 10px 20px rgba(12, 18, 52, 0.08);
+    }
+    .feature-card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+    .discord-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .step-card {
+      background: #fff;
+      border: 1px solid var(--discord-line);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 10px 20px rgba(12, 18, 52, 0.08);
+    }
+    .step-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: #ede9fe;
+      color: var(--discord-accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .discord-screens {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .discord-screens img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--discord-line);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
       background: #fff;
     }
-    .hero-badge {
-      width: 140px;
+    .discord-faq {
+      display: grid;
+      gap: 16px;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .float-subtle {
+      animation: floatSubtle 6s ease-in-out infinite;
+    }
+    @keyframes floatSubtle {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .float-subtle {
+        animation: none;
+      }
     }
   </style>
 </head>
-<body class="page">
+<body class="page discord">
   <header class="site-header">
     <div class="bot-banner">
       <span>Now available for Slack and Discord</span>
@@ -234,6 +367,7 @@
     <nav class="nav-links">
       <a href="/holiday/">Holidays</a>
       <a href="/discord-bot/">Discord Bot</a>
+      <a href="/slack-bot/">Slack Bot</a>
       <a class="shop-link" href="https://shop.obscureholidaycalendar.com/?utm_source=site&utm_medium=nav&utm_campaign=shop" target="_blank" rel="noopener">Shop</a>
       <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener">@obscureholidaycalendar</a>
       <a href="/about/">About</a>
@@ -242,41 +376,36 @@
     </nav>
   </header>
 
-  <main class="page-wrap">
-    <article class="holiday-card">
-      <div class="bot-hero">
-        <img src="/assets/app-icon.png" alt="Bot icon" class="hero-badge" />
-        <h1 class="holiday-title">Obscure Holiday Calendar Discord Bot for Daily Holiday Posts</h1>
-        <div class="meta-line" style="justify-content: center;">
-          <span class="pill">/today</span>
-          <span class="pill pill-secondary">/date</span>
-          <span class="pill pill-secondary">/search</span>
-          <span class="pill">Daily posts</span>
+  <main class="discord-wrap">
+    <article class="discord-shell">
+      <section class="discord-hero reveal">
+        <div class="discord-copy">
+          <span class="discord-kicker">Discord bot</span>
+          <h1>Daily holiday posts for your Discord server.</h1>
+          <p>Bring daily holiday posts, random picks, and fun facts into your Discord server. Free to add, premium for advanced scheduling and commands.</p>
+          <div class="command-pills">
+            <span class="pill">/today</span>
+            <span class="pill pill-secondary">/date</span>
+            <span class="pill pill-secondary">/search</span>
+            <span class="pill">Daily posts</span>
+          </div>
+          <div class="discord-cta">
+            <a class="btn primary" href="https://discord.com/oauth2/authorize?client_id=1447955404142153789&permissions=2684438528&integration_type=0&scope=applications.commands+bot">Invite to Discord</a>
+            <a class="btn secondary" href="https://www.obscureholidaycalendar.com/app/">Get the Mobile App</a>
+          </div>
         </div>
-        <p class="lead" style="margin: 8px auto 12px; max-width: 640px;">
-          Bring daily holiday posts, random picks, and fun facts into your Discord server with this Discord holiday bot. Free, no signup—just invite and go.
-        </p>
-        <p style="margin: 0 auto 12px; max-width: 720px;">
-          Perfect for community servers, classrooms, and fun channels. The bot posts today’s obscure holiday with emoji, a short description, and a link back to your site.
-        </p>
-        <p style="margin: 0 auto 12px; max-width: 720px;">
-          Built for daily holiday posts and slash commands, this Discord holiday bot helps members discover the <a href="/holiday/">daily holiday calendar</a> right from chat.
-        </p>
-        <div class="bot-cta">
-          <a class="bot-button invite" href="https://discord.com/oauth2/authorize?client_id=1447955404142153789&permissions=2684438528&integration_type=0&scope=applications.commands+bot">
-            Invite to Discord
-          </a>
-          <a class="bot-button secondary" href="https://www.obscureholidaycalendar.com/app/">
-            Get the Mobile App
-          </a>
-        </div>
-        <p style="margin: 6px auto 0; max-width: 720px;">
-          Feature highlights: daily holiday posts, free /today, and premium slash commands like /date, /search, /random, /facts, /tomorrow, /upcoming, and /week.
-        </p>
-      </div>
+        <aside class="discord-panel float-subtle">
+          <h3>Free vs Premium</h3>
+          <ul>
+            <li>Free: /today, basic setup, daily posts at 00:00 UTC.</li>
+            <li>Premium: /date, /search, /random, /facts, /tomorrow, /upcoming, /week.</li>
+            <li>Premium scheduling: timezone, hour, multiple channels, skip weekends, holiday choice.</li>
+          </ul>
+        </aside>
+      </section>
 
-      <section class="section">
-        <h2>What this Discord holiday bot does for your server</h2>
+      <section class="reveal">
+        <h2>What this Discord holiday bot does</h2>
         <div class="feature-grid">
           <div class="feature-card">
             <strong>/today (free) & /date (premium)</strong>
@@ -292,102 +421,42 @@
           </div>
           <div class="feature-card">
             <strong>Daily channel posts</strong>
-            <p>Free tier posts once daily at 00:00 UTC to one channel; premium adds multiple channels, timezone/hour, and skip-weekends.</p>
+            <p>Free tier posts once daily at 00:00 UTC; premium adds multiple channels, timezone/hour, and skip-weekends.</p>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <h2>Why servers choose this daily holiday Discord bot</h2>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <strong>Fresh daily content</strong>
-            <p>Daily holiday posts keep your Discord server active with low effort.</p>
+      <section class="reveal">
+        <h2>How it works</h2>
+        <div class="discord-steps">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Invite the bot</h3>
+            <p>Click “Invite to Discord” and approve Send Messages + Embed Links.</p>
           </div>
-          <div class="feature-card">
-            <strong>Obscure holidays at a glance</strong>
-            <p>Share unique and lesser-known celebrations your members haven’t seen before.</p>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Pick a channel</h3>
+            <p>Choose where daily holidays should post.</p>
           </div>
-          <div class="feature-card">
-            <strong>Simple setup</strong>
-            <p>Invite the bot, pick a channel, and start posting daily holidays in minutes.</p>
-          </div>
-          <div class="feature-card">
-            <strong>Built for engagement</strong>
-            <p>Slash commands and fun facts help spark conversation in any community.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Discord bot slash commands for holidays</h2>
-        <p>Use these slash commands to explore the Obscure Holiday Calendar inside Discord:</p>
-        <p><strong>Free commands:</strong> /today, /help, /invite, /support, /app, /premium, /upgrade, /manage, /setup (basic).</p>
-        <p><strong>Premium commands:</strong> /date, /search, /random, /facts, /tomorrow, /upcoming, /week.</p>
-        <p><strong>Optional commands:</strong> /vote and /rate (when top.gg is enabled).</p>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <strong>/today (free)</strong>
-            <p>See today’s obscure holidays with emoji and a shareable link.</p>
-          </div>
-          <div class="feature-card">
-            <strong>/date MM-DD (premium)</strong>
-            <p>Look up holidays for a specific date like 07-04 or 10-31.</p>
-          </div>
-          <div class="feature-card">
-            <strong>/search keyword (premium)</strong>
-            <p>Search by theme, food, or activity to find the perfect day.</p>
-          </div>
-          <div class="feature-card">
-            <strong>/random, /facts, /tomorrow, /upcoming, /week (premium)</strong>
-            <p>Grab a surprise holiday, fun facts, tomorrow’s holiday, upcoming dates, or a 7-day digest.</p>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Post daily holidays</h3>
+            <p>Try /today or let the bot auto-post every day.</p>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <h2>Who this Discord holiday bot is for</h2>
-        <p>Built for communities that want daily holiday posts, quick fun facts, and shareable celebrations.</p>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <strong>Community servers</strong>
-            <p>Boost engagement with daily holiday content and conversation starters.</p>
-          </div>
-          <div class="feature-card">
-            <strong>Schools & classrooms</strong>
-            <p>Use daily holidays to spark mini lessons, prompts, or themed activities.</p>
-          </div>
-          <div class="feature-card">
-            <strong>Gaming & creator hubs</strong>
-            <p>Drop a daily holiday post to keep chat lively between events or streams.</p>
-          </div>
-          <div class="feature-card">
-            <strong>Teams & clubs</strong>
-            <p>Celebrate something small every day without extra admin work.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>How to add the Discord bot to your server</h2>
-        <p>This Discord holiday bot works as a slash command bot that pulls daily holiday posts and fun facts directly from the Obscure Holiday Calendar.</p>
-        <ul class="steps">
-          <li><strong>Step 1:</strong> Click “Invite to Discord.”</li>
-          <li><strong>Step 2:</strong> Choose your server and approve (needs Send Messages + Embed Links).</li>
-          <li><strong>Step 3:</strong> Try <code>/today</code> or <code>/help</code> right away. Premium unlocks <code>/date</code>, <code>/random</code>, <code>/facts</code>, <code>/tomorrow</code>, <code>/upcoming</code>, and <code>/week</code>.</li>
-        </ul>
-      </section>
-
-      <section class="section">
+      <section class="reveal">
         <h2>Discord bot preview screenshots</h2>
-        <div class="screenshots">
+        <div class="discord-screens">
           <img src="/assets/bot_screenshot_1.png" alt="Discord bot overview preview" loading="lazy">
           <img src="/assets/bot_screenshot_2.png" alt="Discord bot slash command preview" loading="lazy">
           <img src="/assets/bot_screenshot_3.png" alt="Discord bot daily holiday post preview" loading="lazy">
         </div>
       </section>
 
-      <section class="section">
+      <section class="discord-faq reveal">
         <h2>Discord holiday bot FAQ</h2>
         <div class="feature-grid">
           <div class="feature-card">
@@ -406,44 +475,18 @@
             <strong>Can I choose the posting channel?</strong>
             <p>Yes. The bot posts to the channel you select, with premium control over time, timezone, and multiple channels.</p>
           </div>
-          <div class="feature-card">
-            <strong>Is this a slash command Discord bot?</strong>
-            <p>Yes. Free includes /today; premium unlocks /date, /search, /random, /facts, /tomorrow, /upcoming, and /week.</p>
-          </div>
-          <div class="feature-card">
-            <strong>Does it work for any server?</strong>
-            <p>It works for any Discord server that allows slash commands and bot invites.</p>
-          </div>
         </div>
       </section>
 
-      <section class="section">
-        <h2>Free vs premium Discord bot features</h2>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <strong>Free</strong>
-            <p>/today, basic /setup, one daily channel at 00:00 UTC, branding on, and the first holiday of the day. Plus /help, /invite, /support, /app, /premium, /upgrade, /manage.</p>
-          </div>
-          <div class="feature-card">
-            <strong>Premium</strong>
-            <p>/date, /search, /random, /facts, /tomorrow, /upcoming, /week, multiple channels, timezone/hour, branding toggle, role pings, quiet mode, embed style/color, skip weekends, and holiday choice.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
+      <section class="reveal">
         <h2>Premium Discord bot features and upgrades</h2>
         <p class="lead" style="margin: 6px 0 12px;">Premium unlocks /date, /search, /random, /facts, /tomorrow, /upcoming, /week, multiple daily channels, custom timezone/hour, branding toggle, and advanced scheduling.</p>
-        <div class="bot-cta">
-          <a class="bot-button invite" href="https://discord.com/oauth2/authorize?client_id=1447955404142153789&permissions=2684438528&integration_type=0&scope=applications.commands+bot">
+        <div class="discord-cta">
+          <a class="btn primary" href="https://discord.com/oauth2/authorize?client_id=1447955404142153789&permissions=2684438528&integration_type=0&scope=applications.commands+bot">
             Invite (first)
           </a>
-          <a class="bot-button secondary" href="/discord-bot/?success=1">
-            Already upgraded? Success page
-          </a>
-          <a class="bot-button secondary" href="/discord-bot/?canceled=1">
-            Canceled? Retry checkout
-          </a>
+          <a class="btn secondary" href="/discord-bot/?success=1">Already upgraded? Success page</a>
+          <a class="btn secondary" href="/discord-bot/?canceled=1">Canceled? Retry checkout</a>
         </div>
       </section>
     </article>
@@ -457,6 +500,7 @@
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/discord-bot/">Discord Bot</a>
+      <a href="/slack-bot/">Slack Bot</a>
     </div>
     <p>&copy; 2025 Obscure Holiday Calendar</p>
   </footer>
@@ -472,6 +516,27 @@
           });
         });
       }
+    })();
+  </script>
+  <script>
+    (function() {
+      const reveals = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window) || !reveals.length) {
+        reveals.forEach((el) => el.classList.add("is-visible"));
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+      reveals.forEach((el) => io.observe(el));
     })();
   </script>
 </body>
