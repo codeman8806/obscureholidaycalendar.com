@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Obscure Holiday Calendar Slack Bot | Daily Holidays in Slack</title>
-  <meta name="description" content="Add the Obscure Holiday Calendar Slack bot for daily holiday posts and slash commands like /today, plus premium options for /date, /search, /random, /facts, /tomorrow, /upcoming, and /week." />
-  <meta name="keywords" content="Slack bot, obscure holidays, daily holiday bot, holiday calendar bot, slash commands, fun facts, auto posting" />
+  <meta name="description" content="Add the Obscure Holiday Calendar Slack bot for daily holiday posts in your channel, plus slash commands like /today. Premium adds /date, /search, /random, /facts, /tomorrow, /upcoming, and /week with advanced scheduling." />
+  <meta name="keywords" content="Slack bot, obscure holidays, daily holiday bot, holiday calendar bot, slash commands, fun facts, auto posting, Slack app" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="google-adsense-account" content="ca-pub-7162731177966348">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -13,23 +13,124 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="canonical" href="https://www.obscureholidaycalendar.com/slack-bot/" />
   <meta property="og:title" content="Obscure Holiday Calendar Slack Bot">
-  <meta property="og:description" content="Daily holiday posts and /today for free, with premium slash commands like /date, /search, /random, /facts, /tomorrow, /upcoming, and /week." />
+  <meta property="og:description" content="Daily holiday posts and /today for free, with premium slash commands like /date, /search, /random, /facts, /tomorrow, /upcoming, and /week plus advanced scheduling." />
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.obscureholidaycalendar.com/slack-bot/">
-  <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/bot_screenshot_1.png">
-  <meta property="og:image:width" content="727">
-  <meta property="og:image:height" content="526">
-  <meta property="og:image:alt" content="Obscure Holiday Calendar Slack bot preview">
+  <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/slack-bot/Today_Screenshot_1600x1000.png">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="1000">
+  <meta property="og:image:alt" content="Obscure Holiday Calendar Slack bot daily holiday preview">
+  <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/slack-bot/FunFacts_Screenshot_1600x1000.png">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="1000">
+  <meta property="og:image:alt" content="Obscure Holiday Calendar Slack bot fun facts preview">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Obscure Holiday Calendar Slack Bot">
-  <meta name="twitter:description" content="Install the Slack bot for daily holiday posts and slash commands like /today, with premium /date, /search, /random, /facts, /tomorrow, /upcoming, and /week.">
-  <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/bot_screenshot_1.png">
+  <meta name="twitter:description" content="Install the Slack bot for daily holiday posts and /today for free, with premium /date, /search, /random, /facts, /tomorrow, /upcoming, and /week plus advanced scheduling.">
+  <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/slack-bot/Today_Screenshot_1600x1000.png">
+  <meta name="twitter:image:alt" content="Obscure Holiday Calendar Slack bot daily holiday preview">
+  <meta name="twitter:label1" content="Commands">
+  <meta name="twitter:data1" content="/today (free) • /date /search /random /facts /tomorrow /upcoming /week (premium)">
+  <meta name="twitter:label2" content="Posting">
+  <meta name="twitter:data2" content="Daily holiday channel updates">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTLDP7FMGV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-JTLDP7FMGV');
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Obscure Holiday Calendar Slack Bot",
+      "description": "A Slack bot that posts daily obscure holidays with /today for free, plus premium slash commands like /date, /search, /random, /facts, /tomorrow, /upcoming, and /week with advanced scheduling.",
+      "applicationCategory": "CommunicationApplication",
+      "operatingSystem": "Slack",
+      "url": "https://www.obscureholidaycalendar.com/slack-bot/",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.obscureholidaycalendar.com/assets/slack-bot/Today_Screenshot_1600x1000.png",
+        "width": 1600,
+        "height": 1000
+      },
+      "screenshot": [
+        "https://www.obscureholidaycalendar.com/assets/slack-bot/Today_Screenshot_1600x1000.png",
+        "https://www.obscureholidaycalendar.com/assets/slack-bot/FunFacts_Screenshot_1600x1000.png"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Obscure Holiday Calendar",
+        "url": "https://www.obscureholidaycalendar.com/"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is the Obscure Holiday Calendar Slack bot free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Slack bot is free to add with /today and daily posts, and premium upgrades unlock advanced commands and scheduling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What commands does the Slack bot support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Free includes /today. Premium adds /date, /search, /random, /facts, /tomorrow, /upcoming, and /week."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I schedule daily holiday posts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can set a daily schedule per channel and pick a timezone, hour, and minute."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What permissions does the Slack bot need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The bot needs permission to post messages in channels where you want daily holiday updates."
+          }
+        }
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.obscureholidaycalendar.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Slack Bot",
+          "item": "https://www.obscureholidaycalendar.com/slack-bot/"
+        }
+      ]
+    }
   </script>
   <link rel="stylesheet" href="/styles.css">
   <style>
