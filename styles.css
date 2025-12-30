@@ -366,6 +366,13 @@ a:hover {
   object-fit: cover;
   background: transparent;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+  display: block;
+}
+
+.page:not(.home):not(.modern):not(.slack):not(.discord) .store-badge[alt*="Google Play"],
+.page:not(.home):not(.modern):not(.slack):not(.discord) .store-badge[src*="play.google.com/intl/en_us/badges/static/images/badges"] {
+  transform: scale(1.06);
+  clip-path: inset(6px 10px 6px 10px round 10px);
 }
 
 .section {
@@ -557,6 +564,8 @@ main.content-page {
   .nav-links {
     flex-wrap: wrap;
     justify-content: flex-start;
+    gap: 10px;
+    font-size: 0.95rem;
   }
 
   .holiday-card {
@@ -569,6 +578,25 @@ main.content-page {
 
   .fact-list {
     grid-template-columns: 1fr;
+  }
+
+  .bot-banner {
+    border-radius: 20px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    gap: 8px;
+  }
+
+  .bot-banner-link img {
+    height: 28px;
+  }
+
+  .brand {
+    width: 100%;
+  }
+
+  .brand-tagline {
+    font-size: 0.95rem;
   }
 }
 
