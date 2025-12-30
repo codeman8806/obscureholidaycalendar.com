@@ -635,6 +635,11 @@ main.content-page {
   box-shadow: none;
 }
 
+.page:not(.home):not(.modern):not(.slack):not(.discord) .hero-aside,
+.page:not(.home):not(.modern):not(.slack):not(.discord) .badge-caption {
+  display: none;
+}
+
 .page:not(.home):not(.modern):not(.slack):not(.discord) .section,
 .page:not(.home):not(.modern):not(.slack):not(.discord) .note-bar {
   background: transparent;
