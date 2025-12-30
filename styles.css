@@ -358,6 +358,16 @@ a:hover {
   padding: 8px 10px;
 }
 
+.page:not(.home):not(.modern):not(.slack):not(.discord) .store-badge {
+  width: 180px;
+  height: 52px;
+  padding: 0;
+  border-radius: 10px;
+  object-fit: cover;
+  background: transparent;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+}
+
 .section {
   margin-top: 24px;
   padding-top: 24px;
