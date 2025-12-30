@@ -319,6 +319,37 @@
     .home-bots .section-heading {
       text-align: center;
     }
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .float-subtle {
+      animation: floatSubtle 6s ease-in-out infinite;
+    }
+    @keyframes floatSubtle {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .float-subtle {
+        animation: none;
+      }
+    }
     .ig-badge {
       height: 36px;
       width: auto;
@@ -393,7 +424,7 @@
   
   <main class="page-wrap">
     <article class="home-shell">
-      <section class="home-hero">
+      <section class="home-hero reveal">
         <div class="hero-copy">
           <span class="hero-kicker">Daily fun holidays</span>
           <h1>Celebrate something new every day.</h1>
@@ -404,7 +435,7 @@
           </div>
         </div>
         <div class="hero-right">
-          <div class="hero-card">
+          <div class="hero-card float-subtle">
             <span class="card-label">Today’s holiday</span>
             <div id="emoji" class="today-emoji"></div>
             <p id="name"></p>
@@ -414,7 +445,7 @@
         </div>
       </section>
 
-      <section class="home-steps">
+      <section class="home-steps reveal">
         <article class="step-card">
           <div class="step-number">1</div>
           <h3>Discover a holiday</h3>
@@ -432,7 +463,7 @@
         </article>
       </section>
 
-      <section class="home-download">
+      <section class="home-download reveal">
         <div class="download-panel">
           <h3>Download the app</h3>
           <div class="store-badges">
@@ -446,7 +477,7 @@
         </div>
       </section>
 
-      <section class="home-bots">
+      <section class="home-bots reveal">
         <h2 class="section-heading">Daily posts for your community</h2>
         <p>Add Obscure Holiday Calendar to Slack or Discord for automated daily holidays.</p>
         <div class="bot-badges">
@@ -459,14 +490,14 @@
         </div>
       </section>
 
-      <section class="home-follow">
+      <section class="home-follow reveal">
         <h2 class="section-heading">Follow for daily holiday drops</h2>
         <a href="https://instagram.com/obscureholidaycalendar" target="_blank" rel="noopener">
           <img class="ig-badge" src="/assets/brands/instagram-badge.svg" alt="Follow on Instagram" />
         </a>
       </section>
 
-      <section class="home-links">
+      <section class="home-links reveal">
         <h2 class="section-heading">Jump in right now</h2>
         <div class="quick-links-grid">
           <div class="quick-card">
@@ -614,6 +645,27 @@
             altEl.removeAttribute("href");
           }
         });
+    })();
+  </script>
+  <script>
+    (function() {
+      const reveals = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window) || !reveals.length) {
+        reveals.forEach((el) => el.classList.add("is-visible"));
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+      reveals.forEach((el) => io.observe(el));
     })();
   </script>
 </body>
