@@ -41,6 +41,72 @@ a:hover {
   min-height: 100vh;
 }
 
+.page:not(.home):not(.modern):not(.slack):not(.discord) {
+  background: linear-gradient(180deg, #efe6ff 0%, #f7f0ff 45%, #ffffff 100%);
+  color: #0f172a;
+}
+
+.page:not(.home):not(.modern):not(.slack):not(.discord) .site-header {
+  padding-top: 24px;
+}
+
+.page:not(.home):not(.modern):not(.slack):not(.discord) .brand-tagline {
+  color: rgba(71, 85, 105, 0.95);
+}
+
+.page:not(.home):not(.modern):not(.slack):not(.discord) .nav-links a {
+  color: #1f2937;
+}
+
+.page:not(.home):not(.modern):not(.slack):not(.discord) .nav-links a:hover {
+  color: #111827;
+}
+
+.page:not(.home):not(.modern):not(.slack):not(.discord) .holiday-card {
+  background: #ffffff;
+  border: 1px solid #ddd6fe;
+  box-shadow: 0 18px 34px rgba(15, 23, 42, 0.08);
+}
+
+.page.modern:not(.home):not(.slack):not(.discord) {
+  background: linear-gradient(180deg, #efe6ff 0%, #f7f0ff 45%, #ffffff 100%);
+  color: #0f172a;
+}
+
+.page.modern:not(.home):not(.slack):not(.discord) .site-header {
+  padding-top: 24px;
+}
+
+.page.modern:not(.home):not(.slack):not(.discord) .brand-tagline {
+  color: rgba(71, 85, 105, 0.95);
+}
+
+.page.modern:not(.home):not(.slack):not(.discord) .nav-links a {
+  color: #1f2937;
+}
+
+.page.modern:not(.home):not(.slack):not(.discord) .nav-links a:hover {
+  color: #111827;
+}
+
+.page.modern .content-page {
+  max-width: 920px;
+  margin: 24px auto 64px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #ddd6fe;
+  border-radius: 18px;
+  box-shadow: 0 18px 34px rgba(15, 23, 42, 0.08);
+}
+
+.page.modern .content-page h1 {
+  letter-spacing: -0.02em;
+}
+
+.page.modern .content-page h2 {
+  margin-top: 28px;
+}
+
 .page-wrap {
   max-width: 1120px;
   margin: 0 auto;
