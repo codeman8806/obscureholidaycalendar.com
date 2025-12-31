@@ -278,46 +278,40 @@
     .brand-tagline {
       color: #e2e8f0;
     }
-    .related-grid {
+    .link-list {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
+      gap: 10px;
     }
-    .related-card {
-      background: var(--related-bg);
-      border: 1px solid #e8e8fb;
-      border-radius: 16px;
-      padding: 14px 16px;
-      box-shadow: 0 14px 32px rgba(44,0,95,0.08);
+    .link-list li {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid #e5e7eb;
     }
-    .related-card h3 {
-      margin: 8px 0 6px;
-      color: #1f2533;
-      font-size: 1.05rem;
-    }
-    .related-card p {
-      margin: 0 0 8px;
-      color: #4b5563;
-      font-size: 0.95rem;
-    }
-    .related-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(44,0,95,0.08);
-      color: #2c005f;
-      font-weight: 700;
-      font-size: 0.85rem;
-      border: 1px solid rgba(44,0,95,0.12);
-    }
-    .related-link {
-      color: var(--brand-blue);
-      font-weight: 700;
+    .link-list a {
+      color: #1f2937;
       text-decoration: none;
+      font-weight: 600;
     }
-    .related-link:hover {
+    .link-list a:hover {
       text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .link-list .meta {
+      display: block;
+      color: #6b7280;
+      font-size: 0.92rem;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .soft-divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(44,0,95,0.05), rgba(44,0,95,0.2), rgba(44,0,95,0.05));
+      margin: 18px 0;
+      border: 0;
     }
     .share-tools {
       display: flex;
@@ -362,21 +356,50 @@
       padding: 0;
       margin: 0;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 10px;
     }
     .recent-list li a {
       display: block;
       padding: 10px 12px;
       border-radius: 12px;
-      background: rgba(255,255,255,0.82);
+      background: rgba(255,255,255,0.78);
       border: 1px solid #e5e7eb;
       color: #1f2937;
       text-decoration: none;
-      box-shadow: 0 10px 20px rgba(15,23,42,0.08);
+      font-weight: 600;
     }
     .recent-list li a:hover {
       border-color: #cbd5e1;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .section {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: sectionFade 520ms ease forwards;
+    }
+    .section:nth-of-type(1) { animation-delay: 40ms; }
+    .section:nth-of-type(2) { animation-delay: 80ms; }
+    .section:nth-of-type(3) { animation-delay: 120ms; }
+    .section:nth-of-type(4) { animation-delay: 160ms; }
+    .section:nth-of-type(5) { animation-delay: 200ms; }
+    .section:nth-of-type(6) { animation-delay: 240ms; }
+    .section:nth-of-type(7) { animation-delay: 280ms; }
+    .section:nth-of-type(8) { animation-delay: 320ms; }
+    .section:nth-of-type(9) { animation-delay: 360ms; }
+    @keyframes sectionFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .section {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
     }
     .quick-links {
       display: flex;
@@ -720,33 +743,24 @@
         <h2>Sources and attribution</h2>
         <p>Primary note: Ditch New Years Resolutions Day is an informal observance that repeats every year on .</p>
       </section>
+      <hr class="soft-divider" />
+      <section class="section" id="continue">
+        <h2>Continue to</h2>
+        <ul class="link-list">
+          <li><a href="/holiday/cliché-day/">Yesterday: Cliché Day</a><span class="meta">Quick context from the day before.</span></li>
+          <li><a href="/holiday/galentines-day/">Tomorrow: Galentines Day</a><span class="meta">Keep the streak going with tomorrow's pick.</span></li>
+          <li><a href="/holiday/count-your-buttons-day/">Random pick: Count Your Buttons Day</a><span class="meta">Jump to another surprise holiday.</span></li>
+          <li><a href="/holiday/star-wars-day/">Popular: Star Wars Day (May the 4th)</a><span class="meta">A fan favorite with broad appeal.</span></li>
+        </ul>
+      </section>
 
       <section class="section" id="related">
         <h2>Related holidays</h2>
-        <div class="related-grid">
-          
-          <article class="related-card">
-            <div class="related-pill"></div>
-            <h3><a href="/holiday/national-piña-colada-day/">National Piña Colada Day</a></h3>
-            <p>Discover National Piña Colada Day.</p>
-            <a class="related-link" href="/holiday/national-piña-colada-day/" aria-label="Read about National Piña Colada Day">Read more →</a>
-          </article>
-        
-          <article class="related-card">
-            <div class="related-pill"></div>
-            <h3><a href="/holiday/lovers-day/">Lovers Day</a></h3>
-            <p>Discover Lovers Day.</p>
-            <a class="related-link" href="/holiday/lovers-day/" aria-label="Read about Lovers Day">Read more →</a>
-          </article>
-        
-          <article class="related-card">
-            <div class="related-pill"></div>
-            <h3><a href="/holiday/rat-catchers-day/">Rat Catchers Day</a></h3>
-            <p>Discover Rat Catchers Day.</p>
-            <a class="related-link" href="/holiday/rat-catchers-day/" aria-label="Read about Rat Catchers Day">Read more →</a>
-          </article>
-        
-        </div>
+        <ul class="link-list">
+          <li><a href="/holiday/national-piña-colada-day/">National Piña Colada Day</a><span class="meta">Discover National Piña Colada Day.</span></li>
+          <li><a href="/holiday/lovers-day/">Lovers Day</a><span class="meta">Discover Lovers Day.</span></li>
+          <li><a href="/holiday/rat-catchers-day/">Rat Catchers Day</a><span class="meta">Discover Rat Catchers Day.</span></li>
+        </ul>
       </section>
 
       <section class="section" id="faq">
@@ -758,27 +772,11 @@
 
       <section class="section app-cta">
         <h2>Get the app</h2>
-        <p>Thousands of obscure holidays, daily widgets, reminders, and fun facts—free on iOS and Android.</p>
-        <div class="store-buttons-top">
-          <a href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank" rel="noopener">
-            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                 alt="Download on the App Store" class="store-badge" />
-          </a>
-          <a href="https://play.google.com/store/apps/details?id=com.codeman8806.obscureholidaycalendar" target="_blank" rel="noopener">
+        <p>Thousands of obscure holidays, daily wian8806.obscureholidaycalendar" target="_blank" rel="noopener">
             <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
                  alt="Get it on Google Play" class="store-badge" />
           </a>
         </div>
-      </section>
-
-      <section class="section more-holidays">
-        <h2>Explore more holidays</h2>
-        <ul>
-          <li>Yesterday: <a href="/holiday/cliché-day/">Cliché Day</a></li>
-          <li>Tomorrow: <a href="/holiday/galentines-day/">Galentines Day</a></li>
-          <li>Random pick: <a href="/holiday/count-your-buttons-day/">Count Your Buttons Day</a></li>
-          <li>Popular: <a href="/holiday/star-wars-day/">Star Wars Day (May the 4th)</a></li>
-        </ul>
       </section>
 
       <section class="section" id="recently-viewed">
