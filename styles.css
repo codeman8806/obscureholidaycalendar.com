@@ -54,6 +54,10 @@ a:hover {
   color: rgba(71, 85, 105, 0.95);
 }
 
+.page:not(.home):not(.modern):not(.slack):not(.discord):not(.holiday-library) .brand-name {
+  color: #2c005f;
+}
+
 .page:not(.home):not(.modern):not(.slack):not(.discord) .nav-links a {
   color: #1f2937;
 }
@@ -548,6 +552,253 @@ main.content-page {
   min-width: 32px;
   font-weight: 700;
   color: var(--muted);
+}
+
+.page.holiday-library {
+  background: radial-gradient(circle at 10% 10%, #1b0b3f 0%, #0f1028 45%, #0a0f22 100%);
+}
+
+.page.holiday-library main.content-page {
+  max-width: 1200px;
+  padding: 32px 20px 60px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.page.holiday-library .library-hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(245,247,255,0.94));
+  border: 1px solid rgba(226,232,255,0.9);
+  box-shadow: 0 20px 50px rgba(10, 18, 44, 0.18);
+}
+
+.page.holiday-library .library-hero .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: #2c005f;
+  font-size: 0.75rem;
+  margin: 0 0 8px;
+}
+
+.page.holiday-library .library-hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  color: #0f172a;
+}
+
+.page.holiday-library .library-hero p {
+  margin: 0;
+  color: #334155;
+  max-width: 540px;
+}
+
+.page.holiday-library .hero-meta {
+  display: grid;
+  gap: 12px;
+}
+
+.page.holiday-library .meta-card {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}
+
+.page.holiday-library .meta-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #64748b;
+}
+
+.page.holiday-library .meta-value {
+  display: block;
+  margin-top: 4px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.page.holiday-library .month-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 24px;
+}
+
+.page.holiday-library .month-jump a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #f8fafc;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.page.holiday-library .month-jump a:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.4);
+}
+
+.page.holiday-library .library-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin: 0 0 24px;
+}
+
+.page.holiday-library .search-input {
+  flex: 1 1 280px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.12);
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.page.holiday-library .search-input::placeholder {
+  color: rgba(248,250,252,0.7);
+}
+
+.page.holiday-library .btn-random {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: linear-gradient(120deg, rgba(44,0,95,0.9), rgba(28,150,243,0.9));
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.page.holiday-library .btn-random:hover {
+  filter: brightness(1.06);
+}
+
+.page.holiday-library .search-count {
+  color: #cbd5f5;
+  font-weight: 600;
+}
+
+.page.holiday-library .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.page.holiday-library .month-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.page.holiday-library .month-section {
+  margin: 0;
+  padding: 18px 16px 12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(226,232,255,0.9);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+}
+
+.page.holiday-library .month-section h2 {
+  margin: 0 0 12px;
+  font-size: 1.3rem;
+  color: #2c005f;
+  position: relative;
+}
+
+.page.holiday-library .month-section h2::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 48px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2c005f, #1c96f3);
+}
+
+.page.holiday-library .month-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.page.holiday-library .day-group {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #f7f8ff;
+  border: 1px solid #e6ecfb;
+}
+
+.page.holiday-library .day-number {
+  font-weight: 800;
+  color: #2c005f;
+  background: rgba(44,0,95,0.12);
+  border-radius: 10px;
+  padding: 4px 6px;
+  text-align: center;
+}
+
+.page.holiday-library .day-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+.page.holiday-library .day-links a {
+  color: #1f2937;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.page.holiday-library .day-links a:hover {
+  color: #1c96f3;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.page.holiday-library .muted {
+  color: #94a3b8;
+}
+
+@media (max-width: 720px) {
+  .page.holiday-library .library-hero {
+    padding: 18px;
+  }
+  .page.holiday-library .day-group {
+    grid-template-columns: 1fr;
+  }
+  .page.holiday-library .day-number {
+    width: fit-content;
+  }
 }
 
 .muted {
