@@ -558,6 +558,10 @@ main.content-page {
   background: radial-gradient(circle at 10% 10%, #1b0b3f 0%, #0f1028 45%, #0a0f22 100%);
 }
 
+.page.holiday-library .brand-name {
+  color: #2c005f;
+}
+
 .page.holiday-library main.content-page {
   max-width: 1200px;
   padding: 32px 20px 60px;
