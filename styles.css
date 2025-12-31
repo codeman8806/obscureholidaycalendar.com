@@ -644,15 +644,17 @@ main.content-page {
   border-radius: 999px;
   background: rgba(255,255,255,0.14);
   border: 1px solid rgba(255,255,255,0.22);
-  color: #f8fafc;
+  color: #1f2937;
+  background: rgba(255,255,255,0.88);
+  border-color: rgba(226,232,255,0.9);
   text-decoration: none;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
 
 .page.holiday-library .month-jump a:hover {
-  background: rgba(255,255,255,0.2);
-  border-color: rgba(255,255,255,0.4);
+  background: #ffffff;
+  border-color: rgba(148,163,184,0.6);
 }
 
 .page.holiday-library .library-tools {
