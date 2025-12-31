@@ -58,6 +58,14 @@ a:hover {
   color: #2c005f;
 }
 
+.page.modern:not(.home):not(.slack):not(.discord) .brand-name {
+  color: #2c005f;
+}
+
+.page.home .brand-name {
+  color: #2c005f;
+}
+
 .page:not(.home):not(.modern):not(.slack):not(.discord) .nav-links a {
   color: #1f2937;
 }
