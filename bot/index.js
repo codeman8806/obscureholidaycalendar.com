@@ -728,6 +728,9 @@ async function handleWeek(interaction) {
 }
 
 async function handleSetup(interaction) {
+  if (!interaction.guild) {
+    return interaction.reply({ content: "This command can only be used in a server.", ephemeral: true });
+  }
   const guildId = interaction.guild.id;
   const config = getGuildConfig(guildId);
   const channel = interaction.options.getChannel("channel", true);
