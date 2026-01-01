@@ -12,6 +12,7 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
+  MessageFlags,
 } from "discord.js";
 import { commandDefs } from "./commandDefs.js";
 
@@ -592,7 +593,7 @@ async function handleToday(interaction) {
   const now = new Date();
   const mmdd = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
   const hits = findByDate(mmdd);
-  if (!hits.length) return interaction.reply({ content: "No holiday found for today.", ephemeral: true });
+  if (!hits.length) return interaction.reply({ content: "No holiday found for today.", flags: MessageFlags.Ephemeral });
   const premium = isPremium(interaction.guild, interaction.member);
   const config = getGuildConfig(interaction.guild.id);
   const requested = interaction.options.getInteger("holiday_choice");
@@ -640,7 +641,7 @@ async function handleHelp(interaction) {
       "/week — 7-day digest (premium)",
       "/help — list commands",
     ].join("\n"),
-    ephemeral: true,
+    flags: MessageFlags.Ephemeral,
   });
 }
 
@@ -653,7 +654,7 @@ async function handleVote(interaction) {
         new ButtonBuilder().setLabel("Leave a review").setStyle(ButtonStyle.Link).setURL(TOPGG_REVIEW_URL)
       ),
     ],
-    ephemeral: true,
+    flags: MessageFlags.Ephemeral,
   });
 }
 
@@ -666,30 +667,30 @@ async function handleRate(interaction) {
         new ButtonBuilder().setLabel("Vote").setStyle(ButtonStyle.Link).setURL(TOPGG_VOTE_URL)
       ),
     ],
-    ephemeral: true,
+    flags: MessageFlags.Ephemeral,
   });
 }
 
 async function handleDate(interaction) {
   if (!isPremium(interaction.guild, interaction.member)) {
-    return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /date.", ephemeral: true });
+    return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /date.", flags: MessageFlags.Ephemeral });
   }
   const input = interaction.options.getString("date", true);
   const parsed = parseDate(input);
-  if (!parsed) return interaction.reply({ content: "Please provide a date as MM-DD or MM/DD (example: 07-04).", ephemeral: true });
+  if (!parsed) return interaction.reply({ content: "Please provide a date as MM-DD or MM/DD (example: 07-04).", flags: MessageFlags.Ephemeral });
   const hits = findByDate(parsed);
-  if (!hits.length) return interaction.reply({ content: `No holidays found on ${parsed}.`, ephemeral: true });
+  if (!hits.length) return interaction.reply({ content: `No holidays found on ${parsed}.`, flags: MessageFlags.Ephemeral });
   const config = getGuildConfig(interaction.guild.id);
   return interaction.reply({ embeds: [buildEmbed(hits[0], { branding: config.branding })], components: buildButtons(hits[0]) });
 }
 
 async function handleSearch(interaction) {
   if (!isPremium(interaction.guild, interaction.member)) {
-    return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /search.", ephemeral: true });
+    return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /search.", flags: MessageFlags.Ephemeral });
   }
   const query = interaction.options.getString("query", true);
   const matches = findByName(query);
-  if (!matches.length) return interaction.reply({ content: "No match. Try a simpler phrase.", ephemeral: true });
+  if (!matches.length) return interaction.reply({ content: "No match. Try a simpler phrase.", flags: MessageFlags.Ephemeral });
   const config = getGuildConfig(interaction.guild.id);
   const embeds = matches.slice(0, 3).map((h) => buildEmbed(h, { branding: config.branding }));
   return interaction.reply({ embeds, components: buildButtons(matches[0]) });
@@ -697,7 +698,7 @@ async function handleSearch(interaction) {
 
 async function handleRandom(interaction) {
   if (!isPremium(interaction.guild, interaction.member)) {
-    return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /random.", ephemeral: true });
+    return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /random.", flags: MessageFlags.Ephemeral });
   }
   const h = pickRandom();
   const config = getGuildConfig(interaction.guild.id);
@@ -707,12 +708,12 @@ async function handleRandom(interaction) {
 async function handleWeek(interaction) {
   const premium = isPremium(interaction.guild, interaction.member);
   if (!premium) {
-    return interaction.reply({ content: "Premium only. Upgrade to get the 7-day digest.", ephemeral: true });
+    return interaction.reply({ content: "Premium only. Upgrade to get the 7-day digest.", flags: MessageFlags.Ephemeral });
   }
   const days = Math.max(3, Math.min(interaction.options.getInteger("days") || 7, 14));
   const now = new Date();
   const items = holidaysForRange(now, days);
-  if (!items.length) return interaction.reply({ content: "No upcoming holidays found.", ephemeral: true });
+  if (!items.length) return interaction.reply({ content: "No upcoming holidays found.", flags: MessageFlags.Ephemeral });
   const embed = new EmbedBuilder()
     .setTitle(`Next ${days} days of holidays`)
     .setColor(DEFAULT_EMBED_COLOR);
@@ -729,7 +730,7 @@ async function handleWeek(interaction) {
 
 async function handleSetup(interaction) {
   if (!interaction.guild) {
-    return interaction.reply({ content: "This command can only be used in a server.", ephemeral: true });
+    return interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
   }
   const guildId = interaction.guild.id;
   const config = getGuildConfig(guildId);
@@ -747,7 +748,7 @@ async function handleSetup(interaction) {
   const premium = isPremium(interaction.guild, interaction.member);
 
   if (!channel.isTextBased()) {
-    return interaction.reply({ content: "Please pick a text channel.", ephemeral: true });
+    return interaction.reply({ content: "Please pick a text channel.", flags: MessageFlags.Ephemeral });
   }
 
   if (!premium) {
@@ -765,7 +766,7 @@ async function handleSetup(interaction) {
         `Promotions: ${config.promotionsEnabled === false ? "off" : "on (weekly vote / monthly review)"}`,
         "Premium unlocks timezone/hour/branding toggles.",
       ].join("\n"),
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     });
   }
 
@@ -777,7 +778,7 @@ async function handleSetup(interaction) {
   const ch = config.channelSettings[channel.id] || {};
   if (tz) {
     if (!isValidTimezone(tz)) {
-      return interaction.reply({ content: "Timezone not recognized. Please use an IANA timezone like America/New_York.", ephemeral: true });
+      return interaction.reply({ content: "Timezone not recognized. Please use an IANA timezone like America/New_York.", flags: MessageFlags.Ephemeral });
     }
     ch.timezone = tz;
   }
@@ -808,13 +809,13 @@ async function handleSetup(interaction) {
       `Skip weekends: ${ch.skipWeekends ? "yes" : "no"}`,
       `Promotions: ${config.promotionsEnabled === false ? "off" : "on (weekly vote / monthly review)"}`,
     ].join("\n"),
-    ephemeral: true,
+    flags: MessageFlags.Ephemeral,
   });
 }
 
 async function handleFacts(interaction) {
   if (!isPremium(interaction.guild, interaction.member)) {
-    return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /facts.", ephemeral: true });
+    return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /facts.", flags: MessageFlags.Ephemeral });
   }
   const target = interaction.options.getString("name_or_date", false) || "today";
   let holiday = null;
@@ -829,9 +830,9 @@ async function handleFacts(interaction) {
     holiday = findByName(target)[0] || null;
   }
 
-  if (!holiday) return interaction.reply({ content: "Couldn't find fun facts for that. Try 12-25 or \"bacon\".", ephemeral: true });
+  if (!holiday) return interaction.reply({ content: "Couldn't find fun facts for that. Try 12-25 or \"bacon\".", flags: MessageFlags.Ephemeral });
   const facts = Array.isArray(holiday.funFacts) ? holiday.funFacts.slice(0, 5) : [];
-  if (!facts.length) return interaction.reply({ content: "No fun facts on file for that one.", ephemeral: true });
+  if (!facts.length) return interaction.reply({ content: "No fun facts on file for that one.", flags: MessageFlags.Ephemeral });
   const embed = new EmbedBuilder()
     .setTitle(`${holiday.emoji ? holiday.emoji + " " : ""}${holiday.name || "Holiday"} — fun facts`)
     .setDescription(facts.map((f) => `• ${f}`).join("\n"))
@@ -846,14 +847,14 @@ async function handleFacts(interaction) {
 async function handleTomorrow(interaction) {
   const premium = isPremium(interaction.guild, interaction.member);
   if (!premium) {
-    return interaction.reply({ content: "Premium only. Unlock premium via Server Subscription and retry.", ephemeral: true });
+    return interaction.reply({ content: "Premium only. Unlock premium via Server Subscription and retry.", flags: MessageFlags.Ephemeral });
   }
   const now = new Date();
   const tomorrow = new Date(now);
   tomorrow.setDate(now.getDate() + 1);
   const mmdd = `${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}`;
   const hits = findByDate(mmdd);
-  if (!hits.length) return interaction.reply({ content: "No holiday found for tomorrow.", ephemeral: true });
+  if (!hits.length) return interaction.reply({ content: "No holiday found for tomorrow.", flags: MessageFlags.Ephemeral });
   const config = getGuildConfig(interaction.guild.id);
   return interaction.reply({ embeds: [buildEmbed(hits[0], { branding: config.branding })], components: buildButtons(hits[0]) });
 }
@@ -861,12 +862,12 @@ async function handleTomorrow(interaction) {
 async function handleUpcoming(interaction) {
   const premium = isPremium(interaction.guild, interaction.member);
   if (!premium) {
-    return interaction.reply({ content: "Premium only. Unlock premium via Server Subscription and retry.", ephemeral: true });
+    return interaction.reply({ content: "Premium only. Unlock premium via Server Subscription and retry.", flags: MessageFlags.Ephemeral });
   }
   const days = Math.max(1, Math.min(interaction.options.getInteger("days") || 7, 30));
   const now = new Date();
   const items = holidaysForRange(now, days);
-  if (!items.length) return interaction.reply({ content: "No upcoming holidays found.", ephemeral: true });
+  if (!items.length) return interaction.reply({ content: "No upcoming holidays found.", flags: MessageFlags.Ephemeral });
   const fields = items.slice(0, 5).map(({ date, holiday }) => ({
     name: `${holiday.emoji ? holiday.emoji + " " : ""}${holiday.name}`,
     value: prettyDate(date),
@@ -908,7 +909,7 @@ async function handlePremiumStatus(interaction) {
       "Premium perks:",
       ...benefits,
     ];
-    return interaction.reply({ content: lines.join("\n"), ephemeral: true });
+    return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
   }
 
   // Not premium: offer upgrade
@@ -934,7 +935,7 @@ async function handlePremiumStatus(interaction) {
 
   return interaction.reply({
     content: lines.join("\n"),
-    ephemeral: true,
+    flags: MessageFlags.Ephemeral,
     components: [
       new ActionRowBuilder().addComponents(
         new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(upgradeUrl),
@@ -946,7 +947,7 @@ async function handlePremiumStatus(interaction) {
 
 async function handleUpgrade(interaction) {
   if (!stripeClient || !STRIPE_PRICE_ID_STANDARD || !STRIPE_PRICE_ID_INTRO) {
-    return interaction.reply({ content: "Stripe is not configured. Try again later.", ephemeral: true });
+    return interaction.reply({ content: "Stripe is not configured. Try again later.", flags: MessageFlags.Ephemeral });
   }
   const guildId = interaction.guildId;
   const userId = interaction.user.id;
@@ -954,19 +955,19 @@ async function handleUpgrade(interaction) {
     const session = await createPremiumCheckoutSession({ guildId, userId });
     return interaction.reply({
       content: `Upgrade to premium using Stripe Checkout: ${session.url}`,
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     });
   } catch (err) {
     console.error("Stripe checkout error:", err);
-    return interaction.reply({ content: "Unable to create checkout session right now.", ephemeral: true });
+    return interaction.reply({ content: "Unable to create checkout session right now.", flags: MessageFlags.Ephemeral });
   }
 }
 
 async function handleManage(interaction) {
-  if (!stripeClient) return interaction.reply({ content: "Stripe is not configured.", ephemeral: true });
+  if (!stripeClient) return interaction.reply({ content: "Stripe is not configured.", flags: MessageFlags.Ephemeral });
   const premium = isPremium(interaction.guild, interaction.member);
   if (!premium) {
-    return interaction.reply({ content: "This server is not premium yet. Use /upgrade to start a subscription.", ephemeral: true });
+    return interaction.reply({ content: "This server is not premium yet. Use /upgrade to start a subscription.", flags: MessageFlags.Ephemeral });
   }
   // Find the customer for this guild by looking up active subscriptions with matching metadata
   let customerId = null;
@@ -998,17 +999,17 @@ async function handleManage(interaction) {
       return_url: STRIPE_PORTAL_RETURN_URL,
     });
     if (session.url) {
-      return interaction.reply({ content: `Manage your subscription here: ${session.url}`, ephemeral: true });
+      return interaction.reply({ content: `Manage your subscription here: ${session.url}`, flags: MessageFlags.Ephemeral });
     }
   } catch (err) {
     console.error("Stripe portal error:", err);
   }
-  return interaction.reply({ content: "Unable to open the billing portal right now. If you just subscribed, give it a minute and try again.", ephemeral: true });
+  return interaction.reply({ content: "Unable to open the billing portal right now. If you just subscribed, give it a minute and try again.", flags: MessageFlags.Ephemeral });
 }
 
 async function handleGrantPremium(interaction) {
   if (!isOwner(interaction.user.id)) {
-    return interaction.reply({ content: "Owner-only command.", ephemeral: true });
+    return interaction.reply({ content: "Owner-only command.", flags: MessageFlags.Ephemeral });
   }
   const serverId = interaction.options.getString("server_id", true);
   const enabled = interaction.options.getBoolean("enabled");
@@ -1019,20 +1020,20 @@ async function handleGrantPremium(interaction) {
     delete premiumAllowlist[serverId];
   }
   writeJsonSafe(PREMIUM_PATH, premiumAllowlist);
-  return interaction.reply({ content: `Premium ${flag ? "granted to" : "revoked from"} ${serverId}.`, ephemeral: true });
+  return interaction.reply({ content: `Premium ${flag ? "granted to" : "revoked from"} ${serverId}.`, flags: MessageFlags.Ephemeral });
 }
 
 async function handleInstallCount(interaction) {
   if (!isOwner(interaction.user.id)) {
-    return interaction.reply({ content: "Owner-only command.", ephemeral: true });
+    return interaction.reply({ content: "Owner-only command.", flags: MessageFlags.Ephemeral });
   }
   const count = client.guilds.cache.size;
-  return interaction.reply({ content: `I am currently in ${count} server(s).`, ephemeral: true });
+  return interaction.reply({ content: `I am currently in ${count} server(s).`, flags: MessageFlags.Ephemeral });
 }
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once("ready", async () => {
+client.once("clientReady", async () => {
   console.log(`Bot logged in as ${client.user.tag}`);
 
   // Presence / status
@@ -1129,7 +1130,7 @@ client.on("interactionCreate", async (interaction) => {
               new ButtonBuilder().setLabel("Invite the Bot").setStyle(ButtonStyle.Link).setURL(BOT_INVITE_URL)
             ),
           ],
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       case "app":
         return interaction.reply({
@@ -1140,7 +1141,7 @@ client.on("interactionCreate", async (interaction) => {
               new ButtonBuilder().setLabel("View Website").setStyle(ButtonStyle.Link).setURL(SITE_URL)
             ),
           ],
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       case "slack":
         return interaction.reply({
@@ -1150,19 +1151,19 @@ client.on("interactionCreate", async (interaction) => {
               new ButtonBuilder().setLabel("Slack Bot Info").setStyle(ButtonStyle.Link).setURL(SLACK_BOT_URL)
             ),
           ],
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       case "help":
         return handleHelp(interaction);
       default:
-        return interaction.reply({ content: "Unknown command.", ephemeral: true });
+        return interaction.reply({ content: "Unknown command.", flags: MessageFlags.Ephemeral });
     }
   } catch (err) {
     console.error(err);
     if (interaction.replied || interaction.deferred) {
-      return interaction.followUp({ content: "Something went wrong handling that request.", ephemeral: true });
+      return interaction.followUp({ content: "Something went wrong handling that request.", flags: MessageFlags.Ephemeral });
     }
-    return interaction.reply({ content: "Something went wrong handling that request.", ephemeral: true });
+    return interaction.reply({ content: "Something went wrong handling that request.", flags: MessageFlags.Ephemeral });
   }
 });
 
