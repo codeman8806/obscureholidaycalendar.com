@@ -12,6 +12,7 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
+  PermissionsBitField,
   MessageFlags,
 } from "discord.js";
 import { commandDefs } from "./commandDefs.js";
@@ -1167,8 +1168,22 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
-client.on("guildCreate", () => {
+client.on("guildCreate", async (guild) => {
   postTopGGStats();
+  try {
+    const owner = await guild.fetchOwner();
+    if (!owner?.user) return;
+    await owner.user.send(
+      [
+        "Thanks for adding Obscure Holiday Calendar!",
+        "Run /setup to pick a daily-post channel.",
+        "Try /today for a quick holiday card.",
+        "Premium: /upgrade to subscribe, /manage to cancel anytime.",
+      ].join("\n")
+    );
+  } catch (err) {
+    console.warn("Owner welcome DM failed:", err.message);
+  }
 });
 
 client.on("guildDelete", () => {
