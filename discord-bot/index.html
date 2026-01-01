@@ -202,6 +202,19 @@
       line-height: 1.6;
       max-width: 560px;
     }
+    .promo-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(88, 101, 242, 0.2);
+      background: rgba(88, 101, 242, 0.08);
+      color: #1f2a6b;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin: 6px 0 14px;
+    }
     .discord-cta {
       display: flex;
       flex-wrap: wrap;
@@ -384,6 +397,7 @@
           <span class="discord-kicker">Discord bot</span>
           <h1>Daily holiday posts for your Discord server.</h1>
           <p>Bring daily holiday posts, random picks, and fun facts into your Discord server. Free to add, premium for advanced scheduling and commands.</p>
+          <div class="promo-note">First month: 99 cents for premium. Cancel anytime.</div>
           <div class="command-pills">
             <span class="pill">/today</span>
             <span class="pill pill-secondary">/date</span>
@@ -488,6 +502,20 @@
           </a>
           <a class="btn secondary" href="/discord-bot/?success=1">Already upgraded? Success page</a>
           <a class="btn secondary" href="/discord-bot/?canceled=1">Canceled? Retry checkout</a>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <h2>Upgrade and cancel from Discord</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <strong>Upgrade in your server</strong>
+            <p>Run <span class="pill">/upgrade</span> in your Discord server to start checkout and unlock premium features.</p>
+          </div>
+          <div class="feature-card">
+            <strong>Cancel anytime</strong>
+            <p>Run <span class="pill">/manage</span> in your Discord server to open the billing portal and cancel.</p>
+          </div>
         </div>
       </section>
     </article>
