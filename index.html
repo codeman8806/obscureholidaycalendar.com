@@ -156,6 +156,19 @@
       opacity: 0.55;
       pointer-events: none;
     }
+    .hero-support {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--home-muted);
+    }
+    .hero-support a {
+      color: var(--home-accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .hero-support a:hover {
+      text-decoration: underline;
+    }
     .hero-badges {
       display: flex;
       flex-wrap: wrap;
@@ -429,6 +442,9 @@
             <a class="btn primary" href="/holiday/">Browse all holidays</a>
             <a class="btn secondary" id="alt-holiday" href="/holiday/">See today’s alternate holiday</a>
           </div>
+          <p class="hero-support">
+            Launching on TinyLaunch — <a href="https://www.tinylaunch.com/launch/8220" target="_blank" rel="noopener">vote us up</a>.
+          </p>
         </div>
         <div class="hero-right">
           <div class="hero-card float-subtle">
