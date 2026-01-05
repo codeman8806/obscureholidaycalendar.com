@@ -1195,10 +1195,24 @@ client.on("guildDelete", () => {
 
 function scheduleDailyPost() {
   console.log("Scheduling daily posts per guild config...");
-  Object.keys(guildConfig).forEach((guildId) => {
+  const guildIds = Object.keys(guildConfig);
+  if (!guildIds.length) {
+    console.log("No guild configs found for scheduling.");
+    return;
+  }
+  let scheduledCount = 0;
+  guildIds.forEach((guildId) => {
     const cfg = getGuildConfig(guildId);
-    (cfg.channelIds || []).forEach((chId) => scheduleForChannel(guildId, chId));
+    (cfg.channelIds || []).forEach((chId) => {
+      scheduleForChannel(guildId, chId);
+      scheduledCount += 1;
+    });
   });
+  if (!scheduledCount) {
+    console.log("No channels configured for scheduling.");
+    return;
+  }
+  console.log(`Scheduled ${scheduledCount} channel(s) across ${guildIds.length} guild(s).`);
 }
 
 const guildTimers = new Map(); // key `${guildId}:${channelId}` -> timer
