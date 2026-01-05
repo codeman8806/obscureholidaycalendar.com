@@ -462,7 +462,10 @@ function buildPromoComponents(guildId, opts = {}) {
   const rows = [];
   const noteParts = [];
   const includeRate = !!opts.includeRate;
-  const voteOk = canShowVotePrompt(guildId);
+  const cfg = getGuildConfig(guildId);
+  if (cfg.promotionsEnabled === false) return { rows, note: "" };
+  const forceVote = !!opts.forceVote;
+  const voteOk = forceVote || canShowVotePrompt(guildId);
   const rateOk = includeRate && canShowRatePrompt(guildId);
 
   if (!voteOk && !rateOk) return { rows, note: "" };
@@ -471,7 +474,7 @@ function buildPromoComponents(guildId, opts = {}) {
   if (voteOk) {
     row.addComponents(new ButtonBuilder().setLabel("Vote on top.gg").setStyle(ButtonStyle.Link).setURL(TOPGG_VOTE_URL));
     noteParts.push("Optional: support the bot with a quick vote.");
-    markVotePrompt(guildId);
+    if (!forceVote) markVotePrompt(guildId);
   }
   if (rateOk) {
     row.addComponents(new ButtonBuilder().setLabel("Leave a review").setStyle(ButtonStyle.Link).setURL(TOPGG_REVIEW_URL));
@@ -610,7 +613,7 @@ async function handleToday(interaction) {
   }
   const pick = hits[choice] || hits[0];
   const baseComponents = buildButtons(pick);
-  const { rows: promoRows, note: promoNote } = buildPromoComponents(interaction.guild.id, { includeRate: false });
+  const { rows: promoRows, note: promoNote } = buildPromoComponents(interaction.guild.id, { includeRate: false, forceVote: true });
   return interaction.reply({
     content: promoNote || undefined,
     embeds: [buildEmbed(pick, { branding: !premium || config.branding })],
@@ -1268,7 +1271,7 @@ async function postTodayForChannel(guildId, channelId) {
 
   const mention = channelSettings.quiet ? "" : channelSettings.roleId ? `<@&${channelSettings.roleId}> ` : "";
 
-  const { rows: promoRows, note: promoNote } = buildPromoComponents(guildId, { includeRate: true });
+  const { rows: promoRows, note: promoNote } = buildPromoComponents(guildId, { includeRate: true, forceVote: true });
   const components = [...buildButtons(pick), ...promoRows];
   await channel.send({
     content: `${mention}🎉 Today’s holidays: ${topNames}${teaser ? `\n${teaser}` : ""}${promoNote ? `\n\n${promoNote}` : ""}`,
