@@ -71,10 +71,13 @@ def create_sitemap_index(files, output_file):
     sitemapindex = Element("sitemapindex")
     sitemapindex.set("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9")
 
-    for fname in files:
+    for fname, lastmod in files:
         sm = SubElement(sitemapindex, "sitemap")
         loc = SubElement(sm, "loc")
         loc.text = f"{DOMAIN}/sitemaps/{fname}"
+        if lastmod:
+            last = SubElement(sm, "lastmod")
+            last.text = lastmod
 
     tree = ElementTree(sitemapindex)
     tree.write(output_file, encoding="utf-8", xml_declaration=True)
@@ -124,13 +127,16 @@ def main():
         filepath = os.path.join(OUTPUT_DIR, filename)
 
         create_sitemap(entries, filepath)
-        sitemap_files.append(filename)
+        lastmod = datetime.date.fromtimestamp(os.path.getmtime(filepath)).isoformat()
+        sitemap_files.append((filename, lastmod))
 
     # Static pages sitemap
     static_entries = [(url, today_str) for url in STATIC_PAGES]
     static_filename = "sitemap-static.xml"
-    create_sitemap(static_entries, os.path.join(OUTPUT_DIR, static_filename))
-    sitemap_files.append(static_filename)
+    static_path = os.path.join(OUTPUT_DIR, static_filename)
+    create_sitemap(static_entries, static_path)
+    lastmod = datetime.date.fromtimestamp(os.path.getmtime(static_path)).isoformat()
+    sitemap_files.append((static_filename, lastmod))
 
     # Generate index
     create_sitemap_index(sitemap_files, "sitemap-index.xml")

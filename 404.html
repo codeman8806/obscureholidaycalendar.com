@@ -5,14 +5,30 @@
   <title>Redirecting…</title>
   <meta name="google-adsense-account" content="ca-pub-7162731177966348" />
   <script>
-    // Preserve full URL path and query when redirecting to index.html
-    var redirectUrl = '/' + window.location.pathname + window.location.search + window.location.hash;
+    // Redirect common non-canonical URLs (no trailing slash or index.html) to canonical paths.
+    var path = window.location.pathname || "/";
+    var search = window.location.search || "";
+    var hash = window.location.hash || "";
+    var target = null;
 
-    // Store the original path so index.html can read it
-    sessionStorage.setItem('originalPath', window.location.pathname);
+    if (path.endsWith("/index.html")) {
+      target = path.slice(0, -"/index.html".length) + "/";
+    } else if (path === "/holiday") {
+      target = "/holiday/";
+    } else if (path === "/app") {
+      target = "/app/";
+    } else if (path.startsWith("/holiday/") && !path.endsWith("/")) {
+      target = path + "/";
+    }
 
-    // Redirect to index.html while keeping the path info in sessionStorage
-    window.location.replace('/');
+    if (target) {
+      window.location.replace(target + search + hash);
+    } else {
+      // Store the original path so index.html can read it
+      sessionStorage.setItem("originalPath", path);
+      // Redirect to index.html while keeping the path info in sessionStorage
+      window.location.replace("/");
+    }
   </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7162731177966348" crossorigin="anonymous"></script>
 </head>

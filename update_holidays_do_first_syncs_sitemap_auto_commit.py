@@ -560,37 +560,9 @@ def create_new_pages(new_root: Dict[str, Any], slugs_to_add: Set[str]) -> None:
 
 def rebuild_sitemap(final_slugs: Set[str]) -> None:
     """
-    Rebuild sitemap.xml from scratch:
-      - root homepage
-      - all /holiday/<slug>/ URLs
+    Deprecated: sitemap-index.xml and monthly sitemaps are generated elsewhere.
     """
-    print(f"Rebuilding sitemap.xml with {len(final_slugs)} holiday URLs...")
-    lines = [
-        '<?xml version="1.0" encoding="UTF-8"?>',
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-        "  <url>",
-        f"    <loc>{SITE_BASE}/</loc>",
-        "    <changefreq>monthly</changefreq>",
-        "    <priority>1.00</priority>",
-        "  </url>",
-    ]
-
-    for slug in sorted(final_slugs):
-        loc = f"{SITE_BASE}/holiday/{slug}/"
-        lines.extend([
-            "  <url>",
-            f"    <loc>{loc}</loc>",
-            "    <changefreq>yearly</changefreq>",
-            "    <priority>0.80</priority>",
-            "  </url>",
-        ])
-
-    lines.append("</urlset>")
-
-    with SITEMAP_PATH.open("w", encoding="utf-8") as f:
-        f.write("\n".join(lines) + "\n")
-
-    print(f"Wrote sitemap.xml to {SITEMAP_PATH}")
+    print("Skipping sitemap.xml rebuild (deprecated).")
 
 
 # ==== GIT INTEGRATION ====
