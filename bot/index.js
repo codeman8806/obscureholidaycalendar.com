@@ -227,10 +227,6 @@ async function sendSetupResetNotices() {
   let failed = 0;
 
   for (const [guildId, guild] of guildEntries) {
-    if (!Object.prototype.hasOwnProperty.call(guildConfig, guildId)) {
-      skipped += 1;
-      continue;
-    }
     const cfg = getGuildConfig(guildId);
     if (cfg.setupResetNoticeSentAt && cfg.setupResetNoticeSentStatus === "sent") {
       skipped += 1;
