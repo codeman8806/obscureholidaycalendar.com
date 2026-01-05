@@ -395,6 +395,33 @@ function getGuildConfig(guildId) {
 
 function saveGuildConfig() {
   writeJsonSafe(CONFIG_PATH, guildConfig);
+  const guildCount = Object.keys(guildConfig).length;
+  const channelCount = Object.values(guildConfig).reduce((sum, cfg) => sum + ((cfg.channelIds || []).length), 0);
+  console.log(`Saved guild config to ${CONFIG_PATH} (${guildCount} guilds, ${channelCount} channel(s)).`);
+}
+
+function formatSetupLog(config, channelId) {
+  const channelSettings = config.channelSettings?.[channelId] || {};
+  const channelIds = config.channelIds || [];
+  const tz = channelSettings.timezone || config.timezone || DEFAULT_TIMEZONE;
+  const hour = Number.isInteger(channelSettings.hour) ? channelSettings.hour : config.hour || 0;
+  const branding = channelSettings.branding ?? config.branding ?? true;
+  const holidayChoice = Number.isInteger(channelSettings.holidayChoice) ? channelSettings.holidayChoice : config.holidayChoice;
+  const promotionsEnabled = config.promotionsEnabled !== false;
+  const payload = {
+    channels: channelIds,
+    timezone: tz,
+    hour,
+    branding,
+    holidayChoice,
+    roleId: channelSettings.roleId || null,
+    quiet: channelSettings.quiet || false,
+    style: channelSettings.style || DEFAULT_EMBED_STYLE,
+    color: channelSettings.color || null,
+    skipWeekends: channelSettings.skipWeekends || false,
+    promotionsEnabled,
+  };
+  return JSON.stringify(payload);
 }
 
 function isValidTimezone(tz) {
@@ -738,6 +765,7 @@ async function handleSetup(interaction) {
   }
   const guildId = interaction.guild.id;
   const config = getGuildConfig(guildId);
+  console.log(`Setup invoked for guild ${guildId} (config path: ${CONFIG_PATH}).`);
   const channel = interaction.options.getChannel("channel", true);
   const tz = interaction.options.getString("timezone");
   const hour = interaction.options.getInteger("hour");
@@ -763,6 +791,7 @@ async function handleSetup(interaction) {
     config.holidayChoice = DEFAULT_HOLIDAY_CHOICE;
     if (typeof promotionsEnabled === "boolean") config.promotionsEnabled = promotionsEnabled;
     saveGuildConfig();
+    console.log(`Setup saved for guild ${guildId}: ${formatSetupLog(config, channel.id)}`);
     scheduleForChannel(guildId, channel.id);
     return interaction.reply({
       content: [
@@ -800,6 +829,7 @@ async function handleSetup(interaction) {
   config.channelSettings[channel.id] = ch;
 
   saveGuildConfig();
+  console.log(`Setup saved for guild ${guildId}: ${formatSetupLog(config, channel.id)}`);
   scheduleForChannel(guildId, channel.id);
 
   return interaction.reply({
