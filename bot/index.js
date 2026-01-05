@@ -66,7 +66,11 @@ const SLACK_BOT_URL = process.env.SLACK_BOT_URL || `${SITE_URL}/slack-bot/`;
 const TOPGG_VOTE_URL = process.env.TOPGG_VOTE_URL || "https://top.gg/bot/1447955404142153789/vote";
 const TOPGG_REVIEW_URL = process.env.TOPGG_REVIEW_URL || "https://top.gg/bot/1447955404142153789#reviews";
 const PREMIUM_ROLE_ID = process.env.PREMIUM_ROLE_ID || null; // Discord Server Subscription role id
-const CONFIG_PATH = path.resolve(__dirname, "guild-config.json");
+const CONFIG_PATH = process.env.GUILD_CONFIG_PATH
+  ? path.resolve(__dirname, process.env.GUILD_CONFIG_PATH)
+  : path.resolve(__dirname, "guild-config.json");
+console.log(`GUILD_CONFIG_PATH env: ${process.env.GUILD_CONFIG_PATH || "(not set)"}`);
+console.log(`Resolved guild config path: ${CONFIG_PATH}`);
 const PREMIUM_PATH = path.resolve(__dirname, "premium.json"); // optional allowlist
 const BOT_OWNER_ID = process.env.BOT_OWNER_ID || null;
 const TOPGG_TOKEN = process.env.TOPGG_TOKEN || null; // for posting stats to top.gg
