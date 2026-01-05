@@ -92,11 +92,6 @@ const DEFAULT_EMBED_STYLE = "compact";
 const DEFAULT_TIMEZONE = "UTC";
 const PROMO_VOTE_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000; // once per week per guild
 const PROMO_RATE_INTERVAL_MS = 30 * 24 * 60 * 60 * 1000; // once per 30 days per guild
-const SETUP_RESET_NOTICE = [
-  "**Notice**",
-  "A scheduling bug cleared your /setup configuration.",
-  "The issue is fixed now, but you will need to run `/setup` again to resume daily posts.",
-].join("\n");
 
 function readJsonSafe(filePath, fallback) {
   try {
@@ -218,45 +213,6 @@ function isPremiumGuild(guild) {
 function isOwner(userId) {
   if (!BOT_OWNER_ID) return false;
   return userId === BOT_OWNER_ID;
-}
-
-async function sendSetupResetNotices() {
-  const guildEntries = Array.from(client.guilds.cache.entries());
-  let sent = 0;
-  let skipped = 0;
-  let failed = 0;
-
-  for (const [guildId, guild] of guildEntries) {
-    const cfg = getGuildConfig(guildId);
-    if (cfg.setupResetNoticeSentAt && cfg.setupResetNoticeSentStatus === "sent") {
-      skipped += 1;
-      continue;
-    }
-    try {
-      const owner = await guild.fetchOwner();
-      if (!owner?.user) {
-        cfg.setupResetNoticeSentAt = Date.now();
-        cfg.setupResetNoticeSentStatus = "skipped_no_owner";
-        saveGuildConfig();
-        skipped += 1;
-        continue;
-      }
-      await owner.user.send(SETUP_RESET_NOTICE);
-      cfg.setupResetNoticeSentAt = Date.now();
-      cfg.setupResetNoticeSentStatus = "sent";
-      saveGuildConfig();
-      sent += 1;
-    } catch (err) {
-      console.warn(`Setup reset notice failed for guild ${guildId}:`, err.message);
-      cfg.setupResetNoticeSentAt = Date.now();
-      cfg.setupResetNoticeSentStatus = "failed";
-      saveGuildConfig();
-      failed += 1;
-    }
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-  }
-
-  console.log(`Setup reset notice complete: sent ${sent}, skipped ${skipped}, failed ${failed}.`);
 }
 
 function setPremiumGuild(guildId, enabled) {
@@ -1198,13 +1154,6 @@ client.once("clientReady", async () => {
 
   // Schedule daily auto-post
   scheduleDailyPost();
-
-  // One-time notice about setup reset (owner DM)
-  setTimeout(() => {
-    sendSetupResetNotices().catch((err) => {
-      console.error("Setup reset notice run failed:", err);
-    });
-  }, 2000);
 
   // Post stats to top.gg now and on interval
   postTopGGStats();
