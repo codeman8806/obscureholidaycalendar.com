@@ -92,6 +92,11 @@ const DEFAULT_EMBED_STYLE = "compact";
 const DEFAULT_TIMEZONE = "UTC";
 const PROMO_VOTE_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000; // once per week per guild
 const PROMO_RATE_INTERVAL_MS = 30 * 24 * 60 * 60 * 1000; // once per 30 days per guild
+const SETUP_RESET_NOTICE = [
+  "**Notice**",
+  "A scheduling bug cleared your /setup configuration.",
+  "The issue is fixed now, but you will need to run `/setup` again to resume daily posts.",
+].join("\n");
 
 function readJsonSafe(filePath, fallback) {
   try {
@@ -213,6 +218,56 @@ function isPremiumGuild(guild) {
 function isOwner(userId) {
   if (!BOT_OWNER_ID) return false;
   return userId === BOT_OWNER_ID;
+}
+
+async function sendSetupResetNotices() {
+  const guildEntries = Array.from(client.guilds.cache.entries());
+  let sent = 0;
+  let skipped = 0;
+  let failed = 0;
+
+  for (const [guildId, guild] of guildEntries) {
+    if (!Object.prototype.hasOwnProperty.call(guildConfig, guildId)) {
+      skipped += 1;
+      continue;
+    }
+    const cfg = getGuildConfig(guildId);
+    if (cfg.setupResetNoticeSentAt) {
+      skipped += 1;
+      continue;
+    }
+    if (Array.isArray(cfg.channelIds) && cfg.channelIds.length > 0) {
+      cfg.setupResetNoticeSentAt = Date.now();
+      cfg.setupResetNoticeSentStatus = "skipped_active_config";
+      saveGuildConfig();
+      skipped += 1;
+      continue;
+    }
+    try {
+      const owner = await guild.fetchOwner();
+      if (!owner?.user) {
+        cfg.setupResetNoticeSentAt = Date.now();
+        cfg.setupResetNoticeSentStatus = "skipped_no_owner";
+        saveGuildConfig();
+        skipped += 1;
+        continue;
+      }
+      await owner.user.send(SETUP_RESET_NOTICE);
+      cfg.setupResetNoticeSentAt = Date.now();
+      cfg.setupResetNoticeSentStatus = "sent";
+      saveGuildConfig();
+      sent += 1;
+    } catch (err) {
+      console.warn(`Setup reset notice failed for guild ${guildId}:`, err.message);
+      cfg.setupResetNoticeSentAt = Date.now();
+      cfg.setupResetNoticeSentStatus = "failed";
+      saveGuildConfig();
+      failed += 1;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  }
+
+  console.log(`Setup reset notice complete: sent ${sent}, skipped ${skipped}, failed ${failed}.`);
 }
 
 function setPremiumGuild(guildId, enabled) {
@@ -739,9 +794,9 @@ async function handleHelp(interaction) {
       "/premium — check your premium status",
       "/upgrade — start a premium checkout",
       "/manage — manage/cancel premium (billing portal)",
-      "/tomorrow — tomorrow’s holiday (premium)",
-      "/upcoming — upcoming holidays (premium)",
-      "/week — 7-day digest (premium)",
+      "/tomorrow — tomorrow’s holiday",
+      "/upcoming — upcoming holidays",
+      "/week — 7-day digest",
       "/help — list commands",
     ].join("\n"),
     flags: MessageFlags.Ephemeral,
@@ -809,10 +864,6 @@ async function handleRandom(interaction) {
 }
 
 async function handleWeek(interaction) {
-  const premium = isPremium(interaction.guild, interaction.member);
-  if (!premium) {
-    return interaction.reply({ content: "Premium only. Upgrade to get the 7-day digest.", flags: MessageFlags.Ephemeral });
-  }
   const days = Math.max(3, Math.min(interaction.options.getInteger("days") || 7, 14));
   const now = new Date();
   const items = holidaysForRange(now, days);
@@ -951,10 +1002,6 @@ async function handleFacts(interaction) {
 }
 
 async function handleTomorrow(interaction) {
-  const premium = isPremium(interaction.guild, interaction.member);
-  if (!premium) {
-    return interaction.reply({ content: "Premium only. Unlock premium via Server Subscription and retry.", flags: MessageFlags.Ephemeral });
-  }
   const now = new Date();
   const tomorrow = new Date(now);
   tomorrow.setDate(now.getDate() + 1);
@@ -966,10 +1013,6 @@ async function handleTomorrow(interaction) {
 }
 
 async function handleUpcoming(interaction) {
-  const premium = isPremium(interaction.guild, interaction.member);
-  if (!premium) {
-    return interaction.reply({ content: "Premium only. Unlock premium via Server Subscription and retry.", flags: MessageFlags.Ephemeral });
-  }
   const days = Math.max(1, Math.min(interaction.options.getInteger("days") || 7, 30));
   const now = new Date();
   const items = holidaysForRange(now, days);
@@ -996,13 +1039,12 @@ async function handlePremiumStatus(interaction) {
   const benefits = [
     "✅ Multiple daily channels",
     "✅ Custom timezone & hour",
-    "✅ Premium commands: /tomorrow, /upcoming, /date, /search, /random, /facts, /week",
+    "✅ Premium commands: /date, /search, /random, /facts",
     "✅ Branding toggle",
     "✅ Pick which of the day’s holidays to auto-post",
     "✅ Per-channel role pings & quiet mode",
     "✅ Rich/compact embeds, custom color",
     "✅ Skip-weekends scheduling",
-    "✅ 7-day digest: /week",
   ];
 
   if (premium) {
@@ -1167,6 +1209,13 @@ client.once("clientReady", async () => {
 
   // Schedule daily auto-post
   scheduleDailyPost();
+
+  // One-time notice about setup reset (owner DM)
+  setTimeout(() => {
+    sendSetupResetNotices().catch((err) => {
+      console.error("Setup reset notice run failed:", err);
+    });
+  }, 2000);
 
   // Post stats to top.gg now and on interval
   postTopGGStats();
