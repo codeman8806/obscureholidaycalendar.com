@@ -146,7 +146,7 @@ export const commandDefs = [
   },
   {
     name: "week",
-    description: "Premium: show a 7-day digest",
+    description: "Show a 7-day digest",
     options: [
       {
         name: "days",
@@ -166,11 +166,11 @@ export const commandDefs = [
   },
   {
     name: "tomorrow",
-    description: "See tomorrow’s holiday (Premium only)",
+    description: "See tomorrow’s holiday",
   },
   {
     name: "upcoming",
-    description: "See upcoming holidays (Premium only)",
+    description: "See upcoming holidays",
     options: [
       {
         name: "days",
