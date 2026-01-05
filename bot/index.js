@@ -113,6 +113,70 @@ const premiumAllowlist = readJsonSafe(PREMIUM_PATH, {});
 const stripeClient = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null;
 const SITE_BASE = "https://www.obscureholidaycalendar.com/holiday";
 
+function normalizeAllGuildConfigs() {
+  let changed = false;
+  let updatedGuilds = 0;
+  const updatedGuildIds = [];
+  Object.keys(guildConfig).forEach((guildId) => {
+    const cfg = guildConfig[guildId] || {};
+    let updated = false;
+    if (!Array.isArray(cfg.channelIds)) {
+      cfg.channelIds = [];
+      changed = true;
+      updated = true;
+    }
+    if (!cfg.channelSettings) {
+      cfg.channelSettings = {};
+      changed = true;
+      updated = true;
+    }
+    if (typeof cfg.timezone !== "string") {
+      cfg.timezone = DEFAULT_TIMEZONE;
+      changed = true;
+      updated = true;
+    }
+    if (!Number.isInteger(cfg.hour)) {
+      cfg.hour = 0;
+      changed = true;
+      updated = true;
+    }
+    if (typeof cfg.branding !== "boolean") {
+      cfg.branding = true;
+      changed = true;
+      updated = true;
+    }
+    if (typeof cfg.holidayChoice !== "number") {
+      cfg.holidayChoice = DEFAULT_HOLIDAY_CHOICE;
+      changed = true;
+      updated = true;
+    }
+    if (typeof cfg.promotionsEnabled !== "boolean") {
+      cfg.promotionsEnabled = true;
+      changed = true;
+      updated = true;
+    }
+    if (!cfg.lastVotePromptAt) {
+      cfg.lastVotePromptAt = 0;
+      changed = true;
+      updated = true;
+    }
+    if (!cfg.lastRatePromptAt) {
+      cfg.lastRatePromptAt = 0;
+      changed = true;
+      updated = true;
+    }
+    if (updated) {
+      updatedGuilds += 1;
+      updatedGuildIds.push(guildId);
+    }
+    guildConfig[guildId] = cfg;
+  });
+  if (changed) {
+    writeJsonSafe(CONFIG_PATH, guildConfig);
+    console.log(`Normalized guild-config.json on startup (${updatedGuilds} guild(s) updated): ${updatedGuildIds.join(", ")}`);
+  }
+}
+
 function loadHolidays() {
   const raw = fs.readFileSync(HOLIDAYS_PATH, "utf8");
   const data = JSON.parse(raw);
@@ -121,6 +185,7 @@ function loadHolidays() {
 
 const holidaysByDate = loadHolidays();
 const allHolidays = Object.values(holidaysByDate).flat();
+normalizeAllGuildConfigs();
 
 function isPremium(guild, member) {
   if (!guild) return false;
@@ -372,6 +437,9 @@ function getGuildConfig(guildId) {
       branding: true,
       channelSettings: {},
     };
+  }
+  if (!Array.isArray(guildConfig[guildId].channelIds)) {
+    guildConfig[guildId].channelIds = [];
   }
   // Backfill new fields
   if (!guildConfig[guildId].channelSettings) {
