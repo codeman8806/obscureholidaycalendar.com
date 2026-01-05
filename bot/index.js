@@ -232,14 +232,7 @@ async function sendSetupResetNotices() {
       continue;
     }
     const cfg = getGuildConfig(guildId);
-    if (cfg.setupResetNoticeSentAt) {
-      skipped += 1;
-      continue;
-    }
-    if (Array.isArray(cfg.channelIds) && cfg.channelIds.length > 0) {
-      cfg.setupResetNoticeSentAt = Date.now();
-      cfg.setupResetNoticeSentStatus = "skipped_active_config";
-      saveGuildConfig();
+    if (cfg.setupResetNoticeSentAt && cfg.setupResetNoticeSentStatus === "sent") {
       skipped += 1;
       continue;
     }
