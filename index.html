@@ -600,6 +600,26 @@
         return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
       }
 
+      function ordinalSuffix(day) {
+        if (day % 100 >= 11 && day % 100 <= 13) return "th";
+        switch (day % 10) {
+          case 1:
+            return "st";
+          case 2:
+            return "nd";
+          case 3:
+            return "rd";
+          default:
+            return "th";
+        }
+      }
+
+      function formatDisplayDate(month, day) {
+        const date = new Date(new Date().getFullYear(), month - 1, day);
+        const monthName = date.toLocaleString("en-US", { month: "long" });
+        return `${monthName} ${day}${ordinalSuffix(day)}`;
+      }
+
       const now = new Date();
       const mm = String(now.getMonth() + 1).padStart(2, "0");
       const dd = String(now.getDate()).padStart(2, "0");
@@ -626,7 +646,7 @@
           const emoji = first.emoji || "";
           const slug = first.slug || slugify(name);
           nameEl.textContent = name;
-          dateEl.textContent = `${Number(mm)}/${Number(dd)}`;
+          dateEl.textContent = formatDisplayDate(Number(mm), Number(dd));
           if (emojiEl) emojiEl.textContent = emoji;
           linkEl.textContent = "View the holiday page";
           linkEl.href = `/holiday/${slug}/`;
