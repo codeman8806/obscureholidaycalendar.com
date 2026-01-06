@@ -1381,6 +1381,7 @@ async function postTodayForChannel(guildId, channelId) {
     embeds: [todayEmbed],
     components,
   });
+  console.log(`Daily post sent for guild ${guildId} channel ${channelId}.`);
 }
 
 // Start HTTP server (Stripe + health)
