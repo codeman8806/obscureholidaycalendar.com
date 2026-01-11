@@ -265,7 +265,7 @@ async function postDiscordServicesStats() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bot ${DISCORDSERVICES_TOKEN}`,
+        Authorization: DISCORDSERVICES_TOKEN,
       },
       body: JSON.stringify(payload),
     });
