@@ -269,29 +269,38 @@ async function postDiscordServicesStats() {
     const botId = process.env.DISCORDSERVICES_BOT_ID || client.user?.id;
     if (!botId) return;
     const shardCount = Number(process.env.DISCORDSERVICES_SHARDS || "1");
-    const payload = {
-      servers: serverCount,
-      server_count: serverCount,
-      shards: shardCount,
-      shard_count: shardCount,
-    };
     const url = `https://api.discordservices.net/bot/${botId}/stats`;
-    const postWithAuth = async (authHeader) => {
+    const postWithAuth = async (authHeader, body) => {
       const res = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: authHeader,
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(body),
       });
       return res;
     };
-    let res = await postWithAuth(DISCORDSERVICES_TOKEN);
-    if (!res.ok && (res.status === 400 || res.status === 401 || res.status === 403)) {
+    const payloads = [
+      { servers: serverCount, shards: shardCount },
+      { server_count: serverCount, shard_count: shardCount },
+    ];
+    let res = null;
+    for (const payload of payloads) {
+      res = await postWithAuth(DISCORDSERVICES_TOKEN, payload);
+      if (res.ok) break;
+      if (res.status === 401 || res.status === 403) break;
+      if (res.status !== 400) break;
+    }
+    if (res && !res.ok && (res.status === 400 || res.status === 401 || res.status === 403)) {
       const retryHeader = DISCORDSERVICES_TOKEN.startsWith("Bot ") ? DISCORDSERVICES_TOKEN : `Bot ${DISCORDSERVICES_TOKEN}`;
       if (retryHeader !== DISCORDSERVICES_TOKEN) {
-        res = await postWithAuth(retryHeader);
+        for (const payload of payloads) {
+          res = await postWithAuth(retryHeader, payload);
+          if (res.ok) break;
+          if (res.status === 401 || res.status === 403) break;
+          if (res.status !== 400) break;
+        }
       }
     }
     if (!res.ok) {
