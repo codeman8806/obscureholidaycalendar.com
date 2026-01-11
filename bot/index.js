@@ -265,7 +265,7 @@ async function postDiscordServicesStats() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: DISCORDSERVICES_TOKEN,
+        Authorization: `Bot ${DISCORDSERVICES_TOKEN}`,
       },
       body: JSON.stringify(payload),
     });
@@ -278,6 +278,23 @@ async function postDiscordServicesStats() {
   } catch (e) {
     console.warn("discordservices stats post failed:", e.message);
   }
+}
+
+function removeChannelFromConfig(guildId, channelId, reason) {
+  const config = getGuildConfig(guildId);
+  const before = config.channelIds || [];
+  config.channelIds = before.filter((id) => id !== channelId);
+  if (config.channelSettings && config.channelSettings[channelId]) {
+    delete config.channelSettings[channelId];
+  }
+  saveGuildConfig();
+  console.warn(`Removed channel ${channelId} from guild ${guildId} config (${reason}).`);
+}
+
+function isMissingAccessError(err) {
+  const code = err?.code;
+  const status = err?.status;
+  return code === 50001 || code === 10003 || status === 403 || status === 404;
 }
 
 async function listSubscriptionsByPrice(priceId) {
@@ -1348,7 +1365,16 @@ async function postTodayForChannel(guildId, channelId) {
     const day = new Date().getDay();
     if (day === 0 || day === 6) return; // Sunday or Saturday
   }
-  const channel = await client.channels.fetch(channelId);
+  let channel;
+  try {
+    channel = await client.channels.fetch(channelId);
+  } catch (err) {
+    if (isMissingAccessError(err)) {
+      removeChannelFromConfig(guildId, channelId, `fetch failed: ${err?.code || err?.status || "unknown"}`);
+      return;
+    }
+    throw err;
+  }
   if (!channel || !channel.isTextBased()) return;
 
   const now = new Date();
@@ -1376,12 +1402,20 @@ async function postTodayForChannel(guildId, channelId) {
 
   const { rows: promoRows, note: promoNote } = buildPromoComponents(guildId, { includeRate: true, forceVote: true });
   const components = [...buildButtons(pick), ...promoRows];
-  await channel.send({
-    content: `${mention}🎉 Today’s holidays: ${topNames}${teaser ? `\n${teaser}` : ""}${promoNote ? `\n\n${promoNote}` : ""}`,
-    embeds: [todayEmbed],
-    components,
-  });
-  console.log(`Daily post sent for guild ${guildId} channel ${channelId}.`);
+  try {
+    await channel.send({
+      content: `${mention}🎉 Today’s holidays: ${topNames}${teaser ? `\n${teaser}` : ""}${promoNote ? `\n\n${promoNote}` : ""}`,
+      embeds: [todayEmbed],
+      components,
+    });
+    console.log(`Daily post sent for guild ${guildId} channel ${channelId}.`);
+  } catch (err) {
+    if (isMissingAccessError(err)) {
+      removeChannelFromConfig(guildId, channelId, `send failed: ${err?.code || err?.status || "unknown"}`);
+      return;
+    }
+    throw err;
+  }
 }
 
 // Start HTTP server (Stripe + health)
