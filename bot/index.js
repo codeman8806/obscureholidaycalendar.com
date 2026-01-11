@@ -229,7 +229,7 @@ async function postTopGGStats() {
   if (!TOPGG_TOKEN) return;
   try {
     const serverCount = client.guilds.cache.size;
-    const botId = client.user?.id;
+    const botId = process.env.DISCORDSERVICES_BOT_ID || client.user?.id;
     if (!botId) return;
     const res = await fetch(`https://top.gg/api/bots/${botId}/stats`, {
       method: "POST",
@@ -271,7 +271,9 @@ async function postDiscordServicesStats() {
     });
     if (!res.ok) {
       const text = await res.text();
-      console.warn(`discordservices stats post failed: ${res.status} ${text}`);
+      console.warn(
+        `discordservices stats post failed: ${res.status} ${text} (botId=${botId}, servers=${serverCount}, shards=${shardCount})`
+      );
     } else {
       console.log(`Posted stats to discordservices.net: ${serverCount} servers`);
     }
