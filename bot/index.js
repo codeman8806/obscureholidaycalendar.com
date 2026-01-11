@@ -259,7 +259,9 @@ async function postDiscordServicesStats() {
     const shardCount = Number(process.env.DISCORDSERVICES_SHARDS || "1");
     const payload = {
       servers: serverCount,
+      server_count: serverCount,
       shards: shardCount,
+      shard_count: shardCount,
     };
     const res = await fetch(`https://api.discordservices.net/bot/${botId}/stats`, {
       method: "POST",
