@@ -266,7 +266,7 @@ async function postDiscordServicesStats() {
   if (!DISCORDSERVICES_TOKEN) return;
   try {
     const serverCount = client.guilds.cache.size;
-    const botId = client.user?.id;
+    const botId = process.env.DISCORDSERVICES_BOT_ID || client.user?.id;
     if (!botId) return;
     const shardCount = Number(process.env.DISCORDSERVICES_SHARDS || "1");
     const payload = {
@@ -275,14 +275,25 @@ async function postDiscordServicesStats() {
       shards: shardCount,
       shard_count: shardCount,
     };
-    const res = await fetch(`https://api.discordservices.net/bot/${botId}/stats`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: DISCORDSERVICES_TOKEN,
-      },
-      body: JSON.stringify(payload),
-    });
+    const url = `https://api.discordservices.net/bot/${botId}/stats`;
+    const postWithAuth = async (authHeader) => {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authHeader,
+        },
+        body: JSON.stringify(payload),
+      });
+      return res;
+    };
+    let res = await postWithAuth(DISCORDSERVICES_TOKEN);
+    if (!res.ok && (res.status === 400 || res.status === 401 || res.status === 403)) {
+      const retryHeader = DISCORDSERVICES_TOKEN.startsWith("Bot ") ? DISCORDSERVICES_TOKEN : `Bot ${DISCORDSERVICES_TOKEN}`;
+      if (retryHeader !== DISCORDSERVICES_TOKEN) {
+        res = await postWithAuth(retryHeader);
+      }
+    }
     if (!res.ok) {
       const text = await res.text();
       console.warn(
