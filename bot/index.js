@@ -74,7 +74,19 @@ console.log(`Resolved guild config path: ${CONFIG_PATH}`);
 const PREMIUM_PATH = path.resolve(__dirname, "premium.json"); // optional allowlist
 const BOT_OWNER_ID = process.env.BOT_OWNER_ID || null;
 const TOPGG_TOKEN = process.env.TOPGG_TOKEN || null; // for posting stats to top.gg
-const DISCORDSERVICES_TOKEN = (process.env.DISCORDSERVICES_TOKEN || "").trim() || null; // for posting stats to api.discordservices.net
+function normalizeApiToken(value) {
+  if (!value) return null;
+  const trimmed = value.trim();
+  if (
+    (trimmed.startsWith("\"") && trimmed.endsWith("\"")) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1).trim() || null;
+  }
+  return trimmed || null;
+}
+
+const DISCORDSERVICES_TOKEN = normalizeApiToken(process.env.DISCORDSERVICES_TOKEN); // for posting stats to api.discordservices.net
 const TOPGG_POST_INTERVAL_MIN = Number(process.env.TOPGG_POST_INTERVAL_MIN || "30");
 const DISCORDSERVICES_POST_INTERVAL_MIN = Number(process.env.DISCORDSERVICES_POST_INTERVAL_MIN || TOPGG_POST_INTERVAL_MIN || "30");
 const PORT = process.env.PORT || null; // for Railway/health checks (optional)
