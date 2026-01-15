@@ -405,19 +405,6 @@
     "01-15": [
       {
         "date": "01-15",
-        "description": "Martin Luther King Jr.'s Birthday is a federal holiday in the United States commemorating the birthday of Martin Luther King Jr., a pivotal leader in the Civil Rights Movement. It celebrates his life, achievements, and legacy of advocating for civil rights through nonviolence and civil disobedience, striving for racial equality and justice.",
-        "emoji": "🕊",
-        "funFacts": [
-          "Martin Luther King Jr. was born on January 15, 1929, but the federal holiday is observed on the third Monday of January each year.",
-          "The idea for the holiday was initially promoted by the Congressional Black Caucus and supported by labor unions in the 1970s, eventually signed into law by President Ronald Reagan in 1983.",
-          "The first observance of the federal holiday took place on January 20, 1986.",
-          "Many states initially resisted observing the holiday, with some combining it with other holidays or giving it alternative names before widespread adoption.",
-          "Since 1994, the holiday has been designated as a national day of service, encouraging Americans to volunteer and improve their communities."
-        ],
-        "name": "Martin Luther King Jr.'s Birthday"
-      },
-      {
-        "date": "01-15",
         "description": "Celebrated annually on January 15th, Wikipedia Day commemorates the launch of Wikipedia, the free, web-based, collaborative, multilingual encyclopedia, on this date in 2001. It acknowledges the global community of volunteers who contribute to and maintain the world's most comprehensive and accessible open knowledge resource.",
         "emoji": "🌐",
         "funFacts": [
@@ -428,6 +415,19 @@
           "Wikipedia operates under a model of open collaboration, allowing anyone with internet access to write and edit articles."
         ],
         "name": "Wikipedia Day"
+      },
+      {
+        "date": "01-15",
+        "description": "National Hat Day celebrates hats of every style—from beanies and berets to caps and fedoras—inviting people to wear a favorite hat, explore the history of headwear, and show a little personal style.",
+        "emoji": "🎩",
+        "funFacts": [
+          "Hats have been worn for thousands of years for protection, ceremony, and fashion.",
+          "A hat can signal identity or profession, from uniforms to team caps.",
+          "Many classic hat styles are named for places or people, like fedoras, bowlers, and berets.",
+          "Hat etiquette varies by culture, but the tradition of tipping a hat dates back centuries.",
+          "National Hat Day is a simple excuse to show off a favorite hat or try a new look."
+        ],
+        "name": "National Hat Day"
       }
     ],
     "01-16": [

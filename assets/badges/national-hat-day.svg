@@ -1,11 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="120" viewBox="0 0 240 120" role="img" aria-label="National Hat Day">
   <defs>
     <linearGradient id="grad-national-hat-day" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#62553a"/>
-      <stop offset="100%" stop-color="#0c22df"/>
+      <stop offset="0%" stop-color="#4fd48e"/>
+      <stop offset="100%" stop-color="#cc7f55"/>
     </linearGradient>
   </defs>
   <rect rx="16" ry="16" width="240" height="120" fill="url(#grad-national-hat-day)"/>
-  <text x="50%" y="54%" fill="#ffffff" font-family="Inter, Manrope, system-ui, sans-serif" font-size="20" font-weight="700" text-anchor="middle">National Hat Day</text>
-  <text x="50%" y="78%" fill="#f1f5f9" font-family="Inter, Manrope, system-ui, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Obscure Holiday Calendar</text>
+  <text>
+    <tspan x="50%" y="52" fill="#ffffff" font-family="Inter, Manrope, system-ui, sans-serif" font-size="18" font-weight="700" text-anchor="middle">National Hat</tspan>
+    <tspan x="50%" y="74" fill="#ffffff" font-family="Inter, Manrope, system-ui, sans-serif" font-size="18" font-weight="700" text-anchor="middle">Day</tspan>
+  </text>
+  <text x="50%" y="90%" fill="#f1f5f9" font-family="Inter, Manrope, system-ui, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Obscure Holiday Calendar</text>
 </svg>
