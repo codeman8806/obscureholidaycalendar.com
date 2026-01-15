@@ -63,9 +63,9 @@
         "description": "Women Rock! day is an annual celebration dedicated to recognizing and honoring the immense contributions, achievements, and resilience of women across all fields and walks of life. It's a day to empower, uplift, and acknowledge the powerful impact women have made and continue to make on the world, inspiring future generations to break barriers and reach for their dreams.",
         "emoji": "💪",
         "funFacts": [
-          "The phrase 'rock on' is often used to encourage perseverance and resilience, perfectly capturing the spirit of women who overcome challenges.",
+          "Countries with more women in leadership tend to score higher on health and education",
           "Historically, women have been at the forefront of social change movements, from suffrage to civil rights, demonstrating incredible strength and determination.",
-          "In music, 'rock' is a genre defined by its powerful sound and often rebellious spirit, reflecting the revolutionary impact women have had in arts and culture.",
+          "Women consistently outperform men in collaboration, empathy, and communication skills.",
           "This day encourages reflection on the countless unsung heroines whose efforts have shaped our world but may not always receive public recognition.",
           "Celebrating 'Women Rock!' can involve supporting women-owned businesses, advocating for gender equality, or simply recognizing the 'rockstar' women in your own life."
         ],
@@ -405,6 +405,19 @@
     "01-15": [
       {
         "date": "01-15",
+        "description": "National Hat Day is celebrated every January 15th, honoring hats of all shapes and sizes. It's a whimsical reminder to appreciate the role hats play in fashion and culture, encouraging everyone to wear their favorite hat and share their unique styles.",
+        "emoji": "🎩",
+        "funFacts": [
+          "The earliest hats date back to ancient civilizations, with Egyptians wearing straw hats to protect against the sun.",
+          "In the 19th century, top hats became a symbol of wealth and social status in Western fashion.",
+          "Some cultures have specific hats for particular occasions or ceremonies, such as the sombrero in Mexican festivities.",
+          "National Hat Day aims to promote creativity, inviting people to design and showcase their own hats.",
+          "The world's largest hat is over 14 feet tall and was created in 2018 for National Hat Day celebrations in Texas."
+        ],
+        "name": "National Hat Day"
+      },
+      {
+        "date": "01-15",
         "description": "Celebrated annually on January 15th, Wikipedia Day commemorates the launch of Wikipedia, the free, web-based, collaborative, multilingual encyclopedia, on this date in 2001. It acknowledges the global community of volunteers who contribute to and maintain the world's most comprehensive and accessible open knowledge resource.",
         "emoji": "🌐",
         "funFacts": [
@@ -415,19 +428,6 @@
           "Wikipedia operates under a model of open collaboration, allowing anyone with internet access to write and edit articles."
         ],
         "name": "Wikipedia Day"
-      },
-      {
-        "date": "01-15",
-        "description": "National Hat Day celebrates hats of every style—from beanies and berets to caps and fedoras—inviting people to wear a favorite hat, explore the history of headwear, and show a little personal style.",
-        "emoji": "🎩",
-        "funFacts": [
-          "Hats have been worn for thousands of years for protection, ceremony, and fashion.",
-          "A hat can signal identity or profession, from uniforms to team caps.",
-          "Many classic hat styles are named for places or people, like fedoras, bowlers, and berets.",
-          "Hat etiquette varies by culture, but the tradition of tipping a hat dates back centuries.",
-          "National Hat Day is a simple excuse to show off a favorite hat or try a new look."
-        ],
-        "name": "National Hat Day"
       }
     ],
     "01-16": [

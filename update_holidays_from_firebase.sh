@@ -31,8 +31,15 @@ except Exception as exc:  # pragma: no cover
     sys.exit(f"Downloaded data is not valid JSON: {exc}")
 
 holidays = data.get("holidays", data)
-if not isinstance(holidays, list):  # pragma: no cover
-    sys.exit("Expected a list of holidays under 'holidays' or at root.")
+if not isinstance(holidays, (list, dict)):  # pragma: no cover
+    sys.exit("Expected a list or dict of holidays under 'holidays' or at root.")
+
+if isinstance(holidays, list):
+    payload = {"holidays": holidays}
+    holiday_count = len(holidays)
+else:
+    payload = {"holidays": holidays}
+    holiday_count = sum(len(items) for items in holidays.values() if isinstance(items, list))
 
 timestamp = datetime.datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
 snap_path = root / f"holidays_snapshot_{timestamp}.json"
@@ -40,15 +47,15 @@ out_path = root / "holidays.json"
 bot_path = root / "bot" / "holidays.json"
 
 # Write a pretty snapshot for diffing and archival.
-snap_path.write_text(json.dumps({"holidays": holidays}, ensure_ascii=False, indent=2))
+snap_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
 
 # Write the canonical file used by the site generator.
-out_path.write_text(json.dumps({"holidays": holidays}, ensure_ascii=False, indent=2))
+out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
 
 # Keep the bot copy in sync.
 bot_path.write_text(out_path.read_text())
 
-print(f"Fetched {len(holidays)} holidays")
+print(f"Fetched {holiday_count} holidays")
 print(f"Snapshot saved to {snap_path.name}")
 print("Updated holidays.json and bot/holidays.json")
 PY
