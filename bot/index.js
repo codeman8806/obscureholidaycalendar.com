@@ -281,11 +281,15 @@ async function postDiscordServicesStats() {
     const serverCount = client.guilds.cache.size;
     const shardCount = Number(process.env.DISCORDSERVICES_SHARDS) || 1;
     const url = `https://api.discordservices.net/bot/${botId}/stats`;
+    const authHeader = DISCORDSERVICES_TOKEN.startsWith("Bot ")
+      ? DISCORDSERVICES_TOKEN
+      : `Bot ${DISCORDSERVICES_TOKEN}`;
     const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: DISCORDSERVICES_TOKEN,
+        Authorization: authHeader,
+        "User-Agent": "ObscureHolidayBot/1.0",
       },
       body: JSON.stringify({
         servers: serverCount,
@@ -293,10 +297,16 @@ async function postDiscordServicesStats() {
       }),
     });
     if (!res.ok) {
+      const text = await res.text();
       console.error(
         "Discord Services stats post failed:",
         res.status,
-        await res.text()
+        res.statusText,
+        text
+      );
+      console.error(
+        "Discord Services response headers:",
+        Object.fromEntries(res.headers.entries())
       );
     } else {
       console.log(`Posted stats to discordservices.net: ${serverCount} servers`);
