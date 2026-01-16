@@ -56,10 +56,38 @@ export const commandDefs = [
       },
     ],
   },
+  {
+    name: "fact",
+    description: "Get one fun fact (free)",
+    options: [
+      {
+        name: "name_or_date",
+        description: "Name or MM-DD (leave empty for today)",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+      },
+    ],
+  },
   { name: "invite", description: "Get the bot invite link" },
   { name: "support", description: "Get help/landing page link" },
   { name: "app", description: "Get the mobile app links" },
   { name: "slack", description: "Get the Slack bot link" },
+  {
+    name: "help",
+    description: "Show help",
+    options: [
+      {
+        name: "level",
+        description: "brief or full",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+        choices: [
+          { name: "Brief", value: "brief" },
+          { name: "Full", value: "full" },
+        ],
+      },
+    ],
+  },
   {
     name: "setup",
     description: "Configure daily posts (channel/time). Premium unlocks timezone/hour/branding toggles.",
@@ -138,11 +166,120 @@ export const commandDefs = [
         type: ApplicationCommandOptionType.Boolean,
         required: false,
       },
+      {
+        name: "filter_no_food",
+        description: "Premium: exclude food holidays",
+        type: ApplicationCommandOptionType.Boolean,
+        required: false,
+      },
+      {
+        name: "filter_no_religious",
+        description: "Premium: exclude religious holidays",
+        type: ApplicationCommandOptionType.Boolean,
+        required: false,
+      },
+      {
+        name: "filter_only_weird",
+        description: "Premium: only weird/absurd holidays",
+        type: ApplicationCommandOptionType.Boolean,
+        required: false,
+      },
+      {
+        name: "filter_only_international",
+        description: "Premium: only international holidays",
+        type: ApplicationCommandOptionType.Boolean,
+        required: false,
+      },
+      {
+        name: "filter_safe_mode",
+        description: "Premium: filter out sensitive themes",
+        type: ApplicationCommandOptionType.Boolean,
+        required: false,
+      },
+      {
+        name: "filter_blacklist",
+        description: "Premium: comma-separated keywords to exclude",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+      },
+      {
+        name: "surprise_days",
+        description: "Premium: enable wildcard surprise days (1–2 per month)",
+        type: ApplicationCommandOptionType.Boolean,
+        required: false,
+      },
+      {
+        name: "tone",
+        description: "Premium: daily mood/tone for posts",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+        choices: [
+          { name: "Wholesome", value: "wholesome" },
+          { name: "Silly", value: "silly" },
+          { name: "Nerdy", value: "nerdy" },
+          { name: "Historical", value: "historical" },
+          { name: "Global", value: "global" },
+        ],
+      },
+      {
+        name: "streak_role",
+        description: "Premium: role to grant when streak goal is reached",
+        type: ApplicationCommandOptionType.Role,
+        required: false,
+      },
+      {
+        name: "streak_goal",
+        description: "Premium: streak days required for the streak role",
+        type: ApplicationCommandOptionType.Integer,
+        required: false,
+      },
     ],
   },
   {
     name: "premium",
     description: "See premium status",
+  },
+  {
+    name: "analytics",
+    description: "Premium: view engagement analytics for this server",
+  },
+  {
+    name: "lore",
+    description: "Premium: manage server lore (anniversary, keywords, mini-holidays)",
+    options: [
+      {
+        name: "action",
+        description: "What do you want to do?",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+        choices: [
+          { name: "Set anniversary (MM-DD)", value: "set_anniversary" },
+          { name: "Add inside joke keyword", value: "add_keyword" },
+          { name: "Remove inside joke keyword", value: "remove_keyword" },
+          { name: "Add custom mini-holiday", value: "add_custom" },
+          { name: "Remove custom mini-holiday", value: "remove_custom" },
+          { name: "List lore", value: "list" },
+        ],
+      },
+      {
+        name: "value",
+        description: "Keyword or holiday name",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+      },
+      {
+        name: "date",
+        description: "MM-DD (for anniversary or custom holiday)",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+      },
+      {
+        name: "description",
+        description: "Short description (for custom holiday)",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+      },
+    ],
   },
   {
     name: "week",
@@ -202,5 +339,4 @@ export const commandDefs = [
     name: "installcount",
     description: "Owner-only: show how many servers this bot is in",
   },
-  { name: "help", description: "List commands" },
 ];
