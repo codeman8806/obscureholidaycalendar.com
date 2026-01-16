@@ -1196,7 +1196,7 @@ async function handleHelp(interaction) {
     return interaction.reply({
       content: [
         "ObscureHolidayBot quick help",
-        "/today, /tomorrow, /upcoming, /week",
+        "/today, /tomorrow, /upcoming, /week, /streak",
         "/setup, /analytics, /lore (premium/admin)",
         "/premium, /upgrade, /manage",
         "/help full — full command list",
@@ -1214,6 +1214,7 @@ async function handleHelp(interaction) {
       "/upcoming [days] — upcoming holidays (max 30)",
       "/week [days] — 7-day digest (3–14)",
       "/fact [name|MM-DD] — one fun fact (free)",
+      "/streak — show the server streak",
       "",
       "Premium content",
       "/date MM-DD — holiday on a date",
@@ -1242,6 +1243,7 @@ async function handleHelp(interaction) {
       "",
       "Tips",
       "Daily posts use the bot’s role permissions in that channel.",
+      "Streaks increment when someone reacts to the daily post; the first reaction per day counts.",
       "If streak roles or analytics aren’t working, check Manage Roles + Read Message History.",
     ].join("\n"),
     flags: MessageFlags.Ephemeral,
@@ -1507,6 +1509,21 @@ async function handleFact(interaction) {
     embed.setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
   }
   return interaction.reply({ embeds: [embed], components: buildButtons(holiday) });
+}
+
+async function handleStreak(interaction) {
+  const config = getGuildConfig(interaction.guild.id);
+  const count = config.streakCount || 0;
+  const best = config.streakBest || 0;
+  const lastAck = config.streakLastAckDate || "never";
+  return interaction.reply({
+    content: [
+      `🔥 Server streak: ${count} day${count === 1 ? "" : "s"} (best ${best})`,
+      `Last acknowledged: ${lastAck}`,
+      "Streaks count when someone reacts to the daily post. The first reaction per day counts; missed days reset the streak.",
+    ].join("\n"),
+    flags: MessageFlags.Ephemeral,
+  });
 }
 
 async function handleTomorrow(interaction) {
@@ -1935,6 +1952,8 @@ client.on("interactionCreate", async (interaction) => {
         return handleFacts(interaction);
       case "fact":
         return handleFact(interaction);
+      case "streak":
+        return handleStreak(interaction);
       case "setup":
         return handleSetup(interaction);
       case "premium":

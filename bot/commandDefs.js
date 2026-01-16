@@ -68,6 +68,7 @@ export const commandDefs = [
       },
     ],
   },
+  { name: "streak", description: "Show the server’s current streak" },
   { name: "invite", description: "Get the bot invite link" },
   { name: "support", description: "Get help/landing page link" },
   { name: "app", description: "Get the mobile app links" },
