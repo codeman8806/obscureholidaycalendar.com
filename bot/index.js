@@ -290,6 +290,9 @@ async function postDiscordServicesStats() {
         "Content-Type": "application/json",
         Authorization: authHeader,
         "User-Agent": "ObscureHolidayBot/1.0",
+        Accept: "application/json",
+        Origin: "https://www.obscureholidaycalendar.com",
+        Referer: "https://www.obscureholidaycalendar.com/",
       },
       body: JSON.stringify({
         servers: serverCount,
