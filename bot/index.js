@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import {
   Client,
   GatewayIntentBits,
+  Partials,
   EmbedBuilder,
   ActivityType,
   ActionRowBuilder,
@@ -104,6 +105,16 @@ const DEFAULT_EMBED_STYLE = "compact";
 const DEFAULT_TIMEZONE = "UTC";
 const PROMO_VOTE_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000; // once per week per guild
 const PROMO_RATE_INTERVAL_MS = 30 * 24 * 60 * 60 * 1000; // once per 30 days per guild
+const DEFAULT_STREAK_GOAL = 7;
+const FOLLOWUP_DELAY_MIN = Number(process.env.FOLLOWUP_DELAY_MIN || "45");
+const DEFAULT_TONE = "default";
+const ALLOWED_TONES = new Set(["wholesome", "silly", "nerdy", "historical", "global", "default"]);
+const MAX_ANALYTICS_HISTORY = 120;
+const FOOD_KEYWORDS = ["pizza", "burger", "chocolate", "cake", "coffee", "tea", "soup", "cheese", "ice cream", "taco", "donut", "bacon", "cookie", "bread", "pasta"];
+const RELIGIOUS_KEYWORDS = ["christmas", "easter", "ramadan", "hanukkah", "diwali", "yom kippur", "lent", "ash wednesday", "saint", "holy", "religious"];
+const WEIRD_KEYWORDS = ["weird", "absurd", "odd", "quirky", "strange", "silly", "goof", "bizarre", "random", "peculiar"];
+const INTERNATIONAL_KEYWORDS = ["international", "world", "global"];
+const SAFE_MODE_BLOCKLIST = ["adult", "sex", "drug", "alcohol", "beer", "wine", "weed", "marijuana", "violence", "gambling"];
 
 function readJsonSafe(filePath, fallback) {
   try {
@@ -493,6 +504,31 @@ function getGuildConfig(guildId) {
       hour: 0, // 00:00 UTC-ish
       branding: true,
       channelSettings: {},
+      streakCount: 0,
+      streakBest: 0,
+      streakLastAckDate: "",
+      streakRoleId: null,
+      streakRoleGoal: DEFAULT_STREAK_GOAL,
+      tone: DEFAULT_TONE,
+      analytics: { channels: {}, holidays: {}, history: [] },
+      filters: {
+        noFood: false,
+        noReligious: false,
+        onlyWeird: false,
+        onlyInternational: false,
+        safeMode: false,
+        blacklist: [],
+      },
+      surprise: {
+        enabled: true,
+        monthKey: "",
+        days: [],
+      },
+      lore: {
+        anniversary: "",
+        keywords: [],
+        customs: [],
+      },
     };
   }
   if (!Array.isArray(guildConfig[guildId].channelIds)) {
@@ -505,6 +541,58 @@ function getGuildConfig(guildId) {
   guildConfig[guildId].timezone = normalizeTimezone(guildConfig[guildId].timezone || DEFAULT_TIMEZONE);
   if (typeof guildConfig[guildId].holidayChoice !== "number") {
     guildConfig[guildId].holidayChoice = DEFAULT_HOLIDAY_CHOICE;
+  }
+  if (typeof guildConfig[guildId].streakCount !== "number") {
+    guildConfig[guildId].streakCount = 0;
+  }
+  if (typeof guildConfig[guildId].streakBest !== "number") {
+    guildConfig[guildId].streakBest = 0;
+  }
+  if (typeof guildConfig[guildId].streakLastAckDate !== "string") {
+    guildConfig[guildId].streakLastAckDate = "";
+  }
+  if (typeof guildConfig[guildId].streakRoleId !== "string") {
+    guildConfig[guildId].streakRoleId = null;
+  }
+  if (typeof guildConfig[guildId].tone !== "string") {
+    guildConfig[guildId].tone = DEFAULT_TONE;
+  }
+  if (!ALLOWED_TONES.has(guildConfig[guildId].tone)) {
+    guildConfig[guildId].tone = DEFAULT_TONE;
+  }
+  if (!guildConfig[guildId].analytics) {
+    guildConfig[guildId].analytics = { channels: {}, holidays: {}, history: [] };
+  }
+  if (!guildConfig[guildId].analytics.channels) guildConfig[guildId].analytics.channels = {};
+  if (!guildConfig[guildId].analytics.holidays) guildConfig[guildId].analytics.holidays = {};
+  if (!Array.isArray(guildConfig[guildId].analytics.history)) guildConfig[guildId].analytics.history = [];
+  if (!guildConfig[guildId].filters) {
+    guildConfig[guildId].filters = {
+      noFood: false,
+      noReligious: false,
+      onlyWeird: false,
+      onlyInternational: false,
+      safeMode: false,
+      blacklist: [],
+    };
+  }
+  if (!Array.isArray(guildConfig[guildId].filters.blacklist)) {
+    guildConfig[guildId].filters.blacklist = [];
+  }
+  if (!guildConfig[guildId].surprise) {
+    guildConfig[guildId].surprise = { enabled: true, monthKey: "", days: [] };
+  }
+  if (typeof guildConfig[guildId].surprise.enabled !== "boolean") {
+    guildConfig[guildId].surprise.enabled = true;
+  }
+  if (!Array.isArray(guildConfig[guildId].surprise.days)) guildConfig[guildId].surprise.days = [];
+  if (!guildConfig[guildId].lore) {
+    guildConfig[guildId].lore = { anniversary: "", keywords: [], customs: [] };
+  }
+  if (!Array.isArray(guildConfig[guildId].lore.keywords)) guildConfig[guildId].lore.keywords = [];
+  if (!Array.isArray(guildConfig[guildId].lore.customs)) guildConfig[guildId].lore.customs = [];
+  if (!guildConfig[guildId].streakRoleGoal || typeof guildConfig[guildId].streakRoleGoal !== "number") {
+    guildConfig[guildId].streakRoleGoal = DEFAULT_STREAK_GOAL;
   }
   if (typeof guildConfig[guildId].promotionsEnabled !== "boolean") {
     guildConfig[guildId].promotionsEnabled = true;
@@ -532,6 +620,7 @@ function formatSetupLog(config, channelId) {
   const hour = Number.isInteger(channelSettings.hour) ? channelSettings.hour : config.hour || 0;
   const branding = channelSettings.branding ?? config.branding ?? true;
   const holidayChoice = Number.isInteger(channelSettings.holidayChoice) ? channelSettings.holidayChoice : config.holidayChoice;
+  const tone = config.tone || DEFAULT_TONE;
   const promotionsEnabled = config.promotionsEnabled !== false;
   const payload = {
     channels: channelIds,
@@ -539,6 +628,9 @@ function formatSetupLog(config, channelId) {
     hour,
     branding,
     holidayChoice,
+    tone,
+    streakRoleId: config.streakRoleId || null,
+    streakRoleGoal: config.streakRoleGoal || DEFAULT_STREAK_GOAL,
     roleId: channelSettings.roleId || null,
     quiet: channelSettings.quiet || false,
     style: channelSettings.style || DEFAULT_EMBED_STYLE,
@@ -577,7 +669,343 @@ function getChannelConfig(guildId, channelId) {
     style: channelSettings.style || DEFAULT_EMBED_STYLE,
     color: channelSettings.color || null,
     skipWeekends: channelSettings.skipWeekends || false,
+    lastPostMessageId: channelSettings.lastPostMessageId || null,
+    lastPostDateKey: channelSettings.lastPostDateKey || "",
+    tone: base.tone || DEFAULT_TONE,
   };
+}
+
+function normalizeTone(tone) {
+  if (!tone) return DEFAULT_TONE;
+  return ALLOWED_TONES.has(tone) ? tone : DEFAULT_TONE;
+}
+
+function applyToneToDescription(desc, tone) {
+  if (!desc) return desc;
+  switch (tone) {
+    case "wholesome":
+      return `A gentle, feel-good moment today. ${desc}`;
+    case "silly":
+      return `Leaning into the playful side today. ${desc}`;
+    case "nerdy":
+      return `Quick knowledge drop for today. ${desc}`;
+    case "historical":
+      return `A nod to history and context today. ${desc}`;
+    case "global":
+      return `A global perspective for today. ${desc}`;
+    default:
+      return desc;
+  }
+}
+
+function pickHolidayForTone(hits, tone, fallbackIndex) {
+  if (!hits || !hits.length) return null;
+  if (hits.length === 1) return hits[0];
+  const normalized = normalizeTone(tone);
+  const candidates = hits.map((h) => {
+    const name = (h.name || "").toLowerCase();
+    const desc = (h.description || "").toLowerCase();
+    let score = 0;
+    if (normalized === "global") {
+      if (name.includes("international") || name.includes("world") || desc.includes("global")) score += 2;
+    }
+    if (normalized === "historical") {
+      if (desc.includes("history") || desc.includes("historical") || desc.includes("founded")) score += 2;
+    }
+    if (normalized === "nerdy") {
+      if (desc.includes("science") || desc.includes("technology") || desc.includes("math")) score += 2;
+    }
+    if (normalized === "silly") {
+      if (name.includes("fun") || name.includes("silly") || name.includes("weird")) score += 1;
+    }
+    if (normalized === "wholesome") {
+      if (desc.includes("community") || desc.includes("kind") || desc.includes("care")) score += 1;
+    }
+    return { score, holiday: h };
+  });
+  candidates.sort((a, b) => b.score - a.score);
+  if (candidates[0].score > 0) return candidates[0].holiday;
+  return hits[Math.min(Math.max(fallbackIndex || 0, 0), hits.length - 1)];
+}
+
+function pickRandomItem(items) {
+  if (!items || !items.length) return null;
+  return items[Math.floor(Math.random() * items.length)];
+}
+
+function normalizeFilterList(value) {
+  if (!value) return [];
+  return value
+    .split(",")
+    .map((item) => item.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+function hasActiveFilters(filters) {
+  if (!filters) return false;
+  return (
+    filters.noFood ||
+    filters.noReligious ||
+    filters.onlyWeird ||
+    filters.onlyInternational ||
+    filters.safeMode ||
+    (filters.blacklist && filters.blacklist.length > 0)
+  );
+}
+
+function matchesKeyword(text, keywords) {
+  return keywords.some((kw) => text.includes(kw));
+}
+
+function filterHoliday(holiday, filters) {
+  if (!filters) return true;
+  const text = `${holiday.name || ""} ${holiday.description || ""}`.toLowerCase();
+  if (filters.onlyInternational && !matchesKeyword(text, INTERNATIONAL_KEYWORDS)) return false;
+  if (filters.onlyWeird && !matchesKeyword(text, WEIRD_KEYWORDS)) return false;
+  if (filters.noFood && matchesKeyword(text, FOOD_KEYWORDS)) return false;
+  if (filters.noReligious && matchesKeyword(text, RELIGIOUS_KEYWORDS)) return false;
+  if (filters.safeMode && matchesKeyword(text, SAFE_MODE_BLOCKLIST)) return false;
+  if (filters.blacklist && filters.blacklist.length && matchesKeyword(text, filters.blacklist)) return false;
+  return true;
+}
+
+function applyHolidayFilters(hits, filters) {
+  return (hits || []).filter((h) => filterHoliday(h, filters));
+}
+
+function isWeirdHoliday(holiday) {
+  const text = `${holiday.name || ""} ${holiday.description || ""}`.toLowerCase();
+  return matchesKeyword(text, WEIRD_KEYWORDS);
+}
+
+function buildMonthKey(dateKey) {
+  return dateKey.slice(0, 7);
+}
+
+function pickSurpriseDays(monthKey, count) {
+  const [yearStr, monthStr] = monthKey.split("-");
+  const year = Number(yearStr);
+  const month = Number(monthStr);
+  const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  const picks = new Set();
+  while (picks.size < count && picks.size < daysInMonth) {
+    picks.add(Math.floor(Math.random() * daysInMonth) + 1);
+  }
+  return [...picks]
+    .sort((a, b) => a - b)
+    .map((day) => `${monthKey}-${String(day).padStart(2, "0")}`);
+}
+
+function maybePickWildcardHoliday(config, dateKey) {
+  if (!config.surprise?.enabled) return null;
+  const monthKey = buildMonthKey(dateKey);
+  if (config.surprise.monthKey !== monthKey || !config.surprise.days.length) {
+    const count = Math.random() < 0.5 ? 1 : 2;
+    config.surprise.monthKey = monthKey;
+    config.surprise.days = pickSurpriseDays(monthKey, count);
+    saveGuildConfig();
+  }
+  if (!config.surprise.days.includes(dateKey)) return null;
+
+  const filtered = applyHolidayFilters(allHolidays, config.filters);
+  if (!filtered.length && hasActiveFilters(config.filters)) return null;
+  const pool = filtered.length ? filtered : allHolidays;
+  const weirdPool = pool.filter(isWeirdHoliday);
+  return pickRandomItem(weirdPool.length ? weirdPool : pool);
+}
+
+function buildLoreLines(config, dateKey) {
+  const lines = [];
+  const lore = config.lore || {};
+  if (lore.anniversary && lore.anniversary === dateKey.slice(5)) {
+    lines.push("🎉 Server anniversary today!");
+  }
+  if (Array.isArray(lore.customs)) {
+    const customsToday = lore.customs.filter((c) => c.date === dateKey.slice(5));
+    for (const c of customsToday) {
+      lines.push(`Server lore: ${c.name}${c.description ? ` — ${c.description}` : ""}`);
+    }
+  }
+  if (Array.isArray(lore.keywords) && lore.keywords.length && Math.random() < 0.25) {
+    const keyword = pickRandomItem(lore.keywords);
+    if (keyword) lines.push(`Server lore: This feels like a good day for ${keyword}.`);
+  }
+  return lines;
+}
+
+function recordPostAnalytics(config, channelId, dateKey, hour, holiday) {
+  const analytics = config.analytics || { channels: {}, holidays: {}, history: [] };
+  if (!analytics.channels) analytics.channels = {};
+  if (!analytics.holidays) analytics.holidays = {};
+  if (!Array.isArray(analytics.history)) analytics.history = [];
+
+  const channelStats = analytics.channels[channelId] || { posts: 0, reactions: 0 };
+  channelStats.posts += 1;
+  analytics.channels[channelId] = channelStats;
+
+  const slug = holiday.slug || slugify(holiday.name || "holiday");
+  const holidayStats = analytics.holidays[slug] || { name: holiday.name || slug, reactions: 0 };
+  analytics.holidays[slug] = holidayStats;
+
+  analytics.history.push({
+    dateKey,
+    channelId,
+    slug,
+    name: holiday.name || slug,
+    reactions: 0,
+    hour,
+  });
+  if (analytics.history.length > MAX_ANALYTICS_HISTORY) {
+    analytics.history = analytics.history.slice(-MAX_ANALYTICS_HISTORY);
+  }
+  config.analytics = analytics;
+}
+
+function recordReactionAnalytics(config, channelId, dateKey) {
+  const analytics = config.analytics;
+  if (!analytics) return;
+  if (!analytics.channels) analytics.channels = {};
+  if (!analytics.holidays) analytics.holidays = {};
+  if (!Array.isArray(analytics.history)) analytics.history = [];
+
+  const channelStats = analytics.channels[channelId] || { posts: 0, reactions: 0 };
+  channelStats.reactions += 1;
+  analytics.channels[channelId] = channelStats;
+
+  const settings = config.channelSettings?.[channelId] || {};
+  const slug = settings.lastPostSlug;
+  const name = settings.lastPostName || slug;
+  if (slug) {
+    const holidayStats = analytics.holidays[slug] || { name: name || slug, reactions: 0 };
+    holidayStats.reactions += 1;
+    analytics.holidays[slug] = holidayStats;
+  }
+
+  for (let i = analytics.history.length - 1; i >= 0; i -= 1) {
+    const entry = analytics.history[i];
+    if (entry.channelId === channelId && entry.dateKey === dateKey) {
+      entry.reactions += 1;
+      break;
+    }
+  }
+  config.analytics = analytics;
+}
+
+function buildMicroPrompt(holiday, tone) {
+  const name = holiday?.name || "today’s holiday";
+  const emoji = holiday?.emoji ? `${holiday.emoji} ` : "";
+  const normalized = normalizeTone(tone);
+  const prompts = {
+    wholesome: [
+      `${emoji}Share a kind or uplifting way to mark ${name}.`,
+      `${emoji}What’s a small, feel-good way to celebrate ${name}?`,
+    ],
+    silly: [
+      `${emoji}Drop your silliest idea for celebrating ${name}.`,
+      `${emoji}What’s the most ridiculous way to mark ${name}?`,
+    ],
+    nerdy: [
+      `${emoji}Share a nerdy fact or stat about ${name}.`,
+      `${emoji}What’s a technical or behind-the-scenes angle on ${name}?`,
+    ],
+    historical: [
+      `${emoji}Know a historical tidbit related to ${name}?`,
+      `${emoji}What’s the origin story behind ${name}?`,
+    ],
+    global: [
+      `${emoji}How is ${name} observed around the world?`,
+      `${emoji}Share a cultural tradition tied to ${name}.`,
+    ],
+    default: [
+      `${emoji}React if you’ve celebrated ${name} before.`,
+      `${emoji}What’s your go-to way to mark ${name}?`,
+      `${emoji}Reply with a quick fact or memory about ${name}.`,
+      `${emoji}If you had a 10-minute celebration for ${name}, what would you do?`,
+      `${emoji}Drop a themed emoji if ${name} fits your vibe today.`,
+    ],
+  };
+  const pool = prompts[normalized] || prompts.default;
+  return pickRandomItem(pool);
+}
+
+async function scheduleDidYouKnow(channel, messageId, holiday) {
+  const fact = pickRandomItem(holiday?.funFacts || []);
+  if (!fact) return;
+  const delayMs = Math.max(5, FOLLOWUP_DELAY_MIN) * 60 * 1000;
+  setTimeout(async () => {
+    try {
+      const msg = messageId ? await channel.messages.fetch(messageId) : null;
+      const content = `Did you know? ${fact}`;
+      if (msg) {
+        await msg.reply({ content, allowedMentions: { repliedUser: false } });
+      } else {
+        await channel.send({ content });
+      }
+    } catch (e) {
+      console.warn("Did-you-know follow-up failed:", e.message);
+    }
+  }, delayMs);
+}
+
+function getDateKey(date, timeZone) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+}
+
+function previousDateKey(dateKey) {
+  const [year, month, day] = dateKey.split("-").map((n) => Number(n));
+  const date = new Date(Date.UTC(year, month - 1, day - 1));
+  return date.toISOString().slice(0, 10);
+}
+
+async function maybeAssignStreakRole(guild, member, roleId) {
+  if (!roleId || !guild || !member) return;
+  const role = guild.roles.cache.get(roleId);
+  if (!role) return;
+  const me = guild.members.me;
+  if (!me) return;
+  if (!me.permissions.has(PermissionsBitField.Flags.ManageRoles)) return;
+  if (role.position >= me.roles.highest.position) return;
+  if (member.roles.cache.has(roleId)) return;
+  try {
+    await member.roles.add(roleId);
+  } catch (e) {
+    console.warn("Failed to assign streak role:", e.message);
+  }
+}
+
+async function recordGuildStreak(guildId, channelId, userId) {
+  const config = getGuildConfig(guildId);
+  const channelSettings = config.channelSettings?.[channelId] || {};
+  const dateKey = channelSettings.lastPostDateKey || getDateKey(new Date(), channelSettings.timezone || DEFAULT_TIMEZONE);
+  if (!dateKey) return;
+  if (config.streakLastAckDate === dateKey) return;
+
+  const expectedPrev = previousDateKey(dateKey);
+  if (config.streakLastAckDate === expectedPrev) {
+    config.streakCount = Math.max(1, (config.streakCount || 0) + 1);
+  } else {
+    config.streakCount = 1;
+  }
+  config.streakLastAckDate = dateKey;
+  if (config.streakCount > (config.streakBest || 0)) config.streakBest = config.streakCount;
+  saveGuildConfig();
+
+  const guild = client.guilds.cache.get(guildId);
+  if (!guild) return;
+  if (!isPremiumGuild(guild)) return;
+  if (!config.streakRoleId || config.streakCount < (config.streakRoleGoal || DEFAULT_STREAK_GOAL)) return;
+
+  try {
+    const member = await guild.members.fetch(userId);
+    await maybeAssignStreakRole(guild, member, config.streakRoleId);
+  } catch (e) {
+    console.warn("Failed to grant streak role:", e.message);
+  }
 }
 
 function slugify(text) {
@@ -705,7 +1133,8 @@ function buildEmbed(h, options = {}) {
   const date = h.date || "??-??";
   const fullDesc = h.description || "";
   const style = options.style || DEFAULT_EMBED_STYLE;
-  const desc = style === "rich" ? fullDesc.slice(0, 1200) : fullDesc.slice(0, 500);
+  const rawDesc = style === "rich" ? fullDesc.slice(0, 1200) : fullDesc.slice(0, 500);
+  const desc = applyToneToDescription(rawDesc, normalizeTone(options.tone));
   const facts = Array.isArray(h.funFacts)
     ? h.funFacts.slice(0, style === "rich" ? 5 : 3)
     : [];
@@ -752,50 +1181,84 @@ async function handleToday(interaction) {
   if (!hits.length) return interaction.reply({ content: "No holiday found for today.", flags: MessageFlags.Ephemeral });
   const premium = isPremium(interaction.guild, interaction.member);
   const config = getGuildConfig(interaction.guild.id);
+  const filtered = premium ? applyHolidayFilters(hits, config.filters) : hits;
+  if (!filtered.length) {
+    return interaction.reply({ content: "No holiday found for today with current filters.", flags: MessageFlags.Ephemeral });
+  }
   const requested = interaction.options.getInteger("holiday_choice");
   let choice = 0;
   if (premium) {
     if (Number.isInteger(requested)) {
-      choice = Math.min(Math.max(requested, 0), hits.length - 1);
+      choice = Math.min(Math.max(requested, 0), filtered.length - 1);
     } else {
-      choice = Math.min(config.holidayChoice || 0, hits.length - 1);
+      choice = Math.min(config.holidayChoice || 0, filtered.length - 1);
     }
   } else {
     choice = 0; // free tier: first holiday only
   }
-  const pick = hits[choice] || hits[0];
+  const pick = pickHolidayForTone(filtered, config.tone, choice) || filtered[choice] || filtered[0];
   const baseComponents = buildButtons(pick);
   const { rows: promoRows, note: promoNote } = buildPromoComponents(interaction.guild.id, { includeRate: false, forceVote: true });
   return interaction.reply({
     content: promoNote || undefined,
-    embeds: [buildEmbed(pick, { branding: !premium || config.branding })],
+    embeds: [buildEmbed(pick, { branding: !premium || config.branding, tone: config.tone })],
     components: [...baseComponents, ...promoRows],
   });
 }
 
 async function handleHelp(interaction) {
+  const level = interaction.options.getString("level") || "full";
+  if (level === "brief") {
+    return interaction.reply({
+      content: [
+        "ObscureHolidayBot quick help",
+        "/today, /tomorrow, /upcoming, /week",
+        "/setup, /analytics, /lore (premium/admin)",
+        "/premium, /upgrade, /manage",
+        "/help full — full command list",
+      ].join("\n"),
+      flags: MessageFlags.Ephemeral,
+    });
+  }
   return interaction.reply({
     content: [
-      "Holiday bot slash commands:",
+      "ObscureHolidayBot help (slash commands)",
+      "",
+      "Basics (free)",
       "/today — today’s holiday",
-      "/date MM-DD — holiday on a date (premium)",
-      "/search <query> — find matching holidays (premium)",
-      "/random — surprise me (premium)",
-      "/facts <name|MM-DD> — quick fun facts (premium)",
-      "/invite — invite the bot",
-      "/support — help/landing page",
+      "/tomorrow — tomorrow’s holiday",
+      "/upcoming [days] — upcoming holidays (max 30)",
+      "/week [days] — 7-day digest (3–14)",
+      "/fact [name|MM-DD] — one fun fact (free)",
+      "",
+      "Premium content",
+      "/date MM-DD — holiday on a date",
+      "/search <query> — find matching holidays",
+      "/random — surprise me",
+      "/facts [name|MM-DD] — fun facts (multiple)",
+      "",
+      "Setup & admin",
+      "/setup — configure daily posts",
+      "  free: channel",
+      "  premium: timezone, hour, branding, holiday_choice, role_mention, quiet, promotions, embed_style, embed_color, skip_weekends",
+      "  premium extras: tone, streak_role, streak_goal, filters, blacklist, surprise_days",
+      "/analytics — engagement analytics (premium, admin)",
+      "/lore — server lore (premium, admin)",
+      "",
+      "Account & support",
+      "/premium — check premium status",
+      "/upgrade — start premium checkout",
+      "/manage — manage billing",
       "/vote — vote on top.gg",
       "/rate — leave a review on top.gg",
+      "/support — help/landing page",
+      "/invite — invite the bot",
       "/app — mobile app links",
       "/slack — Slack bot link",
-      "/setup — configure daily posts (premium unlocks time/timezone/branding)",
-      "/premium — check your premium status",
-      "/upgrade — start a premium checkout",
-      "/manage — manage/cancel premium (billing portal)",
-      "/tomorrow — tomorrow’s holiday",
-      "/upcoming — upcoming holidays",
-      "/week — 7-day digest",
-      "/help — list commands",
+      "",
+      "Tips",
+      "Daily posts use the bot’s role permissions in that channel.",
+      "If streak roles or analytics aren’t working, check Manage Roles + Read Message History.",
     ].join("\n"),
     flags: MessageFlags.Ephemeral,
   });
@@ -834,10 +1297,10 @@ async function handleDate(interaction) {
   const input = interaction.options.getString("date", true);
   const parsed = parseDate(input);
   if (!parsed) return interaction.reply({ content: "Please provide a date as MM-DD or MM/DD (example: 07-04).", flags: MessageFlags.Ephemeral });
-  const hits = findByDate(parsed);
-  if (!hits.length) return interaction.reply({ content: `No holidays found on ${parsed}.`, flags: MessageFlags.Ephemeral });
   const config = getGuildConfig(interaction.guild.id);
-  return interaction.reply({ embeds: [buildEmbed(hits[0], { branding: config.branding })], components: buildButtons(hits[0]) });
+  const hits = applyHolidayFilters(findByDate(parsed), config.filters);
+  if (!hits.length) return interaction.reply({ content: `No holidays found on ${parsed} with current filters.`, flags: MessageFlags.Ephemeral });
+  return interaction.reply({ embeds: [buildEmbed(hits[0], { branding: config.branding, tone: config.tone })], components: buildButtons(hits[0]) });
 }
 
 async function handleSearch(interaction) {
@@ -845,10 +1308,10 @@ async function handleSearch(interaction) {
     return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /search.", flags: MessageFlags.Ephemeral });
   }
   const query = interaction.options.getString("query", true);
-  const matches = findByName(query);
-  if (!matches.length) return interaction.reply({ content: "No match. Try a simpler phrase.", flags: MessageFlags.Ephemeral });
   const config = getGuildConfig(interaction.guild.id);
-  const embeds = matches.slice(0, 3).map((h) => buildEmbed(h, { branding: config.branding }));
+  const matches = applyHolidayFilters(findByName(query), config.filters);
+  if (!matches.length) return interaction.reply({ content: "No match. Try a simpler phrase.", flags: MessageFlags.Ephemeral });
+  const embeds = matches.slice(0, 3).map((h) => buildEmbed(h, { branding: config.branding, tone: config.tone }));
   return interaction.reply({ embeds, components: buildButtons(matches[0]) });
 }
 
@@ -856,9 +1319,10 @@ async function handleRandom(interaction) {
   if (!isPremium(interaction.guild, interaction.member)) {
     return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /random.", flags: MessageFlags.Ephemeral });
   }
-  const h = pickRandom();
   const config = getGuildConfig(interaction.guild.id);
-  return interaction.reply({ embeds: [buildEmbed(h, { branding: config.branding })], components: buildButtons(h) });
+  const filtered = applyHolidayFilters(allHolidays, config.filters);
+  const h = pickRandomItem(filtered.length ? filtered : allHolidays);
+  return interaction.reply({ embeds: [buildEmbed(h, { branding: config.branding, tone: config.tone })], components: buildButtons(h) });
 }
 
 async function handleWeek(interaction) {
@@ -897,6 +1361,16 @@ async function handleSetup(interaction) {
   const embedStyle = interaction.options.getString("embed_style");
   const embedColor = interaction.options.getString("embed_color");
   const skipWeekends = interaction.options.getBoolean("skip_weekends");
+  const tone = interaction.options.getString("tone");
+  const filterNoFood = interaction.options.getBoolean("filter_no_food");
+  const filterNoReligious = interaction.options.getBoolean("filter_no_religious");
+  const filterOnlyWeird = interaction.options.getBoolean("filter_only_weird");
+  const filterOnlyInternational = interaction.options.getBoolean("filter_only_international");
+  const filterSafeMode = interaction.options.getBoolean("filter_safe_mode");
+  const filterBlacklist = interaction.options.getString("filter_blacklist");
+  const surpriseDays = interaction.options.getBoolean("surprise_days");
+  const streakRole = interaction.options.getRole("streak_role");
+  const streakGoal = interaction.options.getInteger("streak_goal");
   const promotionsEnabled = interaction.options.getBoolean("promotions");
   const premium = isPremium(interaction.guild, interaction.member);
 
@@ -930,6 +1404,14 @@ async function handleSetup(interaction) {
   }
   if (!config.channelSettings) config.channelSettings = {};
   const ch = config.channelSettings[channel.id] || {};
+  if (tone) config.tone = normalizeTone(tone);
+  if (typeof filterNoFood === "boolean") config.filters.noFood = filterNoFood;
+  if (typeof filterNoReligious === "boolean") config.filters.noReligious = filterNoReligious;
+  if (typeof filterOnlyWeird === "boolean") config.filters.onlyWeird = filterOnlyWeird;
+  if (typeof filterOnlyInternational === "boolean") config.filters.onlyInternational = filterOnlyInternational;
+  if (typeof filterSafeMode === "boolean") config.filters.safeMode = filterSafeMode;
+  if (typeof filterBlacklist === "string") config.filters.blacklist = normalizeFilterList(filterBlacklist);
+  if (typeof surpriseDays === "boolean") config.surprise.enabled = surpriseDays;
   if (tz) {
     if (!isValidTimezone(tz)) {
       return interaction.reply({ content: "Timezone not recognized. Please use an IANA timezone like America/New_York.", flags: MessageFlags.Ephemeral });
@@ -947,6 +1429,8 @@ async function handleSetup(interaction) {
     ch.color = Number.parseInt(embedColor.replace("#", ""), 16);
   }
   if (typeof skipWeekends === "boolean") ch.skipWeekends = skipWeekends;
+  if (streakRole) config.streakRoleId = streakRole.id;
+  if (Number.isInteger(streakGoal) && streakGoal > 0) config.streakRoleGoal = streakGoal;
   config.channelSettings[channel.id] = ch;
 
   saveGuildConfig();
@@ -960,6 +1444,19 @@ async function handleSetup(interaction) {
       `Branding: ${ch.branding === false ? "off" : "on"}`,
       `Holiday pick: ${ch.holidayChoice === 1 ? "Holiday #2 (second of the day)" : "Holiday #1 (first of the day)"}`,
       role ? `Role ping: <@&${role.id}>` : "Role ping: none",
+      `Tone: ${config.tone || DEFAULT_TONE}`,
+      `Surprise days: ${config.surprise.enabled ? "on" : "off"}`,
+      `Filters: ${[
+        config.filters.noFood ? "no food" : null,
+        config.filters.noReligious ? "no religious" : null,
+        config.filters.onlyWeird ? "only weird" : null,
+        config.filters.onlyInternational ? "only international" : null,
+        config.filters.safeMode ? "safe mode" : null,
+      ]
+        .filter(Boolean)
+        .join(", ") || "none"}`,
+      config.filters.blacklist.length ? `Blacklist: ${config.filters.blacklist.join(", ")}` : "Blacklist: none",
+      config.streakRoleId ? `Streak role: <@&${config.streakRoleId}> (goal ${config.streakRoleGoal} days)` : "Streak role: none",
       `Quiet mode: ${ch.quiet ? "on" : "off"}`,
       `Skip weekends: ${ch.skipWeekends ? "yes" : "no"}`,
       `Promotions: ${config.promotionsEnabled === false ? "off" : "on (weekly vote / monthly review)"}`,
@@ -991,6 +1488,35 @@ async function handleFacts(interaction) {
   const embed = new EmbedBuilder()
     .setTitle(`${holiday.emoji ? holiday.emoji + " " : ""}${holiday.name || "Holiday"} — fun facts`)
     .setDescription(facts.map((f) => `• ${f}`).join("\n"))
+    .setColor(0xff7a3c);
+  const premium = isPremium(interaction.guild, interaction.member);
+  if (!premium || getGuildConfig(interaction.guild.id).branding) {
+    embed.setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
+  }
+  return interaction.reply({ embeds: [embed], components: buildButtons(holiday) });
+}
+
+async function handleFact(interaction) {
+  const target = interaction.options.getString("name_or_date", false) || "today";
+  let holiday = null;
+  const asDate = parseDate(target);
+  if (asDate) {
+    holiday = (findByDate(asDate)[0]) || null;
+  } else if (target === "today") {
+    const now = new Date();
+    const mmdd = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+    holiday = (findByDate(mmdd)[0]) || null;
+  } else {
+    holiday = findByName(target)[0] || null;
+  }
+
+  if (!holiday) return interaction.reply({ content: "Couldn't find a fact for that. Try 12-25 or \"bacon\".", flags: MessageFlags.Ephemeral });
+  const facts = Array.isArray(holiday.funFacts) ? holiday.funFacts : [];
+  const fact = pickRandomItem(facts);
+  if (!fact) return interaction.reply({ content: "No fun facts on file for that one.", flags: MessageFlags.Ephemeral });
+  const embed = new EmbedBuilder()
+    .setTitle(`${holiday.emoji ? holiday.emoji + " " : ""}${holiday.name || "Holiday"} — fun fact`)
+    .setDescription(fact)
     .setColor(0xff7a3c);
   const premium = isPremium(interaction.guild, interaction.member);
   if (!premium || getGuildConfig(interaction.guild.id).branding) {
@@ -1043,6 +1569,9 @@ async function handlePremiumStatus(interaction) {
     "✅ Per-channel role pings & quiet mode",
     "✅ Rich/compact embeds, custom color",
     "✅ Skip-weekends scheduling",
+    "✅ Streak role rewards",
+    "✅ Mood/tone selector",
+    "✅ Holiday filters & server lore",
   ];
 
   if (premium) {
@@ -1089,6 +1618,179 @@ async function handlePremiumStatus(interaction) {
       ),
     ],
   });
+}
+
+async function handleAnalytics(interaction) {
+  if (!interaction.guild) {
+    return interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
+  }
+  const premium = isPremium(interaction.guild, interaction.member);
+  if (!premium) {
+    return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /analytics.", flags: MessageFlags.Ephemeral });
+  }
+  if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild)) {
+    return interaction.reply({ content: "Admins only (Manage Server).", flags: MessageFlags.Ephemeral });
+  }
+
+  const config = getGuildConfig(interaction.guild.id);
+  const analytics = config.analytics || { channels: {}, holidays: {}, history: [] };
+  const history = Array.isArray(analytics.history) ? analytics.history : [];
+
+  const last7 = history.slice(-7);
+  const prev7 = history.slice(-14, -7);
+  const sum = (arr) => arr.reduce((acc, item) => acc + (item.reactions || 0), 0);
+  const last7Total = sum(last7);
+  const prev7Total = sum(prev7);
+  const trend = prev7Total > 0 ? Math.round(((last7Total - prev7Total) / prev7Total) * 100) : null;
+
+  const channelEntries = Object.entries(analytics.channels || {})
+    .map(([channelId, stats]) => ({
+      channelId,
+      posts: stats.posts || 0,
+      reactions: stats.reactions || 0,
+      avg: stats.posts ? stats.reactions / stats.posts : 0,
+    }))
+    .sort((a, b) => b.avg - a.avg);
+
+  const holidayEntries = Object.entries(analytics.holidays || {})
+    .map(([slug, stats]) => ({
+      slug,
+      name: stats.name || slug,
+      reactions: stats.reactions || 0,
+    }))
+    .sort((a, b) => b.reactions - a.reactions)
+    .slice(0, 3);
+
+  const hourBuckets = {};
+  for (const entry of history) {
+    const hour = entry.hour ?? null;
+    if (hour === null) continue;
+    if (!hourBuckets[hour]) hourBuckets[hour] = { reactions: 0, posts: 0 };
+    hourBuckets[hour].reactions += entry.reactions || 0;
+    hourBuckets[hour].posts += 1;
+  }
+  const bestHour = Object.entries(hourBuckets)
+    .map(([hour, stats]) => ({
+      hour: Number(hour),
+      avg: stats.posts ? stats.reactions / stats.posts : 0,
+    }))
+    .sort((a, b) => b.avg - a.avg)[0];
+
+  const embed = new EmbedBuilder()
+    .setTitle("Server Engagement Analytics")
+    .setColor(DEFAULT_EMBED_COLOR)
+    .setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
+
+  embed.addFields([
+    {
+      name: "Best posting time",
+      value: bestHour ? `${bestHour.hour}:00 (avg ${bestHour.avg.toFixed(1)} reactions/post)` : "Not enough data yet",
+    },
+    {
+      name: "Top holidays by reactions",
+      value: holidayEntries.length
+        ? holidayEntries.map((h) => `${h.name} (${h.reactions})`).join("\n")
+        : "Not enough data yet",
+    },
+    {
+      name: "Top channels",
+      value: channelEntries.length
+        ? channelEntries
+            .slice(0, 3)
+            .map((c) => `<#${c.channelId}> — ${c.avg.toFixed(1)} avg (${c.reactions} reactions / ${c.posts} posts)`)
+            .join("\n")
+        : "Not enough data yet",
+    },
+    {
+      name: "Engagement trend",
+      value:
+        trend === null
+          ? "Not enough data yet"
+          : `${trend >= 0 ? "▲" : "▼"} ${Math.abs(trend)}% vs previous 7 days (${last7Total} vs ${prev7Total})`,
+    },
+  ]);
+
+  if (last7Total === 0 && history.length >= 7) {
+    embed.addFields([{ name: "Channel health", value: "📉 Quiet week detected. Try a more playful tone tomorrow." }]);
+  } else if (trend !== null && trend < -20) {
+    embed.addFields([{ name: "Channel health", value: "📉 Engagement is down this week. Try a fun holiday tomorrow?" }]);
+  }
+
+  return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
+}
+
+async function handleLore(interaction) {
+  if (!interaction.guild) {
+    return interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
+  }
+  const premium = isPremium(interaction.guild, interaction.member);
+  if (!premium) {
+    return interaction.reply({ content: "Premium only. Upgrade with /upgrade to use /lore.", flags: MessageFlags.Ephemeral });
+  }
+  if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild)) {
+    return interaction.reply({ content: "Admins only (Manage Server).", flags: MessageFlags.Ephemeral });
+  }
+
+  const action = interaction.options.getString("action", true);
+  const value = interaction.options.getString("value");
+  const dateInput = interaction.options.getString("date");
+  const description = interaction.options.getString("description");
+  const config = getGuildConfig(interaction.guild.id);
+  const lore = config.lore;
+
+  if (action === "set_anniversary") {
+    const parsed = parseDate(dateInput || "");
+    if (!parsed) return interaction.reply({ content: "Provide a date as MM-DD for the anniversary.", flags: MessageFlags.Ephemeral });
+    lore.anniversary = parsed;
+    saveGuildConfig();
+    return interaction.reply({ content: `Server anniversary set to ${parsed}.`, flags: MessageFlags.Ephemeral });
+  }
+
+  if (action === "add_keyword") {
+    if (!value) return interaction.reply({ content: "Provide a keyword or phrase.", flags: MessageFlags.Ephemeral });
+    const clean = value.trim();
+    if (!clean) return interaction.reply({ content: "Provide a keyword or phrase.", flags: MessageFlags.Ephemeral });
+    if (!lore.keywords.includes(clean)) lore.keywords.push(clean);
+    saveGuildConfig();
+    return interaction.reply({ content: `Added lore keyword: ${clean}`, flags: MessageFlags.Ephemeral });
+  }
+
+  if (action === "remove_keyword") {
+    if (!value) return interaction.reply({ content: "Provide a keyword to remove.", flags: MessageFlags.Ephemeral });
+    lore.keywords = lore.keywords.filter((k) => k.toLowerCase() !== value.toLowerCase());
+    saveGuildConfig();
+    return interaction.reply({ content: `Removed lore keyword: ${value}`, flags: MessageFlags.Ephemeral });
+  }
+
+  if (action === "add_custom") {
+    if (!value) return interaction.reply({ content: "Provide a custom holiday name.", flags: MessageFlags.Ephemeral });
+    const parsed = parseDate(dateInput || "");
+    if (!parsed) return interaction.reply({ content: "Provide a date as MM-DD for the custom holiday.", flags: MessageFlags.Ephemeral });
+    lore.customs = lore.customs.filter((c) => c.name.toLowerCase() !== value.toLowerCase());
+    lore.customs.push({ name: value.trim(), date: parsed, description: description?.trim() || "" });
+    saveGuildConfig();
+    return interaction.reply({ content: `Added custom holiday: ${value} (${parsed}).`, flags: MessageFlags.Ephemeral });
+  }
+
+  if (action === "remove_custom") {
+    if (!value) return interaction.reply({ content: "Provide a custom holiday name to remove.", flags: MessageFlags.Ephemeral });
+    lore.customs = lore.customs.filter((c) => c.name.toLowerCase() !== value.toLowerCase());
+    saveGuildConfig();
+    return interaction.reply({ content: `Removed custom holiday: ${value}`, flags: MessageFlags.Ephemeral });
+  }
+
+  if (action === "list") {
+    const lines = [
+      lore.anniversary ? `Anniversary: ${lore.anniversary}` : "Anniversary: not set",
+      lore.keywords.length ? `Keywords: ${lore.keywords.join(", ")}` : "Keywords: none",
+      lore.customs.length
+        ? `Custom holidays: ${lore.customs.map((c) => `${c.name} (${c.date})`).join(", ")}`
+        : "Custom holidays: none",
+    ];
+    return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
+  }
+
+  return interaction.reply({ content: "Unknown lore action.", flags: MessageFlags.Ephemeral });
 }
 
 async function handleUpgrade(interaction) {
@@ -1177,7 +1879,15 @@ async function handleInstallCount(interaction) {
   return interaction.reply({ content: `I am currently in ${count} server(s).`, flags: MessageFlags.Ephemeral });
 }
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMembers,
+  ],
+  partials: [Partials.Message, Partials.Channel, Partials.Reaction],
+});
 
 client.once("clientReady", async () => {
   console.log(`Bot logged in as ${client.user.tag}`);
@@ -1239,10 +1949,16 @@ client.on("interactionCreate", async (interaction) => {
         return handleRate(interaction);
       case "facts":
         return handleFacts(interaction);
+      case "fact":
+        return handleFact(interaction);
       case "setup":
         return handleSetup(interaction);
       case "premium":
         return handlePremiumStatus(interaction);
+      case "analytics":
+        return handleAnalytics(interaction);
+      case "lore":
+        return handleLore(interaction);
       case "week":
         return handleWeek(interaction);
       case "upgrade":
@@ -1310,6 +2026,26 @@ client.on("interactionCreate", async (interaction) => {
       return interaction.followUp({ content: "Something went wrong handling that request.", flags: MessageFlags.Ephemeral });
     }
     return interaction.reply({ content: "Something went wrong handling that request.", flags: MessageFlags.Ephemeral });
+  }
+});
+
+client.on("messageReactionAdd", async (reaction, user) => {
+  if (user.bot) return;
+  try {
+    if (reaction.partial) await reaction.fetch();
+    const message = reaction.message;
+    if (!message || !message.guild) return;
+    const guildId = message.guild.id;
+    const channelId = message.channel.id;
+    const config = getGuildConfig(guildId);
+    const channelSettings = config.channelSettings?.[channelId];
+    if (!channelSettings || !channelSettings.lastPostMessageId) return;
+    if (channelSettings.lastPostMessageId !== message.id) return;
+    recordReactionAnalytics(config, channelId, channelSettings.lastPostDateKey || "");
+    saveGuildConfig();
+    await recordGuildStreak(guildId, channelId, user.id);
+  } catch (e) {
+    console.warn("Streak reaction handler failed:", e.message);
   }
 });
 
@@ -1416,35 +2152,64 @@ async function postTodayForChannel(guildId, channelId) {
   const now = new Date();
   const mmdd = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
   const hits = findByDate(mmdd);
+  const dateKey = getDateKey(now, channelSettings.timezone);
+  const wildcardHoliday = premium ? maybePickWildcardHoliday(config, dateKey) : null;
+  const filteredHits = applyHolidayFilters(hits, config.filters);
   if (!hits.length) {
     return channel.send("No holiday found for today. Check back tomorrow!");
+  }
+  if (!filteredHits.length) {
+    return channel.send("No holiday found for today with current filters.");
   }
 
   const premium = isPremiumGuild(channel.guild);
   const branding = !premium || channelSettings.branding;
-  const choice = Math.min(channelSettings.holidayChoice || 0, hits.length - 1);
-  const pick = hits[choice] || hits[0];
-  const topNames = hits.slice(0, 2).map((h) => h.name).join(" and ");
-  const todayEmbed = buildEmbed(pick, { branding, style: channelSettings.style, color: channelSettings.color || undefined });
+  const choice = Math.min(channelSettings.holidayChoice || 0, filteredHits.length - 1);
+  const pick =
+    wildcardHoliday ||
+    pickHolidayForTone(filteredHits, channelSettings.tone, choice) ||
+    filteredHits[choice] ||
+    filteredHits[0];
+  const topNames = wildcardHoliday ? pick.name : filteredHits.slice(0, 2).map((h) => h.name).join(" and ");
+  const todayEmbed = buildEmbed(pick, {
+    branding,
+    style: channelSettings.style,
+    color: channelSettings.color || undefined,
+    tone: channelSettings.tone,
+  });
 
   // Coming up tomorrow teaser
   const tomorrow = new Date(now);
   tomorrow.setDate(now.getDate() + 1);
   const tmm = `${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}`;
-  const nextHits = findByDate(tmm);
-  const teaser = nextHits.length ? `Up next: ${nextHits[0].name} (${prettyDate(tmm)})` : "";
+  const nextHits = applyHolidayFilters(findByDate(tmm), config.filters);
+  const teaser = wildcardHoliday ? "" : nextHits.length ? `Up next: ${nextHits[0].name} (${prettyDate(tmm)})` : "";
 
   const mention = channelSettings.quiet ? "" : channelSettings.roleId ? `<@&${channelSettings.roleId}> ` : "";
 
   const { rows: promoRows, note: promoNote } = buildPromoComponents(guildId, { includeRate: true, forceVote: true });
   const components = [...buildButtons(pick), ...promoRows];
+  const streakLine = config.streakCount ? `\n🔥 Server streak: ${config.streakCount} day${config.streakCount === 1 ? "" : "s"}` : "";
+  const wildcardLine = wildcardHoliday ? "\n🪄 Wildcard Day: surprise pick" : "";
+  const promptLine = buildMicroPrompt(pick, channelSettings.tone);
+  const loreLines = buildLoreLines(config, getDateKey(now, channelSettings.timezone));
   try {
-    await channel.send({
-      content: `${mention}🎉 Today’s holidays: ${topNames}${teaser ? `\n${teaser}` : ""}${promoNote ? `\n\n${promoNote}` : ""}`,
+    const sent = await channel.send({
+      content: `${mention}🎉 Today’s holidays: ${topNames}${wildcardLine}${teaser ? `\n${teaser}` : ""}${streakLine}${loreLines.length ? `\n\n${loreLines.join("\n")}` : ""}${promptLine ? `\n\n${promptLine}` : ""}${promoNote ? `\n\n${promoNote}` : ""}`,
       embeds: [todayEmbed],
       components,
     });
     console.log(`Daily post sent for guild ${guildId} channel ${channelId}.`);
+    const postDateKey = dateKey;
+    const settings = config.channelSettings?.[channelId] || {};
+    settings.lastPostMessageId = sent?.id || null;
+    settings.lastPostDateKey = postDateKey;
+    settings.lastPostSlug = pick.slug || slugify(pick.name || "holiday");
+    settings.lastPostName = pick.name || settings.lastPostSlug;
+    config.channelSettings[channelId] = settings;
+    recordPostAnalytics(config, channelId, postDateKey, channelSettings.hour, pick);
+    saveGuildConfig();
+    scheduleDidYouKnow(channel, sent?.id || null, pick);
   } catch (err) {
     if (isMissingAccessError(err)) {
       removeChannelFromConfig(guildId, channelId, `send failed: ${err?.code || err?.status || "unknown"}`);
