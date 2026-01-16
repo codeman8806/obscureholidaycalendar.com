@@ -281,22 +281,18 @@ async function postDiscordServicesStats() {
     const serverCount = client.guilds.cache.size;
     const shardCount = Number(process.env.DISCORDSERVICES_SHARDS) || 1;
     const url = `https://api.discordservices.net/bot/${botId}/stats`;
-    const authHeader = DISCORDSERVICES_TOKEN.startsWith("Bot ")
-      ? DISCORDSERVICES_TOKEN
-      : `Bot ${DISCORDSERVICES_TOKEN}`;
     const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: authHeader,
+        Authorization: DISCORDSERVICES_TOKEN,
         "User-Agent": "ObscureHolidayBot/1.0",
-        Accept: "application/json",
+        Accept: "text/html",
         Origin: "https://www.obscureholidaycalendar.com",
         Referer: "https://www.obscureholidaycalendar.com/",
       },
       body: JSON.stringify({
         servers: serverCount,
-        shards: shardCount,
       }),
     });
     if (!res.ok) {
