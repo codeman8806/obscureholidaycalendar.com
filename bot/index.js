@@ -292,16 +292,10 @@ async function postDiscordServicesStats() {
       }),
     });
     if (!res.ok) {
-      const text = await res.text();
       console.error(
         "Discord Services stats post failed:",
         res.status,
-        res.statusText,
-        text
-      );
-      console.error(
-        "Discord Services response headers:",
-        Object.fromEntries(res.headers.entries())
+        await res.text()
       );
     } else {
       console.log(`Posted stats to discordservices.net: ${serverCount} servers`);
