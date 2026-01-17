@@ -237,6 +237,10 @@ export const commandDefs = [
     ],
   },
   {
+    name: "postnowall",
+    description: "Owner: post today’s holidays now (all servers)",
+  },
+  {
     name: "premium",
     description: "See premium status",
   },

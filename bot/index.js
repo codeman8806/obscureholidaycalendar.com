@@ -1520,6 +1520,33 @@ async function handleStreak(interaction) {
   });
 }
 
+async function handlePostNowAll(interaction) {
+  if (!isOwner(interaction.user.id)) {
+    return interaction.reply({ content: "Owner-only command.", flags: MessageFlags.Ephemeral });
+  }
+  await interaction.reply({ content: "Posting today’s holidays now across all configured guilds…", flags: MessageFlags.Ephemeral });
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const guildEntries = Object.entries(guildConfig);
+  let totalChannels = 0;
+  for (const [guildId, cfg] of guildEntries) {
+    const channelIds = (cfg && cfg.channelIds) ? cfg.channelIds : [];
+    if (!channelIds.length) continue;
+    for (const channelId of channelIds) {
+      try {
+        totalChannels += 1;
+        await postTodayForChannel(guildId, channelId);
+        await sleep(500);
+      } catch (err) {
+        console.warn(`Owner post failed for guild ${guildId} channel ${channelId}:`, err?.message || err);
+      }
+    }
+  }
+  return interaction.followUp({
+    content: `Done. Attempted ${totalChannels} channel${totalChannels === 1 ? "" : "s"}.`,
+    flags: MessageFlags.Ephemeral,
+  });
+}
+
 async function handleTomorrow(interaction) {
   const now = new Date();
   const tomorrow = new Date(now);
@@ -1970,6 +1997,8 @@ client.on("interactionCreate", async (interaction) => {
         return handleGrantPremium(interaction);
       case "installcount":
         return handleInstallCount(interaction);
+      case "postnowall":
+        return handlePostNowAll(interaction);
       case "invite":
         return interaction.reply({
           content: "Invite the bot to your server:",
@@ -2024,50 +2053,6 @@ client.on("interactionCreate", async (interaction) => {
     }
     return interaction.reply({ content: "Something went wrong handling that request.", flags: MessageFlags.Ephemeral });
   }
-});
-
-client.on("messageCreate", async (message) => {
-  if (!BOT_OWNER_ID) return;
-  if (!message || message.author?.id !== BOT_OWNER_ID) return;
-  const content = (message.content || "").trim();
-  if (!content.startsWith("!postnow")) return;
-  if (!message.guild) {
-    return message.reply("Run `!postnow` in a server channel to post today's holidays.");
-  }
-  if (content.startsWith("!postnowall")) {
-    await message.reply("Posting today’s holidays now across all configured guilds…");
-    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    const guildEntries = Object.entries(guildConfig);
-    let totalChannels = 0;
-    for (const [guildId, cfg] of guildEntries) {
-      const channelIds = (cfg && cfg.channelIds) ? cfg.channelIds : [];
-      if (!channelIds.length) continue;
-      for (const channelId of channelIds) {
-        try {
-          totalChannels += 1;
-          await postTodayForChannel(guildId, channelId);
-          await sleep(500);
-        } catch (err) {
-          console.warn(`Owner post failed for guild ${guildId} channel ${channelId}:`, err?.message || err);
-        }
-      }
-    }
-    return message.reply(`Done. Attempted ${totalChannels} channel${totalChannels === 1 ? "" : "s"}.`);
-  }
-  const config = getGuildConfig(message.guild.id);
-  const channelIds = config.channelIds || [];
-  if (!channelIds.length) {
-    return message.reply("No daily post channels are configured yet. Use /setup first.");
-  }
-  await message.reply("Posting today’s holidays now…");
-  for (const channelId of channelIds) {
-    try {
-      await postTodayForChannel(message.guild.id, channelId);
-    } catch (err) {
-      console.warn(`Owner post failed for guild ${message.guild.id} channel ${channelId}:`, err?.message || err);
-    }
-  }
-  return message.reply("Done.");
 });
 
 client.on("messageReactionAdd", async (reaction, user) => {
