@@ -2026,6 +2026,50 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
+client.on("messageCreate", async (message) => {
+  if (!BOT_OWNER_ID) return;
+  if (!message || message.author?.id !== BOT_OWNER_ID) return;
+  const content = (message.content || "").trim();
+  if (!content.startsWith("!postnow")) return;
+  if (!message.guild) {
+    return message.reply("Run `!postnow` in a server channel to post today's holidays.");
+  }
+  if (content.startsWith("!postnowall")) {
+    await message.reply("Posting today’s holidays now across all configured guilds…");
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const guildEntries = Object.entries(guildConfig);
+    let totalChannels = 0;
+    for (const [guildId, cfg] of guildEntries) {
+      const channelIds = (cfg && cfg.channelIds) ? cfg.channelIds : [];
+      if (!channelIds.length) continue;
+      for (const channelId of channelIds) {
+        try {
+          totalChannels += 1;
+          await postTodayForChannel(guildId, channelId);
+          await sleep(500);
+        } catch (err) {
+          console.warn(`Owner post failed for guild ${guildId} channel ${channelId}:`, err?.message || err);
+        }
+      }
+    }
+    return message.reply(`Done. Attempted ${totalChannels} channel${totalChannels === 1 ? "" : "s"}.`);
+  }
+  const config = getGuildConfig(message.guild.id);
+  const channelIds = config.channelIds || [];
+  if (!channelIds.length) {
+    return message.reply("No daily post channels are configured yet. Use /setup first.");
+  }
+  await message.reply("Posting today’s holidays now…");
+  for (const channelId of channelIds) {
+    try {
+      await postTodayForChannel(message.guild.id, channelId);
+    } catch (err) {
+      console.warn(`Owner post failed for guild ${message.guild.id} channel ${channelId}:`, err?.message || err);
+    }
+  }
+  return message.reply("Done.");
+});
+
 client.on("messageReactionAdd", async (reaction, user) => {
   if (user.bot) return;
   try {
@@ -2150,8 +2194,9 @@ async function postTodayForChannel(guildId, channelId) {
   const mmdd = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
   const hits = findByDate(mmdd);
   const dateKey = getDateKey(now, channelSettings.timezone);
+  const premium = isPremiumGuild(channel.guild);
   const wildcardHoliday = premium ? maybePickWildcardHoliday(config, dateKey) : null;
-  const filteredHits = applyHolidayFilters(hits, config.filters);
+  const filteredHits = premium ? applyHolidayFilters(hits, config.filters) : hits;
   if (!hits.length) {
     return channel.send("No holiday found for today. Check back tomorrow!");
   }
@@ -2159,7 +2204,6 @@ async function postTodayForChannel(guildId, channelId) {
     return channel.send("No holiday found for today with current filters.");
   }
 
-  const premium = isPremiumGuild(channel.guild);
   const branding = !premium || channelSettings.branding;
   const choice = Math.min(channelSettings.holidayChoice || 0, filteredHits.length - 1);
   const pick =
