@@ -75,6 +75,7 @@ console.log(`Resolved guild config path: ${CONFIG_PATH}`);
 const PREMIUM_PATH = path.resolve(__dirname, "premium.json"); // optional allowlist
 const BOT_OWNER_ID = process.env.BOT_OWNER_ID || null;
 const TOPGG_TOKEN = process.env.TOPGG_TOKEN || null; // for posting stats to top.gg
+const BOTLIST_TOKEN = normalizeApiToken(process.env.BOTLIST_TOKEN); // for posting stats to botlist.me
 function normalizeApiToken(value) {
   if (!value) return null;
   const trimmed = value.trim();
@@ -90,6 +91,7 @@ function normalizeApiToken(value) {
 const DISCORDSERVICES_TOKEN = normalizeApiToken(process.env.DISCORDSERVICES_TOKEN); // for posting stats to api.discordservices.net
 const TOPGG_POST_INTERVAL_MIN = Number(process.env.TOPGG_POST_INTERVAL_MIN || "30");
 const DISCORDSERVICES_POST_INTERVAL_MIN = Number(process.env.DISCORDSERVICES_POST_INTERVAL_MIN || TOPGG_POST_INTERVAL_MIN || "30");
+const BOTLIST_POST_INTERVAL_MIN = Number(process.env.BOTLIST_POST_INTERVAL_MIN || TOPGG_POST_INTERVAL_MIN || "30");
 const PORT = process.env.PORT || null; // for Railway/health checks (optional)
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || null;
 const STRIPE_PRICE_ID_STANDARD = process.env.STRIPE_PRICE_ID_STANDARD || process.env.STRIPE_PRICE_ID || null; // $3.99/month
@@ -302,6 +304,32 @@ async function postDiscordServicesStats() {
     }
   } catch (e) {
     console.warn("discordservices stats post failed:", e.message);
+  }
+}
+
+async function postBotListStats() {
+  if (!BOTLIST_TOKEN) return;
+  try {
+    const serverCount = client.guilds.cache.size;
+    const botId = process.env.BOTLIST_BOT_ID || client.user?.id;
+    if (!botId) return;
+    const shardCount = Number(process.env.BOTLIST_SHARDS || process.env.DISCORDSERVICES_SHARDS || "1");
+    const res = await fetch(`https://api.botlist.me/api/v1/bots/${botId}/stats`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: BOTLIST_TOKEN,
+      },
+      body: JSON.stringify({ server_count: serverCount, shard_count: shardCount }),
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      console.warn(`botlist.me stats post failed: ${res.status} ${text}`);
+    } else {
+      console.log(`Posted stats to botlist.me: ${serverCount} servers`);
+    }
+  } catch (e) {
+    console.warn("botlist.me stats post failed:", e.message);
   }
 }
 
@@ -1950,6 +1978,12 @@ client.once("clientReady", async () => {
   postDiscordServicesStats();
   if (DISCORDSERVICES_TOKEN && DISCORDSERVICES_POST_INTERVAL_MIN > 0) {
     setInterval(postDiscordServicesStats, DISCORDSERVICES_POST_INTERVAL_MIN * 60 * 1000);
+  }
+
+  // Post stats to botlist.me now and on interval
+  postBotListStats();
+  if (BOTLIST_TOKEN && BOTLIST_POST_INTERVAL_MIN > 0) {
+    setInterval(postBotListStats, BOTLIST_POST_INTERVAL_MIN * 60 * 1000);
   }
 });
 
