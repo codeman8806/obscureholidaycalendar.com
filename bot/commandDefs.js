@@ -19,7 +19,7 @@ export const commandDefs = [
   },
   {
     name: "date",
-    description: "Show holidays on a specific date",
+    description: "Premium: show holidays on a specific date",
     options: [
       {
         name: "date",
@@ -31,7 +31,7 @@ export const commandDefs = [
   },
   {
     name: "search",
-    description: "Search for a holiday by name/keywords",
+    description: "Premium: search for a holiday by name/keywords",
     options: [
       {
         name: "query",
@@ -41,12 +41,12 @@ export const commandDefs = [
       },
     ],
   },
-  { name: "random", description: "Get a random holiday" },
+  { name: "random", description: "Premium: get a random holiday" },
   { name: "vote", description: "Vote for the bot on top.gg" },
   { name: "rate", description: "Leave a review on top.gg" },
   {
     name: "facts",
-    description: "Get fun facts for a holiday",
+    description: "Premium: get fun facts for a holiday",
     options: [
       {
         name: "name_or_date",
@@ -70,6 +70,7 @@ export const commandDefs = [
   },
   { name: "streak", description: "Show the server’s current streak" },
   { name: "invite", description: "Get the bot invite link" },
+  { name: "share", description: "Share the bot invite link" },
   { name: "support", description: "Get help/landing page link" },
   { name: "app", description: "Get the mobile app links" },
   { name: "slack", description: "Get the Slack bot link" },
@@ -288,7 +289,7 @@ export const commandDefs = [
   },
   {
     name: "week",
-    description: "Show a 7-day digest",
+    description: "Premium: show a 7-day digest",
     options: [
       {
         name: "days",
@@ -308,11 +309,11 @@ export const commandDefs = [
   },
   {
     name: "tomorrow",
-    description: "See tomorrow’s holiday",
+    description: "Premium: see tomorrow’s holiday",
   },
   {
     name: "upcoming",
-    description: "See upcoming holidays",
+    description: "Premium: see upcoming holidays",
     options: [
       {
         name: "days",
