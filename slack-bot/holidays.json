@@ -63,9 +63,9 @@
         "description": "Women Rock! day is an annual celebration dedicated to recognizing and honoring the immense contributions, achievements, and resilience of women across all fields and walks of life. It's a day to empower, uplift, and acknowledge the powerful impact women have made and continue to make on the world, inspiring future generations to break barriers and reach for their dreams.",
         "emoji": "💪",
         "funFacts": [
-          "The phrase 'rock on' is often used to encourage perseverance and resilience, perfectly capturing the spirit of women who overcome challenges.",
+          "Countries with more women in leadership tend to score higher on health and education",
           "Historically, women have been at the forefront of social change movements, from suffrage to civil rights, demonstrating incredible strength and determination.",
-          "In music, 'rock' is a genre defined by its powerful sound and often rebellious spirit, reflecting the revolutionary impact women have had in arts and culture.",
+          "Women consistently outperform men in collaboration, empathy, and communication skills.",
           "This day encourages reflection on the countless unsung heroines whose efforts have shaped our world but may not always receive public recognition.",
           "Celebrating 'Women Rock!' can involve supporting women-owned businesses, advocating for gender equality, or simply recognizing the 'rockstar' women in your own life."
         ],
@@ -405,6 +405,19 @@
     "01-15": [
       {
         "date": "01-15",
+        "description": "National Hat Day is celebrated every January 15th, honoring hats of all shapes and sizes. It's a whimsical reminder to appreciate the role hats play in fashion and culture, encouraging everyone to wear their favorite hat and share their unique styles.",
+        "emoji": "🎩",
+        "funFacts": [
+          "The earliest hats date back to ancient civilizations, with Egyptians wearing straw hats to protect against the sun.",
+          "In the 19th century, top hats became a symbol of wealth and social status in Western fashion.",
+          "Some cultures have specific hats for particular occasions or ceremonies, such as the sombrero in Mexican festivities.",
+          "National Hat Day aims to promote creativity, inviting people to design and showcase their own hats.",
+          "The world's largest hat is over 14 feet tall and was created in 2018 for National Hat Day celebrations in Texas."
+        ],
+        "name": "National Hat Day"
+      },
+      {
+        "date": "01-15",
         "description": "Celebrated annually on January 15th, Wikipedia Day commemorates the launch of Wikipedia, the free, web-based, collaborative, multilingual encyclopedia, on this date in 2001. It acknowledges the global community of volunteers who contribute to and maintain the world's most comprehensive and accessible open knowledge resource.",
         "emoji": "🌐",
         "funFacts": [
@@ -415,19 +428,6 @@
           "Wikipedia operates under a model of open collaboration, allowing anyone with internet access to write and edit articles."
         ],
         "name": "Wikipedia Day"
-      },
-      {
-        "date": "01-15",
-        "description": "National Hat Day celebrates hats of every style—from beanies and berets to caps and fedoras—inviting people to wear a favorite hat, explore the history of headwear, and show a little personal style.",
-        "emoji": "🎩",
-        "funFacts": [
-          "Hats have been worn for thousands of years for protection, ceremony, and fashion.",
-          "A hat can signal identity or profession, from uniforms to team caps.",
-          "Many classic hat styles are named for places or people, like fedoras, bowlers, and berets.",
-          "Hat etiquette varies by culture, but the tradition of tipping a hat dates back centuries.",
-          "National Hat Day is a simple excuse to show off a favorite hat or try a new look."
-        ],
-        "name": "National Hat Day"
       }
     ],
     "01-16": [
@@ -720,30 +720,29 @@
     "01-27": [
       {
         "date": "01-27",
-        "description": "International Holocaust Remembrance Day is an international memorial day on 27 January that commemorates the victims of the Holocaust. It was designated by United Nations General Assembly Resolution 60/7 on 1 November 2005. The date marks the anniversary of the liberation of Auschwitz-Birkenau, the largest Nazi concentration and extermination camp.",
-        "emoji": "🕯",
+        "description": "Chocolate Cake Day is celebrated on January 27th to honor the rich, decadent, and versatile dessert that has captured the hearts of many. On this day, people around the world indulge in delicious chocolate cakes, whether homemade or from their favorite bakeries, often sharing recipes, hosting taste tests, or baking competitions.",
+        "emoji": "🍫",
         "funFacts": [
-          "The United Nations designated January 27 as International Holocaust Remembrance Day to commemorate the victims of the Holocaust and coincide with the liberation of Auschwitz-Birkenau in 1945.",
-          "The resolution establishing the day encourages member states to develop educational programs to instill future generations with the lessons of the Holocaust.",
-          "It urges member states to preserve sites that served as Nazi extermination camps, concentration camps, forced labour camps and prisons during the Holocaust.",
-          "The day aims to remember the six million Jews and millions of other victims, including Roma, Sinti, homosexuals, and people with disabilities, who were systematically murdered by the Nazi regime.",
-          "The UN General Assembly rejects any denial of the Holocaust as a historical event, either in full or in part, in the resolution establishing this day."
+          "Chocolate cake originated in the 18th century, with early recipes appearing in American cookbooks.",
+          "The world’s largest chocolate cake weighed over 4,000 pounds and was made in 2016 in Australia.",
+          "Dark chocolate, often used in chocolate cakes, is rich in antioxidants and has health benefits when consumed in moderation.",
+          "The first printed chocolate cake recipe was published in 1847 in Britain.",
+          "In the U.S., chocolate cake is the most popular cake flavor, followed closely by vanilla."
         ],
-        "name": "International Holocaust Remembrance Day"
+        "name": "Chocolate Cake Day"
       },
       {
         "date": "01-27",
-        "description": "National Chocolate Cake Day, celebrated on January 27th, is a delicious occasion dedicated to one of the world's most beloved desserts. It's a day to indulge in the rich, sweet, and comforting goodness of chocolate cake in all its forms, from decadent molten lava cakes to classic layered masterpieces. Whether you bake one from scratch, pick one up from your favorite bakery, or simply enjoy a slice, this day is a tribute to the timeless appeal of chocolate.",
-        "emoji": "🍫",
+        "description": "Punch the Clock Day is a lighthearted annual celebration on January 27th that encourages workers to take a moment to appreciate the daily grind. It’s a day to recognize the hard work people put in every day and to bring awareness to the importance of work-life balance. Whether it's clocking in and out or simply taking a break, today is about giving a nod to the routine that keeps our lives moving.",
+        "emoji": "🕒",
         "funFacts": [
-          "The first chocolate cake recipes emerged in the late 19th century after cocoa powder became more widely available and affordable.",
-          "The 'Devil's Food Cake' is a classic chocolate cake known for its dark, moist, and airy texture, often contrasted with the 'Red Velvet Cake'.",
-          "German chocolate cake, despite its name, is an American creation, named after an American baker named Samuel German who developed a dark baking chocolate.",
-          "Chocolate is derived from cacao beans, first cultivated by ancient Mesoamerican civilizations like the Mayans and Aztecs, who consumed it as a bitter beverage.",
-          "The world's largest chocolate cake weighed over 13,000 pounds and was made in Michigan, USA, in 2017.",
-          "Chocolate cake can be found in countless variations worldwide, incorporating ingredients like coffee, chili, nuts, and various fruits."
+          "The holiday originated in the early 2000s as a way to promote workplace morale.",
+          "Many people use this day to declare a 'no overtime' day, encouraging their colleagues to leave work on time.",
+          "Punching the clock has historical roots in the industrial era, when workers would literally punch in and out on time cards.",
+          "Activities to celebrate can include workplace games, time-off raffles, and team lunches to foster camaraderie.",
+          "Some companies acknowledge this day by hosting wellness programs focused on stress relief and work-life balance."
         ],
-        "name": "Chocolate Cake Day"
+        "name": "Punch the Clock Day"
       }
     ],
     "01-28": [
