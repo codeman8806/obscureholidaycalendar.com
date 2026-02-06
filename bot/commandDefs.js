@@ -238,6 +238,111 @@ export const commandDefs = [
     ],
   },
   {
+    name: "categories",
+    description: "Show available holiday categories and current server settings",
+  },
+  {
+    name: "setcategories",
+    description: "Premium: set allowed holiday categories",
+    options: [
+      {
+        name: "categories",
+        description: "Comma-separated list (or 'all' for no filter)",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+        autocomplete: true,
+      },
+    ],
+  },
+  {
+    name: "excludesensitive",
+    description: "Premium: toggle sensitive holiday filtering",
+    options: [
+      {
+        name: "enabled",
+        description: "true to exclude, false to allow (omit to toggle)",
+        type: ApplicationCommandOptionType.Boolean,
+        required: false,
+      },
+    ],
+  },
+  {
+    name: "trial",
+    description: "Admin: view trial status or start the 7-day trial",
+  },
+  {
+    name: "block-holiday",
+    description: "Admin: block a holiday by id or name",
+    options: [
+      {
+        name: "id_or_name",
+        description: "Holiday id, slug, or name",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "unblock-holiday",
+    description: "Admin: unblock a holiday by id or name",
+    options: [
+      {
+        name: "id_or_name",
+        description: "Holiday id, slug, or name",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "force-holiday",
+    description: "Admin: force-include a holiday by id or name",
+    options: [
+      {
+        name: "id_or_name",
+        description: "Holiday id, slug, or name",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "unforce-holiday",
+    description: "Admin: remove forced holiday by id or name",
+    options: [
+      {
+        name: "id_or_name",
+        description: "Holiday id, slug, or name",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "overrides",
+    description: "Admin: show blocked/forced holiday overrides",
+  },
+  {
+    name: "why",
+    description: "Admin: explain why a holiday is filtered",
+    options: [
+      {
+        name: "id_or_name",
+        description: "Holiday id, slug, or name",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "admin-stats",
+    description: "Owner: growth/upsell stats",
+  },
+  {
+    name: "admin-funnel",
+    description: "Owner: conversion funnel summary",
+  },
+  {
     name: "postnowall",
     description: "Owner: post today’s holidays now (all servers)",
   },
