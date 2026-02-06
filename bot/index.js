@@ -96,11 +96,17 @@ const PORT = process.env.PORT || null; // for Railway/health checks (optional)
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || null;
 const STRIPE_PRICE_ID_STANDARD = process.env.STRIPE_PRICE_ID_STANDARD || process.env.STRIPE_PRICE_ID || null; // $3.99/month
 const STRIPE_PRICE_ID_INTRO = process.env.STRIPE_PRICE_ID_INTRO || null; // $0.99 first month
+const STRIPE_PRICE_ID_TRIAL = process.env.STRIPE_PRICE_ID_TRIAL || null; // optional trial price override
+const STRIPE_TRIAL_DAYS = Number(process.env.STRIPE_TRIAL_DAYS || "7");
+const TRIAL_DAYS = Number.isFinite(STRIPE_TRIAL_DAYS) && STRIPE_TRIAL_DAYS > 0 ? STRIPE_TRIAL_DAYS : 7;
+const TRIAL_DURATION_MS = TRIAL_DAYS * 24 * 60 * 60 * 1000;
+const STRIPE_PORTAL_URL = process.env.STRIPE_PORTAL_URL || null;
 const STRIPE_LOOKUP_KEY = process.env.STRIPE_LOOKUP_KEY || null; // optional lookup key
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || null;
 const STRIPE_SUCCESS_URL = process.env.STRIPE_SUCCESS_URL || `${SITE_URL}/discord-bot/?success=1`;
 const STRIPE_CANCEL_URL = process.env.STRIPE_CANCEL_URL || `${SITE_URL}/discord-bot/?canceled=1`;
 const STRIPE_PORTAL_RETURN_URL = process.env.STRIPE_PORTAL_RETURN_URL || `${SITE_URL}/discord-bot/`;
+const PUBLIC_BASE_URL = process.env.PUBLIC_BASE_URL || null;
 const DEFAULT_HOLIDAY_CHOICE = 0; // which holiday of the day to schedule: 0 = first, 1 = second
 const DEFAULT_EMBED_COLOR = 0x1c96f3;
 const DEFAULT_EMBED_STYLE = "compact";
@@ -115,11 +121,26 @@ const FOLLOWUP_DELAY_MIN = Number(process.env.FOLLOWUP_DELAY_MIN || "45");
 const DEFAULT_TONE = "default";
 const ALLOWED_TONES = new Set(["wholesome", "silly", "nerdy", "historical", "global", "default"]);
 const MAX_ANALYTICS_HISTORY = 120;
+const MAX_EVENT_HISTORY = 200;
 const FOOD_KEYWORDS = ["pizza", "burger", "chocolate", "cake", "coffee", "tea", "soup", "cheese", "ice cream", "taco", "donut", "bacon", "cookie", "bread", "pasta"];
 const RELIGIOUS_KEYWORDS = ["christmas", "easter", "ramadan", "hanukkah", "diwali", "yom kippur", "lent", "ash wednesday", "saint", "holy", "religious"];
 const WEIRD_KEYWORDS = ["weird", "absurd", "odd", "quirky", "strange", "silly", "goof", "bizarre", "random", "peculiar"];
 const INTERNATIONAL_KEYWORDS = ["international", "world", "global"];
 const SAFE_MODE_BLOCKLIST = ["adult", "sex", "drug", "alcohol", "beer", "wine", "weed", "marijuana", "violence", "gambling"];
+const CATEGORY_KEYWORDS = {
+  food: FOOD_KEYWORDS,
+  religious: RELIGIOUS_KEYWORDS,
+  weird: WEIRD_KEYWORDS,
+  international: INTERNATIONAL_KEYWORDS,
+  seasonal: ["spring", "summer", "autumn", "fall", "winter", "solstice", "equinox", "harvest", "halloween", "valentine", "new year"],
+  nature: ["earth", "ocean", "sea", "river", "forest", "tree", "garden", "green", "climate", "environment", "conservation", "animal", "pet", "dog", "cat", "bird", "wildlife"],
+  health: ["health", "wellness", "fitness", "exercise", "mental", "awareness", "cancer", "heart", "diabetes", "blood", "safety", "prevention"],
+  tech: ["tech", "technology", "science", "engineering", "math", "computer", "internet", "coding", "programming", "robot", "space"],
+  arts: ["art", "music", "dance", "theater", "poetry", "book", "literature", "film", "movie", "photography", "design"],
+  community: ["community", "friend", "family", "volunteer", "charity", "kindness", "gratitude", "teacher", "nurse", "service"],
+};
+const ALL_CATEGORIES = [...Object.keys(CATEGORY_KEYWORDS), "general"];
+const SENSITIVE_KEYWORDS = [...SAFE_MODE_BLOCKLIST, "weapon", "gun", "war", "suicide", "death", "crime", "abuse"];
 
 function readJsonSafe(filePath, fallback) {
   try {
@@ -144,6 +165,26 @@ const guildConfig = readJsonSafe(CONFIG_PATH, {});
 const premiumAllowlist = readJsonSafe(PREMIUM_PATH, {});
 const stripeClient = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null;
 const SITE_BASE = "https://www.obscureholidaycalendar.com/holiday";
+
+function getPlanStatus(config, now = Date.now()) {
+  if (config?.isPremium) return "premium";
+  const endsAt = Number(config?.trialEndsAt || 0);
+  if (endsAt > 0 && now < endsAt) return "trial";
+  return "free";
+}
+
+function effectivePremium(config, now = Date.now(), guildId = null) {
+  if (!config) return false;
+  if (config.isPremium) return true;
+  const endsAt = Number(config.trialEndsAt || 0);
+  if (endsAt > 0 && now < endsAt) return true;
+  if (endsAt > 0 && now >= endsAt) {
+    config.trialStartedAt = 0;
+    config.trialEndsAt = 0;
+    if (guildId) saveGuildConfig();
+  }
+  return false;
+}
 
 function normalizeAllGuildConfigs() {
   let changed = false;
@@ -187,6 +228,81 @@ function normalizeAllGuildConfigs() {
       changed = true;
       updated = true;
     }
+    if (!("allowedCategories" in cfg)) {
+      cfg.allowedCategories = null;
+      changed = true;
+      updated = true;
+    }
+    if (typeof cfg.excludeSensitive !== "boolean") {
+      cfg.excludeSensitive = false;
+      changed = true;
+      updated = true;
+    }
+    if (!cfg.trialStartedAt) {
+      cfg.trialStartedAt = 0;
+      changed = true;
+      updated = true;
+    }
+    if (!cfg.trialEndsAt) {
+      cfg.trialEndsAt = 0;
+      changed = true;
+      updated = true;
+    }
+    if (!cfg.trialRedeemedAt) {
+      cfg.trialRedeemedAt = 0;
+      changed = true;
+      updated = true;
+    }
+    if (!cfg.featureAnnouncementSentAt) {
+      cfg.featureAnnouncementSentAt = 0;
+      changed = true;
+      updated = true;
+    }
+    if (!cfg.trialReminderSentAt) {
+      cfg.trialReminderSentAt = 0;
+      changed = true;
+      updated = true;
+    }
+    if (typeof cfg.trialReminderPending !== "boolean") {
+      cfg.trialReminderPending = false;
+      changed = true;
+      updated = true;
+    }
+    if (!cfg.trialReminderSentAt) {
+      cfg.trialReminderSentAt = 0;
+      changed = true;
+      updated = true;
+    }
+    if (!Array.isArray(cfg.blockedHolidayIds)) {
+      cfg.blockedHolidayIds = [];
+      changed = true;
+      updated = true;
+    }
+    if (!Array.isArray(cfg.forcedHolidayIds)) {
+      cfg.forcedHolidayIds = [];
+      changed = true;
+      updated = true;
+    }
+    if (typeof cfg.upsellWeekKey !== "string") {
+      cfg.upsellWeekKey = "";
+      changed = true;
+      updated = true;
+    }
+    if (!Number.isInteger(cfg.upsellWeekCount)) {
+      cfg.upsellWeekCount = 0;
+      changed = true;
+      updated = true;
+    }
+    if (typeof cfg.isPremium !== "boolean") {
+      cfg.isPremium = !!premiumAllowlist[guildId];
+      changed = true;
+      updated = true;
+    }
+    if (typeof cfg.onboardingDmSent !== "boolean") {
+      cfg.onboardingDmSent = false;
+      changed = true;
+      updated = true;
+    }
     if (!cfg.lastVotePromptAt) {
       cfg.lastVotePromptAt = 0;
       changed = true;
@@ -227,7 +343,14 @@ function normalizeAllGuildConfigs() {
 function loadHolidays() {
   const raw = fs.readFileSync(HOLIDAYS_PATH, "utf8");
   const data = JSON.parse(raw);
-  return data.holidays || {};
+  const holidays = data.holidays || {};
+  Object.values(holidays).forEach((items) => {
+    if (!Array.isArray(items)) return;
+    items.forEach((holiday) => {
+      ensureHolidayMeta(holiday);
+    });
+  });
+  return holidays;
 }
 
 const holidaysByDate = loadHolidays();
@@ -236,6 +359,8 @@ normalizeAllGuildConfigs();
 
 function isPremium(guild, member) {
   if (!guild) return false;
+  const config = getGuildConfig(guild.id);
+  if (effectivePremium(config, Date.now(), guild.id)) return true;
   // Discord Server Subscription role check on interacting member
   if (PREMIUM_ROLE_ID && member && member.roles && member.roles.cache.has(PREMIUM_ROLE_ID)) return true;
   // Allowlist fallback
@@ -245,6 +370,8 @@ function isPremium(guild, member) {
 
 function isPremiumGuild(guild) {
   if (!guild) return false;
+  const config = getGuildConfig(guild.id);
+  if (effectivePremium(config, Date.now(), guild.id)) return true;
   if (premiumAllowlist[guild.id]) return true;
   if (PREMIUM_ROLE_ID) {
     const role = guild.roles.cache.get(PREMIUM_ROLE_ID);
@@ -262,6 +389,9 @@ function setPremiumGuild(guildId, enabled) {
   if (!guildId) return;
   if (enabled) premiumAllowlist[guildId] = true;
   else delete premiumAllowlist[guildId];
+  const config = getGuildConfig(guildId);
+  config.isPremium = !!enabled;
+  saveGuildConfig();
   writeJsonSafe(PREMIUM_PATH, premiumAllowlist);
 }
 
@@ -432,6 +562,24 @@ async function createPremiumCheckoutSession({ guildId, userId, customerEmail }) 
   });
 }
 
+async function createTrialCheckoutSession({ guildId, userId, customerEmail }) {
+  const priceId = STRIPE_PRICE_ID_TRIAL || STRIPE_PRICE_ID_STANDARD;
+  if (!stripeClient || !priceId || !TRIAL_DAYS) return null;
+  const metadata = { guild_id: guildId, user_id: userId || "", trial: "true" };
+  return stripeClient.checkout.sessions.create({
+    mode: "subscription",
+    customer_email: customerEmail || undefined,
+    line_items: [{ price: priceId, quantity: 1 }],
+    success_url: STRIPE_SUCCESS_URL,
+    cancel_url: STRIPE_CANCEL_URL,
+    metadata,
+    subscription_data: {
+      metadata,
+      trial_period_days: TRIAL_DAYS,
+    },
+  });
+}
+
 function subscriptionNeedsUpgrade(sub) {
   const items = sub.items?.data || [];
   const hasIntro = items.some((item) => item?.price?.id === STRIPE_PRICE_ID_INTRO);
@@ -471,6 +619,18 @@ app.post("/create-checkout-session", express.json(), async (req, res) => {
   }
 });
 
+app.get("/start-trial", async (req, res) => {
+  const guildId = req.query.guild_id;
+  const userId = req.query.user_id;
+  if (!guildId) return res.status(400).send("Missing guild_id");
+  const result = await startTrialAndGetCheckoutUrl(String(guildId), userId ? String(userId) : "");
+  if (!result.ok) {
+    return res.redirect(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/");
+  }
+  if (result.url) return res.redirect(result.url);
+  return res.redirect(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/");
+});
+
 // Stripe webhook
 app.post(
   "/webhook",
@@ -490,8 +650,18 @@ app.post(
       const session = event.data.object;
       const guildId = session.metadata?.guild_id;
       if (guildId) {
-        setPremiumGuild(guildId, true);
-        console.log(`Premium granted via Stripe for guild ${guildId}`);
+        const isTrialSession = session.metadata?.trial === "true";
+        if (isTrialSession) {
+          const config = getGuildConfig(guildId);
+          if (!config.trialRedeemedAt) startTrialForConfig(config, guildId, session.metadata?.user_id || "");
+          console.log(`Trial started via Stripe for guild ${guildId}`);
+        } else {
+          setPremiumGuild(guildId, true);
+          const config = getGuildConfig(guildId);
+          recordEvent(config, "upgrade_completed", { guildId, userId: session.metadata?.user_id || "" });
+          saveGuildConfig();
+          console.log(`Premium granted via Stripe for guild ${guildId}`);
+        }
       }
     }
     if (event.type === "invoice.paid") {
@@ -534,7 +704,21 @@ function getGuildConfig(guildId) {
       streakRoleId: null,
       streakRoleGoal: DEFAULT_STREAK_GOAL,
       tone: DEFAULT_TONE,
-      analytics: { channels: {}, holidays: {}, history: [] },
+      analytics: { channels: {}, holidays: {}, history: [], events: [] },
+      allowedCategories: null,
+      excludeSensitive: false,
+      trialStartedAt: 0,
+      trialEndsAt: 0,
+      trialRedeemedAt: 0,
+      isPremium: false,
+      onboardingDmSent: false,
+      featureAnnouncementSentAt: 0,
+      trialReminderSentAt: 0,
+      trialReminderPending: false,
+      blockedHolidayIds: [],
+      forcedHolidayIds: [],
+      upsellWeekKey: "",
+      upsellWeekCount: 0,
       filters: {
         noFood: false,
         noReligious: false,
@@ -596,6 +780,7 @@ function getGuildConfig(guildId) {
   if (!guildConfig[guildId].analytics.channels) guildConfig[guildId].analytics.channels = {};
   if (!guildConfig[guildId].analytics.holidays) guildConfig[guildId].analytics.holidays = {};
   if (!Array.isArray(guildConfig[guildId].analytics.history)) guildConfig[guildId].analytics.history = [];
+  if (!Array.isArray(guildConfig[guildId].analytics.events)) guildConfig[guildId].analytics.events = [];
   if (!guildConfig[guildId].filters) {
     guildConfig[guildId].filters = {
       noFood: false,
@@ -627,6 +812,55 @@ function getGuildConfig(guildId) {
   if (typeof guildConfig[guildId].promotionsEnabled !== "boolean") {
     guildConfig[guildId].promotionsEnabled = true;
   }
+  if (!("allowedCategories" in guildConfig[guildId])) {
+    guildConfig[guildId].allowedCategories = null;
+  }
+  if (Array.isArray(guildConfig[guildId].allowedCategories)) {
+    guildConfig[guildId].allowedCategories = guildConfig[guildId].allowedCategories
+      .map((cat) => String(cat).toLowerCase())
+      .filter((cat) => ALL_CATEGORIES.includes(cat));
+  }
+  if (typeof guildConfig[guildId].excludeSensitive !== "boolean") {
+    guildConfig[guildId].excludeSensitive = false;
+  }
+  if (!guildConfig[guildId].trialStartedAt) {
+    guildConfig[guildId].trialStartedAt = 0;
+  }
+  if (!guildConfig[guildId].trialEndsAt) {
+    guildConfig[guildId].trialEndsAt = 0;
+  }
+  if (!guildConfig[guildId].trialRedeemedAt) {
+    guildConfig[guildId].trialRedeemedAt = 0;
+  }
+  if (!guildConfig[guildId].featureAnnouncementSentAt) {
+    guildConfig[guildId].featureAnnouncementSentAt = 0;
+  }
+  if (!guildConfig[guildId].trialReminderSentAt) {
+    guildConfig[guildId].trialReminderSentAt = 0;
+  }
+  if (typeof guildConfig[guildId].trialReminderPending !== "boolean") {
+    guildConfig[guildId].trialReminderPending = false;
+  }
+  if (typeof guildConfig[guildId].isPremium !== "boolean") {
+    guildConfig[guildId].isPremium = !!premiumAllowlist[guildId];
+  }
+  if (typeof guildConfig[guildId].onboardingDmSent !== "boolean") {
+    guildConfig[guildId].onboardingDmSent = false;
+  }
+  if (!Array.isArray(guildConfig[guildId].blockedHolidayIds)) {
+    guildConfig[guildId].blockedHolidayIds = [];
+  }
+  if (!Array.isArray(guildConfig[guildId].forcedHolidayIds)) {
+    guildConfig[guildId].forcedHolidayIds = [];
+  }
+  if (typeof guildConfig[guildId].upsellWeekKey !== "string") {
+    guildConfig[guildId].upsellWeekKey = "";
+  }
+  if (!Number.isInteger(guildConfig[guildId].upsellWeekCount)) {
+    guildConfig[guildId].upsellWeekCount = 0;
+  }
+  guildConfig[guildId].blockedHolidayIds = guildConfig[guildId].blockedHolidayIds.map((id) => String(id).toLowerCase());
+  guildConfig[guildId].forcedHolidayIds = guildConfig[guildId].forcedHolidayIds.map((id) => String(id).toLowerCase());
   if (!guildConfig[guildId].lastVotePromptAt) {
     guildConfig[guildId].lastVotePromptAt = 0;
   }
@@ -641,6 +875,12 @@ function getGuildConfig(guildId) {
   }
   if (!guildConfig[guildId].lastWeeklyRecapAt) {
     guildConfig[guildId].lastWeeklyRecapAt = 0;
+  }
+  if (!guildConfig[guildId].featureAnnouncementSentAt) {
+    guildConfig[guildId].featureAnnouncementSentAt = 0;
+  }
+  if (!guildConfig[guildId].trialReminderSentAt) {
+    guildConfig[guildId].trialReminderSentAt = 0;
   }
   return guildConfig[guildId];
 }
@@ -780,6 +1020,14 @@ function normalizeFilterList(value) {
     .filter(Boolean);
 }
 
+function normalizeCategoryList(value) {
+  if (!value) return [];
+  return value
+    .split(",")
+    .map((item) => item.trim().toLowerCase())
+    .filter(Boolean);
+}
+
 function hasActiveFilters(filters) {
   if (!filters) return false;
   return (
@@ -792,8 +1040,85 @@ function hasActiveFilters(filters) {
   );
 }
 
+function hasActiveCategoryFilters(config) {
+  if (!config) return false;
+  if (config.allowedCategories === null || typeof config.allowedCategories === "undefined") {
+    return !!config.excludeSensitive;
+  }
+  return true;
+}
+
+function hasActiveOverrides(config) {
+  if (!config) return false;
+  return (
+    hasActiveFilters(config.filters) ||
+    hasActiveCategoryFilters(config) ||
+    (config.blockedHolidayIds && config.blockedHolidayIds.length > 0) ||
+    (config.forcedHolidayIds && config.forcedHolidayIds.length > 0)
+  );
+}
+
+function weekKeyFromDate(date) {
+  const start = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+  const day = Math.floor((date - start) / (24 * 60 * 60 * 1000));
+  const week = Math.floor((day + start.getUTCDay()) / 7) + 1;
+  return `${date.getUTCFullYear()}-W${String(week).padStart(2, "0")}`;
+}
+
+function shouldShowUpsell(config, date, hiddenCount) {
+  if (!config || hiddenCount < 2) return false;
+  const weekKey = weekKeyFromDate(date);
+  if (config.upsellWeekKey !== weekKey) {
+    config.upsellWeekKey = weekKey;
+    config.upsellWeekCount = 0;
+  }
+  return (config.upsellWeekCount || 0) < 3;
+}
+
 function matchesKeyword(text, keywords) {
   return keywords.some((kw) => text.includes(kw));
+}
+
+function holidayText(holiday) {
+  return `${holiday.name || ""} ${holiday.description || ""}`.toLowerCase();
+}
+
+function holidayId(holiday) {
+  if (!holiday) return "";
+  return String(holiday.id || holiday.slug || slugify(holiday.name || "holiday")).toLowerCase();
+}
+
+function resolveHolidayByIdOrName(input) {
+  if (!input) return null;
+  const needle = String(input).trim().toLowerCase();
+  const direct = allHolidays.find((holiday) => holidayId(holiday) === needle);
+  if (direct) return direct;
+  const matches = findByName(needle);
+  return matches.length ? matches[0] : null;
+}
+
+function computeHolidayCategories(holiday) {
+  const text = holidayText(holiday);
+  const categories = [];
+  for (const [category, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
+    if (matchesKeyword(text, keywords)) categories.push(category);
+  }
+  if (!categories.length) categories.push("general");
+  return categories;
+}
+
+function isSensitiveHoliday(holiday) {
+  const text = holidayText(holiday);
+  return matchesKeyword(text, SENSITIVE_KEYWORDS);
+}
+
+function ensureHolidayMeta(holiday) {
+  if (!Array.isArray(holiday.categories) || !holiday.categories.length) {
+    holiday.categories = computeHolidayCategories(holiday);
+  }
+  if (typeof holiday.is_sensitive !== "boolean") {
+    holiday.is_sensitive = isSensitiveHoliday(holiday);
+  }
 }
 
 function filterHoliday(holiday, filters) {
@@ -810,6 +1135,81 @@ function filterHoliday(holiday, filters) {
 
 function applyHolidayFilters(hits, filters) {
   return (hits || []).filter((h) => filterHoliday(h, filters));
+}
+
+function applyCategoryFilters(hits, config) {
+  if (!config) return hits || [];
+  const allowed = config.allowedCategories;
+  const excludeSensitive = !!config.excludeSensitive;
+  return (hits || []).filter((holiday) => {
+    ensureHolidayMeta(holiday);
+    if (excludeSensitive && holiday.is_sensitive) return false;
+    if (allowed === null || typeof allowed === "undefined") return true;
+    if (!Array.isArray(allowed) || !allowed.length) return false;
+    const categories = (holiday.categories || []).map((c) => c.toLowerCase());
+    return categories.some((c) => allowed.includes(c));
+  });
+}
+
+function applyServerFilters(hits, config) {
+  if (!config) return hits || [];
+  const blockedIds = new Set((config.blockedHolidayIds || []).map((id) => String(id).toLowerCase()));
+  const forcedIds = new Set((config.forcedHolidayIds || []).map((id) => String(id).toLowerCase()));
+  if (forcedIds.size) {
+    return (hits || []).filter((holiday) => {
+      const id = holidayId(holiday);
+      if (!id || blockedIds.has(id)) return false;
+      return forcedIds.has(id);
+    });
+  }
+  const keywordFiltered = applyHolidayFilters(hits, config.filters);
+  const categoryFiltered = applyCategoryFilters(keywordFiltered, config);
+  if (!blockedIds.size) return categoryFiltered;
+  return categoryFiltered.filter((holiday) => {
+    const id = holidayId(holiday);
+    return !id || !blockedIds.has(id);
+  });
+}
+
+function summarizeFilterReasons(hits, filtered, config) {
+  if (!config) return null;
+  const total = hits.length;
+  const kept = filtered.length;
+  const removed = total - kept;
+  if (!removed) return null;
+  const blockedIds = new Set((config.blockedHolidayIds || []).map((id) => String(id).toLowerCase()));
+  const forcedIds = new Set((config.forcedHolidayIds || []).map((id) => String(id).toLowerCase()));
+  const reasons = {};
+  for (const holiday of hits) {
+    const id = holidayId(holiday);
+    const removedByForced = forcedIds.size && !forcedIds.has(id);
+    if (removedByForced) {
+      reasons.not_forced = (reasons.not_forced || 0) + 1;
+      continue;
+    }
+    if (blockedIds.has(id)) {
+      reasons.blocked = (reasons.blocked || 0) + 1;
+      continue;
+    }
+    if (!filterHoliday(holiday, config.filters)) {
+      reasons.keyword_filter = (reasons.keyword_filter || 0) + 1;
+      continue;
+    }
+    ensureHolidayMeta(holiday);
+    if (config.excludeSensitive && holiday.is_sensitive) {
+      reasons.sensitive = (reasons.sensitive || 0) + 1;
+      continue;
+    }
+    const allowed = config.allowedCategories;
+    if (allowed !== null && typeof allowed !== "undefined") {
+      const categories = (holiday.categories || []).map((c) => c.toLowerCase());
+      if (!categories.some((c) => allowed.includes(c))) {
+        reasons.category = (reasons.category || 0) + 1;
+        continue;
+      }
+    }
+  }
+  return { total, kept, removed, reasons };
 }
 
 function isWeirdHoliday(holiday) {
@@ -846,8 +1246,8 @@ function maybePickWildcardHoliday(config, dateKey) {
   }
   if (!config.surprise.days.includes(dateKey)) return null;
 
-  const filtered = applyHolidayFilters(allHolidays, config.filters);
-  if (!filtered.length && hasActiveFilters(config.filters)) return null;
+  const filtered = applyServerFilters(allHolidays, config);
+  if (!filtered.length && hasActiveOverrides(config)) return null;
   const pool = filtered.length ? filtered : allHolidays;
   const weirdPool = pool.filter(isWeirdHoliday);
   return pickRandomItem(weirdPool.length ? weirdPool : pool);
@@ -898,6 +1298,17 @@ function recordPostAnalytics(config, channelId, dateKey, hour, holiday) {
     analytics.history = analytics.history.slice(-MAX_ANALYTICS_HISTORY);
   }
   config.analytics = analytics;
+}
+
+function recordEvent(config, event, meta = {}) {
+  if (!config) return;
+  if (!config.analytics) config.analytics = { channels: {}, holidays: {}, history: [], events: [] };
+  if (!Array.isArray(config.analytics.events)) config.analytics.events = [];
+  const planStatus = getPlanStatus(config);
+  config.analytics.events.push({ event, at: Date.now(), meta: { planStatus, ...meta } });
+  if (config.analytics.events.length > MAX_EVENT_HISTORY) {
+    config.analytics.events = config.analytics.events.slice(-MAX_EVENT_HISTORY);
+  }
 }
 
 function recordReactionAnalytics(config, channelId, dateKey) {
@@ -1146,13 +1557,46 @@ async function getUpgradeUrlForInteraction(interaction) {
   return upgradeUrl;
 }
 
+function buildTrialStartUrl(guildId, userId) {
+  if (!PUBLIC_BASE_URL) return null;
+  const base = PUBLIC_BASE_URL.replace(/\/+$/, "");
+  return `${base}/start-trial?guild_id=${guildId}&user_id=${userId || ""}`;
+}
+
+function startTrialForConfig(config, guildId, userId) {
+  if (!config || config.trialRedeemedAt) return false;
+  const now = Date.now();
+  config.trialRedeemedAt = now;
+  config.trialStartedAt = now;
+  config.trialEndsAt = now + TRIAL_DURATION_MS;
+  recordEvent(config, "trial_started", { guildId, userId, trialEndsAt: config.trialEndsAt });
+  saveGuildConfig();
+  return true;
+}
+
+async function startTrialAndGetCheckoutUrl(guildId, userId) {
+  const config = getGuildConfig(guildId);
+  if (config.isPremium) return { ok: false, reason: "paid" };
+  if (effectivePremium(config, Date.now(), guildId)) return { ok: false, reason: "active" };
+  if (config.trialRedeemedAt) return { ok: false, reason: "used" };
+  startTrialForConfig(config, guildId, userId);
+  if (!stripeClient) return { ok: true, url: SUPPORT_URL };
+  try {
+    const session = await createTrialCheckoutSession({ guildId, userId });
+    return { ok: true, url: session?.url || SUPPORT_URL };
+  } catch (err) {
+    console.warn("Stripe trial checkout error:", err?.message || err);
+    return { ok: true, url: SUPPORT_URL };
+  }
+}
+
 async function replyPremiumOnly(interaction, { feature, previewLines = [] } = {}) {
   const upgradeUrl = await getUpgradeUrlForInteraction(interaction);
   const lines = [
     "Premium only.",
     feature ? `Feature: ${feature}` : null,
     previewLines.length ? `Preview: ${previewLines.join(" • ")}` : null,
-    "Upgrade to unlock premium commands and scheduling.",
+    "Start a 7-day trial to unlock premium commands and scheduling.",
   ].filter(Boolean);
 
   return interaction.reply({
@@ -1160,9 +1604,10 @@ async function replyPremiumOnly(interaction, { feature, previewLines = [] } = {}
     flags: MessageFlags.Ephemeral,
     components: [
       new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId("start_trial").setLabel("Start 7-day trial").setStyle(ButtonStyle.Success),
         new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(upgradeUrl),
         new ButtonBuilder()
-          .setLabel("Support / Info")
+          .setLabel("Learn More")
           .setStyle(ButtonStyle.Link)
           .setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
       ),
@@ -1220,14 +1665,15 @@ function pickRandom() {
   return allHolidays[Math.floor(Math.random() * allHolidays.length)];
 }
 
-function holidaysForRange(startDate, days) {
+function holidaysForRange(startDate, days, config) {
   const list = [];
   for (let i = 0; i < days; i++) {
     const d = new Date(startDate);
     d.setDate(startDate.getDate() + i);
     const mmdd = `${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
     const hits = findByDate(mmdd);
-    if (hits.length) list.push({ date: mmdd, holiday: hits[0] });
+    const filtered = config ? applyServerFilters(hits, config) : hits;
+    if (filtered.length) list.push({ date: mmdd, holiday: filtered[0] });
   }
   return list;
 }
@@ -1289,6 +1735,158 @@ function buildButtons(h) {
   ];
 }
 
+function buildTrialActionRow() {
+  return new ActionRowBuilder().addComponents(
+    new ButtonBuilder().setCustomId("start_trial").setLabel("Start 7-day trial").setStyle(ButtonStyle.Success),
+    new ButtonBuilder()
+      .setLabel("Learn More")
+      .setStyle(ButtonStyle.Link)
+      .setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
+  );
+}
+
+function formatTimestamp(ts) {
+  if (!ts) return "unknown";
+  return `${new Date(ts).toISOString().slice(0, 16).replace("T", " ")} UTC`;
+}
+
+function buildUpgradeRow(url) {
+  const upgradeUrl = url || SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/";
+  return new ActionRowBuilder().addComponents(
+    new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(upgradeUrl),
+    new ButtonBuilder().setLabel("Learn More").setStyle(ButtonStyle.Link).setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
+  );
+}
+
+async function findCustomerIdForGuild(guildId) {
+  if (!stripeClient || !guildId) return null;
+  try {
+    let startingAfter = null;
+    while (true) {
+      const subs = await stripeClient.subscriptions.list({
+        status: "active",
+        limit: 100,
+        starting_after: startingAfter || undefined,
+      });
+      for (const sub of subs.data) {
+        const gid = sub.metadata?.guild_id || sub.items?.data?.[0]?.metadata?.guild_id;
+        if (gid === guildId && subscriptionHasPremiumPrice(sub)) {
+          return sub.customer;
+        }
+      }
+      if (!subs.has_more) break;
+      startingAfter = subs.data[subs.data.length - 1].id;
+    }
+  } catch (err) {
+    console.warn("Stripe lookup error:", err.message);
+  }
+  return null;
+}
+
+async function getPortalUrlForGuild(guildId) {
+  if (STRIPE_PORTAL_URL) return STRIPE_PORTAL_URL;
+  if (!stripeClient) return null;
+  const customerId = await findCustomerIdForGuild(guildId);
+  if (!customerId) return null;
+  try {
+    const session = await stripeClient.billingPortal.sessions.create({
+      customer: customerId,
+      return_url: STRIPE_PORTAL_RETURN_URL,
+    });
+    return session?.url || null;
+  } catch (err) {
+    console.warn("Stripe portal error:", err.message);
+    return null;
+  }
+}
+
+async function getBestUpgradeUrlForGuild(guildId, interaction) {
+  const portalUrl = await getPortalUrlForGuild(guildId);
+  if (portalUrl) return portalUrl;
+  if (interaction) return getUpgradeUrlForInteraction(interaction);
+  if (stripeClient && STRIPE_PRICE_ID_STANDARD && STRIPE_PRICE_ID_INTRO) {
+    try {
+      const session = await createPremiumCheckoutSession({ guildId, userId: "" });
+      if (session?.url) return session.url;
+    } catch (err) {
+      console.warn("Stripe checkout error (best upgrade url):", err.message);
+    }
+  }
+  return SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/";
+}
+
+async function maybeSendOnboardingDm(user, guildId) {
+  if (!user || !guildId) return;
+  const config = getGuildConfig(guildId);
+  if (config.onboardingDmSent) return;
+  const trialUrl = buildTrialStartUrl(guildId, user.id);
+  const lines = [
+    "Thanks for adding Obscure Holiday Calendar!",
+    "Category Filters let you pick which kinds of holidays your server sees.",
+    config.trialRedeemedAt
+      ? "Your server has already used its 7-day trial. Use /upgrade to subscribe."
+      : trialUrl
+        ? `Start a 7-day trial: ${trialUrl}`
+        : "Start a 7-day trial: run /premium and click Start 7-day trial.",
+    "Use /categories to explore filters, and /setcategories to configure them (admin).",
+  ];
+  try {
+    await user.send(lines.join("\n"));
+    config.onboardingDmSent = true;
+    saveGuildConfig();
+  } catch (err) {
+    console.warn("Onboarding DM failed:", err.message);
+  }
+}
+
+async function maybeSendTrialReminder(guildId) {
+  if (!guildId) return;
+  const config = getGuildConfig(guildId);
+  const now = Date.now();
+  if (config.isPremium) {
+    if (config.trialReminderPending) {
+      config.trialReminderPending = false;
+      recordEvent(config, "trial_reminder_skipped", { guildId, reason: "upgraded" });
+      saveGuildConfig();
+    }
+    return;
+  }
+  const status = getPlanStatus(config, now);
+  if (status !== "trial") {
+    if (config.trialReminderPending) {
+      config.trialReminderPending = false;
+      recordEvent(config, "trial_reminder_skipped", { guildId, reason: "no_longer_eligible" });
+      saveGuildConfig();
+    }
+    return;
+  }
+  if (config.trialReminderSentAt) return;
+  const endsAt = Number(config.trialEndsAt || 0);
+  if (!endsAt || endsAt - now > 24 * 60 * 60 * 1000) {
+    if (config.trialReminderPending) {
+      config.trialReminderPending = false;
+      recordEvent(config, "trial_reminder_skipped", { guildId, reason: "trial_extended" });
+      saveGuildConfig();
+    }
+    return;
+  }
+  try {
+    const guild = await client.guilds.fetch(guildId);
+    const owner = await guild.fetchOwner();
+    if (!owner?.user) return;
+    const upgradeUrl = await getBestUpgradeUrlForGuild(guildId);
+    await owner.user.send(`Trial ends tomorrow — keep filters active by upgrading: ${upgradeUrl}`);
+    config.trialReminderSentAt = now;
+    config.trialReminderPending = false;
+    recordEvent(config, "trial_reminder_sent", { guildId, method: "dm" });
+    saveGuildConfig();
+  } catch (err) {
+    config.trialReminderPending = true;
+    saveGuildConfig();
+    console.warn("Trial reminder DM failed:", err.message);
+  }
+}
+
 async function handleToday(interaction) {
   const now = new Date();
   const mmdd = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
@@ -1296,7 +1894,7 @@ async function handleToday(interaction) {
   if (!hits.length) return interaction.reply({ content: "No holiday found for today.", flags: MessageFlags.Ephemeral });
   const premium = isPremium(interaction.guild, interaction.member);
   const config = getGuildConfig(interaction.guild.id);
-  const filtered = premium ? applyHolidayFilters(hits, config.filters) : hits;
+  const filtered = premium ? applyServerFilters(hits, config) : hits;
   if (!filtered.length) {
     return interaction.reply({ content: "No holiday found for today with current filters.", flags: MessageFlags.Ephemeral });
   }
@@ -1343,6 +1941,7 @@ async function handleHelp(interaction) {
       "/today — today’s holiday",
       "/fact [name|MM-DD] — one fun fact (free)",
       "/streak — show the server streak",
+      "/categories — list holiday categories + server settings",
       "",
       "Premium content",
       "/date MM-DD — holiday on a date",
@@ -1352,12 +1951,23 @@ async function handleHelp(interaction) {
       "/tomorrow — tomorrow’s holiday",
       "/upcoming [days] — upcoming holidays (max 30)",
       "/week [days] — 7-day digest (3–14)",
+      "/setcategories <list|all> — allow categories (admin)",
+      "/excludesensitive [true|false] — hide sensitive holidays (admin)",
+      "/trial — check 7-day trial status (admin)",
       "",
       "Setup & admin",
       "/setup — configure daily posts",
       "  free: channel",
       "  premium: timezone, hour, branding, holiday_choice, role_mention, quiet, promotions, embed_style, embed_color, skip_weekends",
       "  premium extras: tone, streak_role, streak_goal, filters, blacklist, surprise_days",
+      "",
+      "Admin controls",
+      "/trial — start/check 7-day trial",
+      "/categories — view categories",
+      "/setcategories — set allowed categories (premium/trial)",
+      "/excludesensitive — toggle sensitive filter (premium/trial)",
+      "/overrides — blocked/forced lists",
+      "/why — explain why something was filtered",
       "/analytics — engagement analytics (premium, admin)",
       "/lore — server lore (premium, admin)",
       "",
@@ -1374,6 +1984,7 @@ async function handleHelp(interaction) {
       "/slack — Slack bot link",
       "",
       "Tips",
+      "Premium adds control, not more noise.",
       "Daily posts use the bot’s role permissions in that channel.",
       "Streaks increment when someone reacts to the daily post; the first reaction per day counts.",
       "If streak roles or analytics aren’t working, check Manage Roles + Read Message History.",
@@ -1423,7 +2034,7 @@ async function handleDate(interaction) {
   const parsed = parseDate(input);
   if (!parsed) return interaction.reply({ content: "Please provide a date as MM-DD or MM/DD (example: 07-04).", flags: MessageFlags.Ephemeral });
   const config = getGuildConfig(interaction.guild.id);
-  const hits = applyHolidayFilters(findByDate(parsed), config.filters);
+  const hits = applyServerFilters(findByDate(parsed), config);
   if (!hits.length) return interaction.reply({ content: `No holidays found on ${parsed} with current filters.`, flags: MessageFlags.Ephemeral });
   return interaction.reply({ embeds: [buildEmbed(hits[0], { branding: config.branding, tone: config.tone })], components: buildButtons(hits[0]) });
 }
@@ -1437,7 +2048,7 @@ async function handleSearch(interaction) {
   }
   const query = interaction.options.getString("query", true);
   const config = getGuildConfig(interaction.guild.id);
-  const matches = applyHolidayFilters(findByName(query), config.filters);
+  const matches = applyServerFilters(findByName(query), config);
   if (!matches.length) return interaction.reply({ content: "No match. Try a simpler phrase.", flags: MessageFlags.Ephemeral });
   const embeds = matches.slice(0, 3).map((h) => buildEmbed(h, { branding: config.branding, tone: config.tone }));
   return interaction.reply({ embeds, components: buildButtons(matches[0]) });
@@ -1450,7 +2061,10 @@ async function handleRandom(interaction) {
     return replyPremiumOnly(interaction, { feature: "/random", previewLines });
   }
   const config = getGuildConfig(interaction.guild.id);
-  const filtered = applyHolidayFilters(allHolidays, config.filters);
+  const filtered = applyServerFilters(allHolidays, config);
+  if (!filtered.length && hasActiveOverrides(config)) {
+    return interaction.reply({ content: "No holidays found with current filters.", flags: MessageFlags.Ephemeral });
+  }
   const h = pickRandomItem(filtered.length ? filtered : allHolidays);
   return interaction.reply({ embeds: [buildEmbed(h, { branding: config.branding, tone: config.tone })], components: buildButtons(h) });
 }
@@ -1464,7 +2078,8 @@ async function handleWeek(interaction) {
   }
   const days = Math.max(3, Math.min(interaction.options.getInteger("days") || 7, 14));
   const now = new Date();
-  const items = holidaysForRange(now, days);
+  const config = getGuildConfig(interaction.guild.id);
+  const items = holidaysForRange(now, days, config);
   if (!items.length) return interaction.reply({ content: "No upcoming holidays found.", flags: MessageFlags.Ephemeral });
   const embed = new EmbedBuilder()
     .setTitle(`Next ${days} days of holidays`)
@@ -1526,6 +2141,7 @@ async function handleSetup(interaction) {
     scheduleForChannel(guildId, channel.id);
     const upgradeUrl = await getUpgradeUrlForInteraction(interaction);
     await sendSetupPreview(channel, config, false, null);
+    await maybeSendOnboardingDm(interaction.user, guildId);
     return interaction.reply({
       content: [
         `Daily posts set to <#${channel.id}> at 00:00 UTC.`,
@@ -1584,6 +2200,7 @@ async function handleSetup(interaction) {
   console.log(`Setup saved for guild ${guildId}: ${formatSetupLog(config, channel.id)}`);
   scheduleForChannel(guildId, channel.id);
   await sendSetupPreview(channel, config, true, ch);
+  await maybeSendOnboardingDm(interaction.user, guildId);
 
   return interaction.reply({
     content: [
@@ -1611,6 +2228,372 @@ async function handleSetup(interaction) {
     ].join("\n"),
     flags: MessageFlags.Ephemeral,
   });
+}
+
+async function handleCategories(interaction) {
+  if (!interaction.guild) {
+    return interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
+  }
+  const config = getGuildConfig(interaction.guild.id);
+  const allowed = config.allowedCategories;
+  const allowedLabel = allowed === null ? "all" : allowed.length ? allowed.join(", ") : "none";
+  const trialActive = effectivePremium(config, Date.now(), interaction.guild.id) && !config.isPremium;
+  const trialLine = trialActive
+    ? `Trial: active until ${formatTimestamp(config.trialEndsAt)}`
+    : config.trialRedeemedAt
+      ? config.trialEndsAt
+        ? `Trial: used (ended ${formatTimestamp(config.trialEndsAt)})`
+        : "Trial: used"
+      : `Trial: available (${TRIAL_DAYS} days)`;
+  const lines = [
+    `Available categories: ${ALL_CATEGORIES.join(", ")}`,
+    `Allowed categories: ${allowedLabel}`,
+    `Exclude sensitive: ${config.excludeSensitive ? "on" : "off"}`,
+    trialLine,
+  ];
+  const premium = isPremium(interaction.guild, interaction.member);
+  const components = premium ? [] : [buildTrialActionRow()];
+  return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral, components });
+}
+
+async function handleSetCategories(interaction) {
+  if (!interaction.guild) {
+    return interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
+  }
+  if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild)) {
+    return interaction.reply({ content: "Admins only (Manage Server).", flags: MessageFlags.Ephemeral });
+  }
+  if (!isPremium(interaction.guild, interaction.member)) {
+    return replyPremiumOnly(interaction, { feature: "/setcategories" });
+  }
+  const input = interaction.options.getString("categories", true).trim().toLowerCase();
+  const config = getGuildConfig(interaction.guild.id);
+  recordEvent(config, "categories_set_attempt", { guildId: interaction.guildId, input });
+  if (["all", "any", "*", "everything", "reset"].includes(input)) {
+    config.allowedCategories = null;
+  } else if (["none", "clear"].includes(input)) {
+    config.allowedCategories = [];
+  } else {
+    const list = [...new Set(normalizeCategoryList(input))];
+    const invalid = list.filter((cat) => !ALL_CATEGORIES.includes(cat));
+    if (invalid.length) {
+      return interaction.reply({
+        content: `Unknown categories: ${invalid.join(", ")}\nAvailable: ${ALL_CATEGORIES.join(", ")}`,
+        flags: MessageFlags.Ephemeral,
+      });
+    }
+    config.allowedCategories = list;
+  }
+  recordEvent(config, "categories_set", {
+    guildId: interaction.guildId,
+    allowedCategories: config.allowedCategories,
+  });
+  saveGuildConfig();
+  const allowedLabel = config.allowedCategories === null ? "all" : config.allowedCategories.length ? config.allowedCategories.join(", ") : "none";
+  return interaction.reply({
+    content: `Allowed categories updated: ${allowedLabel}`,
+    flags: MessageFlags.Ephemeral,
+  });
+}
+
+async function handleSetCategoriesAutocomplete(interaction) {
+  const focused = interaction.options.getFocused() || "";
+  const raw = String(focused);
+  const parts = raw.split(",").map((part) => part.trim());
+  const last = parts.length ? parts[parts.length - 1].toLowerCase() : "";
+  const base = parts.length > 1 ? parts.slice(0, -1).join(", ") + ", " : "";
+  const choices = [...ALL_CATEGORIES, "all", "reset"]
+    .filter((item) => item.toLowerCase().includes(last))
+    .slice(0, 25)
+    .map((item) => ({
+      name: base + item,
+      value: base + item,
+    }));
+  return interaction.respond(choices);
+}
+
+async function handleExcludeSensitive(interaction) {
+  if (!interaction.guild) {
+    return interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
+  }
+  if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild)) {
+    return interaction.reply({ content: "Admins only (Manage Server).", flags: MessageFlags.Ephemeral });
+  }
+  if (!isPremium(interaction.guild, interaction.member)) {
+    return replyPremiumOnly(interaction, { feature: "/excludesensitive" });
+  }
+  const config = getGuildConfig(interaction.guild.id);
+  const enabled = interaction.options.getBoolean("enabled");
+  config.excludeSensitive = typeof enabled === "boolean" ? enabled : !config.excludeSensitive;
+  saveGuildConfig();
+  return interaction.reply({
+    content: `Exclude sensitive: ${config.excludeSensitive ? "on" : "off"}`,
+    flags: MessageFlags.Ephemeral,
+  });
+}
+
+async function handleStartTrialButton(interaction) {
+  if (!interaction.guildId) {
+    return interaction.reply({ content: "This action must be used in a server.", flags: MessageFlags.Ephemeral });
+  }
+  if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild)) {
+    return interaction.reply({ content: "Admins only (Manage Server).", flags: MessageFlags.Ephemeral });
+  }
+  const config = getGuildConfig(interaction.guildId);
+  if (config.isPremium) {
+    return interaction.reply({ content: "Premium is already active for this server.", flags: MessageFlags.Ephemeral });
+  }
+  if (effectivePremium(config, Date.now(), interaction.guildId)) {
+    return interaction.reply({
+      content: `Trial already active until ${formatTimestamp(config.trialEndsAt)}.`,
+      flags: MessageFlags.Ephemeral,
+    });
+  }
+  if (config.trialRedeemedAt) {
+    const upgradeUrl = await getUpgradeUrlForInteraction(interaction);
+    return interaction.reply({ content: "This server already used its 7-day trial.", flags: MessageFlags.Ephemeral, components: [buildUpgradeRow(upgradeUrl)] });
+  }
+  const result = await startTrialAndGetCheckoutUrl(interaction.guildId, interaction.user.id);
+  if (!result.ok) {
+    return interaction.reply({ content: "Unable to start the trial right now.", flags: MessageFlags.Ephemeral });
+  }
+  const url = result.url || SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/";
+  return interaction.reply({
+    content: `Trial started! Finish checkout here: ${url}`,
+    flags: MessageFlags.Ephemeral,
+    components: [
+      new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setLabel("Open Checkout").setStyle(ButtonStyle.Link).setURL(url)
+      ),
+    ],
+  });
+}
+
+async function handleTrialStatus(interaction) {
+  if (!interaction.guild) {
+    return interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
+  }
+  if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild)) {
+    return interaction.reply({ content: "Admins only (Manage Server).", flags: MessageFlags.Ephemeral });
+  }
+  const config = getGuildConfig(interaction.guild.id);
+  const now = Date.now();
+  effectivePremium(config, now, interaction.guild.id);
+  const status = getPlanStatus(config, now);
+  const premium = status === "premium";
+  const trialActive = status === "trial";
+  if (premium && config.trialReminderPending) {
+    config.trialReminderPending = false;
+    recordEvent(config, "trial_reminder_skipped", { guildId: interaction.guildId, reason: "upgraded" });
+    saveGuildConfig();
+  }
+  if (trialActive && config.trialReminderPending && !config.trialReminderSentAt && Number(config.trialEndsAt || 0) - now <= 24 * 60 * 60 * 1000) {
+    const upgradeUrl = await getBestUpgradeUrlForGuild(interaction.guild.id, interaction);
+    const reminder = `Trial ends tomorrow — keep filters active by upgrading: ${upgradeUrl}`;
+    config.trialReminderSentAt = now;
+    config.trialReminderPending = false;
+    recordEvent(config, "trial_reminder_sent", { guildId: interaction.guildId, method: "fallback_ephemeral" });
+    saveGuildConfig();
+    return interaction.reply({ content: reminder, flags: MessageFlags.Ephemeral });
+  }
+  if (!trialActive && config.trialReminderPending) {
+    config.trialReminderPending = false;
+    recordEvent(config, "trial_reminder_skipped", { guildId: interaction.guildId, reason: "no_longer_eligible" });
+    saveGuildConfig();
+  }
+  const lines = [
+    `Status: ${status}`,
+    trialActive ? `Trial ends: ${formatTimestamp(config.trialEndsAt)}` : null,
+    config.trialRedeemedAt && !trialActive ? `Trial used: ${formatTimestamp(config.trialRedeemedAt)}` : null,
+    config.trialRedeemedAt && !trialActive && config.trialEndsAt ? `Trial ended: ${formatTimestamp(config.trialEndsAt)}` : null,
+  ].filter(Boolean);
+  if (premium) {
+    return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
+  }
+  if (trialActive) {
+    const remainingMs = Math.max(0, Number(config.trialEndsAt || 0) - now);
+    const remainingHours = Math.ceil(remainingMs / (1000 * 60 * 60));
+    lines.push(`Time remaining: ~${remainingHours} hour(s)`);
+    return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
+  }
+  const upgradeUrl = await getBestUpgradeUrlForGuild(interaction.guild.id, interaction);
+  if (config.trialRedeemedAt) {
+    return interaction.reply({
+      content: lines.join("\n"),
+      flags: MessageFlags.Ephemeral,
+      components: [buildUpgradeRow(upgradeUrl)],
+    });
+  }
+  return interaction.reply({
+    content: lines.concat("Eligible for a 7-day trial.").join("\n"),
+    flags: MessageFlags.Ephemeral,
+    components: [buildTrialActionRow()],
+  });
+}
+
+function describeOverrides(config) {
+  const blocked = config.blockedHolidayIds || [];
+  const forced = config.forcedHolidayIds || [];
+  const summarize = (list) => list.slice(0, 15).join(", ") + (list.length > 15 ? "…" : "");
+  return [
+    blocked.length ? `Blocked: ${summarize(blocked)}` : "Blocked: none",
+    forced.length ? `Forced: ${summarize(forced)}` : "Forced: none",
+  ];
+}
+
+async function handleOverrides(interaction) {
+  if (!interaction.guild) {
+    return interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
+  }
+  if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild)) {
+    return interaction.reply({ content: "Admins only (Manage Server).", flags: MessageFlags.Ephemeral });
+  }
+  const config = getGuildConfig(interaction.guild.id);
+  return interaction.reply({ content: describeOverrides(config).join("\n"), flags: MessageFlags.Ephemeral });
+}
+
+async function handleOverrideUpdate(interaction, listKey, actionVerb) {
+  if (!interaction.guild) {
+    return interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
+  }
+  if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild)) {
+    return interaction.reply({ content: "Admins only (Manage Server).", flags: MessageFlags.Ephemeral });
+  }
+  const input = interaction.options.getString("id_or_name", true);
+  const holiday = resolveHolidayByIdOrName(input);
+  if (!holiday) {
+    return interaction.reply({ content: "Holiday not found. Try a full name or slug.", flags: MessageFlags.Ephemeral });
+  }
+  const config = getGuildConfig(interaction.guild.id);
+  const id = holidayId(holiday);
+  const list = new Set((config[listKey] || []).map((item) => String(item).toLowerCase()));
+  if (actionVerb === "add") list.add(id);
+  if (actionVerb === "remove") list.delete(id);
+  config[listKey] = [...list];
+  saveGuildConfig();
+  return interaction.reply({
+    content: `${listKey === "blockedHolidayIds" ? "Blocked" : "Forced"} updated: ${holiday.name || id}`,
+    flags: MessageFlags.Ephemeral,
+  });
+}
+
+async function handleWhy(interaction) {
+  if (!interaction.guild) {
+    return interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
+  }
+  if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild)) {
+    return interaction.reply({ content: "Admins only (Manage Server).", flags: MessageFlags.Ephemeral });
+  }
+  const input = interaction.options.getString("id_or_name", true);
+  const holiday = resolveHolidayByIdOrName(input);
+  if (!holiday) {
+    return interaction.reply({ content: "Holiday not found. Try a full name or slug.", flags: MessageFlags.Ephemeral });
+  }
+  ensureHolidayMeta(holiday);
+  const config = getGuildConfig(interaction.guild.id);
+  const blockedIds = new Set((config.blockedHolidayIds || []).map((id) => String(id).toLowerCase()));
+  const forcedIds = new Set((config.forcedHolidayIds || []).map((id) => String(id).toLowerCase()));
+  const id = holidayId(holiday);
+  const allowed = config.allowedCategories;
+  let decision = "allowed";
+  if (forcedIds.size && !forcedIds.has(id)) {
+    decision = "filtered (not forced)";
+  } else if (blockedIds.has(id)) {
+    decision = "filtered (blocked)";
+  } else if (!filterHoliday(holiday, config.filters)) {
+    decision = "filtered (keyword filters)";
+  } else if (config.excludeSensitive && holiday.is_sensitive) {
+    decision = "filtered (sensitive)";
+  } else if (allowed !== null && typeof allowed !== "undefined") {
+    const categories = (holiday.categories || []).map((c) => c.toLowerCase());
+    if (!categories.some((c) => allowed.includes(c))) {
+      decision = "filtered (category)";
+    }
+  }
+  const lines = [
+    `Holiday: ${holiday.name || id}`,
+    `Id: ${id}`,
+    `Categories: ${(holiday.categories || []).join(", ") || "none"}`,
+    `Sensitive: ${holiday.is_sensitive ? "yes" : "no"}`,
+    `Decision: ${decision}`,
+  ];
+  return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
+}
+
+async function handleAdminStats(interaction) {
+  if (!isOwner(interaction.user.id)) {
+    return interaction.reply({ content: "Owner-only command.", flags: MessageFlags.Ephemeral });
+  }
+  const now = Date.now();
+  const cutoff = now - 30 * 24 * 60 * 60 * 1000;
+  const guildStats = [];
+  let totalTrials = 0;
+  let totalUpgrades = 0;
+  let totalCategoryAttempts = 0;
+  for (const [guildId, config] of Object.entries(guildConfig)) {
+    const events = Array.isArray(config.analytics?.events) ? config.analytics.events : [];
+    let upsellCount = 0;
+    let trialCount = 0;
+    let upgradeCount = 0;
+    let categoryAttempts = 0;
+    for (const event of events) {
+      if (!event || event.at < cutoff) continue;
+      if (event.event === "upsell_shown") upsellCount += 1;
+      if (event.event === "trial_started") trialCount += 1;
+      if (event.event === "upgrade_completed") upgradeCount += 1;
+      if (event.event === "categories_set_attempt") categoryAttempts += 1;
+    }
+    totalTrials += trialCount;
+    totalUpgrades += upgradeCount;
+    totalCategoryAttempts += categoryAttempts;
+    guildStats.push({ guildId, upsellCount, trialCount, upgradeCount, categoryAttempts });
+  }
+  guildStats.sort((a, b) => b.upsellCount - a.upsellCount);
+  const topGuilds = guildStats.slice(0, 5).map((stat) => {
+    const guild = client.guilds.cache.get(stat.guildId);
+    const label = guild ? `${guild.name} (${stat.guildId})` : stat.guildId;
+    return `${label} — upsell ${stat.upsellCount}, trial ${stat.trialCount}, upgrade ${stat.upgradeCount}, categories ${stat.categoryAttempts}`;
+  });
+  const lines = [
+    "Admin stats (last 30 days)",
+    `Trials started: ${totalTrials}`,
+    `Upgrades completed: ${totalUpgrades}`,
+    `Category attempts: ${totalCategoryAttempts}`,
+    "Top guilds by upsell_shown:",
+    ...(topGuilds.length ? topGuilds : ["none"]),
+  ];
+  return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
+}
+
+async function handleAdminFunnel(interaction) {
+  if (!isOwner(interaction.user.id)) {
+    return interaction.reply({ content: "Owner-only command.", flags: MessageFlags.Ephemeral });
+  }
+  const now = Date.now();
+  const cutoff = now - 14 * 24 * 60 * 60 * 1000;
+  let upsellCount = 0;
+  let trialCount = 0;
+  let upgradeCount = 0;
+  for (const config of Object.values(guildConfig)) {
+    const events = Array.isArray(config.analytics?.events) ? config.analytics.events : [];
+    for (const event of events) {
+      if (!event || event.at < cutoff) continue;
+      if (event.event === "upsell_shown") upsellCount += 1;
+      if (event.event === "trial_started") trialCount += 1;
+      if (event.event === "upgrade_completed") upgradeCount += 1;
+    }
+  }
+  const trialRate = upsellCount ? (trialCount / upsellCount) * 100 : 0;
+  const upgradeRate = trialCount ? (upgradeCount / trialCount) * 100 : 0;
+  const lines = [
+    "Admin funnel (last 14 days)",
+    `Upsell shown: ${upsellCount}`,
+    `Trials started: ${trialCount}`,
+    `Upgrades completed: ${upgradeCount}`,
+    `Trial conversion: ${trialRate.toFixed(1)}%`,
+    `Upgrade conversion: ${upgradeRate.toFixed(1)}%`,
+  ];
+  return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
 }
 
 async function handleFacts(interaction) {
@@ -1742,9 +2725,9 @@ async function handleTomorrow(interaction) {
   const tomorrow = new Date(now);
   tomorrow.setDate(now.getDate() + 1);
   const mmdd = `${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}`;
-  const hits = findByDate(mmdd);
-  if (!hits.length) return interaction.reply({ content: "No holiday found for tomorrow.", flags: MessageFlags.Ephemeral });
   const config = getGuildConfig(interaction.guild.id);
+  const hits = applyServerFilters(findByDate(mmdd), config);
+  if (!hits.length) return interaction.reply({ content: "No holiday found for tomorrow with current filters.", flags: MessageFlags.Ephemeral });
   return interaction.reply({ embeds: [buildEmbed(hits[0], { branding: config.branding })], components: buildButtons(hits[0]) });
 }
 
@@ -1757,14 +2740,14 @@ async function handleUpcoming(interaction) {
   }
   const days = Math.max(1, Math.min(interaction.options.getInteger("days") || 7, 30));
   const now = new Date();
-  const items = holidaysForRange(now, days);
+  const config = getGuildConfig(interaction.guild.id);
+  const items = holidaysForRange(now, days, config);
   if (!items.length) return interaction.reply({ content: "No upcoming holidays found.", flags: MessageFlags.Ephemeral });
   const fields = items.slice(0, 5).map(({ date, holiday }) => ({
     name: `${holiday.emoji ? holiday.emoji + " " : ""}${holiday.name}`,
     value: prettyDate(date),
     inline: true,
   }));
-  const config = getGuildConfig(interaction.guild.id);
   const embed = new EmbedBuilder()
     .setTitle("Upcoming holidays")
     .addFields(fields)
@@ -1778,6 +2761,8 @@ async function handleUpcoming(interaction) {
 async function handlePremiumStatus(interaction) {
   const premium = isPremium(interaction.guild, interaction.member);
   const config = getGuildConfig(interaction.guild.id);
+  effectivePremium(config, Date.now(), interaction.guild.id);
+  const trialActive = getPlanStatus(config) === "trial";
   const benefits = [
     "✅ Multiple daily channels",
     "✅ Custom timezone & hour",
@@ -1790,18 +2775,20 @@ async function handlePremiumStatus(interaction) {
     "✅ Streak role rewards",
     "✅ Mood/tone selector",
     "✅ Holiday filters & server lore",
+    "✅ Category filters + sensitive toggle",
   ];
 
-  if (premium) {
+  if (premium || trialActive) {
     const lines = [
-      "✅ Premium is active for this server.",
+      premium ? "✅ Premium is active for this server." : "🧪 Trial is active for this server.",
+      !premium && trialActive ? `Trial ends: ${formatTimestamp(config.trialEndsAt)}` : null,
       `Daily channel(s): ${config.channelIds.length ? config.channelIds.map((c) => `<#${c}>`).join(", ") : "not set"}`,
       `Timezone: ${config.timezone} @ ${config.hour}:00`,
       `Branding: ${config.branding === false ? "off" : "on"}`,
       `Holiday pick: ${config.holidayChoice === 1 ? "second of the day" : "first of the day"}`,
       "Premium perks:",
       ...benefits,
-    ];
+    ].filter(Boolean);
     return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
   }
 
@@ -1821,7 +2808,7 @@ async function handlePremiumStatus(interaction) {
 
   const lines = [
     "⚠️ Premium not active.",
-    "Intro offer: $0.99 for your first month, then $3.99/month. Cancel anytime.",
+    "Start a 7-day trial, then $3.99/month. Cancel anytime.",
     "Premium unlocks:",
     ...benefits,
   ];
@@ -1831,8 +2818,9 @@ async function handlePremiumStatus(interaction) {
     flags: MessageFlags.Ephemeral,
     components: [
       new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId("start_trial").setLabel("Start 7-day trial").setStyle(ButtonStyle.Success),
         new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(upgradeUrl),
-        new ButtonBuilder().setLabel("Support / Info").setStyle(ButtonStyle.Link).setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
+        new ButtonBuilder().setLabel("Learn More").setStyle(ButtonStyle.Link).setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
       ),
     ],
   });
@@ -2170,99 +3158,134 @@ client.once("clientReady", async () => {
 });
 
 client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
   try {
-    switch (interaction.commandName) {
-      case "today":
-        return handleToday(interaction);
-      case "date":
-        return handleDate(interaction);
-      case "search":
-        return handleSearch(interaction);
-      case "random":
-        return handleRandom(interaction);
-      case "vote":
-        return handleVote(interaction);
-      case "rate":
-        return handleRate(interaction);
-      case "facts":
-        return handleFacts(interaction);
-      case "fact":
-        return handleFact(interaction);
-      case "streak":
-        return handleStreak(interaction);
+    if (interaction.isChatInputCommand()) {
+      switch (interaction.commandName) {
+        case "today":
+          return handleToday(interaction);
+        case "date":
+          return handleDate(interaction);
+        case "search":
+          return handleSearch(interaction);
+        case "random":
+          return handleRandom(interaction);
+        case "vote":
+          return handleVote(interaction);
+        case "rate":
+          return handleRate(interaction);
+        case "facts":
+          return handleFacts(interaction);
+        case "fact":
+          return handleFact(interaction);
+        case "streak":
+          return handleStreak(interaction);
       case "setup":
         return handleSetup(interaction);
+      case "categories":
+        return handleCategories(interaction);
+      case "setcategories":
+        return handleSetCategories(interaction);
+      case "excludesensitive":
+        return handleExcludeSensitive(interaction);
+      case "trial":
+        return handleTrialStatus(interaction);
+      case "block-holiday":
+        return handleOverrideUpdate(interaction, "blockedHolidayIds", "add");
+      case "unblock-holiday":
+        return handleOverrideUpdate(interaction, "blockedHolidayIds", "remove");
+      case "force-holiday":
+        return handleOverrideUpdate(interaction, "forcedHolidayIds", "add");
+      case "unforce-holiday":
+        return handleOverrideUpdate(interaction, "forcedHolidayIds", "remove");
+      case "overrides":
+        return handleOverrides(interaction);
+      case "why":
+        return handleWhy(interaction);
+      case "admin-stats":
+        return handleAdminStats(interaction);
+      case "admin-funnel":
+        return handleAdminFunnel(interaction);
       case "premium":
         return handlePremiumStatus(interaction);
-      case "analytics":
-        return handleAnalytics(interaction);
-      case "lore":
-        return handleLore(interaction);
-      case "week":
-        return handleWeek(interaction);
-      case "upgrade":
-        return handleUpgrade(interaction);
-      case "manage":
-        return handleManage(interaction);
-      case "tomorrow":
-        return handleTomorrow(interaction);
-      case "upcoming":
-        return handleUpcoming(interaction);
-      case "grantpremium":
-        return handleGrantPremium(interaction);
-      case "installcount":
-        return handleInstallCount(interaction);
-      case "postnowall":
-        return handlePostNowAll(interaction);
-      case "invite":
-        return interaction.reply({
-          content: "Invite the bot to your server:",
-          components: [
-            new ActionRowBuilder().addComponents(
-              new ButtonBuilder().setLabel("Invite to another server").setStyle(ButtonStyle.Link).setURL(BOT_INVITE_URL),
-              new ButtonBuilder().setLabel("Get the App").setStyle(ButtonStyle.Link).setURL(APP_URL)
-            ),
-          ],
-        });
-      case "share":
-        return handleShare(interaction);
-      case "support":
-        return interaction.reply({
-          content: "Need help? Visit our landing page:",
-          components: [
-            new ActionRowBuilder().addComponents(
-              new ButtonBuilder().setLabel("Support / Landing").setStyle(ButtonStyle.Link).setURL(SUPPORT_URL),
-              new ButtonBuilder().setLabel("Invite the Bot").setStyle(ButtonStyle.Link).setURL(BOT_INVITE_URL)
-            ),
-          ],
-          flags: MessageFlags.Ephemeral,
-        });
-      case "app":
-        return interaction.reply({
-          content: "Get the Obscure Holiday Calendar app:",
-          components: [
-            new ActionRowBuilder().addComponents(
-              new ButtonBuilder().setLabel("Get the App").setStyle(ButtonStyle.Link).setURL(APP_URL),
-              new ButtonBuilder().setLabel("View Website").setStyle(ButtonStyle.Link).setURL(SITE_URL)
-            ),
-          ],
-          flags: MessageFlags.Ephemeral,
-        });
-      case "slack":
-        return interaction.reply({
-          content: "We also have a Slack bot for daily holiday posts:",
-          components: [
-            new ActionRowBuilder().addComponents(
-              new ButtonBuilder().setLabel("Slack Bot Info").setStyle(ButtonStyle.Link).setURL(SLACK_BOT_URL)
-            ),
-          ],
-          flags: MessageFlags.Ephemeral,
-        });
-      case "help":
-        return handleHelp(interaction);
-      default:
-        return interaction.reply({ content: "Unknown command.", flags: MessageFlags.Ephemeral });
+        case "analytics":
+          return handleAnalytics(interaction);
+        case "lore":
+          return handleLore(interaction);
+        case "week":
+          return handleWeek(interaction);
+        case "upgrade":
+          return handleUpgrade(interaction);
+        case "manage":
+          return handleManage(interaction);
+        case "tomorrow":
+          return handleTomorrow(interaction);
+        case "upcoming":
+          return handleUpcoming(interaction);
+        case "grantpremium":
+          return handleGrantPremium(interaction);
+        case "installcount":
+          return handleInstallCount(interaction);
+        case "postnowall":
+          return handlePostNowAll(interaction);
+        case "invite":
+          return interaction.reply({
+            content: "Invite the bot to your server:",
+            components: [
+              new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setLabel("Invite to another server").setStyle(ButtonStyle.Link).setURL(BOT_INVITE_URL),
+                new ButtonBuilder().setLabel("Get the App").setStyle(ButtonStyle.Link).setURL(APP_URL)
+              ),
+            ],
+          });
+        case "share":
+          return handleShare(interaction);
+        case "support":
+          return interaction.reply({
+            content: "Need help? Visit our landing page:",
+            components: [
+              new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setLabel("Support / Landing").setStyle(ButtonStyle.Link).setURL(SUPPORT_URL),
+                new ButtonBuilder().setLabel("Invite the Bot").setStyle(ButtonStyle.Link).setURL(BOT_INVITE_URL)
+              ),
+            ],
+            flags: MessageFlags.Ephemeral,
+          });
+        case "app":
+          return interaction.reply({
+            content: "Get the Obscure Holiday Calendar app:",
+            components: [
+              new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setLabel("Get the App").setStyle(ButtonStyle.Link).setURL(APP_URL),
+                new ButtonBuilder().setLabel("View Website").setStyle(ButtonStyle.Link).setURL(SITE_URL)
+              ),
+            ],
+            flags: MessageFlags.Ephemeral,
+          });
+        case "slack":
+          return interaction.reply({
+            content: "We also have a Slack bot for daily holiday posts:",
+            components: [
+              new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setLabel("Slack Bot Info").setStyle(ButtonStyle.Link).setURL(SLACK_BOT_URL)
+              ),
+            ],
+            flags: MessageFlags.Ephemeral,
+          });
+        case "help":
+          return handleHelp(interaction);
+        default:
+          return interaction.reply({ content: "Unknown command.", flags: MessageFlags.Ephemeral });
+      }
+    }
+    if (interaction.isButton()) {
+      if (interaction.customId === "start_trial") {
+        return handleStartTrialButton(interaction);
+      }
+    }
+    if (interaction.isAutocomplete()) {
+      if (interaction.commandName === "setcategories") {
+        return handleSetCategoriesAutocomplete(interaction);
+      }
     }
   } catch (err) {
     console.error(err);
@@ -2298,14 +3321,7 @@ client.on("guildCreate", async (guild) => {
   try {
     const owner = await guild.fetchOwner();
     if (!owner?.user) return;
-    await owner.user.send(
-      [
-        "Thanks for adding Obscure Holiday Calendar!",
-        "Run /setup to pick a daily-post channel.",
-        "Try /today for a quick holiday card.",
-        "Premium: /upgrade to subscribe, /manage to cancel anytime.",
-      ].join("\n")
-    );
+    await maybeSendOnboardingDm(owner.user, guild.id);
   } catch (err) {
     console.warn("Owner welcome DM failed:", err.message);
   }
@@ -2399,7 +3415,13 @@ async function postTodayForChannel(guildId, channelId) {
   const dateKey = getDateKey(now, channelSettings.timezone);
   const premium = isPremiumGuild(channel.guild);
   const wildcardHoliday = premium ? maybePickWildcardHoliday(config, dateKey) : null;
-  const filteredHits = premium ? applyHolidayFilters(hits, config.filters) : hits;
+  const filteredHits = premium ? applyServerFilters(hits, config) : hits;
+  if (premium) {
+    const summary = summarizeFilterReasons(hits, filteredHits, config);
+    if (summary) {
+      recordEvent(config, "filter_applied", { guildId, channelId, source: "daily_post", ...summary });
+    }
+  }
   if (!hits.length) {
     return channel.send("No holiday found for today. Check back tomorrow!");
   }
@@ -2408,13 +3430,17 @@ async function postTodayForChannel(guildId, channelId) {
   }
 
   const branding = !premium || channelSettings.branding;
-  const choice = Math.min(channelSettings.holidayChoice || 0, filteredHits.length - 1);
+  const maxFreeItems = 3;
+  const listHits = premium ? filteredHits : filteredHits.slice(0, maxFreeItems);
+  const hiddenCount = Math.max(0, filteredHits.length - listHits.length);
+  const choice = premium ? Math.min(channelSettings.holidayChoice || 0, filteredHits.length - 1) : 0;
+  const pickPool = premium ? filteredHits : listHits;
   const pick =
     wildcardHoliday ||
-    pickHolidayForTone(filteredHits, channelSettings.tone, choice) ||
-    filteredHits[choice] ||
-    filteredHits[0];
-  const topNames = wildcardHoliday ? pick.name : filteredHits.slice(0, 2).map((h) => h.name).join(" and ");
+    pickHolidayForTone(pickPool, channelSettings.tone, choice) ||
+    pickPool[choice] ||
+    pickPool[0];
+  const listNames = listHits.map((h) => h.name).join(", ");
   const todayEmbed = buildEmbed(pick, {
     branding,
     style: channelSettings.style,
@@ -2426,33 +3452,46 @@ async function postTodayForChannel(guildId, channelId) {
   const tomorrow = new Date(now);
   tomorrow.setDate(now.getDate() + 1);
   const tmm = `${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}`;
-  const nextHits = applyHolidayFilters(findByDate(tmm), config.filters);
+  const nextHits = applyServerFilters(findByDate(tmm), config);
   const teaser = wildcardHoliday ? "" : nextHits.length ? `Up next: ${nextHits[0].name} (${prettyDate(tmm)})` : "";
 
   const mention = channelSettings.quiet ? "" : channelSettings.roleId ? `<@&${channelSettings.roleId}> ` : "";
 
   const { rows: promoRows, note: promoNote } = buildPromoComponents(guildId, { includeRate: true, forceVote: true });
-  let premiumNote = "";
-  let premiumRow = null;
-  if (!premium && canShowPremiumPrompt(guildId)) {
-    premiumNote = "Upgrade to premium for custom timezones, analytics, filters, and multi-channel scheduling.";
-    premiumRow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setLabel("Upgrade to Premium")
-        .setStyle(ButtonStyle.Link)
-        .setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
-    );
-    markPremiumPrompt(guildId);
+  let trialNote = "";
+  let trialRow = null;
+  const showUpsell = !premium && shouldShowUpsell(config, now, hiddenCount);
+  if (showUpsell) {
+    trialNote = `Try free for 7 days: Category Filters + Work-Safe Mode.\nStart a 7-day trial to see ${hiddenCount} more today.`;
+    trialRow = buildTrialActionRow();
   }
   let shareNote = "";
   if (canShowSharePrompt(guildId)) {
     shareNote = "Like this bot? Invite it to another server to help it grow.";
     markSharePrompt(guildId);
   }
+  let announcementNote = "";
+  if (!config.featureAnnouncementSentAt) {
+    announcementNote = "New: Category Filters + Work-Safe Mode. Try free for 7 days — run /trial.";
+  }
+  let trialReminderNote = "";
+  if (config.trialReminderPending && !config.trialReminderSentAt) {
+    const endsAt = Number(config.trialEndsAt || 0);
+    if (config.isPremium) {
+      config.trialReminderPending = false;
+      recordEvent(config, "trial_reminder_skipped", { guildId, reason: "upgraded" });
+    } else if (!endsAt || endsAt - Date.now() > 24 * 60 * 60 * 1000) {
+      config.trialReminderPending = false;
+      recordEvent(config, "trial_reminder_skipped", { guildId, reason: "trial_extended" });
+    } else {
+      const upgradeUrl = await getBestUpgradeUrlForGuild(guildId);
+      trialReminderNote = `Trial ends tomorrow — keep filters active by upgrading: ${upgradeUrl}`;
+    }
+  }
   const components = [
     ...buildButtons(pick),
     ...promoRows,
-    ...(premiumRow ? [premiumRow] : []),
+    ...(trialRow ? [trialRow] : []),
   ];
   const streakLine = config.streakCount ? `\n🔥 Server streak: ${config.streakCount} day${config.streakCount === 1 ? "" : "s"}` : "";
   const wildcardLine = wildcardHoliday ? "\n🪄 Wildcard Day: surprise pick" : "";
@@ -2460,7 +3499,7 @@ async function postTodayForChannel(guildId, channelId) {
   const loreLines = buildLoreLines(config, getDateKey(now, channelSettings.timezone));
   try {
     const sent = await channel.send({
-      content: `${mention}🎉 Today’s holidays: ${topNames}${wildcardLine}${teaser ? `\n${teaser}` : ""}${streakLine}${loreLines.length ? `\n\n${loreLines.join("\n")}` : ""}${promptLine ? `\n\n${promptLine}` : ""}${promoNote ? `\n\n${promoNote}` : ""}${premiumNote ? `\n\n${premiumNote}` : ""}${shareNote ? `\n\n${shareNote}` : ""}`,
+      content: `${mention}🎉 Today’s holidays: ${listNames}${wildcardLine}${teaser ? `\n${teaser}` : ""}${announcementNote ? `\n${announcementNote}` : ""}${trialNote ? `\n${trialNote}` : ""}${trialReminderNote ? `\n${trialReminderNote}` : ""}${streakLine}${loreLines.length ? `\n\n${loreLines.join("\n")}` : ""}${promptLine ? `\n\n${promptLine}` : ""}${promoNote ? `\n\n${promoNote}` : ""}${shareNote ? `\n\n${shareNote}` : ""}`,
       embeds: [todayEmbed],
       components,
     });
@@ -2473,7 +3512,21 @@ async function postTodayForChannel(guildId, channelId) {
     settings.lastPostName = pick.name || settings.lastPostSlug;
     config.channelSettings[channelId] = settings;
     recordPostAnalytics(config, channelId, postDateKey, channelSettings.hour, pick);
+    if (showUpsell) {
+      config.upsellWeekCount = (config.upsellWeekCount || 0) + 1;
+      recordEvent(config, "upsell_shown", { guildId, hiddenCount });
+    }
+    if (announcementNote) {
+      config.featureAnnouncementSentAt = Date.now();
+    }
+    if (trialReminderNote) {
+      config.trialReminderSentAt = Date.now();
+      config.trialReminderPending = false;
+      recordEvent(config, "trial_reminder_sent", { guildId, method: "fallback_post" });
+    }
+    recordEvent(config, "daily_post_sent", { guildId, channelId, holiday: pick.name || "" });
     saveGuildConfig();
+    await maybeSendTrialReminder(guildId);
     scheduleDidYouKnow(channel, sent?.id || null, pick);
   } catch (err) {
     if (isMissingAccessError(err)) {

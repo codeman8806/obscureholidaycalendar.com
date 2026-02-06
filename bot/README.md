@@ -14,6 +14,13 @@ Node.js Discord bot that answers holiday questions using `holidays.json`.
   - `/app` — app store/site links
   - `/slack` — Slack bot link
   - `/setup` — configure daily posts (premium unlocks time/timezone/branding)
+  - `/categories` — list holiday categories + server settings
+  - `/setcategories` — premium: set allowed holiday categories
+  - `/excludesensitive` — premium: toggle sensitive holiday filtering
+  - `/trial` — admin: view 7-day trial status/start 7-day trial
+  - `/overrides` — admin: show blocked/forced holiday overrides
+  - `/why` — admin: explain why a holiday was filtered
+  - Premium adds control, not more noise.
   - `/premium` — check your premium status
   - `/upgrade` — get a Stripe checkout link to upgrade
   - `/tomorrow` — tomorrow’s holiday (premium)
@@ -43,9 +50,13 @@ Node.js Discord bot that answers holiday questions using `holidays.json`.
       - `STRIPE_SECRET_KEY=<sk_live_or_test>`  
       - `STRIPE_PRICE_ID_INTRO=<price_0_99>`  
       - `STRIPE_PRICE_ID_STANDARD=<price_3_99>`  
+      - Optional: `STRIPE_PRICE_ID_TRIAL=<price_id>` (defaults to standard price)  
+      - Optional: `STRIPE_TRIAL_DAYS=7`  
       - `STRIPE_WEBHOOK_SECRET=<whsec_...>`  
       - `STRIPE_SUCCESS_URL` / `STRIPE_CANCEL_URL` (defaults to your discord-bot page)  
+      - Optional: `STRIPE_PORTAL_URL=<portal_link>` (preferred upgrade link for trial reminders)  
       - `PORT` (Railway injects this; HTTP server listens here for Stripe/webhook)  
+      - Optional: `PUBLIC_BASE_URL=https://your-bot-host.example.com` (used for trial start links)
    - Run `npm start`.
 3) Invite the bot to your server using the OAuth URL with `bot` scope and at least `Send Messages` / `Embed Links` permissions.
 
