@@ -2,3 +2,6 @@ node_modules/
 bot/node_modules/
 *.log
 .npm/
+slack-bot/workspace-tokens.json
+slack-bot/workspace-config.json
+slack-bot/premium.json

@@ -34,11 +34,11 @@
 3) Slack app config:
    - OAuth & Permissions:
      - Redirect URL: `https://<your-host>/slack/oauth/callback`
-     - Scopes: `commands`, `chat:write`
+     - Scopes: `commands`, `chat:write`, `channels:read`
      - (Recommended) Enable App Home and events for a welcome message and buttons.
    - Slash commands: point to `https://<your-host>/slack/commands`
    - Interactivity & Shortcuts: Request URL `https://<your-host>/slack/interactions`
-   - Event Subscriptions: Request URL `https://<your-host>/slack/events` (subscribe to `app_home_opened`)
+   - Event Subscriptions: Request URL `https://<your-host>/slack/events` (subscribe to `app_home_opened`, `app_uninstalled`)
    - Install URL: `https://<your-host>/slack/install`
    - Stripe webhook endpoint: `https://<your-host>/stripe/webhook`
    - Enable Stripe events: `checkout.session.completed`, `invoice.paid`, `customer.subscription.updated`, `customer.subscription.deleted`
@@ -46,9 +46,9 @@
 Note: install the app via the OAuth flow (Install URL) in your own workspace too, so tokens are created exactly the same way as public installs.
 
 Admin endpoints:
-- `GET /admin/installs?token=<SLACK_ADMIN_TOKEN>` returns install count and list.
+- `GET /admin/installs` with header `x-admin-token: <SLACK_ADMIN_TOKEN>` returns install count and list.
 - `GET /admin/installs.html` (basic auth if `SLACK_ADMIN_USER`/`SLACK_ADMIN_PASS` set).
-- `POST /run-schedule` (basic auth or `SLACK_ADMIN_TOKEN`) triggers the scheduler once.
+- `POST /run-schedule` (basic auth or header `x-admin-token: <SLACK_ADMIN_TOKEN>`) triggers the scheduler once.
 
 ## Slash commands
 - `/today`

@@ -13,7 +13,7 @@ const SLACK_SIGNING_SECRET = (process.env.SLACK_SIGNING_SECRET || "").trim() || 
 const SLACK_APP_NAME = process.env.SLACK_APP_NAME || "ObscureHolidayCalendar";
 const SLACK_CLIENT_ID = process.env.SLACK_CLIENT_ID || null;
 const SLACK_CLIENT_SECRET = process.env.SLACK_CLIENT_SECRET || null;
-const SLACK_OAUTH_SCOPES = process.env.SLACK_OAUTH_SCOPES || "commands,chat:write";
+const SLACK_OAUTH_SCOPES = process.env.SLACK_OAUTH_SCOPES || "commands,chat:write,channels:read";
 const SLACK_REDIRECT_URI = process.env.SLACK_REDIRECT_URI || null;
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || null;
@@ -57,6 +57,14 @@ const DEFAULT_TIMEZONE = "UTC";
 const DEFAULT_HOUR = 9;
 const DEFAULT_MINUTE = 0;
 const DEFAULT_HOLIDAY_CHOICE = 0;
+const OAUTH_STATE_TTL_MS = 10 * 60 * 1000;
+const oauthStateStore = new Map();
+
+function pruneOauthStateStore(now = Date.now()) {
+  for (const [state, expiresAt] of oauthStateStore.entries()) {
+    if (!expiresAt || expiresAt <= now) oauthStateStore.delete(state);
+  }
+}
 
 function readJsonSafe(filePath, fallback, legacyPaths = []) {
   try {
@@ -157,10 +165,13 @@ function parseDateInput(input) {
 }
 
 function holidayUrl(holiday) {
-  const base = SITE_BASE || SITE_URL || "";
-  if (!base) return "";
-  const bareBase = base.replace(/^https?:\/\//, "").replace(/^www\./, "");
-  return bareBase;
+  if (!holiday) return "";
+  if (!SITE_BASE) return SITE_URL || "";
+  const slugFromHoliday = String(holiday.slug || "").trim();
+  const slugFromName = slugFromHoliday ? "" : nameToSlug[normalizeName(holiday.name || "")];
+  const slug = slugFromHoliday || slugFromName || "";
+  if (!slug) return SITE_BASE;
+  return `${SITE_BASE}/${slug}/`;
 }
 
 function formatHoliday(holiday, mmdd) {
@@ -168,7 +179,9 @@ function formatHoliday(holiday, mmdd) {
   const emoji = holiday.emoji ? `${holiday.emoji} ` : "";
   const dateLine = mmdd ? `(${mmdd})` : "";
   const link = holidayUrl(holiday);
-  return `${emoji}*${holiday.name || "Holiday"}* ${dateLine}\n${holiday.description || ""}\n${link}`;
+  const lines = [`${emoji}*${holiday.name || "Holiday"}* ${dateLine}`, holiday.description || ""];
+  if (link) lines.push(link);
+  return lines.join("\n");
 }
 
 function isPremiumTeam(teamId) {
@@ -506,7 +519,7 @@ async function resolveChannelId(teamId, rawChannel) {
   let cursor;
   do {
     const resp = await fetch(
-      `https://slack.com/api/conversations.list?types=public_channel,private_channel&limit=200${cursor ? `&cursor=${cursor}` : ""}`,
+      `https://slack.com/api/conversations.list?types=public_channel&limit=200${cursor ? `&cursor=${cursor}` : ""}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -515,7 +528,12 @@ async function resolveChannelId(teamId, rawChannel) {
       }
     );
     const data = await resp.json();
-    if (!data.ok) return null;
+    if (!data.ok) {
+      if (data.error === "missing_scope") {
+        console.warn("Slack channel lookup missing scope: add channels:read or use channel ID.");
+      }
+      return null;
+    }
     const match = (data.channels || []).find((c) => c.name === name);
     if (match) return match.id;
     cursor = data.response_metadata?.next_cursor || "";
@@ -650,15 +668,16 @@ async function syncPremiumFromStripe() {
 
 function verifySlackSignature(req) {
   if (!SLACK_SIGNING_SECRET) return false;
-  const timestamp = req.headers["x-slack-request-timestamp"];
+  const timestamp = Number(req.headers["x-slack-request-timestamp"]);
   const signature = req.headers["x-slack-signature"];
-  if (!timestamp || !signature) return false;
+  if (!Number.isFinite(timestamp) || !signature) return false;
   const fiveMinutes = 60 * 5;
   const now = Math.floor(Date.now() / 1000);
-  if (Math.abs(now - Number(timestamp)) > fiveMinutes) return false;
+  if (Math.abs(now - timestamp) > fiveMinutes) return false;
   const sigBase = `v0:${timestamp}:${req.rawBody || ""}`;
   const hmac = crypto.createHmac("sha256", SLACK_SIGNING_SECRET).update(sigBase).digest("hex");
   const computed = `v0=${hmac}`;
+  if (computed.length !== signature.length) return false;
   return crypto.timingSafeEqual(Buffer.from(computed), Buffer.from(signature));
 }
 
@@ -679,7 +698,7 @@ function requireAdminAuth(req, res, next) {
     }
     return next();
   }
-  const token = req.query.token || req.headers["x-admin-token"];
+  const token = req.headers["x-admin-token"];
   if (!SLACK_ADMIN_TOKEN || token !== SLACK_ADMIN_TOKEN) {
     return res.status(403).send("Forbidden");
   }
@@ -723,10 +742,14 @@ app.get("/slack/install", (req, res) => {
   if (!SLACK_CLIENT_ID || !SLACK_REDIRECT_URI) {
     return res.status(400).send("Slack OAuth not configured.");
   }
+  pruneOauthStateStore();
+  const state = crypto.randomBytes(16).toString("hex");
+  oauthStateStore.set(state, Date.now() + OAUTH_STATE_TTL_MS);
   const url = new URL("https://slack.com/oauth/v2/authorize");
   url.searchParams.set("client_id", SLACK_CLIENT_ID);
   url.searchParams.set("scope", SLACK_OAUTH_SCOPES);
   url.searchParams.set("redirect_uri", SLACK_REDIRECT_URI);
+  url.searchParams.set("state", state);
   return res.redirect(url.toString());
 });
 
@@ -735,7 +758,12 @@ app.get("/slack/oauth/callback", async (req, res) => {
     return res.status(400).send("Slack OAuth not configured.");
   }
   const code = req.query.code;
+  const state = req.query.state;
   if (!code) return res.status(400).send("Missing code.");
+  if (!state || !oauthStateStore.has(String(state))) return res.status(400).send("Invalid OAuth state.");
+  const expiresAt = oauthStateStore.get(String(state));
+  oauthStateStore.delete(String(state));
+  if (!expiresAt || Date.now() > expiresAt) return res.status(400).send("Expired OAuth state.");
   try {
     const body = new URLSearchParams({
       client_id: SLACK_CLIENT_ID,
@@ -936,6 +964,8 @@ app.post("/slack/commands", async (req, res) => {
           "skip_weekends=true|false (premium)",
           "promotions=true|false (premium)",
           "",
+          "Note: channel name lookup requires channels:read scope. Channel IDs (C...) always work.",
+          "",
           "Example:",
           "/setup channel=#general timezone=America/New_York hour=6 minute=45 holiday_choice=1 skip_weekends=true",
           "",
@@ -952,7 +982,7 @@ app.post("/slack/commands", async (req, res) => {
     if (args.channel) {
       resolvedChannel = await resolveChannelId(teamId, args.channel);
       if (!resolvedChannel) {
-        errors.push("Channel not found. Use #channel or a valid channel ID.");
+        errors.push("Channel not found. Use #channel or a valid channel ID (C...).");
       }
     }
     if (args.timezone && !isValidTimeZone(args.timezone)) {
@@ -1166,31 +1196,50 @@ app.post("/slack/commands", async (req, res) => {
 
 app.post("/slack/interactions", async (req, res) => {
   if (!verifySlackSignature(req)) return res.status(401).send("Invalid signature");
-  const payload = req.body?.payload ? JSON.parse(req.body.payload) : null;
+  let payload = null;
+  try {
+    payload = req.body?.payload ? JSON.parse(req.body.payload) : null;
+  } catch {
+    return res.status(400).send("Invalid payload");
+  }
   if (!payload) return res.status(400).send("Missing payload");
 
   if (payload.type === "block_actions") {
+    res.json({ ok: true });
     const teamId = payload.team?.id;
     const userId = payload.user?.id;
     const triggerId = payload.trigger_id;
     const actionId = payload.actions?.[0]?.action_id;
-    if (actionId === "setup_modal") {
-      const config = ensureWorkspace(teamId);
-      const isPremium = isPremiumTeam(teamId);
-      await slackOpenModal(teamId, triggerId, buildSetupModal(config, isPremium, { channel_id: null, user_id: userId }));
-    }
-    if (actionId === "post_today") {
-      const mmdd = toMMDD(new Date());
-      const hits = findByDate(mmdd);
-      if (hits.length) {
-        const holiday = hits[0];
-        await slackPostMessage({ id: userId, teamId }, formatHoliday(holiday, mmdd));
+    (async () => {
+      if (actionId === "setup_modal") {
+        const config = ensureWorkspace(teamId);
+        const isPremium = isPremiumTeam(teamId);
+        await slackOpenModal(teamId, triggerId, buildSetupModal(config, isPremium, { channel_id: null, user_id: userId }));
       }
-    }
-    if (actionId === "upgrade_link" && STRIPE_SUCCESS_URL) {
-      await slackPostMessage({ id: userId, teamId }, `Upgrade to premium: ${STRIPE_SUCCESS_URL}`);
-    }
-    return res.json({ ok: true });
+      if (actionId === "post_today") {
+        const mmdd = toMMDD(new Date());
+        const hits = findByDate(mmdd);
+        if (hits.length) {
+          const holiday = hits[0];
+          await slackPostMessage({ id: userId, teamId }, formatHoliday(holiday, mmdd));
+        }
+      }
+      if (actionId === "upgrade_link") {
+        if (!stripeClient || !STRIPE_PRICE_ID_INTRO || !STRIPE_PRICE_ID_STANDARD || !STRIPE_SUCCESS_URL || !STRIPE_CANCEL_URL) {
+          await slackPostMessage({ id: userId, teamId }, "Stripe is not configured.");
+          return;
+        }
+        try {
+          const session = await createPremiumCheckoutSession({ teamId, userId });
+          await slackPostMessage({ id: userId, teamId }, `Upgrade to premium: ${session.url}`);
+        } catch (e) {
+          await slackPostMessage({ id: userId, teamId }, "Unable to create checkout session right now.");
+        }
+      }
+    })().catch((err) => {
+      console.warn("Slack interaction action failed:", err.message);
+    });
+    return;
   }
 
   if (payload.type === "view_submission" && payload.view?.callback_id === "setup_modal") {
@@ -1224,11 +1273,12 @@ app.post("/slack/interactions", async (req, res) => {
       config.promotionsEnabled = options.includes("promotions");
     }
     writeJsonSafe(CONFIG_PATH, workspaceConfig);
-
+    res.json({});
     if (channelId && userId) {
-      await slackPostEphemeral(teamId, channelId, userId, "✅ Schedule saved. You can update anytime with /setup.");
+      slackPostEphemeral(teamId, channelId, userId, "✅ Schedule saved. You can update anytime with /setup.")
+        .catch((err) => console.warn("Slack setup confirmation failed:", err.message));
     }
-    return res.json({});
+    return;
   }
 
   return res.json({ ok: true });
@@ -1242,24 +1292,43 @@ app.post("/slack/events", async (req, res) => {
     return res.json({ challenge: payload.challenge });
   }
   if (payload.type === "event_callback") {
+    res.json({ ok: true });
     const event = payload.event;
-    console.log("Slack event received:", event?.type);
-    if (event?.type === "app_home_opened") {
-      const teamId = event.team_id || payload.team_id;
-      const userId = event.user;
-      console.log("App Home open for team", teamId, "user", userId);
-      await slackPublishHome(teamId, userId);
-      const config = ensureWorkspace(teamId);
-      config.welcomedUsers = config.welcomedUsers || {};
-      if (!config.welcomedUsers[userId]) {
-        config.welcomedUsers[userId] = true;
-        writeJsonSafe(CONFIG_PATH, workspaceConfig);
-        await slackPostMessage(
-          { id: userId, teamId },
-          "👋 Welcome! Use /setup to schedule daily posts, or open the App Home tab for buttons."
-        );
+    (async () => {
+      console.log("Slack event received:", event?.type);
+      if (event?.type === "app_uninstalled") {
+        const teamId = payload.team_id;
+        if (teamId) {
+          delete workspaceTokens[teamId];
+          delete workspaceConfig[teamId];
+          delete premiumAllowlist[teamId];
+          writeJsonSafe(WORKSPACE_TOKENS_PATH, workspaceTokens);
+          writeJsonSafe(CONFIG_PATH, workspaceConfig);
+          writeJsonSafe(PREMIUM_PATH, premiumAllowlist);
+          console.log(`Slack app uninstalled for team ${teamId}; cleaned stored workspace data.`);
+        }
+        return;
       }
-    }
+      if (event?.type === "app_home_opened") {
+        const teamId = event.team_id || payload.team_id;
+        const userId = event.user;
+        console.log("App Home open for team", teamId, "user", userId);
+        await slackPublishHome(teamId, userId);
+        const config = ensureWorkspace(teamId);
+        config.welcomedUsers = config.welcomedUsers || {};
+        if (!config.welcomedUsers[userId]) {
+          config.welcomedUsers[userId] = true;
+          writeJsonSafe(CONFIG_PATH, workspaceConfig);
+          await slackPostMessage(
+            { id: userId, teamId },
+            "👋 Welcome! Use /setup to schedule daily posts, or open the App Home tab for buttons."
+          );
+        }
+      }
+    })().catch((err) => {
+      console.warn("Slack event handling failed:", err.message);
+    });
+    return;
   }
   res.json({ ok: true });
 });
@@ -1327,6 +1396,7 @@ app.get("/admin/installs.html", requireAdminAuth, (req, res) => {
 
 app.listen(PORT, async () => {
   if (stripeClient) await syncPremiumFromStripe();
+  setInterval(pruneOauthStateStore, 60 * 1000);
   setInterval(handleDailyPosts, 60 * 1000);
   console.log(`${SLACK_APP_NAME} Slack bot running on ${PORT}`);
 });
