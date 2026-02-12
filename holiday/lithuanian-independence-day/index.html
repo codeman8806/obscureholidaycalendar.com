@@ -92,6 +92,151 @@
         order: -1;
       }
     }
+    .next-rail {
+      display: none;
+    }
+    .continue-lead {
+      margin: 0 0 12px;
+      color: #42526b;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    #related-mid .link-list li {
+      background: linear-gradient(90deg, rgba(28,150,243,0.08), rgba(255,255,255,0.8));
+      border-color: rgba(28,150,243,0.2);
+    }
+    @media (min-width: 1280px) {
+      .next-rail {
+        display: block;
+        position: fixed;
+        right: max(16px, calc((100vw - 1280px) / 2));
+        top: 120px;
+        width: 248px;
+        border-radius: 16px;
+        border: 1px solid #ded7ff;
+        background: linear-gradient(180deg, #ffffff, #f6f3ff);
+        box-shadow: 0 16px 34px rgba(44,0,95,0.18);
+        padding: 14px;
+        z-index: 160;
+      }
+      .next-rail-head {
+        font-weight: 800;
+        color: #2c005f;
+        margin: 0 0 10px;
+        font-size: 0.95rem;
+      }
+      .next-rail-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 8px;
+      }
+      .next-rail-list a {
+        display: block;
+        border-radius: 10px;
+        border: 1px solid #e8e2ff;
+        background: #fff;
+        color: #2c005f;
+        text-decoration: none;
+        font-weight: 700;
+        padding: 9px 10px;
+        font-size: 0.92rem;
+      }
+      .next-rail-list a:hover {
+        border-color: #d5caff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .next-rail-fallback {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 0.86rem;
+        font-weight: 700;
+        color: #334155;
+      }
+    }
+    :root {
+      --pro-space: clamp(18px, 2vw, 28px);
+      --pro-border: #e6e8f3;
+      --pro-ink: #172033;
+      --pro-muted: #4d5b75;
+      --pro-bg: #fbfbff;
+    }
+    .page-wrap {
+      max-width: 1160px;
+      padding-bottom: 64px;
+    }
+    .holiday-card {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: clamp(22px, 2.2vw, 36px);
+      border: 1px solid var(--pro-border);
+      box-shadow: 0 22px 56px rgba(20, 12, 70, 0.13);
+      background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
+    }
+    .hero {
+      gap: clamp(18px, 2vw, 30px);
+    }
+    .holiday-title {
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+    .lead,
+    .section p,
+    .section li,
+    .faq dd,
+    .link-list .meta {
+      color: var(--pro-ink);
+      line-height: 1.72;
+    }
+    .section {
+      padding: 14px 0;
+      border-top: 1px solid rgba(44, 0, 95, 0.08);
+    }
+    .section:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .section h2 {
+      letter-spacing: -0.01em;
+      margin: 0 0 10px;
+      font-size: clamp(1.25rem, 1.2vw + 1rem, 1.6rem);
+    }
+    .note-bar {
+      border-left: 4px solid rgba(44, 0, 95, 0.42);
+      background: linear-gradient(90deg, rgba(44,0,95,0.11), rgba(28,150,243,0.11));
+    }
+    .ad-section {
+      border-radius: 14px;
+      border: 1px solid #e6e8f3;
+      background: var(--pro-bg);
+      padding: 12px;
+      margin: 16px 0;
+    }
+    .link-list li,
+    .recent-list li a,
+    .faq-item {
+      transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+    }
+    .link-list li:hover,
+    .recent-list li a:hover,
+    .faq-item:hover {
+      transform: translateY(-1px);
+      border-color: #d6d9ea;
+      box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);
+    }
+    .footer-links a {
+      font-weight: 600;
+    }
+    @media (max-width: 900px) {
+      .holiday-card {
+        border-radius: 18px;
+      }
+      .section {
+        padding: 12px 0;
+      }
+    }
   </style>
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
@@ -658,8 +803,13 @@
       <a href="#celebrate">Celebrate</a>
       <a href="#fun-facts">Fun facts</a>
       <a href="#faq">FAQ</a>
-      <a href="#related">Related</a>
+      <a href="#related-mid">People also viewed</a>
     </div>
+    <aside class="next-rail" id="next-rail" aria-label="Keep browsing holidays">
+      <div class="next-rail-head">Keep the streak going</div>
+      <ul class="next-rail-list"></ul>
+      <a class="next-rail-fallback" href="/holiday/">Browse all holidays</a>
+    </aside>
     <article class="holiday-card">
       <header class="hero">
         <div class="hero-content">
@@ -770,6 +920,11 @@
       </section>
 
 
+      <section class="section" id="related-mid">
+        <h2>People also viewed</h2>
+        <ul class="link-list"></ul>
+      </section>
+
       <section class="section" id="celebrate">
         <h2>Ways to observe</h2>
         <ul class="list">
@@ -828,7 +983,8 @@
       </section>
       <hr class="soft-divider" />
       <section class="section" id="continue">
-        <h2>Continue to</h2>
+        <h2>Continue your streak</h2>
+        <p class="continue-lead">Open one more holiday before you go to build daily momentum.</p>
         <ul class="link-list">
           <li><a href="/holiday/gumdrop-day/">Yesterday: Gumdrop Day</a><span class="meta">Quick context from the day before.</span></li>
           <li><a href="/holiday/cabbage-day/">Tomorrow: Cabbage Day</a><span class="meta">Keep the streak going with tomorrow's pick.</span></li>
@@ -965,6 +1121,164 @@
           });
         });
       }
+      const rail = document.getElementById('next-rail');
+
+      function track(eventName, payload) {
+        if (!window.gtag) return;
+        try {
+          gtag('event', eventName, payload || {});
+        } catch (_) {}
+      }
+
+      function textLabel(el) {
+        return ((el && el.textContent) || '').trim().slice(0, 80);
+      }
+
+      function buildRail() {
+        if (!rail) return;
+        const railList = rail.querySelector('.next-rail-list');
+        if (!railList) return;
+        const links = Array.from(document.querySelectorAll('#continue .link-list a')).slice(0, 4);
+        if (!links.length) return;
+        railList.innerHTML = links.map((a) => `<li><a href="${a.getAttribute('href') || '/holiday/'}">${textLabel(a)}</a></li>`).join('');
+      }
+
+      function buildMidRelated() {
+        const midList = document.querySelector('#related-mid .link-list');
+        const related = Array.from(document.querySelectorAll('#related .link-list li')).slice(0, 4);
+        if (!midList || !related.length) return;
+        midList.innerHTML = related.map((li) => li.outerHTML).join('');
+      }
+
+      function attachEngagementTracking() {
+        document.addEventListener('click', (event) => {
+          const anchor = event.target.closest('a');
+          if (!anchor) return;
+          const href = anchor.getAttribute('href') || '';
+          if (anchor.closest('#next-rail')) {
+            track('rail_click', { source_page: pageData.slug, link_text: textLabel(anchor), link_url: href });
+          } else if (anchor.closest('#continue')) {
+            track('continue_click', { source_page: pageData.slug, link_text: textLabel(anchor), link_url: href });
+          } else if (anchor.closest('#related') || anchor.closest('#related-mid')) {
+            track('related_click', { source_page: pageData.slug, link_text: textLabel(anchor), link_url: href });
+          } else if (anchor.closest('.quick-links')) {
+            track('jump_link_click', { source_page: pageData.slug, link_text: textLabel(anchor), link_url: href });
+          }
+        }, { passive: true });
+      }
+
+      buildRail();
+      buildMidRelated();
+      attachEngagementTracking();
+
+      function initAdvancedEngagementTracking() {
+        const once = new Set();
+
+        function emit(name, payload) {
+          if (!window.gtag) return;
+          try {
+            gtag('event', name, payload || {});
+          } catch (_) {}
+        }
+
+        const milestones = [25, 50, 75, 100];
+        function onScrollDepth() {
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          if (maxScroll <= 0) return;
+          const pct = Math.round((window.scrollY / maxScroll) * 100);
+          milestones.forEach((m) => {
+            const key = `scroll_${m}`;
+            if (pct >= m && !once.has(key)) {
+              once.add(key);
+              emit('scroll_depth', {
+                source_page: pageData.slug,
+                percent: m,
+                page_type: 'holiday'
+              });
+            }
+          });
+        }
+
+        let engagedSeconds = 0;
+        let active = true;
+        let lastTick = Date.now();
+        let idleTimer = null;
+        const engagedMilestones = [30, 90, 180];
+
+        function resetIdle() {
+          active = true;
+          if (idleTimer) clearTimeout(idleTimer);
+          idleTimer = setTimeout(() => { active = false; }, 15000);
+        }
+
+        ['scroll', 'click', 'keydown', 'touchstart', 'mousemove'].forEach((evt) => {
+          window.addEventListener(evt, resetIdle, { passive: true });
+        });
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) active = false;
+          else resetIdle();
+        });
+
+        setInterval(() => {
+          const now = Date.now();
+          const delta = (now - lastTick) / 1000;
+          lastTick = now;
+          if (document.hidden || !active) return;
+          engagedSeconds += delta;
+          engagedMilestones.forEach((m) => {
+            const key = `engaged_${m}`;
+            if (engagedSeconds >= m && !once.has(key)) {
+              once.add(key);
+              emit('engaged_time', {
+                source_page: pageData.slug,
+                seconds: m,
+                page_type: 'holiday'
+              });
+            }
+          });
+        }, 1000);
+
+        window.addEventListener('scroll', onScrollDepth, { passive: true });
+        onScrollDepth();
+        resetIdle();
+
+        const adSections = document.querySelectorAll('.ad-section');
+        if ('IntersectionObserver' in window && adSections.length) {
+          const adIo = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const adKey = entry.target.getAttribute('data-ad-key') || `ad_${Array.from(adSections).indexOf(entry.target) + 1}`;
+              if (once.has(adKey)) return;
+              once.add(adKey);
+              emit('ad_viewable', {
+                source_page: pageData.slug,
+                ad_slot: adKey,
+                page_type: 'holiday'
+              });
+            });
+          }, { threshold: 0.45 });
+          adSections.forEach((el, idx) => {
+            el.setAttribute('data-ad-key', `ad_slot_${idx + 1}`);
+            adIo.observe(el);
+          });
+        }
+
+        const shareBtnEl = document.getElementById('share-btn');
+        const copyBtnEl = document.getElementById('copy-btn');
+        if (shareBtnEl) {
+          shareBtnEl.addEventListener('click', () => {
+            emit('share_button_click', { source_page: pageData.slug, page_type: 'holiday' });
+          });
+        }
+        if (copyBtnEl) {
+          copyBtnEl.addEventListener('click', () => {
+            emit('copy_link_click', { source_page: pageData.slug, page_type: 'holiday' });
+          });
+        }
+      }
+
+      initAdvancedEngagementTracking();
+
       addRecent();
       renderRecents();
 

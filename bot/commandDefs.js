@@ -343,6 +343,22 @@ export const commandDefs = [
     description: "Owner: conversion funnel summary",
   },
   {
+    name: "admin-health",
+    description: "Owner: daily-post health diagnostics",
+  },
+  {
+    name: "admin-fire",
+    description: "Owner: force-run daily post logic for a guild",
+    options: [
+      {
+        name: "guild_id",
+        description: "Optional target guild ID (defaults to current guild)",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+      },
+    ],
+  },
+  {
     name: "postnowall",
     description: "Owner: post today’s holidays now (all servers)",
   },
