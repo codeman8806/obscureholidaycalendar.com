@@ -9,15 +9,26 @@ DOMAIN = "https://www.obscureholidaycalendar.com"
 HOLIDAY_DIR = "holiday"
 OUTPUT_DIR = "sitemaps"
 HOLIDAYS_JSON = Path("holidays.json")
-STATIC_PAGES = [
-    f"{DOMAIN}/",
-    f"{DOMAIN}/holiday/",
-    f"{DOMAIN}/about/",
-    f"{DOMAIN}/contact/",
-    f"{DOMAIN}/privacy/",
-    f"{DOMAIN}/discord-bot/",
-    f"{DOMAIN}/discord-bot/success.html",
-    f"{DOMAIN}/discord-bot/canceled.html",
+CURRENT_YEAR = datetime.date.today().year
+STATIC_PAGE_PATHS = [
+    "/",
+    "/holiday/",
+    "/about/",
+    "/articles/",
+    "/contact/",
+    "/privacy/",
+    "/subprocessors/",
+    "/app/",
+    "/discord-bot/",
+    "/discord-bot/success.html",
+    "/discord-bot/canceled.html",
+    "/discord-bot/privacy.html",
+    "/discord-bot/terms.html",
+    "/slack-bot/",
+    "/slack-bot/success.html",
+    "/slack-bot/admin-installs.html",
+    "/slack-bot/installed.html",
+    "/slack-bot/terms.html",
 ]
 
 # Create output directory
@@ -83,6 +94,19 @@ def create_sitemap_index(files, output_file):
     tree.write(output_file, encoding="utf-8", xml_declaration=True)
 
 
+def static_page_lastmod(path: str, fallback: str) -> str:
+    rel = path.lstrip("/")
+    local_path = Path("index.html") if not rel else Path(rel)
+    if path.endswith("/"):
+        local_path = Path(rel) / "index.html" if rel else Path("index.html")
+    try:
+        if local_path.exists():
+            return datetime.date.fromtimestamp(local_path.stat().st_mtime).isoformat()
+    except Exception:
+        pass
+    return fallback
+
+
 def main():
     monthly = {f"{m:02d}": [] for m in range(1, 13)}
     sitemap_files = []
@@ -103,7 +127,7 @@ def main():
         if date_mmdd and "-" in date_mmdd:
             try:
                 mm, dd = date_mmdd.split("-")
-                lastmod = f"2025-{int(mm):02d}-{int(dd):02d}"
+                lastmod = f"{CURRENT_YEAR}-{int(mm):02d}-{int(dd):02d}"
             except Exception:
                 pass
 
@@ -123,7 +147,7 @@ def main():
         if not entries:
             continue
 
-        filename = f"sitemap-2025-{month}.xml"
+        filename = f"sitemap-{CURRENT_YEAR}-{month}.xml"
         filepath = os.path.join(OUTPUT_DIR, filename)
 
         create_sitemap(entries, filepath)
@@ -131,7 +155,9 @@ def main():
         sitemap_files.append((filename, lastmod))
 
     # Static pages sitemap
-    static_entries = [(url, today_str) for url in STATIC_PAGES]
+    static_entries = []
+    for path in STATIC_PAGE_PATHS:
+        static_entries.append((f"{DOMAIN}{path}", static_page_lastmod(path, today_str)))
     static_filename = "sitemap-static.xml"
     static_path = os.path.join(OUTPUT_DIR, static_filename)
     create_sitemap(static_entries, static_path)

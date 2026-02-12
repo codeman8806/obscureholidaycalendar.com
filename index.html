@@ -15,6 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Discover today's obscure, weird & fun holidays with the Obscure Holiday Calendar app. Includes widgets, reminders, deep links & daily content. Free on iOS & Android." />
   <meta name="keywords" content="obscure holidays app, holiday calendar app, fun holidays app, daily holiday app, weird holidays app, holiday reminders app, holiday widget app, national day app, obscure holiday calendar, daily observance app">
+  <meta name="robots" content="index,follow,max-image-preview:large">
 
   <!-- ASO Smart Banners -->
   <meta name="apple-itunes-app" content="app-id=6755315850">
@@ -452,9 +453,9 @@
           <div class="hero-card float-subtle">
             <span class="card-label">Today’s holiday</span>
             <div id="emoji" class="today-emoji"></div>
-            <p id="name"></p>
+            <p id="name">Explore today’s featured holiday</p>
             <div id="date"></div>
-            <a id="learn-more" href="#"></a>
+            <a id="learn-more" href="/holiday/">View the holiday page</a>
           </div>
         </div>
       </section>
@@ -638,8 +639,8 @@
           if (!first) {
             nameEl.textContent = "Check back tomorrow for a new holiday!";
             dateEl.textContent = "";
-            linkEl.textContent = "";
-            linkEl.removeAttribute("href");
+            linkEl.textContent = "Browse all holidays";
+            linkEl.href = "/holiday/";
             if (altEl) {
               altEl.textContent = "No alternate holiday today";
               altEl.classList.add("is-disabled");
@@ -672,7 +673,8 @@
         .catch(() => {
           nameEl.textContent = "Unable to load today's holiday.";
           dateEl.textContent = "";
-          linkEl.textContent = "";
+          linkEl.textContent = "Browse all holidays";
+          linkEl.href = "/holiday/";
           if (altEl) {
             altEl.textContent = "No alternate holiday today";
             altEl.classList.add("is-disabled");

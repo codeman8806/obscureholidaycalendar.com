@@ -113,8 +113,10 @@ const DEFAULT_EMBED_STYLE = "compact";
 const DEFAULT_TIMEZONE = "UTC";
 const PROMO_VOTE_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000; // once per week per guild
 const PROMO_RATE_INTERVAL_MS = 30 * 24 * 60 * 60 * 1000; // once per 30 days per guild
-const PREMIUM_PROMO_INTERVAL_MS = 14 * 24 * 60 * 60 * 1000; // once per 14 days per guild
+const PREMIUM_PROMO_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000; // once per 7 days per guild
 const SHARE_PROMO_INTERVAL_MS = 14 * 24 * 60 * 60 * 1000; // once per 14 days per guild
+const ACTIVATION_REMINDER_DELAY_MS = 24 * 60 * 60 * 1000; // 24h after join if setup incomplete
+const ACTIVATION_SWEEP_INTERVAL_MS = 30 * 60 * 1000; // every 30 minutes
 const WEEKLY_RECAP_INTERVAL_MS = 6 * 60 * 60 * 1000; // check every 6 hours
 const DEFAULT_STREAK_GOAL = 7;
 const FOLLOWUP_DELAY_MIN = Number(process.env.FOLLOWUP_DELAY_MIN || "45");
@@ -156,8 +158,10 @@ function readJsonSafe(filePath, fallback) {
 function writeJsonSafe(filePath, data) {
   try {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
+    return true;
   } catch (e) {
     console.error(`Failed to write ${filePath}:`, e);
+    return false;
   }
 }
 
@@ -743,6 +747,12 @@ function getGuildConfig(guildId) {
       lastPremiumPromptAt: 0,
       lastSharePromptAt: 0,
       lastWeeklyRecapAt: 0,
+      lastDailyPostAt: 0,
+      lastDailyPostStatus: null,
+      lastDailyPostAttempts: [],
+      firstSeenAt: Date.now(),
+      activationReminderDueAt: Date.now() + ACTIVATION_REMINDER_DELAY_MS,
+      activationReminderSentAt: 0,
     };
   }
   if (!Array.isArray(guildConfig[guildId].channelIds)) {
@@ -876,6 +886,27 @@ function getGuildConfig(guildId) {
   if (!guildConfig[guildId].lastWeeklyRecapAt) {
     guildConfig[guildId].lastWeeklyRecapAt = 0;
   }
+  if (!Number.isFinite(Number(guildConfig[guildId].lastDailyPostAt || 0))) {
+    guildConfig[guildId].lastDailyPostAt = 0;
+  }
+  if (!guildConfig[guildId].lastDailyPostStatus || typeof guildConfig[guildId].lastDailyPostStatus !== "object") {
+    guildConfig[guildId].lastDailyPostStatus = null;
+  }
+  if (!Array.isArray(guildConfig[guildId].lastDailyPostAttempts)) {
+    guildConfig[guildId].lastDailyPostAttempts = [];
+  }
+  guildConfig[guildId].lastDailyPostAttempts = guildConfig[guildId].lastDailyPostAttempts
+    .filter((attempt) => attempt && Number.isFinite(Number(attempt.at)))
+    .slice(-100);
+  if (!Number.isFinite(Number(guildConfig[guildId].firstSeenAt || 0))) {
+    guildConfig[guildId].firstSeenAt = Date.now();
+  }
+  if (!Number.isFinite(Number(guildConfig[guildId].activationReminderDueAt || 0))) {
+    guildConfig[guildId].activationReminderDueAt = Number(guildConfig[guildId].firstSeenAt || Date.now()) + ACTIVATION_REMINDER_DELAY_MS;
+  }
+  if (!Number.isFinite(Number(guildConfig[guildId].activationReminderSentAt || 0))) {
+    guildConfig[guildId].activationReminderSentAt = 0;
+  }
   if (!guildConfig[guildId].featureAnnouncementSentAt) {
     guildConfig[guildId].featureAnnouncementSentAt = 0;
   }
@@ -886,10 +917,11 @@ function getGuildConfig(guildId) {
 }
 
 function saveGuildConfig() {
-  writeJsonSafe(CONFIG_PATH, guildConfig);
+  const ok = writeJsonSafe(CONFIG_PATH, guildConfig);
   const guildCount = Object.keys(guildConfig).length;
   const channelCount = Object.values(guildConfig).reduce((sum, cfg) => sum + ((cfg.channelIds || []).length), 0);
-  console.log(`Saved guild config to ${CONFIG_PATH} (${guildCount} guilds, ${channelCount} channel(s)).`);
+  if (ok) console.log(`Saved guild config to ${CONFIG_PATH} (${guildCount} guilds, ${channelCount} channel(s)).`);
+  return ok;
 }
 
 function formatSetupLog(config, channelId) {
@@ -1066,13 +1098,14 @@ function weekKeyFromDate(date) {
 }
 
 function shouldShowUpsell(config, date, hiddenCount) {
-  if (!config || hiddenCount < 2) return false;
+  if (!config || hiddenCount < 1) return false;
   const weekKey = weekKeyFromDate(date);
   if (config.upsellWeekKey !== weekKey) {
     config.upsellWeekKey = weekKey;
     config.upsellWeekCount = 0;
   }
-  return (config.upsellWeekCount || 0) < 3;
+  const maxPerWeek = hiddenCount >= 2 ? 3 : 1;
+  return (config.upsellWeekCount || 0) < maxPerWeek;
 }
 
 function matchesKeyword(text, keywords) {
@@ -1301,14 +1334,73 @@ function recordPostAnalytics(config, channelId, dateKey, hour, holiday) {
 }
 
 function recordEvent(config, event, meta = {}) {
-  if (!config) return;
-  if (!config.analytics) config.analytics = { channels: {}, holidays: {}, history: [], events: [] };
-  if (!Array.isArray(config.analytics.events)) config.analytics.events = [];
-  const planStatus = getPlanStatus(config);
-  config.analytics.events.push({ event, at: Date.now(), meta: { planStatus, ...meta } });
-  if (config.analytics.events.length > MAX_EVENT_HISTORY) {
-    config.analytics.events = config.analytics.events.slice(-MAX_EVENT_HISTORY);
+  if (!config) return { ok: false, error: "missing_config" };
+  try {
+    if (!config.analytics) config.analytics = { channels: {}, holidays: {}, history: [], events: [] };
+    if (!Array.isArray(config.analytics.events)) config.analytics.events = [];
+    const planStatus = getPlanStatus(config);
+    const at = Date.now();
+    const eventId = `${at}_${Math.random().toString(36).slice(2, 8)}`;
+    config.analytics.events.push({ id: eventId, event, at, meta: { planStatus, ...meta } });
+    if (config.analytics.events.length > MAX_EVENT_HISTORY) {
+      config.analytics.events = config.analytics.events.slice(-MAX_EVENT_HISTORY);
+    }
+    return { ok: true, eventId, at };
+  } catch (err) {
+    console.error("recordEvent failed:", err?.stack || err?.message || err);
+    return { ok: false, error: err?.message || "record_event_failed" };
   }
+}
+
+function markDailyPostAttempt(config, attempt) {
+  if (!config || !attempt) return;
+  const at = Number(attempt.at || Date.now());
+  const merged = {
+    at,
+    guildId: String(attempt.guildId || ""),
+    channelId: String(attempt.channelId || ""),
+    status: String(attempt.status || "unknown"),
+    reason: String(attempt.reason || ""),
+    planStatus: String(attempt.planStatus || getPlanStatus(config)),
+  };
+  config.lastDailyPostAt = at;
+  config.lastDailyPostStatus = {
+    at,
+    status: merged.status,
+    reason: merged.reason,
+    guildId: merged.guildId,
+    channelId: merged.channelId,
+    planStatus: merged.planStatus,
+  };
+  if (!Array.isArray(config.lastDailyPostAttempts)) config.lastDailyPostAttempts = [];
+  config.lastDailyPostAttempts.push(merged);
+  if (config.lastDailyPostAttempts.length > 100) {
+    config.lastDailyPostAttempts = config.lastDailyPostAttempts.slice(-100);
+  }
+}
+
+function getEventTimestamp(event) {
+  const createdAt = Number(event?.createdAt);
+  if (Number.isFinite(createdAt) && createdAt > 0) return createdAt;
+  const ts = Number(event?.ts);
+  if (Number.isFinite(ts) && ts > 0) return ts;
+  const at = Number(event?.at);
+  if (Number.isFinite(at) && at > 0) return at;
+  return 0;
+}
+
+function queryAnalyticsEventsInRange(startMs, endMs) {
+  const events = [];
+  for (const [guildId, config] of Object.entries(guildConfig)) {
+    const rows = Array.isArray(config?.analytics?.events) ? config.analytics.events : [];
+    for (const row of rows) {
+      const at = getEventTimestamp(row);
+      if (!at || at < startMs || at > endMs) continue;
+      events.push({ guildId, at, event: row?.event || "", meta: row?.meta || {}, id: row?.id || null });
+    }
+  }
+  events.sort((a, b) => a.at - b.at);
+  return events;
 }
 
 function recordReactionAnalytics(config, channelId, dateKey) {
@@ -1590,13 +1682,40 @@ async function startTrialAndGetCheckoutUrl(guildId, userId) {
   }
 }
 
+function premiumValueLines(feature) {
+  const common = [
+    "Outcome: less manual posting, more daily engagement.",
+  ];
+  const byFeature = {
+    "/date": ["Unlock /date, /tomorrow, /upcoming, and /week for planning ahead."],
+    "/search": ["Unlock /search and /random for discoverability and variety."],
+    "/random": ["Unlock /random and deeper daily controls for fresher content."],
+    "/facts": ["Unlock full /facts output plus analytics to optimize what lands."],
+    "/tomorrow": ["Unlock tomorrow/upcoming digests and category-safe filtering."],
+    "/upcoming": ["Unlock upcoming/week planning plus timezone/hour scheduling."],
+    "/week": ["Unlock week/upcoming plus channel-by-channel scheduling control."],
+    "/analytics": ["See best posting times/channels and optimize for more reactions."],
+    "/lore": ["Unlock lore, tone, and filters for a server-specific experience."],
+    "/setcategories": ["Unlock category controls and work-safe filtering."],
+    "/excludesensitive": ["Unlock sensitive-content controls for safer auto-posts."],
+  };
+  return [...(byFeature[feature] || ["Unlock premium commands plus advanced daily scheduling."]), ...common];
+}
+
 async function replyPremiumOnly(interaction, { feature, previewLines = [] } = {}) {
   const upgradeUrl = await getUpgradeUrlForInteraction(interaction);
+  const valueLines = premiumValueLines(feature);
+  const config = interaction.guildId ? getGuildConfig(interaction.guildId) : null;
+  if (config && interaction.guildId) {
+    recordEvent(config, "premium_prompt_shown", { guildId: interaction.guildId, source: "premium_only_reply", feature: feature || "unknown" });
+    saveGuildConfig();
+  }
   const lines = [
     "Premium only.",
     feature ? `Feature: ${feature}` : null,
     previewLines.length ? `Preview: ${previewLines.join(" • ")}` : null,
-    "Start a 7-day trial to unlock premium commands and scheduling.",
+    ...valueLines,
+    "Start a 7-day trial, then $3.99/month. Cancel anytime.",
   ].filter(Boolean);
 
   return interaction.reply({
@@ -1730,7 +1849,7 @@ function buildButtons(h) {
     new ActionRowBuilder().addComponents(
       new ButtonBuilder().setLabel("View on Website").setStyle(ButtonStyle.Link).setURL(url),
       new ButtonBuilder().setLabel("Get the App").setStyle(ButtonStyle.Link).setURL(APP_URL),
-      new ButtonBuilder().setLabel("Invite to another server").setStyle(ButtonStyle.Link).setURL(BOT_INVITE_URL)
+      new ButtonBuilder().setCustomId("invite_cta").setLabel("Invite to another server").setStyle(ButtonStyle.Primary)
     ),
   ];
 }
@@ -1833,9 +1952,49 @@ async function maybeSendOnboardingDm(user, guildId) {
   try {
     await user.send(lines.join("\n"));
     config.onboardingDmSent = true;
+    recordEvent(config, "onboarding_dm_sent", { guildId, userId: user.id });
     saveGuildConfig();
   } catch (err) {
     console.warn("Onboarding DM failed:", err.message);
+  }
+}
+
+async function maybeSendActivationNudgeForGuild(guildId, now = Date.now()) {
+  if (!guildId) return false;
+  const config = getGuildConfig(guildId);
+  if (config.activationReminderSentAt) return false;
+  if ((config.channelIds || []).length > 0) return false;
+  const dueAt = Number(config.activationReminderDueAt || 0);
+  if (!dueAt || now < dueAt) return false;
+  try {
+    const guild = await client.guilds.fetch(guildId);
+    const owner = await guild.fetchOwner();
+    if (!owner?.user) return false;
+    await owner.user.send(
+      [
+        `Quick setup reminder for **${guild.name}**:`,
+        "Run `/setup` in your server to enable daily holiday auto-posts.",
+        "Need to share the bot with another community? Use `/share` or `/invite`.",
+      ].join("\n")
+    );
+    config.activationReminderSentAt = now;
+    recordEvent(config, "activation_nudge_sent", { guildId, method: "dm_24h" });
+    saveGuildConfig();
+    return true;
+  } catch (err) {
+    console.warn("Activation nudge DM failed:", err?.message || err);
+    return false;
+  }
+}
+
+async function sweepActivationNudges() {
+  const now = Date.now();
+  for (const guildId of Object.keys(guildConfig)) {
+    try {
+      await maybeSendActivationNudgeForGuild(guildId, now);
+    } catch (err) {
+      console.warn(`Activation sweep failed for guild ${guildId}:`, err?.message || err);
+    }
   }
 }
 
@@ -1912,11 +2071,47 @@ async function handleToday(interaction) {
   const pick = pickHolidayForTone(filtered, config.tone, choice) || filtered[choice] || filtered[0];
   const baseComponents = buildButtons(pick);
   const { rows: promoRows, note: promoNote } = buildPromoComponents(interaction.guild.id, { includeRate: false, forceVote: true });
-  return interaction.reply({
+  await interaction.reply({
     content: promoNote || undefined,
     embeds: [buildEmbed(pick, { branding: !premium || config.branding, tone: config.tone })],
     components: [...baseComponents, ...promoRows],
   });
+  let sentPremiumPrompt = false;
+  if (!premium) {
+    const hiddenCount = Math.max(0, filtered.length - 1);
+    if (hiddenCount > 0 && canShowPremiumPrompt(interaction.guild.id)) {
+      const upgradeUrl = await getUpgradeUrlForInteraction(interaction);
+      markPremiumPrompt(interaction.guild.id);
+      recordEvent(config, "premium_prompt_shown", { guildId: interaction.guild.id, source: "today_followup", hiddenCount });
+      saveGuildConfig();
+      await interaction.followUp({
+        content: [
+          `${hiddenCount} more holiday${hiddenCount === 1 ? "" : "s"} available today.`,
+          "Premium unlocks the full daily set + /date, /search, /random, /facts, and advanced scheduling.",
+          "Start a 7-day trial, then $3.99/month. Cancel anytime.",
+        ].join("\n"),
+        flags: MessageFlags.Ephemeral,
+        components: [
+          new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId("start_trial").setLabel("Start 7-day trial").setStyle(ButtonStyle.Success),
+            new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(upgradeUrl)
+          ),
+        ],
+      });
+      sentPremiumPrompt = true;
+    }
+  }
+  if (!sentPremiumPrompt && interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild) && (!config.channelIds || !config.channelIds.length)) {
+    try {
+      await interaction.followUp({
+        content: "Tip: run /setup to auto-post daily holidays.",
+        flags: MessageFlags.Ephemeral,
+      });
+    } catch {
+      // no-op: nudge is optional
+    }
+  }
+  return null;
 }
 
 async function handleHelp(interaction) {
@@ -2101,6 +2296,8 @@ async function handleSetup(interaction) {
   }
   const guildId = interaction.guild.id;
   const config = getGuildConfig(guildId);
+  recordEvent(config, "setup_started", { guildId, userId: interaction.user.id });
+  saveGuildConfig();
   console.log(`Setup invoked for guild ${guildId} (config path: ${CONFIG_PATH}).`);
   const channel = interaction.options.getChannel("channel", true);
   const tz = interaction.options.getString("timezone");
@@ -2136,6 +2333,8 @@ async function handleSetup(interaction) {
     config.branding = true;
     config.holidayChoice = DEFAULT_HOLIDAY_CHOICE;
     if (typeof promotionsEnabled === "boolean") config.promotionsEnabled = promotionsEnabled;
+    config.activationReminderSentAt = Date.now();
+    recordEvent(config, "setup_completed", { guildId, userId: interaction.user.id, premium: false, channelId: channel.id });
     saveGuildConfig();
     console.log(`Setup saved for guild ${guildId}: ${formatSetupLog(config, channel.id)}`);
     scheduleForChannel(guildId, channel.id);
@@ -2195,6 +2394,8 @@ async function handleSetup(interaction) {
   if (streakRole) config.streakRoleId = streakRole.id;
   if (Number.isInteger(streakGoal) && streakGoal > 0) config.streakRoleGoal = streakGoal;
   config.channelSettings[channel.id] = ch;
+  config.activationReminderSentAt = Date.now();
+  recordEvent(config, "setup_completed", { guildId, userId: interaction.user.id, premium: true, channelId: channel.id });
 
   saveGuildConfig();
   console.log(`Setup saved for guild ${guildId}: ${formatSetupLog(config, channel.id)}`);
@@ -2569,31 +2770,176 @@ async function handleAdminFunnel(interaction) {
   if (!isOwner(interaction.user.id)) {
     return interaction.reply({ content: "Owner-only command.", flags: MessageFlags.Ephemeral });
   }
-  const now = Date.now();
-  const cutoff = now - 14 * 24 * 60 * 60 * 1000;
+  const endMs = Date.now();
+  const startMs = endMs - 14 * 24 * 60 * 60 * 1000;
+  const events = queryAnalyticsEventsInRange(startMs, endMs);
   let upsellCount = 0;
   let trialCount = 0;
   let upgradeCount = 0;
-  for (const config of Object.values(guildConfig)) {
-    const events = Array.isArray(config.analytics?.events) ? config.analytics.events : [];
-    for (const event of events) {
-      if (!event || event.at < cutoff) continue;
-      if (event.event === "upsell_shown") upsellCount += 1;
-      if (event.event === "trial_started") trialCount += 1;
-      if (event.event === "upgrade_completed") upgradeCount += 1;
-    }
+  let setupStarted = 0;
+  let setupCompleted = 0;
+  let inviteShown = 0;
+  let inviteClicked = 0;
+  let premiumPromptShown = 0;
+  for (const event of events) {
+    if (event.event === "upsell_shown") upsellCount += 1;
+    if (event.event === "trial_started") trialCount += 1;
+    if (event.event === "upgrade_completed") upgradeCount += 1;
+    if (event.event === "setup_started") setupStarted += 1;
+    if (event.event === "setup_completed") setupCompleted += 1;
+    if (event.event === "invite_cta_shown") inviteShown += 1;
+    if (event.event === "invite_cta_clicked") inviteClicked += 1;
+    if (event.event === "premium_prompt_shown") premiumPromptShown += 1;
   }
   const trialRate = upsellCount ? (trialCount / upsellCount) * 100 : 0;
   const upgradeRate = trialCount ? (upgradeCount / trialCount) * 100 : 0;
+  const startIso = new Date(startMs).toISOString();
+  const endIso = new Date(endMs).toISOString();
   const lines = [
     "Admin funnel (last 14 days)",
+    `Query source: guildConfig[*].analytics.events`,
+    `Timestamp fields checked: createdAt -> ts -> at`,
+    `Range start: ${startIso}`,
+    `Range end: ${endIso}`,
+  ];
+  if (!events.length) {
+    lines.push("0 events found in range");
+  }
+  lines.push(
     `Upsell shown: ${upsellCount}`,
+    `Premium prompts shown: ${premiumPromptShown}`,
     `Trials started: ${trialCount}`,
     `Upgrades completed: ${upgradeCount}`,
+    `Setup started: ${setupStarted}`,
+    `Setup completed: ${setupCompleted}`,
+    `Invite CTA shown: ${inviteShown}`,
+    `Invite CTA clicked: ${inviteClicked}`,
     `Trial conversion: ${trialRate.toFixed(1)}%`,
-    `Upgrade conversion: ${upgradeRate.toFixed(1)}%`,
+    `Upgrade conversion: ${upgradeRate.toFixed(1)}%`
+  );
+  return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
+}
+
+async function handleAdminHealth(interaction) {
+  if (!isOwner(interaction.user.id)) {
+    return interaction.reply({ content: "Owner-only command.", flags: MessageFlags.Ephemeral });
+  }
+  const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const totalGuilds = client.guilds.cache.size;
+  const configs = Object.entries(guildConfig);
+  let dailyEnabledGuilds = 0;
+  let validChannelGuilds = 0;
+  let recentDailyPostGuilds = 0;
+  const failureReasons = {};
+  const recentAttempts = [];
+  for (const [guildId, config] of configs) {
+    const channelIds = Array.isArray(config.channelIds) ? config.channelIds : [];
+    if (channelIds.length) dailyEnabledGuilds += 1;
+    if (Number(config.lastDailyPostAt || 0) >= sevenDaysAgo) recentDailyPostGuilds += 1;
+
+    let hasValidChannel = false;
+    if (channelIds.length) {
+      const guild = client.guilds.cache.get(guildId);
+      for (const channelId of channelIds) {
+        if (!/^\d+$/.test(String(channelId || ""))) continue;
+        const cached = guild?.channels?.cache?.get(channelId);
+        if (cached) {
+          hasValidChannel = true;
+          break;
+        }
+      }
+    }
+    if (hasValidChannel) validChannelGuilds += 1;
+
+    const attempts = Array.isArray(config.lastDailyPostAttempts) ? config.lastDailyPostAttempts : [];
+    for (const attempt of attempts) {
+      if (!attempt || Number(attempt.at || 0) < sevenDaysAgo) continue;
+      const status = String(attempt.status || "");
+      const reason = String(attempt.reason || "unknown");
+      if (status.startsWith("fail")) {
+        failureReasons[reason] = (failureReasons[reason] || 0) + 1;
+      }
+      recentAttempts.push({
+        at: Number(attempt.at || 0),
+        guildId: String(attempt.guildId || guildId),
+        status,
+        reason,
+      });
+    }
+  }
+  recentAttempts.sort((a, b) => b.at - a.at);
+  const lastTen = recentAttempts.slice(0, 10);
+  const reasonLines = Object.entries(failureReasons)
+    .sort((a, b) => b[1] - a[1])
+    .map(([reason, count]) => `${reason}: ${count}`);
+  const totalFailures = Object.values(failureReasons).reduce((sum, count) => sum + count, 0);
+  const lines = [
+    "Admin health",
+    `Total guilds: ${totalGuilds}`,
+    `Guilds with daily posting enabled: ${dailyEnabledGuilds}`,
+    `Guilds with valid channelId stored: ${validChannelGuilds}`,
+    `Guilds with lastDailyPostAt in last 7 days: ${recentDailyPostGuilds}`,
+    `Recent post failures (last 7 days): ${totalFailures}`,
+    `Failure reasons: ${reasonLines.length ? reasonLines.join(", ") : "none"}`,
+    "Last 10 post attempts:",
+    ...(lastTen.length
+      ? lastTen.map((a) => `${new Date(a.at).toISOString()} guild=${a.guildId} status=${a.status}${a.reason ? ` (${a.reason})` : ""}`)
+      : ["none"]),
   ];
   return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
+}
+
+async function handleAdminFire(interaction) {
+  if (!isOwner(interaction.user.id)) {
+    return interaction.reply({ content: "Owner-only command.", flags: MessageFlags.Ephemeral });
+  }
+  const requestedGuildId = interaction.options.getString("guild_id", false);
+  const guildId = requestedGuildId || interaction.guildId;
+  if (!guildId) {
+    return interaction.reply({ content: "Provide guild_id or run this inside a server.", flags: MessageFlags.Ephemeral });
+  }
+  const config = getGuildConfig(guildId);
+  const channelIds = Array.isArray(config.channelIds) ? config.channelIds : [];
+  const channelId = channelIds[0] || null;
+  if (!channelId) {
+    return interaction.reply({ content: `No daily posting channel configured for guild ${guildId}.`, flags: MessageFlags.Ephemeral });
+  }
+  await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+  let result;
+  try {
+    result = await postTodayForChannel(guildId, channelId, { source: "admin_fire", diagnostics: true });
+  } catch (err) {
+    const msg = err?.message || "post_failed";
+    return interaction.editReply({ content: `Admin fire failed for guild ${guildId} channel ${channelId}: ${msg}` });
+  }
+  const eventRows = Array.isArray(result?.eventWrites) ? result.eventWrites : [];
+  const eventsWriteOk = result?.eventsWriteOk !== false;
+  const lines = [
+    "Admin fire",
+    `Guild: ${guildId}`,
+    `Channel: ${channelId}`,
+    `Plan status: ${result?.planStatus || getPlanStatus(config)}`,
+    `Total holidays for today: ${Number.isFinite(result?.totalHolidays) ? result.totalHolidays : 0}`,
+    `shownCount: ${Number.isFinite(result?.shownCount) ? result.shownCount : 0}`,
+    `hiddenCount: ${Number.isFinite(result?.hiddenCount) ? result.hiddenCount : 0}`,
+    `upsell_shown: ${result?.upsellShown ? "yes" : "no"}${result?.upsellReason ? ` (${result.upsellReason})` : ""}`,
+    `events_write_ok: ${eventsWriteOk ? "true" : "false"}`,
+    `post_status: ${result?.status || "unknown"}${result?.reason ? ` (${result.reason})` : ""}`,
+  ];
+  if (eventRows.length) {
+    lines.push(
+      "events:",
+      ...eventRows.slice(-6).map((e) =>
+        `${e.event} ok=${e.ok ? "true" : "false"}${e.id ? ` id=${e.id}` : ""}${e.at ? ` at=${new Date(e.at).toISOString()}` : ""}${e.error ? ` err=${e.error}` : ""}`
+      )
+    );
+  } else {
+    lines.push("events: none");
+  }
+  if (result?.eventsWriteError) {
+    lines.push(`events_write_error: ${result.eventsWriteError}`);
+  }
+  return interaction.editReply({ content: lines.join("\n") });
 }
 
 async function handleFacts(interaction) {
@@ -3007,9 +3353,23 @@ async function handleUpgrade(interaction) {
   const userId = interaction.user.id;
   try {
     const session = await createPremiumCheckoutSession({ guildId, userId });
+    const config = getGuildConfig(guildId);
+    recordEvent(config, "premium_prompt_shown", { guildId, source: "upgrade_command" });
+    saveGuildConfig();
     return interaction.reply({
-      content: `Upgrade to premium using Stripe Checkout: ${session.url}`,
+      content: [
+        "Premium checkout is ready.",
+        "Includes: multi-channel daily posts, timezone/hour control, filters, analytics, and premium commands.",
+        "Start a 7-day trial, then $3.99/month. Cancel anytime.",
+        `Checkout: ${session.url}`,
+      ].join("\n"),
       flags: MessageFlags.Ephemeral,
+      components: [
+        new ActionRowBuilder().addComponents(
+          new ButtonBuilder().setCustomId("start_trial").setLabel("Start 7-day trial").setStyle(ButtonStyle.Success),
+          new ButtonBuilder().setLabel("Open Checkout").setStyle(ButtonStyle.Link).setURL(session.url)
+        ),
+      ],
     });
   } catch (err) {
     console.error("Stripe checkout error:", err);
@@ -3086,6 +3446,11 @@ async function handleInstallCount(interaction) {
 }
 
 async function handleShare(interaction) {
+  if (interaction.guildId) {
+    const config = getGuildConfig(interaction.guildId);
+    recordEvent(config, "invite_cta_shown", { guildId: interaction.guildId, source: "share_command" });
+    saveGuildConfig();
+  }
   return interaction.reply({
     content: "Share the Obscure Holiday Calendar bot with another server:",
     components: [
@@ -3137,6 +3502,8 @@ client.once("clientReady", async () => {
   // Schedule daily auto-post
   scheduleDailyPost();
   scheduleWeeklyRecap();
+  sweepActivationNudges();
+  setInterval(sweepActivationNudges, ACTIVATION_SWEEP_INTERVAL_MS);
 
   // Post stats to top.gg now and on interval
   postTopGGStats();
@@ -3205,6 +3572,10 @@ client.on("interactionCreate", async (interaction) => {
         return handleAdminStats(interaction);
       case "admin-funnel":
         return handleAdminFunnel(interaction);
+      case "admin-health":
+        return handleAdminHealth(interaction);
+      case "admin-fire":
+        return handleAdminFire(interaction);
       case "premium":
         return handlePremiumStatus(interaction);
         case "analytics":
@@ -3227,8 +3598,13 @@ client.on("interactionCreate", async (interaction) => {
           return handleInstallCount(interaction);
         case "postnowall":
           return handlePostNowAll(interaction);
-        case "invite":
-          return interaction.reply({
+	        case "invite":
+	          if (interaction.guildId) {
+	            const config = getGuildConfig(interaction.guildId);
+	            recordEvent(config, "invite_cta_shown", { guildId: interaction.guildId, source: "invite_command" });
+	            saveGuildConfig();
+	          }
+	          return interaction.reply({
             content: "Invite the bot to your server:",
             components: [
               new ActionRowBuilder().addComponents(
@@ -3281,6 +3657,27 @@ client.on("interactionCreate", async (interaction) => {
       if (interaction.customId === "start_trial") {
         return handleStartTrialButton(interaction);
       }
+      if (interaction.customId === "invite_cta") {
+        if (interaction.guildId) {
+          const config = getGuildConfig(interaction.guildId);
+          recordEvent(config, "invite_cta_clicked", {
+            guildId: interaction.guildId,
+            userId: interaction.user.id,
+            source: "message_button",
+          });
+          saveGuildConfig();
+        }
+        return interaction.reply({
+          content: "Invite the bot to another server:",
+          flags: MessageFlags.Ephemeral,
+          components: [
+            new ActionRowBuilder().addComponents(
+              new ButtonBuilder().setLabel("Invite to another server").setStyle(ButtonStyle.Link).setURL(BOT_INVITE_URL),
+              new ButtonBuilder().setLabel("Support / Info").setStyle(ButtonStyle.Link).setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
+            ),
+          ],
+        });
+      }
     }
     if (interaction.isAutocomplete()) {
       if (interaction.commandName === "setcategories") {
@@ -3318,6 +3715,13 @@ client.on("messageReactionAdd", async (reaction, user) => {
 
 client.on("guildCreate", async (guild) => {
   postTopGGStats();
+  const config = getGuildConfig(guild.id);
+  const now = Date.now();
+  if (!config.firstSeenAt) config.firstSeenAt = now;
+  config.activationReminderDueAt = now + ACTIVATION_REMINDER_DELAY_MS;
+  config.activationReminderSentAt = 0;
+  recordEvent(config, "guild_joined", { guildId: guild.id });
+  saveGuildConfig();
   try {
     const owner = await guild.fetchOwner();
     if (!owner?.user) return;
@@ -3389,50 +3793,126 @@ function scheduleForChannel(guildId, channelId) {
   console.log(`Scheduled ${guildId}#${channelId} in ${Math.round(delay / 1000 / 60)} minutes (${channelConfig.timezone} @ ${channelConfig.hour}:00)`);
 }
 
-async function postTodayForChannel(guildId, channelId) {
+async function postTodayForChannel(guildId, channelId, options = {}) {
   const config = getGuildConfig(guildId);
-  if (!config.channelIds || !config.channelIds.includes(channelId)) return;
+  const diagnostics = options?.diagnostics === true;
+  const nowMs = Date.now();
+  const result = {
+    guildId,
+    channelId,
+    source: options?.source || "scheduler",
+    planStatus: getPlanStatus(config, nowMs),
+    totalHolidays: 0,
+    shownCount: 0,
+    hiddenCount: 0,
+    upsellShown: false,
+    upsellReason: "not_evaluated",
+    status: "unknown",
+    reason: "",
+    eventWrites: [],
+    eventsWriteOk: true,
+    eventsWriteError: "",
+  };
+
+  if (!config.channelIds || !config.channelIds.includes(channelId)) {
+    result.status = "fail";
+    result.reason = "not_configured";
+    markDailyPostAttempt(config, { at: nowMs, guildId, channelId, status: "fail_not_configured", reason: result.reason, planStatus: result.planStatus });
+    saveGuildConfig();
+    return result;
+  }
+
   const channelSettings = getChannelConfig(guildId, channelId);
   if (channelSettings.skipWeekends) {
     const day = new Date().getDay();
-    if (day === 0 || day === 6) return; // Sunday or Saturday
+    if (day === 0 || day === 6) {
+      result.status = "skipped";
+      result.reason = "weekend_skipped";
+      markDailyPostAttempt(config, { at: nowMs, guildId, channelId, status: "skip_weekend", reason: result.reason, planStatus: result.planStatus });
+      saveGuildConfig();
+      return result;
+    }
   }
+
   let channel;
   try {
     channel = await client.channels.fetch(channelId);
   } catch (err) {
+    const reason = isMissingAccessError(err) ? "missing_channel_or_access_fetch" : "fetch_error";
+    result.status = "fail";
+    result.reason = reason;
+    markDailyPostAttempt(config, { at: Date.now(), guildId, channelId, status: "fail_fetch", reason, planStatus: result.planStatus });
     if (isMissingAccessError(err)) {
       removeChannelFromConfig(guildId, channelId, `fetch failed: ${err?.code || err?.status || "unknown"}`);
-      return;
+      return result;
     }
+    saveGuildConfig();
     throw err;
   }
-  if (!channel || !channel.isTextBased()) return;
+  if (!channel || !channel.isTextBased()) {
+    result.status = "fail";
+    result.reason = "invalid_channel";
+    markDailyPostAttempt(config, { at: Date.now(), guildId, channelId, status: "fail_invalid_channel", reason: result.reason, planStatus: result.planStatus });
+    saveGuildConfig();
+    return result;
+  }
 
   const now = new Date();
   const mmdd = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
   const hits = findByDate(mmdd);
+  result.totalHolidays = hits.length;
   const dateKey = getDateKey(now, channelSettings.timezone);
   const premium = isPremiumGuild(channel.guild);
   const wildcardHoliday = premium ? maybePickWildcardHoliday(config, dateKey) : null;
   const filteredHits = premium ? applyServerFilters(hits, config) : hits;
+
+  const writeEvent = (event, meta = {}) => {
+    const writeResult = recordEvent(config, event, meta);
+    if (diagnostics) {
+      result.eventWrites.push({
+        event,
+        ok: !!writeResult.ok,
+        id: writeResult.eventId || null,
+        at: writeResult.at || null,
+        error: writeResult.error || "",
+      });
+    }
+    if (!writeResult.ok) {
+      result.eventsWriteOk = false;
+      if (!result.eventsWriteError) result.eventsWriteError = writeResult.error || "event_write_failed";
+    }
+    return writeResult;
+  };
+
   if (premium) {
     const summary = summarizeFilterReasons(hits, filteredHits, config);
     if (summary) {
-      recordEvent(config, "filter_applied", { guildId, channelId, source: "daily_post", ...summary });
+      writeEvent("filter_applied", { guildId, channelId, source: "daily_post", ...summary });
     }
   }
   if (!hits.length) {
-    return channel.send("No holiday found for today. Check back tomorrow!");
+    await channel.send("No holiday found for today. Check back tomorrow!");
+    result.status = "fail";
+    result.reason = "no_holidays_today";
+    markDailyPostAttempt(config, { at: Date.now(), guildId, channelId, status: "fail_no_holiday", reason: result.reason, planStatus: result.planStatus });
+    saveGuildConfig();
+    return result;
   }
   if (!filteredHits.length) {
-    return channel.send("No holiday found for today with current filters.");
+    await channel.send("No holiday found for today with current filters.");
+    result.status = "fail";
+    result.reason = "all_filtered_out";
+    markDailyPostAttempt(config, { at: Date.now(), guildId, channelId, status: "fail_filtered_out", reason: result.reason, planStatus: result.planStatus });
+    saveGuildConfig();
+    return result;
   }
 
   const branding = !premium || channelSettings.branding;
   const maxFreeItems = 3;
   const listHits = premium ? filteredHits : filteredHits.slice(0, maxFreeItems);
   const hiddenCount = Math.max(0, filteredHits.length - listHits.length);
+  result.shownCount = listHits.length;
+  result.hiddenCount = hiddenCount;
   const choice = premium ? Math.min(channelSettings.holidayChoice || 0, filteredHits.length - 1) : 0;
   const pickPool = premium ? filteredHits : listHits;
   const pick =
@@ -3448,27 +3928,33 @@ async function postTodayForChannel(guildId, channelId) {
     tone: channelSettings.tone,
   });
 
-  // Coming up tomorrow teaser
   const tomorrow = new Date(now);
   tomorrow.setDate(now.getDate() + 1);
   const tmm = `${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}`;
   const nextHits = applyServerFilters(findByDate(tmm), config);
   const teaser = wildcardHoliday ? "" : nextHits.length ? `Up next: ${nextHits[0].name} (${prettyDate(tmm)})` : "";
-
   const mention = channelSettings.quiet ? "" : channelSettings.roleId ? `<@&${channelSettings.roleId}> ` : "";
-
   const { rows: promoRows, note: promoNote } = buildPromoComponents(guildId, { includeRate: true, forceVote: true });
   let trialNote = "";
   let trialRow = null;
   const showUpsell = !premium && shouldShowUpsell(config, now, hiddenCount);
+  result.upsellShown = showUpsell;
   if (showUpsell) {
     trialNote = `Try free for 7 days: Category Filters + Work-Safe Mode.\nStart a 7-day trial to see ${hiddenCount} more today.`;
     trialRow = buildTrialActionRow();
+    result.upsellReason = "free_plan_hidden_count_threshold_met";
+  } else if (premium) {
+    result.upsellReason = "premium_or_trial_plan";
+  } else if (hiddenCount <= 0) {
+    result.upsellReason = "hidden_count_below_threshold";
+  } else {
+    result.upsellReason = "upsell_rate_limited_or_throttled";
   }
   let shareNote = "";
   if (canShowSharePrompt(guildId)) {
     shareNote = "Like this bot? Invite it to another server to help it grow.";
     markSharePrompt(guildId);
+    writeEvent("invite_cta_shown", { guildId, source: "daily_share_note" });
   }
   let announcementNote = "";
   if (!config.featureAnnouncementSentAt) {
@@ -3479,24 +3965,21 @@ async function postTodayForChannel(guildId, channelId) {
     const endsAt = Number(config.trialEndsAt || 0);
     if (config.isPremium) {
       config.trialReminderPending = false;
-      recordEvent(config, "trial_reminder_skipped", { guildId, reason: "upgraded" });
+      writeEvent("trial_reminder_skipped", { guildId, reason: "upgraded" });
     } else if (!endsAt || endsAt - Date.now() > 24 * 60 * 60 * 1000) {
       config.trialReminderPending = false;
-      recordEvent(config, "trial_reminder_skipped", { guildId, reason: "trial_extended" });
+      writeEvent("trial_reminder_skipped", { guildId, reason: "trial_extended" });
     } else {
       const upgradeUrl = await getBestUpgradeUrlForGuild(guildId);
       trialReminderNote = `Trial ends tomorrow — keep filters active by upgrading: ${upgradeUrl}`;
     }
   }
-  const components = [
-    ...buildButtons(pick),
-    ...promoRows,
-    ...(trialRow ? [trialRow] : []),
-  ];
+  const components = [...buildButtons(pick), ...promoRows, ...(trialRow ? [trialRow] : [])];
   const streakLine = config.streakCount ? `\n🔥 Server streak: ${config.streakCount} day${config.streakCount === 1 ? "" : "s"}` : "";
   const wildcardLine = wildcardHoliday ? "\n🪄 Wildcard Day: surprise pick" : "";
   const promptLine = buildMicroPrompt(pick, channelSettings.tone);
   const loreLines = buildLoreLines(config, getDateKey(now, channelSettings.timezone));
+
   try {
     const sent = await channel.send({
       content: `${mention}🎉 Today’s holidays: ${listNames}${wildcardLine}${teaser ? `\n${teaser}` : ""}${announcementNote ? `\n${announcementNote}` : ""}${trialNote ? `\n${trialNote}` : ""}${trialReminderNote ? `\n${trialReminderNote}` : ""}${streakLine}${loreLines.length ? `\n\n${loreLines.join("\n")}` : ""}${promptLine ? `\n\n${promptLine}` : ""}${promoNote ? `\n\n${promoNote}` : ""}${shareNote ? `\n\n${shareNote}` : ""}`,
@@ -3514,7 +3997,7 @@ async function postTodayForChannel(guildId, channelId) {
     recordPostAnalytics(config, channelId, postDateKey, channelSettings.hour, pick);
     if (showUpsell) {
       config.upsellWeekCount = (config.upsellWeekCount || 0) + 1;
-      recordEvent(config, "upsell_shown", { guildId, hiddenCount });
+      writeEvent("upsell_shown", { guildId, hiddenCount });
     }
     if (announcementNote) {
       config.featureAnnouncementSentAt = Date.now();
@@ -3522,17 +4005,27 @@ async function postTodayForChannel(guildId, channelId) {
     if (trialReminderNote) {
       config.trialReminderSentAt = Date.now();
       config.trialReminderPending = false;
-      recordEvent(config, "trial_reminder_sent", { guildId, method: "fallback_post" });
+      writeEvent("trial_reminder_sent", { guildId, method: "fallback_post" });
     }
-    recordEvent(config, "daily_post_sent", { guildId, channelId, holiday: pick.name || "" });
+    writeEvent("daily_post_sent", { guildId, channelId, holiday: pick.name || "" });
+    markDailyPostAttempt(config, { at: Date.now(), guildId, channelId, status: "success", reason: "sent", planStatus: result.planStatus });
     saveGuildConfig();
     await maybeSendTrialReminder(guildId);
     scheduleDidYouKnow(channel, sent?.id || null, pick);
+    result.status = "success";
+    result.reason = "sent";
+    return result;
   } catch (err) {
+    const isRateLimited = Number(err?.status) === 429 || Number(err?.code) === 429;
+    const reason = isRateLimited ? "rate_limited" : isMissingAccessError(err) ? "missing_channel_or_access_send" : "send_error";
+    result.status = "fail";
+    result.reason = reason;
+    markDailyPostAttempt(config, { at: Date.now(), guildId, channelId, status: "fail_send", reason, planStatus: result.planStatus });
     if (isMissingAccessError(err)) {
       removeChannelFromConfig(guildId, channelId, `send failed: ${err?.code || err?.status || "unknown"}`);
-      return;
+      return result;
     }
+    saveGuildConfig();
     throw err;
   }
 }
