@@ -440,34 +440,47 @@ async function postDiscordServicesStats() {
     const serverCount = client.guilds.cache.size;
     const shardCount = Number(process.env.DISCORDSERVICES_SHARDS) || 1;
     const url = `https://api.discordservices.net/bot/${botId}/stats`;
-    const authHeader = formatDiscordServicesAuth(DISCORDSERVICES_TOKEN);
-    const payload = {
-      servers: serverCount,
-      guilds: serverCount,
-      server_count: serverCount,
-      shards: shardCount,
-      shard_count: shardCount,
-    };
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: authHeader,
-      },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) {
-      const text = await res.text();
-      console.error(
-        "Discord Services stats post failed:",
-        res.status,
-        text,
-        `url=${url}`,
-        `payload=${JSON.stringify(payload)}`
-      );
-    } else {
-      console.log(`Posted stats to discordservices.net: ${serverCount} servers (${shardCount} shards)`);
+    const authCandidates = Array.from(
+      new Set([formatDiscordServicesAuth(DISCORDSERVICES_TOKEN), DISCORDSERVICES_TOKEN].filter(Boolean))
+    );
+    const payloadCandidates = [
+      { servers: serverCount, shards: shardCount },
+      { servers: serverCount },
+    ];
+
+    const failures = [];
+    for (const authHeader of authCandidates) {
+      for (const payload of payloadCandidates) {
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authHeader,
+          },
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) {
+          console.log(`Posted stats to discordservices.net: ${serverCount} servers (${shardCount} shards)`);
+          return;
+        }
+        const text = await res.text();
+        failures.push({
+          status: res.status,
+          text,
+          authKind: authHeader.startsWith("Bot ") ? "Bot token" : "raw token",
+          payload,
+        });
+      }
     }
+
+    const first = failures[0];
+    console.error(
+      "Discord Services stats post failed:",
+      first?.status || "unknown",
+      first?.text || "",
+      `url=${url}`,
+      `attempts=${JSON.stringify(failures)}`
+    );
   } catch (e) {
     console.warn("discordservices stats post failed:", e.message);
   }
