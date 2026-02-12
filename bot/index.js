@@ -89,6 +89,11 @@ function normalizeApiToken(value) {
 }
 
 const DISCORDSERVICES_TOKEN = normalizeApiToken(process.env.DISCORDSERVICES_TOKEN); // for posting stats to api.discordservices.net
+function formatDiscordServicesAuth(token) {
+  if (!token) return null;
+  if (/^(bot|bearer)\s+/i.test(token)) return token;
+  return `Bot ${token}`;
+}
 const TOPGG_POST_INTERVAL_MIN = Number(process.env.TOPGG_POST_INTERVAL_MIN || "30");
 const DISCORDSERVICES_POST_INTERVAL_MIN = Number(process.env.DISCORDSERVICES_POST_INTERVAL_MIN || TOPGG_POST_INTERVAL_MIN || "30");
 const BOTLIST_POST_INTERVAL_MIN = Number(process.env.BOTLIST_POST_INTERVAL_MIN || TOPGG_POST_INTERVAL_MIN || "30");
@@ -435,24 +440,33 @@ async function postDiscordServicesStats() {
     const serverCount = client.guilds.cache.size;
     const shardCount = Number(process.env.DISCORDSERVICES_SHARDS) || 1;
     const url = `https://api.discordservices.net/bot/${botId}/stats`;
+    const authHeader = formatDiscordServicesAuth(DISCORDSERVICES_TOKEN);
+    const payload = {
+      servers: serverCount,
+      guilds: serverCount,
+      server_count: serverCount,
+      shards: shardCount,
+      shard_count: shardCount,
+    };
     const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: DISCORDSERVICES_TOKEN,
+        Authorization: authHeader,
       },
-      body: JSON.stringify({
-        servers: serverCount,
-      }),
+      body: JSON.stringify(payload),
     });
     if (!res.ok) {
+      const text = await res.text();
       console.error(
         "Discord Services stats post failed:",
         res.status,
-        await res.text()
+        text,
+        `url=${url}`,
+        `payload=${JSON.stringify(payload)}`
       );
     } else {
-      console.log(`Posted stats to discordservices.net: ${serverCount} servers`);
+      console.log(`Posted stats to discordservices.net: ${serverCount} servers (${shardCount} shards)`);
     }
   } catch (e) {
     console.warn("discordservices stats post failed:", e.message);
