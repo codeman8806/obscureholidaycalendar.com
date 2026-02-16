@@ -125,6 +125,7 @@ const ACTIVATION_SWEEP_INTERVAL_MS = 30 * 60 * 1000; // every 30 minutes
 const WEEKLY_RECAP_INTERVAL_MS = 6 * 60 * 60 * 1000; // check every 6 hours
 const DEFAULT_STREAK_GOAL = 7;
 const FOLLOWUP_DELAY_MIN = Number(process.env.FOLLOWUP_DELAY_MIN || "45");
+const FREE_DAILY_VISIBLE = Math.max(1, Number(process.env.FREE_DAILY_VISIBLE || "1"));
 const DEFAULT_TONE = "default";
 const ALLOWED_TONES = new Set(["wholesome", "silly", "nerdy", "historical", "global", "default"]);
 const MAX_ANALYTICS_HISTORY = 120;
@@ -2808,7 +2809,13 @@ async function handleAdminFunnel(interaction) {
   let inviteShown = 0;
   let inviteClicked = 0;
   let premiumPromptShown = 0;
+  let dailyPostSent = 0;
+  let upsellEvaluated = 0;
+  let upsellEligible = 0;
+  const eventTypeCounts = {};
   for (const event of events) {
+    const eventName = String(event.event || "unknown");
+    eventTypeCounts[eventName] = (eventTypeCounts[eventName] || 0) + 1;
     if (event.event === "upsell_shown") upsellCount += 1;
     if (event.event === "trial_started") trialCount += 1;
     if (event.event === "upgrade_completed") upgradeCount += 1;
@@ -2817,6 +2824,11 @@ async function handleAdminFunnel(interaction) {
     if (event.event === "invite_cta_shown") inviteShown += 1;
     if (event.event === "invite_cta_clicked") inviteClicked += 1;
     if (event.event === "premium_prompt_shown") premiumPromptShown += 1;
+    if (event.event === "daily_post_sent") dailyPostSent += 1;
+    if (event.event === "upsell_evaluated") {
+      upsellEvaluated += 1;
+      if (Number(event?.meta?.hiddenCount || 0) > 0) upsellEligible += 1;
+    }
   }
   const trialRate = upsellCount ? (trialCount / upsellCount) * 100 : 0;
   const upgradeRate = trialCount ? (upgradeCount / trialCount) * 100 : 0;
@@ -2833,6 +2845,10 @@ async function handleAdminFunnel(interaction) {
     lines.push("0 events found in range");
   }
   lines.push(
+    `Total events in range: ${events.length}`,
+    `Daily posts sent: ${dailyPostSent}`,
+    `Upsell evaluated: ${upsellEvaluated}`,
+    `Upsell eligible (hiddenCount > 0): ${upsellEligible}`,
     `Upsell shown: ${upsellCount}`,
     `Premium prompts shown: ${premiumPromptShown}`,
     `Trials started: ${trialCount}`,
@@ -2844,6 +2860,13 @@ async function handleAdminFunnel(interaction) {
     `Trial conversion: ${trialRate.toFixed(1)}%`,
     `Upgrade conversion: ${upgradeRate.toFixed(1)}%`
   );
+  const topEvents = Object.entries(eventTypeCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .map(([name, count]) => `${name}: ${count}`);
+  if (topEvents.length) {
+    lines.push(`Top events: ${topEvents.join(", ")}`);
+  }
   return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
 }
 
@@ -3935,7 +3958,7 @@ async function postTodayForChannel(guildId, channelId, options = {}) {
   }
 
   const branding = !premium || channelSettings.branding;
-  const maxFreeItems = 3;
+  const maxFreeItems = FREE_DAILY_VISIBLE;
   const listHits = premium ? filteredHits : filteredHits.slice(0, maxFreeItems);
   const hiddenCount = Math.max(0, filteredHits.length - listHits.length);
   result.shownCount = listHits.length;
@@ -3977,6 +4000,15 @@ async function postTodayForChannel(guildId, channelId, options = {}) {
   } else {
     result.upsellReason = "upsell_rate_limited_or_throttled";
   }
+  writeEvent("upsell_evaluated", {
+    guildId,
+    channelId,
+    hiddenCount,
+    shownCount: listHits.length,
+    totalCount: filteredHits.length,
+    upsellShown: showUpsell,
+    reason: result.upsellReason,
+  });
   let shareNote = "";
   if (canShowSharePrompt(guildId)) {
     shareNote = "Like this bot? Invite it to another server to help it grow.";
