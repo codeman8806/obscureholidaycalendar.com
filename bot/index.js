@@ -121,6 +121,7 @@ const PROMO_RATE_INTERVAL_MS = 30 * 24 * 60 * 60 * 1000; // once per 30 days per
 const PREMIUM_PROMO_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000; // once per 7 days per guild
 const SHARE_PROMO_INTERVAL_MS = 14 * 24 * 60 * 60 * 1000; // once per 14 days per guild
 const ACTIVATION_REMINDER_DELAY_MS = 24 * 60 * 60 * 1000; // 24h after join if setup incomplete
+const ACTIVATION_NUDGE_REPEAT_MS = Number(process.env.ACTIVATION_NUDGE_REPEAT_DAYS || "7") * 24 * 60 * 60 * 1000; // repeat setup nudge weekly until configured
 const ACTIVATION_SWEEP_INTERVAL_MS = 30 * 60 * 1000; // every 30 minutes
 const WEEKLY_RECAP_INTERVAL_MS = 6 * 60 * 60 * 1000; // check every 6 hours
 const DEFAULT_STREAK_GOAL = 7;
@@ -273,6 +274,16 @@ function normalizeAllGuildConfigs() {
       changed = true;
       updated = true;
     }
+    if (!cfg.trialDay1SentAt) {
+      cfg.trialDay1SentAt = 0;
+      changed = true;
+      updated = true;
+    }
+    if (!cfg.trialDay5SentAt) {
+      cfg.trialDay5SentAt = 0;
+      changed = true;
+      updated = true;
+    }
     if (typeof cfg.trialReminderPending !== "boolean") {
       cfg.trialReminderPending = false;
       changed = true;
@@ -310,6 +321,21 @@ function normalizeAllGuildConfigs() {
     }
     if (typeof cfg.onboardingDmSent !== "boolean") {
       cfg.onboardingDmSent = false;
+      changed = true;
+      updated = true;
+    }
+    if (!Number.isFinite(Number(cfg.activationReminderDueAt || 0))) {
+      cfg.activationReminderDueAt = Number(cfg.firstSeenAt || Date.now()) + ACTIVATION_REMINDER_DELAY_MS;
+      changed = true;
+      updated = true;
+    }
+    if (!Number.isFinite(Number(cfg.activationReminderSentAt || 0))) {
+      cfg.activationReminderSentAt = 0;
+      changed = true;
+      updated = true;
+    }
+    if (!Number.isInteger(cfg.activationNudgeCount)) {
+      cfg.activationNudgeCount = 0;
       changed = true;
       updated = true;
     }
@@ -746,6 +772,8 @@ function getGuildConfig(guildId) {
       onboardingDmSent: false,
       featureAnnouncementSentAt: 0,
       trialReminderSentAt: 0,
+      trialDay1SentAt: 0,
+      trialDay5SentAt: 0,
       trialReminderPending: false,
       blockedHolidayIds: [],
       forcedHolidayIds: [],
@@ -781,6 +809,7 @@ function getGuildConfig(guildId) {
       firstSeenAt: Date.now(),
       activationReminderDueAt: Date.now() + ACTIVATION_REMINDER_DELAY_MS,
       activationReminderSentAt: 0,
+      activationNudgeCount: 0,
     };
   }
   if (!Array.isArray(guildConfig[guildId].channelIds)) {
@@ -876,6 +905,12 @@ function getGuildConfig(guildId) {
   if (!guildConfig[guildId].trialReminderSentAt) {
     guildConfig[guildId].trialReminderSentAt = 0;
   }
+  if (!guildConfig[guildId].trialDay1SentAt) {
+    guildConfig[guildId].trialDay1SentAt = 0;
+  }
+  if (!guildConfig[guildId].trialDay5SentAt) {
+    guildConfig[guildId].trialDay5SentAt = 0;
+  }
   if (typeof guildConfig[guildId].trialReminderPending !== "boolean") {
     guildConfig[guildId].trialReminderPending = false;
   }
@@ -934,6 +969,9 @@ function getGuildConfig(guildId) {
   }
   if (!Number.isFinite(Number(guildConfig[guildId].activationReminderSentAt || 0))) {
     guildConfig[guildId].activationReminderSentAt = 0;
+  }
+  if (!Number.isInteger(guildConfig[guildId].activationNudgeCount)) {
+    guildConfig[guildId].activationNudgeCount = 0;
   }
   if (!guildConfig[guildId].featureAnnouncementSentAt) {
     guildConfig[guildId].featureAnnouncementSentAt = 0;
@@ -1689,6 +1727,10 @@ function startTrialForConfig(config, guildId, userId) {
   config.trialRedeemedAt = now;
   config.trialStartedAt = now;
   config.trialEndsAt = now + TRIAL_DURATION_MS;
+  config.trialDay1SentAt = 0;
+  config.trialDay5SentAt = 0;
+  config.trialReminderSentAt = 0;
+  config.trialReminderPending = false;
   recordEvent(config, "trial_started", { guildId, userId, trialEndsAt: config.trialEndsAt });
   saveGuildConfig();
   return true;
@@ -1752,7 +1794,7 @@ async function replyPremiumOnly(interaction, { feature, previewLines = [] } = {}
     components: [
       new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId("start_trial").setLabel("Start 7-day trial").setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(upgradeUrl),
+        new ButtonBuilder().setCustomId("upgrade_cta").setLabel("Upgrade to Premium").setStyle(ButtonStyle.Primary),
         new ButtonBuilder()
           .setLabel("Learn More")
           .setStyle(ButtonStyle.Link)
@@ -1885,6 +1927,7 @@ function buildButtons(h) {
 function buildTrialActionRow() {
   return new ActionRowBuilder().addComponents(
     new ButtonBuilder().setCustomId("start_trial").setLabel("Start 7-day trial").setStyle(ButtonStyle.Success),
+    new ButtonBuilder().setCustomId("upgrade_cta").setLabel("Upgrade to Premium").setStyle(ButtonStyle.Primary),
     new ButtonBuilder()
       .setLabel("Learn More")
       .setStyle(ButtonStyle.Link)
@@ -1898,9 +1941,8 @@ function formatTimestamp(ts) {
 }
 
 function buildUpgradeRow(url) {
-  const upgradeUrl = url || SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/";
   return new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(upgradeUrl),
+    new ButtonBuilder().setCustomId("upgrade_cta").setLabel("Upgrade to Premium").setStyle(ButtonStyle.Primary),
     new ButtonBuilder().setLabel("Learn More").setStyle(ButtonStyle.Link).setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
   );
 }
@@ -1990,7 +2032,6 @@ async function maybeSendOnboardingDm(user, guildId) {
 async function maybeSendActivationNudgeForGuild(guildId, now = Date.now()) {
   if (!guildId) return false;
   const config = getGuildConfig(guildId);
-  if (config.activationReminderSentAt) return false;
   if ((config.channelIds || []).length > 0) return false;
   const dueAt = Number(config.activationReminderDueAt || 0);
   if (!dueAt || now < dueAt) return false;
@@ -2002,11 +2043,19 @@ async function maybeSendActivationNudgeForGuild(guildId, now = Date.now()) {
       [
         `Quick setup reminder for **${guild.name}**:`,
         "Run `/setup` in your server to enable daily holiday auto-posts.",
+        "Tip: configure one channel now, then tune style/time later.",
         "Need to share the bot with another community? Use `/share` or `/invite`.",
       ].join("\n")
     );
     config.activationReminderSentAt = now;
-    recordEvent(config, "activation_nudge_sent", { guildId, method: "dm_24h" });
+    config.activationReminderDueAt = now + ACTIVATION_NUDGE_REPEAT_MS;
+    config.activationNudgeCount = Number(config.activationNudgeCount || 0) + 1;
+    recordEvent(config, "activation_nudge_sent", {
+      guildId,
+      method: "dm_recurring",
+      nudgeCount: config.activationNudgeCount,
+      nextAt: config.activationReminderDueAt,
+    });
     saveGuildConfig();
     return true;
   } catch (err) {
@@ -2047,12 +2096,13 @@ async function maybeSendTrialReminder(guildId) {
     }
     return;
   }
-  if (config.trialReminderSentAt) return;
+  const startedAt = Number(config.trialStartedAt || 0);
   const endsAt = Number(config.trialEndsAt || 0);
-  if (!endsAt || endsAt - now > 24 * 60 * 60 * 1000) {
+  if (!endsAt) return;
+  if (endsAt <= now) {
     if (config.trialReminderPending) {
       config.trialReminderPending = false;
-      recordEvent(config, "trial_reminder_skipped", { guildId, reason: "trial_extended" });
+      recordEvent(config, "trial_reminder_skipped", { guildId, reason: "trial_expired" });
       saveGuildConfig();
     }
     return;
@@ -2061,12 +2111,45 @@ async function maybeSendTrialReminder(guildId) {
     const guild = await client.guilds.fetch(guildId);
     const owner = await guild.fetchOwner();
     if (!owner?.user) return;
+    let changed = false;
+    const elapsedMs = startedAt > 0 ? now - startedAt : 0;
+    const remainingMs = endsAt - now;
     const upgradeUrl = await getBestUpgradeUrlForGuild(guildId);
-    await owner.user.send(`Trial ends tomorrow — keep filters active by upgrading: ${upgradeUrl}`);
-    config.trialReminderSentAt = now;
-    config.trialReminderPending = false;
-    recordEvent(config, "trial_reminder_sent", { guildId, method: "dm" });
-    saveGuildConfig();
+
+    if (remainingMs <= 24 * 60 * 60 * 1000 && !config.trialReminderSentAt) {
+      await owner.user.send(`Trial ends tomorrow — keep filters active by upgrading: ${upgradeUrl}`);
+      config.trialReminderSentAt = now;
+      config.trialReminderPending = false;
+      recordEvent(config, "trial_reminder_sent", { guildId, method: "dm", stage: "day6" });
+      changed = true;
+    } else if (startedAt > 0 && elapsedMs >= 5 * 24 * 60 * 60 * 1000 && !config.trialDay5SentAt) {
+      await owner.user.send(
+        [
+          "Trial check-in (day 5): keep your filter settings if you want this feed long-term.",
+          "If your community likes the daily posts, now is a good time to upgrade.",
+          `Upgrade: ${upgradeUrl}`,
+        ].join("\n")
+      );
+      config.trialDay5SentAt = now;
+      recordEvent(config, "trial_day5_sent", { guildId, method: "dm", day: 5 });
+      changed = true;
+    } else if (startedAt > 0 && elapsedMs >= 24 * 60 * 60 * 1000 && !config.trialDay1SentAt) {
+      await owner.user.send(
+        [
+          "Trial check-in (day 1): Category Filters and Work-Safe Mode are active.",
+          "Run `/setcategories` and `/excludesensitive` to tune your daily feed.",
+          `Upgrade anytime: ${upgradeUrl}`,
+        ].join("\n")
+      );
+      config.trialDay1SentAt = now;
+      recordEvent(config, "trial_day1_sent", { guildId, method: "dm", day: 1 });
+      changed = true;
+    }
+
+    if (changed) {
+      config.trialReminderPending = false;
+      saveGuildConfig();
+    }
   } catch (err) {
     config.trialReminderPending = true;
     saveGuildConfig();
@@ -2122,7 +2205,7 @@ async function handleToday(interaction) {
         components: [
           new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId("start_trial").setLabel("Start 7-day trial").setStyle(ButtonStyle.Success),
-            new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(upgradeUrl)
+            new ButtonBuilder().setCustomId("upgrade_cta").setLabel("Upgrade to Premium").setStyle(ButtonStyle.Primary)
           ),
         ],
       });
@@ -2324,6 +2407,10 @@ async function handleSetup(interaction) {
   }
   const guildId = interaction.guild.id;
   const config = getGuildConfig(guildId);
+  const hadNoChannelsBeforeSetup = !Array.isArray(config.channelIds) || config.channelIds.length === 0;
+  if (hadNoChannelsBeforeSetup && Number(config.activationReminderSentAt || 0) > 0) {
+    recordEvent(config, "activation_nudge_clicked", { guildId, userId: interaction.user.id, source: "setup_command" });
+  }
   recordEvent(config, "setup_started", { guildId, userId: interaction.user.id });
   saveGuildConfig();
   console.log(`Setup invoked for guild ${guildId} (config path: ${CONFIG_PATH}).`);
@@ -2366,7 +2453,6 @@ async function handleSetup(interaction) {
     saveGuildConfig();
     console.log(`Setup saved for guild ${guildId}: ${formatSetupLog(config, channel.id)}`);
     scheduleForChannel(guildId, channel.id);
-    const upgradeUrl = await getUpgradeUrlForInteraction(interaction);
     await sendSetupPreview(channel, config, false, null);
     await maybeSendOnboardingDm(interaction.user, guildId);
     return interaction.reply({
@@ -2378,7 +2464,7 @@ async function handleSetup(interaction) {
       flags: MessageFlags.Ephemeral,
       components: [
         new ActionRowBuilder().addComponents(
-          new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(upgradeUrl),
+          new ButtonBuilder().setCustomId("upgrade_cta").setLabel("Upgrade to Premium").setStyle(ButtonStyle.Primary),
           new ButtonBuilder()
             .setLabel("Premium Features")
             .setStyle(ButtonStyle.Link)
@@ -2598,6 +2684,29 @@ async function handleStartTrialButton(interaction) {
   });
 }
 
+async function handleUpgradeCtaButton(interaction) {
+  if (!interaction.guildId) {
+    return interaction.reply({ content: "This action must be used in a server.", flags: MessageFlags.Ephemeral });
+  }
+  const config = getGuildConfig(interaction.guildId);
+  recordEvent(config, "upgrade_cta_clicked", {
+    guildId: interaction.guildId,
+    userId: interaction.user.id,
+    source: "button",
+  });
+  saveGuildConfig();
+  const upgradeUrl = await getBestUpgradeUrlForGuild(interaction.guildId, interaction);
+  return interaction.reply({
+    content: `Open premium checkout: ${upgradeUrl}`,
+    flags: MessageFlags.Ephemeral,
+    components: [
+      new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setLabel("Open Checkout").setStyle(ButtonStyle.Link).setURL(upgradeUrl)
+      ),
+    ],
+  });
+}
+
 async function handleTrialStatus(interaction) {
   if (!interaction.guild) {
     return interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
@@ -2812,6 +2921,12 @@ async function handleAdminFunnel(interaction) {
   let dailyPostSent = 0;
   let upsellEvaluated = 0;
   let upsellEligible = 0;
+  let trialCtaClicked = 0;
+  let upgradeCtaClicked = 0;
+  let activationNudgeSent = 0;
+  let activationNudgeClicked = 0;
+  let trialDay1Sent = 0;
+  let trialDay5Sent = 0;
   const eventTypeCounts = {};
   for (const event of events) {
     const eventName = String(event.event || "unknown");
@@ -2829,6 +2944,12 @@ async function handleAdminFunnel(interaction) {
       upsellEvaluated += 1;
       if (Number(event?.meta?.hiddenCount || 0) > 0) upsellEligible += 1;
     }
+    if (event.event === "trial_cta_clicked") trialCtaClicked += 1;
+    if (event.event === "upgrade_cta_clicked") upgradeCtaClicked += 1;
+    if (event.event === "activation_nudge_sent") activationNudgeSent += 1;
+    if (event.event === "activation_nudge_clicked") activationNudgeClicked += 1;
+    if (event.event === "trial_day1_sent") trialDay1Sent += 1;
+    if (event.event === "trial_day5_sent") trialDay5Sent += 1;
   }
   const trialRate = upsellCount ? (trialCount / upsellCount) * 100 : 0;
   const upgradeRate = trialCount ? (upgradeCount / trialCount) * 100 : 0;
@@ -2851,10 +2972,16 @@ async function handleAdminFunnel(interaction) {
     `Upsell eligible (hiddenCount > 0): ${upsellEligible}`,
     `Upsell shown: ${upsellCount}`,
     `Premium prompts shown: ${premiumPromptShown}`,
+    `Trial CTA clicked: ${trialCtaClicked}`,
+    `Upgrade CTA clicked: ${upgradeCtaClicked}`,
     `Trials started: ${trialCount}`,
     `Upgrades completed: ${upgradeCount}`,
+    `Trial day1 reminders sent: ${trialDay1Sent}`,
+    `Trial day5 reminders sent: ${trialDay5Sent}`,
     `Setup started: ${setupStarted}`,
     `Setup completed: ${setupCompleted}`,
+    `Activation nudges sent: ${activationNudgeSent}`,
+    `Activation nudges converted (/setup): ${activationNudgeClicked}`,
     `Invite CTA shown: ${inviteShown}`,
     `Invite CTA clicked: ${inviteClicked}`,
     `Trial conversion: ${trialRate.toFixed(1)}%`,
@@ -2867,6 +2994,74 @@ async function handleAdminFunnel(interaction) {
   if (topEvents.length) {
     lines.push(`Top events: ${topEvents.join(", ")}`);
   }
+  return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
+}
+
+async function handleAdminConversion(interaction) {
+  if (!isOwner(interaction.user.id)) {
+    return interaction.reply({ content: "Owner-only command.", flags: MessageFlags.Ephemeral });
+  }
+  const rawDays = interaction.options.getInteger("days", false);
+  const days = Number.isInteger(rawDays) ? Math.max(1, Math.min(rawDays, 90)) : 14;
+  const endMs = Date.now();
+  const startMs = endMs - days * 24 * 60 * 60 * 1000;
+  const events = queryAnalyticsEventsInRange(startMs, endMs);
+
+  const counts = {
+    activationNudgeSent: 0,
+    activationNudgeClicked: 0,
+    setupCompleted: 0,
+    upsellEvaluated: 0,
+    upsellShown: 0,
+    trialCtaClicked: 0,
+    trialStarted: 0,
+    trialDay1Sent: 0,
+    trialDay5Sent: 0,
+    trialEndingSoonSent: 0,
+    upgradeCtaClicked: 0,
+    upgradeCompleted: 0,
+  };
+
+  for (const row of events) {
+    const eventName = String(row?.event || "");
+    if (eventName === "activation_nudge_sent") counts.activationNudgeSent += 1;
+    if (eventName === "activation_nudge_clicked") counts.activationNudgeClicked += 1;
+    if (eventName === "setup_completed") counts.setupCompleted += 1;
+    if (eventName === "upsell_evaluated") counts.upsellEvaluated += 1;
+    if (eventName === "upsell_shown") counts.upsellShown += 1;
+    if (eventName === "trial_cta_clicked") counts.trialCtaClicked += 1;
+    if (eventName === "trial_started") counts.trialStarted += 1;
+    if (eventName === "trial_day1_sent") counts.trialDay1Sent += 1;
+    if (eventName === "trial_day5_sent") counts.trialDay5Sent += 1;
+    if (eventName === "trial_reminder_sent") counts.trialEndingSoonSent += 1;
+    if (eventName === "upgrade_cta_clicked") counts.upgradeCtaClicked += 1;
+    if (eventName === "upgrade_completed") counts.upgradeCompleted += 1;
+  }
+
+  const pct = (num, den) => (den > 0 ? ((num / den) * 100).toFixed(1) : "0.0");
+  const startIso = new Date(startMs).toISOString();
+  const endIso = new Date(endMs).toISOString();
+  const lines = [
+    `Admin conversion (${days} day${days === 1 ? "" : "s"})`,
+    `Range start: ${startIso}`,
+    `Range end: ${endIso}`,
+    `Total events in range: ${events.length}`,
+    "--- Activation ---",
+    `Nudges sent: ${counts.activationNudgeSent}`,
+    `Nudge -> setup conversions: ${counts.activationNudgeClicked} (${pct(counts.activationNudgeClicked, counts.activationNudgeSent)}%)`,
+    `Setup completed: ${counts.setupCompleted}`,
+    "--- Upsell ---",
+    `Upsell evaluated: ${counts.upsellEvaluated}`,
+    `Upsell shown: ${counts.upsellShown} (${pct(counts.upsellShown, counts.upsellEvaluated)}% of evaluated)`,
+    `Trial CTA clicked: ${counts.trialCtaClicked} (${pct(counts.trialCtaClicked, counts.upsellShown)}% of shown)`,
+    `Trials started: ${counts.trialStarted} (${pct(counts.trialStarted, counts.trialCtaClicked)}% of trial CTA clicks)`,
+    "--- Trial lifecycle ---",
+    `Day 1 reminders sent: ${counts.trialDay1Sent}`,
+    `Day 5 reminders sent: ${counts.trialDay5Sent}`,
+    `Ending-soon reminders sent: ${counts.trialEndingSoonSent}`,
+    `Upgrade CTA clicked: ${counts.upgradeCtaClicked}`,
+    `Upgrades completed: ${counts.upgradeCompleted} (${pct(counts.upgradeCompleted, counts.upgradeCtaClicked)}% of upgrade CTA clicks)`,
+  ];
   return interaction.reply({ content: lines.join("\n"), flags: MessageFlags.Ephemeral });
 }
 
@@ -3215,7 +3410,7 @@ async function handlePremiumStatus(interaction) {
     components: [
       new ActionRowBuilder().addComponents(
         new ButtonBuilder().setCustomId("start_trial").setLabel("Start 7-day trial").setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(upgradeUrl),
+        new ButtonBuilder().setCustomId("upgrade_cta").setLabel("Upgrade to Premium").setStyle(ButtonStyle.Primary),
         new ButtonBuilder().setLabel("Learn More").setStyle(ButtonStyle.Link).setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
       ),
     ],
@@ -3401,6 +3596,11 @@ async function handleUpgrade(interaction) {
   }
   const guildId = interaction.guildId;
   const userId = interaction.user.id;
+  if (guildId) {
+    const config = getGuildConfig(guildId);
+    recordEvent(config, "upgrade_cta_clicked", { guildId, userId, source: "upgrade_command" });
+    saveGuildConfig();
+  }
   try {
     const session = await createPremiumCheckoutSession({ guildId, userId });
     const config = getGuildConfig(guildId);
@@ -3622,6 +3822,8 @@ client.on("interactionCreate", async (interaction) => {
         return handleAdminStats(interaction);
       case "admin-funnel":
         return handleAdminFunnel(interaction);
+      case "admin-conversion":
+        return handleAdminConversion(interaction);
       case "admin-health":
         return handleAdminHealth(interaction);
       case "admin-fire":
@@ -3705,7 +3907,19 @@ client.on("interactionCreate", async (interaction) => {
     }
     if (interaction.isButton()) {
       if (interaction.customId === "start_trial") {
+        if (interaction.guildId) {
+          const config = getGuildConfig(interaction.guildId);
+          recordEvent(config, "trial_cta_clicked", {
+            guildId: interaction.guildId,
+            userId: interaction.user.id,
+            source: "button",
+          });
+          saveGuildConfig();
+        }
         return handleStartTrialButton(interaction);
+      }
+      if (interaction.customId === "upgrade_cta") {
+        return handleUpgradeCtaButton(interaction);
       }
       if (interaction.customId === "invite_cta") {
         if (interaction.guildId) {
@@ -3770,6 +3984,7 @@ client.on("guildCreate", async (guild) => {
   if (!config.firstSeenAt) config.firstSeenAt = now;
   config.activationReminderDueAt = now + ACTIVATION_REMINDER_DELAY_MS;
   config.activationReminderSentAt = 0;
+  config.activationNudgeCount = 0;
   recordEvent(config, "guild_joined", { guildId: guild.id });
   saveGuildConfig();
   try {
@@ -4162,8 +4377,8 @@ async function sendWeeklyRecap(guildId) {
       content: lines.join("\n"),
       components: [
         new ActionRowBuilder().addComponents(
-          new ButtonBuilder().setLabel("Invite to another server").setStyle(ButtonStyle.Link).setURL(BOT_INVITE_URL),
-          new ButtonBuilder().setLabel("Upgrade to Premium").setStyle(ButtonStyle.Link).setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
+          new ButtonBuilder().setCustomId("invite_cta").setLabel("Invite to another server").setStyle(ButtonStyle.Primary),
+          new ButtonBuilder().setCustomId("upgrade_cta").setLabel("Upgrade to Premium").setStyle(ButtonStyle.Secondary)
         ),
       ],
     });
