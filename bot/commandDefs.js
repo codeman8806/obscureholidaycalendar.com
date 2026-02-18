@@ -343,6 +343,18 @@ export const commandDefs = [
     description: "Owner: conversion funnel summary",
   },
   {
+    name: "admin-conversion",
+    description: "Owner: stage-by-stage conversion rates",
+    options: [
+      {
+        name: "days",
+        description: "Lookback window in days (default 14)",
+        type: ApplicationCommandOptionType.Integer,
+        required: false,
+      },
+    ],
+  },
+  {
     name: "admin-health",
     description: "Owner: daily-post health diagnostics",
   },
