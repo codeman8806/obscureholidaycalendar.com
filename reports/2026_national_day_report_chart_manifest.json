@@ -1,51 +1,73 @@
 {
-  "generated_at": "2026-02-21T07:45:44.354925Z",
-  "top10_dates": [
+  "generated_at": "2026-02-21T07:59:58.640677Z",
+  "total_records": 732,
+  "category_counts": {
+    "arts_culture": 91,
+    "food": 252,
+    "animals_nature": 272,
+    "awareness_advocacy": 7,
+    "fun_weird_general": 38,
+    "wellness_lifestyle": 39,
+    "seasonal": 24,
+    "work_technology": 9
+  },
+  "food_subcategories": {
+    "Savory Meals": 27,
+    "Dessert & Sweets": 84,
+    "Beverages": 22,
+    "Produce & Ingredients": 13,
+    "Other Food": 106
+  },
+  "animal_vs_awareness": {
+    "animals_nature": 272,
+    "awareness_advocacy": 7
+  },
+  "longest_names": [
     {
-      "date": "01-01",
-      "count": 2
+      "name": "National Pizza with the Works Except Anchovies Day",
+      "length": 50
     },
     {
-      "date": "01-02",
-      "count": 2
+      "name": "Answer The Telephone Like Buddy The Elf Day",
+      "length": 43
     },
     {
-      "date": "01-03",
-      "count": 2
+      "name": "National Law Enforcement Appreciation Day",
+      "length": 41
     },
     {
-      "date": "01-04",
-      "count": 2
+      "name": "National Answer Your Cat's Questions Day",
+      "length": 40
     },
     {
-      "date": "01-05",
-      "count": 2
+      "name": "National Two Different Colored Shoes Day",
+      "length": 40
     },
     {
-      "date": "01-06",
-      "count": 2
+      "name": "National Chocolate-covered Anything Day",
+      "length": 39
     },
     {
-      "date": "01-07",
-      "count": 2
+      "name": "Particularly Preposterous Packaging Day",
+      "length": 39
     },
     {
-      "date": "01-08",
-      "count": 2
+      "name": "Bittersweet Chocolate with Almonds Day",
+      "length": 38
     },
     {
-      "date": "01-09",
-      "count": 2
+      "name": "International Respect for Chickens Day",
+      "length": 38
     },
     {
-      "date": "01-10",
-      "count": 2
+      "name": "National Chocolate Covered Pretzel Day",
+      "length": 38
     }
   ],
   "chart_files": [
-    "holidays-by-month.svg",
-    "category-distribution.svg",
-    "top-10-crowded-dates.svg",
-    "month-to-month-delta.svg"
+    "category-dominance.svg",
+    "food-sub-breakdown.svg",
+    "animal-vs-awareness.svg",
+    "obscurity-longest-names.svg"
   ]
 }

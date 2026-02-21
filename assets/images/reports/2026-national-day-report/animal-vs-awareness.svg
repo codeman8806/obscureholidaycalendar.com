@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="t d">
+<title id="t">Animals versus awareness category counts</title>
+<desc id="d">Two-bar comparison showing animals and nature records far outnumber awareness and advocacy records.</desc>
+<rect width="100%" height="100%" fill="#fff"/>
+<line x1="110" y1="330" x2="710" y2="330" stroke="#334155" stroke-width="2"/>
+<rect x="200" y="55.0" width="110" height="275.0" fill="#16a34a" rx="6"/>
+<text x="255.0" y="45.0" text-anchor="middle" font-size="14" fill="#0f172a">272</text>
+<text x="255.0" y="354" text-anchor="middle" font-size="13" fill="#334155">Animals & Nature</text>
+<rect x="400" y="322.9" width="110" height="7.1" fill="#7c3aed" rx="6"/>
+<text x="455.0" y="312.9" text-anchor="middle" font-size="14" fill="#0f172a">7</text>
+<text x="455.0" y="354" text-anchor="middle" font-size="13" fill="#334155">Awareness & Advocacy</text>
+</svg>

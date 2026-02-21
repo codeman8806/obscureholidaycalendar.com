@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="520" viewBox="0 0 980 520" role="img" aria-labelledby="t d">
+<title id="t">Food holiday subcategory distribution</title>
+<desc id="d">Horizontal bars splitting food holidays into dessert, beverages, savory, produce, and other.</desc>
+<rect width="100%" height="100%" fill="#fff"/>
+<text x="210" y="67.0" text-anchor="end" font-size="14" fill="#0f172a">Other Food</text>
+<rect x="220" y="50.0" width="720.0" height="22" fill="#f59e0b" rx="4"/>
+<text x="948.0" y="67.0" font-size="13" fill="#334155">106 (42.06% of food)</text>
+<text x="210" y="155.0" text-anchor="end" font-size="14" fill="#0f172a">Dessert & Sweets</text>
+<rect x="220" y="138.0" width="570.6" height="22" fill="#fb7185" rx="4"/>
+<text x="798.6" y="155.0" font-size="13" fill="#334155">84 (33.33% of food)</text>
+<text x="210" y="243.0" text-anchor="end" font-size="14" fill="#0f172a">Savory Meals</text>
+<rect x="220" y="226.0" width="183.4" height="22" fill="#0ea5e9" rx="4"/>
+<text x="411.4" y="243.0" font-size="13" fill="#334155">27 (10.71% of food)</text>
+<text x="210" y="331.0" text-anchor="end" font-size="14" fill="#0f172a">Beverages</text>
+<rect x="220" y="314.0" width="149.4" height="22" fill="#22c55e" rx="4"/>
+<text x="377.4" y="331.0" font-size="13" fill="#334155">22 (8.73% of food)</text>
+<text x="210" y="419.0" text-anchor="end" font-size="14" fill="#0f172a">Produce & Ingredients</text>
+<rect x="220" y="402.0" width="88.3" height="22" fill="#94a3b8" rx="4"/>
+<text x="316.3" y="419.0" font-size="13" fill="#334155">13 (5.16% of food)</text>
+</svg>
