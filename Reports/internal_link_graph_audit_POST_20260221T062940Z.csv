@@ -1,0 +1,761 @@
+page,title,total_internal_outbound_links,total_internal_outbound_links_to_crawled_pages,total_internal_inbound_links,depth_from_homepage,is_orphan_page,has_lt_5_inbound_links,has_gt_50_outbound_links,holiday_primary_category,holiday_inferred_tags,structural_weakness_score,authority_hub_score
+/,"Obscure Holiday Calendar – Fun, Weird & Obscure Daily Holidays",44,43,2234,0,no,no,no,,,0,2239.28
+/404.html,Redirecting…,0,0,0,-1,yes,yes,no,,,70,-2.5
+/about/,About — Obscure Holiday Calendar,16,16,1495,1,no,no,no,,,2,1496.42
+/app/,"Obscure Holiday Calendar App – Widgets, Reminders & Daily Fun Holidays",16,16,738,2,no,no,no,,,4,738.92
+/articles/,Complete Guide to December’s Obscure Holidays,0,0,0,-1,yes,yes,no,,,70,-2.5
+/contact/,Contact — Obscure Holiday Calendar,15,15,1498,1,no,no,no,,,2,1499.3
+/discord-bot/,"Obscure Holiday Calendar Discord Bot | Daily Holidays, Facts, and Auto Posts",17,17,1508,1,no,no,no,,,2,1509.54
+/discord-bot/canceled.html,Checkout canceled — Obscure Holiday Bot,1,1,0,-1,yes,yes,no,,,70,-2.38
+/discord-bot/privacy.html,Privacy Policy · Obscure Holiday Discord Bot,11,11,2,-1,no,yes,no,,,28,0.82
+/discord-bot/success.html,Premium activated — Obscure Holiday Bot,1,1,0,-1,yes,yes,no,,,70,-2.38
+/discord-bot/terms.html,Terms of Service · Obscure Holiday Discord Bot,13,13,0,-1,yes,yes,no,,,70,-0.94
+/holiday/,Holiday Library — Obscure Holiday Calendar,746,746,2897,1,no,no,yes,,,7,2906.1
+/holiday/absurdity-day/,Absurdity Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/according-to-hoyle-day/,According to Hoyle Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/alexander-graham-bell-day/,Alexander Graham Bell Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/all-or-nothing-day/,All or Nothing Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/american-beer-day/,American Beer Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink;animals_nature,4,12.24
+/holiday/american-football-day/,American Football Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/american-touch-tag-day/,American Touch Tag Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/angel-food-cake-day/,Angel Food Cake Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/answer-the-telephone-like-buddy-the-elf-day/,Answer The Telephone Like Buddy The Elf Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/antarctica-day/,Antarctica Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/appreciate-a-dragon-day/,Appreciate a Dragon Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/april-fools-day/,April Fools' Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/ask-a-stupid-question-day/,Ask a Stupid Question Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/australia-day/,Australia Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/awkward-moments-day/,Awkward Moments Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/backward-day/,Backward Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/bacon-day/,Bacon Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/bake-cookies-day/,Bake Cookies Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/ballpoint-pen-day/,Ballpoint Pen Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/barbershop-quartet-day/,Barbershop Quartet Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/barbie-and-barney-backlash-day/,Barbie and Barney Backlash Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/bathtub-day/,Bathtub Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/be-a-millionaire-day/,Be a Millionaire Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/be-an-angel-day/,Be an Angel Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/be-bald-and-be-free-day/,Be Bald and Be Free Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/be-late-for-something-day/,Be Late for Something Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/be-nasty-day/,Be Nasty Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/beaujolais-nouveau-day/,Beaujolais Nouveau Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/best-friends-day/,Best Friends Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/beverage-day/,Beverage Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/bicycle-day/,Bicycle Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/big-wind-day/,Big Wind Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/bill-of-rights-day/,Bill of Rights Day — Obscure Holiday Calendar,27,27,14,2,no,no,no,awareness_advocacy,awareness_advocacy,4,16.24
+/holiday/biscotti-day/,Biscotti Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/bittersweet-chocolate-with-almonds-day/,Bittersweet Chocolate with Almonds Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/blah-blah-blah-day/,Blah Blah Blah Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/blueberry-cheesecake-day/,Blueberry Cheesecake Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/boxing-day/,Boxing Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/brandied-fruit-day/,Brandied Fruit Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/bring-flowers-to-someone-day/,Bring Flowers to Someone Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature,4,14.24
+/holiday/brisket-day/,Brisket Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/brothers-day/,Brothers Day — Obscure Holiday Calendar,25,25,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.0
+/holiday/bubble-bath-day/,Bubble Bath Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/bubble-tea-day/,Bubble Tea Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/bulldogs-are-beautiful-day/,Bulldogs Are Beautiful Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature,4,14.24
+/holiday/butterscotch-pudding-day/,Butterscotch Pudding Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/buy-a-musical-instrument-day/,Buy a Musical Instrument Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/cabbage-day/,Cabbage Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/cacti-appreciation-day/,Cacti Appreciation Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/card-playing-day/,Card Playing Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/carousel-day/,Carousel Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/carrot-cake-day/,Carrot Cake Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/carve-a-pumpkin-day/,Carve a Pumpkin Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/caviar-day/,Caviar Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/celebrate-your-unique-talent-day/,Celebrate Your Unique Talent Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/celebration-of-life-day/,Celebration of Life Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/cellophane-tape-day/,Cellophane Tape Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/change-your-password-day/,Change Your Password Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/checkers-day/,Checkers Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/cheer-up-the-lonely-day/,Cheer Up the Lonely Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/cheesecake-day/,Cheesecake Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/cherries-jubilee-day/,Cherries Jubilee Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/chewing-gum-day/,Chewing Gum Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/chocolate-cake-day/,Chocolate Cake Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/chocolate-covered-raisin-day/,Chocolate Covered Raisin Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/chocolate-fondue-day/,Chocolate Fondue Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/chocolate-milkshake-day/,Chocolate Milkshake Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/christmas-card-day/,Christmas Card Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,seasonal_holidays,seasonal_holidays,4,14.24
+/holiday/christmas-day/,Christmas Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,seasonal_holidays,seasonal_holidays,4,14.24
+/holiday/christmas-eve/,Christmas Eve — Obscure Holiday Calendar,27,27,12,2,no,no,no,seasonal_holidays,seasonal_holidays,4,14.24
+/holiday/cinco-de-mayo/,Cinco de Mayo — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/clean-out-your-refrigerator-day/,Clean Out Your Refrigerator Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/clean-up-your-room-day/,Clean Up Your Room Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/cliché-day/,Cliché Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/coconut-cream-pie-day/,Coconut Cream Pie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/coloring-book-day/,Coloring Book Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/common-sense-day/,Common Sense Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/cookbook-launch-day/,Cookbook Launch Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,arts_culture,arts_culture,4,12.24
+/holiday/corn-chip-day/,Corn Chip Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/corn-fritters-day/,Corn Fritters Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/count-your-buttons-day/,Count Your Buttons Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/cousins-day/,Cousins Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/creative-ice-cream-flavors-day/,Creative Ice Cream Flavors Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/crepe-day/,Crepe Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/cuddle-up-day/,Cuddle Up Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/curling-day-sweden/,Curling Day (Sweden) — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/dance-like-a-chicken-day/,Dance Like a Chicken Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/darwin-day/,Darwin Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/data-privacy-day/,Data Privacy Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/day-of-the-mushroom/,Day of the Mushroom — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/deep-dish-pizza-day/,Deep Dish Pizza Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/dessert-day/,Dessert Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/deviled-egg-day/,Deviled Egg Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/dictionary-day/,Dictionary Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/dinosaur-day/,Dinosaur Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/ditch-new-years-resolutions-day/,Ditch New Years Resolutions Day — Obscure Holiday Calendar,25,25,8,3,no,no,no,seasonal_holidays,seasonal_holidays,6,9.5
+/holiday/do-a-grouch-a-favor-day/,Do a Grouch a Favor Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/do-something-nice-day/,Do Something Nice Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/dolly-the-sheep-day/,Dolly the Sheep Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/dolphin-day/,Dolphin Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/donald-duck-day/,Donald Duck Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/doodle-day/,Doodle Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/dr-seuss-day/,Dr. Seuss Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/draw-a-picture-of-a-bird-day/,Draw a Picture of a Bird Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature,4,14.24
+/holiday/dress-up-your-pet-day/,Dress Up Your Pet Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/drive-in-movie-day/,Drive-In Movie Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/earths-rotation-day/,Earths Rotation Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature;arts_culture,4,10.24
+/holiday/eat-a-red-apple-day/,Eat a Red Apple Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/eat-an-extra-dessert-day/,Eat an Extra Dessert Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/eat-outside-day/,Eat Outside Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/eat-what-you-want-day/,Eat What You Want Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/electronic-greetings-day/,Electronic Greetings Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/embrace-your-geekness-day/,Embrace Your Geekness Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/evaluate-your-life-day/,Evaluate Your Life Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/falling-needles-family-fest-day/,Falling Needles Family Fest Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,wellness_lifestyle,wellness_lifestyle;seasonal_holidays,4,10.24
+/holiday/feral-cat-day/,Feral Cat Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/ferris-wheel-day/,Ferris Wheel Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/festivus/,Festivus — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/fibonacci-day/,Fibonacci Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/fight-procrastination-day/,Fight Procrastination Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/find-a-rainbow-day/,Find a Rainbow Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/fire-day/,Fire Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/first-greenback-day/,First Greenback Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/first-macy-s-christmas-parade-day/,First Macy's Christmas Parade Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,seasonal_holidays,seasonal_holidays,4,14.24
+/holiday/first-steam-locomotive-journey-day/,First Steam Locomotive Journey Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/floral-design-day/,Floral Design Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,fun_weird_general,fun_weird_general,4,14.24
+/holiday/forget-me-not-day/,Forget-Me-Not Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/fortune-cookie-day/,Fortune Cookie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/french-fries-day/,French Fries Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/fresh-veggies-day/,Fresh Veggies Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/frog-jumping-day/,Frog Jumping Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/fruitcake-toss-day/,Fruitcake Toss Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/galentines-day/,Galentines Day — Obscure Holiday Calendar,27,26,8,2,no,no,no,fun_weird_general,fun_weird_general,4,10.24
+/holiday/german-american-day/,German-American Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/get-organized-day/,Get Organized Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/get-over-it-day/,Get Over It Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/gingerbread-house-day/,Gingerbread House Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/girl-scout-day/,Girl Scout Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/give-something-away-day/,Give Something Away Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/global-belly-laugh-day/,Global Belly Laugh Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/go-caroling-day/,Go Caroling Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/go-fishing-day/,Go Fishing Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/go-for-broke-day/,Go for Broke Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/go-skateboarding-day/,Go Skateboarding Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/go-to-an-art-museum-day/,Go to an Art Museum Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/good-samaritan-day/,Good Samaritan Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/grab-some-nuts-day/,Grab Some Nuts Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/groundhog-day/,Groundhog Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/gumbo-day/,Gumbo Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/gumdrop-day/,Gumdrop Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/gummy-worm-day/,Gummy Worm Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/guy-fawkes-day/,Guy Fawkes Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/haiku-poetry-day/,Haiku Poetry Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/halloween/,Halloween — Obscure Holiday Calendar,27,27,8,2,no,no,no,seasonal_holidays,seasonal_holidays,4,10.24
+/holiday/happiness-happens-day/,Happiness Happens Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,14.24
+/holiday/happy-hour-day/,Happy Hour Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/have-a-bad-day-day/,Have a Bad Day Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/have-a-bagel-day/,Have a Bagel Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/have-a-party-with-your-bear-day/,Have a Party with Your Bear Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/hermit-day/,Hermit Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/hobbit-day/,Hobbit Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/homemade-bread-day/,Homemade Bread Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/houseplant-appreciation-day/,Houseplant Appreciation Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature,4,14.24
+/holiday/hug-a-bear-day/,Hug a Bear Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/hug-holiday-day/,Hug Holiday Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/hug-your-cat-day/,Hug Your Cat Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature,4,14.24
+/holiday/human-rights-day/,Human Rights Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,awareness_advocacy,awareness_advocacy,4,13.24
+/holiday/i-forgot-day/,I Forgot Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/i-need-a-patch-for-that-day/,I Need a Patch for That Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/ice-cream-cone-day/,Ice Cream Cone Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/ides-of-march/,Ides of March — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/indian-pudding-day/,Indian Pudding Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/inspire-your-heart-with-art-day/,Inspire Your Heart With Art Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/international-bionic-man-day/,International Bionic Man Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/international-birdhouse-day/,International Birdhouse Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature,4,14.24
+/holiday/international-civil-aviation-day/,International Civil Aviation Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/international-coffee-day/,International Coffee Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/international-day-of-awesomeness/,International Day of Awesomeness — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/international-day-of-forests/,International Day of Forests — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature,4,14.24
+/holiday/international-day-of-happiness/,International Day of Happiness — Obscure Holiday Calendar,27,27,11,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,13.24
+/holiday/international-fairy-day/,International Fairy Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/international-goof-off-day/,International Goof Off Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/international-human-solidarity-day/,International Human Solidarity Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/international-joke-day/,International Joke Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/international-kissing-day/,International Kissing Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/international-left-handers-day/,International Left-Handers Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/international-lego-day/,International LEGO Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/international-mountain-day/,International Mountain Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/international-ninja-day/,International Ninja Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/international-no-diet-day/,International No Diet Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/international-poetry-day/,International Poetry Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/international-polar-bear-day/,International Polar Bear Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/international-potato-chip-day/,International Potato Chip Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/international-radiography-day/,International Radiography Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/international-respect-for-chickens-day/,International Respect for Chickens Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/international-sloth-day/,International Sloth Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/international-sushi-day/,International Sushi Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/international-talk-like-a-pirate-day/,International Talk Like a Pirate Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/international-tongue-twister-day/,International Tongue Twister Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/international-trampoline-day/,International Trampoline Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/international-women-s-day/,International Women's Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/irish-coffee-day/,Irish Coffee Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/its-my-party-day/,Its My Party Day — Obscure Holiday Calendar,25,24,9,2,no,no,no,arts_culture,arts_culture,4,11.0
+/holiday/just-because-day/,Just Because Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/kid-inventors-day/,Kid Inventors' Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/kiss-and-make-up-day/,Kiss and Make Up Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/korean-american-day/,Korean American Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/krampusnacht/,Krampusnacht — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/lamington-day/,Lamington Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/leap-day/,Leap Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/learn-what-your-name-means-day/,Learn What Your Name Means Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/learn-your-name-in-morse-code-day/,Learn Your Name in Morse Code Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/leave-the-office-early-day/,Leave The Office Early Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,work_technology,work_technology,4,13.24
+/holiday/left-sock-day/,Left Sock Day — Obscure Holiday Calendar,27,27,13,2,no,no,no,fun_weird_general,fun_weird_general,4,15.24
+/holiday/lei-day/,Lei Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/leif-erikson-day/,Leif Erikson Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/let-it-go-day/,Let It Go Day — Obscure Holiday Calendar,27,26,8,2,no,no,no,fun_weird_general,fun_weird_general,4,10.24
+/holiday/lima-bean-respect-day/,Lima Bean Respect Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/lithuanian-independence-day/,Lithuanian Independence Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/lizard-appreciation-day/,Lizard Appreciation Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/lollipop-day/,Lollipop Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/look-alike-day/,Look Alike Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/look-for-circles-day/,Look for Circles Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/look-up-at-the-sky-day/,Look Up at the Sky Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/loomis-day/,Loomis Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/lost-sock-memorial-day/,Lost Sock Memorial Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,awareness_advocacy,awareness_advocacy,4,12.24
+/holiday/love-a-tree-day/,Love a Tree Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature;wellness_lifestyle,4,14.24
+/holiday/love-note-day/,Love Note Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,14.24
+/holiday/love-your-pet-day/,Love Your Pet Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,14.24
+/holiday/lovers-day/,Lovers Day — Obscure Holiday Calendar,25,25,10,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,12.0
+/holiday/lucky-penny-day/,Lucky Penny Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/macaroon-day/,Macaroon Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/mad-hatter-day/,Mad Hatter Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/make-a-gift-day/,Make a Gift Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/make-a-hat-day/,Make a Hat Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/make-cut-out-snowflakes-day/,Make Cut-Out Snowflakes Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/make-life-beautiful-day/,Make Life Beautiful Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/make-up-your-mind-day/,Make Up Your Mind Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/make-up-your-own-holiday-day/,Make Up Your Own Holiday Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/march-forth-day/,March Forth Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/may-day/,May Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/may-ray-day/,May-Ray Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/mean-girls-day/,Mean Girls Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/meteor-watch-day/,Meteor Watch Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/mickey-mouse-day/,Mickey Mouse Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/middle-childs-day/,Middle Childs Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/milk-chocolate-day/,Milk Chocolate Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/mincemeat-day/,Mincemeat Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/miniature-golf-day/,Miniature Golf Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/mischief-night/,Mischief Night — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/moldy-cheese-day/,Moldy Cheese Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/monkey-day/,Monkey Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/moon-day/,Moon Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/morse-code-day/,Morse Code Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/muffin-day/,Muffin Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/mushroom-day/,Mushroom Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/name-your-poison-day/,Name Your Poison Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/name-yourself-day/,Name Yourself Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-7-eleven-day/,National 7-Eleven Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-alien-abduction-day/,National Alien Abduction Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-ampersand-day/,National Ampersand Day — Obscure Holiday Calendar,25,25,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.0
+/holiday/national-animal-crackers-day/,National Animal Crackers Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-answer-your-cat-s-questions-day/,National Answer Your Cat's Questions Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/national-anthem-day/,National Anthem Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-apple-betty-day/,National Apple Betty Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-apple-dumpling-day/,National Apple Dumpling Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-apple-turnover-day/,National Apple Turnover Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-aunt-and-uncle-day/,National Aunt and Uncle Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-authors-day/,National Authors Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/national-avocado-day/,National Avocado Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-bad-poetry-day/,National Bad Poetry Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/national-baklava-day/,National Baklava Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-banana-bread-day/,National Banana Bread Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-banana-split-day/,National Banana Split Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-barbecued-spareribs-day/,National Barbecued Spareribs Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-beach-day/,National Beach Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-beer-day/,National Beer Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink;animals_nature,4,12.24
+/holiday/national-bird-day/,National Bird Day — Obscure Holiday Calendar,27,27,13,2,no,no,no,animals_nature,animals_nature,4,15.24
+/holiday/national-black-cat-appreciation-day/,National Black Cat Appreciation Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature,4,14.24
+/holiday/national-black-cat-day/,National Black Cat Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/national-blueberry-popsicle-day/,National Blueberry Popsicle Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-bologna-day/,National Bologna Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-book-lovers-day/,National Book Lovers Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,arts_culture,arts_culture;wellness_lifestyle,4,13.24
+/holiday/national-bourbon-day/,National Bourbon Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-bow-tie-day/,National Bow Tie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-brownie-day/,National Brownie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-buffet-day/,National Buffet Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-cake-day/,National Cake Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/national-cake-decorating-day/,National Cake Decorating Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-camera-day/,National Camera Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/national-candy-cane-day/,National Candy Cane Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-candy-corn-day/,National Candy Corn Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-candy-day/,National Candy Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-cappuccino-day/,National Cappuccino Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-caps-lock-day/,National Caps Lock Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-cat-day/,National Cat Day — Obscure Holiday Calendar,27,27,9,1,no,no,no,animals_nature,animals_nature,2,11.74
+/holiday/national-catfish-day/,National Catfish Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,animals_nature,animals_nature,4,12.24
+/holiday/national-cbd-day/,National CBD Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-cereal-day/,National Cereal Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-cheese-day/,National Cheese Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-cheese-lovers-day/,National Cheese Lovers Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink;wellness_lifestyle,4,13.24
+/holiday/national-cheese-pizza-day/,National Cheese Pizza Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-cheeseburger-day/,National Cheeseburger Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-cheesecake-day/,National Cheesecake Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-cherries-jubilee-day/,National Cherries Jubilee Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-cherry-popsicle-day/,National Cherry Popsicle Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-chocolate-chip-cookie-day/,National Chocolate Chip Cookie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-chocolate-chip-day/,National Chocolate Chip Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-chocolate-covered-anything-day/,National Chocolate-covered Anything Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-chocolate-covered-pretzel-day/,National Chocolate Covered Pretzel Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-chocolate-cupcake-day/,National Chocolate Cupcake Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-chocolate-milk-day/,National Chocolate Milk Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-chocolate-milkshake-day/,National Chocolate Milkshake Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-chocolate-mint-day/,National Chocolate Mint Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-chocolate-pecan-pie-day/,National Chocolate Pecan Pie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-chocolate-pudding-day/,National Chocolate Pudding Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,food_drink,food_drink,4,11.24
+/holiday/national-chocolate-wafer-day/,National Chocolate Wafer Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-chop-suey-day/,National Chop Suey Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-chopsticks-day/,National Chopsticks Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-cinnamon-crescent-day/,National Cinnamon Crescent Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-clam-chowder-day/,National Clam Chowder Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-cocktail-day/,National Cocktail Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-cocoa-day/,National Cocoa Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-coconut-day/,National Coconut Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/national-coffee-day/,National Coffee Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-coffee-ice-cream-day/,National Coffee Ice Cream Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-comic-book-day/,National Comic Book Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/national-compliment-day/,National Compliment Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-cookie-day/,National Cookie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-cookie-exchange-day/,National Cookie Exchange Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-corn-fritters-day/,National Corn Fritters Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-corn-on-the-cob-day/,National Corn on the Cob Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-corned-beef-hash-day/,National Corned Beef Hash Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink;animals_nature,4,9.24
+/holiday/national-cosmopolitan-day/,National Cosmopolitan Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-crayon-day/,National Crayon Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-cream-filled-donut-day/,National Cream-Filled Donut Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/national-creamsicle-day/,National Creamsicle Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-croissant-day/,National Croissant Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-crossword-puzzle-day/,National Crossword Puzzle Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-crème-brûlée-day/,National Crème Brûlée Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/national-crème-de-menthe-day/,National Crème De Menthe Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/national-cubicle-day/,National Cubicle Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-cupcake-day/,National Cupcake Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-daiquiri-day/,National Daiquiri Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-dark-chocolate-day/,National Dark Chocolate Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-date-nut-bread-day/,National Date Nut Bread Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-daylight-appreciation-day/,National Daylight Appreciation Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/national-deep-fried-clams-day/,National Deep Fried Clams Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-ding-a-ling-day/,National Ding-A-Ling Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-dog-day/,National Dog Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/national-doughnut-day/,National Doughnut Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-drink-beer-day/,National Drink Beer Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink;animals_nature,4,9.24
+/holiday/national-drink-wine-day/,National Drink Wine Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-eat-a-hoagie-day/,National Eat a Hoagie Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-eat-your-beans-day/,National Eat Your Beans Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-eat-your-vegetables-day/,National Eat Your Vegetables Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/national-egg-day/,National Egg Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-eggnog-day/,National Eggnog Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-emma-m-nutt-day/,National Emma M. Nutt Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-espresso-day/,National Espresso Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-fast-food-day/,National Fast Food Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-ferret-day/,National Ferret Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-fettuccine-alfredo-day/,National Fettuccine Alfredo Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-filet-mignon-day/,National Filet Mignon Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-food-day/,National Food Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-french-toast-day/,National French Toast Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-fried-chicken-day/,National Fried Chicken Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-fried-scallops-day/,National Fried Scallops Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-frozen-yogurt-day/,National Frozen Yogurt Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-fudge-day/,National Fudge Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,fun_weird_general,fun_weird_general,4,10.24
+/holiday/national-garlic-day/,National Garlic Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-gingerbread-cookie-day/,National Gingerbread Cookie Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-gingerbread-day/,National Gingerbread Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-girlfriends-day/,National Girlfriends Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-golf-lovers-day/,National Golf Lovers Day — Obscure Holiday Calendar,25,25,10,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,12.0
+/holiday/national-grammar-day/,National Grammar Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-greasy-foods-day/,National Greasy Foods Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-great-american-pot-pie-day/,National Great American Pot Pie Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-grilled-cheese-sandwich-day/,National Grilled Cheese Sandwich Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-grouch-day/,National Grouch Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-guacamole-day/,National Guacamole Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-hamburger-day/,National Hamburger Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-hammock-day/,National Hammock Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-hangover-day/,National Hangover Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-hard-candy-day/,National Hard Candy Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-hat-day/,National Hat Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-high-five-day/,National High-Five Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-homemade-cookies-day/,National Homemade Cookies Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-homemade-soup-day/,National Homemade Soup Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-hot-dog-day/,National Hot Dog Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,animals_nature,animals_nature,4,13.24
+/holiday/national-hot-mulled-cider-day/,National Hot Mulled Cider Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-hot-tea-day/,National Hot Tea Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-hugging-day/,National Hugging Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-hydration-day/,National Hydration Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/national-ice-cream-sandwich-day/,National Ice Cream Sandwich Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-ice-cream-soda-day/,National Ice Cream Soda Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,food_drink,food_drink,4,11.24
+/holiday/national-iced-tea-day/,National Iced Tea Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-inane-answering-machine-day/,National Inane Answering Machine Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-inventors-day/,National Inventors' Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-it-professionals-day/,National IT Professionals Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-jelly-bean-day/,National Jelly Bean Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-joe-day/,National Joe Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-jukebox-day/,National Jukebox Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-julienne-fries-day/,National Julienne Fries Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-junk-food-day/,National Junk Food Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-kite-flying-day/,National Kite Flying Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-kool-aid-day/,National Kool-Aid Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-lasagna-day/,National Lasagna Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-laundry-day/,National Laundry Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-law-enforcement-appreciation-day/,National Law Enforcement Appreciation Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-lazy-day/,National Lazy Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-leathercraft-day/,National Leathercraft Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-lets-laugh-day/,National Lets Laugh Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/national-letter-writing-day/,National Letter Writing Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-limerick-day/,National Limerick Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-llama-awareness-day/,National Llama Awareness Day — Obscure Holiday Calendar,27,27,6,2,no,no,no,awareness_advocacy,awareness_advocacy,4,8.24
+/holiday/national-mac-and-cheese-day/,National Mac and Cheese Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-macadamia-nut-day/,National Macadamia Nut Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-make-lunch-count-day/,National Make Lunch Count Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-make-your-bed-day/,National Make Your Bed Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-maple-syrup-day/,National Maple Syrup Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-margarita-day/,National Margarita Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-mario-day/,National Mario Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-matchmaker-day/,National Matchmaker Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-measure-your-feet-day/,National Measure Your Feet Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-milk-chocolate-day/,National Milk Chocolate Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-milk-day/,National Milk Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-mint-julep-day/,National Mint Julep Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-mm-day/,National Mm Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/national-mole-day/,National Mole Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-moonshine-day/,National Moonshine Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-moscato-day/,National Moscato Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/national-mousse-day/,National Mousse Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-mutt-day/,National Mutt Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-nachos-day/,National Nachos Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-name-your-car-day/,National Name Your Car Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-new-hampshire-day/,National New Hampshire Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-nothing-day/,National Nothing Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,fun_weird_general,fun_weird_general,4,10.24
+/holiday/national-oatmeal-cookie-day/,National Oatmeal Cookie Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-onion-rings-day/,National Onion Rings Day — Obscure Holiday Calendar,27,26,8,2,no,no,no,fun_weird_general,fun_weird_general,4,10.24
+/holiday/national-ootd-day/,National OOTD Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,fun_weird_general,fun_weird_general,4,10.24
+/holiday/national-pancake-day/,National Pancake Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-panda-day/,National Panda Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-paper-airplane-day/,National Paper Airplane Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-parfait-day/,National Parfait Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-pasta-day/,National Pasta Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-pastry-day/,National Pastry Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-peach-pie-day/,National Peach Pie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-peanut-butter-and-jelly-day/,National Peanut Butter and Jelly Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-peanut-butter-cookie-day/,National Peanut Butter Cookie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-peanut-butter-fudge-day/,National Peanut Butter Fudge Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-peanut-butter-lovers-day/,National Peanut Butter Lovers Day — Obscure Holiday Calendar,25,25,10,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,12.0
+/holiday/national-pecan-cookie-day/,National Pecan Cookie Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-pecan-pie-day/,National Pecan Pie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-pecan-torte-day/,National Pecan Torte Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-pepperoni-pizza-day/,National Pepperoni Pizza Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-periodic-table-day/,National Periodic Table Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-pet-day/,National Pet Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-pharmacist-day/,National Pharmacist Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-pickle-day/,National Pickle Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-picnic-day/,National Picnic Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-pie-day-12-01/,National Pie Day 12 01 — Obscure Holiday Calendar,25,25,7,3,no,no,no,fun_weird_general,fun_weird_general,6,8.5
+/holiday/national-pie-day/,National Pie Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-pierce-your-ears-day/,National Pierce Your Ears Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-pig-day/,National Pig Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/national-pizza-day/,National Pizza Day — Obscure Holiday Calendar,27,27,12,1,no,no,no,food_drink,food_drink,2,14.74
+/holiday/national-pizza-with-the-works-except-anchovies-day/,National Pizza with the Works Except Anchovies Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink;work_technology,4,9.24
+/holiday/national-piña-colada-day/,National Piña Colada Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/national-play-doh-day/,National Play-Doh Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-popcorn-day/,National Popcorn Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/national-potato-day/,National Potato Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-potato-lovers-day/,National Potato Lovers Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,10.24
+/holiday/national-pretzel-day/,National Pretzel Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-prime-rib-day/,National Prime Rib Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-promposal-day/,National Promposal Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-pumpkin-cheesecake-day/,National Pumpkin Cheesecake Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-pumpkin-day/,National Pumpkin Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-pumpkin-pie-day/,National Pumpkin Pie Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-puppy-day/,National Puppy Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-puzzle-day/,National Puzzle Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-quesadilla-day/,National Quesadilla Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-radio-day/,National Radio Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/national-raspberries-n-cream-day/,National Raspberries N' Cream Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-raspberry-bombe-day/,National Raspberry Bombe Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/national-raspberry-cake-day/,National Raspberry Cake Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-raspberry-cream-pie-day/,National Raspberry Cream Pie Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-relaxation-day/,National Relaxation Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-rice-krispie-treat-day/,National Rice Krispie Treat Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-roof-over-your-head-day/,National Roof Over Your Head Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-root-beer-float-day/,National Root Beer Float Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink;animals_nature,4,13.24
+/holiday/national-rotisserie-chicken-day/,National Rotisserie Chicken Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-rubber-ducky-day/,National Rubber Ducky Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-salami-day/,National Salami Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-sandwich-day/,National Sandwich Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/national-sardines-day/,National Sardines Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-say-something-nice-day/,National Say Something Nice Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-scavenger-hunt-day/,National Scavenger Hunt Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-scrabble-day/,National Scrabble Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-siblings-day/,National Siblings Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-sisters-day/,National Sisters Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-sloppy-joe-day/,National Sloppy Joe Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-soft-ice-cream-day/,National Soft Ice Cream Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-sour-candy-day/,National Sour Candy Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-spaghetti-day/,National Spaghetti Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-spicy-hermit-cookie-day/,National Spicy Hermit Cookie Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-spumoni-day/,National Spumoni Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-sticky-bun-day/,National Sticky Bun Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-strawberry-day/,National Strawberry Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-strawberry-parfait-day/,National Strawberry Parfait Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/national-strawberry-rhubarb-pie-day/,National Strawberry Rhubarb Pie Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-strawberry-shortcake-day/,National Strawberry Shortcake Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-sugar-cookie-day/,National Sugar Cookie Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/national-sundae-day/,National Sundae Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-sunglasses-day/,National Sunglasses Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/national-taco-day/,National Taco Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/national-tapioca-day/,National Tapioca Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/national-tea-day/,National Tea Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-techies-day/,National Techies Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-technology-day/,National Technology Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,work_technology,work_technology,4,9.24
+/holiday/national-teddy-bear-day/,National Teddy Bear Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-tell-a-joke-day/,National Tell a Joke Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-tempura-day/,National Tempura Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,fun_weird_general,fun_weird_general,4,14.24
+/holiday/national-tequila-day/,National Tequila Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-tortilla-chip-day/,National Tortilla Chip Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-train-your-brain-day/,National Train Your Brain Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/national-tug-of-war-day/,National Tug-of-War Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-tv-dinner-day/,National TV Dinner Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-two-different-colored-shoes-day/,National Two Different Colored Shoes Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-ugly-sweater-day/,National Ugly Sweater Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-umbrella-day/,National Umbrella Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-underwear-day/,National Underwear Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-vanilla-milkshake-day/,National Vanilla Milkshake Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/national-video-game-day/,National Video Game Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/national-watch-day/,National Watch Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/national-watermelon-day/,National Watermelon Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-weed-your-garden-day/,National Weed Your Garden Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature,4,14.24
+/holiday/national-welsh-rarebit-day/,National Welsh Rarebit Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/national-whipped-cream-day/,National Whipped Cream Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-wine-and-cheese-day/,National Wine and Cheese Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/national-wine-day/,National Wine Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/national-yo-yo-day/,National Yo-Yo Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/national-zucchini-bread-day/,National Zucchini Bread Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/nature-photography-day/,Nature Photography Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature;arts_culture,4,14.24
+/holiday/near-miss-day/,Near Miss Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/new-beers-eve/,New Beers Eve — Obscure Holiday Calendar,25,25,9,2,no,no,no,food_drink,food_drink;animals_nature,4,11.0
+/holiday/new-years-day/,New Years Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,seasonal_holidays,seasonal_holidays,4,12.24
+/holiday/new-years-eve/,New Years Eve — Obscure Holiday Calendar,25,25,7,3,no,no,no,seasonal_holidays,seasonal_holidays,6,8.5
+/holiday/no-beard-day/,No Beard Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/no-bra-day/,No Bra Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/no-dirty-dishes-day/,No Dirty Dishes Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/no-housework-day/,No Housework Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,work_technology,work_technology,4,9.24
+/holiday/no-interruptions-day/,No Interruptions Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,fun_weird_general,fun_weird_general,4,10.24
+/holiday/no-news-is-good-news-day/,No News is Good News Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/no-rhyme-or-reason-day/,No Rhyme or Reason Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/no-socks-day/,No Socks Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/nobel-prize-day/,Nobel Prize Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/nutty-fudge-day/,Nutty Fudge Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/nylon-invention-day/,Nylon Invention Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,work_technology,work_technology,4,9.24
+/holiday/old-rock-day/,Old Rock Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/old-stuff-day/,Old Stuff Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/one-cent-day/,One Cent Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/opposite-day/,Opposite Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/orange-blossom-day/,Orange Blossom Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/oreo-cookie-day/,Oreo Cookie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/organize-your-home-day/,Organize Your Home Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/origami-day/,Origami Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/oyster-day/,Oyster Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/pack-rat-day/,Pack Rat Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/pandemonium-day/,Pandemonium Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/paperclip-day/,Paperclip Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/paranormal-day/,Paranormal Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/pardon-day/,Pardon Day — Obscure Holiday Calendar,25,25,6,2,no,no,no,fun_weird_general,fun_weird_general,4,8.0
+/holiday/particularly-preposterous-packaging-day/,Particularly Preposterous Packaging Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/paul-bunyan-day/,Paul Bunyan Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/peach-ice-cream-day/,Peach Ice Cream Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,food_drink,food_drink,4,13.24
+/holiday/pecan-pie-day/,Pecan Pie Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/peculiar-people-day/,Peculiar People Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/penguin-awareness-day/,Penguin Awareness Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature;awareness_advocacy,4,10.24
+/holiday/pfeffernusse-day/,Pfeffernusse Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/pi-day/,Pi Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/piano-day/,Piano Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/pick-strawberries-day/,Pick Strawberries Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/pierogi-day/,Pierogi Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/pig-in-a-blanket-day/,Pig in a Blanket Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/pistachio-day/,Pistachio Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/plant-a-flower-day/,Plant a Flower Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/pledge-of-allegiance-day/,Pledge of Allegiance Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/plimsoll-day/,Plimsoll Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/plum-pudding-day/,Plum Pudding Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/plush-animal-lovers-day/,Plush Animal Lover's Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,12.24
+/holiday/pluto-discovery-day/,Pluto Discovery Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/popeye-s-birthday/,Popeye's Birthday — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/poultry-day/,Poultry Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/presidential-joke-day/,Presidential Joke Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/pretend-to-be-a-time-traveler-day/,Pretend to be a Time Traveler Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/punch-the-clock-day/,Punch the Clock Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/push-button-phone-day/,Push-button Phone Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/put-a-pillow-on-your-fridge-day/,Put a Pillow on Your Fridge Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/put-on-your-own-shoes-day/,Put on your own shoes day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/race-your-mouse-around-the-icons-day/,Race Your Mouse Around the Icons Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/rain-day/,Rain Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/random-acts-of-kindness-day/,Random Acts of Kindness Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,10.24
+/holiday/random-acts-of-light-day/,Random Acts of Light Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/rat-catchers-day/,Rat Catchers Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,animals_nature,animals_nature,4,11.0
+/holiday/read-in-the-bathtub-day/,Read in the Bathtub Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/red-planet-day/,Red Planet Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/repeat-day/,Repeat Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/respect-your-cat-day/,Respect Your Cat Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,animals_nature,animals_nature,4,14.24
+/holiday/rice-pudding-day/,Rice Pudding Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/ride-the-wind-day/,Ride the Wind Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/roast-chestnuts-day/,Roast Chestnuts Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/roast-leg-of-lamb-day/,Roast Leg of Lamb Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/rubber-eraser-day/,Rubber Eraser Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/rum-day/,Rum Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/sadie-hawkins-day/,Sadie Hawkins Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/saint-catherines-day/,Saint Catherines Day — Obscure Holiday Calendar,25,25,10,2,no,no,no,animals_nature,animals_nature,4,12.0
+/holiday/saint-cecilias-day/,Saint Cecilias Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/saint-nicholas-day/,Saint Nicholas Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/sausage-pizza-day/,Sausage Pizza Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,food_drink,food_drink,4,12.24
+/holiday/sauvignon-blanc-day/,Sauvignon Blanc Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/save-your-hearing-day/,Save Your Hearing Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/saxophone-day/,Saxophone Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/science-fiction-day/,Science Fiction Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/seafood-bisque-day/,Seafood Bisque Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/serendipity-day/,Serendipity Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/shrimp-day/,Shrimp Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/shrimp-scampi-day/,Shrimp Scampi Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/sidewalk-egg-frying-day/,Sidewalk Egg Frying Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/singles-awareness-day/,Singles Awareness Day — Obscure Holiday Calendar,27,27,6,2,no,no,no,awareness_advocacy,awareness_advocacy,4,8.24
+/holiday/skyscraper-day/,Skyscraper Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/smart-is-cool-day/,Smart is Cool Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/smile-power-day/,Smile Power Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/smoke-and-mirrors-day/,Smoke and Mirrors Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/smores-day/,Smores Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/something-on-a-stick-day/,Something on a Stick Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/sourest-day/,Sourest Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/special-education-day/,Special Education Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/spicy-guacamole-day/,Spicy Guacamole Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/sponge-cake-day/,Sponge Cake Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/spouse-s-day/,Spouse's Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/spumoni-day/,Spumoni Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/square-dance-day/,Square Dance Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/squirrel-appreciation-day/,Squirrel Appreciation Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/st-patricks-day/,St Patricks Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/star-wars-day/,Star Wars Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/static-electricity-day/,Static Electricity Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/stay-home-because-youre-well-day/,Stay Home Because Youre Well Day — Obscure Holiday Calendar,25,25,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.0
+/holiday/stick-out-your-tongue-day/,Stick Out Your Tongue Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/still-need-to-do-day/,Still Need to Do Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/string-cheese-day/,String Cheese Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/submarine-day/,Submarine Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/sunscreen-day/,Sunscreen Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/superhero-day/,Superhero Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/superman-day/,Superman Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/supermans-birthday/,Supermans Birthday — Obscure Holiday Calendar,27,26,8,2,no,no,no,fun_weird_general,fun_weird_general,4,10.24
+/holiday/supernatural-day/,Supernatural Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/swim-a-lap-day/,Swim a Lap Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/take-your-houseplant-for-a-walk-day/,Take your Houseplant for a Walk Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,animals_nature,animals_nature,4,13.24
+/holiday/talk-like-shakespeare-day/,Talk Like Shakespeare Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/talk-like-yoda-day/,Talk Like Yoda Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/tartan-day/,Tartan Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,arts_culture,arts_culture,4,13.24
+/holiday/teddy-bear-picnic-day/,Teddy Bear Picnic Day — Obscure Holiday Calendar,27,27,10,2,no,no,no,fun_weird_general,fun_weird_general,4,12.24
+/holiday/tell-a-lie-day/,Tell a Lie Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/tell-the-truth-day/,Tell the Truth Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/thank-a-mailman-day/,Thank a Mailman Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/thanksgiving-day/,Thanksgiving Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,seasonal_holidays,seasonal_holidays,4,10.24
+/holiday/the-day-the-music-died-day/,The Day the Music Died Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/thesaurus-day/,Thesaurus Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/thrift-shop-day/,Thrift Shop Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/tick-tock-day/,Tick Tock Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/tin-can-day/,Tin Can Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/toasted-marshmallow-day/,Toasted Marshmallow Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/today/,Today — Obscure Holiday Calendar,25,24,5,3,no,no,no,fun_weird_general,fun_weird_general,6,6.5
+/holiday/tolkien-reading-day/,Tolkien Reading Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/towel-day/,Towel Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/tuba-day/,Tuba Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/tutankhamun-s-tomb-discovery-day/,Tutankhamun's Tomb Discovery Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/tv-dinner-day/,TV Dinner Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/tv-talk-show-host-day/,TV Talk Show Host Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/twilight-zone-day/,Twilight Zone Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/unicorn-day/,Unicorn Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/valentine-s-day/,Valentine's Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,seasonal_holidays,seasonal_holidays,4,10.24
+/holiday/vanilla-cupcake-day/,Vanilla Cupcake Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/vanilla-ice-cream-day/,Vanilla Ice Cream Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/vcr-day/,VCR Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/vesuvius-day/,Vesuvius Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/video-games-day/,Video Games Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/violin-day/,Violin Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/virtual-vacation-day/,Virtual Vacation Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/visit-the-zoo-day/,Visit the Zoo Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/visit-your-relatives-day/,Visit Your Relatives Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/waffle-day/,Waffle Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/wear-brown-shoes-day/,Wear Brown Shoes Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/wear-purple-for-peace-day/,Wear Purple for Peace Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,10.24
+/holiday/wear-something-gaudy-day/,Wear Something Gaudy Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/wear-your-pajamas-to-work-day/,Wear Your Pajamas to Work Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,work_technology,work_technology,4,9.24
+/holiday/white-t-shirt-day/,White T-Shirt Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/wiggle-your-toes-day/,Wiggle Your Toes Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/wikipedia-day/,Wikipedia Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/wild-foods-day/,Wild Foods Day — Obscure Holiday Calendar,27,27,11,2,no,no,no,fun_weird_general,fun_weird_general,4,13.24
+/holiday/winnie-the-pooh-day/,Winnie the Pooh Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/winter-solstice/,Winter Solstice — Obscure Holiday Calendar,27,27,8,2,no,no,no,seasonal_holidays,seasonal_holidays,4,10.24
+/holiday/women-rock-day/,Women Rock! day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/wonderful-weirdos-day/,Wonderful Weirdos Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/work-like-a-dog-day/,Work Like a Dog Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature;work_technology,4,10.24
+/holiday/workaholics-day/,Workaholics Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,work_technology,work_technology,4,9.24
+/holiday/world-backup-day/,World Backup Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/world-baking-day/,World Baking Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/world-bartender-day/,World Bartender Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/world-braille-day/,World Braille Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/world-chocolate-day/,World Chocolate Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/world-cocktail-day/,World Cocktail Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/world-contact-day/,World Contact Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/world-crocodile-day/,World Crocodile Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/world-emoji-day/,World Emoji Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/world-frog-day/,World Frog Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/world-goth-day/,World Goth Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/world-mathematics-day/,World Mathematics Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/world-nutella-day/,World Nutella Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink,4,9.24
+/holiday/world-party-day/,World Party Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/world-penguin-day/,World Penguin Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/world-plant-a-vegetable-garden-day/,World Plant a Vegetable Garden Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,food_drink,food_drink;animals_nature,4,9.24
+/holiday/world-radio-day/,World Radio Day — Obscure Holiday Calendar,27,27,12,2,no,no,no,arts_culture,arts_culture,4,14.24
+/holiday/world-rainforest-day/,World Rainforest Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/world-rat-day/,World Rat Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/world-sauntering-day/,World Sauntering Day — Obscure Holiday Calendar,27,27,9,2,no,no,no,fun_weird_general,fun_weird_general,4,11.24
+/holiday/world-sleep-day/,World Sleep Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,wellness_lifestyle,wellness_lifestyle,4,10.24
+/holiday/world-theatre-day/,World Theatre Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/world-toilet-day/,World Toilet Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/world-turtle-day/,World Turtle Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/world-ufo-day/,World UFO Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,arts_culture,arts_culture,4,10.24
+/holiday/world-wildlife-day/,World Wildlife Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature,4,10.24
+/holiday/worship-of-tools-day/,Worship of Tools Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,work_technology,work_technology,4,9.24
+/holiday/wright-brother-day/,Wright Brother Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/zipper-day/,Zipper Day — Obscure Holiday Calendar,27,27,7,2,no,no,no,fun_weird_general,fun_weird_general,4,9.24
+/holiday/zoo-lovers-day/,Zoo Lovers Day — Obscure Holiday Calendar,27,27,8,2,no,no,no,animals_nature,animals_nature;wellness_lifestyle,4,10.24
+/holidays/animals-nature/,Animals & Nature Holidays Hub — Obscure Holiday Calendar,43,43,37,2,no,no,no,,,4,41.16
+/holidays/arts-culture/,Arts & Culture Holidays Hub — Obscure Holiday Calendar,38,38,32,3,no,no,no,,,6,35.06
+/holidays/seasonal-holidays/,Seasonal Holidays Hub — Obscure Holiday Calendar,17,17,11,3,no,no,no,,,6,11.54
+/holidays/wellness-lifestyle/,Wellness & Lifestyle Holidays Hub — Obscure Holiday Calendar,19,19,13,3,no,no,no,,,6,13.78
+/privacy/,Privacy Policy — Obscure Holiday Calendar,17,17,1498,1,no,no,no,,,2,1499.54
+/shop/,Shop — Obscure Holiday Calendar,0,0,0,-1,yes,yes,no,,,70,-2.5
+/slack-bot/,Obscure Holiday Calendar Slack Bot | Daily Holidays in Slack,19,19,1503,1,no,no,no,,,2,1504.78
+/slack-bot/admin-installs.html,Slack Bot Installs,0,0,0,-1,yes,yes,no,,,70,-2.5
+/slack-bot/installed.html,Slack bot installed — Obscure Holiday Calendar,2,2,0,-1,yes,yes,no,,,70,-2.26
+/slack-bot/success.html,Premium activated — Obscure Holiday Bot,2,2,0,-1,yes,yes,no,,,70,-2.26
+/slack-bot/terms.html,Terms of Service · Obscure Holiday Slack Bot,13,13,2,2,no,yes,no,,,22,2.56
+/subprocessors/,Sub-processors — Obscure Holiday Calendar,16,16,2,2,no,yes,no,,,22,2.92
