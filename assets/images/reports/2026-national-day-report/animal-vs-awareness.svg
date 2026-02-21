@@ -5,8 +5,8 @@
 <line x1="110" y1="330" x2="710" y2="330" stroke="#334155" stroke-width="2"/>
 <rect x="200" y="55.0" width="110" height="275.0" fill="#16a34a" rx="6"/>
 <text x="255.0" y="45.0" text-anchor="middle" font-size="14" fill="#0f172a">272</text>
-<text x="255.0" y="354" text-anchor="middle" font-size="13" fill="#334155">Animals & Nature</text>
+<text x="255.0" y="354" text-anchor="middle" font-size="13" fill="#334155">Animals &amp; Nature</text>
 <rect x="400" y="322.9" width="110" height="7.1" fill="#7c3aed" rx="6"/>
 <text x="455.0" y="312.9" text-anchor="middle" font-size="14" fill="#0f172a">7</text>
-<text x="455.0" y="354" text-anchor="middle" font-size="13" fill="#334155">Awareness & Advocacy</text>
+<text x="455.0" y="354" text-anchor="middle" font-size="13" fill="#334155">Awareness &amp; Advocacy</text>
 </svg>
