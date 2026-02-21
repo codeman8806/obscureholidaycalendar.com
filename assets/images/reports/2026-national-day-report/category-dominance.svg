@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="620" viewBox="0 0 1020 620" role="img" aria-labelledby="t d">
+<title id="t">Category dominance of national day records</title>
+<desc id="d">Horizontal bar chart comparing category counts with top three categories highlighted by size.</desc>
+<rect width="100%" height="100%" fill="#fff"/>
+<text x="248" y="71.0" font-size="14" text-anchor="end" fill="#0f172a">Animals & Nature</text>
+<rect x="260" y="53.0" width="720.0" height="22" fill="#0ea5e9" rx="4"/>
+<text x="988.0" y="70.0" font-size="13" fill="#334155">272 (37.16%)</text>
+<text x="248" y="137.9" font-size="14" text-anchor="end" fill="#0f172a">Food</text>
+<rect x="260" y="119.9" width="667.1" height="22" fill="#22c55e" rx="4"/>
+<text x="935.1" y="136.9" font-size="13" fill="#334155">252 (34.43%)</text>
+<text x="248" y="204.8" font-size="14" text-anchor="end" fill="#0f172a">Arts & Culture</text>
+<rect x="260" y="186.8" width="240.9" height="22" fill="#f59e0b" rx="4"/>
+<text x="508.9" y="203.8" font-size="13" fill="#334155">91 (12.43%)</text>
+<text x="248" y="271.6" font-size="14" text-anchor="end" fill="#0f172a">Wellness & Lifestyle</text>
+<rect x="260" y="253.6" width="103.2" height="22" fill="#8b5cf6" rx="4"/>
+<text x="371.2" y="270.6" font-size="13" fill="#334155">39 (5.33%)</text>
+<text x="248" y="338.5" font-size="14" text-anchor="end" fill="#0f172a">Fun / Weird General</text>
+<rect x="260" y="320.5" width="100.6" height="22" fill="#ef4444" rx="4"/>
+<text x="368.6" y="337.5" font-size="13" fill="#334155">38 (5.19%)</text>
+<text x="248" y="405.4" font-size="14" text-anchor="end" fill="#0f172a">Seasonal</text>
+<rect x="260" y="387.4" width="63.5" height="22" fill="#14b8a6" rx="4"/>
+<text x="331.5" y="404.4" font-size="13" fill="#334155">24 (3.28%)</text>
+<text x="248" y="472.2" font-size="14" text-anchor="end" fill="#0f172a">Work / Technology</text>
+<rect x="260" y="454.2" width="23.8" height="22" fill="#64748b" rx="4"/>
+<text x="291.8" y="471.2" font-size="13" fill="#334155">9 (1.23%)</text>
+<text x="248" y="539.1" font-size="14" text-anchor="end" fill="#0f172a">Awareness / Advocacy</text>
+<rect x="260" y="521.1" width="18.5" height="22" fill="#a855f7" rx="4"/>
+<text x="286.5" y="538.1" font-size="13" fill="#334155">7 (0.96%)</text>
+</svg>
