@@ -1,0 +1,9 @@
+category,pages,avg_inbound_links,avg_outbound_links,same_category_link_rate,same_category_edge_count,holiday_outbound_edge_count,weakly_connected_cluster
+fun_weird_general,514,8.99,26.93,0.8184,3343,4085,no
+food_drink,117,8.91,26.98,0.4866,455,935,no
+animals_nature,37,9.54,26.89,0.398,117,294,no
+arts_culture,32,10.22,26.94,0.3937,100,254,no
+wellness_lifestyle,13,9.92,26.54,0.4059,41,101,no
+seasonal_holidays,11,10.09,26.64,0.4419,38,86,no
+work_technology,7,7.14,27.0,0.375,21,56,no
+awareness_advocacy,5,9.0,27.0,0.375,15,40,no
