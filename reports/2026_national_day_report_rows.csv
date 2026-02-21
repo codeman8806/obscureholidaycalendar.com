@@ -1,0 +1,733 @@
+date,name,primary_category
+01-01,New Years Day,arts_culture
+01-01,National Hangover Day,arts_culture
+01-02,Science Fiction Day,arts_culture
+01-02,National Buffet Day,food
+01-03,Women Rock! day,animals_nature
+01-03,Fruitcake Toss Day,food
+01-04,World Braille Day,animals_nature
+01-04,National Spaghetti Day,food
+01-05,National Bird Day,animals_nature
+01-05,National Whipped Cream Day,food
+01-06,National Technology Day,animals_nature
+01-06,Cuddle Up Day,animals_nature
+01-07,Old Rock Day,animals_nature
+01-07,National Tempura Day,food
+01-08,Earths Rotation Day,animals_nature
+01-08,Bubble Bath Day,animals_nature
+01-09,National Law Enforcement Appreciation Day,awareness_advocacy
+01-09,Static Electricity Day,arts_culture
+01-10,Houseplant Appreciation Day,animals_nature
+01-10,Peculiar People Day,fun_weird_general
+01-11,National Milk Day,food
+01-11,Learn Your Name in Morse Code Day,animals_nature
+01-12,National Pharmacist Day,animals_nature
+01-12,National Hot Tea Day,food
+01-13,Korean American Day,fun_weird_general
+01-13,National Rubber Ducky Day,animals_nature
+01-14,Dress Up Your Pet Day,wellness_lifestyle
+01-14,Organize Your Home Day,animals_nature
+01-15,National Hat Day,fun_weird_general
+01-15,Wikipedia Day,fun_weird_general
+01-16,National Nothing Day,seasonal
+01-16,Appreciate a Dragon Day,arts_culture
+01-17,Kid Inventors' Day,fun_weird_general
+01-17,Popeye's Birthday,animals_nature
+01-18,Thesaurus Day,animals_nature
+01-18,Winnie the Pooh Day,wellness_lifestyle
+01-19,National Popcorn Day,food
+01-19,Tin Can Day,work_technology
+01-20,National Cheese Lovers Day,food
+01-20,Penguin Awareness Day,animals_nature
+01-21,National Hugging Day,wellness_lifestyle
+01-21,Squirrel Appreciation Day,animals_nature
+01-22,National Answer Your Cat's Questions Day,animals_nature
+01-22,Celebration of Life Day,animals_nature
+01-23,National Pie Day,wellness_lifestyle
+01-23,National Measure Your Feet Day,wellness_lifestyle
+01-24,National Compliment Day,animals_nature
+01-24,Global Belly Laugh Day,arts_culture
+01-25,Opposite Day,arts_culture
+01-25,Irish Coffee Day,food
+01-26,Australia Day,arts_culture
+01-26,Spouse's Day,animals_nature
+01-27,Chocolate Cake Day,food
+01-27,Punch the Clock Day,arts_culture
+01-28,Data Privacy Day,awareness_advocacy
+01-28,International LEGO Day,fun_weird_general
+01-29,National Puzzle Day,animals_nature
+01-29,Corn Chip Day,food
+01-30,National Croissant Day,wellness_lifestyle
+01-30,National Inane Answering Machine Day,work_technology
+01-31,Backward Day,food
+01-31,Inspire Your Heart With Art Day,animals_nature
+02-01,National Dark Chocolate Day,food
+02-01,Change Your Password Day,work_technology
+02-02,Groundhog Day,seasonal
+02-02,Crepe Day,arts_culture
+02-03,The Day the Music Died Day,animals_nature
+02-03,Carrot Cake Day,food
+02-04,National Homemade Soup Day,food
+02-04,Thank a Mailman Day,animals_nature
+02-05,World Nutella Day,food
+02-05,Chocolate Fondue Day,food
+02-06,National Chopsticks Day,animals_nature
+02-06,National Frozen Yogurt Day,food
+02-07,National Fettuccine Alfredo Day,food
+02-07,National Periodic Table Day,animals_nature
+02-08,National Kite Flying Day,animals_nature
+02-08,National Potato Lovers Day,wellness_lifestyle
+02-09,National Pizza Day,food
+02-09,Read in the Bathtub Day,animals_nature
+02-10,National Umbrella Day,fun_weird_general
+02-10,Plimsoll Day,animals_nature
+02-11,White T-Shirt Day,awareness_advocacy
+02-11,National Inventors' Day,work_technology
+02-12,Darwin Day,animals_nature
+02-12,Plum Pudding Day,food
+02-13,World Radio Day,arts_culture
+02-13,Galentine's Day,food
+02-14,Valentine's Day,food
+02-14,Ferris Wheel Day,fun_weird_general
+02-15,Singles Awareness Day,arts_culture
+02-15,Gumdrop Day,food
+02-16,Lithuanian Independence Day,seasonal
+02-16,Do a Grouch a Favor Day,animals_nature
+02-17,Random Acts of Kindness Day,animals_nature
+02-17,Cabbage Day,food
+02-18,National Drink Wine Day,food
+02-18,Pluto Discovery Day,fun_weird_general
+02-19,National Chocolate Mint Day,food
+02-19,National Tug-of-War Day,food
+02-20,Love Your Pet Day,animals_nature
+02-20,Muffin Day,food
+02-21,National Sticky Bun Day,wellness_lifestyle
+02-21,First Steam Locomotive Journey Day,food
+02-22,National Margarita Day,food
+02-22,Dolly the Sheep Day,fun_weird_general
+02-23,National Banana Bread Day,food
+02-23,Curling Day (Sweden),food
+02-24,National Tortilla Chip Day,food
+02-24,World Bartender Day,food
+02-25,National Clam Chowder Day,food
+02-25,International Bionic Man Day,animals_nature
+02-26,Left Sock Day,animals_nature
+02-26,Pistachio Day,food
+02-27,National Strawberry Day,wellness_lifestyle
+02-27,International Polar Bear Day,animals_nature
+02-28,Floral Design Day,animals_nature
+02-28,Nylon Invention Day,food
+02-29,Leap Day,seasonal
+02-29,Superman's Birthday,arts_culture
+03-01,National Peanut Butter Lover's Day,food
+03-01,National Pig Day,animals_nature
+03-02,Old Stuff Day,seasonal
+03-02,Dr. Seuss Day,animals_nature
+03-03,World Wildlife Day,animals_nature
+03-03,National Anthem Day,fun_weird_general
+03-04,March Forth Day,seasonal
+03-04,National Grammar Day,animals_nature
+03-05,Learn What Your Name Means Day,fun_weird_general
+03-05,International Birdhouse Day,animals_nature
+03-06,Oreo Cookie Day,food
+03-06,World Mathematics Day,animals_nature
+03-07,National Cereal Day,animals_nature
+03-07,Alexander Graham Bell Day,animals_nature
+03-08,International Women's Day,fun_weird_general
+03-08,Be Nasty Day,food
+03-09,International Day of Awesomeness,wellness_lifestyle
+03-09,Get Over It Day,animals_nature
+03-10,National Mario Day,arts_culture
+03-10,First Greenback Day,fun_weird_general
+03-11,Worship of Tools Day,animals_nature
+03-11,National Promposal Day,arts_culture
+03-12,Plant a Flower Day,animals_nature
+03-12,Girl Scout Day,fun_weird_general
+03-13,World Sleep Day,wellness_lifestyle
+03-13,Good Samaritan Day,wellness_lifestyle
+03-14,Pi Day,animals_nature
+03-14,Doodle Day,arts_culture
+03-15,World Contact Day,awareness_advocacy
+03-15,Ides of March,fun_weird_general
+03-16,National Panda Day,animals_nature
+03-16,International Potato Chip Day,seasonal
+03-17,St. Patrick's Day,food
+03-17,Submarine Day,work_technology
+03-18,Awkward Moments Day,animals_nature
+03-18,National Sloppy Joe Day,food
+03-19,National Let's Laugh Day,wellness_lifestyle
+03-19,Poultry Day,animals_nature
+03-20,International Day of Happiness,wellness_lifestyle
+03-20,National Alien Abduction Day,animals_nature
+03-21,International Poetry Day,food
+03-21,International Day of Forests,animals_nature
+03-22,International Goof Off Day,arts_culture
+03-22,World Frog Day,animals_nature
+03-23,National Puppy Day,animals_nature
+03-23,Near Miss Day,awareness_advocacy
+03-24,National Cocktail Day,food
+03-24,Chocolate Covered Raisin Day,food
+03-25,Waffle Day,wellness_lifestyle
+03-25,Tolkien Reading Day,animals_nature
+03-26,Make Up Your Own Holiday Day,seasonal
+03-26,International Trampoline Day,wellness_lifestyle
+03-27,World Theatre Day,arts_culture
+03-27,National Joe Day,food
+03-28,Respect Your Cat Day,animals_nature
+03-28,Something on a Stick Day,food
+03-29,Piano Day,arts_culture
+03-29,Smoke and Mirrors Day,animals_nature
+03-30,Virtual Vacation Day,animals_nature
+03-30,Cacti Appreciation Day,animals_nature
+03-31,National Crayon Day,animals_nature
+03-31,World Backup Day,fun_weird_general
+04-01,April Fools' Day,arts_culture
+04-01,One Cent Day,arts_culture
+04-02,National Peanut Butter and Jelly Day,food
+04-02,National Ferret Day,animals_nature
+04-03,World Party Day,animals_nature
+04-03,Find a Rainbow Day,animals_nature
+04-04,World Rat Day,fun_weird_general
+04-04,Tell a Lie Day,animals_nature
+04-05,Go for Broke Day,animals_nature
+04-05,Deep Dish Pizza Day,food
+04-06,New Beer's Eve,food
+04-06,Tartan Day,arts_culture
+04-07,National Beer Day,food
+04-07,No Housework Day,food
+04-08,Zoo Lovers Day,animals_nature
+04-08,Draw a Picture of a Bird Day,animals_nature
+04-09,Name Yourself Day,seasonal
+04-09,Unicorn Day,food
+04-10,National Siblings Day,animals_nature
+04-10,National Cinnamon Crescent Day,fun_weird_general
+04-11,National Pet Day,animals_nature
+04-11,Barbershop Quartet Day,animals_nature
+04-12,National Grilled Cheese Sandwich Day,food
+04-12,Big Wind Day,animals_nature
+04-13,National Scrabble Day,wellness_lifestyle
+04-13,National Make Lunch Count Day,wellness_lifestyle
+04-14,Look Up at the Sky Day,animals_nature
+04-14,Dolphin Day,animals_nature
+04-15,National Laundry Day,animals_nature
+04-15,Rubber Eraser Day,arts_culture
+04-16,Wear Your Pajamas to Work Day,arts_culture
+04-16,Day of the Mushroom,animals_nature
+04-17,Haiku Poetry Day,animals_nature
+04-17,Blah Blah Blah Day,animals_nature
+04-18,National High-Five Day,animals_nature
+04-18,National Animal Crackers Day,food
+04-19,National Garlic Day,animals_nature
+04-19,Bicycle Day,fun_weird_general
+04-20,Look Alike Day,arts_culture
+04-20,Lima Bean Respect Day,food
+04-21,National Tea Day,food
+04-21,Bulldogs Are Beautiful Day,animals_nature
+04-22,National Jelly Bean Day,animals_nature
+04-22,National Picnic Day,animals_nature
+04-23,Talk Like Shakespeare Day,animals_nature
+04-23,Lover's Day,animals_nature
+04-24,Pig in a Blanket Day,food
+04-24,Sauvignon Blanc Day,food
+04-25,World Penguin Day,animals_nature
+04-25,National Zucchini Bread Day,food
+04-26,National Pretzel Day,food
+04-26,Get Organized Day,wellness_lifestyle
+04-27,National Prime Rib Day,animals_nature
+04-27,Morse Code Day,animals_nature
+04-28,Superhero Day,animals_nature
+04-28,National Cubicle Day,animals_nature
+04-29,Shrimp Scampi Day,food
+04-29,Zipper Day,animals_nature
+04-30,National Oatmeal Cookie Day,food
+04-30,Bubble Tea Day,food
+05-01,May Day,animals_nature
+05-01,Lei Day,animals_nature
+05-02,Tuba Day,animals_nature
+05-02,Fire Day,animals_nature
+05-03,National Two Different Colored Shoes Day,animals_nature
+05-03,Paranormal Day,animals_nature
+05-04,Star Wars Day,arts_culture
+05-04,International Respect for Chickens Day,animals_nature
+05-05,Cinco de Mayo,arts_culture
+05-05,Oyster Day,food
+05-06,International No Diet Day,animals_nature
+05-06,Beverage Day,food
+05-07,National Cosmopolitan Day,food
+05-07,Roast Leg of Lamb Day,animals_nature
+05-08,No Socks Day,arts_culture
+05-08,Coconut Cream Pie Day,food
+05-09,Lost Sock Memorial Day,animals_nature
+05-09,National Moscato Day,food
+05-10,Clean Up Your Room Day,arts_culture
+05-10,Shrimp Day,food
+05-11,Eat What You Want Day,animals_nature
+05-11,Twilight Zone Day,arts_culture
+05-12,National Limerick Day,arts_culture
+05-12,Nutty Fudge Day,wellness_lifestyle
+05-13,World Cocktail Day,food
+05-13,Frog Jumping Day,seasonal
+05-14,Dance Like a Chicken Day,arts_culture
+05-14,National Llama Awareness Day,animals_nature
+05-15,National Chocolate Chip Day,food
+05-15,Bring Flowers to Someone Day,animals_nature
+05-16,Love a Tree Day,animals_nature
+05-16,Wear Purple for Peace Day,animals_nature
+05-17,World Baking Day,wellness_lifestyle
+05-17,Pack Rat Day,seasonal
+05-18,No Dirty Dishes Day,animals_nature
+05-18,Visit Your Relatives Day,animals_nature
+05-19,May-Ray Day,arts_culture
+05-19,World Plant a Vegetable Garden Day,food
+05-20,Be a Millionaire Day,arts_culture
+05-20,Pick Strawberries Day,food
+05-21,Talk Like Yoda Day,animals_nature
+05-21,I Need a Patch for That Day,seasonal
+05-22,World Goth Day,animals_nature
+05-22,Buy a Musical Instrument Day,arts_culture
+05-23,World Turtle Day,animals_nature
+05-23,Lucky Penny Day,animals_nature
+05-24,National Scavenger Hunt Day,animals_nature
+05-24,Brother's Day,animals_nature
+05-25,Towel Day,arts_culture
+05-25,National Wine Day,food
+05-26,National Paper Airplane Day,arts_culture
+05-26,Blueberry Cheesecake Day,food
+05-27,Sunscreen Day,animals_nature
+05-27,Cellophane Tape Day,work_technology
+05-28,National Hamburger Day,food
+05-28,Brisket Day,food
+05-29,Put a Pillow on Your Fridge Day,arts_culture
+05-29,Paperclip Day,work_technology
+05-30,National Mint Julep Day,food
+05-30,Loomis Day,seasonal
+05-31,Save Your Hearing Day,animals_nature
+05-31,Macaroon Day,food
+06-01,National Say Something Nice Day,animals_nature
+06-01,Dinosaur Day,animals_nature
+06-02,National Rotisserie Chicken Day,wellness_lifestyle
+06-02,Leave The Office Early Day,arts_culture
+06-03,National Egg Day,animals_nature
+06-03,Repeat Day,animals_nature
+06-04,National Cheese Day,food
+06-04,Hug Your Cat Day,animals_nature
+06-05,National Gingerbread Day,food
+06-05,National Moonshine Day,arts_culture
+06-06,National Yo-Yo Day,fun_weird_general
+06-06,Drive-In Movie Day,arts_culture
+06-07,National Doughnut Day,food
+06-07,VCR Day,fun_weird_general
+06-08,Best Friends Day,animals_nature
+06-08,Name Your Poison Day,arts_culture
+06-09,Donald Duck Day,arts_culture
+06-09,National Strawberry Rhubarb Pie Day,food
+06-10,National Iced Tea Day,food
+06-10,Ballpoint Pen Day,animals_nature
+06-11,National Corn on the Cob Day,food
+06-11,Make Life Beautiful Day,animals_nature
+06-12,National Peanut Butter Cookie Day,food
+06-12,Superman Day,arts_culture
+06-13,National Weed Your Garden Day,animals_nature
+06-13,Random Acts of Light Day,arts_culture
+06-14,National Bourbon Day,animals_nature
+06-14,National Strawberry Shortcake Day,food
+06-15,Nature Photography Day,animals_nature
+06-15,Smile Power Day,animals_nature
+06-16,National Fudge Day,food
+06-16,Fresh Veggies Day,food
+06-17,World Crocodile Day,animals_nature
+06-17,National Eat Your Vegetables Day,food
+06-18,International Sushi Day,animals_nature
+06-18,Go Fishing Day,animals_nature
+06-19,National Watch Day,animals_nature
+06-19,World Sauntering Day,fun_weird_general
+06-20,National Vanilla Milkshake Day,food
+06-20,National Ice Cream Soda Day,wellness_lifestyle
+06-21,National Daylight Appreciation Day,seasonal
+06-21,Go Skateboarding Day,arts_culture
+06-22,National Onion Rings Day,food
+06-22,World Rainforest Day,animals_nature
+06-23,National Hydration Day,animals_nature
+06-23,Let It Go Day,animals_nature
+06-24,International Fairy Day,animals_nature
+06-24,Swim a Lap Day,animals_nature
+06-25,National Strawberry Parfait Day,food
+06-25,National Catfish Day,animals_nature
+06-26,National Chocolate Pudding Day,food
+06-26,National Coconut Day,food
+06-27,National Sunglasses Day,animals_nature
+06-27,Orange Blossom Day,animals_nature
+06-28,National Tapioca Day,food
+06-28,Paul Bunyan Day,arts_culture
+06-29,National Camera Day,animals_nature
+06-29,Hug Holiday Day,animals_nature
+06-30,National OOTD Day,animals_nature
+06-30,Meteor Watch Day,animals_nature
+07-01,International Joke Day,animals_nature
+07-01,Creative Ice Cream Flavors Day,animals_nature
+07-02,World UFO Day,arts_culture
+07-02,I Forgot Day,animals_nature
+07-03,National Eat Your Beans Day,animals_nature
+07-03,National Chocolate Wafer Day,food
+07-04,National Barbecued Spareribs Day,animals_nature
+07-04,Sidewalk Egg Frying Day,animals_nature
+07-05,National Apple Turnover Day,food
+07-05,Workaholics Day,animals_nature
+07-06,International Kissing Day,wellness_lifestyle
+07-06,National Fried Chicken Day,animals_nature
+07-07,World Chocolate Day,food
+07-07,Tell the Truth Day,animals_nature
+07-08,Video Games Day,animals_nature
+07-08,National Video Game Day,animals_nature
+07-09,National Sugar Cookie Day,food
+07-09,No Bra Day,seasonal
+07-10,National Piña Colada Day,food
+07-10,Teddy Bear Picnic Day,animals_nature
+07-11,National 7-Eleven Day,animals_nature
+07-11,Cheer Up the Lonely Day,animals_nature
+07-12,National Pecan Pie Day,food
+07-12,Pecan Pie Day,food
+07-13,Embrace Your Geekness Day,arts_culture
+07-13,French Fries Day,food
+07-14,National Mac and Cheese Day,food
+07-14,Pandemonium Day,animals_nature
+07-15,Give Something Away Day,fun_weird_general
+07-15,Gummy Worm Day,food
+07-16,National Corn Fritters Day,food
+07-16,Corn Fritters Day,food
+07-17,World Emoji Day,animals_nature
+07-17,Peach Ice Cream Day,food
+07-18,National Sour Candy Day,food
+07-18,Caviar Day,wellness_lifestyle
+07-19,National Daiquiri Day,food
+07-19,Stick Out Your Tongue Day,arts_culture
+07-20,Moon Day,fun_weird_general
+07-20,Lollipop Day,food
+07-21,National Junk Food Day,food
+07-21,Lamington Day,food
+07-22,National Hammock Day,animals_nature
+07-22,Rat Catcher’s Day,animals_nature
+07-23,National Hot Dog Day,animals_nature
+07-23,Vanilla Ice Cream Day,food
+07-24,National Tequila Day,food
+07-24,Cousins Day,animals_nature
+07-25,National Wine and Cheese Day,food
+07-25,Carousel Day,arts_culture
+07-26,National Aunt and Uncle Day,animals_nature
+07-26,All or Nothing Day,animals_nature
+07-27,National Crème Brûlée Day,food
+07-27,Take your Houseplant for a Walk Day,animals_nature
+07-28,National Milk Chocolate Day,food
+07-28,Milk Chocolate Day,food
+07-29,National Lasagna Day,food
+07-29,Rain Day,fun_weird_general
+07-30,National Cheesecake Day,food
+07-30,Cheesecake Day,food
+07-31,National Avocado Day,food
+07-31,National Raspberry Cake Day,food
+08-01,National Raspberry Cream Pie Day,food
+08-01,National Girlfriends Day,animals_nature
+08-02,National Ice Cream Sandwich Day,food
+08-02,Coloring Book Day,animals_nature
+08-03,National Watermelon Day,food
+08-03,Grab Some Nuts Day,food
+08-04,National Chocolate Chip Cookie Day,food
+08-04,National Sisters Day,animals_nature
+08-05,Work Like a Dog Day,animals_nature
+08-05,National Underwear Day,animals_nature
+08-06,National Root Beer Float Day,food
+08-06,Wiggle Your Toes Day,animals_nature
+08-07,National Raspberries N' Cream Day,food
+08-07,Particularly Preposterous Packaging Day,arts_culture
+08-08,National CBD Day,animals_nature
+08-08,Happiness Happens Day,wellness_lifestyle
+08-09,National Book Lovers Day,animals_nature
+08-09,Rice Pudding Day,food
+08-10,National Lazy Day,animals_nature
+08-10,S'mores Day,food
+08-11,National Raspberry Bombe Day,food
+08-11,Presidential Joke Day,animals_nature
+08-12,National Julienne Fries Day,food
+08-12,Middle Child's Day,animals_nature
+08-13,International Left-Handers Day,animals_nature
+08-13,National Filet Mignon Day,food
+08-14,National Creamsicle Day,food
+08-14,National Kool-Aid Day,food
+08-15,National Leathercraft Day,arts_culture
+08-15,National Relaxation Day,animals_nature
+08-16,National Tell a Joke Day,animals_nature
+08-16,Rum Day,food
+08-17,National Black Cat Appreciation Day,animals_nature
+08-17,Thrift Shop Day,wellness_lifestyle
+08-18,National Bad Poetry Day,food
+08-18,Serendipity Day,seasonal
+08-19,National Soft Ice Cream Day,food
+08-19,National Potato Day,animals_nature
+08-20,National Radio Day,animals_nature
+08-20,National Chocolate Pecan Pie Day,food
+08-21,National Spumoni Day,food
+08-21,Spumoni Day,food
+08-22,Be an Angel Day,animals_nature
+08-22,National Pecan Torte Day,food
+08-23,Ride the Wind Day,seasonal
+08-23,Sponge Cake Day,food
+08-24,National Peach Pie Day,food
+08-24,Vesuvius Day,animals_nature
+08-25,National Banana Split Day,food
+08-25,Kiss and Make Up Day,animals_nature
+08-26,National Dog Day,animals_nature
+08-26,National Cherry Popsicle Day,food
+08-27,Lizard Appreciation Day,animals_nature
+08-27,Just Because Day,arts_culture
+08-28,National Bow Tie Day,animals_nature
+08-28,Race Your Mouse Around the Icons Day,arts_culture
+08-29,National Chop Suey Day,food
+08-29,According to Hoyle Day,arts_culture
+08-30,National Beach Day,animals_nature
+08-30,Toasted Marshmallow Day,animals_nature
+08-31,National Matchmaker Day,animals_nature
+08-31,Eat Outside Day,animals_nature
+09-01,National Emma M. Nutt Day,animals_nature
+09-01,No Rhyme or Reason Day,animals_nature
+09-02,National Pierce Your Ears Day,animals_nature
+09-02,National Blueberry Popsicle Day,animals_nature
+09-03,Skyscraper Day,fun_weird_general
+09-03,National Welsh Rarebit Day,food
+09-04,National Macadamia Nut Day,food
+09-04,Eat an Extra Dessert Day,food
+09-05,National Cheese Pizza Day,food
+09-05,Be Late for Something Day,arts_culture
+09-06,National Coffee Ice Cream Day,food
+09-06,Fight Procrastination Day,animals_nature
+09-07,National Salami Day,food
+09-07,National New Hampshire Day,fun_weird_general
+09-08,National Ampersand Day,fun_weird_general
+09-08,Pardon Day,seasonal
+09-09,National Teddy Bear Day,animals_nature
+09-09,Wonderful Weirdos Day,animals_nature
+09-10,National TV Dinner Day,fun_weird_general
+09-10,TV Dinner Day,arts_culture
+09-11,National Make Your Bed Day,fun_weird_general
+09-11,No News is Good News Day,wellness_lifestyle
+09-12,National Chocolate Milkshake Day,food
+09-12,Chocolate Milkshake Day,food
+09-13,Supernatural Day,animals_nature
+09-13,Fortune Cookie Day,food
+09-14,National Cream-Filled Donut Day,food
+09-14,National Eat a Hoagie Day,food
+09-15,Make a Hat Day,arts_culture
+09-15,National Crème de Menthe Day,food
+09-16,National Play-Doh Day,animals_nature
+09-16,National Guacamole Day,animals_nature
+09-17,National IT Professionals Day,animals_nature
+09-17,National Apple Dumpling Day,food
+09-18,National Cheeseburger Day,food
+09-18,National Rice Krispie Treat Day,food
+09-19,International Talk Like a Pirate Day,arts_culture
+09-19,Butterscotch Pudding Day,food
+09-20,National Pepperoni Pizza Day,food
+09-20,String Cheese Day,food
+09-21,National Pecan Cookie Day,food
+09-21,Miniature Golf Day,fun_weird_general
+09-22,Hobbit Day,arts_culture
+09-22,Ice Cream Cone Day,wellness_lifestyle
+09-23,Checkers Day,animals_nature
+09-23,National Great American Pot Pie Day,food
+09-24,National Cherries Jubilee Day,food
+09-24,Cherries Jubilee Day,food
+09-25,National Comic Book Day,animals_nature
+09-25,National Quesadilla Day,food
+09-26,National Pancake Day,food
+09-26,Love Note Day,animals_nature
+09-27,National Chocolate Milk Day,food
+09-27,National Corned Beef Hash Day,food
+09-28,National Drink Beer Day,food
+09-28,Ask a Stupid Question Day,food
+09-29,National Coffee Day,food
+09-29,Biscotti Day,food
+09-30,National Hot Mulled Cider Day,arts_culture
+09-30,Chewing Gum Day,animals_nature
+10-01,International Coffee Day,food
+10-01,National Homemade Cookies Day,food
+10-02,National Name Your Car Day,wellness_lifestyle
+10-02,National Fried Scallops Day,food
+10-03,National Techies Day,animals_nature
+10-03,Mean Girls Day,arts_culture
+10-04,National Taco Day,food
+10-04,National Golf Lover's Day,animals_nature
+10-05,National Apple Betty Day,food
+10-05,Do Something Nice Day,wellness_lifestyle
+10-06,Mad Hatter Day,food
+10-06,German-American Day,wellness_lifestyle
+10-07,National Chocolate Covered Pretzel Day,food
+10-07,Bathtub Day,animals_nature
+10-08,American Touch Tag Day,animals_nature
+10-08,Pierogi Day,food
+10-09,Leif Erikson Day,fun_weird_general
+10-09,Moldy Cheese Day,food
+10-10,National Cake Decorating Day,food
+10-10,Angel Food Cake Day,food
+10-11,It's My Party Day,arts_culture
+10-11,Sausage Pizza Day,food
+10-12,Cookbook Launch Day,animals_nature
+10-12,Gumbo Day,arts_culture
+10-13,National M&M Day,food
+10-13,National Train Your Brain Day,animals_nature
+10-14,Be Bald and Be Free Day,animals_nature
+10-14,Dessert Day,food
+10-15,National Grouch Day,animals_nature
+10-15,Mushroom Day,animals_nature
+10-16,Dictionary Day,animals_nature
+10-16,Feral Cat Day,animals_nature
+10-17,National Pasta Day,food
+10-17,Wear Something Gaudy Day,arts_culture
+10-18,National Chocolate Cupcake Day,food
+10-18,No Beard Day,arts_culture
+10-19,Evaluate Your Life Day,animals_nature
+10-19,Seafood Bisque Day,food
+10-20,International Sloth Day,awareness_advocacy
+10-20,Brandied Fruit Day,food
+10-21,National Pumpkin Cheesecake Day,food
+10-21,Count Your Buttons Day,arts_culture
+10-22,National Caps Lock Day,animals_nature
+10-22,Smart is Cool Day,animals_nature
+10-23,National Mole Day,arts_culture
+10-23,TV Talk Show Host Day,wellness_lifestyle
+10-24,National Bologna Day,food
+10-24,National Food Day,animals_nature
+10-25,National Greasy Foods Day,food
+10-25,Sourest Day,animals_nature
+10-26,National Pumpkin Day,animals_nature
+10-26,Mincemeat Day,food
+10-27,National Black Cat Day,animals_nature
+10-27,American Beer Day,food
+10-28,Wild Foods Day,animals_nature
+10-28,Plush Animal Lover's Day,animals_nature
+10-29,National Cat Day,animals_nature
+10-29,Hermit Day,seasonal
+10-30,National Candy Corn Day,food
+10-30,Mischief Night,animals_nature
+10-31,Halloween,arts_culture
+10-31,Carve a Pumpkin Day,food
+11-01,National Deep Fried Clams Day,food
+11-01,National Author’s Day,animals_nature
+11-02,Deviled Egg Day,wellness_lifestyle
+11-02,Look for Circles Day,animals_nature
+11-03,National Sandwich Day,food
+11-03,Cliché Day,animals_nature
+11-04,National Candy Day,food
+11-04,Common Sense Day,seasonal
+11-05,Guy Fawkes Day,animals_nature
+11-05,American Football Day,seasonal
+11-06,National Nachos Day,food
+11-06,Saxophone Day,arts_culture
+11-07,Bittersweet Chocolate with Almonds Day,food
+11-07,Hug a Bear Day,animals_nature
+11-08,National Cappuccino Day,food
+11-08,International Radiography Day,arts_culture
+11-09,Go to an Art Museum Day,animals_nature
+11-09,International Tongue Twister Day,animals_nature
+11-10,Vanilla Cupcake Day,food
+11-10,Forget-Me-Not Day,animals_nature
+11-11,National Sundae Day,food
+11-11,Origami Day,animals_nature
+11-12,National Pizza with the Works Except Anchovies Day,food
+11-12,Happy Hour Day,work_technology
+11-13,Sadie Hawkins Day,animals_nature
+11-13,Indian Pudding Day,food
+11-14,National Pickle Day,food
+11-14,Spicy Guacamole Day,animals_nature
+11-15,Clean Out Your Refrigerator Day,seasonal
+11-15,National Spicy Hermit Cookie Day,food
+11-16,National Fast Food Day,food
+11-16,Have a Party with Your Bear Day,food
+11-17,National Baklava Day,food
+11-17,Homemade Bread Day,food
+11-18,Mickey Mouse Day,food
+11-18,Push-button Phone Day,animals_nature
+11-19,Have a Bad Day Day,arts_culture
+11-19,World Toilet Day,animals_nature
+11-20,National Peanut Butter Fudge Day,animals_nature
+11-20,Absurdity Day,animals_nature
+11-21,National Gingerbread Cookie Day,food
+11-21,Beaujolais Nouveau Day,food
+11-22,National Jukebox Day,arts_culture
+11-22,Saint Cecilia's Day,animals_nature
+11-23,Fibonacci Day,animals_nature
+11-23,National Espresso Day,food
+11-24,Celebrate Your Unique Talent Day,animals_nature
+11-24,National Sardines Day,fun_weird_general
+11-25,National Parfait Day,food
+11-25,Saint Catherine's Day,animals_nature
+11-26,National Cake Day,food
+11-26,Tutankhamun's Tomb Discovery Day,arts_culture
+11-27,Thanksgiving Day,wellness_lifestyle
+11-27,First Macy's Christmas Parade Day,wellness_lifestyle
+11-28,National French Toast Day,food
+11-28,Red Planet Day,fun_weird_general
+11-29,Electronic Greetings Day,animals_nature
+11-29,Square Dance Day,arts_culture
+11-30,National Mousse Day,food
+11-30,Stay Home Because You're Well Day,arts_culture
+12-01,Antarctica Day,animals_nature
+12-01,Eat a Red Apple Day,food
+12-02,National Mutt Day,animals_nature
+12-02,Special Education Day,animals_nature
+12-03,National Roof Over Your Head Day,animals_nature
+12-03,Make a Gift Day,arts_culture
+12-04,National Cookie Day,food
+12-04,Wear Brown Shoes Day,arts_culture
+12-05,Krampusnacht,fun_weird_general
+12-05,International Ninja Day,food
+12-06,Saint Nicholas Day,arts_culture
+12-06,Put on your own shoes day,fun_weird_general
+12-07,International Civil Aviation Day,work_technology
+12-07,National Letter Writing Day,arts_culture
+12-08,National Brownie Day,food
+12-08,Pretend to be a Time Traveler Day,arts_culture
+12-09,Christmas Card Day,wellness_lifestyle
+12-09,National Pastry Day,animals_nature
+12-10,Human Rights Day,awareness_advocacy
+12-10,Nobel Prize Day,arts_culture
+12-11,International Mountain Day,animals_nature
+12-11,Have a Bagel Day,food
+12-12,Gingerbread House Day,food
+12-12,National Ding-A-Ling Day,animals_nature
+12-13,National Cocoa Day,food
+12-13,Violin Day,animals_nature
+12-14,Monkey Day,animals_nature
+12-14,Roast Chestnuts Day,arts_culture
+12-15,Bill of Rights Day,food
+12-15,National Cupcake Day,food
+12-16,National Chocolate-covered Anything Day,food
+12-16,Barbie and Barney Backlash Day,arts_culture
+12-17,National Maple Syrup Day,food
+12-17,Wright Brother Day,wellness_lifestyle
+12-18,Answer The Telephone Like Buddy The Elf Day,arts_culture
+12-18,Bake Cookies Day,food
+12-19,National Ugly Sweater Day,arts_culture
+12-19,National Hard Candy Day,food
+12-20,Go Caroling Day,animals_nature
+12-20,International Human Solidarity Day,animals_nature
+12-21,Winter Solstice,arts_culture
+12-21,National Crossword Puzzle Day,animals_nature
+12-22,National Date Nut Bread Day,food
+12-22,National Cookie Exchange Day,food
+12-23,Festivus,seasonal
+12-23,Pfeffernusse Day,food
+12-24,Christmas Eve,arts_culture
+12-24,National Eggnog Day,animals_nature
+12-25,Christmas Day,wellness_lifestyle
+12-25,National Pumpkin Pie Day,food
+12-26,Boxing Day,seasonal
+12-26,National Candy Cane Day,food
+12-27,Visit the Zoo Day,animals_nature
+12-27,Make Cut-Out Snowflakes Day,animals_nature
+12-28,Card Playing Day,animals_nature
+12-28,Pledge of Allegiance Day,fun_weird_general
+12-29,Tick Tock Day,arts_culture
+12-29,Still Need to Do Day,arts_culture
+12-30,Bacon Day,food
+12-30,Falling Needles Family Fest Day,animals_nature
+12-31,Make Up Your Mind Day,animals_nature
+12-31,No Interruptions Day,animals_nature

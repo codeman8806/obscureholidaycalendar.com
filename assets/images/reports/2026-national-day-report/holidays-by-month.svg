@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="t d">
+<title id="t">Holidays by month in 2026 dataset</title>
+<desc id="d">Bar chart showing monthly holiday counts ranging from 58 to 62 entries.</desc>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<line x1="90" y1="430" x2="960" y2="430" stroke="#334155" stroke-width="2"/>
+<line x1="90" y1="40" x2="90" y2="430" stroke="#334155" stroke-width="2"/>
+<line x1="90" y1="65.2" x2="960" y2="65.2" stroke="#e2e8f0" stroke-width="1"/>
+<text x="78" y="69.2" font-size="12" text-anchor="end" fill="#334155">58</text>
+<line x1="90" y1="58.9" x2="960" y2="58.9" stroke="#e2e8f0" stroke-width="1"/>
+<text x="78" y="62.9" font-size="12" text-anchor="end" fill="#334155">59</text>
+<line x1="90" y1="52.6" x2="960" y2="52.6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="78" y="56.6" font-size="12" text-anchor="end" fill="#334155">60</text>
+<line x1="90" y1="46.3" x2="960" y2="46.3" stroke="#e2e8f0" stroke-width="1"/>
+<text x="78" y="50.3" font-size="12" text-anchor="end" fill="#334155">61</text>
+<line x1="90" y1="40.0" x2="960" y2="40.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="78" y="44.0" font-size="12" text-anchor="end" fill="#334155">62</text>
+<rect x="103.8" y="40.0" width="45.0" height="390.0" fill="#2563eb" rx="4"/>
+<text x="126.2" y="32.0" font-size="12" text-anchor="middle" fill="#0f172a">62</text>
+<text x="126.2" y="452" font-size="12" text-anchor="middle" fill="#334155">Jan</text>
+<rect x="176.3" y="65.2" width="45.0" height="364.8" fill="#2563eb" rx="4"/>
+<text x="198.8" y="57.2" font-size="12" text-anchor="middle" fill="#0f172a">58</text>
+<text x="198.8" y="452" font-size="12" text-anchor="middle" fill="#334155">Feb</text>
+<rect x="248.8" y="40.0" width="45.0" height="390.0" fill="#2563eb" rx="4"/>
+<text x="271.2" y="32.0" font-size="12" text-anchor="middle" fill="#0f172a">62</text>
+<text x="271.2" y="452" font-size="12" text-anchor="middle" fill="#334155">Mar</text>
+<rect x="321.3" y="52.6" width="45.0" height="377.4" fill="#2563eb" rx="4"/>
+<text x="343.8" y="44.6" font-size="12" text-anchor="middle" fill="#0f172a">60</text>
+<text x="343.8" y="452" font-size="12" text-anchor="middle" fill="#334155">Apr</text>
+<rect x="393.8" y="40.0" width="45.0" height="390.0" fill="#2563eb" rx="4"/>
+<text x="416.2" y="32.0" font-size="12" text-anchor="middle" fill="#0f172a">62</text>
+<text x="416.2" y="452" font-size="12" text-anchor="middle" fill="#334155">May</text>
+<rect x="466.3" y="52.6" width="45.0" height="377.4" fill="#2563eb" rx="4"/>
+<text x="488.8" y="44.6" font-size="12" text-anchor="middle" fill="#0f172a">60</text>
+<text x="488.8" y="452" font-size="12" text-anchor="middle" fill="#334155">Jun</text>
+<rect x="538.8" y="40.0" width="45.0" height="390.0" fill="#2563eb" rx="4"/>
+<text x="561.2" y="32.0" font-size="12" text-anchor="middle" fill="#0f172a">62</text>
+<text x="561.2" y="452" font-size="12" text-anchor="middle" fill="#334155">Jul</text>
+<rect x="611.3" y="40.0" width="45.0" height="390.0" fill="#2563eb" rx="4"/>
+<text x="633.8" y="32.0" font-size="12" text-anchor="middle" fill="#0f172a">62</text>
+<text x="633.8" y="452" font-size="12" text-anchor="middle" fill="#334155">Aug</text>
+<rect x="683.8" y="52.6" width="45.0" height="377.4" fill="#2563eb" rx="4"/>
+<text x="706.2" y="44.6" font-size="12" text-anchor="middle" fill="#0f172a">60</text>
+<text x="706.2" y="452" font-size="12" text-anchor="middle" fill="#334155">Sep</text>
+<rect x="756.3" y="40.0" width="45.0" height="390.0" fill="#2563eb" rx="4"/>
+<text x="778.8" y="32.0" font-size="12" text-anchor="middle" fill="#0f172a">62</text>
+<text x="778.8" y="452" font-size="12" text-anchor="middle" fill="#334155">Oct</text>
+<rect x="828.8" y="52.6" width="45.0" height="377.4" fill="#2563eb" rx="4"/>
+<text x="851.2" y="44.6" font-size="12" text-anchor="middle" fill="#0f172a">60</text>
+<text x="851.2" y="452" font-size="12" text-anchor="middle" fill="#334155">Nov</text>
+<rect x="901.3" y="40.0" width="45.0" height="390.0" fill="#2563eb" rx="4"/>
+<text x="923.8" y="32.0" font-size="12" text-anchor="middle" fill="#0f172a">62</text>
+<text x="923.8" y="452" font-size="12" text-anchor="middle" fill="#334155">Dec</text>
+</svg>

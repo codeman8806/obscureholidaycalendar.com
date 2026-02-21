@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="500" viewBox="0 0 980 500" role="img" aria-labelledby="t d">
+<title id="t">Month-to-month change in holiday counts</title>
+<desc id="d">Diverging bars showing month-over-month count changes driven by month length.</desc>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<line x1="90" y1="210.0" x2="950" y2="210.0" stroke="#334155" stroke-width="2"/>
+<rect x="109.5" y="210.0" width="39.1" height="153.0" fill="#dc2626" rx="3"/>
+<text x="129.1" y="377.0" font-size="11" text-anchor="middle" fill="#0f172a">-4</text>
+<text x="129.1" y="410" font-size="10" text-anchor="middle" fill="#334155">Jan→Feb</text>
+<rect x="187.7" y="57.0" width="39.1" height="153.0" fill="#16a34a" rx="3"/>
+<text x="207.3" y="51.0" font-size="11" text-anchor="middle" fill="#0f172a">+4</text>
+<text x="207.3" y="410" font-size="10" text-anchor="middle" fill="#334155">Feb→Mar</text>
+<rect x="265.9" y="210.0" width="39.1" height="76.5" fill="#dc2626" rx="3"/>
+<text x="285.5" y="300.5" font-size="11" text-anchor="middle" fill="#0f172a">-2</text>
+<text x="285.5" y="410" font-size="10" text-anchor="middle" fill="#334155">Mar→Apr</text>
+<rect x="344.1" y="133.5" width="39.1" height="76.5" fill="#16a34a" rx="3"/>
+<text x="363.6" y="127.5" font-size="11" text-anchor="middle" fill="#0f172a">+2</text>
+<text x="363.6" y="410" font-size="10" text-anchor="middle" fill="#334155">Apr→May</text>
+<rect x="422.3" y="210.0" width="39.1" height="76.5" fill="#dc2626" rx="3"/>
+<text x="441.8" y="300.5" font-size="11" text-anchor="middle" fill="#0f172a">-2</text>
+<text x="441.8" y="410" font-size="10" text-anchor="middle" fill="#334155">May→Jun</text>
+<rect x="500.5" y="133.5" width="39.1" height="76.5" fill="#16a34a" rx="3"/>
+<text x="520.0" y="127.5" font-size="11" text-anchor="middle" fill="#0f172a">+2</text>
+<text x="520.0" y="410" font-size="10" text-anchor="middle" fill="#334155">Jun→Jul</text>
+<rect x="578.6" y="210.0" width="39.1" height="0.0" fill="#16a34a" rx="3"/>
+<text x="598.2" y="204.0" font-size="11" text-anchor="middle" fill="#0f172a">+0</text>
+<text x="598.2" y="410" font-size="10" text-anchor="middle" fill="#334155">Jul→Aug</text>
+<rect x="656.8" y="210.0" width="39.1" height="76.5" fill="#dc2626" rx="3"/>
+<text x="676.4" y="300.5" font-size="11" text-anchor="middle" fill="#0f172a">-2</text>
+<text x="676.4" y="410" font-size="10" text-anchor="middle" fill="#334155">Aug→Sep</text>
+<rect x="735.0" y="133.5" width="39.1" height="76.5" fill="#16a34a" rx="3"/>
+<text x="754.5" y="127.5" font-size="11" text-anchor="middle" fill="#0f172a">+2</text>
+<text x="754.5" y="410" font-size="10" text-anchor="middle" fill="#334155">Sep→Oct</text>
+<rect x="813.2" y="210.0" width="39.1" height="76.5" fill="#dc2626" rx="3"/>
+<text x="832.7" y="300.5" font-size="11" text-anchor="middle" fill="#0f172a">-2</text>
+<text x="832.7" y="410" font-size="10" text-anchor="middle" fill="#334155">Oct→Nov</text>
+<rect x="891.4" y="133.5" width="39.1" height="76.5" fill="#16a34a" rx="3"/>
+<text x="910.9" y="127.5" font-size="11" text-anchor="middle" fill="#0f172a">+2</text>
+<text x="910.9" y="410" font-size="10" text-anchor="middle" fill="#334155">Nov→Dec</text>
+</svg>
