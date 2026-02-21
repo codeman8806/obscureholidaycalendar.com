@@ -13,6 +13,8 @@ CURRENT_YEAR = datetime.date.today().year
 STATIC_PAGE_PATHS = [
     "/",
     "/holiday/",
+    "/reports/",
+    "/reports/2026-national-day-report/",
     "/about/",
     "/articles/",
     "/contact/",

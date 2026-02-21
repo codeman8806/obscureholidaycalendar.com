@@ -1,0 +1,133 @@
+{
+  "total_holidays": 732,
+  "months": [
+    {
+      "month": "January",
+      "month_num": "01",
+      "count": 62
+    },
+    {
+      "month": "February",
+      "month_num": "02",
+      "count": 58
+    },
+    {
+      "month": "March",
+      "month_num": "03",
+      "count": 62
+    },
+    {
+      "month": "April",
+      "month_num": "04",
+      "count": 60
+    },
+    {
+      "month": "May",
+      "month_num": "05",
+      "count": 62
+    },
+    {
+      "month": "June",
+      "month_num": "06",
+      "count": 60
+    },
+    {
+      "month": "July",
+      "month_num": "07",
+      "count": 62
+    },
+    {
+      "month": "August",
+      "month_num": "08",
+      "count": 62
+    },
+    {
+      "month": "September",
+      "month_num": "09",
+      "count": 60
+    },
+    {
+      "month": "October",
+      "month_num": "10",
+      "count": 62
+    },
+    {
+      "month": "November",
+      "month_num": "11",
+      "count": 60
+    },
+    {
+      "month": "December",
+      "month_num": "12",
+      "count": 62
+    }
+  ],
+  "category_counts": [
+    {
+      "category": "animals_nature",
+      "count": 272,
+      "percent": 37.16
+    },
+    {
+      "category": "food",
+      "count": 252,
+      "percent": 34.43
+    },
+    {
+      "category": "arts_culture",
+      "count": 91,
+      "percent": 12.43
+    },
+    {
+      "category": "wellness_lifestyle",
+      "count": 39,
+      "percent": 5.33
+    },
+    {
+      "category": "fun_weird_general",
+      "count": 38,
+      "percent": 5.19
+    },
+    {
+      "category": "seasonal",
+      "count": 24,
+      "percent": 3.28
+    },
+    {
+      "category": "work_technology",
+      "count": 9,
+      "percent": 1.23
+    },
+    {
+      "category": "awareness_advocacy",
+      "count": 7,
+      "percent": 0.96
+    }
+  ],
+  "top_5_crowded_dates": [
+    {
+      "date": "01-01",
+      "count": 2
+    },
+    {
+      "date": "01-02",
+      "count": 2
+    },
+    {
+      "date": "01-03",
+      "count": 2
+    },
+    {
+      "date": "01-04",
+      "count": 2
+    },
+    {
+      "date": "01-05",
+      "count": 2
+    }
+  ],
+  "notes": {
+    "category_method": "Keyword-based inference from holiday name + description. Primary category = first matching rule.",
+    "source_file": "holidays.json"
+  }
+}
