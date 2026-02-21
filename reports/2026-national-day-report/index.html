@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>2026 National Day Report: 732 Holidays Analyzed | Obscure Holiday Calendar</title>
-  <meta name="description" content="A data-driven analysis of 732 national day records, including category dominance, food sub-breakdowns, and obscurity signals." />
+  <title>2026 National Day Report: Category Breakdown &amp; Key Insights | Obscure Holiday Calendar</title>
+  <meta name="description" content="Data analysis of 732 holidays showing which categories dominate, food trends, animal vs awareness ratios, and more." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://www.obscureholidaycalendar.com/reports/2026-national-day-report/" />
 
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="The 2026 National Day Report: 732 Holidays Analyzed" />
-  <meta property="og:description" content="A data-driven analysis of category dominance, food-theme concentration, advocacy gaps, and obscurity patterns in the national day dataset." />
+  <meta property="og:title" content="2026 National Day Report: Category Breakdown &amp; Key Insights" />
+  <meta property="og:description" content="Data analysis of 732 holidays showing which categories dominate, food trends, animal vs awareness ratios, and more." />
   <meta property="og:url" content="https://www.obscureholidaycalendar.com/reports/2026-national-day-report/" />
   <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-dominance.svg?v=20260221b" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="The 2026 National Day Report: 732 Holidays Analyzed" />
-  <meta name="twitter:description" content="Category-led analysis of national day records, including food subtypes and an obscurity index." />
+  <meta name="twitter:title" content="2026 National Day Report: Category Breakdown &amp; Key Insights" />
+  <meta name="twitter:description" content="Data analysis of 732 holidays showing which categories dominate, food trends, animal vs awareness ratios, and more." />
   <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-dominance.svg?v=20260221b" />
 
   <link rel="stylesheet" href="/styles.css" />
@@ -24,8 +24,12 @@
     .report-wrap { max-width: 980px; margin: 0 auto; padding: 24px 18px 64px; }
     .report-wrap h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 10px; }
     .report-wrap h2 { margin-top: 38px; margin-bottom: 12px; }
+    .report-wrap h3 { margin-top: 0; margin-bottom: 8px; color: #0f172a; font-size: 1.1rem; }
     .report-wrap p, .report-wrap li { line-height: 1.7; color: #132238; }
     .report-meta { color: #475569; font-size: 0.95rem; margin-bottom: 20px; }
+    .exec-summary { background: #f8fafc; border: 1px solid #d9e2ec; border-radius: 10px; padding: 14px; margin-bottom: 18px; }
+    .exec-summary p { margin: 0 0 6px; font-weight: 700; color: #0f172a; }
+    .callout-quote { margin: 16px 0; padding: 12px 14px; border-left: 4px solid #0ea5e9; background: #f8fbff; color: #0f172a; font-size: 1.05rem; }
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 18px 0 26px; }
     .kpi-card { border: 1px solid #d9e2ec; border-radius: 12px; padding: 12px; background: #f8fbff; }
     .kpi-label { font-size: 0.8rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -44,9 +48,10 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "The 2026 National Day Report: 732 Holidays Analyzed",
-    "description": "Data-led analysis of category dominance, food holiday composition, advocacy share, and obscurity signals.",
-    "author": { "@type": "Organization", "name": "Obscure Holiday Calendar" },
+    "headline": "2026 National Day Report: Category Breakdown and Key Insights",
+    "description": "Data analysis of 732 holidays showing which categories dominate, food trends, animal vs awareness ratios, and more.",
+    "author": "Obscure Holiday Calendar",
+    "image": "https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-dominance.svg?v=20260221b",
     "publisher": {
       "@type": "Organization",
       "name": "Obscure Holiday Calendar",
@@ -95,8 +100,19 @@
 
     <h1>The 2026 National Day Report: 732 Holidays Analyzed</h1>
     <p class="report-meta">Published February 21, 2026 · Source file analyzed: <code>holidays.json</code> in this repository.</p>
+    <section class="exec-summary" aria-label="Executive Summary">
+      <p>Executive Summary</p>
+      <ul>
+        <li>Animals &amp; Nature (37.16%) and Food (34.43%) account for 71.59% of all 732 records.</li>
+        <li>Animals &amp; Nature leads Awareness &amp; Advocacy by a 38.9:1 ratio (272 vs 7 records).</li>
+        <li>Food is not just desserts: 57.94% of food entries are non-dessert themes.</li>
+        <li>The top three categories (Animals &amp; Nature, Food, Arts &amp; Culture) represent 84.02% of the dataset.</li>
+        <li>The longest holiday title is 50 characters, showing strong long-tail, niche intent potential.</li>
+      </ul>
+    </section>
 
     <section>
+      <h3>What This Report Covers</h3>
       <p>This version of the report is intentionally category-first. It removes date-density framing and instead examines the shape of the catalog by topic dominance, food-theme composition, advocacy representation, and lexical specificity. The current dataset snapshot contains <strong>732</strong> holiday entries. All percentages and counts below are computed directly from those rows. No figures are manually estimated, and all visuals are generated from the same computed outputs used in the written analysis.</p>
       <div class="kpi-grid">
         <div class="kpi-card"><div class="kpi-label">Rows in Dataset</div><div class="kpi-value">732</div></div>
@@ -108,6 +124,7 @@
 
     <section>
       <h2>Category Dominance Analysis</h2>
+      <h3>What This Means for Content and Creators</h3>
       <p>The catalog is top-heavy. Animals &amp; nature (272 records, 37.16%) and food (252 records, 34.43%) account for more than 71% of all entries combined. Arts &amp; culture is a clear third tier at 91 records (12.43%), while all remaining categories collectively represent roughly 16% of the dataset. For editorial operations, this means high-volume discovery opportunities are concentrated in only a few thematic lanes.</p>
       <p>The top three dominant categories are:</p>
       <ul>
@@ -115,7 +132,8 @@
         <li><strong>Food</strong> — 252 records (34.43%)</li>
         <li><strong>Arts &amp; Culture</strong> — 91 records (12.43%)</li>
       </ul>
-      <p>This composition supports a two-track strategy: volume capture in the dominant lanes, and differentiation in mid-share lanes such as arts/culture and wellness/lifestyle. It also explains why users often enter through broad-interest pages and then branch into narrower categories via internal links.</p>
+      <p>This composition supports a two-track strategy: volume capture in dominant lanes, and differentiation in mid-share lanes such as <a href="/holidays/arts-culture/">Arts &amp; Culture</a> and <a href="/holidays/wellness-lifestyle/">Wellness &amp; Lifestyle</a>. It also explains why users often enter through broad-interest pages and then branch into narrower categories via internal links.</p>
+      <blockquote class="callout-quote">“Animals &amp; Nature and Food alone make up 71.59% of the 2026 holiday dataset.”</blockquote>
       <figure>
         <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-dominance.svg?v=20260221b" alt="Horizontal bar chart of category dominance showing animals and nature first, food second, arts and culture third, then smaller categories." />
         <figcaption>Category comparison chart generated from computed primary-category counts.</figcaption>
@@ -139,8 +157,10 @@
 
     <section>
       <h2>Food Holiday Analysis</h2>
+      <h3>What This Means for Editorial Planning</h3>
       <p>Food-related holidays represent <strong>34.43%</strong> of the full dataset (252 of 732 entries), making food the second-largest category and one of the strongest repeat-use content pools. To make this actionable, the food set was further split into subtypes using deterministic keyword rules on holiday names. This subtype view is useful for publishers deciding whether to focus on recipe-friendly, beverage-friendly, or seasonal comfort-food narratives.</p>
       <p>The largest food subtype in this snapshot is <strong>Other Food</strong> (106 entries, 42.06% of food records), followed by <strong>Dessert &amp; Sweets</strong> (84 entries, 33.33%). <strong>Savory Meals</strong> contributes 27 entries (10.71%), <strong>Beverages</strong> contributes 22 entries (8.73%), and <strong>Produce &amp; Ingredients</strong> contributes 13 entries (5.16%). This split shows that food demand in the catalog is not exclusively dessert-driven; there is enough savory and beverage inventory to support diverse editorial planning.</p>
+      <blockquote class="callout-quote">“Food-related holidays account for 34.43% of all records, with 57.94% in non-dessert subtypes.”</blockquote>
       <figure>
         <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/food-sub-breakdown.svg?v=20260221b" alt="Horizontal bar chart showing food holiday sub-breakdown with Other Food and Dessert and Sweets as the largest subgroups." />
         <figcaption>Food sub-breakdown by deterministic keyword grouping of food-category holiday names.</figcaption>
@@ -150,8 +170,10 @@
 
     <section>
       <h2>Animal vs Awareness Breakdown</h2>
+      <h3>What This Means for Topic Balance</h3>
       <p>The difference between celebratory topics and advocacy-style topics is substantial. Animals &amp; nature holds 272 entries, while awareness &amp; advocacy holds 7. That is a <strong>38.9 to 1</strong> ratio in favor of celebratory and affinity-based observances. In percentage terms, animals &amp; nature accounts for 37.16% of the entire catalog, versus 0.96% for awareness-focused entries.</p>
-      <p>This gap is strategically relevant. If the product goal is broad engagement, the existing distribution already favors high-share themes that perform well in lightweight social and evergreen formats. If the goal includes educational or public-interest depth, awareness content is currently underrepresented and may require intentional expansion policies. The point is not that one lane is “better,” but that the current inventory significantly skews toward celebratory discovery.</p>
+      <p>This gap is strategically relevant. If the product goal is broad engagement, the existing distribution already favors high-share themes that perform well in lightweight social and evergreen formats. If the goal includes educational or public-interest depth, awareness content is currently underrepresented and may require intentional expansion policies. The point is not that one lane is “better,” but that the current inventory significantly skews toward celebratory discovery across pages like <a href="/holidays/animals-nature/">Animals &amp; Nature</a>.</p>
+      <blockquote class="callout-quote">“The Animals &amp; Nature category is 38.9 times larger than Awareness &amp; Advocacy in the current dataset.”</blockquote>
       <figure>
         <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/animal-vs-awareness.svg?v=20260221b" alt="Two-bar chart comparing Animals and Nature with Awareness and Advocacy, showing a large gap in record counts." />
         <figcaption>Direct comparison of celebratory affinity inventory versus advocacy-style inventory.</figcaption>
@@ -160,9 +182,11 @@
 
     <section>
       <h2>The Obscurity Index</h2>
+      <h3>What This Means for Long-Tail Search</h3>
       <p>The Obscurity Index in this report is a practical proxy built from name-level specificity rather than subjective scoring. It combines three signals: longest holiday names, niche-themed wording, and specific hobby-oriented themes. Longer names often indicate narrower intent or higher lexical specificity, while niche and hobby terms identify topics that are less likely to be discovered through broad category browsing.</p>
       <p><strong>Longest names</strong> in the current snapshot include “National Pizza with the Works Except Anchovies Day” (50 characters), “Answer The Telephone Like Buddy The Elf Day” (43), and “National Law Enforcement Appreciation Day” (41). These titles are structurally specific and can work as strong long-tail landing pages when paired with contextual internal links.</p>
-      <p><strong>Niche-themed examples</strong> include terms such as Morse code, cellophane tape, plimsoll, and barbershop quartet. <strong>Hobby-related examples</strong> include photography, puzzle, kite flying, museum, dance, and reading-oriented observances. In aggregate, these subsets are smaller than top-level category lanes but useful for expertise signals, newsletter segmentation, and partner campaigns that need precision over volume.</p>
+      <p><strong>Niche-themed examples</strong> include terms such as Morse code, cellophane tape, plimsoll, and barbershop quartet. <strong>Hobby-related examples</strong> include photography, puzzle, kite flying, museum, dance, and reading-oriented observances. In aggregate, these subsets are smaller than top-level category lanes but useful for expertise signals, newsletter segmentation, and partner campaigns that need precision over volume, especially when linked from broader clusters like <a href="/holidays/seasonal-holidays/">Seasonal Holidays</a>.</p>
+      <blockquote class="callout-quote">“The top obscurity signal reaches 50 characters: ‘National Pizza with the Works Except Anchovies Day.’”</blockquote>
       <figure>
         <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/obscurity-longest-names.svg?v=20260221b" alt="Horizontal bar chart ranking the ten longest holiday names by character length as an obscurity proxy." />
         <figcaption>Obscurity index proxy: longest holiday names by character count.</figcaption>
@@ -177,6 +201,19 @@
           </tbody>
         </table>
       </div>
+    </section>
+
+    <section>
+      <h2>Top 5 Surprising Insights</h2>
+      <h3>Fast Stats for Journalists and Editors</h3>
+      <ol>
+        <li><strong>Two categories dominate discovery.</strong> Animals &amp; Nature and Food together account for 71.59% of records, concentrating search and navigation demand in two lanes.</li>
+        <li><strong>Awareness content is structurally underrepresented.</strong> At 0.96% share, Awareness &amp; Advocacy is much smaller than most commercial and celebratory categories.</li>
+        <li><strong>Food breadth is wider than expected.</strong> Non-dessert food entries (other food, savory, beverages, produce) represent 57.94% of food holidays.</li>
+        <li><strong>Top-three concentration is unusually high.</strong> The top three categories account for 84.02%, indicating strong content clustering effects.</li>
+        <li><strong>Niche naming is a real long-tail asset.</strong> The longest and most specific holiday names create natural opportunities for highly targeted queries and coverage.</li>
+      </ol>
+      <blockquote class="callout-quote">“The top three categories capture 84.02% of all records, leaving only 15.98% for the remaining five categories.”</blockquote>
     </section>
 
     <section>
@@ -196,7 +233,7 @@
 
     <section>
       <h2>About Obscure Holiday Calendar</h2>
-      <p>Obscure Holiday Calendar is a structured discovery system for fun, weird, and specific observances. Alongside the holiday library, category hubs provide focused entry points for readers and search crawlers: <a href="/holidays/arts-culture/">Arts &amp; Culture</a>, <a href="/holidays/wellness-lifestyle/">Wellness &amp; Lifestyle</a>, <a href="/holidays/animals-nature/">Animals &amp; Nature</a>, and <a href="/holidays/seasonal-holidays/">Seasonal</a>. For citations, link directly to this report page so readers can verify chart sources and methodology.</p>
+      <p>Obscure Holiday Calendar is a structured discovery system for fun, weird, and specific observances. Alongside the holiday library, category hubs provide focused entry points for readers and search crawlers: <a href="/holidays/arts-culture/">Arts &amp; Culture</a>, <a href="/holidays/wellness-lifestyle/">Wellness &amp; Lifestyle</a>, <a href="/holidays/animals-nature/">Animals &amp; Nature</a>, and <a href="/holidays/seasonal-holidays/">Seasonal</a>. For citations, link directly to this report page so readers can verify chart sources and methodology, or reference the category hubs for topic-specific context.</p>
     </section>
   </main>
 
