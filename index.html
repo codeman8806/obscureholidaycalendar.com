@@ -419,15 +419,17 @@
       (function(){
         // Tinyhunt banner visibility window (local time)
         // Show from Mar 3, 2026 through Mar 9, 2026. Hide starting Mar 10, 2026.
+        var params = new URLSearchParams(location.search || '');
+        var force = params.get('show_tinyhunt') === '1';
         var start = new Date(2026, 2, 3);      // months are 0-indexed
         var endExclusive = new Date(2026, 2, 10);
         var now = new Date();
-        if (now < start || now >= endExclusive) {
+        if (!force && (now < start || now >= endExclusive)) {
           var b0 = document.getElementById('th-banner');
           if (b0) b0.remove();
           return;
         }
-        if (localStorage.getItem('th_banner_dismissed') === '1') {
+        if (!force && localStorage.getItem('th_banner_dismissed') === '1') {
           var b = document.getElementById('th-banner');
           if (b) b.remove();
           return;
