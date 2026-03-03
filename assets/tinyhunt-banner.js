@@ -2,12 +2,14 @@
 // Shows Mar 3–9, 2026 local time; hides starting Mar 10.
 (function(){
   try {
+    var params = new URLSearchParams(location.search || '');
+    var force = params.get('show_tinyhunt') === '1';
     var start = new Date(2026, 2, 3); // Mar 3, 2026
     var endExclusive = new Date(2026, 2, 10); // Mar 10, 2026
     var now = new Date();
-    if (now < start || now >= endExclusive) return;
+    if (!force && (now < start || now >= endExclusive)) return;
     if (document.getElementById('th-banner')) return; // already present (e.g., homepage)
-    if (localStorage.getItem('th_banner_dismissed') === '1') return;
+    if (!force && localStorage.getItem('th_banner_dismissed') === '1') return;
 
     var header = document.querySelector('.site-header');
     if (!header) return;
@@ -51,4 +53,3 @@
     // fail silent
   }
 })();
-
