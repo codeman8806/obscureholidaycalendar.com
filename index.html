@@ -418,11 +418,11 @@
     <script>
       (function(){
         // Tinyhunt banner visibility window (local time)
-        // Show from Mar 3, 2026 through Mar 9, 2026. Hide starting Mar 10, 2026.
+        // Show from Mar 2, 2026 through Mar 8, 2026. Hide starting Mar 9, 2026.
         var params = new URLSearchParams(location.search || '');
         var force = params.get('show_tinyhunt') === '1';
-        var start = new Date(2026, 2, 3);      // months are 0-indexed
-        var endExclusive = new Date(2026, 2, 10);
+        var start = new Date(2026, 2, 2);      // months are 0-indexed (Mar=2)
+        var endExclusive = new Date(2026, 2, 9);
         var now = new Date();
         if (!force && (now < start || now >= endExclusive)) {
           var b0 = document.getElementById('th-banner');
