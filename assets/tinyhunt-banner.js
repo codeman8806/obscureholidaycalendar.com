@@ -4,8 +4,9 @@
   try {
     var params = new URLSearchParams(location.search || '');
     var force = params.get('show_tinyhunt') === '1';
-    var start = new Date(2026, 2, 3); // Mar 3, 2026
-    var endExclusive = new Date(2026, 2, 10); // Mar 10, 2026
+    // Show Mar 2–8, 2026; hide starting Mar 9 (local time)
+    var start = new Date(2026, 2, 2); // Mar 2, 2026
+    var endExclusive = new Date(2026, 2, 9); // Mar 9, 2026
     var now = new Date();
     if (!force && (now < start || now >= endExclusive)) return;
     if (document.getElementById('th-banner')) return; // already present (e.g., homepage)
