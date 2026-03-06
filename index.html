@@ -580,6 +580,9 @@
     </article>
   </main>
 
+  <!-- Featured In (renders only if JSON list has items) -->
+  <section id="featured-in-home" class="page-wrap" hidden aria-label="Featured In"></section>
+
 
   <footer class="site-footer">
     <div class="footer-links">
@@ -600,6 +603,7 @@
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
+      <a href="/press/">Press</a>
       <a href="/discord-bot/">Discord Bot</a>
       <a href="/slack-bot/">Slack Bot</a>
     </div>
@@ -719,6 +723,40 @@
             altEl.removeAttribute("href");
           }
         });
+    })();
+  </script>
+  <script>
+    (function(){
+      var el = document.getElementById('featured-in-home');
+      if(!el) return;
+      fetch('/assets/data/featured.json', { cache: 'no-store' })
+        .then(function(r){ return r.ok ? r.json() : []; })
+        .then(function(items){
+          if(!Array.isArray(items) || !items.length) return;
+          var h = document.createElement('h2');
+          h.textContent = 'Featured In';
+          h.style.margin = '0 0 10px';
+          var ul = document.createElement('ul');
+          ul.style.listStyle = 'none';
+          ul.style.margin = '0';
+          ul.style.padding = '0';
+          ul.style.display = 'flex';
+          ul.style.flexWrap = 'wrap';
+          ul.style.gap = '10px';
+          items.forEach(function(it){
+            if(!it || !it.name || !it.url) return;
+            var li = document.createElement('li');
+            li.style.border = '1px solid #ddd6fe';
+            li.style.borderRadius = '12px';
+            li.style.padding = '8px 12px';
+            li.style.background = '#fff';
+            var a = document.createElement('a');
+            a.href = it.url; a.target = '_blank'; a.rel = 'nofollow noopener'; a.textContent = it.name; a.style.fontWeight='700';
+            li.appendChild(a); ul.appendChild(li);
+          });
+          el.appendChild(h); el.appendChild(ul); el.hidden = false;
+        })
+        .catch(function(){});
     })();
   </script>
   <script>
