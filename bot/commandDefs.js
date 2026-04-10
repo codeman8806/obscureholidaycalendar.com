@@ -235,6 +235,12 @@ export const commandDefs = [
         type: ApplicationCommandOptionType.Integer,
         required: false,
       },
+      {
+        name: "daily_intro",
+        description: "Premium: custom intro line at the top of every daily post (use 'clear' to remove)",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+      },
     ],
   },
   {
@@ -477,5 +483,29 @@ export const commandDefs = [
   {
     name: "installcount",
     description: "Owner-only: show how many servers this bot is in",
+  },
+  {
+    name: "poll",
+    description: "Premium: post a fun poll tied to today's (or any) holiday",
+    options: [
+      {
+        name: "name_or_date",
+        description: "Holiday name or MM-DD (leave empty for today)",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+      },
+    ],
+  },
+  {
+    name: "tip",
+    description: "Premium: get a fun, actionable way to celebrate today's holiday",
+    options: [
+      {
+        name: "name_or_date",
+        description: "Holiday name or MM-DD (leave empty for today)",
+        type: ApplicationCommandOptionType.String,
+        required: false,
+      },
+    ],
   },
 ];
