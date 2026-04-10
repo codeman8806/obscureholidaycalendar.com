@@ -199,9 +199,16 @@ function ensureWorkspace(teamId) {
       skipWeekends: false,
       promotionsEnabled: true,
       lastPostedByChannel: {},
+      dailyIntro: "",
+      monthlyPostCount: 0,
+      lastMonthlyHighlightsAt: 0,
     };
   }
-  return workspaceConfig[teamId];
+  const cfg = workspaceConfig[teamId];
+  if (cfg.dailyIntro == null) cfg.dailyIntro = "";
+  if (cfg.monthlyPostCount == null) cfg.monthlyPostCount = 0;
+  if (cfg.lastMonthlyHighlightsAt == null) cfg.lastMonthlyHighlightsAt = 0;
+  return cfg;
 }
 
 function parseSetupArgs(text) {
@@ -257,7 +264,7 @@ function getLocalParts(timeZone) {
   };
 }
 
-async function slackPostMessage(channel, text) {
+async function slackPostMessage(channel, text, blocks) {
   const token = channel.teamId ? workspaceTokens[channel.teamId]?.access_token : null;
   if (!token) return { ok: false, error: "missing_token" };
   const resp = await fetch("https://slack.com/api/chat.postMessage", {
@@ -266,7 +273,7 @@ async function slackPostMessage(channel, text) {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json; charset=utf-8",
     },
-    body: JSON.stringify({ channel: channel.id || channel, text }),
+    body: JSON.stringify({ channel: channel.id || channel, text, ...(blocks ? { blocks } : {}) }),
   });
   const data = await resp.json().catch(() => ({}));
   if (!data.ok) {
@@ -496,10 +503,23 @@ function buildSetupModal(config, isPremium, metadata) {
         ],
       },
       {
+        type: "input",
+        block_id: "daily_intro_block",
+        optional: true,
+        label: { type: "plain_text", text: "Custom daily intro (Premium)" },
+        element: {
+          type: "plain_text_input",
+          action_id: "daily_intro",
+          initial_value: config.dailyIntro || "",
+          placeholder: { type: "plain_text", text: "Intro line at the top of every daily post. Leave blank to remove." },
+          max_length: 200,
+        },
+      },
+      {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: "*Free vs Premium*\n• Free: /today + daily posts (UTC)\n• Premium: /date, /search, /random, /facts, /tomorrow, /upcoming, /week + custom schedule",
+          text: "*Free vs Premium*\n• Free: /today + daily posts (UTC)\n• Premium: /date, /search, /random, /facts, /poll, /tip, /tomorrow, /upcoming, /week + custom schedule + daily intro + monthly recap",
         },
       },
     ],
@@ -561,17 +581,78 @@ async function handleDailyPosts() {
     if (!hits.length) continue;
     const choice = Math.min(config.holidayChoice || 0, hits.length - 1);
     const holiday = hits[choice];
-    const text = formatHoliday(holiday, mmdd);
-    const postResult = await slackPostMessage({ id: config.channelId, teamId }, text);
+    const baseText = formatHoliday(holiday, mmdd);
+    const postText =
+      isPremiumTeam(teamId) && config.dailyIntro ? `${config.dailyIntro}\n${baseText}` : baseText;
+    const postResult = await slackPostMessage({ id: config.channelId, teamId }, postText);
     if (!postResult.ok) {
       console.warn(`Daily post failed for team ${teamId}: ${postResult.error}`);
       continue;
     }
+    config.monthlyPostCount = (config.monthlyPostCount || 0) + 1;
     config.lastPostedByChannel = {
       ...(config.lastPostedByChannel || {}),
       [config.channelId]: parts.ymd,
     };
     writeJsonSafe(CONFIG_PATH, workspaceConfig);
+  }
+}
+
+async function sendMonthlyHighlightsForTeam(teamId, config) {
+  if (!workspaceTokens[teamId]?.access_token) return;
+  if (!config.channelId) return;
+  const postCount = config.monthlyPostCount || 0;
+  config.lastMonthlyHighlightsAt = Date.now();
+  config.monthlyPostCount = 0;
+  writeJsonSafe(CONFIG_PATH, workspaceConfig);
+
+  const now = new Date();
+  const monthName = now.toLocaleString("en-US", { month: "long", year: "numeric" });
+  const blocks = [
+    {
+      type: "header",
+      text: { type: "plain_text", text: "📊 Monthly Holiday Recap", emoji: true },
+    },
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: [
+          `*${monthName}* — here's how the holiday celebrations went:`,
+          "",
+          `• 📅 *${postCount}* daily holiday post${postCount !== 1 ? "s" : ""} sent this month`,
+          `• 🎉 Keep the streak going — tomorrow's holiday is already lined up!`,
+        ].join("\n"),
+      },
+    },
+    {
+      type: "context",
+      elements: [
+        {
+          type: "mrkdwn",
+          text: `Powered by <${SITE_URL || "https://obscureholidaycalendar.com"}|Obscure Holiday Calendar> · Use \`/upcoming\` to preview what's ahead.`,
+        },
+      ],
+    },
+  ];
+  await slackPostMessage(
+    { id: config.channelId, teamId },
+    `📊 Monthly holiday recap — ${monthName}`,
+    blocks
+  );
+}
+
+async function handleMonthlyHighlights() {
+  const now = Date.now();
+  const TWENTY_EIGHT_DAYS = 28 * 24 * 60 * 60 * 1000;
+  for (const [teamId, config] of Object.entries(workspaceConfig)) {
+    if (!isPremiumTeam(teamId)) continue;
+    if (!config.channelId) continue;
+    const lastSent = config.lastMonthlyHighlightsAt || 0;
+    if (now - lastSent < TWENTY_EIGHT_DAYS) continue;
+    await sendMonthlyHighlightsForTeam(teamId, config).catch((err) =>
+      console.warn(`Monthly highlights failed for team ${teamId}:`, err.message)
+    );
   }
 }
 
@@ -838,6 +919,8 @@ app.post("/slack/commands", async (req, res) => {
               "• /search <query> *(Premium)*",
               "• /random *(Premium)*",
               "• /facts [name or MM-DD] *(Premium)*",
+              "• /poll *(Premium)* — post a holiday poll",
+              "• /tip *(Premium)* — get a celebration idea",
               "• /setup",
               "• /premium [refresh]",
               "• /upgrade",
@@ -870,6 +953,8 @@ app.post("/slack/commands", async (req, res) => {
         "/search <query> *(Premium)* — or /ohsearch if /search is taken",
         "/random *(Premium)*",
         "/facts [name or MM-DD] *(Premium)*",
+        "/poll *(Premium)* — post a fun holiday poll to your channel",
+        "/tip *(Premium)* — get an actionable celebration idea",
         "/setup key=value ...",
         "/premium [refresh]",
         "/upgrade",
@@ -911,7 +996,21 @@ app.post("/slack/commands", async (req, res) => {
         // Ignore and fall through to default message.
       }
     }
-    return respond("⚠️ Premium not active. Use /upgrade to subscribe.");
+    return respond(
+      [
+        "✨ *Premium* unlocks the full Obscure Holiday experience:",
+        "",
+        "• `/poll` — post fun holiday polls to your channel",
+        "• `/tip` — get actionable celebration ideas",
+        "• `/date`, `/search`, `/random`, `/facts`",
+        "• `/tomorrow`, `/week`, `/upcoming`",
+        "• Custom schedule: any timezone & post time",
+        "• Custom daily intro line on every post",
+        "• Monthly highlights recap in your channel",
+        "",
+        "Use `/upgrade` to get started.",
+      ].join("\n")
+    );
   }
 
   if (cmd === "upgrade") {
@@ -920,7 +1019,16 @@ app.post("/slack/commands", async (req, res) => {
     }
     try {
       const session = await createPremiumCheckoutSession({ teamId, userId: user_id });
-      return respond(`Upgrade to premium: ${session.url}`);
+      return respond(
+        [
+          "✨ *Upgrade to Premium* — unlock the full holiday experience:",
+          "• `/poll`, `/tip`, `/facts`, `/search`, `/random`",
+          "• Custom schedule, timezone, and daily intro",
+          "• Monthly highlights recap for your channel",
+          "",
+          session.url,
+        ].join("\n")
+      );
     } catch (e) {
       return respond("Unable to create checkout session right now.");
     }
@@ -1039,11 +1147,17 @@ app.post("/slack/commands", async (req, res) => {
       if (requested !== null) choice = Math.min(requested, hits.length - 1);
       else choice = Math.min(config.holidayChoice || 0, hits.length - 1);
     }
-    return respond(formatHoliday(hits[choice], mmdd));
+    const mainText = formatHoliday(hits[choice], mmdd);
+    if (!isPremium && hits.length > 1) {
+      return respond(
+        `${mainText}\n\n🔓 _${hits.length - 1} more holiday${hits.length > 2 ? "s" : ""} today — unlock all with Premium. Use \`/upgrade\` to start._`
+      );
+    }
+    return respond(mainText);
   }
 
   if (cmd === "tomorrow") {
-    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    if (!isPremium) return respond("🔒 */tomorrow* is a Premium feature — see what's coming up. Use `/upgrade` to unlock.");
     const d = new Date();
     d.setUTCDate(d.getUTCDate() + 1);
     const mmdd = toMMDD(d);
@@ -1057,7 +1171,7 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "date") {
-    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    if (!isPremium) return respond("🔒 */date* is a Premium feature — look up any date's holiday. Use `/upgrade` to unlock.");
     const mmdd = parseDateInput(text);
     if (!mmdd) return respond("Use MM-DD (e.g., 12-25).");
     const hits = findByDate(mmdd);
@@ -1070,7 +1184,7 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "search") {
-    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    if (!isPremium) return respond("🔒 */search* is a Premium feature — find any of 700+ holidays by name. Use `/upgrade` to unlock.");
     if (!text) return respond("Provide a search query.");
     const hits = findByName(text).slice(0, 5);
     if (!hits.length) return respond("No matches found.");
@@ -1079,13 +1193,13 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "random") {
-    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    if (!isPremium) return respond("🔒 */random* is a Premium feature — discover a surprise holiday anytime. Use `/upgrade` to unlock.");
     const pick = allHolidays[Math.floor(Math.random() * allHolidays.length)];
     return respond(formatHoliday(pick));
   }
 
   if (cmd === "facts") {
-    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    if (!isPremium) return respond("🔒 */facts* is a Premium feature — get fun facts for any holiday. Use `/upgrade` to unlock.");
     let holiday = null;
     const parsed = parseDateInput(text || "");
     if (parsed) holiday = findByDate(parsed)[0];
@@ -1098,8 +1212,119 @@ app.post("/slack/commands", async (req, res) => {
     return respond(`*${holiday.name}* fun facts:\n${lines.join("\n")}`);
   }
 
+  if (cmd === "poll") {
+    if (!isPremium) return respond("\ud83d\udd12 */poll* is a Premium feature \u2014 post fun holiday polls to your channel. Use `/upgrade` to unlock.");
+    const mmdd = toMMDD(new Date());
+    const hits = findByDate(mmdd);
+    if (!hits.length) return respond("No holiday found for today.");
+    const holiday = hits[Math.min(config.holidayChoice || 0, hits.length - 1)];
+    const pollTemplates = [
+      `Are you celebrating ${holiday.emoji || ""} *${holiday.name}* today?`,
+      `It's ${holiday.emoji || ""} *${holiday.name}* \u2014 are you in?`,
+      `Did you know today is ${holiday.emoji || ""} *${holiday.name}*? Will you mark it?`,
+      `${holiday.emoji || ""} *${holiday.name}* is today \u2014 are you a fan?`,
+      `How are you marking ${holiday.emoji || ""} *${holiday.name}* today?`,
+    ];
+    const question = pollTemplates[Math.floor(Math.random() * pollTemplates.length)];
+    const targetChannel = config.channelId || channel_id;
+    if (!targetChannel) return respond("No channel configured. Run `/setup` first.");
+    const blocks = [
+      {
+        type: "section",
+        text: { type: "mrkdwn", text: `\ud83d\udcca *Holiday Poll*\n${question}` },
+      },
+      {
+        type: "actions",
+        elements: [
+          {
+            type: "button",
+            text: { type: "plain_text", text: "\u2705 Yes!" },
+            action_id: "poll_vote_yes",
+            value: holiday.name,
+          },
+          {
+            type: "button",
+            text: { type: "plain_text", text: "\u274c Nope" },
+            action_id: "poll_vote_no",
+            value: holiday.name,
+          },
+        ],
+      },
+      {
+        type: "context",
+        elements: [
+          {
+            type: "mrkdwn",
+            text: `Powered by <${SITE_URL || "https://obscureholidaycalendar.com"}|Obscure Holiday Calendar>`,
+          },
+        ],
+      },
+    ];
+    const postResult = await slackPostMessage({ id: targetChannel, teamId }, `\ud83d\udcca ${question}`, blocks);
+    if (!postResult.ok) return respond(`Could not post poll: ${postResult.error}`);
+    return respond(`\u2705 Poll posted to <#${targetChannel}>!`);
+  }
+
+  if (cmd === "tip") {
+    if (!isPremium) return respond("\ud83d\udd12 */tip* is a Premium feature \u2014 get fun actionable celebration ideas for any holiday. Use `/upgrade` to unlock.");
+    const mmdd = toMMDD(new Date());
+    const hits = findByDate(mmdd);
+    if (!hits.length) return respond("No holiday found for today.");
+    const holiday = hits[Math.min(config.holidayChoice || 0, hits.length - 1)];
+    const desc = (holiday.description || "").toLowerCase();
+    let tips;
+    if (desc.includes("food") || desc.includes("eat") || desc.includes("cook") || desc.includes("bake") || desc.includes("drink")) {
+      tips = [
+        `Try making a ${holiday.name}-themed dish and share a photo in the channel!`,
+        `Look up a recipe inspired by ${holiday.name} \u2014 bonus points for sharing with coworkers.`,
+        `Host a mini taste test in honor of ${holiday.name}. Everyone brings something!`,
+      ];
+    } else if (desc.includes("animal") || desc.includes("pet") || desc.includes("dog") || desc.includes("cat")) {
+      tips = [
+        `Give your pet some extra playtime to mark ${holiday.name}.`,
+        `Share a photo of your pet in the channel in honor of ${holiday.name}!`,
+        `Consider donating to a local animal shelter for ${holiday.name}.`,
+      ];
+    } else if (desc.includes("book") || desc.includes("read") || desc.includes("story") || desc.includes("literature")) {
+      tips = [
+        `Pick up a book tied to the theme of ${holiday.name} and share what you chose.`,
+        `Share your current read in the channel to mark ${holiday.name}.`,
+        `Ask the team: what book best captures the spirit of ${holiday.name}?`,
+      ];
+    } else if (desc.includes("music") || desc.includes("song") || desc.includes("sing") || desc.includes("dance")) {
+      tips = [
+        `Share a playlist that matches the vibe of ${holiday.name}.`,
+        `Drop your favorite track in honor of ${holiday.name} \u2014 see who vibes with it.`,
+        `Host a 5-minute music moment: everyone shares one song for ${holiday.name}.`,
+      ];
+    } else if (desc.includes("science") || desc.includes("space") || desc.includes("math") || desc.includes("tech")) {
+      tips = [
+        `Share a cool fact or article to celebrate ${holiday.name}.`,
+        `Challenge the team: who can share the most mind-blowing thing related to ${holiday.name}?`,
+        `Take 5 minutes to look something up in the spirit of ${holiday.name}.`,
+      ];
+    } else if (desc.includes("nature") || desc.includes("outdoor") || desc.includes("plant") || desc.includes("garden")) {
+      tips = [
+        `Take a short walk outside to celebrate ${holiday.name}.`,
+        `Share a nature photo to mark ${holiday.name}.`,
+        `Plant or water something in honor of ${holiday.name}.`,
+      ];
+    } else {
+      tips = [
+        `Share something about ${holiday.name} with your team today.`,
+        `Challenge someone to explain ${holiday.name} in one sentence.`,
+        `Take 5 minutes to learn something new about ${holiday.name}.`,
+        `Post an emoji that captures ${holiday.name} \u2014 see if anyone can guess it.`,
+      ];
+    }
+    const tip = tips[Math.floor(Math.random() * tips.length)];
+    return respond(
+      `\ud83d\udca1 *${holiday.emoji || ""} ${holiday.name} \u2014 Celebration Tip*\n\n${tip}`
+    );
+  }
+
   if (cmd === "week" || cmd === "upcoming") {
-    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    if (!isPremium) return respond("🔒 */week* is a Premium feature — preview the full week of holidays ahead. Use `/upgrade` to unlock.");
     const days = Math.min(Math.max(Number(text || "7"), 3), 30);
     const list = [];
     const now = new Date();
@@ -1116,7 +1341,7 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "schedule") {
-    if (!isPremium) return respond("Premium required. Use /upgrade.");
+    if (!isPremium) return respond("🔒 */schedule* is a Premium feature — test and debug your automated daily posts. Use `/upgrade` to unlock.");
     const lower = (text || "").toLowerCase();
     if (lower.includes("status")) {
       const parts = getLocalParts(config.timezone || DEFAULT_TIMEZONE);
@@ -1231,10 +1456,28 @@ app.post("/slack/interactions", async (req, res) => {
         }
         try {
           const session = await createPremiumCheckoutSession({ teamId, userId });
-          await slackPostMessage({ id: userId, teamId }, `Upgrade to premium: ${session.url}`);
+          await slackPostMessage(
+            { id: userId, teamId },
+            [
+              "✨ *Upgrade to Premium* — unlock the full holiday experience:",
+              "• `/poll`, `/tip`, `/facts`, `/search`, `/random`",
+              "• Custom schedule, timezone, and daily intro",
+              "• Monthly highlights recap for your channel",
+              "",
+              session.url,
+            ].join("\n")
+          );
         } catch (e) {
           await slackPostMessage({ id: userId, teamId }, "Unable to create checkout session right now.");
         }
+      }
+      if (actionId === "poll_vote_yes") {
+        const holidayName = payload.actions?.[0]?.value || "today's holiday";
+        await slackPostEphemeral(teamId, payload.channel?.id, userId, `✅ You're celebrating ${holidayName}! 🎉`);
+      }
+      if (actionId === "poll_vote_no") {
+        const holidayName = payload.actions?.[0]?.value || "today's holiday";
+        await slackPostEphemeral(teamId, payload.channel?.id, userId, `Maybe next time! Check out what ${holidayName} is all about.`);
       }
     })().catch((err) => {
       console.warn("Slack interaction action failed:", err.message);
@@ -1254,6 +1497,7 @@ app.post("/slack/interactions", async (req, res) => {
     const minute = state.minute_block?.minute?.selected_option?.value;
     const choice = state.choice_block?.holiday_choice?.selected_option?.value;
     const options = state.options_block?.options?.selected_options?.map((opt) => opt.value) || [];
+    const dailyIntroRaw = state.daily_intro_block?.daily_intro?.value ?? "";
 
     const errors = {};
     if (timezone && !isValidTimeZone(timezone)) errors.timezone_block = "Invalid timezone.";
@@ -1271,6 +1515,7 @@ app.post("/slack/interactions", async (req, res) => {
     if (isPremium) {
       config.skipWeekends = options.includes("skip_weekends");
       config.promotionsEnabled = options.includes("promotions");
+      config.dailyIntro = dailyIntroRaw.trim().slice(0, 200);
     }
     writeJsonSafe(CONFIG_PATH, workspaceConfig);
     res.json({});
@@ -1321,7 +1566,16 @@ app.post("/slack/events", async (req, res) => {
           writeJsonSafe(CONFIG_PATH, workspaceConfig);
           await slackPostMessage(
             { id: userId, teamId },
-            "👋 Welcome! Use /setup to schedule daily posts, or open the App Home tab for buttons."
+            [
+              `\ud83d\udc4b *Welcome to Obscure Holiday Calendar!*`,
+              "",
+              "Here's how to get started:",
+              "1\ufe0f\u20e3 Run `/setup` to pick a channel and post time",
+              "2\ufe0f\u20e3 Run `/today` to see what's happening right now",
+              "3\ufe0f\u20e3 Run `/upgrade` to unlock Premium features",
+              "",
+              "\ud83d\udca1 Tip: Open the App Home tab for quick controls.",
+            ].join("\n")
           );
         }
       }
@@ -1398,5 +1652,6 @@ app.listen(PORT, async () => {
   if (stripeClient) await syncPremiumFromStripe();
   setInterval(pruneOauthStateStore, 60 * 1000);
   setInterval(handleDailyPosts, 60 * 1000);
+  setInterval(handleMonthlyHighlights, 6 * 60 * 60 * 1000);
   console.log(`${SLACK_APP_NAME} Slack bot running on ${PORT}`);
 });
