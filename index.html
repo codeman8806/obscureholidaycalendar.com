@@ -60,9 +60,32 @@
   <meta name="twitter:description" content="Discover today's obscure, weird and fun holidays. Widgets, reminders, deep links & more.">
   <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png">
 
+  <!-- Preconnect hints -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin />
+
   <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7162731177966348"
      crossorigin="anonymous"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Obscure Holiday Calendar",
+    "url": "https://www.obscureholidaycalendar.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://www.obscureholidaycalendar.com/holiday/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 
   <link rel="stylesheet" href="/styles.css">
   <style>
@@ -404,9 +427,28 @@
     .quick-card a:hover {
       text-decoration: underline;
     }
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .skip-link:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 10px 14px;
+      margin: 8px 12px;
+      background: #ffffff;
+      color: #000;
+      border-radius: 10px;
+      z-index: 1000;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    }
   </style>
 
-  <script defer src="/assets/tinyhunt-banner.js"></script>
 </head>
 <body class="modern page home">
   <header class="site-header">
@@ -471,7 +513,7 @@
   </header>
 
   
-  <main class="page-wrap">
+  <main id="main" class="page-wrap">
     <article class="home-shell">
       <section class="home-hero reveal">
         <div class="hero-copy">
@@ -553,7 +595,7 @@
             <h3>Today’s picks</h3>
             <ul>
               <li><a href="/holiday/">See all holidays</a></li>
-              <li><a href="/holiday/#December">Browse this month</a></li>
+              <li><a href="/holiday/" id="browse-month-link">Browse this month</a></li>
               <li><a href="/discord-bot/">Post holidays to Discord</a></li>
               <li><a href="/slack-bot/">Post holidays to Slack</a></li>
             </ul>
@@ -611,7 +653,7 @@
       <strong>Reports</strong>
       <a href="/reports/2026-national-day-report/">2026 National Day Report</a>
     </div>
-    <p>&copy; 2025 Obscure Holiday Calendar</p>
+    <p>&copy; 2026 Obscure Holiday Calendar</p>
   </footer>
   <script>
     (function() {
@@ -778,6 +820,17 @@
         { threshold: 0.18 }
       );
       reveals.forEach((el) => io.observe(el));
+    })();
+  </script>
+  <script>
+    (function() {
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const link = document.getElementById('browse-month-link');
+      if (link) {
+        const month = months[new Date().getMonth()];
+        link.href = '/holiday/#' + month;
+        link.textContent = 'Browse ' + month + ' holidays';
+      }
     })();
   </script>
 </body>

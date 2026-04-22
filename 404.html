@@ -1,40 +1,191 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Redirecting…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page Not Found — Obscure Holiday Calendar</title>
+  <meta name="description" content="The page you're looking for doesn't exist. Browse obscure holidays or head back home." />
+  <meta name="robots" content="noindex,follow" />
+  <link rel="canonical" href="https://www.obscureholidaycalendar.com/" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="google-adsense-account" content="ca-pub-7162731177966348" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTLDP7FMGV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JTLDP7FMGV');
+  </script>
   <script>
     // Redirect common non-canonical URLs (no trailing slash or index.html) to canonical paths.
-    var path = window.location.pathname || "/";
-    var search = window.location.search || "";
-    var hash = window.location.hash || "";
-    var target = null;
+    (function() {
+      var path = window.location.pathname || "/";
+      var search = window.location.search || "";
+      var hash = window.location.hash || "";
+      var target = null;
 
-    if (path.endsWith("/index.html")) {
-      target = path.slice(0, -"/index.html".length) + "/";
-    } else if (path === "/holiday") {
-      target = "/holiday/";
-    } else if (path === "/app") {
-      target = "/app/";
-    } else if (path.startsWith("/holiday/") && !path.endsWith("/")) {
-      target = path + "/";
-    }
+      if (path.endsWith("/index.html")) {
+        target = path.slice(0, -"/index.html".length) + "/";
+      } else if (path === "/holiday") {
+        target = "/holiday/";
+      } else if (path === "/app") {
+        target = "/app/";
+      } else if (path.startsWith("/holiday/") && !path.endsWith("/")) {
+        target = path + "/";
+      }
 
-    if (target) {
-      window.location.replace(target + search + hash);
-    } else {
-      // Store the original path so index.html can read it
-      sessionStorage.setItem("originalPath", path);
-      // Redirect to index.html while keeping the path info in sessionStorage
-      window.location.replace("/");
-    }
+      if (target) {
+        window.location.replace(target + search + hash);
+      }
+    })();
   </script>
+  <link rel="stylesheet" href="/styles.css" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7162731177966348" crossorigin="anonymous"></script>
-
-  <script defer src="/assets/tinyhunt-banner.js"></script>
+  <style>
+    .not-found-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+      text-align: center;
+    }
+    .not-found-code {
+      font-size: clamp(5rem, 18vw, 9rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      background: linear-gradient(135deg, #6d28d9, #f25d94);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0 0 8px;
+    }
+    .not-found-wrap h1 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin: 0 0 12px;
+      color: #0f172a;
+    }
+    .not-found-wrap p {
+      color: #475569;
+      font-size: 1.05rem;
+      margin: 0 0 28px;
+      line-height: 1.6;
+    }
+    .not-found-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .not-found-actions a {
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    .not-found-actions .btn-primary {
+      background: #6d28d9;
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(109,40,217,0.25);
+    }
+    .not-found-actions .btn-secondary {
+      border: 1px solid #ddd6fe;
+      color: #0f172a;
+      background: #fff;
+    }
+    .not-found-links {
+      margin-top: 40px;
+      text-align: left;
+      background: #fff;
+      border: 1px solid #ede9fe;
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .not-found-links h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6d28d9;
+    }
+    .not-found-links ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .not-found-links a {
+      color: #1f2937;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .not-found-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body class="modern">
-  Redirecting…
+<body class="modern page">
+  <header class="site-header">
+    <div class="bot-banner">
+      <span>Now available for Slack and Discord</span>
+      <a class="bot-banner-link" href="/slack-bot/">
+        <img class="bot-banner-badge" src="https://platform.slack-edge.com/img/add_to_slack.png" alt="Add to Slack" />
+      </a>
+      <a class="bot-banner-link" href="/discord-bot/">
+        <img class="bot-banner-badge" src="/assets/brands/chat-badge.svg" alt="Add to Discord" />
+      </a>
+    </div>
+    <a class="brand" href="/">
+      <img src="/assets/app-icon.png" alt="Obscure Holiday Calendar icon" class="brand-mark" />
+      <div class="brand-text">
+        <span class="brand-name">Obscure Holiday Calendar</span>
+        <span class="brand-tagline">Daily fun, weird, and wonderful observances</span>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="/holiday/">Holidays</a>
+      <a href="/discord-bot/">Discord</a>
+      <a href="/slack-bot/">Slack</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page-wrap">
+    <div class="not-found-wrap">
+      <p class="not-found-code">404</p>
+      <h1>Page not found</h1>
+      <p>This page has wandered off to celebrate a holiday somewhere. Try heading back home or browsing all the holidays.</p>
+      <div class="not-found-actions">
+        <a class="btn-primary" href="/">Back to home</a>
+        <a class="btn-secondary" href="/holiday/">Browse all holidays</a>
+      </div>
+      <div class="not-found-links">
+        <h2>Popular pages</h2>
+        <ul>
+          <li><a href="/holiday/national-pizza-day/">National Pizza Day</a></li>
+          <li><a href="/holiday/national-cat-day/">National Cat Day</a></li>
+          <li><a href="/holiday/international-talk-like-a-pirate-day/">Talk Like a Pirate Day</a></li>
+          <li><a href="/holiday/groundhog-day/">Groundhog Day</a></li>
+          <li><a href="/holiday/halloween/">Halloween</a></li>
+          <li><a href="/holiday/">See all holidays →</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/holiday/">Holidays</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+    </div>
+    <p>&copy; 2026 Obscure Holiday Calendar</p>
+  </footer>
 </body>
 </html>

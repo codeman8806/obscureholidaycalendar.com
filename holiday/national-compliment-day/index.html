@@ -6,7 +6,7 @@
   <title>National Compliment Day — Obscure Holiday Calendar</title>
   <meta name="description" content="National Compliment Day, observed annually on January 24, encourages everyone to spread positivity and boost morale by giving sincere compliments." />
   <meta name="last-modified" content="2025-12-17" />
-  <meta name="theme-color" content="#2c005f" />
+  <meta name="theme-color" content="#12466e" />
   <meta name="google-adsense-account" content="ca-pub-7162731177966348" />
   <link rel="canonical" href="https://www.obscureholidaycalendar.com/holiday/national-compliment-day/" />
   <link rel="preload" href="/styles.css" as="style" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'" />
@@ -50,7 +50,7 @@
     }
     .holiday-card {
       background: linear-gradient(180deg, #ffffff 0%, #f8f5ff 100%);
-      border-radius: 22px;
+      border-radius: var(--card-radius);
       padding: 32px;
       box-shadow: 0 24px 64px rgba(20, 12, 70, 0.16);
     }
@@ -77,7 +77,7 @@
       max-width: 220px;
       width: min(90%, 220px);
       margin: 0;
-      filter: drop-shadow(0 12px 30px rgba(44,0,95,0.18));
+      filter: drop-shadow(0 12px 30px rgba(var(--brand-rgb),0.18));
     }
     .holiday-title {
       margin: 8px 0 6px;
@@ -115,13 +115,13 @@
         border-radius: 16px;
         border: 1px solid #ded7ff;
         background: linear-gradient(180deg, #ffffff, #f6f3ff);
-        box-shadow: 0 16px 34px rgba(44,0,95,0.18);
+        box-shadow: 0 16px 34px rgba(var(--brand-rgb),0.18);
         padding: 14px;
         z-index: 160;
       }
       .next-rail-head {
         font-weight: 800;
-        color: #2c005f;
+        color: var(--brand-purple);
         margin: 0 0 10px;
         font-size: 0.95rem;
       }
@@ -137,7 +137,7 @@
         border-radius: 10px;
         border: 1px solid #e8e2ff;
         background: #fff;
-        color: #2c005f;
+        color: var(--brand-purple);
         text-decoration: none;
         font-weight: 700;
         padding: 9px 10px;
@@ -157,167 +157,20 @@
       }
     }
     :root {
-      --pro-space: clamp(18px, 2vw, 28px);
-      --pro-border: #e6e8f3;
-      --pro-ink: #172033;
-      --pro-muted: #4d5b75;
-      --pro-bg: #fbfbff;
-    }
-    .page-wrap {
-      max-width: 1160px;
-      padding-bottom: 64px;
-    }
-    .holiday-card {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: clamp(22px, 2.2vw, 36px);
-      border: 1px solid var(--pro-border);
-      box-shadow: 0 22px 56px rgba(20, 12, 70, 0.13);
-      background: linear-gradient(180deg, #ffffff 0%, #fbfaff 100%);
-    }
-    .hero {
-      gap: clamp(18px, 2vw, 30px);
-    }
-    .holiday-title {
-      letter-spacing: -0.02em;
-      text-wrap: balance;
-    }
-    .lead,
-    .section p,
-    .section li,
-    .faq dd,
-    .link-list .meta {
-      color: var(--pro-ink);
-      line-height: 1.72;
-    }
-    .section {
-      padding: 14px 0;
-      border-top: 1px solid rgba(44, 0, 95, 0.08);
-    }
-    .section:first-of-type {
-      border-top: 0;
-      padding-top: 0;
-    }
-    .section h2 {
-      letter-spacing: -0.01em;
-      margin: 0 0 10px;
-      font-size: clamp(1.25rem, 1.2vw + 1rem, 1.6rem);
-    }
-    .note-bar {
-      border-left: 4px solid rgba(44, 0, 95, 0.42);
-      background: linear-gradient(90deg, rgba(44,0,95,0.11), rgba(28,150,243,0.11));
-    }
-    .ad-section {
-      border-radius: 14px;
-      border: 1px solid #e6e8f3;
-      background: var(--pro-bg);
-      padding: 12px;
-      margin: 16px 0;
-    }
-    .link-list li,
-    .recent-list li a,
-    .faq-item {
-      transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
-    }
-    .link-list li:hover,
-    .recent-list li a:hover,
-    .faq-item:hover {
-      transform: translateY(-1px);
-      border-color: #d6d9ea;
-      box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);
-    }
-    .footer-links a {
-      font-weight: 600;
-    }
-    @media (max-width: 900px) {
-      .holiday-card {
-        border-radius: 18px;
-      }
-      .section {
-        padding: 12px 0;
-      }
-    }
-  </style>
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTLDP7FMGV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-JTLDP7FMGV');
-    (function() {
-      const params = new URLSearchParams(window.location.search || '');
-      const ref = document.referrer || '';
-      const refHost = (() => {
-        try { return ref ? new URL(ref).hostname : ''; } catch (_) { return ''; }
-      })();
-      const makePayload = () => ({
-        ts: Date.now(),
-        source: params.get('utm_source') || (refHost || 'direct'),
-        medium: params.get('utm_medium') || (ref ? 'referral' : 'unknown'),
-        campaign: params.get('utm_campaign') || '',
-        content: params.get('utm_content') || '',
-        term: params.get('utm_term') || '',
-        referrer: refHost,
-        landing_path: window.location.pathname || '',
-      });
-      let first = null;
-      try {
-        const stored = localStorage.getItem('ohc_first_touch');
-        if (stored) {
-          first = JSON.parse(stored);
-        } else {
-          first = makePayload();
-          localStorage.setItem('ohc_first_touch', JSON.stringify(first));
-        }
-      } catch (_) {
-        first = first || makePayload();
-      }
-      if (window.gtag && first) {
-        try {
-          gtag('set', 'user_properties', {
-            first_source: first.source || '',
-            first_medium: first.medium || '',
-            first_campaign: first.campaign || '',
-            first_content: first.content || '',
-            first_term: first.term || '',
-            first_referrer: first.referrer || '',
-            first_landing_path: first.landing_path || ''
-          });
-        } catch (_) {}
-      }
-    })();
-  </script>
-  <meta name="apple-itunes-app" content="app-id=6755315850">
-  <meta name="google-play-app" content="app-id=com.codeman8806.obscureholidaycalendar">
-  <meta property="og:title" content="National Compliment Day — Obscure Holiday Calendar" />
-  <meta property="og:description" content="National Compliment Day, observed annually on January 24, encourages everyone to spread positivity and boost morale by giving sincere compliments." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.obscureholidaycalendar.com/holiday/national-compliment-day/" />
-  <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="National Compliment Day — Obscure Holiday Calendar" />
-  <meta name="twitter:description" content="National Compliment Day, observed annually on January 24, encourages everyone to spread positivity and boost morale by giving sincere compliments." />
-  <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/app-icon.png" />
-  <noscript><link rel="stylesheet" href="/styles.css" crossorigin="anonymous"></noscript>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7162731177966348" crossorigin="anonymous"></script>
-  <style>
-    :root {
-      --brand-purple: #2c005f;
-      --brand-pink: #f25d94;
-      --brand-blue: #1c96f3;
-      --bg: radial-gradient(circle at 20% 20%, #1a0c3f 0%, #0f0a2a 40%, #0b0b24 70%);
+      --brand-purple: #12466e;
+      --brand-pink: #9649e9;
+      --brand-blue: #e0ab2e;
+      --brand-rgb: 18, 70, 110;
+      --brand-pink-rgb: 150, 73, 233;
+      --brand-blue-rgb: 224, 171, 46;
+      --bg: radial-gradient(circle at 20% 20%, #10293c 0%, #0f172f 40%, #100e25 70%);
       --card: #ffffff;
-      --muted: #5b6174;
-      --border: #e4e7f2;
-      --shadow: 0 24px 64px rgba(20, 12, 70, 0.16);
-      --pill: linear-gradient(135deg, rgba(44,0,95,0.12), rgba(242,93,148,0.12));
-      --related-bg: linear-gradient(180deg, #f8f5ff 0%, #f3f9ff 100%);
+      --muted: #58627e;
+      --border: #dfe1ec;
+      --shadow: 0 24px 64px rgba(27, 72, 106, 0.18);
+      --pill: linear-gradient(135deg, rgba(23, 84, 130,0.12), rgba(150, 73, 233,0.12));
+      --related-bg: linear-gradient(180deg, #f4f7fb 0%, #fbf8ef 100%);
+      --card-radius: 18px;
     }
     body {
       background: var(--bg);
@@ -398,7 +251,7 @@
       border: 1px solid #ece9ff;
     }
     .pill-secondary {
-      background: linear-gradient(135deg, rgba(28,150,243,0.12), rgba(242,93,148,0.12));
+      background: linear-gradient(135deg, rgba(var(--brand-blue-rgb),0.12), rgba(var(--brand-pink-rgb),0.12));
       border: 1px solid #dbeafe;
     }
     .lead {
@@ -411,7 +264,7 @@
       color: var(--brand-pink);
     }
     .store-buttons-top .store-badge {
-      filter: drop-shadow(0 10px 24px rgba(44,0,95,0.12));
+      filter: drop-shadow(0 10px 24px rgba(var(--brand-rgb),0.12));
     }
     .nav-links a {
       color: #f0f4ff;
@@ -456,17 +309,17 @@
     }
     .soft-divider {
       height: 1px;
-      background: linear-gradient(90deg, rgba(44,0,95,0.05), rgba(44,0,95,0.2), rgba(44,0,95,0.05));
+      background: linear-gradient(90deg, rgba(var(--brand-rgb),0.05), rgba(var(--brand-rgb),0.2), rgba(var(--brand-rgb),0.05));
       margin: 18px 0;
       border: 0;
     }
 
     #continue .link-list li {
-      background: linear-gradient(90deg, rgba(44,0,95,0.08), rgba(255,255,255,0.72));
-      border-color: rgba(44,0,95,0.18);
+      background: linear-gradient(90deg, rgba(var(--brand-rgb),0.08), rgba(255,255,255,0.72));
+      border-color: rgba(var(--brand-rgb),0.18);
     }
     #continue .link-list a {
-      color: #2c005f;
+      color: var(--brand-purple);
     }
     #continue .link-list .meta {
       color: #5b6174;
@@ -482,23 +335,23 @@
       align-items: center;
       gap: 8px;
       padding: 10px 14px;
-      background: linear-gradient(120deg, #2c005f, #f25d94);
+      background: linear-gradient(120deg, var(--brand-purple), var(--brand-pink));
       color: #fff;
       border-radius: 999px;
       font-weight: 800;
       text-decoration: none;
       border: none;
       cursor: pointer;
-      box-shadow: 0 12px 28px rgba(44,0,95,0.26);
+      box-shadow: 0 12px 28px rgba(var(--brand-rgb),0.26);
       transition: transform 120ms ease, box-shadow 120ms ease;
     }
     .btn-pill.secondary {
-      background: linear-gradient(120deg, #1c96f3, #5ad4ff);
+      background: linear-gradient(120deg, var(--brand-blue), #5ad4ff);
       box-shadow: 0 12px 24px rgba(28,150,243,0.22);
     }
     .btn-pill:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(44,0,95,0.3);
+      box-shadow: 0 14px 30px rgba(var(--brand-rgb),0.3);
     }
     .btn-pill:focus-visible {
       outline: 2px solid #fff;
@@ -579,9 +432,9 @@
       border-color: rgba(255,255,255,0.28);
     }
     .note-bar {
-      background: linear-gradient(90deg, rgba(44,0,95,0.14), rgba(28,150,243,0.14));
+      background: linear-gradient(90deg, rgba(var(--brand-rgb),0.14), rgba(var(--brand-blue-rgb),0.14));
       color: #0f172a;
-      border: 1px solid rgba(44,0,95,0.16);
+      border: 1px solid rgba(var(--brand-rgb),0.16);
       padding: 12px 14px;
       border-radius: 14px;
       font-weight: 600;
@@ -631,7 +484,9 @@
       "@type": "ImageObject",
       "url": "https://www.obscureholidaycalendar.com/assets/app-icon.png"
     }
-  }
+  },
+  "datePublished": "2025-12-17",
+  "dateModified": "2025-12-17"
 }
 </script>
 <script type="application/ld+json">
@@ -726,30 +581,6 @@
   "name": "National Compliment Day",
   "url": "https://www.obscureholidaycalendar.com/holiday/national-compliment-day/",
   "description": "National Compliment Day, observed annually on January 24, encourages everyone to spread positivity and boost morale by giving sincere compliments.",
-  "breadcrumb": {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.obscureholidaycalendar.com/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Holidays",
-        "item": "https://www.obscureholidaycalendar.com/holiday/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "National Compliment Day",
-        "item": "https://www.obscureholidaycalendar.com/holiday/national-compliment-day/"
-      }
-    ]
-  },
   "isPartOf": {
     "@type": "WebSite",
     "name": "Obscure Holiday Calendar",
@@ -757,8 +588,6 @@
   }
 }
 </script>
-
-  <script defer src="/assets/tinyhunt-banner.js"></script>
 </head>
 <body class="page">
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -823,7 +652,7 @@
             <span class="pill pill-secondary">Updated 2025-12-17</span>
           </div>
           <p class="lead">
-            This holiday is featured in the <a class="inline-link" href="https://www.obscureholidaycalendar.com/app/" target="_blank" rel="noopener">Obscure Holiday Calendar app</a> with emoji-style visuals, reminders, and daily fun facts.
+            In the <a class="inline-link" href="https://www.obscureholidaycalendar.com/app/" target="_blank" rel="noopener">Obscure Holiday Calendar app</a>, National Compliment Day 😊 includes custom visuals, smart reminders, and fast share links.
           </p>
           <div class="share-tools">
             <button class="btn-pill" type="button" id="share-btn" aria-label="Share this holiday">
@@ -1045,7 +874,7 @@
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
     </div>
-    <p>&copy; 2025 Obscure Holiday Calendar</p>
+    <p>&copy; 2026 Obscure Holiday Calendar</p>
   </footer>
   <script>
     (function() {
