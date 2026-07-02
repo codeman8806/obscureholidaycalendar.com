@@ -13,7 +13,10 @@ const SLACK_SIGNING_SECRET = (process.env.SLACK_SIGNING_SECRET || "").trim() || 
 const SLACK_APP_NAME = process.env.SLACK_APP_NAME || "ObscureHolidayCalendar";
 const SLACK_CLIENT_ID = process.env.SLACK_CLIENT_ID || null;
 const SLACK_CLIENT_SECRET = process.env.SLACK_CLIENT_SECRET || null;
-const SLACK_OAUTH_SCOPES = process.env.SLACK_OAUTH_SCOPES || "commands,chat:write,channels:read";
+// Must always match the Bot Token Scopes configured in the Slack app dashboard
+// (OAuth & Permissions). Not env-configurable on purpose: a stale env var here
+// silently desyncs the install URL from the app config and fails Slack review.
+const SLACK_OAUTH_SCOPES = "commands,chat:write,channels:read";
 const SLACK_REDIRECT_URI = process.env.SLACK_REDIRECT_URI || null;
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || null;
