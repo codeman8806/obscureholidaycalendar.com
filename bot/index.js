@@ -67,12 +67,21 @@ const SLACK_BOT_URL = process.env.SLACK_BOT_URL || `${SITE_URL}/slack-bot/`;
 const TOPGG_VOTE_URL = process.env.TOPGG_VOTE_URL || "https://top.gg/bot/1447955404142153789/vote";
 const TOPGG_REVIEW_URL = process.env.TOPGG_REVIEW_URL || "https://top.gg/bot/1447955404142153789#reviews";
 const PREMIUM_ROLE_ID = process.env.PREMIUM_ROLE_ID || null; // Discord Server Subscription role id
+// Point DATA_DIR at a Railway volume (or any persistent mount) so guild
+// config and premium status survive redeploys instead of living only in
+// the git-checked-out working directory.
+const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : __dirname;
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
 const CONFIG_PATH = process.env.GUILD_CONFIG_PATH
-  ? path.resolve(__dirname, process.env.GUILD_CONFIG_PATH)
-  : path.resolve(__dirname, "guild-config.json");
+  ? path.resolve(process.env.GUILD_CONFIG_PATH)
+  : path.join(DATA_DIR, "guild-config.json");
 console.log(`GUILD_CONFIG_PATH env: ${process.env.GUILD_CONFIG_PATH || "(not set)"}`);
 console.log(`Resolved guild config path: ${CONFIG_PATH}`);
-const PREMIUM_PATH = path.resolve(__dirname, "premium.json"); // optional allowlist
+const PREMIUM_PATH = process.env.PREMIUM_CONFIG_PATH
+  ? path.resolve(process.env.PREMIUM_CONFIG_PATH)
+  : path.join(DATA_DIR, "premium.json"); // optional allowlist
 const BOT_OWNER_ID = process.env.BOT_OWNER_ID || null;
 const TOPGG_TOKEN = process.env.TOPGG_TOKEN || null; // for posting stats to top.gg
 const BOTLIST_TOKEN = normalizeApiToken(process.env.BOTLIST_TOKEN); // for posting stats to botlist.me
