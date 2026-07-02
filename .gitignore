@@ -9,3 +9,7 @@ slack-bot/premium.json
 # Build artifacts / data snapshots (not web assets)
 holidays_snapshot_*.json
 
+# Local machine artifacts that must never be published
+syslog
+testfile
+
