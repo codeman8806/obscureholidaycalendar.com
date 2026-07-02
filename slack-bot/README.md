@@ -51,29 +51,36 @@ Admin endpoints:
 - `POST /run-schedule` (basic auth or header `x-admin-token: <SLACK_ADMIN_TOKEN>`) triggers the scheduler once.
 
 ## Slash commands
-- `/today`
-- `/tomorrow`
-- `/upcoming [days]`
-- `/week [days]`
-- `/date MM-DD`
-- `/search <query>`
-- `/random`
-- `/facts [name or MM-DD]`
-- `/setup key=value ...`
-- `/premium`
-- `/upgrade`
-- `/manage`
-- `/help`
-- `/invite`
-- `/vote`
-- `/rate`
-- `/support`
-- `/app`
+All commands are prefixed with `ohc-` to avoid name collisions with other Slack apps
+(required by Slack's app review guidelines). Appending `help` to any command (e.g.
+`/ohc-today help`) returns usage instructions for that command.
 
-## /setup examples
-- `/setup timezone=America/New_York hour=9 promotions=true`
-- `/setup holiday_choice=1 skip_weekends=true`
-- `/setup channel=#general timezone=America/Los_Angeles hour=6 minute=45`
+- `/ohc-today`
+- `/ohc-tomorrow`
+- `/ohc-upcoming [days]`
+- `/ohc-week [days]`
+- `/ohc-date MM-DD`
+- `/ohc-search <query>`
+- `/ohc-random`
+- `/ohc-facts [name or MM-DD]`
+- `/ohc-poll` — post a holiday poll to the configured channel
+- `/ohc-tip` — get an actionable celebration tip
+- `/ohc-setup key=value ...`
+- `/ohc-premium [refresh]`
+- `/ohc-upgrade`
+- `/ohc-manage`
+- `/ohc-help`
+- `/ohc-invite`
+- `/ohc-vote`
+- `/ohc-rate`
+- `/ohc-support`
+- `/ohc-app`
+- `/ohc-schedule test|status|debug`
+
+## /ohc-setup examples
+- `/ohc-setup timezone=America/New_York hour=9 promotions=true`
+- `/ohc-setup holiday_choice=1 skip_weekends=true`
+- `/ohc-setup channel=#general timezone=America/Los_Angeles hour=6 minute=45`
 
 Defaults:
 - timezone: `UTC`

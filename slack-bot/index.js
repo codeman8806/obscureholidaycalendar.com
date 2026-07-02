@@ -372,7 +372,7 @@ async function slackPublishHome(teamId, userId) {
       },
       {
         type: "context",
-        elements: [{ type: "mrkdwn", text: "Need help? Use `/help` anytime." }],
+        elements: [{ type: "mrkdwn", text: "Need help? Use `/ohc-help` anytime." }],
       },
     ],
   };
@@ -633,7 +633,7 @@ async function sendMonthlyHighlightsForTeam(teamId, config) {
       elements: [
         {
           type: "mrkdwn",
-          text: `Powered by <${SITE_URL || "https://obscureholidaycalendar.com"}|Obscure Holiday Calendar> · Use \`/upcoming\` to preview what's ahead.`,
+          text: `Powered by <${SITE_URL || "https://obscureholidaycalendar.com"}|Obscure Holiday Calendar> · Use \`/ohc-upcoming\` to preview what's ahead.`,
         },
       ],
     },
@@ -896,13 +896,44 @@ app.post("/slack/commands", async (req, res) => {
   if (!command) return respond("Missing command.");
 
   const rawCmd = command.replace("/", "");
-  const aliasMap = {
-    ohsearch: "search",
-    ohinvite: "invite",
-    ohapp: "app",
-  };
-  const cmd = aliasMap[rawCmd] || rawCmd;
+  const CMD_PREFIX = "ohc-";
+  const cmd = rawCmd.startsWith(CMD_PREFIX) ? rawCmd.slice(CMD_PREFIX.length) : rawCmd;
   const isPremium = isPremiumTeam(teamId);
+
+  const HELP_TEXT = {
+    today: "/ohc-today [2] — show today's holiday. Add 2 to see the second holiday (Premium).",
+    tomorrow: "/ohc-tomorrow [2] — show tomorrow's holiday (Premium). Add 2 for the second holiday.",
+    week: "/ohc-week [days] — preview the next N days of holidays, 3-30 (Premium). Default 7.",
+    upcoming: "/ohc-upcoming [days] — preview the next N days of holidays, 3-30 (Premium). Default 7.",
+    date: "/ohc-date MM-DD [2] — look up the holiday(s) on a specific date (Premium), e.g. /ohc-date 12-25.",
+    search: "/ohc-search <query> — search 700+ holidays by name (Premium), e.g. /ohc-search pizza.",
+    random: "/ohc-random — get a random holiday from the full calendar (Premium).",
+    facts: "/ohc-facts [name or MM-DD] — get fun facts for a holiday (Premium). Defaults to today.",
+    poll: "/ohc-poll — post a fun holiday poll to your configured channel (Premium).",
+    tip: "/ohc-tip — get an actionable celebration tip for today's holiday (Premium).",
+    setup: "/ohc-setup key=value ... — configure your channel, timezone, and daily post time. Run with no arguments to see all options.",
+    premium: "/ohc-premium [refresh] — show Premium status for this workspace, or refresh it after subscribing.",
+    upgrade: "/ohc-upgrade — get a checkout link to unlock Premium features.",
+    manage: "/ohc-manage — open the Stripe billing portal to manage your subscription.",
+    invite: "/ohc-invite — get the link to install this app in another workspace.",
+    vote: "/ohc-vote — get the link to vote for this app.",
+    rate: "/ohc-rate — get the link to leave a review.",
+    support: "/ohc-support — get the support/contact link.",
+    app: "/ohc-app — get links to the Obscure Holiday Calendar mobile app.",
+    schedule: "/ohc-schedule test|status|debug — test a post, check status, or debug your automated daily posts (Premium).",
+    help: "/ohc-help — list all available commands.",
+  };
+
+  const trimmedText = (text || "").trim();
+  if (trimmedText.toLowerCase() === "help" && cmd !== "help") {
+    return respond(HELP_TEXT[cmd] || `No help available for /ohc-${cmd}.`);
+  }
+
+  // Commands that don't take any arguments: any other input is unrecognized.
+  const NO_ARG_COMMANDS = new Set(["manage", "invite", "vote", "rate", "support", "app", "upgrade"]);
+  if (NO_ARG_COMMANDS.has(cmd) && trimmedText) {
+    return respond(`/ohc-${cmd} doesn't take any arguments. ${HELP_TEXT[cmd] || ""}`);
+  }
 
   if (cmd === "help") {
     if (trigger_id) {
@@ -913,23 +944,26 @@ app.post("/slack/commands", async (req, res) => {
             type: "mrkdwn",
             text: [
               "*Holiday bot commands:*",
-              "• /today",
-              "• /today 2 *(Premium)*",
-              "• /tomorrow *(Premium)*",
-              "• /week [days] *(Premium)*",
-              "• /upcoming [days] *(Premium)*",
-              "• /date MM-DD *(Premium)*",
-              "• /search <query> *(Premium)*",
-              "• /random *(Premium)*",
-              "• /facts [name or MM-DD] *(Premium)*",
-              "• /poll *(Premium)* — post a holiday poll",
-              "• /tip *(Premium)* — get a celebration idea",
-              "• /setup",
-              "• /premium [refresh]",
-              "• /upgrade",
-              "• /manage",
-              "• /invite — or /ohinvite",
-              "• /support, /app",
+              "• /ohc-today",
+              "• /ohc-today 2 *(Premium)*",
+              "• /ohc-tomorrow *(Premium)*",
+              "• /ohc-week [days] *(Premium)*",
+              "• /ohc-upcoming [days] *(Premium)*",
+              "• /ohc-date MM-DD *(Premium)*",
+              "• /ohc-search <query> *(Premium)*",
+              "• /ohc-random *(Premium)*",
+              "• /ohc-facts [name or MM-DD] *(Premium)*",
+              "• /ohc-poll *(Premium)* — post a holiday poll",
+              "• /ohc-tip *(Premium)* — get a celebration idea",
+              "• /ohc-setup",
+              "• /ohc-premium [refresh]",
+              "• /ohc-upgrade",
+              "• /ohc-manage",
+              "• /ohc-invite",
+              "• /ohc-vote, /ohc-rate",
+              "• /ohc-support, /ohc-app",
+              "",
+              "Tip: add \"help\" after any command for details, e.g. /ohc-today help",
             ].join("\n"),
           },
         },
@@ -947,28 +981,28 @@ app.post("/slack/commands", async (req, res) => {
     return respond(
       [
         "Holiday bot commands:",
-        "/today",
-        "/today 2 *(Premium)*: second holiday",
-        "/tomorrow *(Premium)* add 2 for second holiday",
-        "/week [days] *(Premium)*",
-        "/upcoming [days] *(Premium)*",
-        "/date MM-DD *(Premium)* add 2 for second holiday",
-        "/search <query> *(Premium)* — or /ohsearch if /search is taken",
-        "/random *(Premium)*",
-        "/facts [name or MM-DD] *(Premium)*",
-        "/poll *(Premium)* — post a fun holiday poll to your channel",
-        "/tip *(Premium)* — get an actionable celebration idea",
-        "/setup key=value ...",
-        "/premium [refresh]",
-        "/upgrade",
-        "/manage",
-        "/invite — or /ohinvite if /invite is taken",
-        "/vote",
-        "/rate",
-        "/support",
-        "/app — or /ohapp if /app is taken",
+        "/ohc-today",
+        "/ohc-today 2 *(Premium)*: second holiday",
+        "/ohc-tomorrow *(Premium)* add 2 for second holiday",
+        "/ohc-week [days] *(Premium)*",
+        "/ohc-upcoming [days] *(Premium)*",
+        "/ohc-date MM-DD *(Premium)* add 2 for second holiday",
+        "/ohc-search <query> *(Premium)*",
+        "/ohc-random *(Premium)*",
+        "/ohc-facts [name or MM-DD] *(Premium)*",
+        "/ohc-poll *(Premium)* — post a fun holiday poll to your channel",
+        "/ohc-tip *(Premium)* — get an actionable celebration idea",
+        "/ohc-setup key=value ...",
+        "/ohc-premium [refresh]",
+        "/ohc-upgrade",
+        "/ohc-manage",
+        "/ohc-invite",
+        "/ohc-vote",
+        "/ohc-rate",
+        "/ohc-support",
+        "/ohc-app",
         "",
-        "Tip: Use `/setup` to open the guided setup modal.",
+        "Tip: Use `/ohc-setup` to open the guided setup modal. Add \"help\" after any command for details.",
       ].join("\n")
     );
   }
@@ -1003,15 +1037,15 @@ app.post("/slack/commands", async (req, res) => {
       [
         "✨ *Premium* unlocks the full Obscure Holiday experience:",
         "",
-        "• `/poll` — post fun holiday polls to your channel",
-        "• `/tip` — get actionable celebration ideas",
-        "• `/date`, `/search`, `/random`, `/facts`",
-        "• `/tomorrow`, `/week`, `/upcoming`",
+        "• `/ohc-poll` — post fun holiday polls to your channel",
+        "• `/ohc-tip` — get actionable celebration ideas",
+        "• `/ohc-date`, `/ohc-search`, `/ohc-random`, `/ohc-facts`",
+        "• `/ohc-tomorrow`, `/ohc-week`, `/ohc-upcoming`",
         "• Custom schedule: any timezone & post time",
         "• Custom daily intro line on every post",
         "• Monthly highlights recap in your channel",
         "",
-        "Use `/upgrade` to get started.",
+        "Use `/ohc-upgrade` to get started.",
       ].join("\n")
     );
   }
@@ -1025,7 +1059,7 @@ app.post("/slack/commands", async (req, res) => {
       return respond(
         [
           "✨ *Upgrade to Premium* — unlock the full holiday experience:",
-          "• `/poll`, `/tip`, `/facts`, `/search`, `/random`",
+          "• `/ohc-poll`, `/ohc-tip`, `/ohc-facts`, `/ohc-search`, `/ohc-random`",
           "• Custom schedule, timezone, and daily intro",
           "• Monthly highlights recap for your channel",
           "",
@@ -1078,7 +1112,7 @@ app.post("/slack/commands", async (req, res) => {
           "Note: channel name lookup requires channels:read scope. Channel IDs (C...) always work.",
           "",
           "Example:",
-          "/setup channel=#general timezone=America/New_York hour=6 minute=45 holiday_choice=1 skip_weekends=true",
+          "/ohc-setup channel=#general timezone=America/New_York hour=6 minute=45 holiday_choice=1 skip_weekends=true",
           "",
           "Template:",
           "timezone= hour= minute= holiday_choice= skip_weekends= promotions=",
@@ -1153,14 +1187,14 @@ app.post("/slack/commands", async (req, res) => {
     const mainText = formatHoliday(hits[choice], mmdd);
     if (!isPremium && hits.length > 1) {
       return respond(
-        `${mainText}\n\n🔓 _${hits.length - 1} more holiday${hits.length > 2 ? "s" : ""} today — unlock all with Premium. Use \`/upgrade\` to start._`
+        `${mainText}\n\n🔓 _${hits.length - 1} more holiday${hits.length > 2 ? "s" : ""} today — unlock all with Premium. Use \`/ohc-upgrade\` to start._`
       );
     }
     return respond(mainText);
   }
 
   if (cmd === "tomorrow") {
-    if (!isPremium) return respond("🔒 */tomorrow* is a Premium feature — see what's coming up. Use `/upgrade` to unlock.");
+    if (!isPremium) return respond("🔒 */ohc-tomorrow* is a Premium feature — see what's coming up. Use `/ohc-upgrade` to unlock.");
     const d = new Date();
     d.setUTCDate(d.getUTCDate() + 1);
     const mmdd = toMMDD(d);
@@ -1174,7 +1208,7 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "date") {
-    if (!isPremium) return respond("🔒 */date* is a Premium feature — look up any date's holiday. Use `/upgrade` to unlock.");
+    if (!isPremium) return respond("🔒 */ohc-date* is a Premium feature — look up any date's holiday. Use `/ohc-upgrade` to unlock.");
     const mmdd = parseDateInput(text);
     if (!mmdd) return respond("Use MM-DD (e.g., 12-25).");
     const hits = findByDate(mmdd);
@@ -1187,7 +1221,7 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "search") {
-    if (!isPremium) return respond("🔒 */search* is a Premium feature — find any of 700+ holidays by name. Use `/upgrade` to unlock.");
+    if (!isPremium) return respond("🔒 */ohc-search* is a Premium feature — find any of 700+ holidays by name. Use `/ohc-upgrade` to unlock.");
     if (!text) return respond("Provide a search query.");
     const hits = findByName(text).slice(0, 5);
     if (!hits.length) return respond("No matches found.");
@@ -1196,13 +1230,13 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "random") {
-    if (!isPremium) return respond("🔒 */random* is a Premium feature — discover a surprise holiday anytime. Use `/upgrade` to unlock.");
+    if (!isPremium) return respond("🔒 */ohc-random* is a Premium feature — discover a surprise holiday anytime. Use `/ohc-upgrade` to unlock.");
     const pick = allHolidays[Math.floor(Math.random() * allHolidays.length)];
     return respond(formatHoliday(pick));
   }
 
   if (cmd === "facts") {
-    if (!isPremium) return respond("🔒 */facts* is a Premium feature — get fun facts for any holiday. Use `/upgrade` to unlock.");
+    if (!isPremium) return respond("🔒 */ohc-facts* is a Premium feature — get fun facts for any holiday. Use `/ohc-upgrade` to unlock.");
     let holiday = null;
     const parsed = parseDateInput(text || "");
     if (parsed) holiday = findByDate(parsed)[0];
@@ -1216,7 +1250,7 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "poll") {
-    if (!isPremium) return respond("\ud83d\udd12 */poll* is a Premium feature \u2014 post fun holiday polls to your channel. Use `/upgrade` to unlock.");
+    if (!isPremium) return respond("\ud83d\udd12 */ohc-poll* is a Premium feature \u2014 post fun holiday polls to your channel. Use `/ohc-upgrade` to unlock.");
     const mmdd = toMMDD(new Date());
     const hits = findByDate(mmdd);
     if (!hits.length) return respond("No holiday found for today.");
@@ -1230,7 +1264,7 @@ app.post("/slack/commands", async (req, res) => {
     ];
     const question = pollTemplates[Math.floor(Math.random() * pollTemplates.length)];
     const targetChannel = config.channelId || channel_id;
-    if (!targetChannel) return respond("No channel configured. Run `/setup` first.");
+    if (!targetChannel) return respond("No channel configured. Run `/ohc-setup` first.");
     const blocks = [
       {
         type: "section",
@@ -1269,7 +1303,7 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "tip") {
-    if (!isPremium) return respond("\ud83d\udd12 */tip* is a Premium feature \u2014 get fun actionable celebration ideas for any holiday. Use `/upgrade` to unlock.");
+    if (!isPremium) return respond("\ud83d\udd12 */ohc-tip* is a Premium feature \u2014 get fun actionable celebration ideas for any holiday. Use `/ohc-upgrade` to unlock.");
     const mmdd = toMMDD(new Date());
     const hits = findByDate(mmdd);
     if (!hits.length) return respond("No holiday found for today.");
@@ -1327,7 +1361,10 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "week" || cmd === "upcoming") {
-    if (!isPremium) return respond("🔒 */week* is a Premium feature — preview the full week of holidays ahead. Use `/upgrade` to unlock.");
+    if (!isPremium) return respond("🔒 */ohc-week* is a Premium feature — preview the full week of holidays ahead. Use `/ohc-upgrade` to unlock.");
+    if (trimmedText && Number.isNaN(Number(trimmedText))) {
+      return respond(`Invalid input. ${HELP_TEXT[cmd]}`);
+    }
     const days = Math.min(Math.max(Number(text || "7"), 3), 30);
     const list = [];
     const now = new Date();
@@ -1344,7 +1381,7 @@ app.post("/slack/commands", async (req, res) => {
   }
 
   if (cmd === "schedule") {
-    if (!isPremium) return respond("🔒 */schedule* is a Premium feature — test and debug your automated daily posts. Use `/upgrade` to unlock.");
+    if (!isPremium) return respond("🔒 */ohc-schedule* is a Premium feature — test and debug your automated daily posts. Use `/ohc-upgrade` to unlock.");
     const lower = (text || "").toLowerCase();
     if (lower.includes("status")) {
       const parts = getLocalParts(config.timezone || DEFAULT_TIMEZONE);
@@ -1398,10 +1435,10 @@ app.post("/slack/commands", async (req, res) => {
       );
     }
     if (!lower.includes("test")) {
-      return respond("Use `/schedule test` to post today's holiday right now, `/schedule status`, or `/schedule debug`.");
+      return respond("Use `/ohc-schedule test` to post today's holiday right now, `/ohc-schedule status`, or `/ohc-schedule debug`.");
     }
     if (!config.channelId) {
-      return respond("No channel is configured. Run /setup first.");
+      return respond("No channel is configured. Run /ohc-setup first.");
     }
     const mmdd = toMMDD(new Date());
     const hits = findByDate(mmdd);
@@ -1463,7 +1500,7 @@ app.post("/slack/interactions", async (req, res) => {
             { id: userId, teamId },
             [
               "✨ *Upgrade to Premium* — unlock the full holiday experience:",
-              "• `/poll`, `/tip`, `/facts`, `/search`, `/random`",
+              "• `/ohc-poll`, `/ohc-tip`, `/ohc-facts`, `/ohc-search`, `/ohc-random`",
               "• Custom schedule, timezone, and daily intro",
               "• Monthly highlights recap for your channel",
               "",
@@ -1573,9 +1610,9 @@ app.post("/slack/events", async (req, res) => {
               `\ud83d\udc4b *Welcome to Obscure Holiday Calendar!*`,
               "",
               "Here's how to get started:",
-              "1\ufe0f\u20e3 Run `/setup` to pick a channel and post time",
-              "2\ufe0f\u20e3 Run `/today` to see what's happening right now",
-              "3\ufe0f\u20e3 Run `/upgrade` to unlock Premium features",
+              "1\ufe0f\u20e3 Run `/ohc-setup` to pick a channel and post time",
+              "2\ufe0f\u20e3 Run `/ohc-today` to see what's happening right now",
+              "3\ufe0f\u20e3 Run `/ohc-upgrade` to unlock Premium features",
               "",
               "\ud83d\udca1 Tip: Open the App Home tab for quick controls.",
             ].join("\n")
