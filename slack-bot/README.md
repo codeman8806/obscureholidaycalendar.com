@@ -1,4 +1,4 @@
-# Obscure Holiday Slack Bot
+# Obscure Holiday Calendar — Bot for Slack
 
 ## Setup (Railway or any Node 18+ host)
 
