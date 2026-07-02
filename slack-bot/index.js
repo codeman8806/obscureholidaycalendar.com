@@ -417,6 +417,10 @@ function buildSetupModal(config, isPremium, metadata) {
           type: "conversations_select",
           action_id: "channel",
           default_to_current_conversation: true,
+          filter: {
+            include: ["public", "private"],
+            exclude_bot_users: true,
+          },
         },
       },
       {
