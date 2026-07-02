@@ -1049,6 +1049,7 @@ app.post("/slack/commands", async (req, res) => {
         "• Custom daily intro line on every post",
         "• Monthly highlights recap in your channel",
         "",
+        "💵 $0.99 for your first month, then $3.99/month. Cancel anytime with `/ohc-manage`.",
         "Use `/ohc-upgrade` to get started.",
       ].join("\n")
     );
