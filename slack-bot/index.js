@@ -526,7 +526,7 @@ function buildSetupModal(config, isPremium, metadata) {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: "*Free vs Premium*\n• Free: /today + daily posts (UTC)\n• Premium: /date, /search, /random, /facts, /poll, /tip, /tomorrow, /upcoming, /week + custom schedule + daily intro + monthly recap",
+          text: "*Free vs Premium*\n• Free: /ohc-today + daily posts (UTC)\n• Premium: /ohc-date, /ohc-search, /ohc-random, /ohc-facts, /ohc-poll, /ohc-tip, /ohc-tomorrow, /ohc-upcoming, /ohc-week + custom schedule + daily intro + monthly recap",
         },
       },
     ],
@@ -1564,7 +1564,7 @@ app.post("/slack/interactions", async (req, res) => {
     writeJsonSafe(CONFIG_PATH, workspaceConfig);
     res.json({});
     if (channelId && userId) {
-      slackPostEphemeral(teamId, channelId, userId, "✅ Schedule saved. You can update anytime with /setup.")
+      slackPostEphemeral(teamId, channelId, userId, "✅ Schedule saved. You can update anytime with /ohc-setup.")
         .catch((err) => console.warn("Slack setup confirmation failed:", err.message));
     }
     return;
