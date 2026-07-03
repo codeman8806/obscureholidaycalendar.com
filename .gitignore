@@ -5,6 +5,8 @@ bot/node_modules/
 slack-bot/workspace-tokens.json
 slack-bot/workspace-config.json
 slack-bot/premium.json
+bot/guild-config.json
+bot/premium.json
 
 # Build artifacts / data snapshots (not web assets)
 holidays_snapshot_*.json
