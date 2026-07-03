@@ -2237,7 +2237,6 @@ async function handleToday(interaction) {
   if (!premium) {
     const hiddenCount = Math.max(0, filtered.length - 1);
     if (hiddenCount > 0 && canShowPremiumPrompt(interaction.guild.id)) {
-      const upgradeUrl = await getUpgradeUrlForInteraction(interaction);
       markPremiumPrompt(interaction.guild.id);
       recordEvent(config, "premium_prompt_shown", { guildId: interaction.guild.id, source: "today_followup", hiddenCount });
       saveGuildConfig();
@@ -3584,25 +3583,12 @@ async function handlePremiumStatus(interaction) {
   }
 
   // Not premium: offer upgrade
-  let upgradeUrl = SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/";
-  if (stripeClient && STRIPE_PRICE_ID_STANDARD && STRIPE_PRICE_ID_INTRO) {
-    try {
-      const session = await createPremiumCheckoutSession({
-        guildId: interaction.guildId,
-        userId: interaction.user.id,
-      });
-      if (session.url) upgradeUrl = session.url;
-    } catch (err) {
-      console.error("Stripe checkout error (premium status):", err);
-    }
-  }
-
   const lines = [
-    "✨ Upgrade to Premium — free for 7 days, then $3.99/month.",
+    "✨ Upgrade to Premium — $3.99/month.",
     "Give your server a richer holiday experience with:",
     ...benefits,
     "",
-    "No commitment needed. Cancel anytime.",
+    "Try it free for 7 days, or skip the trial and pay $0.99 for your first month. Cancel anytime.",
   ];
 
   return interaction.reply({
@@ -3811,14 +3797,13 @@ async function handleUpgrade(interaction) {
       content: [
         "✨ Premium checkout is ready.",
         "Unlock multi-channel daily posts, custom timezone/hour scheduling, category filters, analytics, streak roles, and all premium commands.",
-        "Start free for 7 days — then just $3.99/month. Cancel anytime.",
-        `Open checkout: ${session.url}`,
+        "Two ways to start: try it free for 7 days, or skip the trial and pay $0.99 for your first month right now. Either way it's $3.99/month after. Cancel anytime.",
       ].join("\n"),
       flags: MessageFlags.Ephemeral,
       components: [
         new ActionRowBuilder().addComponents(
           new ButtonBuilder().setCustomId("start_trial").setLabel("Start 7-day trial").setStyle(ButtonStyle.Success),
-          new ButtonBuilder().setLabel("Open Checkout").setStyle(ButtonStyle.Link).setURL(session.url)
+          new ButtonBuilder().setLabel("Skip trial — $0.99 first month").setStyle(ButtonStyle.Link).setURL(session.url)
         ),
       ],
     });
