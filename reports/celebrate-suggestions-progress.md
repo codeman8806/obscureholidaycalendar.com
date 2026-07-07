@@ -1,0 +1,521 @@
+# Celebrate-suggestions cleanup progress
+
+Tracks the sitewide replacement of generic, templated "Ways to celebrate" filler
+(and matching FAQ/JSON-LD answers) with topic-specific suggestions grounded in each
+holiday's actual facts. Started 2026-07-07. See commit messages for per-batch detail.
+
+**Status: 70 / 508 done.**
+
+## Done (70)
+
+- [x] absurdity-day
+- [x] according-to-hoyle-day
+- [x] all-or-nothing-day
+- [x] american-beer-day
+- [x] american-football-day
+- [x] american-touch-tag-day
+- [x] angel-food-cake-day
+- [x] answer-the-telephone-like-buddy-the-elf-day
+- [x] antarctica-day
+- [x] april-fools-day
+- [x] ask-a-stupid-question-day
+- [x] bake-cookies-day
+- [x] ballpoint-pen-day
+- [x] barbershop-quartet-day
+- [x] barbie-and-barney-backlash-day
+- [x] bathtub-day
+- [x] be-a-millionaire-day
+- [x] be-an-angel-day
+- [x] be-bald-and-be-free-day
+- [x] be-late-for-something-day
+- [x] beaujolais-nouveau-day
+- [x] best-friends-day
+- [x] beverage-day
+- [x] bicycle-day
+- [x] big-wind-day
+- [x] bill-of-rights-day
+- [x] biscotti-day
+- [x] bittersweet-chocolate-with-almonds-day
+- [x] blah-blah-blah-day
+- [x] blueberry-cheesecake-day
+- [x] brandied-fruit-day
+- [x] bring-flowers-to-someone-day
+- [x] brisket-day
+- [x] brothers-day
+- [x] bulldogs-are-beautiful-day
+- [x] butterscotch-pudding-day
+- [x] buy-a-musical-instrument-day
+- [x] carousel-day
+- [x] carve-a-pumpkin-day
+- [x] caviar-day
+- [x] celebrate-your-unique-talent-day
+- [x] cellophane-tape-day
+- [x] checkers-day
+- [x] cheer-up-the-lonely-day
+- [x] cheesecake-day
+- [x] cherries-jubilee-day
+- [x] chewing-gum-day
+- [x] chocolate-covered-raisin-day
+- [x] chocolate-milkshake-day
+- [x] christmas-card-day
+- [x] cinco-de-mayo
+- [x] clean-out-your-refrigerator-day
+- [x] clean-up-your-room-day
+- [x] cliché-day
+- [x] coconut-cream-pie-day
+- [x] coloring-book-day
+- [x] common-sense-day
+- [x] cookbook-launch-day
+- [x] corn-fritters-day
+- [x] count-your-buttons-day
+- [x] cousins-day
+- [x] creative-ice-cream-flavors-day
+- [x] dance-like-a-chicken-day
+- [x] day-of-the-mushroom
+- [x] deep-dish-pizza-day
+- [x] dessert-day
+- [x] deviled-egg-day
+- [x] dictionary-day
+- [x] dinosaur-day
+- [x] do-something-nice-day
+
+## Remaining (438)
+
+- [ ] dolphin-day
+- [ ] donald-duck-day
+- [ ] draw-a-picture-of-a-bird-day
+- [ ] drive-in-movie-day
+- [ ] eat-a-red-apple-day
+- [ ] eat-an-extra-dessert-day
+- [ ] eat-outside-day
+- [ ] electronic-greetings-day
+- [ ] embrace-your-geekness-day
+- [ ] evaluate-your-life-day
+- [ ] feral-cat-day
+- [ ] fibonacci-day
+- [ ] fight-procrastination-day
+- [ ] find-a-rainbow-day
+- [ ] fire-day
+- [ ] first-macy-s-christmas-parade-day
+- [ ] forget-me-not-day
+- [ ] fortune-cookie-day
+- [ ] french-fries-day
+- [ ] fresh-veggies-day
+- [ ] frog-jumping-day
+- [ ] german-american-day
+- [ ] get-organized-day
+- [ ] gingerbread-house-day
+- [ ] give-something-away-day
+- [ ] go-fishing-day
+- [ ] go-for-broke-day
+- [ ] go-skateboarding-day
+- [ ] go-to-an-art-museum-day
+- [ ] grab-some-nuts-day
+- [ ] gumbo-day
+- [ ] gummy-worm-day
+- [ ] guy-fawkes-day
+- [ ] haiku-poetry-day
+- [ ] halloween
+- [ ] happiness-happens-day
+- [ ] happy-hour-day
+- [ ] have-a-bad-day-day
+- [ ] have-a-bagel-day
+- [ ] have-a-party-with-your-bear-day
+- [ ] hermit-day
+- [ ] hobbit-day
+- [ ] homemade-bread-day
+- [ ] hug-a-bear-day
+- [ ] hug-holiday-day
+- [ ] hug-your-cat-day
+- [ ] human-rights-day
+- [ ] i-need-a-patch-for-that-day
+- [ ] ice-cream-cone-day
+- [ ] indian-pudding-day
+- [ ] international-civil-aviation-day
+- [ ] international-coffee-day
+- [ ] international-day-of-happiness
+- [ ] international-fairy-day
+- [ ] international-human-solidarity-day
+- [ ] international-joke-day
+- [ ] international-left-handers-day
+- [ ] international-mountain-day
+- [ ] international-ninja-day
+- [ ] international-no-diet-day
+- [ ] international-radiography-day
+- [ ] international-respect-for-chickens-day
+- [ ] international-sloth-day
+- [ ] international-sushi-day
+- [ ] international-talk-like-a-pirate-day
+- [ ] international-tongue-twister-day
+- [ ] its-my-party-day
+- [ ] just-because-day
+- [ ] kiss-and-make-up-day
+- [ ] krampusnacht
+- [ ] lamington-day
+- [ ] leave-the-office-early-day
+- [ ] lei-day
+- [ ] leif-erikson-day
+- [ ] let-it-go-day
+- [ ] lima-bean-respect-day
+- [ ] lizard-appreciation-day
+- [ ] lollipop-day
+- [ ] look-alike-day
+- [ ] look-for-circles-day
+- [ ] look-up-at-the-sky-day
+- [ ] loomis-day
+- [ ] lost-sock-memorial-day
+- [ ] love-a-tree-day
+- [ ] lucky-penny-day
+- [ ] macaroon-day
+- [ ] mad-hatter-day
+- [ ] make-a-gift-day
+- [ ] make-a-hat-day
+- [ ] make-life-beautiful-day
+- [ ] may-day
+- [ ] may-ray-day
+- [ ] mean-girls-day
+- [ ] meteor-watch-day
+- [ ] mickey-mouse-day
+- [ ] middle-childs-day
+- [ ] milk-chocolate-day
+- [ ] mincemeat-day
+- [ ] miniature-golf-day
+- [ ] moldy-cheese-day
+- [ ] monkey-day
+- [ ] moon-day
+- [ ] morse-code-day
+- [ ] mushroom-day
+- [ ] name-your-poison-day
+- [ ] name-yourself-day
+- [ ] national-alien-abduction-day
+- [ ] national-ampersand-day
+- [ ] national-animal-crackers-day
+- [ ] national-apple-betty-day
+- [ ] national-apple-dumpling-day
+- [ ] national-aunt-and-uncle-day
+- [ ] national-authors-day
+- [ ] national-avocado-day
+- [ ] national-bad-poetry-day
+- [ ] national-baklava-day
+- [ ] national-banana-split-day
+- [ ] national-beach-day
+- [ ] national-beer-day
+- [ ] national-black-cat-appreciation-day
+- [ ] national-black-cat-day
+- [ ] national-blueberry-popsicle-day
+- [ ] national-bologna-day
+- [ ] national-book-lovers-day
+- [ ] national-bourbon-day
+- [ ] national-bow-tie-day
+- [ ] national-brownie-day
+- [ ] national-cake-day
+- [ ] national-cake-decorating-day
+- [ ] national-camera-day
+- [ ] national-candy-corn-day
+- [ ] national-candy-day
+- [ ] national-cappuccino-day
+- [ ] national-caps-lock-day
+- [ ] national-cat-day
+- [ ] national-catfish-day
+- [ ] national-cbd-day
+- [ ] national-cheese-pizza-day
+- [ ] national-cheeseburger-day
+- [ ] national-cheesecake-day
+- [ ] national-cherries-jubilee-day
+- [ ] national-cherry-popsicle-day
+- [ ] national-chocolate-chip-cookie-day
+- [ ] national-chocolate-chip-day
+- [ ] national-chocolate-covered-anything-day
+- [ ] national-chocolate-covered-pretzel-day
+- [ ] national-chocolate-cupcake-day
+- [ ] national-chocolate-milk-day
+- [ ] national-chocolate-milkshake-day
+- [ ] national-chocolate-pecan-pie-day
+- [ ] national-chocolate-pudding-day
+- [ ] national-chop-suey-day
+- [ ] national-cinnamon-crescent-day
+- [ ] national-cocoa-day
+- [ ] national-coconut-day
+- [ ] national-coffee-day
+- [ ] national-coffee-ice-cream-day
+- [ ] national-comic-book-day
+- [ ] national-cookie-day
+- [ ] national-corn-fritters-day
+- [ ] national-corn-on-the-cob-day
+- [ ] national-corned-beef-hash-day
+- [ ] national-cosmopolitan-day
+- [ ] national-crayon-day
+- [ ] national-cream-filled-donut-day
+- [ ] national-creamsicle-day
+- [ ] national-crème-brûlée-day
+- [ ] national-crème-de-menthe-day
+- [ ] national-cubicle-day
+- [ ] national-cupcake-day
+- [ ] national-daiquiri-day
+- [ ] national-date-nut-bread-day
+- [ ] national-daylight-appreciation-day
+- [ ] national-deep-fried-clams-day
+- [ ] national-ding-a-ling-day
+- [ ] national-dog-day
+- [ ] national-doughnut-day
+- [ ] national-drink-beer-day
+- [ ] national-eat-a-hoagie-day
+- [ ] national-eat-your-vegetables-day
+- [ ] national-egg-day
+- [ ] national-emma-m-nutt-day
+- [ ] national-espresso-day
+- [ ] national-fast-food-day
+- [ ] national-ferret-day
+- [ ] national-filet-mignon-day
+- [ ] national-food-day
+- [ ] national-french-toast-day
+- [ ] national-fried-scallops-day
+- [ ] national-fudge-day
+- [ ] national-garlic-day
+- [ ] national-gingerbread-cookie-day
+- [ ] national-gingerbread-day
+- [ ] national-girlfriends-day
+- [ ] national-golf-lovers-day
+- [ ] national-greasy-foods-day
+- [ ] national-great-american-pot-pie-day
+- [ ] national-grilled-cheese-sandwich-day
+- [ ] national-grouch-day
+- [ ] national-guacamole-day
+- [ ] national-hamburger-day
+- [ ] national-hammock-day
+- [ ] national-high-five-day
+- [ ] national-homemade-cookies-day
+- [ ] national-hot-dog-day
+- [ ] national-hot-mulled-cider-day
+- [ ] national-ice-cream-sandwich-day
+- [ ] national-ice-cream-soda-day
+- [ ] national-iced-tea-day
+- [ ] national-it-professionals-day
+- [ ] national-joe-day
+- [ ] national-jukebox-day
+- [ ] national-julienne-fries-day
+- [ ] national-junk-food-day
+- [ ] national-kool-aid-day
+- [ ] national-lasagna-day
+- [ ] national-laundry-day
+- [ ] national-lazy-day
+- [ ] national-leathercraft-day
+- [ ] national-letter-writing-day
+- [ ] national-limerick-day
+- [ ] national-llama-awareness-day
+- [ ] national-mac-and-cheese-day
+- [ ] national-macadamia-nut-day
+- [ ] national-make-lunch-count-day
+- [ ] national-make-your-bed-day
+- [ ] national-maple-syrup-day
+- [ ] national-matchmaker-day
+- [ ] national-milk-chocolate-day
+- [ ] national-mint-julep-day
+- [ ] national-mm-day
+- [ ] national-mole-day
+- [ ] national-moonshine-day
+- [ ] national-moscato-day
+- [ ] national-mousse-day
+- [ ] national-mutt-day
+- [ ] national-nachos-day
+- [ ] national-name-your-car-day
+- [ ] national-new-hampshire-day
+- [ ] national-oatmeal-cookie-day
+- [ ] national-onion-rings-day
+- [ ] national-ootd-day
+- [ ] national-pancake-day
+- [ ] national-panda-day
+- [ ] national-paper-airplane-day
+- [ ] national-parfait-day
+- [ ] national-pasta-day
+- [ ] national-pastry-day
+- [ ] national-peach-pie-day
+- [ ] national-peanut-butter-and-jelly-day
+- [ ] national-peanut-butter-cookie-day
+- [ ] national-peanut-butter-fudge-day
+- [ ] national-pecan-cookie-day
+- [ ] national-pecan-torte-day
+- [ ] national-pepperoni-pizza-day
+- [ ] national-pet-day
+- [ ] national-pickle-day
+- [ ] national-pie-day-12-01
+- [ ] national-pierce-your-ears-day
+- [ ] national-pizza-with-the-works-except-anchovies-day
+- [ ] national-piña-colada-day
+- [ ] national-play-doh-day
+- [ ] national-potato-day
+- [ ] national-pretzel-day
+- [ ] national-prime-rib-day
+- [ ] national-pumpkin-cheesecake-day
+- [ ] national-pumpkin-day
+- [ ] national-quesadilla-day
+- [ ] national-radio-day
+- [ ] national-raspberries-n-cream-day
+- [ ] national-raspberry-bombe-day
+- [ ] national-raspberry-cake-day
+- [ ] national-raspberry-cream-pie-day
+- [ ] national-relaxation-day
+- [ ] national-rice-krispie-treat-day
+- [ ] national-roof-over-your-head-day
+- [ ] national-root-beer-float-day
+- [ ] national-rotisserie-chicken-day
+- [ ] national-salami-day
+- [ ] national-sandwich-day
+- [ ] national-sardines-day
+- [ ] national-say-something-nice-day
+- [ ] national-scavenger-hunt-day
+- [ ] national-scrabble-day
+- [ ] national-siblings-day
+- [ ] national-sisters-day
+- [ ] national-sloppy-joe-day
+- [ ] national-soft-ice-cream-day
+- [ ] national-sour-candy-day
+- [ ] national-spicy-hermit-cookie-day
+- [ ] national-spumoni-day
+- [ ] national-strawberry-parfait-day
+- [ ] national-strawberry-rhubarb-pie-day
+- [ ] national-strawberry-shortcake-day
+- [ ] national-sundae-day
+- [ ] national-sunglasses-day
+- [ ] national-taco-day
+- [ ] national-tapioca-day
+- [ ] national-tea-day
+- [ ] national-techies-day
+- [ ] national-teddy-bear-day
+- [ ] national-tell-a-joke-day
+- [ ] national-tequila-day
+- [ ] national-train-your-brain-day
+- [ ] national-tv-dinner-day
+- [ ] national-two-different-colored-shoes-day
+- [ ] national-ugly-sweater-day
+- [ ] national-underwear-day
+- [ ] national-vanilla-milkshake-day
+- [ ] national-watch-day
+- [ ] national-watermelon-day
+- [ ] national-weed-your-garden-day
+- [ ] national-welsh-rarebit-day
+- [ ] national-wine-and-cheese-day
+- [ ] national-wine-day
+- [ ] national-yo-yo-day
+- [ ] national-zucchini-bread-day
+- [ ] nature-photography-day
+- [ ] new-beers-eve
+- [ ] new-years-eve
+- [ ] no-beard-day
+- [ ] no-dirty-dishes-day
+- [ ] no-housework-day
+- [ ] no-news-is-good-news-day
+- [ ] no-rhyme-or-reason-day
+- [ ] no-socks-day
+- [ ] nobel-prize-day
+- [ ] nutty-fudge-day
+- [ ] one-cent-day
+- [ ] orange-blossom-day
+- [ ] origami-day
+- [ ] oyster-day
+- [ ] paperclip-day
+- [ ] paranormal-day
+- [ ] pardon-day
+- [ ] particularly-preposterous-packaging-day
+- [ ] paul-bunyan-day
+- [ ] peach-ice-cream-day
+- [ ] piano-day
+- [ ] pick-strawberries-day
+- [ ] pierogi-day
+- [ ] pig-in-a-blanket-day
+- [ ] poultry-day
+- [ ] presidential-joke-day
+- [ ] pretend-to-be-a-time-traveler-day
+- [ ] push-button-phone-day
+- [ ] put-a-pillow-on-your-fridge-day
+- [ ] put-on-your-own-shoes-day
+- [ ] race-your-mouse-around-the-icons-day
+- [ ] rain-day
+- [ ] random-acts-of-light-day
+- [ ] rat-catchers-day
+- [ ] red-planet-day
+- [ ] repeat-day
+- [ ] rice-pudding-day
+- [ ] ride-the-wind-day
+- [ ] roast-chestnuts-day
+- [ ] roast-leg-of-lamb-day
+- [ ] rubber-eraser-day
+- [ ] rum-day
+- [ ] sadie-hawkins-day
+- [ ] saint-catherines-day
+- [ ] saint-cecilias-day
+- [ ] saint-nicholas-day
+- [ ] sausage-pizza-day
+- [ ] sauvignon-blanc-day
+- [ ] save-your-hearing-day
+- [ ] saxophone-day
+- [ ] seafood-bisque-day
+- [ ] serendipity-day
+- [ ] shrimp-day
+- [ ] shrimp-scampi-day
+- [ ] skyscraper-day
+- [ ] smart-is-cool-day
+- [ ] smile-power-day
+- [ ] smoke-and-mirrors-day
+- [ ] smores-day
+- [ ] something-on-a-stick-day
+- [ ] sourest-day
+- [ ] special-education-day
+- [ ] spicy-guacamole-day
+- [ ] sponge-cake-day
+- [ ] spumoni-day
+- [ ] square-dance-day
+- [ ] st-patricks-day
+- [ ] stay-home-because-youre-well-day
+- [ ] stick-out-your-tongue-day
+- [ ] string-cheese-day
+- [ ] submarine-day
+- [ ] sunscreen-day
+- [ ] superhero-day
+- [ ] superman-day
+- [ ] supernatural-day
+- [ ] swim-a-lap-day
+- [ ] take-your-houseplant-for-a-walk-day
+- [ ] talk-like-yoda-day
+- [ ] tartan-day
+- [ ] teddy-bear-picnic-day
+- [ ] tell-a-lie-day
+- [ ] thrift-shop-day
+- [ ] toasted-marshmallow-day
+- [ ] today
+- [ ] towel-day
+- [ ] tuba-day
+- [ ] tutankhamun-s-tomb-discovery-day
+- [ ] tv-dinner-day
+- [ ] tv-talk-show-host-day
+- [ ] twilight-zone-day
+- [ ] unicorn-day
+- [ ] vanilla-cupcake-day
+- [ ] vanilla-ice-cream-day
+- [ ] vcr-day
+- [ ] vesuvius-day
+- [ ] violin-day
+- [ ] virtual-vacation-day
+- [ ] visit-your-relatives-day
+- [ ] wear-brown-shoes-day
+- [ ] wear-purple-for-peace-day
+- [ ] wear-something-gaudy-day
+- [ ] wear-your-pajamas-to-work-day
+- [ ] wiggle-your-toes-day
+- [ ] wild-foods-day
+- [ ] winter-solstice
+- [ ] wonderful-weirdos-day
+- [ ] work-like-a-dog-day
+- [ ] world-baking-day
+- [ ] world-cocktail-day
+- [ ] world-emoji-day
+- [ ] world-frog-day
+- [ ] world-goth-day
+- [ ] world-penguin-day
+- [ ] world-plant-a-vegetable-garden-day
+- [ ] world-rat-day
+- [ ] world-sauntering-day
+- [ ] world-turtle-day
+- [ ] wright-brother-day
+- [ ] zipper-day
+- [ ] zoo-lovers-day
