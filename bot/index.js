@@ -1780,36 +1780,62 @@ function premiumValueLines(feature) {
     "Premium also includes: custom timezone & hour, streak roles, per-channel filters, analytics, and more.",
   ];
   const byFeature = {
-    "/date": ["See exactly which holidays fall on any date — great for planning themed posts and events ahead of time."],
-    "/search": ["Search the full holiday library by keyword — find the perfect holiday for any mood, theme, or occasion."],
-    "/random": ["Surprise your community with a random holiday pick — a great way to keep daily posts feeling fresh."],
-    "/facts": ["Unlock all fun facts for any holiday — gives your community real conversation starters every day."],
     "/tomorrow": ["Preview tomorrow's holiday today — plan ahead and post a fun sneak-peek for your community."],
     "/upcoming": ["See the next 30 days of holidays at a glance — perfect for content calendars and event planning."],
-    "/week": ["Get a 7-day holiday digest — see the full week ahead and schedule posts around what resonates."],
     "/analytics": ["See which holidays and posting hours earn the most reactions in your server — optimize automatically."],
     "/lore": ["Add server anniversaries, custom holidays, and recurring in-jokes to personalize every daily post."],
     "/setcategories": ["Choose exactly which holiday categories your server sees — food, weird, tech, global, and more."],
     "/excludesensitive": ["Enable Work-Safe Mode to automatically filter sensitive themes out of your daily posts."],
   };
-  return [...(byFeature[feature] || ["Unlock /date, /search, /random, /facts, advanced scheduling, filters, analytics, and more."]), ...common];
+  return [...(byFeature[feature] || ["Unlock advanced scheduling, filters, analytics, and more."]), ...common];
 }
 
 async function replyPremiumOnly(interaction, { feature, previewLines = [] } = {}) {
-  const upgradeUrl = await getUpgradeUrlForInteraction(interaction);
-  const valueLines = premiumValueLines(feature);
   const config = interaction.guildId ? getGuildConfig(interaction.guildId) : null;
+  // Only server admins (Manage Server) can actually start a trial or upgrade —
+  // a trial/upgrade button shown to anyone else just dead-ends on "Admins
+  // only" when clicked, wasting the impression. Show them a lighter nudge
+  // toward whoever can act instead.
+  const isAdmin = interaction.guildId
+    ? !!interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild)
+    : false;
   if (config && interaction.guildId) {
-    recordEvent(config, "premium_prompt_shown", { guildId: interaction.guildId, source: "premium_only_reply", feature: feature || "unknown" });
+    recordEvent(config, "premium_prompt_shown", {
+      guildId: interaction.guildId,
+      source: "premium_only_reply",
+      feature: feature || "unknown",
+      audience: isAdmin ? "admin" : "member",
+    });
     saveGuildConfig();
   }
   const featureLabel = feature || "This command";
+  const headline = previewLines.length
+    ? `🔒 ${featureLabel} is a Premium feature. Here's a preview: ${previewLines.join(" • ")}`
+    : `🔒 ${featureLabel} is a Premium feature.`;
+
+  if (!isAdmin) {
+    return interaction.reply({
+      content: [
+        headline,
+        "Ask a server admin (Manage Server permission) to run /trial or /upgrade to unlock it for everyone here.",
+      ].join("\n"),
+      flags: MessageFlags.Ephemeral,
+      components: [
+        new ActionRowBuilder().addComponents(
+          new ButtonBuilder()
+            .setLabel("Learn More")
+            .setStyle(ButtonStyle.Link)
+            .setURL(SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/")
+        ),
+      ],
+    });
+  }
+
+  const valueLines = premiumValueLines(feature);
   const lines = [
-    previewLines.length
-      ? `🔒 ${featureLabel} is a Premium feature. Here's a preview: ${previewLines.join(" • ")}`
-      : `🔒 ${featureLabel} is a Premium feature.`,
+    headline,
     ...valueLines,
-    "Start a free 7-day trial — no commitment — then just $3.99/month. Cancel anytime.",
+    "Start a free 7-day trial — no card required — then just $3.99/month if you keep it. Cancel anytime.",
   ].filter(Boolean);
 
   return interaction.reply({
@@ -2095,6 +2121,34 @@ async function maybeSendActivationNudgeForGuild(guildId, now = Date.now()) {
   }
 }
 
+// guildConfig is only created via the `guildCreate` event or a lazy
+// getGuildConfig() call from a command interaction. Guilds that installed the
+// bot but never triggered either of those (e.g. their config entry was lost
+// to a redeploy without a persistent DATA_DIR, per the README's own warning)
+// have NO entry in guildConfig at all — invisible to sweepActivationNudges,
+// scheduleDailyPost, and every analytics/funnel command, even though Discord
+// still shows the bot as installed there. This reconciles guildConfig against
+// the live guild list (the ground truth) so nothing installed stays invisible.
+function reconcileGuildConfigsFromLiveGuilds() {
+  let created = 0;
+  for (const guild of client.guilds.cache.values()) {
+    if (guildConfig[guild.id]) continue;
+    const config = getGuildConfig(guild.id);
+    const joinedAt = guild.joinedAt ? guild.joinedAt.getTime() : Date.now();
+    config.firstSeenAt = joinedAt;
+    config.activationReminderDueAt = joinedAt + ACTIVATION_REMINDER_DELAY_MS;
+    config.activationReminderSentAt = 0;
+    config.activationNudgeCount = 0;
+    recordEvent(config, "guild_config_backfilled", { guildId: guild.id, joinedAt });
+    created += 1;
+  }
+  if (created) {
+    console.log(`Backfilled ${created} guildConfig entr${created === 1 ? "y" : "ies"} from the live guild list.`);
+    saveGuildConfig();
+  }
+  return created;
+}
+
 async function sweepActivationNudges() {
   const now = Date.now();
   for (const guildId of Object.keys(guildConfig)) {
@@ -2243,8 +2297,8 @@ async function handleToday(interaction) {
       await interaction.followUp({
         content: [
           `🔓 ${hiddenCount} more holiday${hiddenCount === 1 ? "" : "s"} happening today that you're missing.`,
-          "Premium unlocks the full daily set + /date, /search, /random, /facts, custom scheduling, filters, and analytics.",
-          "Start free for 7 days — then just $3.99/month. Cancel anytime.",
+          "Premium unlocks the full daily set + custom scheduling, category filters, analytics, and streak rewards.",
+          "Start free for 7 days — no card required — then just $3.99/month if you keep it. Cancel anytime.",
         ].join("\n"),
         flags: MessageFlags.Ephemeral,
         components: [
@@ -2291,19 +2345,19 @@ async function handleHelp(interaction) {
       "Basics (free)",
       "/today — today’s holiday",
       "/fact [name|MM-DD] — one fun fact (free)",
-      "/streak — show the server streak",
-      "/categories — list holiday categories + server settings",
-      "",
-      "Premium content",
       "/date MM-DD — holiday on a date",
       "/search <query> — find matching holidays",
       "/random — surprise me",
       "/facts [name|MM-DD] — fun facts (multiple)",
+      "/week [days] — 7-day digest (3–14)",
+      "/streak — show the server streak",
+      "/categories — list holiday categories + server settings",
+      "",
+      "Premium content",
       "/poll [name|MM-DD] — auto-post a community poll for a holiday",
       "/tip [name|MM-DD] — get a fun, actionable way to celebrate a holiday",
       "/tomorrow — tomorrow’s holiday",
       "/upcoming [days] — upcoming holidays (max 30)",
-      "/week [days] — 7-day digest (3–14)",
       "/setcategories <list|all> — allow categories (admin)",
       "/excludesensitive [true|false] — hide sensitive holidays (admin)",
       "/trial — check 7-day trial status (admin)",
@@ -2373,16 +2427,6 @@ async function handleRate(interaction) {
 }
 
 async function handleDate(interaction) {
-  if (!isPremium(interaction.guild, interaction.member)) {
-    const input = interaction.options.getString("date", true);
-    const parsed = parseDate(input);
-    const previewLines = [];
-    if (parsed) {
-      const hits = findByDate(parsed);
-      if (hits.length) previewLines.push(`${prettyDate(parsed)}: ${hits[0].name}`);
-    }
-    return replyPremiumOnly(interaction, { feature: "/date", previewLines });
-  }
   const input = interaction.options.getString("date", true);
   const parsed = parseDate(input);
   if (!parsed) return interaction.reply({ content: "Please provide a date as MM-DD or MM/DD (example: 07-04).", flags: MessageFlags.Ephemeral });
@@ -2393,12 +2437,6 @@ async function handleDate(interaction) {
 }
 
 async function handleSearch(interaction) {
-  if (!isPremium(interaction.guild, interaction.member)) {
-    const query = interaction.options.getString("query", true);
-    const matches = findByName(query);
-    const previewLines = matches.length ? [`Match: ${matches[0].name}`] : [];
-    return replyPremiumOnly(interaction, { feature: "/search", previewLines });
-  }
   const query = interaction.options.getString("query", true);
   const config = getGuildConfig(interaction.guild.id);
   const matches = applyServerFilters(findByName(query), config);
@@ -2408,11 +2446,6 @@ async function handleSearch(interaction) {
 }
 
 async function handleRandom(interaction) {
-  if (!isPremium(interaction.guild, interaction.member)) {
-    const pick = pickRandom();
-    const previewLines = pick ? [`Random pick: ${pick.name}`] : [];
-    return replyPremiumOnly(interaction, { feature: "/random", previewLines });
-  }
   const config = getGuildConfig(interaction.guild.id);
   const filtered = applyServerFilters(allHolidays, config);
   if (!filtered.length && hasActiveOverrides(config)) {
@@ -2423,12 +2456,6 @@ async function handleRandom(interaction) {
 }
 
 async function handleWeek(interaction) {
-  if (!isPremium(interaction.guild, interaction.member)) {
-    const now = new Date();
-    const items = holidaysForRange(now, 7);
-    const previewLines = items.slice(0, 2).map(({ date, holiday }) => `${prettyDate(date)}: ${holiday.name}`);
-    return replyPremiumOnly(interaction, { feature: "/week", previewLines });
-  }
   const days = Math.max(3, Math.min(interaction.options.getInteger("days") || 7, 14));
   const now = new Date();
   const config = getGuildConfig(interaction.guild.id);
@@ -2705,7 +2732,10 @@ async function handleStartTrialButton(interaction) {
     return interaction.reply({ content: "This action must be used in a server.", flags: MessageFlags.Ephemeral });
   }
   if (!interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageGuild)) {
-    return interaction.reply({ content: "Admins only (Manage Server).", flags: MessageFlags.Ephemeral });
+    return interaction.reply({
+      content: "Only a server admin (Manage Server permission) can start the trial — ask one to click this button, or have them run /trial!",
+      flags: MessageFlags.Ephemeral,
+    });
   }
   const config = getGuildConfig(interaction.guildId);
   if (config.isPremium) {
@@ -2727,11 +2757,14 @@ async function handleStartTrialButton(interaction) {
   }
   const url = result.url || SUPPORT_URL || "https://www.obscureholidaycalendar.com/discord-bot/";
   return interaction.reply({
-    content: `Trial started! Finish checkout here: ${url}`,
+    content:
+      `🎉 Your 7-day Premium trial is active right now — no card required. ` +
+      `Everything's unlocked for this server until ${formatTimestamp(config.trialEndsAt)}.\n` +
+      `Want to keep Premium after the trial ($3.99/month, cancel anytime)? Set up billing now, or we'll remind you before the trial ends.`,
     flags: MessageFlags.Ephemeral,
     components: [
       new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setLabel("Open Checkout").setStyle(ButtonStyle.Link).setURL(url)
+        new ButtonBuilder().setLabel("Set up billing (optional)").setStyle(ButtonStyle.Link).setURL(url)
       ),
     ],
   });
@@ -3241,22 +3274,6 @@ async function handleAdminFire(interaction) {
 }
 
 async function handleFacts(interaction) {
-  if (!isPremium(interaction.guild, interaction.member)) {
-    const target = interaction.options.getString("name_or_date", false) || "today";
-    let holiday = null;
-    const asDate = parseDate(target);
-    if (asDate) {
-      holiday = (findByDate(asDate)[0]) || null;
-    } else if (target === "today") {
-      const now = new Date();
-      const mmdd = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
-      holiday = (findByDate(mmdd)[0]) || null;
-    } else {
-      holiday = findByName(target)[0] || null;
-    }
-    const previewLines = holiday ? [`Facts for: ${holiday.name}`] : [];
-    return replyPremiumOnly(interaction, { feature: "/facts", previewLines });
-  }
   const target = interaction.options.getString("name_or_date", false) || "today";
   let holiday = null;
   const asDate = parseDate(target);
@@ -3311,14 +3328,13 @@ async function handleFact(interaction) {
     embed.setFooter({ text: "Powered by ObscureHolidayCalendar.com" });
   }
   await interaction.reply({ embeds: [embed], components: buildButtons(holiday) });
-  if (!premium && interaction.guild) {
+  if (interaction.guild) {
     const totalFacts = (holiday.funFacts || []).length;
     if (totalFacts > 1) {
       try {
         await interaction.followUp({
-          content: `💡 There ${totalFacts === 2 ? "is" : "are"} ${totalFacts - 1} more fun fact${totalFacts === 2 ? "" : "s"} for this holiday. Unlock all of them with \`/facts\` — included in a free 7-day Premium trial.`,
+          content: `💡 There ${totalFacts === 2 ? "is" : "are"} ${totalFacts - 1} more fun fact${totalFacts === 2 ? "" : "s"} for this holiday. See them all with \`/facts\`.`,
           flags: MessageFlags.Ephemeral,
-          components: [buildTrialActionRow()],
         });
       } catch {}
     }
@@ -3554,7 +3570,7 @@ async function handlePremiumStatus(interaction) {
   const benefits = [
     "✅ Multiple daily channels",
     "✅ Custom timezone & hour",
-    "✅ Premium commands: /date, /search, /random, /facts, /poll, /tip",
+    "✅ Premium commands: /tomorrow, /upcoming, /poll, /tip",
     "✅ Branding toggle",
     "✅ Pick which of the day’s holidays to auto-post",
     "✅ Per-channel role pings & quiet mode",
@@ -3934,6 +3950,11 @@ client.once("clientReady", async () => {
 
   // Sync premium allowlist from Stripe on startup
   await syncPremiumFromStripe();
+
+  // Backfill guildConfig for any installed guild missing an entry (lost
+  // config, or joined before this tracking existed) before scheduling/sweeping
+  // run, so nothing installed is skipped.
+  reconcileGuildConfigsFromLiveGuilds();
 
   // Schedule daily auto-post
   scheduleDailyPost();
@@ -4396,7 +4417,7 @@ async function postTodayForChannel(guildId, channelId, options = {}) {
   const showUpsell = !premium && shouldShowUpsell(config, now, hiddenCount);
   result.upsellShown = showUpsell;
   if (showUpsell) {
-    trialNote = `🔓 ${hiddenCount} more holiday${hiddenCount === 1 ? "" : "s"} today — unlock the full daily set with a free 7-day trial.\nPremium also adds custom scheduling, category filters, analytics, and streak rewards.`;
+    trialNote = `🔓 ${hiddenCount} more holiday${hiddenCount === 1 ? "" : "s"} today — unlock the full daily set with a free 7-day trial (no card required).\nPremium also adds custom scheduling, category filters, analytics, and streak rewards.`;
     trialRow = buildTrialActionRow();
     result.upsellReason = "free_plan_hidden_count_threshold_met";
   } else if (premium) {
