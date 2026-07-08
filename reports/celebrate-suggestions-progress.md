@@ -3,17 +3,18 @@
 Tracks the sitewide rebuild of generic, templated "Ways to celebrate" sections
 into the richer format modeled on appreciate-a-dragon-day / national-nothing-day:
 an intro line, themed subsections with real activities, a subsection with
-verified real-world source links, and a closing "Did you know?" fact — plus a
-filled-in "Sources and attribution" section. Started 2026-07-07, template
-change requested 2026-07-08. All work is done manually, page by page, no
-scripted content generation. See commit messages for per-batch detail.
+verified real-world source links (diversified across reputable sites, not just
+Wikipedia), and a closing "Did you know?" fact — plus a filled-in "Sources and
+attribution" section. Started 2026-07-07, template change requested 2026-07-08,
+source diversification requested 2026-07-08. All work is done manually, page by
+page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 20 / 508 fully rebuilt to the rich template.**
-90 more were already fixed in an earlier, simpler pass (5 bullets + one
-"Learn more" link) and still need to be rebuilt to match. The remaining 398
-haven't been touched at all yet.
+**Status: 30 / 508 fully rebuilt to the rich template with diversified sources.**
+80 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
+more" link) and still need to be rebuilt to match. The remaining 398 haven't
+been touched at all yet.
 
-## Rebuilt to rich template (20)
+## Rebuilt to rich template (30)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -35,19 +36,19 @@ haven't been touched at all yet.
 - [x] be-an-angel-day
 - [x] be-bald-and-be-free-day
 - [x] be-late-for-something-day
+- [x] beaujolais-nouveau-day
+- [x] best-friends-day
+- [x] beverage-day
+- [x] bicycle-day
+- [x] big-wind-day
+- [x] bill-of-rights-day
+- [x] biscotti-day
+- [x] bittersweet-chocolate-with-almonds-day
+- [x] blah-blah-blah-day
+- [x] blueberry-cheesecake-day
 
-## Done in the old simple format — needs rebuild to rich template (90)
+## Done in the old simple format — needs rebuild to rich template (80)
 
-- [ ] beaujolais-nouveau-day
-- [ ] best-friends-day
-- [ ] beverage-day
-- [ ] bicycle-day
-- [ ] big-wind-day
-- [ ] bill-of-rights-day
-- [ ] biscotti-day
-- [ ] bittersweet-chocolate-with-almonds-day
-- [ ] blah-blah-blah-day
-- [ ] blueberry-cheesecake-day
 - [ ] brandied-fruit-day
 - [ ] bring-flowers-to-someone-day
 - [ ] brisket-day
