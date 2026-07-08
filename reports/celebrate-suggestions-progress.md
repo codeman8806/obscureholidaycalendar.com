@@ -5,9 +5,10 @@ Tracks the sitewide replacement of generic, templated "Ways to celebrate" filler
 holiday's actual facts, plus a verified "Learn more" source link per page.
 Started 2026-07-07. See commit messages for per-batch detail.
 
-**Status: 110 / 508 done.** All 110 now include a checked (HTTP 200) source link,
-except a small set of unofficial/internet-meme holidays with no verifiable single
-source (noted in the batch commit messages).
+**Status: 110 / 508 done.** All 110 now include a checked (HTTP 200) "Learn more"
+source link — including holidays with no verifiable single origin of their own,
+which link to a real source on the holiday's underlying subject instead (e.g. Get
+Organized Day → Getting Things Done; Cheer Up the Lonely Day → Loneliness).
 
 ## Done (110)
 
