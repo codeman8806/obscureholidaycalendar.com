@@ -9,12 +9,12 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 92 / 508 fully rebuilt to the rich template with diversified sources.**
-18 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
+**Status: 97 / 508 fully rebuilt to the rich template with diversified sources.**
+13 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
 more" link) and still need to be rebuilt to match. The remaining 398 haven't
 been touched at all yet.
 
-## Rebuilt to rich template (92)
+## Rebuilt to rich template (97)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -108,14 +108,14 @@ been touched at all yet.
 - [x] fresh-veggies-day
 - [x] frog-jumping-day
 - [x] german-american-day
+- [x] get-organized-day
+- [x] gingerbread-house-day
+- [x] give-something-away-day
+- [x] go-fishing-day
+- [x] go-for-broke-day
 
-## Done in the old simple format — needs rebuild to rich template (18)
+## Done in the old simple format — needs rebuild to rich template (13)
 
-- [ ] get-organized-day
-- [ ] gingerbread-house-day
-- [ ] give-something-away-day
-- [ ] go-fishing-day
-- [ ] go-for-broke-day
 - [ ] go-skateboarding-day
 - [ ] go-to-an-art-museum-day
 - [ ] grab-some-nuts-day
