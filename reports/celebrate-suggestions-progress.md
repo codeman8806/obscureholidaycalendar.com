@@ -4,9 +4,9 @@ Tracks the sitewide replacement of generic, templated "Ways to celebrate" filler
 (and matching FAQ/JSON-LD answers) with topic-specific suggestions grounded in each
 holiday's actual facts. Started 2026-07-07. See commit messages for per-batch detail.
 
-**Status: 90 / 508 done.**
+**Status: 100 / 508 done.**
 
-## Done (90)
+## Done (100)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -98,19 +98,19 @@ holiday's actual facts. Started 2026-07-07. See commit messages for per-batch de
 - [x] fortune-cookie-day
 - [x] french-fries-day
 - [x] fresh-veggies-day
+- [x] frog-jumping-day
+- [x] german-american-day
+- [x] get-organized-day
+- [x] gingerbread-house-day
+- [x] give-something-away-day
+- [x] go-fishing-day
+- [x] go-for-broke-day
+- [x] go-skateboarding-day
+- [x] go-to-an-art-museum-day
+- [x] grab-some-nuts-day
 
-## Remaining (418)
+## Remaining (408)
 
-- [ ] frog-jumping-day
-- [ ] german-american-day
-- [ ] get-organized-day
-- [ ] gingerbread-house-day
-- [ ] give-something-away-day
-- [ ] go-fishing-day
-- [ ] go-for-broke-day
-- [ ] go-skateboarding-day
-- [ ] go-to-an-art-museum-day
-- [ ] grab-some-nuts-day
 - [ ] gumbo-day
 - [ ] gummy-worm-day
 - [ ] guy-fawkes-day
