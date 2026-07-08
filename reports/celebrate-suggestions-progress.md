@@ -9,12 +9,12 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 102 / 508 fully rebuilt to the rich template with diversified sources.**
-8 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
+**Status: 107 / 508 fully rebuilt to the rich template with diversified sources.**
+3 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
 more" link) and still need to be rebuilt to match. The remaining 398 haven't
 been touched at all yet.
 
-## Rebuilt to rich template (102)
+## Rebuilt to rich template (107)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -118,14 +118,14 @@ been touched at all yet.
 - [x] grab-some-nuts-day
 - [x] gumbo-day
 - [x] gummy-worm-day
+- [x] guy-fawkes-day
+- [x] haiku-poetry-day
+- [x] halloween
+- [x] happiness-happens-day
+- [x] happy-hour-day
 
-## Done in the old simple format — needs rebuild to rich template (8)
+## Done in the old simple format — needs rebuild to rich template (3)
 
-- [ ] guy-fawkes-day
-- [ ] haiku-poetry-day
-- [ ] halloween
-- [ ] happiness-happens-day
-- [ ] happy-hour-day
 - [ ] have-a-bad-day-day
 - [ ] have-a-bagel-day
 - [ ] have-a-party-with-your-bear-day
