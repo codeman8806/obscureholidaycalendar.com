@@ -9,12 +9,12 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 60 / 508 fully rebuilt to the rich template with diversified sources.**
-50 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
+**Status: 65 / 508 fully rebuilt to the rich template with diversified sources.**
+45 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
 more" link) and still need to be rebuilt to match. The remaining 398 haven't
 been touched at all yet.
 
-## Rebuilt to rich template (60)
+## Rebuilt to rich template (65)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -76,14 +76,14 @@ been touched at all yet.
 - [x] cookbook-launch-day
 - [x] corn-fritters-day
 - [x] count-your-buttons-day
+- [x] cousins-day
+- [x] creative-ice-cream-flavors-day
+- [x] dance-like-a-chicken-day
+- [x] day-of-the-mushroom
+- [x] deep-dish-pizza-day
 
-## Done in the old simple format — needs rebuild to rich template (50)
+## Done in the old simple format — needs rebuild to rich template (45)
 
-- [ ] cousins-day
-- [ ] creative-ice-cream-flavors-day
-- [ ] dance-like-a-chicken-day
-- [ ] day-of-the-mushroom
-- [ ] deep-dish-pizza-day
 - [ ] dessert-day
 - [ ] deviled-egg-day
 - [ ] dictionary-day
