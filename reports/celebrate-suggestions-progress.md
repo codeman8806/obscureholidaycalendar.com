@@ -2,11 +2,14 @@
 
 Tracks the sitewide replacement of generic, templated "Ways to celebrate" filler
 (and matching FAQ/JSON-LD answers) with topic-specific suggestions grounded in each
-holiday's actual facts. Started 2026-07-07. See commit messages for per-batch detail.
+holiday's actual facts, plus a verified "Learn more" source link per page.
+Started 2026-07-07. See commit messages for per-batch detail.
 
-**Status: 105 / 508 done.**
+**Status: 110 / 508 done.** All 110 now include a checked (HTTP 200) source link,
+except a small set of unofficial/internet-meme holidays with no verifiable single
+source (noted in the batch commit messages).
 
-## Done (105)
+## Done (110)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -113,14 +116,14 @@ holiday's actual facts. Started 2026-07-07. See commit messages for per-batch de
 - [x] guy-fawkes-day
 - [x] haiku-poetry-day
 - [x] halloween
+- [x] happiness-happens-day
+- [x] happy-hour-day
+- [x] have-a-bad-day-day
+- [x] have-a-bagel-day
+- [x] have-a-party-with-your-bear-day
 
-## Remaining (403)
+## Remaining (398)
 
-- [ ] happiness-happens-day
-- [ ] happy-hour-day
-- [ ] have-a-bad-day-day
-- [ ] have-a-bagel-day
-- [ ] have-a-party-with-your-bear-day
 - [ ] hermit-day
 - [ ] hobbit-day
 - [ ] homemade-bread-day
