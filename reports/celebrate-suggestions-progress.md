@@ -4,9 +4,9 @@ Tracks the sitewide replacement of generic, templated "Ways to celebrate" filler
 (and matching FAQ/JSON-LD answers) with topic-specific suggestions grounded in each
 holiday's actual facts. Started 2026-07-07. See commit messages for per-batch detail.
 
-**Status: 100 / 508 done.**
+**Status: 105 / 508 done.**
 
-## Done (100)
+## Done (105)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -108,14 +108,14 @@ holiday's actual facts. Started 2026-07-07. See commit messages for per-batch de
 - [x] go-skateboarding-day
 - [x] go-to-an-art-museum-day
 - [x] grab-some-nuts-day
+- [x] gumbo-day
+- [x] gummy-worm-day
+- [x] guy-fawkes-day
+- [x] haiku-poetry-day
+- [x] halloween
 
-## Remaining (408)
+## Remaining (403)
 
-- [ ] gumbo-day
-- [ ] gummy-worm-day
-- [ ] guy-fawkes-day
-- [ ] haiku-poetry-day
-- [ ] halloween
 - [ ] happiness-happens-day
 - [ ] happy-hour-day
 - [ ] have-a-bad-day-day
