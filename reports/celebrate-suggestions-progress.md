@@ -9,12 +9,14 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 107 / 508 fully rebuilt to the rich template with diversified sources.**
-3 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
-more" link) and still need to be rebuilt to match. The remaining 398 haven't
-been touched at all yet.
+**Status: 112 / 508 fully rebuilt to the rich template with diversified sources.**
+The old-format tier is now fully cleared — every remaining page is untouched
+sitewide generic filler. The remaining 396 haven't been touched at all yet.
+Note: pages pulled straight from the not-started tier also need their FAQ
+"How do people celebrate" answer (JSON-LD and visible dl) synced to the new
+celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (107)
+## Rebuilt to rich template (112)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -123,17 +125,18 @@ been touched at all yet.
 - [x] halloween
 - [x] happiness-happens-day
 - [x] happy-hour-day
+- [x] have-a-bad-day-day
+- [x] have-a-bagel-day
+- [x] have-a-party-with-your-bear-day
+- [x] hermit-day
+- [x] hobbit-day
 
-## Done in the old simple format — needs rebuild to rich template (3)
+## Done in the old simple format — needs rebuild to rich template (0)
 
-- [ ] have-a-bad-day-day
-- [ ] have-a-bagel-day
-- [ ] have-a-party-with-your-bear-day
+None remaining — this tier is cleared.
 
-## Not started (398)
+## Not started (396)
 
-- [ ] hermit-day
-- [ ] hobbit-day
 - [ ] homemade-bread-day
 - [ ] hug-a-bear-day
 - [ ] hug-holiday-day
