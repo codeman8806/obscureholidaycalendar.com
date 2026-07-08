@@ -4,9 +4,9 @@ Tracks the sitewide replacement of generic, templated "Ways to celebrate" filler
 (and matching FAQ/JSON-LD answers) with topic-specific suggestions grounded in each
 holiday's actual facts. Started 2026-07-07. See commit messages for per-batch detail.
 
-**Status: 70 / 508 done.**
+**Status: 80 / 508 done.**
 
-## Done (70)
+## Done (80)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -78,19 +78,19 @@ holiday's actual facts. Started 2026-07-07. See commit messages for per-batch de
 - [x] dictionary-day
 - [x] dinosaur-day
 - [x] do-something-nice-day
+- [x] dolphin-day
+- [x] donald-duck-day
+- [x] draw-a-picture-of-a-bird-day
+- [x] drive-in-movie-day
+- [x] eat-a-red-apple-day
+- [x] eat-an-extra-dessert-day
+- [x] eat-outside-day
+- [x] electronic-greetings-day
+- [x] embrace-your-geekness-day
+- [x] evaluate-your-life-day
 
-## Remaining (438)
+## Remaining (428)
 
-- [ ] dolphin-day
-- [ ] donald-duck-day
-- [ ] draw-a-picture-of-a-bird-day
-- [ ] drive-in-movie-day
-- [ ] eat-a-red-apple-day
-- [ ] eat-an-extra-dessert-day
-- [ ] eat-outside-day
-- [ ] electronic-greetings-day
-- [ ] embrace-your-geekness-day
-- [ ] evaluate-your-life-day
 - [ ] feral-cat-day
 - [ ] fibonacci-day
 - [ ] fight-procrastination-day
