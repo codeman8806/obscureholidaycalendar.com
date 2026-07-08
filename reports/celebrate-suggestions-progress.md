@@ -1,16 +1,19 @@
 # Celebrate-suggestions cleanup progress
 
-Tracks the sitewide replacement of generic, templated "Ways to celebrate" filler
-(and matching FAQ/JSON-LD answers) with topic-specific suggestions grounded in each
-holiday's actual facts, plus a verified "Learn more" source link per page.
-Started 2026-07-07. See commit messages for per-batch detail.
+Tracks the sitewide rebuild of generic, templated "Ways to celebrate" sections
+into the richer format modeled on appreciate-a-dragon-day / national-nothing-day:
+an intro line, themed subsections with real activities, a subsection with
+verified real-world source links, and a closing "Did you know?" fact — plus a
+filled-in "Sources and attribution" section. Started 2026-07-07, template
+change requested 2026-07-08. All work is done manually, page by page, no
+scripted content generation. See commit messages for per-batch detail.
 
-**Status: 110 / 508 done.** All 110 now include a checked (HTTP 200) "Learn more"
-source link — including holidays with no verifiable single origin of their own,
-which link to a real source on the holiday's underlying subject instead (e.g. Get
-Organized Day → Getting Things Done; Cheer Up the Lonely Day → Loneliness).
+**Status: 20 / 508 fully rebuilt to the rich template.**
+90 more were already fixed in an earlier, simpler pass (5 bullets + one
+"Learn more" link) and still need to be rebuilt to match. The remaining 398
+haven't been touched at all yet.
 
-## Done (110)
+## Rebuilt to rich template (20)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -32,98 +35,101 @@ Organized Day → Getting Things Done; Cheer Up the Lonely Day → Loneliness).
 - [x] be-an-angel-day
 - [x] be-bald-and-be-free-day
 - [x] be-late-for-something-day
-- [x] beaujolais-nouveau-day
-- [x] best-friends-day
-- [x] beverage-day
-- [x] bicycle-day
-- [x] big-wind-day
-- [x] bill-of-rights-day
-- [x] biscotti-day
-- [x] bittersweet-chocolate-with-almonds-day
-- [x] blah-blah-blah-day
-- [x] blueberry-cheesecake-day
-- [x] brandied-fruit-day
-- [x] bring-flowers-to-someone-day
-- [x] brisket-day
-- [x] brothers-day
-- [x] bulldogs-are-beautiful-day
-- [x] butterscotch-pudding-day
-- [x] buy-a-musical-instrument-day
-- [x] carousel-day
-- [x] carve-a-pumpkin-day
-- [x] caviar-day
-- [x] celebrate-your-unique-talent-day
-- [x] cellophane-tape-day
-- [x] checkers-day
-- [x] cheer-up-the-lonely-day
-- [x] cheesecake-day
-- [x] cherries-jubilee-day
-- [x] chewing-gum-day
-- [x] chocolate-covered-raisin-day
-- [x] chocolate-milkshake-day
-- [x] christmas-card-day
-- [x] cinco-de-mayo
-- [x] clean-out-your-refrigerator-day
-- [x] clean-up-your-room-day
-- [x] cliché-day
-- [x] coconut-cream-pie-day
-- [x] coloring-book-day
-- [x] common-sense-day
-- [x] cookbook-launch-day
-- [x] corn-fritters-day
-- [x] count-your-buttons-day
-- [x] cousins-day
-- [x] creative-ice-cream-flavors-day
-- [x] dance-like-a-chicken-day
-- [x] day-of-the-mushroom
-- [x] deep-dish-pizza-day
-- [x] dessert-day
-- [x] deviled-egg-day
-- [x] dictionary-day
-- [x] dinosaur-day
-- [x] do-something-nice-day
-- [x] dolphin-day
-- [x] donald-duck-day
-- [x] draw-a-picture-of-a-bird-day
-- [x] drive-in-movie-day
-- [x] eat-a-red-apple-day
-- [x] eat-an-extra-dessert-day
-- [x] eat-outside-day
-- [x] electronic-greetings-day
-- [x] embrace-your-geekness-day
-- [x] evaluate-your-life-day
-- [x] feral-cat-day
-- [x] fibonacci-day
-- [x] fight-procrastination-day
-- [x] find-a-rainbow-day
-- [x] fire-day
-- [x] first-macy-s-christmas-parade-day
-- [x] forget-me-not-day
-- [x] fortune-cookie-day
-- [x] french-fries-day
-- [x] fresh-veggies-day
-- [x] frog-jumping-day
-- [x] german-american-day
-- [x] get-organized-day
-- [x] gingerbread-house-day
-- [x] give-something-away-day
-- [x] go-fishing-day
-- [x] go-for-broke-day
-- [x] go-skateboarding-day
-- [x] go-to-an-art-museum-day
-- [x] grab-some-nuts-day
-- [x] gumbo-day
-- [x] gummy-worm-day
-- [x] guy-fawkes-day
-- [x] haiku-poetry-day
-- [x] halloween
-- [x] happiness-happens-day
-- [x] happy-hour-day
-- [x] have-a-bad-day-day
-- [x] have-a-bagel-day
-- [x] have-a-party-with-your-bear-day
 
-## Remaining (398)
+## Done in the old simple format — needs rebuild to rich template (90)
+
+- [ ] beaujolais-nouveau-day
+- [ ] best-friends-day
+- [ ] beverage-day
+- [ ] bicycle-day
+- [ ] big-wind-day
+- [ ] bill-of-rights-day
+- [ ] biscotti-day
+- [ ] bittersweet-chocolate-with-almonds-day
+- [ ] blah-blah-blah-day
+- [ ] blueberry-cheesecake-day
+- [ ] brandied-fruit-day
+- [ ] bring-flowers-to-someone-day
+- [ ] brisket-day
+- [ ] brothers-day
+- [ ] bulldogs-are-beautiful-day
+- [ ] butterscotch-pudding-day
+- [ ] buy-a-musical-instrument-day
+- [ ] carousel-day
+- [ ] carve-a-pumpkin-day
+- [ ] caviar-day
+- [ ] celebrate-your-unique-talent-day
+- [ ] cellophane-tape-day
+- [ ] checkers-day
+- [ ] cheer-up-the-lonely-day
+- [ ] cheesecake-day
+- [ ] cherries-jubilee-day
+- [ ] chewing-gum-day
+- [ ] chocolate-covered-raisin-day
+- [ ] chocolate-milkshake-day
+- [ ] christmas-card-day
+- [ ] cinco-de-mayo
+- [ ] clean-out-your-refrigerator-day
+- [ ] clean-up-your-room-day
+- [ ] cliché-day
+- [ ] coconut-cream-pie-day
+- [ ] coloring-book-day
+- [ ] common-sense-day
+- [ ] cookbook-launch-day
+- [ ] corn-fritters-day
+- [ ] count-your-buttons-day
+- [ ] cousins-day
+- [ ] creative-ice-cream-flavors-day
+- [ ] dance-like-a-chicken-day
+- [ ] day-of-the-mushroom
+- [ ] deep-dish-pizza-day
+- [ ] dessert-day
+- [ ] deviled-egg-day
+- [ ] dictionary-day
+- [ ] dinosaur-day
+- [ ] do-something-nice-day
+- [ ] dolphin-day
+- [ ] donald-duck-day
+- [ ] draw-a-picture-of-a-bird-day
+- [ ] drive-in-movie-day
+- [ ] eat-a-red-apple-day
+- [ ] eat-an-extra-dessert-day
+- [ ] eat-outside-day
+- [ ] electronic-greetings-day
+- [ ] embrace-your-geekness-day
+- [ ] evaluate-your-life-day
+- [ ] feral-cat-day
+- [ ] fibonacci-day
+- [ ] fight-procrastination-day
+- [ ] find-a-rainbow-day
+- [ ] fire-day
+- [ ] first-macy-s-christmas-parade-day
+- [ ] forget-me-not-day
+- [ ] fortune-cookie-day
+- [ ] french-fries-day
+- [ ] fresh-veggies-day
+- [ ] frog-jumping-day
+- [ ] german-american-day
+- [ ] get-organized-day
+- [ ] gingerbread-house-day
+- [ ] give-something-away-day
+- [ ] go-fishing-day
+- [ ] go-for-broke-day
+- [ ] go-skateboarding-day
+- [ ] go-to-an-art-museum-day
+- [ ] grab-some-nuts-day
+- [ ] gumbo-day
+- [ ] gummy-worm-day
+- [ ] guy-fawkes-day
+- [ ] haiku-poetry-day
+- [ ] halloween
+- [ ] happiness-happens-day
+- [ ] happy-hour-day
+- [ ] have-a-bad-day-day
+- [ ] have-a-bagel-day
+- [ ] have-a-party-with-your-bear-day
+
+## Not started (398)
 
 - [ ] hermit-day
 - [ ] hobbit-day
