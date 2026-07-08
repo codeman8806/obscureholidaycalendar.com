@@ -9,12 +9,12 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 40 / 508 fully rebuilt to the rich template with diversified sources.**
-70 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
+**Status: 45 / 508 fully rebuilt to the rich template with diversified sources.**
+65 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
 more" link) and still need to be rebuilt to match. The remaining 398 haven't
 been touched at all yet.
 
-## Rebuilt to rich template (40)
+## Rebuilt to rich template (45)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -56,14 +56,14 @@ been touched at all yet.
 - [x] carousel-day
 - [x] carve-a-pumpkin-day
 - [x] caviar-day
+- [x] celebrate-your-unique-talent-day
+- [x] cellophane-tape-day
+- [x] checkers-day
+- [x] cheer-up-the-lonely-day
+- [x] cheesecake-day
 
-## Done in the old simple format — needs rebuild to rich template (70)
+## Done in the old simple format — needs rebuild to rich template (65)
 
-- [ ] celebrate-your-unique-talent-day
-- [ ] cellophane-tape-day
-- [ ] checkers-day
-- [ ] cheer-up-the-lonely-day
-- [ ] cheesecake-day
 - [ ] cherries-jubilee-day
 - [ ] chewing-gum-day
 - [ ] chocolate-covered-raisin-day
