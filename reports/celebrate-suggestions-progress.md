@@ -9,12 +9,12 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 70 / 508 fully rebuilt to the rich template with diversified sources.**
-40 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
+**Status: 82 / 508 fully rebuilt to the rich template with diversified sources.**
+28 more were fixed in an earlier, simpler pass (5 bullets + one Wikipedia "Learn
 more" link) and still need to be rebuilt to match. The remaining 398 haven't
 been touched at all yet.
 
-## Rebuilt to rich template (70)
+## Rebuilt to rich template (82)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -86,22 +86,22 @@ been touched at all yet.
 - [x] dictionary-day
 - [x] dinosaur-day
 - [x] do-something-nice-day
+- [x] dolphin-day
+- [x] donald-duck-day
+- [x] draw-a-picture-of-a-bird-day
+- [x] drive-in-movie-day
+- [x] eat-a-red-apple-day
+- [x] eat-outside-day
+- [x] electronic-greetings-day
+- [x] embrace-your-geekness-day
+- [x] evaluate-your-life-day
+- [x] feral-cat-day
+- [x] fibonacci-day
+- [x] fight-procrastination-day
 
-## Done in the old simple format — needs rebuild to rich template (40)
+## Done in the old simple format — needs rebuild to rich template (28)
 
-- [ ] dolphin-day
-- [ ] donald-duck-day
-- [ ] draw-a-picture-of-a-bird-day
-- [ ] drive-in-movie-day
-- [ ] eat-a-red-apple-day
 - [ ] eat-an-extra-dessert-day
-- [ ] eat-outside-day
-- [ ] electronic-greetings-day
-- [ ] embrace-your-geekness-day
-- [ ] evaluate-your-life-day
-- [ ] feral-cat-day
-- [ ] fibonacci-day
-- [ ] fight-procrastination-day
 - [ ] find-a-rainbow-day
 - [ ] fire-day
 - [ ] first-macy-s-christmas-parade-day
