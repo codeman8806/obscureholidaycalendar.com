@@ -9,14 +9,14 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 212 / 508 fully rebuilt to the rich template with diversified sources.**
+**Status: 217 / 508 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. The remaining 396 haven't been touched at all yet.
 Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (212)
+## Rebuilt to rich template (217)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -230,18 +230,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-cheesecake-day
 - [x] national-cherries-jubilee-day
 - [x] national-cherry-popsicle-day
+- [x] national-chocolate-chip-cookie-day
+- [x] national-chocolate-chip-day
+- [x] national-chocolate-covered-anything-day
+- [x] national-chocolate-covered-pretzel-day
+- [x] national-chocolate-cupcake-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (296)
+## Not started (291)
 
-- [ ] national-chocolate-chip-cookie-day
-- [ ] national-chocolate-chip-day
-- [ ] national-chocolate-covered-anything-day
-- [ ] national-chocolate-covered-pretzel-day
-- [ ] national-chocolate-cupcake-day
 - [ ] national-chocolate-milk-day
 - [ ] national-chocolate-milkshake-day
 - [ ] national-chocolate-pecan-pie-day
