@@ -9,14 +9,14 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 187 / 508 fully rebuilt to the rich template with diversified sources.**
+**Status: 192 / 508 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. The remaining 396 haven't been touched at all yet.
 Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (187)
+## Rebuilt to rich template (192)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -205,18 +205,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-bad-poetry-day
 - [x] national-baklava-day
 - [x] national-banana-split-day
+- [x] national-beach-day
+- [x] national-beer-day
+- [x] national-black-cat-appreciation-day
+- [x] national-black-cat-day
+- [x] national-blueberry-popsicle-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (321)
+## Not started (316)
 
-- [ ] national-beach-day
-- [ ] national-beer-day
-- [ ] national-black-cat-appreciation-day
-- [ ] national-black-cat-day
-- [ ] national-blueberry-popsicle-day
 - [ ] national-bologna-day
 - [ ] national-book-lovers-day
 - [ ] national-bourbon-day
