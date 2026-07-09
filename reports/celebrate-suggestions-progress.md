@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 373 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 378 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (373)
+## Rebuilt to rich template (378)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -399,18 +399,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-techies-day
 - [x] national-teddy-bear-day
 - [x] national-tell-a-joke-day
+- [x] national-tequila-day
+- [x] national-train-your-brain-day
+- [x] national-tv-dinner-day
+- [x] national-two-different-colored-shoes-day
+- [x] national-ugly-sweater-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (222)
+## Not started (217)
 
-- [ ] national-tequila-day
-- [ ] national-train-your-brain-day
-- [ ] national-tv-dinner-day
-- [ ] national-two-different-colored-shoes-day
-- [ ] national-ugly-sweater-day
 - [ ] national-underwear-day
 - [ ] national-vanilla-milkshake-day
 - [ ] national-watch-day
