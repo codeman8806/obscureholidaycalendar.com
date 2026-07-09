@@ -9,14 +9,14 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 317 / 508 fully rebuilt to the rich template with diversified sources.**
+**Status: 322 / 508 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. The remaining 396 haven't been touched at all yet.
 Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (317)
+## Rebuilt to rich template (322)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -335,18 +335,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-paper-airplane-day
 - [x] national-parfait-day
 - [x] national-pasta-day
+- [x] national-pastry-day
+- [x] national-peach-pie-day
+- [x] national-peanut-butter-and-jelly-day
+- [x] national-peanut-butter-cookie-day
+- [x] national-peanut-butter-fudge-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (191)
+## Not started (186)
 
-- [ ] national-pastry-day
-- [ ] national-peach-pie-day
-- [ ] national-peanut-butter-and-jelly-day
-- [ ] national-peanut-butter-cookie-day
-- [ ] national-peanut-butter-fudge-day
 - [ ] national-pecan-cookie-day
 - [ ] national-pecan-torte-day
 - [ ] national-pepperoni-pizza-day
