@@ -15,10 +15,11 @@ sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
 "Source not provided" stubs and were never tracked in this log; folded them
 into the not-started tier below, bringing the true total to 595. Also found
-7 pages checked off as done in an earlier pass that still literally contain
-an unfilled "Source not provided" stub (beaujolais-nouveau-day,
-best-friends-day, beverage-day, bicycle-day, big-wind-day, coloring-book-day,
-common-sense-day) — flagged for a quick fix, not yet corrected below.
+and fixed 7 pages (beaujolais-nouveau-day, best-friends-day, beverage-day,
+bicycle-day, big-wind-day, coloring-book-day, common-sense-day) that were
+checked off as done in an earlier pass but only linked Wikipedia and had
+never had their separate Sources section filled in — each now has a
+diversified, verified source and a filled Sources section.
 Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
