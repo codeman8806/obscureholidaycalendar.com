@@ -9,14 +9,14 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 242 / 508 fully rebuilt to the rich template with diversified sources.**
+**Status: 247 / 508 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. The remaining 396 haven't been touched at all yet.
 Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (242)
+## Rebuilt to rich template (247)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -260,18 +260,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-cupcake-day
 - [x] national-daiquiri-day
 - [x] national-date-nut-bread-day
+- [x] national-daylight-appreciation-day
+- [x] national-deep-fried-clams-day
+- [x] national-ding-a-ling-day
+- [x] national-dog-day
+- [x] national-doughnut-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (266)
+## Not started (261)
 
-- [ ] national-daylight-appreciation-day
-- [ ] national-deep-fried-clams-day
-- [ ] national-ding-a-ling-day
-- [ ] national-dog-day
-- [ ] national-doughnut-day
 - [ ] national-drink-beer-day
 - [ ] national-eat-a-hoagie-day
 - [ ] national-eat-your-vegetables-day
