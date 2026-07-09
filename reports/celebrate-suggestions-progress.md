@@ -9,14 +9,14 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 322 / 508 fully rebuilt to the rich template with diversified sources.**
+**Status: 327 / 508 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. The remaining 396 haven't been touched at all yet.
 Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (322)
+## Rebuilt to rich template (327)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -340,18 +340,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-peanut-butter-and-jelly-day
 - [x] national-peanut-butter-cookie-day
 - [x] national-peanut-butter-fudge-day
+- [x] national-pecan-cookie-day
+- [x] national-pecan-torte-day
+- [x] national-pepperoni-pizza-day
+- [x] national-pet-day
+- [x] national-pickle-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (186)
+## Not started (181)
 
-- [ ] national-pecan-cookie-day
-- [ ] national-pecan-torte-day
-- [ ] national-pepperoni-pizza-day
-- [ ] national-pet-day
-- [ ] national-pickle-day
 - [ ] national-pie-day-12-01
 - [ ] national-pierce-your-ears-day
 - [ ] national-pizza-with-the-works-except-anchovies-day
