@@ -9,14 +9,14 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 357 / 508 fully rebuilt to the rich template with diversified sources.**
+**Status: 362 / 508 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. The remaining 396 haven't been touched at all yet.
 Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (357)
+## Rebuilt to rich template (362)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -375,18 +375,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-siblings-day
 - [x] national-sisters-day
 - [x] national-sloppy-joe-day
+- [x] national-soft-ice-cream-day
+- [x] national-sour-candy-day
+- [x] national-spicy-hermit-cookie-day
+- [x] national-spumoni-day
+- [x] national-strawberry-parfait-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (151)
+## Not started (146)
 
-- [ ] national-soft-ice-cream-day
-- [ ] national-sour-candy-day
-- [ ] national-spicy-hermit-cookie-day
-- [ ] national-spumoni-day
-- [ ] national-strawberry-parfait-day
 - [ ] national-strawberry-rhubarb-pie-day
 - [ ] national-strawberry-shortcake-day
 - [ ] national-sundae-day
