@@ -9,14 +9,14 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 237 / 508 fully rebuilt to the rich template with diversified sources.**
+**Status: 242 / 508 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. The remaining 396 haven't been touched at all yet.
 Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (237)
+## Rebuilt to rich template (242)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -255,18 +255,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-cream-filled-donut-day
 - [x] national-creamsicle-day
 - [x] national-crème-brûlée-day
+- [x] national-crème-de-menthe-day
+- [x] national-cubicle-day
+- [x] national-cupcake-day
+- [x] national-daiquiri-day
+- [x] national-date-nut-bread-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (271)
+## Not started (266)
 
-- [ ] national-crème-de-menthe-day
-- [ ] national-cubicle-day
-- [ ] national-cupcake-day
-- [ ] national-daiquiri-day
-- [ ] national-date-nut-bread-day
 - [ ] national-daylight-appreciation-day
 - [ ] national-deep-fried-clams-day
 - [ ] national-ding-a-ling-day
