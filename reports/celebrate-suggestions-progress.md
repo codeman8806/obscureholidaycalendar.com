@@ -9,14 +9,21 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 367 / 508 fully rebuilt to the rich template with diversified sources.**
+**Status: 368 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
-sitewide generic filler. The remaining 396 haven't been touched at all yet.
+sitewide generic filler. On 2026-07-09 discovered 86 additional pages
+sitewide (outside the original 508-page scope) that still had unfilled
+"Source not provided" stubs and were never tracked in this log; folded them
+into the not-started tier below, bringing the true total to 595. Also found
+7 pages checked off as done in an earlier pass that still literally contain
+an unfilled "Source not provided" stub (beaujolais-nouveau-day,
+best-friends-day, beverage-day, bicycle-day, big-wind-day, coloring-book-day,
+common-sense-day) — flagged for a quick fix, not yet corrected below.
 Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (367)
+## Rebuilt to rich template (368)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -382,6 +389,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-strawberry-parfait-day
 - [x] national-strawberry-rhubarb-pie-day
 - [x] national-strawberry-shortcake-day
+- [x] national-sugar-cookie-day
 - [x] national-sundae-day
 - [x] national-sunglasses-day
 - [x] national-taco-day
@@ -390,7 +398,7 @@ celebrate content, since that was never done for them in an earlier pass.
 
 None remaining — this tier is cleared.
 
-## Not started (141)
+## Not started (227)
 
 - [ ] national-tapioca-day
 - [ ] national-tea-day
@@ -533,3 +541,92 @@ None remaining — this tier is cleared.
 - [ ] wright-brother-day
 - [ ] zipper-day
 - [ ] zoo-lovers-day
+
+## Additional pages found outside original scope (86, added 2026-07-09)
+
+- [ ] alexander-graham-bell-day
+- [ ] awkward-moments-day
+- [ ] bacon-day
+- [ ] be-nasty-day
+- [ ] boxing-day
+- [ ] bubble-bath-day
+- [ ] bubble-tea-day
+- [ ] cacti-appreciation-day
+- [ ] card-playing-day
+- [ ] christmas-eve
+- [ ] cuddle-up-day
+- [ ] doodle-day
+- [ ] dr-seuss-day
+- [ ] dress-up-your-pet-day
+- [ ] eat-what-you-want-day
+- [ ] falling-needles-family-fest-day
+- [ ] festivus
+- [ ] first-greenback-day
+- [ ] get-over-it-day
+- [ ] girl-scout-day
+- [ ] go-caroling-day
+- [ ] good-samaritan-day
+- [ ] ides-of-march
+- [ ] international-birdhouse-day
+- [ ] international-day-of-awesomeness
+- [ ] international-day-of-forests
+- [ ] international-goof-off-day
+- [ ] international-poetry-day
+- [ ] international-potato-chip-day
+- [ ] international-trampoline-day
+- [ ] international-women-s-day
+- [ ] learn-what-your-name-means-day
+- [ ] love-note-day
+- [ ] make-cut-out-snowflakes-day
+- [ ] make-up-your-mind-day
+- [ ] make-up-your-own-holiday-day
+- [ ] march-forth-day
+- [ ] mischief-night
+- [ ] national-7-eleven-day
+- [ ] national-anthem-day
+- [ ] national-candy-cane-day
+- [ ] national-cereal-day
+- [ ] national-cheese-day
+- [ ] national-cocktail-day
+- [ ] national-cookie-exchange-day
+- [ ] national-crossword-puzzle-day
+- [ ] national-eggnog-day
+- [ ] national-grammar-day
+- [ ] national-hard-candy-day
+- [ ] national-jelly-bean-day
+- [ ] national-mario-day
+- [ ] national-pecan-pie-day
+- [ ] national-picnic-day
+- [ ] national-pig-day
+- [ ] national-promposal-day
+- [ ] national-pumpkin-pie-day
+- [ ] national-puppy-day
+- [ ] near-miss-day
+- [ ] no-bra-day
+- [ ] no-interruptions-day
+- [ ] old-stuff-day
+- [ ] oreo-cookie-day
+- [ ] pack-rat-day
+- [ ] pandemonium-day
+- [ ] pecan-pie-day
+- [ ] peculiar-people-day
+- [ ] pfeffernusse-day
+- [ ] plant-a-flower-day
+- [ ] pledge-of-allegiance-day
+- [ ] respect-your-cat-day
+- [ ] still-need-to-do-day
+- [ ] talk-like-shakespeare-day
+- [ ] tick-tock-day
+- [ ] tolkien-reading-day
+- [ ] visit-the-zoo-day
+- [ ] waffle-day
+- [ ] winnie-the-pooh-day
+- [ ] world-backup-day
+- [ ] world-contact-day
+- [ ] world-mathematics-day
+- [ ] world-party-day
+- [ ] world-sleep-day
+- [ ] world-theatre-day
+- [ ] world-toilet-day
+- [ ] world-wildlife-day
+- [ ] worship-of-tools-day
