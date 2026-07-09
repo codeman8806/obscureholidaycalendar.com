@@ -9,14 +9,14 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 132 / 508 fully rebuilt to the rich template with diversified sources.**
+**Status: 137 / 508 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. The remaining 396 haven't been touched at all yet.
 Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (132)
+## Rebuilt to rich template (137)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -150,18 +150,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] international-no-diet-day
 - [x] international-radiography-day
 - [x] international-respect-for-chickens-day
+- [x] international-sloth-day
+- [x] international-sushi-day
+- [x] international-talk-like-a-pirate-day
+- [x] international-tongue-twister-day
+- [x] its-my-party-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (376)
+## Not started (371)
 
-- [ ] international-sloth-day
-- [ ] international-sushi-day
-- [ ] international-talk-like-a-pirate-day
-- [ ] international-tongue-twister-day
-- [ ] its-my-party-day
 - [ ] just-because-day
 - [ ] kiss-and-make-up-day
 - [ ] krampusnacht
