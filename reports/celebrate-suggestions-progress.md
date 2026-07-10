@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 393 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 398 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (393)
+## Rebuilt to rich template (398)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -419,18 +419,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] new-years-eve
 - [x] no-beard-day
 - [x] no-dirty-dishes-day
+- [x] no-housework-day
+- [x] no-news-is-good-news-day
+- [x] no-rhyme-or-reason-day
+- [x] no-socks-day
+- [x] nobel-prize-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (202)
+## Not started (197)
 
-- [ ] no-housework-day
-- [ ] no-news-is-good-news-day
-- [ ] no-rhyme-or-reason-day
-- [ ] no-socks-day
-- [ ] nobel-prize-day
 - [ ] nutty-fudge-day
 - [ ] one-cent-day
 - [ ] orange-blossom-day
