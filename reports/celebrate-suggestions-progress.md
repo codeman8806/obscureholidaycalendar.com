@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 550 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 555 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (550)
+## Rebuilt to rich template (555)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -275,6 +275,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-catfish-day
 - [x] national-cbd-day
 - [x] national-cereal-day
+- [x] national-cheese-day
 - [x] national-cheese-pizza-day
 - [x] national-cheeseburger-day
 - [x] national-cheesecake-day
@@ -291,12 +292,14 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-chocolate-pudding-day
 - [x] national-chop-suey-day
 - [x] national-cinnamon-crescent-day
+- [x] national-cocktail-day
 - [x] national-cocoa-day
 - [x] national-coconut-day
 - [x] national-coffee-day
 - [x] national-coffee-ice-cream-day
 - [x] national-comic-book-day
 - [x] national-cookie-day
+- [x] national-cookie-exchange-day
 - [x] national-corn-fritters-day
 - [x] national-corn-on-the-cob-day
 - [x] national-corned-beef-hash-day
@@ -306,6 +309,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-creamsicle-day
 - [x] national-crème-brûlée-day
 - [x] national-crème-de-menthe-day
+- [x] national-crossword-puzzle-day
 - [x] national-cubicle-day
 - [x] national-cupcake-day
 - [x] national-daiquiri-day
@@ -319,6 +323,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-eat-a-hoagie-day
 - [x] national-eat-your-vegetables-day
 - [x] national-egg-day
+- [x] national-eggnog-day
 - [x] national-emma-m-nutt-day
 - [x] national-espresso-day
 - [x] national-fast-food-day
@@ -585,13 +590,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (44, added 2026-07-09)
+## Additional pages found outside original scope (39, added 2026-07-09)
 
-- [ ] national-cheese-day
-- [ ] national-cocktail-day
-- [ ] national-cookie-exchange-day
-- [ ] national-crossword-puzzle-day
-- [ ] national-eggnog-day
 - [ ] national-grammar-day
 - [ ] national-hard-candy-day
 - [ ] national-jelly-bean-day
