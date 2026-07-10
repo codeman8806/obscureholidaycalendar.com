@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 525 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 530 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (525)
+## Rebuilt to rich template (530)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -128,6 +128,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] eat-an-extra-dessert-day
 - [x] find-a-rainbow-day
 - [x] fire-day
+- [x] first-greenback-day
 - [x] first-macy-s-christmas-parade-day
 - [x] forget-me-not-day
 - [x] fortune-cookie-day
@@ -136,12 +137,16 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] frog-jumping-day
 - [x] german-american-day
 - [x] get-organized-day
+- [x] get-over-it-day
 - [x] gingerbread-house-day
+- [x] girl-scout-day
 - [x] give-something-away-day
+- [x] go-caroling-day
 - [x] go-fishing-day
 - [x] go-for-broke-day
 - [x] go-skateboarding-day
 - [x] go-to-an-art-museum-day
+- [x] good-samaritan-day
 - [x] grab-some-nuts-day
 - [x] gumbo-day
 - [x] gummy-worm-day
@@ -560,13 +565,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (69, added 2026-07-09)
+## Additional pages found outside original scope (64, added 2026-07-09)
 
-- [ ] first-greenback-day
-- [ ] get-over-it-day
-- [ ] girl-scout-day
-- [ ] go-caroling-day
-- [ ] good-samaritan-day
 - [ ] ides-of-march
 - [ ] international-birdhouse-day
 - [ ] international-day-of-awesomeness
