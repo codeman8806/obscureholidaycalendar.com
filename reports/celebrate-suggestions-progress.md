@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 462 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 467 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (462)
+## Rebuilt to rich template (467)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -488,18 +488,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] submarine-day
 - [x] sunscreen-day
 - [x] superhero-day
+- [x] superman-day
+- [x] supernatural-day
+- [x] swim-a-lap-day
+- [x] take-your-houseplant-for-a-walk-day
+- [x] talk-like-yoda-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (133)
+## Not started (128)
 
-- [ ] superman-day
-- [ ] supernatural-day
-- [ ] swim-a-lap-day
-- [ ] take-your-houseplant-for-a-walk-day
-- [ ] talk-like-yoda-day
 - [ ] tartan-day
 - [ ] teddy-bear-picnic-day
 - [ ] tell-a-lie-day
