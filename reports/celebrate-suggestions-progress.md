@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 530 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 535 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (530)
+## Rebuilt to rich template (535)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -167,11 +167,16 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] human-rights-day
 - [x] i-need-a-patch-for-that-day
 - [x] ice-cream-cone-day
+- [x] ides-of-march
 - [x] indian-pudding-day
+- [x] international-birdhouse-day
 - [x] international-civil-aviation-day
 - [x] international-coffee-day
+- [x] international-day-of-awesomeness
+- [x] international-day-of-forests
 - [x] international-day-of-happiness
 - [x] international-fairy-day
+- [x] international-goof-off-day
 - [x] international-human-solidarity-day
 - [x] international-joke-day
 - [x] international-left-handers-day
@@ -565,13 +570,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (64, added 2026-07-09)
+## Additional pages found outside original scope (59, added 2026-07-09)
 
-- [ ] ides-of-march
-- [ ] international-birdhouse-day
-- [ ] international-day-of-awesomeness
-- [ ] international-day-of-forests
-- [ ] international-goof-off-day
 - [ ] international-poetry-day
 - [ ] international-potato-chip-day
 - [ ] international-trampoline-day
