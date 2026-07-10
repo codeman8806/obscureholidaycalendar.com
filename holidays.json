@@ -1169,7 +1169,8 @@
           "The holiday was conceptualized by the show's fictional character, Leslie Knope, portrayed by Amy Poehler.",
           "Leslie Knope famously described it as 'Ladies celebrating ladies.'"
         ],
-        "name": "Galentine's Day"
+        "name": "Galentine's Day",
+        "slug": "galentines-day"
       }
     ],
     "02-14": [
@@ -1575,7 +1576,8 @@
           "While his fictional birthday is February 29th, Superman's actual first appearance in Action Comics #1 was on April 18, 1938.",
           "Theoretically, as a 'leapling' born on February 29th, Superman ages only one year for every four Earth years that pass, a fun quirk in his mythology."
         ],
-        "name": "Superman's Birthday"
+        "name": "Superman's Birthday",
+        "slug": "supermans-birthday"
       }
     ],
     "03-01": [
@@ -1588,7 +1590,8 @@
           "The first patent for peanut butter (a peanut paste process) was granted in 1884 to Marcellus Gilmore Edson of Montreal, Canada.",
           "It takes approximately 540 peanuts to make a 12-ounce jar of peanut butter."
         ],
-        "name": "National Peanut Butter Lover's Day"
+        "name": "National Peanut Butter Lover's Day",
+        "slug": "national-peanut-butter-lovers-day"
       },
       {
         "date": "03-01",
@@ -2030,7 +2033,8 @@
           "In Chicago, it is a tradition to dye the river green for St. Patrick's Day.",
           "Nearly 13 million pints of Guinness are consumed on St. Patrick's Day worldwide."
         ],
-        "name": "St. Patrick's Day"
+        "name": "St. Patrick's Day",
+        "slug": "st-patricks-day"
       },
       {
         "date": "03-17",
@@ -2086,7 +2090,8 @@
           "Laughter can strengthen relationships by fostering a sense of belonging and improving teamwork.",
           "Not only does laughter boost mood, but it can also enhance immune function and decrease pain perception."
         ],
-        "name": "National Let's Laugh Day"
+        "name": "National Let's Laugh Day",
+        "slug": "national-lets-laugh-day"
       },
       {
         "date": "03-19",
@@ -2568,7 +2573,8 @@
           "The act allowed for the sale of '3.2 beer,' referring to its alcohol content by weight (roughly 4% alcohol by volume).",
           "On April 7, 1933, the day the act took effect, breweries across the U.S. delivered millions of barrels of beer, prompting widespread public celebrations."
         ],
-        "name": "New Beer's Eve"
+        "name": "New Beer's Eve",
+        "slug": "new-beers-eve"
       },
       {
         "date": "04-06",
@@ -2987,7 +2993,8 @@
           "The customary exchange involves men giving women roses and women giving men books, a tradition with roots in medieval legends and modern literary promotion.",
           "Millions of roses and books are sold across Catalonia on this single day, making it one of the largest annual events for both industries."
         ],
-        "name": "Lover's Day"
+        "name": "Lover's Day",
+        "slug": "lovers-day"
       }
     ],
     "04-24": [
@@ -3735,7 +3742,8 @@
           "The day is typically celebrated by spending quality time with brothers, reaching out to them, or expressing gratitude for their presence and support.",
           "Brother's Day complements other family-focused observances such as National Sister's Day (first Sunday in August) and National Sibling Day (April 10th)."
         ],
-        "name": "Brother's Day"
+        "name": "Brother's Day",
+        "slug": "brothers-day"
       }
     ],
     "05-25": [
@@ -4857,7 +4865,8 @@
           "In 1978, the Piña Colada was officially declared the national drink of Puerto Rico.",
           "The name 'Piña Colada' literally translates from Spanish to 'strained pineapple,' referring to the fresh pineapple juice used in the original recipe."
         ],
-        "name": "National Piña Colada Day"
+        "name": "National Piña Colada Day",
+        "slug": "national-piña-colada-day"
       },
       {
         "date": "07-10",
@@ -5156,7 +5165,8 @@
           "The Pied Piper legend serves as a cautionary tale about keeping promises, as the Piper allegedly led away the town's children when he wasn't paid for removing the rats.",
           "The German town of Hamelin (Hameln) continues to embrace its legendary past, featuring Pied Piper-themed attractions and an annual historical play."
         ],
-        "name": "Rat Catcher’s Day"
+        "name": "Rat Catcher’s Day",
+        "slug": "rat-catchers-day"
       }
     ],
     "07-23": [
@@ -5265,7 +5275,8 @@
           "The signature \"burnt\" sugar crust is traditionally created by sprinkling sugar over the chilled custard and then caramelizing it with a blowtorch or under a hot broiler.",
           "The basic ingredients for crème brûlée are simple: egg yolks, heavy cream, sugar, and a flavoring, most commonly vanilla."
         ],
-        "name": "National Crème Brûlée Day"
+        "name": "National Crème Brûlée Day",
+        "slug": "national-crème-brûlée-day"
       },
       {
         "date": "07-27",
@@ -5612,7 +5623,8 @@
           "The name 's'more' is widely believed to be a contraction of 'some more,' reflecting the popular demand for an additional serving of the treat.",
           "Americans purchase over 90 million pounds of marshmallows each year, with a significant portion being used for s'mores, especially during summer months."
         ],
-        "name": "S'mores Day"
+        "name": "S'mores Day",
+        "slug": "smores-day"
       }
     ],
     "08-11": [
@@ -5660,7 +5672,8 @@
           "Birth order theory suggests middle children often develop strong diplomatic skills, becoming excellent mediators due to navigating relationships between older and younger siblings.",
           "Several influential figures are believed to have been middle children, including Abraham Lincoln, Bill Gates, and Madonna, often cited as examples of their independence and drive."
         ],
-        "name": "Middle Child's Day"
+        "name": "Middle Child's Day",
+        "slug": "middle-childs-day"
       }
     ],
     "08-13": [
@@ -6484,7 +6497,8 @@
           "It comes in two main varieties: a clear 'white' version and a bright green version, which gets its color from added food coloring.",
           "A prominent ingredient in the classic Grasshopper cocktail, it also lends its flavor to popular desserts like mint chocolate chip ice cream."
         ],
-        "name": "National Crème de Menthe Day"
+        "name": "National Crème de Menthe Day",
+        "slug": "national-crème-de-menthe-day"
       }
     ],
     "09-16": [
@@ -6942,7 +6956,8 @@
           "The longest recorded drive in professional golf was 515 yards by Mike Austin in 1974.",
           "The reason most golf courses have 18 holes is attributed to St Andrews' Old Course in 1764, which standardized the number."
         ],
-        "name": "National Golf Lover's Day"
+        "name": "National Golf Lover's Day",
+        "slug": "national-golf-lovers-day"
       }
     ],
     "10-05": [
@@ -7103,7 +7118,8 @@
           "While not a nationally recognized holiday, it's celebrated by many as a day to prioritize personal joy and self-care.",
           "People often 'celebrate' by treating themselves to something special, like a favorite meal, a relaxing activity, or by spending time on a personal hobby."
         ],
-        "name": "It's My Party Day"
+        "name": "It's My Party Day",
+        "slug": "its-my-party-day"
       },
       {
         "date": "10-11",
@@ -7151,7 +7167,8 @@
           "The 'M's in M&M's stand for Mars (Forrest Mars Sr.) and Murrie (Bruce Murrie, son of Hershey's president William Murrie, who partnered with Mars).",
           "The original M&M's colors were brown, yellow, orange, red, and green; blue was added to the standard color mix in 1995 after a public vote."
         ],
-        "name": "National M&M Day"
+        "name": "National M&M Day",
+        "slug": "national-mm-day"
       },
       {
         "date": "10-13",
@@ -7522,7 +7539,8 @@
           "The German Steiff company is widely credited with creating some of the first commercially produced stuffed toys in the late 19th century.",
           "Plush toys are frequently used in therapy and counseling as comfort objects to help reduce anxiety and promote emotional well-being."
         ],
-        "name": "Plush Animal Lover's Day"
+        "name": "Plush Animal Lover's Day",
+        "slug": "plush-animal-lovers-day"
       }
     ],
     "10-29": [
@@ -7618,7 +7636,8 @@
           "The U.S. Department of Commerce officially recognized National Author's Day in 1949, encouraging people to write letters to their favorite authors.",
           "Many famous authors have written under pseudonyms, such as Samuel Clemens (Mark Twain), Mary Ann Evans (George Eliot), and Eric Arthur Blair (George Orwell)."
         ],
-        "name": "National Author’s Day"
+        "name": "National Author’s Day",
+        "slug": "national-authors-day"
       }
     ],
     "11-02": [
@@ -7666,7 +7685,8 @@
           "Many common English clichés, such as 'ignorance is bliss' or 'all that glitters is not gold,' are derived from classical literature or ancient proverbs.",
           "While often criticized for lacking originality, clichés can sometimes serve as efficient shortcuts in communication, quickly conveying a familiar idea or emotion."
         ],
-        "name": "Cliché Day"
+        "name": "Cliché Day",
+        "slug": "cliché-day"
       }
     ],
     "11-04": [
@@ -8137,7 +8157,8 @@
           "In several countries, including Mexico, this day is specifically known as \"Día del Músico,\" with vibrant public celebrations and tributes to local musicians.",
           "Renowned composers like Henry Purcell and George Frideric Handel composed significant musical works dedicated to Saint Cecilia."
         ],
-        "name": "Saint Cecilia's Day"
+        "name": "Saint Cecilia's Day",
+        "slug": "saint-cecilias-day"
       }
     ],
     "11-23": [
@@ -8213,7 +8234,8 @@
           "Green and yellow are the traditional colors for the Catherinettes' hats, symbolizing knowledge and faith, respectively.",
           "Saint Catherine of Alexandria is venerated in Catholicism as one of the Fourteen Holy Helpers, known for her virginity and martyrdom."
         ],
-        "name": "Saint Catherine's Day"
+        "name": "Saint Catherine's Day",
+        "slug": "saint-catherines-day"
       }
     ],
     "11-26": [
@@ -8344,7 +8366,8 @@
           "The day serves as a lighthearted yet significant reminder to prioritize self-care and combat burnout, advocating for a 'well day' to proactively address health rather than waiting until one is already sick.",
           "It subtly critiques 'presenteeism' – the practice of attending work while feeling unwell – by promoting preventative rest days to avoid the spread of illness and sustain overall wellness."
         ],
-        "name": "Stay Home Because You're Well Day"
+        "name": "Stay Home Because You're Well Day",
+        "slug": "stay-home-because-youre-well-day"
       }
     ],
     "12-01": [
