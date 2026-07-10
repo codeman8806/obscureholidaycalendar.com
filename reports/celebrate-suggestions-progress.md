@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 510 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 515 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (510)
+## Rebuilt to rich template (515)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -39,6 +39,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] april-fools-day
 - [x] ask-a-stupid-question-day
 - [x] awkward-moments-day
+- [x] bacon-day
 - [x] bake-cookies-day
 - [x] ballpoint-pen-day
 - [x] barbershop-quartet-day
@@ -48,6 +49,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] be-an-angel-day
 - [x] be-bald-and-be-free-day
 - [x] be-late-for-something-day
+- [x] be-nasty-day
 - [x] beaujolais-nouveau-day
 - [x] best-friends-day
 - [x] beverage-day
@@ -58,10 +60,13 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] bittersweet-chocolate-with-almonds-day
 - [x] blah-blah-blah-day
 - [x] blueberry-cheesecake-day
+- [x] boxing-day
 - [x] brandied-fruit-day
 - [x] bring-flowers-to-someone-day
 - [x] brisket-day
 - [x] brothers-day
+- [x] bubble-bath-day
+- [x] bubble-tea-day
 - [x] bulldogs-are-beautiful-day
 - [x] butterscotch-pudding-day
 - [x] buy-a-musical-instrument-day
@@ -545,13 +550,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (84, added 2026-07-09)
+## Additional pages found outside original scope (79, added 2026-07-09)
 
-- [ ] bacon-day
-- [ ] be-nasty-day
-- [ ] boxing-day
-- [ ] bubble-bath-day
-- [ ] bubble-tea-day
 - [ ] cacti-appreciation-day
 - [ ] card-playing-day
 - [ ] christmas-eve
