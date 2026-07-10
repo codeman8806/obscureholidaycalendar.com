@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 585 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 590 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (585)
+## Rebuilt to rich template (590)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -598,15 +598,20 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] winter-solstice
 - [x] wonderful-weirdos-day
 - [x] work-like-a-dog-day
+- [x] world-backup-day
 - [x] world-baking-day
 - [x] world-cocktail-day
+- [x] world-contact-day
 - [x] world-emoji-day
 - [x] world-frog-day
 - [x] world-goth-day
+- [x] world-mathematics-day
+- [x] world-party-day
 - [x] world-penguin-day
 - [x] world-plant-a-vegetable-garden-day
 - [x] world-rat-day
 - [x] world-sauntering-day
+- [x] world-sleep-day
 - [x] world-turtle-day
 - [x] wright-brother-day
 - [x] zipper-day
@@ -620,13 +625,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (9, added 2026-07-09)
+## Additional pages found outside original scope (4, added 2026-07-09)
 
-- [ ] world-backup-day
-- [ ] world-contact-day
-- [ ] world-mathematics-day
-- [ ] world-party-day
-- [ ] world-sleep-day
 - [ ] world-theatre-day
 - [ ] world-toilet-day
 - [ ] world-wildlife-day
