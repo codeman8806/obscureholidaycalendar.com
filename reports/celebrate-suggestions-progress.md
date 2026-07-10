@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 575 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 580 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (575)
+## Rebuilt to rich template (580)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -506,6 +506,8 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] pick-strawberries-day
 - [x] pierogi-day
 - [x] pig-in-a-blanket-day
+- [x] plant-a-flower-day
+- [x] pledge-of-allegiance-day
 - [x] poultry-day
 - [x] presidential-joke-day
 - [x] pretend-to-be-a-time-traveler-day
@@ -518,6 +520,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] rat-catchers-day
 - [x] red-planet-day
 - [x] repeat-day
+- [x] respect-your-cat-day
 - [x] rice-pudding-day
 - [x] ride-the-wind-day
 - [x] roast-chestnuts-day
@@ -551,6 +554,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] st-patricks-day
 - [x] stay-home-because-youre-well-day
 - [x] stick-out-your-tongue-day
+- [x] still-need-to-do-day
 - [x] string-cheese-day
 - [x] submarine-day
 - [x] sunscreen-day
@@ -559,6 +563,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] supernatural-day
 - [x] swim-a-lap-day
 - [x] take-your-houseplant-for-a-walk-day
+- [x] talk-like-shakespeare-day
 - [x] talk-like-yoda-day
 - [x] tartan-day
 - [x] teddy-bear-picnic-day
@@ -610,13 +615,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (19, added 2026-07-09)
+## Additional pages found outside original scope (14, added 2026-07-09)
 
-- [ ] plant-a-flower-day
-- [ ] pledge-of-allegiance-day
-- [ ] respect-your-cat-day
-- [ ] still-need-to-do-day
-- [ ] talk-like-shakespeare-day
 - [ ] tick-tock-day
 - [ ] tolkien-reading-day
 - [ ] visit-the-zoo-day
