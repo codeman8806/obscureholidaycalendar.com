@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 594 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 598 / 599 fully rebuilt to the rich template with diversified sources.**
 The only remaining unchecked page is `today`, a broken generator artifact that
 is not a real holiday (see the Not started section) — the user decided to
 skip and flag it rather than rebuild or delete it. Every other page sitewide,
@@ -28,8 +28,15 @@ diversified, verified source and a filled Sources section.
 Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
+On 2026-07-10, a sitewide bug scan (broken links, invalid JSON-LD, Firebase
+drift) turned up 4 more pages with pure generic filler that were never
+tracked here at all (national-hydration-day, national-lets-laugh-day,
+star-wars-day, thanksgiving-day) — rebuilt all 4 and folded them into the
+checklist below, bringing the true total to 599. Also deleted
+national-pie-day-12-01, a second broken generator artifact identical to
+`today` (empty date field, generic title) that was never a real holiday.
 
-## Rebuilt to rich template (594)
+## Rebuilt to rich template (598)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -356,6 +363,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-homemade-cookies-day
 - [x] national-hot-dog-day
 - [x] national-hot-mulled-cider-day
+- [x] national-hydration-day
 - [x] national-ice-cream-sandwich-day
 - [x] national-ice-cream-soda-day
 - [x] national-iced-tea-day
@@ -370,6 +378,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-laundry-day
 - [x] national-lazy-day
 - [x] national-leathercraft-day
+- [x] national-lets-laugh-day
 - [x] national-letter-writing-day
 - [x] national-limerick-day
 - [x] national-llama-awareness-day
@@ -557,6 +566,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] spumoni-day
 - [x] square-dance-day
 - [x] st-patricks-day
+- [x] star-wars-day
 - [x] stay-home-because-youre-well-day
 - [x] stick-out-your-tongue-day
 - [x] still-need-to-do-day
@@ -573,6 +583,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] tartan-day
 - [x] teddy-bear-picnic-day
 - [x] tell-a-lie-day
+- [x] thanksgiving-day
 - [x] thrift-shop-day
 - [x] tick-tock-day
 - [x] toasted-marshmallow-day
