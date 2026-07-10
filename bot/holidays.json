@@ -1,4 +1,212 @@
 {
+  "floatingHolidays": {
+    "ask-a-stupid-question-day": {
+      "description": "Ask a Stupid Question Day, observed annually on September 28th (or the last school day of September), is an informal holiday primarily designed to encourage individuals, especially students, to overcome the fear of asking questions they might deem \"stupid.\" Originating among teachers, its goal is to foster a safe environment for inquiry, promote curiosity, and highlight that no question is truly foolish if it leads to understanding and learning, thereby reducing inhibitions in academic and social settings.",
+      "emoji": "❓",
+      "funFacts": [
+        "The concept originated in the 1980s when teachers noticed students were hesitant to ask questions in class, fearing embarrassment.",
+        "It aims to encourage critical thinking and remove the stigma often associated with asking basic or foundational questions.",
+        "While officially September 28th, some schools observe it on the last Friday or last school day of September to maximize student participation."
+      ],
+      "name": "Ask a Stupid Question Day",
+      "originalDate": "09-28",
+      "originalIndex": 1,
+      "verifiedAt": "2026-07-03"
+    },
+    "beaujolais-nouveau-day": {
+      "dateRule": {
+        "month": 11,
+        "ordinal": 3,
+        "type": "nth-weekday-of-month",
+        "weekday": 4
+      },
+      "description": "Beaujolais Nouveau Day is an annual celebration marking the release of the first wine of the harvest from the Beaujolais region of France. This young, fruity red wine, made from Gamay grapes, is traditionally released at 12:01 AM on the third Thursday of November each year, sparking festivities globally. It signifies the culmination of the grape harvest and the beginning of the new wine season, bringing a fresh taste to wine enthusiasts.",
+      "emoji": "🍷",
+      "funFacts": [
+        "The iconic slogan \"Le Beaujolais Nouveau est arrivé!\" (The New Beaujolais has arrived!) heralds the wine's official release each year.",
+        "Made exclusively from Gamay grapes, Beaujolais Nouveau undergoes a process called carbonic maceration, which contributes to its vibrant fruit flavors and light body without significant tannin extraction.",
+        "Millions of bottles are shipped and uncorked globally in over 100 countries within days of its release, showcasing its international appeal.",
+        "Despite its French origins, Japan is historically one of the largest export markets for Beaujolais Nouveau, often consuming a significant portion of the annual production.",
+        "The tradition began as a local celebration among Beaujolais winemakers in the 19th century, evolving into a worldwide event in the latter half of the 20th century."
+      ],
+      "name": "Beaujolais Nouveau Day",
+      "originalDate": "11-21",
+      "originalIndex": 1,
+      "verifiedAt": "2026-07-03"
+    },
+    "national-daylight-appreciation-day": {
+      "dateRule": {
+        "season": "summer",
+        "type": "solstice"
+      },
+      "description": "National Daylight Appreciation Day is observed annually on June 21st, strategically coinciding with the summer solstice in the Northern Hemisphere. This day encourages people to celebrate and value the longest period of natural daylight experienced during the year. It's an occasion to enjoy outdoor activities, appreciate the sun's energy, warmth, and the positive impact of extended daylight on mood and well-being, reminding us to make the most of the abundant natural light before the days begin to shorten.",
+      "emoji": "☀️",
+      "funFacts": [
+        "The date universally coincides with the summer solstice, marking the longest period of daylight and the shortest night of the year in the Northern Hemisphere.",
+        "The word \"solstice\" originates from Latin, combining \"sol\" (sun) and \"sistere\" (to stand still), as the sun appears to pause its northward or southward movement.",
+        "Depending on latitude, the summer solstice can provide anywhere from around 14 hours of daylight to nearly 24 hours in regions close to the Arctic Circle."
+      ],
+      "name": "National Daylight Appreciation Day",
+      "originalDate": "06-21",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "national-doughnut-day": {
+      "dateRule": {
+        "month": 6,
+        "ordinal": 1,
+        "type": "nth-weekday-of-month",
+        "weekday": 5
+      },
+      "description": "National Doughnut Day is celebrated on the first Friday of June each year, honoring the Salvation Army 'Doughnut Lassies' who provided comfort and support to soldiers by serving them doughnuts on the front lines during World War I. Today, it's a popular occasion for bakeries and shops to offer free or discounted doughnuts, celebrating the beloved fried pastry and its historical significance.",
+      "emoji": "🍩",
+      "funFacts": [
+        "The holiday originated in 1938 in Chicago as a fundraiser for the Salvation Army to help those in need during the Great Depression and to commemorate the 'Doughnut Lassies' of WWI.",
+        "During World War I, Salvation Army volunteers would make and serve fresh doughnuts to American soldiers in the trenches of France, providing a morale boost and a taste of home.",
+        "The iconic doughnut hole is often credited to mid-19th-century New England ship captain Hanson Gregory, who reportedly punched holes in his mother's fried dough to ensure even cooking."
+      ],
+      "name": "National Doughnut Day",
+      "originalDate": "06-07",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "national-hot-dog-day": {
+      "dateRule": {
+        "month": 7,
+        "ordinal": 3,
+        "type": "nth-weekday-of-month",
+        "weekday": 3
+      },
+      "description": "National Hot Dog Day is an annual celebration of the popular American frankfurter, often observed in the United States around the third Wednesday of July, which the prompt specifies as July 23rd. It's a day when enthusiasts and casual consumers alike enjoy hot dogs in various forms, recognizing their cultural significance as a staple of summer cookouts, sporting events, and quick meals across the nation.",
+      "emoji": "🌭",
+      "funFacts": [
+        "Americans consume an estimated 20 billion hot dogs annually.",
+        "The term 'hot dog' is believed to have originated from a 1901 cartoon depicting 'dachshund sausages.'",
+        "Many hot dog purists, especially in Chicago, famously argue that ketchup should not be used on a hot dog."
+      ],
+      "name": "National Hot Dog Day",
+      "originalDate": "07-23",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "national-ugly-sweater-day": {
+      "dateRule": {
+        "month": 12,
+        "ordinal": 3,
+        "type": "nth-weekday-of-month",
+        "weekday": 5
+      },
+      "description": "National Ugly Sweater Day is an annual celebration encouraging people to don their most garish, brightly colored, and often handmade festive sweaters. Typically observed in December, it's a lighthearted tradition embraced by offices, schools, and social gatherings to spread holiday cheer and often raise money for charity.",
+      "emoji": "🧥🎄",
+      "funFacts": [
+        "The trend of wearing \"ugly\" Christmas sweaters began in the 1980s, often seen as ironic fashion popularized by TV shows and movies.",
+        "The first official \"Ugly Christmas Sweater Party\" is often credited to a group in Vancouver, Canada, in 2002, helping to ignite the modern phenomenon.",
+        "Many Ugly Sweater Day events are used as fundraisers for various charities, encouraging participants to donate while showcasing their festive attire.",
+        "Guinness World Records has recognized attempts for the largest gathering of people wearing ugly Christmas sweaters, highlighting the global reach of the trend.",
+        "Celebrities and public figures have also embraced the trend, further popularizing it and making it a staple of holiday celebrations.",
+        "The sweaters are often characterized by excessive embellishments, such as tinsel, bells, oversized appliqués, and sometimes even working LED lights."
+      ],
+      "name": "National Ugly Sweater Day",
+      "originalDate": "12-19",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "stay-home-because-you-re-well-day": {
+      "description": "Stay Home Because You're Well Day, celebrated annually on November 30th, encourages individuals to take a proactive approach to their health by staying home from work or school not due to illness, but to rest, recharge, and prevent potential exposure to germs. This unofficial holiday champions self-care and highlights the importance of preventative well-being for maintaining long-term health and productivity, particularly as the cold and flu season typically gets underway.",
+      "emoji": "🏠",
+      "funFacts": [
+        "This unofficial holiday was created by Ruth and Thomas Roy of Wellcat.com, who are well-known for inventing numerous unique observances, often with a humorous or thought-provoking twist.",
+        "The day serves as a lighthearted yet significant reminder to prioritize self-care and combat burnout, advocating for a 'well day' to proactively address health rather than waiting until one is already sick.",
+        "It subtly critiques 'presenteeism' – the practice of attending work while feeling unwell – by promoting preventative rest days to avoid the spread of illness and sustain overall wellness."
+      ],
+      "name": "Stay Home Because You're Well Day",
+      "originalDate": "11-30",
+      "originalIndex": 1,
+      "verifiedAt": "2026-07-03"
+    },
+    "thanksgiving-day": {
+      "dateRule": {
+        "month": 11,
+        "ordinal": 4,
+        "type": "nth-weekday-of-month",
+        "weekday": 4
+      },
+      "description": "A national holiday primarily celebrated in the United States and Canada as a day of giving thanks for the harvest and other blessings of the past year. It typically involves a large family meal, often featuring turkey, and reflection on gratitude and community.",
+      "emoji": "🦃",
+      "funFacts": [
+        "The first Thanksgiving feast shared by the Pilgrims and the Wampanoag people in 1621 lasted three days.",
+        "While turkey is iconic, historical accounts suggest that venison and seafood, such as fish and lobster, were also prominent at early colonial harvest feasts.",
+        "Sarah Josepha Hale, the author of 'Mary Had a Little Lamb,' campaigned for 36 years to make Thanksgiving a national holiday.",
+        "The annual Macy's Thanksgiving Day Parade in New York City began in 1924, originally featuring animals from the Central Park Zoo.",
+        "In the US, two turkeys are 'pardoned' by the President each year, a tradition that became official in 1989.",
+        "Canadians celebrate Thanksgiving on the second Monday of October, a tradition that dates back to 1879, earlier than the US national holiday."
+      ],
+      "name": "Thanksgiving Day",
+      "originalDate": "11-27",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "tuba-day": {
+      "dateRule": {
+        "month": 5,
+        "ordinal": 1,
+        "type": "nth-weekday-of-month",
+        "weekday": 5
+      },
+      "description": "Tuba Day, observed annually on May 2nd (though sometimes celebrated on the first Friday in May), is a special holiday dedicated to recognizing and appreciating the often-overlooked contributions of tuba and euphonium players. Established by renowned tubist Harvey Phillips in 1979, the day highlights these musicians who provide the foundational bass voice and harmonic support in orchestras, concert bands, marching bands, and various musical ensembles worldwide.",
+      "emoji": "🎵",
+      "funFacts": [
+        "Tuba Day was founded by acclaimed American tubist Harvey Phillips in 1979.",
+        "The tuba is the largest and lowest-pitched instrument in the modern brass family.",
+        "The holiday aims to bring appreciation to tuba and euphonium players, who often play crucial but less prominent roles in musical ensembles."
+      ],
+      "name": "Tuba Day",
+      "originalDate": "05-02",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "winter-solstice": {
+      "dateRule": {
+        "season": "winter",
+        "type": "solstice"
+      },
+      "description": "The Winter Solstice marks the shortest day and longest night of the year in the Northern Hemisphere, occurring when the North Pole is tilted furthest away from the Sun. It is an astronomical event that signifies the official start of winter, after which the days gradually begin to lengthen.",
+      "emoji": "❄",
+      "funFacts": [
+        "The Winter Solstice has been celebrated since ancient times by various cultures, often associated with rebirth, new beginnings, and the return of light.",
+        "In many cultures, the Winter Solstice is known by different names, such as Yule in Germanic traditions or Dongzhi Festival in East Asia.",
+        "Stonehenge in England is famously aligned with the solstices, with its central axis pointing to the sunrise on the winter solstice.",
+        "Though it's the shortest day, the coldest temperatures typically occur weeks or months after the Winter Solstice due to thermal inertia.",
+        "The Earth's orbit around the sun causes the solstices. The winter solstice occurs when the sun reaches its southernmost point in the sky, directly overhead at the Tropic of Capricorn.",
+        "It is a moment when many animals, like bears, enter hibernation or significantly reduce their activity."
+      ],
+      "name": "Winter Solstice",
+      "originalDate": "12-21",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "world-sleep-day": {
+      "dateRule": {
+        "direction": "before",
+        "event": "march-equinox",
+        "type": "relative-to-event",
+        "weekday": 5
+      },
+      "description": "World Sleep Day is an annual event that aims to raise awareness about the importance of sleep for overall health and well-being. Observed on the Friday before the March Equinox, this day encourages individuals to appreciate the benefits of good sleep and promote better sleep practices worldwide.",
+      "emoji": "😴",
+      "funFacts": [
+        "The first World Sleep Day was celebrated in 2008 by the World Sleep Society.",
+        "Sleep loss is linked to numerous health issues, including obesity, diabetes, and heart disease.",
+        "Naps, when taken properly, can improve alertness and cognitive function.",
+        "The global theme for World Sleep Day changes every year, focusing on different sleep issues.",
+        "Around 60% of adults report having sleep problems at some point in their lives."
+      ],
+      "name": "World Sleep Day",
+      "originalDate": "03-13",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    }
+  },
   "holidays": {
     "01-01": [
       {
@@ -1912,16 +2120,17 @@
     "03-13": [
       {
         "date": "03-13",
-        "description": "World Sleep Day is an annual event that aims to raise awareness about the importance of sleep for overall health and well-being. Observed on the Friday before the March Equinox, this day encourages individuals to appreciate the benefits of good sleep and promote better sleep practices worldwide.",
-        "emoji": "😴",
+        "description": "National Earmuff Day, observed every March 13, celebrates the humble ear-warming invention and honors Chester Greenwood, the Maine teenager who patented earmuffs on this date in 1877. It's a lighthearted day to bundle up, appreciate a clever cold-weather innovation, and learn the surprisingly rich history behind a simple accessory that has kept ears toasty for nearly 150 years.",
+        "emoji": "🎧",
         "funFacts": [
-          "The first World Sleep Day was celebrated in 2008 by the World Sleep Society.",
-          "Sleep loss is linked to numerous health issues, including obesity, diabetes, and heart disease.",
-          "Naps, when taken properly, can improve alertness and cognitive function.",
-          "The global theme for World Sleep Day changes every year, focusing on different sleep issues.",
-          "Around 60% of adults report having sleep problems at some point in their lives."
+          "The date March 13 commemorates the day in 1877 when Chester Greenwood of Farmington, Maine, received U.S. Patent No. 188,292 for his 'Ear Mufflers,' reportedly at just 18 or 19 years old.",
+          "Greenwood supposedly got the idea as a teenager whose ears froze while ice skating; he bent wire into loops and had his grandmother sew fur onto them for warmth.",
+          "Farmington, Maine, proudly calls itself the 'Earmuff Capital of the World' and holds an annual Chester Greenwood Day celebration in his honor.",
+          "At its peak in 1936, Greenwood's factory produced over 400,000 pairs of earmuffs in a single year and kept his hometown employed for decades.",
+          "Chester Greenwood was a prolific inventor who accumulated over 100 patents in his lifetime, for items ranging from a steel-toothed rake to a whistling teakettle."
         ],
-        "name": "World Sleep Day"
+        "name": "National Earmuff Day",
+        "slug": "national-earmuff-day"
       },
       {
         "date": "03-13",
@@ -3192,14 +3401,17 @@
     "05-02": [
       {
         "date": "05-02",
-        "description": "Tuba Day, observed annually on May 2nd (though sometimes celebrated on the first Friday in May), is a special holiday dedicated to recognizing and appreciating the often-overlooked contributions of tuba and euphonium players. Established by renowned tubist Harvey Phillips in 1979, the day highlights these musicians who provide the foundational bass voice and harmonic support in orchestras, concert bands, marching bands, and various musical ensembles worldwide.",
-        "emoji": "🎵",
+        "description": "World Tuna Day is an international observance held every May 2 to raise awareness about the value of tuna, the threats of overfishing, and the importance of sustainable fisheries management. It was officially established by the United Nations to highlight the ecological and economic significance of these fast-swimming ocean fish.",
+        "emoji": "🐟",
         "funFacts": [
-          "Tuba Day was founded by acclaimed American tubist Harvey Phillips in 1979.",
-          "The tuba is the largest and lowest-pitched instrument in the modern brass family.",
-          "The holiday aims to bring appreciation to tuba and euphonium players, who often play crucial but less prominent roles in musical ensembles."
+          "The United Nations General Assembly formally designated May 2 as World Tuna Day through resolution 71/124, adopted in December 2016.",
+          "The very first official World Tuna Day was observed in 2017, making it a relatively recent addition to the UN's calendar of observances.",
+          "There are about 15 species of tuna, including the prized bluefin, yellowfin, skipjack, albacore, and bigeye, and they are found across the Pacific, Atlantic, and Indian Oceans.",
+          "More than 96 countries are involved in tuna fisheries, and tuna and tuna-like species are worth billions of dollars annually, providing a vital source of protein and income worldwide.",
+          "Tuna are warm-blooded and among the fastest fish in the sea, with some species like the bluefin capable of swimming in bursts of up to around 75 km/h (about 47 mph)."
         ],
-        "name": "Tuba Day"
+        "name": "World Tuna Day",
+        "slug": "world-tuna-day"
       },
       {
         "date": "05-02",
@@ -4061,14 +4273,17 @@
     "06-07": [
       {
         "date": "06-07",
-        "description": "National Doughnut Day is celebrated on the first Friday of June each year, honoring the Salvation Army 'Doughnut Lassies' who provided comfort and support to soldiers by serving them doughnuts on the front lines during World War I. Today, it's a popular occasion for bakeries and shops to offer free or discounted doughnuts, celebrating the beloved fried pastry and its historical significance.",
-        "emoji": "🍩",
+        "description": "Celebrated every June 7, National Chocolate Ice Cream Day honors one of the world's most beloved frozen desserts. The day invites ice cream lovers to indulge in the rich, creamy treat—whether in a cone, cup, sundae, or milkshake—and to appreciate the long history of chocolate-flavored frozen confections that predate even vanilla in some early recipes.",
+        "emoji": "🍫",
         "funFacts": [
-          "The holiday originated in 1938 in Chicago as a fundraiser for the Salvation Army to help those in need during the Great Depression and to commemorate the 'Doughnut Lassies' of WWI.",
-          "During World War I, Salvation Army volunteers would make and serve fresh doughnuts to American soldiers in the trenches of France, providing a morale boost and a taste of home.",
-          "The iconic doughnut hole is often credited to mid-19th-century New England ship captain Hanson Gregory, who reportedly punched holes in his mother's fried dough to ensure even cooking."
+          "Chocolate ice cream is generally considered older than vanilla; some of the earliest frozen chocolate recipes appeared in Italy in the late 17th century, well before vanilla ice cream became popular.",
+          "A 1692 Italian recipe collection by Antonio Latini is often cited as one of the first written descriptions of a frozen chocolate dessert.",
+          "Chocolate consistently ranks as the second most popular ice cream flavor in the United States, behind vanilla.",
+          "The chocolate flavor comes from cocoa, derived from the beans of the cacao tree, which were once used as currency by the Aztecs and Maya.",
+          "June falls in the middle of summer in the Northern Hemisphere, and July is designated National Ice Cream Month in the U.S., making early June a fitting warm-up for the frozen treat."
         ],
-        "name": "National Doughnut Day"
+        "name": "National Chocolate Ice Cream Day",
+        "slug": "national-chocolate-ice-cream-day"
       },
       {
         "date": "06-07",
@@ -4398,14 +4613,17 @@
     "06-21": [
       {
         "date": "06-21",
-        "description": "National Daylight Appreciation Day is observed annually on June 21st, strategically coinciding with the summer solstice in the Northern Hemisphere. This day encourages people to celebrate and value the longest period of natural daylight experienced during the year. It's an occasion to enjoy outdoor activities, appreciate the sun's energy, warmth, and the positive impact of extended daylight on mood and well-being, reminding us to make the most of the abundant natural light before the days begin to shorten.",
-        "emoji": "☀️",
+        "description": "World Giraffe Day is an annual awareness and fundraising day dedicated to the world's tallest land animal. Held on June 21 — the longest day (or night) of the year — the date was chosen as a fitting nod to the giraffe's remarkably long neck. Launched in 2014 by the Giraffe Conservation Foundation, it rallies zoos, schools, and conservationists worldwide to celebrate giraffes and fight their 'silent extinction' in the wild.",
+        "emoji": "🦒",
         "funFacts": [
-          "The date universally coincides with the summer solstice, marking the longest period of daylight and the shortest night of the year in the Northern Hemisphere.",
-          "The word \"solstice\" originates from Latin, combining \"sol\" (sun) and \"sistere\" (to stand still), as the sun appears to pause its northward or southward movement.",
-          "Depending on latitude, the summer solstice can provide anywhere from around 14 hours of daylight to nearly 24 hours in regions close to the Arctic Circle."
+          "The date, June 21, was deliberately chosen because it is the longest day (or night) of the year depending on the hemisphere — a symbolic tribute to the giraffe's long neck.",
+          "World Giraffe Day was launched in 2014 by the Giraffe Conservation Foundation (GCF), a Namibia-based non-profit and the only NGO in the world focused solely on giraffe conservation across Africa.",
+          "Sir David Attenborough referred to the sharp decline in giraffe numbers as a 'silent extinction,' as their populations quietly fell while public attention focused on other species.",
+          "Just like human fingerprints, no two giraffes have exactly the same coat pattern, allowing researchers to identify individuals in the wild.",
+          "Giraffes need only about 5 to 30 minutes of sleep in a 24-hour period, often taken in short naps while standing up."
         ],
-        "name": "National Daylight Appreciation Day"
+        "name": "World Giraffe Day",
+        "slug": "world-giraffe-day"
       },
       {
         "date": "06-21",
@@ -5172,14 +5390,17 @@
     "07-23": [
       {
         "date": "07-23",
-        "description": "National Hot Dog Day is an annual celebration of the popular American frankfurter, often observed in the United States around the third Wednesday of July, which the prompt specifies as July 23rd. It's a day when enthusiasts and casual consumers alike enjoy hot dogs in various forms, recognizing their cultural significance as a staple of summer cookouts, sporting events, and quick meals across the nation.",
-        "emoji": "🌭",
+        "description": "Celebrated every July 23, National Gorgeous Grandma Day honors older women who remain vibrant, active, and glamorous, challenging outdated stereotypes about what it means to be a grandmother. The day encourages women over 50 to embrace this stage of life with confidence, purpose, and flair rather than fading into a limiting 'little old lady' role.",
+        "emoji": "👵",
         "funFacts": [
-          "Americans consume an estimated 20 billion hot dogs annually.",
-          "The term 'hot dog' is believed to have originated from a 1901 cartoon depicting 'dachshund sausages.'",
-          "Many hot dog purists, especially in Chicago, famously argue that ketchup should not be used on a hot dog."
+          "The day was created by author Alice Solomon in 1984 after she coined the term 'Gorgeous Grandma' to redefine how society views aging women.",
+          "Solomon was inspired to celebrate reinvention after graduating from Wellesley College at the age of 50, proving it is never too late to pursue new goals.",
+          "The observance intentionally rejects the frumpy, passive stereotype of grandmothers, celebrating instead women who are stylish, engaged, and full of energy.",
+          "A 'gorgeous grandma' does not actually have to be a grandmother — the term is meant to honor all vibrant women of a certain age.",
+          "Alice Solomon wrote a book titled 'The Gorgeous Grandma Book' to spread her message of positive, empowered aging."
         ],
-        "name": "National Hot Dog Day"
+        "name": "National Gorgeous Grandma Day",
+        "slug": "national-gorgeous-grandma-day"
       },
       {
         "date": "07-23",
@@ -6805,14 +7026,17 @@
       },
       {
         "date": "09-28",
-        "description": "Ask a Stupid Question Day, observed annually on September 28th (or the last school day of September), is an informal holiday primarily designed to encourage individuals, especially students, to overcome the fear of asking questions they might deem \"stupid.\" Originating among teachers, its goal is to foster a safe environment for inquiry, promote curiosity, and highlight that no question is truly foolish if it leads to understanding and learning, thereby reducing inhibitions in academic and social settings.",
-        "emoji": "❓",
+        "description": "World Rabies Day is an international day of awareness observed every September 28 to promote the prevention, control, and eventual elimination of rabies in both humans and animals. Coordinated by the Global Alliance for Rabies Control and recognized by major health bodies, it unites communities, veterinarians, and health workers worldwide around vaccination and education efforts.",
+        "emoji": "🐕",
         "funFacts": [
-          "The concept originated in the 1980s when teachers noticed students were hesitant to ask questions in class, fearing embarrassment.",
-          "It aims to encourage critical thinking and remove the stigma often associated with asking basic or foundational questions.",
-          "While officially September 28th, some schools observe it on the last Friday or last school day of September to maximize student participation."
+          "The date, September 28, marks the anniversary of the death of Louis Pasteur, who—with his colleagues—developed the first effective rabies vaccine.",
+          "The first World Rabies Day was held in 2007, organized by the Global Alliance for Rabies Control.",
+          "Rabies is nearly 100% fatal once symptoms appear, yet it is almost entirely preventable through vaccination.",
+          "The World Health Organization, along with partners, set a goal of achieving zero human deaths from dog-mediated rabies by 2030 (\"Zero by 30\").",
+          "Dogs are responsible for the vast majority of human rabies cases worldwide, which is why mass dog vaccination campaigns are central to World Rabies Day efforts."
         ],
-        "name": "Ask a Stupid Question Day"
+        "name": "World Rabies Day",
+        "slug": "world-rabies-day"
       }
     ],
     "09-29": [
@@ -8120,16 +8344,17 @@
       },
       {
         "date": "11-21",
-        "description": "Beaujolais Nouveau Day is an annual celebration marking the release of the first wine of the harvest from the Beaujolais region of France. This young, fruity red wine, made from Gamay grapes, is traditionally released at 12:01 AM on the third Thursday of November each year, sparking festivities globally. It signifies the culmination of the grape harvest and the beginning of the new wine season, bringing a fresh taste to wine enthusiasts.",
-        "emoji": "🍷",
+        "description": "World Hello Day is a secular observance held every November 21 that promotes the idea that conflicts should be resolved through communication rather than force. People participate simply by greeting ten or more people during the day, demonstrating the power of personal communication in preserving peace.",
+        "emoji": "👋",
         "funFacts": [
-          "The iconic slogan \"Le Beaujolais Nouveau est arrivé!\" (The New Beaujolais has arrived!) heralds the wine's official release each year.",
-          "Made exclusively from Gamay grapes, Beaujolais Nouveau undergoes a process called carbonic maceration, which contributes to its vibrant fruit flavors and light body without significant tannin extraction.",
-          "Millions of bottles are shipped and uncorked globally in over 100 countries within days of its release, showcasing its international appeal.",
-          "Despite its French origins, Japan is historically one of the largest export markets for Beaujolais Nouveau, often consuming a significant portion of the annual production.",
-          "The tradition began as a local celebration among Beaujolais winemakers in the 19th century, evolving into a worldwide event in the latter half of the 20th century."
+          "It was founded in 1973 by brothers Brian McCormack, a Ph.D. graduate of Arizona State University, and Michael McCormack, a Harvard graduate, as a response to the Yom Kippur War between Egypt and Israel.",
+          "To launch the very first World Hello Day, the McCormack brothers mailed roughly 1,360 letters in seven languages to government leaders around the world encouraging their participation.",
+          "In its first year the observance gained the support of 15 countries, and it has since grown to be observed by people in around 180 countries.",
+          "The single custom is simply to greet ten or more people during the day, sending a message to world leaders to use communication rather than force to settle conflicts.",
+          "Dozens of Nobel Peace Prize laureates have recognized World Hello Day as a meaningful instrument for preserving peace."
         ],
-        "name": "Beaujolais Nouveau Day"
+        "name": "World Hello Day",
+        "slug": "world-hello-day"
       }
     ],
     "11-22": [
@@ -8269,17 +8494,17 @@
     "11-27": [
       {
         "date": "11-27",
-        "description": "A national holiday primarily celebrated in the United States and Canada as a day of giving thanks for the harvest and other blessings of the past year. It typically involves a large family meal, often featuring turkey, and reflection on gratitude and community.",
-        "emoji": "🦃",
+        "description": "Celebrated every November 27th, National Bavarian Cream Pie Day honors the rich, custard-filled dessert known as Bavarian cream pie. This decadent treat pairs a creamy vanilla custard base—thickened with eggs and set with gelatin—with a pie crust, giving pie lovers a delicious reason to indulge each year, often right around the Thanksgiving holiday.",
+        "emoji": "🥧",
         "funFacts": [
-          "The first Thanksgiving feast shared by the Pilgrims and the Wampanoag people in 1621 lasted three days.",
-          "While turkey is iconic, historical accounts suggest that venison and seafood, such as fish and lobster, were also prominent at early colonial harvest feasts.",
-          "Sarah Josepha Hale, the author of 'Mary Had a Little Lamb,' campaigned for 36 years to make Thanksgiving a national holiday.",
-          "The annual Macy's Thanksgiving Day Parade in New York City began in 1924, originally featuring animals from the Central Park Zoo.",
-          "In the US, two turkeys are 'pardoned' by the President each year, a tradition that became official in 1989.",
-          "Canadians celebrate Thanksgiving on the second Monday of October, a tradition that dates back to 1879, earlier than the US national holiday."
+          "Bavarian cream (crème bavaroise) is a classic custard set with gelatin and lightened with whipped cream, distinguishing it from a simple pastry cream.",
+          "The dessert is widely credited to the famous French chef Marie-Antoine Carême, a pioneer of early 19th-century haute cuisine.",
+          "Despite its name referencing Bavaria in Germany, the cream's refined form is strongly associated with French culinary tradition.",
+          "Bavarian cream is the same filling commonly found inside 'Bavarian cream' doughnuts, showing its versatility beyond pies.",
+          "The day falls on November 27th each year, frequently landing near or on Thanksgiving, adding another dessert option to the holiday table."
         ],
-        "name": "Thanksgiving Day"
+        "name": "National Bavarian Cream Pie Day",
+        "slug": "national-bavarian-cream-pie-day"
       },
       {
         "date": "11-27",
@@ -8359,15 +8584,17 @@
       },
       {
         "date": "11-30",
-        "description": "Stay Home Because You're Well Day, celebrated annually on November 30th, encourages individuals to take a proactive approach to their health by staying home from work or school not due to illness, but to rest, recharge, and prevent potential exposure to germs. This unofficial holiday champions self-care and highlights the importance of preventative well-being for maintaining long-term health and productivity, particularly as the cold and flu season typically gets underway.",
-        "emoji": "🏠",
+        "description": "Computer Security Day is an annual observance held every November 30 to raise awareness about cybersecurity and encourage people and organizations to protect their computers, devices, and data from digital threats. It promotes good digital hygiene habits like updating passwords, enabling multi-factor authentication, and staying alert to viruses, malware, and online scams.",
+        "emoji": "🔒",
         "funFacts": [
-          "This unofficial holiday was created by Ruth and Thomas Roy of Wellcat.com, who are well-known for inventing numerous unique observances, often with a humorous or thought-provoking twist.",
-          "The day serves as a lighthearted yet significant reminder to prioritize self-care and combat burnout, advocating for a 'well day' to proactively address health rather than waiting until one is already sick.",
-          "It subtly critiques 'presenteeism' – the practice of attending work while feeling unwell – by promoting preventative rest days to avoid the spread of illness and sustain overall wellness."
+          "The observance was launched in 1988 by the Washington, D.C. chapter of the Association for Computing Machinery's (ACM) Special Interest Group on Security, Audit, and Control.",
+          "November 30 was reportedly chosen so that awareness of computer security would stay high during the busy holiday shopping season, when people tend to be more distracted.",
+          "Coincidentally, 1988 was also the year of the infamous Morris Worm, one of the first major internet worms, which spread just weeks before the day's debut.",
+          "By 2003, organizations like CERT and the U.S. Department of Homeland Security had become involved in amplifying the day's cybersecurity awareness message.",
+          "Common ways to mark the day include updating passwords, enabling multi-factor authentication, running antivirus scans, and educating others about phishing and online threats."
         ],
-        "name": "Stay Home Because You're Well Day",
-        "slug": "stay-home-because-youre-well-day"
+        "name": "Computer Security Day",
+        "slug": "computer-security-day"
       }
     ],
     "12-01": [
@@ -8877,17 +9104,17 @@
     "12-19": [
       {
         "date": "12-19",
-        "description": "National Ugly Sweater Day is an annual celebration encouraging people to don their most garish, brightly colored, and often handmade festive sweaters. Typically observed in December, it's a lighthearted tradition embraced by offices, schools, and social gatherings to spread holiday cheer and often raise money for charity.",
-        "emoji": "🧥🎄",
+        "description": "National Oatmeal Muffin Day, observed annually on December 19, celebrates the humble oatmeal muffin — a heart-healthy baked treat that bridges the gap between a wholesome bowl of oatmeal and a sweet cupcake. The day encourages people to enjoy oatmeal muffins for breakfast or as a snack while appreciating the fiber-rich, cholesterol-friendly benefits of oats.",
+        "emoji": "🧁",
         "funFacts": [
-          "The trend of wearing \"ugly\" Christmas sweaters began in the 1980s, often seen as ironic fashion popularized by TV shows and movies.",
-          "The first official \"Ugly Christmas Sweater Party\" is often credited to a group in Vancouver, Canada, in 2002, helping to ignite the modern phenomenon.",
-          "Many Ugly Sweater Day events are used as fundraisers for various charities, encouraging participants to donate while showcasing their festive attire.",
-          "Guinness World Records has recognized attempts for the largest gathering of people wearing ugly Christmas sweaters, highlighting the global reach of the trend.",
-          "Celebrities and public figures have also embraced the trend, further popularizing it and making it a staple of holiday celebrations.",
-          "The sweaters are often characterized by excessive embellishments, such as tinsel, bells, oversized appliqués, and sometimes even working LED lights."
+          "Oatmeal is considered 'heart-healthy' because its soluble fiber can help lower LDL cholesterol levels, making oatmeal muffins a guilt-free indulgence.",
+          "The word 'muffin' is believed to derive from the Low German 'muffen,' meaning little cakes, with the term appearing in English by the 18th century.",
+          "Oats are a whole grain, and diets high in whole grains have been associated with a reduced risk of colorectal cancer.",
+          "Oatmeal muffins are highly versatile, commonly customized with add-ins like blueberries, bananas, raisins, cinnamon, or nuts.",
+          "Unlike frosted cupcakes they resemble, muffins are traditionally a quick bread leavened with baking powder or baking soda rather than yeast."
         ],
-        "name": "National Ugly Sweater Day"
+        "name": "National Oatmeal Muffin Day",
+        "slug": "national-oatmeal-muffin-day"
       },
       {
         "date": "12-19",
@@ -8935,17 +9162,17 @@
     "12-21": [
       {
         "date": "12-21",
-        "description": "The Winter Solstice marks the shortest day and longest night of the year in the Northern Hemisphere, occurring when the North Pole is tilted furthest away from the Sun. It is an astronomical event that signifies the official start of winter, after which the days gradually begin to lengthen.",
-        "emoji": "❄",
+        "description": "Observed each year on December 21, National French Fried Shrimp Day celebrates one of America's most beloved seafood dishes: shrimp coated in batter or breading and deep-fried to a golden crunch. It's a day for seafood lovers to enjoy fried shrimp at home or at their favorite restaurants and to appreciate this popular comfort food.",
+        "emoji": "🍤",
         "funFacts": [
-          "The Winter Solstice has been celebrated since ancient times by various cultures, often associated with rebirth, new beginnings, and the return of light.",
-          "In many cultures, the Winter Solstice is known by different names, such as Yule in Germanic traditions or Dongzhi Festival in East Asia.",
-          "Stonehenge in England is famously aligned with the solstices, with its central axis pointing to the sunrise on the winter solstice.",
-          "Though it's the shortest day, the coldest temperatures typically occur weeks or months after the Winter Solstice due to thermal inertia.",
-          "The Earth's orbit around the sun causes the solstices. The winter solstice occurs when the sun reaches its southernmost point in the sky, directly overhead at the Tropic of Capricorn.",
-          "It is a moment when many animals, like bears, enter hibernation or significantly reduce their activity."
+          "National Day Calendar and other holiday trackers list the observance on December 21 each year, with reports suggesting it was first celebrated around the year 2000.",
+          "Deep-frying shrimp typically involves coating them in batter or breadcrumbs, and a common home-cooking twist is air frying for a lighter version.",
+          "Shrimp is one of the most popular seafoods consumed in the United States, making fried shrimp a widely enjoyed dish year-round.",
+          "The dish is a staple on many American restaurant menus, from casual seafood shacks to sit-down eateries, and is often served with dipping sauces like cocktail or tartar.",
+          "The holiday falls on the same date as the winter solstice, giving seafood fans a warm, comforting meal to enjoy on one of the year's shortest days."
         ],
-        "name": "Winter Solstice"
+        "name": "National French Fried Shrimp Day",
+        "slug": "national-french-fried-shrimp-day"
       },
       {
         "date": "12-21",
