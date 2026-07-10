@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 520 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 525 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (520)
+## Rebuilt to rich template (525)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -110,14 +110,19 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] dolphin-day
 - [x] donald-duck-day
 - [x] doodle-day
+- [x] dr-seuss-day
 - [x] draw-a-picture-of-a-bird-day
+- [x] dress-up-your-pet-day
 - [x] drive-in-movie-day
 - [x] eat-a-red-apple-day
 - [x] eat-outside-day
+- [x] eat-what-you-want-day
 - [x] electronic-greetings-day
 - [x] embrace-your-geekness-day
 - [x] evaluate-your-life-day
+- [x] falling-needles-family-fest-day
 - [x] feral-cat-day
+- [x] festivus
 - [x] fibonacci-day
 - [x] fight-procrastination-day
 - [x] eat-an-extra-dessert-day
@@ -555,13 +560,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (74, added 2026-07-09)
+## Additional pages found outside original scope (69, added 2026-07-09)
 
-- [ ] dr-seuss-day
-- [ ] dress-up-your-pet-day
-- [ ] eat-what-you-want-day
-- [ ] falling-needles-family-fest-day
-- [ ] festivus
 - [ ] first-greenback-day
 - [ ] get-over-it-day
 - [ ] girl-scout-day
