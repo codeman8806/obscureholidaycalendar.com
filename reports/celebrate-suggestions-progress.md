@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 413 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 418 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (413)
+## Rebuilt to rich template (418)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -439,18 +439,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] pick-strawberries-day
 - [x] pierogi-day
 - [x] pig-in-a-blanket-day
+- [x] poultry-day
+- [x] presidential-joke-day
+- [x] pretend-to-be-a-time-traveler-day
+- [x] push-button-phone-day
+- [x] put-a-pillow-on-your-fridge-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (182)
+## Not started (177)
 
-- [ ] poultry-day
-- [ ] presidential-joke-day
-- [ ] pretend-to-be-a-time-traveler-day
-- [ ] push-button-phone-day
-- [ ] put-a-pillow-on-your-fridge-day
 - [ ] put-on-your-own-shoes-day
 - [ ] race-your-mouse-around-the-icons-day
 - [ ] rain-day
