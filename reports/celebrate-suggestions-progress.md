@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 540 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 545 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (540)
+## Rebuilt to rich template (545)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -212,12 +212,17 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] loomis-day
 - [x] lost-sock-memorial-day
 - [x] love-a-tree-day
+- [x] love-note-day
 - [x] lucky-penny-day
 - [x] macaroon-day
 - [x] mad-hatter-day
 - [x] make-a-gift-day
 - [x] make-a-hat-day
+- [x] make-cut-out-snowflakes-day
 - [x] make-life-beautiful-day
+- [x] make-up-your-mind-day
+- [x] make-up-your-own-holiday-day
+- [x] march-forth-day
 - [x] may-day
 - [x] may-ray-day
 - [x] mean-girls-day
@@ -575,13 +580,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (54, added 2026-07-09)
+## Additional pages found outside original scope (49, added 2026-07-09)
 
-- [ ] love-note-day
-- [ ] make-cut-out-snowflakes-day
-- [ ] make-up-your-mind-day
-- [ ] make-up-your-own-holiday-day
-- [ ] march-forth-day
 - [ ] mischief-night
 - [ ] national-7-eleven-day
 - [ ] national-anthem-day
