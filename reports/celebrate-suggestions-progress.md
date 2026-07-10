@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 491 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 496 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (491)
+## Rebuilt to rich template (496)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -516,19 +516,19 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] wear-purple-for-peace-day
 - [x] wear-something-gaudy-day
 - [x] wear-your-pajamas-to-work-day
+- [x] wiggle-your-toes-day
+- [x] wild-foods-day
+- [x] winter-solstice
+- [x] wonderful-weirdos-day
+- [x] work-like-a-dog-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (104)
+## Not started (99)
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
-- [ ] wiggle-your-toes-day
-- [ ] wild-foods-day
-- [ ] winter-solstice
-- [ ] wonderful-weirdos-day
-- [ ] work-like-a-dog-day
 - [ ] world-baking-day
 - [ ] world-cocktail-day
 - [ ] world-emoji-day
