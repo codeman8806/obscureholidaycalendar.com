@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 555 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 560 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (555)
+## Rebuilt to rich template (560)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -338,6 +338,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-gingerbread-day
 - [x] national-girlfriends-day
 - [x] national-golf-lovers-day
+- [x] national-grammar-day
 - [x] national-greasy-foods-day
 - [x] national-great-american-pot-pie-day
 - [x] national-grilled-cheese-sandwich-day
@@ -345,6 +346,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-guacamole-day
 - [x] national-hamburger-day
 - [x] national-hammock-day
+- [x] national-hard-candy-day
 - [x] national-high-five-day
 - [x] national-homemade-cookies-day
 - [x] national-hot-dog-day
@@ -353,6 +355,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-ice-cream-soda-day
 - [x] national-iced-tea-day
 - [x] national-it-professionals-day
+- [x] national-jelly-bean-day
 - [x] national-joe-day
 - [x] national-jukebox-day
 - [x] national-julienne-fries-day
@@ -370,6 +373,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-make-lunch-count-day
 - [x] national-make-your-bed-day
 - [x] national-maple-syrup-day
+- [x] national-mario-day
 - [x] national-matchmaker-day
 - [x] national-milk-chocolate-day
 - [x] national-mint-julep-day
@@ -396,6 +400,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-peanut-butter-cookie-day
 - [x] national-peanut-butter-fudge-day
 - [x] national-pecan-cookie-day
+- [x] national-pecan-pie-day
 - [x] national-pecan-torte-day
 - [x] national-pepperoni-pizza-day
 - [x] national-pet-day
@@ -590,13 +595,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (39, added 2026-07-09)
+## Additional pages found outside original scope (34, added 2026-07-09)
 
-- [ ] national-grammar-day
-- [ ] national-hard-candy-day
-- [ ] national-jelly-bean-day
-- [ ] national-mario-day
-- [ ] national-pecan-pie-day
 - [ ] national-picnic-day
 - [ ] national-pig-day
 - [ ] national-promposal-day
