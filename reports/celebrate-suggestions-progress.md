@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 580 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 585 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (580)
+## Rebuilt to rich template (585)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -569,7 +569,9 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] teddy-bear-picnic-day
 - [x] tell-a-lie-day
 - [x] thrift-shop-day
+- [x] tick-tock-day
 - [x] toasted-marshmallow-day
+- [x] tolkien-reading-day
 - [x] towel-day
 - [x] tuba-day
 - [x] tutankhamun-s-tomb-discovery-day
@@ -583,13 +585,16 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] vesuvius-day
 - [x] violin-day
 - [x] virtual-vacation-day
+- [x] visit-the-zoo-day
 - [x] visit-your-relatives-day
+- [x] waffle-day
 - [x] wear-brown-shoes-day
 - [x] wear-purple-for-peace-day
 - [x] wear-something-gaudy-day
 - [x] wear-your-pajamas-to-work-day
 - [x] wiggle-your-toes-day
 - [x] wild-foods-day
+- [x] winnie-the-pooh-day
 - [x] winter-solstice
 - [x] wonderful-weirdos-day
 - [x] work-like-a-dog-day
@@ -615,13 +620,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (14, added 2026-07-09)
+## Additional pages found outside original scope (9, added 2026-07-09)
 
-- [ ] tick-tock-day
-- [ ] tolkien-reading-day
-- [ ] visit-the-zoo-day
-- [ ] waffle-day
-- [ ] winnie-the-pooh-day
 - [ ] world-backup-day
 - [ ] world-contact-day
 - [ ] world-mathematics-day
