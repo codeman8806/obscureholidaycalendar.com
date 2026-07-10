@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 598 / 599 fully rebuilt to the rich template with diversified sources.**
+**Status: 609 / 610 fully rebuilt to the rich template with diversified sources.**
 The only remaining unchecked page is `today`, a broken generator artifact that
 is not a real holiday (see the Not started section) — the user decided to
 skip and flag it rather than rebuild or delete it. Every other page sitewide,
@@ -35,8 +35,21 @@ star-wars-day, thanksgiving-day) — rebuilt all 4 and folded them into the
 checklist below, bringing the true total to 599. Also deleted
 national-pie-day-12-01, a second broken generator artifact identical to
 `today` (empty date field, generic title) that was never a real holiday.
+Also on 2026-07-10: Firebase's holidays database was found to have swapped
+11 floating (day-of-week/lunar) holidays out of their fixed calendar slots
+for 11 brand-new fixed-date holidays (national-earmuff-day, world-tuna-day,
+national-chocolate-ice-cream-day, world-giraffe-day,
+national-gorgeous-grandma-day, world-rabies-day, world-hello-day,
+national-bavarian-cream-pie-day, computer-security-day,
+national-oatmeal-muffin-day, national-french-fried-shrimp-day). Per user
+decision, holidays.json was resynced to match and all 11 new pages were
+built from scratch with verified sources, bringing the true total to 610.
+The 11 displaced floating-holiday pages (world-sleep-day, tuba-day,
+thanksgiving-day, etc.) remain live and rebuilt but no longer appear in
+calendar navigation for their old dates — see the floating-holidays memory
+for full detail; this is a known, deliberate tradeoff, not a bug.
 
-## Rebuilt to rich template (598)
+## Rebuilt to rich template (609)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -105,6 +118,7 @@ national-pie-day-12-01, a second broken generator artifact identical to
 - [x] coconut-cream-pie-day
 - [x] coloring-book-day
 - [x] common-sense-day
+- [x] computer-security-day
 - [x] cookbook-launch-day
 - [x] corn-fritters-day
 - [x] count-your-buttons-day
@@ -265,6 +279,7 @@ national-pie-day-12-01, a second broken generator artifact identical to
 - [x] national-bad-poetry-day
 - [x] national-baklava-day
 - [x] national-banana-split-day
+- [x] national-bavarian-cream-pie-day
 - [x] national-beach-day
 - [x] national-beer-day
 - [x] national-black-cat-appreciation-day
@@ -298,6 +313,7 @@ national-pie-day-12-01, a second broken generator artifact identical to
 - [x] national-chocolate-covered-anything-day
 - [x] national-chocolate-covered-pretzel-day
 - [x] national-chocolate-cupcake-day
+- [x] national-chocolate-ice-cream-day
 - [x] national-chocolate-milk-day
 - [x] national-chocolate-milkshake-day
 - [x] national-chocolate-pecan-pie-day
@@ -332,6 +348,7 @@ national-pie-day-12-01, a second broken generator artifact identical to
 - [x] national-dog-day
 - [x] national-doughnut-day
 - [x] national-drink-beer-day
+- [x] national-earmuff-day
 - [x] national-eat-a-hoagie-day
 - [x] national-eat-your-vegetables-day
 - [x] national-egg-day
@@ -342,6 +359,7 @@ national-pie-day-12-01, a second broken generator artifact identical to
 - [x] national-ferret-day
 - [x] national-filet-mignon-day
 - [x] national-food-day
+- [x] national-french-fried-shrimp-day
 - [x] national-french-toast-day
 - [x] national-fried-scallops-day
 - [x] national-fudge-day
@@ -350,6 +368,7 @@ national-pie-day-12-01, a second broken generator artifact identical to
 - [x] national-gingerbread-day
 - [x] national-girlfriends-day
 - [x] national-golf-lovers-day
+- [x] national-gorgeous-grandma-day
 - [x] national-grammar-day
 - [x] national-greasy-foods-day
 - [x] national-great-american-pot-pie-day
@@ -401,6 +420,7 @@ national-pie-day-12-01, a second broken generator artifact identical to
 - [x] national-name-your-car-day
 - [x] national-new-hampshire-day
 - [x] national-oatmeal-cookie-day
+- [x] national-oatmeal-muffin-day
 - [x] national-onion-rings-day
 - [x] national-ootd-day
 - [x] national-pancake-day
@@ -620,16 +640,20 @@ national-pie-day-12-01, a second broken generator artifact identical to
 - [x] world-contact-day
 - [x] world-emoji-day
 - [x] world-frog-day
+- [x] world-giraffe-day
 - [x] world-goth-day
+- [x] world-hello-day
 - [x] world-mathematics-day
 - [x] world-party-day
 - [x] world-penguin-day
 - [x] world-plant-a-vegetable-garden-day
+- [x] world-rabies-day
 - [x] world-rat-day
 - [x] world-sauntering-day
 - [x] world-sleep-day
 - [x] world-theatre-day
 - [x] world-toilet-day
+- [x] world-tuna-day
 - [x] world-turtle-day
 - [x] world-wildlife-day
 - [x] worship-of-tools-day
