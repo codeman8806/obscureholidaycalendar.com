@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 560 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 565 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (560)
+## Rebuilt to rich template (565)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -404,17 +404,22 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-pecan-torte-day
 - [x] national-pepperoni-pizza-day
 - [x] national-pet-day
+- [x] national-picnic-day
 - [x] national-pickle-day
 - [x] national-pie-day-12-01
 - [x] national-pierce-your-ears-day
+- [x] national-pig-day
 - [x] national-pizza-with-the-works-except-anchovies-day
 - [x] national-piña-colada-day
 - [x] national-play-doh-day
 - [x] national-potato-day
 - [x] national-pretzel-day
 - [x] national-prime-rib-day
+- [x] national-promposal-day
 - [x] national-pumpkin-cheesecake-day
 - [x] national-pumpkin-day
+- [x] national-pumpkin-pie-day
+- [x] national-puppy-day
 - [x] national-quesadilla-day
 - [x] national-radio-day
 - [x] national-raspberries-n-cream-day
@@ -595,13 +600,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (34, added 2026-07-09)
+## Additional pages found outside original scope (29, added 2026-07-09)
 
-- [ ] national-picnic-day
-- [ ] national-pig-day
-- [ ] national-promposal-day
-- [ ] national-pumpkin-pie-day
-- [ ] national-puppy-day
 - [ ] near-miss-day
 - [ ] no-bra-day
 - [ ] no-interruptions-day
