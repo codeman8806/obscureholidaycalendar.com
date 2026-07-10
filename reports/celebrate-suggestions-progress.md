@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 565 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 570 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (565)
+## Rebuilt to rich template (570)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -471,19 +471,24 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] national-wine-day
 - [x] national-yo-yo-day
 - [x] national-zucchini-bread-day
+- [x] near-miss-day
 - [x] nature-photography-day
 - [x] new-beers-eve
 - [x] new-years-eve
 - [x] no-beard-day
+- [x] no-bra-day
 - [x] no-dirty-dishes-day
 - [x] no-housework-day
+- [x] no-interruptions-day
 - [x] no-news-is-good-news-day
 - [x] no-rhyme-or-reason-day
 - [x] no-socks-day
 - [x] nobel-prize-day
 - [x] nutty-fudge-day
+- [x] old-stuff-day
 - [x] one-cent-day
 - [x] orange-blossom-day
+- [x] oreo-cookie-day
 - [x] origami-day
 - [x] oyster-day
 - [x] paperclip-day
@@ -600,13 +605,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (29, added 2026-07-09)
+## Additional pages found outside original scope (24, added 2026-07-09)
 
-- [ ] near-miss-day
-- [ ] no-bra-day
-- [ ] no-interruptions-day
-- [ ] old-stuff-day
-- [ ] oreo-cookie-day
 - [ ] pack-rat-day
 - [ ] pandemonium-day
 - [ ] pecan-pie-day
