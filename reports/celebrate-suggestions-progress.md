@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 418 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 423 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (418)
+## Rebuilt to rich template (423)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -444,18 +444,18 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] pretend-to-be-a-time-traveler-day
 - [x] push-button-phone-day
 - [x] put-a-pillow-on-your-fridge-day
+- [x] put-on-your-own-shoes-day
+- [x] race-your-mouse-around-the-icons-day
+- [x] rain-day
+- [x] random-acts-of-light-day
+- [x] rat-catchers-day
 
 ## Done in the old simple format — needs rebuild to rich template (0)
 
 None remaining — this tier is cleared.
 
-## Not started (177)
+## Not started (172)
 
-- [ ] put-on-your-own-shoes-day
-- [ ] race-your-mouse-around-the-icons-day
-- [ ] rain-day
-- [ ] random-acts-of-light-day
-- [ ] rat-catchers-day
 - [ ] red-planet-day
 - [ ] repeat-day
 - [ ] rice-pudding-day
