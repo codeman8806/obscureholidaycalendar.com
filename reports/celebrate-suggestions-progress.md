@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 515 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 520 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (515)
+## Rebuilt to rich template (520)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -70,6 +70,8 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] bulldogs-are-beautiful-day
 - [x] butterscotch-pudding-day
 - [x] buy-a-musical-instrument-day
+- [x] cacti-appreciation-day
+- [x] card-playing-day
 - [x] carousel-day
 - [x] carve-a-pumpkin-day
 - [x] caviar-day
@@ -83,6 +85,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] chocolate-covered-raisin-day
 - [x] chocolate-milkshake-day
 - [x] christmas-card-day
+- [x] christmas-eve
 - [x] cinco-de-mayo
 - [x] clean-out-your-refrigerator-day
 - [x] clean-up-your-room-day
@@ -95,6 +98,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] count-your-buttons-day
 - [x] cousins-day
 - [x] creative-ice-cream-flavors-day
+- [x] cuddle-up-day
 - [x] dance-like-a-chicken-day
 - [x] day-of-the-mushroom
 - [x] deep-dish-pizza-day
@@ -105,6 +109,7 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] do-something-nice-day
 - [x] dolphin-day
 - [x] donald-duck-day
+- [x] doodle-day
 - [x] draw-a-picture-of-a-bird-day
 - [x] drive-in-movie-day
 - [x] eat-a-red-apple-day
@@ -550,13 +555,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (79, added 2026-07-09)
+## Additional pages found outside original scope (74, added 2026-07-09)
 
-- [ ] cacti-appreciation-day
-- [ ] card-playing-day
-- [ ] christmas-eve
-- [ ] cuddle-up-day
-- [ ] doodle-day
 - [ ] dr-seuss-day
 - [ ] dress-up-your-pet-day
 - [ ] eat-what-you-want-day
