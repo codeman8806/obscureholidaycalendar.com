@@ -9,7 +9,7 @@ attribution" section. Started 2026-07-07, template change requested 2026-07-08,
 source diversification requested 2026-07-08. All work is done manually, page by
 page, no scripted content generation. See commit messages for per-batch detail.
 
-**Status: 570 / 595 fully rebuilt to the rich template with diversified sources.**
+**Status: 575 / 595 fully rebuilt to the rich template with diversified sources.**
 The old-format tier is now fully cleared — every remaining page is untouched
 sitewide generic filler. On 2026-07-09 discovered 86 additional pages
 sitewide (outside the original 508-page scope) that still had unfilled
@@ -24,7 +24,7 @@ Note: pages pulled straight from the not-started tier also need their FAQ
 "How do people celebrate" answer (JSON-LD and visible dl) synced to the new
 celebrate content, since that was never done for them in an earlier pass.
 
-## Rebuilt to rich template (570)
+## Rebuilt to rich template (575)
 
 - [x] absurdity-day
 - [x] according-to-hoyle-day
@@ -491,12 +491,17 @@ celebrate content, since that was never done for them in an earlier pass.
 - [x] oreo-cookie-day
 - [x] origami-day
 - [x] oyster-day
+- [x] pack-rat-day
+- [x] pandemonium-day
 - [x] paperclip-day
 - [x] paranormal-day
 - [x] pardon-day
 - [x] particularly-preposterous-packaging-day
 - [x] paul-bunyan-day
 - [x] peach-ice-cream-day
+- [x] pecan-pie-day
+- [x] peculiar-people-day
+- [x] pfeffernusse-day
 - [x] piano-day
 - [x] pick-strawberries-day
 - [x] pierogi-day
@@ -605,13 +610,8 @@ None remaining — this tier is cleared.
 
 - [ ] today (skipped: broken generator artifact, not a real holiday — flagged for user decision, not rebuilt)
 
-## Additional pages found outside original scope (24, added 2026-07-09)
+## Additional pages found outside original scope (19, added 2026-07-09)
 
-- [ ] pack-rat-day
-- [ ] pandemonium-day
-- [ ] pecan-pie-day
-- [ ] peculiar-people-day
-- [ ] pfeffernusse-day
 - [ ] plant-a-flower-day
 - [ ] pledge-of-allegiance-day
 - [ ] respect-your-cat-day
