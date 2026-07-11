@@ -623,6 +623,7 @@
     </div>
     <p>&copy; 2026 Obscure Holiday Calendar</p>
   </footer>
+  <script src="/assets/floating-dates.js"></script>
   <script>
     (function() {
       const shopLink = document.querySelector(".shop-link");
@@ -686,7 +687,19 @@
       fetch("/holidays.json")
         .then((res) => res.json())
         .then((data) => {
-          const holidays = (data && data.holidays && data.holidays[key]) || [];
+          const holidays = ((data && data.holidays && data.holidays[key]) || []).slice();
+          const floating = (data && data.floatingHolidays) || {};
+          const year = now.getFullYear();
+          Object.keys(floating).forEach((slug) => {
+            const entry = floating[slug];
+            const resolved = window.FloatingDates && window.FloatingDates.resolveDateRule(entry.dateRule, year);
+            if (resolved && resolved.month === Number(mm) && resolved.day === Number(dd)) {
+              // Prioritize floating holidays as the featured pick — they're the rare
+              // case (this exact date only happens this once), so they shouldn't get
+              // silently buried behind fixed holidays that show up on this day every year.
+              holidays.unshift({ name: entry.name, emoji: entry.emoji, slug: slug });
+            }
+          });
           const first = holidays[0];
           if (!first) {
             nameEl.textContent = "Check back tomorrow for a new holiday!";

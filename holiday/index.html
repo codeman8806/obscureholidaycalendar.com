@@ -2773,6 +2773,48 @@
     </div>
     <p>&copy; 2026 Obscure Holiday Calendar</p>
   </footer>
+  <script src="/assets/floating-dates.js"></script>
+  <script>
+    (function() {
+      fetch("/holidays.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const floating = (data && data.floatingHolidays) || {};
+          const year = new Date().getFullYear();
+          const monthNames = ["january", "february", "march", "april", "may", "june",
+            "july", "august", "september", "october", "november", "december"];
+          const monthAbbr = ["jan", "feb", "mar", "apr", "may", "jun",
+            "jul", "aug", "sep", "oct", "nov", "dec"];
+          Object.keys(floating).forEach((slug) => {
+            const entry = floating[slug];
+            const resolved = window.FloatingDates && window.FloatingDates.resolveDateRule(entry.dateRule, year);
+            if (!resolved) return;
+            const section = document.getElementById(monthNames[resolved.month - 1]);
+            if (!section) return;
+            const dayGroups = section.querySelectorAll(".day-group");
+            const dayGroup = Array.prototype.find.call(dayGroups, (group) => {
+              const numEl = group.querySelector(".day-number");
+              return numEl && Number(numEl.textContent) === resolved.day;
+            });
+            if (!dayGroup) return;
+            const links = dayGroup.querySelector(".day-links");
+            if (!links) return;
+            const a = document.createElement("a");
+            a.href = `/holiday/${slug}/`;
+            a.textContent = entry.name;
+            a.title = "Date shifts yearly — shown here for " + year;
+            // Match the search script's dataset.searchText format (holiday/index.html's
+            // own search indexer runs synchronously before this async fetch resolves,
+            // so newly-added links have to self-index to stay searchable).
+            const monthName = monthNames[resolved.month - 1];
+            const dayStr = String(resolved.day);
+            a.dataset.searchText = `${entry.name} ${monthName} ${monthAbbr[resolved.month - 1]} ${dayStr} ${dayStr.padStart(2, "0")}`.toLowerCase();
+            links.appendChild(a);
+          });
+        })
+        .catch(() => {});
+    })();
+  </script>
   <script>
     (function() {
       const searchInput = document.getElementById("holiday-search");

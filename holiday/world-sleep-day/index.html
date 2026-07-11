@@ -658,7 +658,7 @@
           <div class="eyebrow">Annual observance</div>
           <h1 class="holiday-title">World Sleep Day <span class="holiday-emoji" aria-hidden="true">😴</span></h1>
           <div class="meta-line">
-            <span class="pill">March 13</span>
+            <span class="pill" id="floating-date-pill">March 13</span>
             <span class="pill pill-secondary">Health / Wellness</span>
             <span class="pill pill-secondary">Updated 2026-07-10</span>
           </div>
@@ -1143,6 +1143,36 @@
           backTop.style.display = show ? 'inline-flex' : 'none';
         });
       }
+    })();
+  </script>
+  <script src="/assets/floating-dates.js"></script>
+  <script>
+    (function() {
+      var slug = "world-sleep-day";
+      var pill = document.getElementById("floating-date-pill");
+      if (!pill || !window.FloatingDates) return;
+      fetch("/holidays.json")
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var entry = data && data.floatingHolidays && data.floatingHolidays[slug];
+          if (!entry) return;
+          var today = new Date();
+          var startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+          var year = today.getFullYear();
+          var resolved = window.FloatingDates.resolveDateRule(entry.dateRule, year);
+          if (resolved) {
+            var candidate = new Date(year, resolved.month - 1, resolved.day);
+            if (candidate < startOfToday) {
+              year += 1;
+              resolved = window.FloatingDates.resolveDateRule(entry.dateRule, year);
+            }
+          }
+          if (!resolved) return;
+          var d = new Date(year, resolved.month - 1, resolved.day);
+          var monthName = d.toLocaleString("en-US", { month: "long" });
+          pill.textContent = "Next: " + monthName + " " + resolved.day + ", " + year;
+        })
+        .catch(function() {});
     })();
   </script>
 </body>
