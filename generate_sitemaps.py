@@ -252,7 +252,20 @@ def main():
     lastmod = datetime.date.fromtimestamp(os.path.getmtime(static_path)).isoformat()
     sitemap_files.append((static_filename, lastmod))
 
-    # Generate index
+    # Generate index — include every sitemap file that already exists on disk,
+    # not just the ones (re)generated in this run. This only ever generates
+    # CURRENT_YEAR's monthly files, so without this, each run would silently
+    # drop every prior year's sitemaps from the index (this happened: the
+    # index was missing all 12 of 2025's monthly sitemaps until fixed by hand
+    # on 2026-07-11).
+    generated_names = {name for name, _ in sitemap_files}
+    for fname in sorted(os.listdir(OUTPUT_DIR)):
+        if fname in generated_names or not fname.startswith("sitemap-") or not fname.endswith(".xml"):
+            continue
+        filepath = os.path.join(OUTPUT_DIR, fname)
+        lastmod = datetime.date.fromtimestamp(os.path.getmtime(filepath)).isoformat()
+        sitemap_files.append((fname, lastmod))
+
     create_sitemap_index(sitemap_files, "sitemap-index.xml")
 
     print("Done! Generated sitemap-index.xml and monthly sitemaps.")
