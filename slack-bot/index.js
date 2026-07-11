@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import Stripe from "stripe";
 import { fileURLToPath } from "url";
+import { resolveDateRule } from "./floatingDates.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -110,10 +111,14 @@ function resolveHolidaysPath() {
 function loadHolidays() {
   const raw = fs.readFileSync(resolveHolidaysPath(), "utf8");
   const data = JSON.parse(raw);
-  return data.holidays || {};
+  const floatingHolidays = data.floatingHolidays || {};
+  Object.entries(floatingHolidays).forEach(([slug, holiday]) => {
+    holiday.slug = slug;
+  });
+  return { holidays: data.holidays || {}, floatingHolidays };
 }
 
-const holidaysByDate = loadHolidays();
+const { holidays: holidaysByDate, floatingHolidays: floatingHolidaysBySlug } = loadHolidays();
 const allHolidays = Object.values(holidaysByDate).flat();
 
 function normalizeName(text) {
@@ -142,8 +147,26 @@ function buildNameToSlug() {
 
 const nameToSlug = buildNameToSlug();
 
+function resolveFloatingHolidaysForDate(mmdd) {
+  const year = new Date().getFullYear();
+  const matches = [];
+  for (const holiday of Object.values(floatingHolidaysBySlug)) {
+    const resolved = resolveDateRule(holiday.dateRule, year);
+    if (!resolved) continue;
+    const mm = String(resolved.month).padStart(2, "0");
+    const dd = String(resolved.day).padStart(2, "0");
+    if (`${mm}-${dd}` === mmdd) matches.push(holiday);
+  }
+  return matches;
+}
+
 function findByDate(mmdd) {
-  return holidaysByDate[mmdd] || [];
+  const fixed = holidaysByDate[mmdd] || [];
+  const floating = resolveFloatingHolidaysForDate(mmdd);
+  // Floating holidays are the rare case (this exact date only happens this
+  // once this year), so they take priority over fixed holidays that occupy
+  // this day every year — same convention as the website's homepage widget.
+  return floating.length ? [...floating, ...fixed] : fixed;
 }
 
 function findByName(query) {
