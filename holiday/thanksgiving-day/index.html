@@ -510,7 +510,7 @@
       "name": "When is Thanksgiving Day?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It is observed on November 27 each year."
+        "text": "It is observed on the fourth Thursday of November each year."
       }
     },
     {
@@ -700,7 +700,7 @@
       </section>
 
       <div class="note-bar" role="note">
-        <strong>Why it matters:</strong> Thanksgiving Day, observed on November 27, serves as a poignant reminder of gratitude and community, encouraging individuals to reflect on their blessings and foster connections with others. This holiday highlights the importance of unity and appreciation, rooted in the historical sharing of resources and goodwill.
+        <strong>Why it matters:</strong> Thanksgiving Day, observed on the fourth Thursday of November, serves as a poignant reminder of gratitude and community, encouraging individuals to reflect on their blessings and foster connections with others. This holiday highlights the importance of unity and appreciation, rooted in the historical sharing of resources and goodwill.
       </div>
 
       <section class="section ad-section" aria-label="Advertisement">
@@ -748,7 +748,7 @@
       <section class="section">
         <h2>Quick facts</h2>
         <ul class="fact-list">
-          <li><span>Date</span><span>November 27</span></li>
+          <li><span>Date</span><span id="floating-date-fact">November 27</span></li>
           <li><span>Type</span><span>National / cultural holiday</span></li>
           <li><span>Great for</span><span>Families, Community groups, Coworkers</span></li>
         </ul>
@@ -857,7 +857,7 @@
       <section class="section" id="faq">
         <h2>FAQ</h2>
         <dl class="faq">
-          <div class="faq-item"><dt>When is Thanksgiving Day?</dt><dd>It is observed on November 27 each year.</dd></div><div class="faq-item"><dt>What is Thanksgiving Day?</dt><dd>A national holiday primarily celebrated in the United States and Canada as a day of giving thanks for the harvest and other blessings of the past year. It typically involves a large family meal, often featuring turkey, and reflection on gratitude and community.</dd></div><div class="faq-item"><dt>How do people celebrate Thanksgiving Day?</dt><dd>People gather for a meal and give thanks, and many learn the surprising legislative history: the date wasn&#x27;t fixed until 1941, after FDR&#x27;s 1939 attempt to move it a week earlier split the country into two competing Thanksgivings for two years.</dd></div>
+          <div class="faq-item"><dt>When is Thanksgiving Day?</dt><dd>It is observed on the fourth Thursday of November each year.</dd></div><div class="faq-item"><dt>What is Thanksgiving Day?</dt><dd>A national holiday primarily celebrated in the United States and Canada as a day of giving thanks for the harvest and other blessings of the past year. It typically involves a large family meal, often featuring turkey, and reflection on gratitude and community.</dd></div><div class="faq-item"><dt>How do people celebrate Thanksgiving Day?</dt><dd>People gather for a meal and give thanks, and many learn the surprising legislative history: the date wasn&#x27;t fixed until 1941, after FDR&#x27;s 1939 attempt to move it a week earlier split the country into two competing Thanksgivings for two years.</dd></div>
         </dl>
       </section>
 
@@ -1171,6 +1171,8 @@
           var d = new Date(year, resolved.month - 1, resolved.day);
           var monthName = d.toLocaleString("en-US", { month: "long" });
           pill.textContent = "Next: " + monthName + " " + resolved.day + ", " + year;
+          var fact = document.getElementById("floating-date-fact");
+          if (fact) fact.textContent = monthName + " " + resolved.day;
         })
         .catch(function() {});
     })();

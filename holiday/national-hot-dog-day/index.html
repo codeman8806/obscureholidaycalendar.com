@@ -510,7 +510,7 @@
       "name": "When is National Hot Dog Day?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It is observed on July 23 each year."
+        "text": "It is observed on the third Wednesday of July each year."
       }
     },
     {
@@ -518,7 +518,7 @@
       "name": "What is National Hot Dog Day?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "National Hot Dog Day is an annual celebration of the popular American frankfurter, often observed in the United States around the third Wednesday of July, which the prompt specifies as July 23rd. It's a day when enthusiasts and casual consumers alike enjoy hot dogs in various forms, recognizing their cultural significance as a staple of summer cookouts, sporting events, and quick meals across the nation."
+        "text": "National Hot Dog Day is an annual celebration of the popular American frankfurter, often observed in the United States around the third Wednesday of July. It's a day when enthusiasts and casual consumers alike enjoy hot dogs in various forms, recognizing their cultural significance as a staple of summer cookouts, sporting events, and quick meals across the nation."
       }
     },
     {
@@ -695,12 +695,12 @@
 
       <section class="section" id="overview">
         <h2>Overview</h2>
-        <p>National Hot Dog Day is an annual celebration of the popular American frankfurter, often observed in the United States around the third Wednesday of July, which the prompt specifies as July 23rd. It&#x27;s a day when enthusiasts and casual consumers alike enjoy hot dogs in various forms, recognizing their cultural significance as a staple of summer cookouts, sporting events, and quick meals across the nation.</p>
+        <p>National Hot Dog Day is an annual celebration of the popular American frankfurter, often observed in the United States around the third Wednesday of July. It&#x27;s a day when enthusiasts and casual consumers alike enjoy hot dogs in various forms, recognizing their cultural significance as a staple of summer cookouts, sporting events, and quick meals across the nation.</p>
         
       </section>
 
       <div class="note-bar" role="note">
-        <strong>Why it matters:</strong> National Hot Dog Day on July 23 celebrates the iconic frankfurter, highlighting its role as a beloved summer staple that brings people together at cookouts and sporting events.
+        <strong>Why it matters:</strong> National Hot Dog Day on the third Wednesday of July celebrates the iconic frankfurter, highlighting its role as a beloved summer staple that brings people together at cookouts and sporting events.
       </div>
 
       <section class="section ad-section" aria-label="Advertisement">
@@ -748,7 +748,7 @@
       <section class="section">
         <h2>Quick facts</h2>
         <ul class="fact-list">
-          <li><span>Date</span><span>July 23</span></li>
+          <li><span>Date</span><span id="floating-date-fact">July 23</span></li>
           <li><span>Type</span><span>Pets / Animals</span></li>
           <li><span>Great for</span><span>Pet parents, Shelters, Veterinarians</span></li>
         </ul>
@@ -853,7 +853,7 @@
       <section class="section" id="faq">
         <h2>FAQ</h2>
         <dl class="faq">
-          <div class="faq-item"><dt>When is National Hot Dog Day?</dt><dd>It is observed on July 23 each year.</dd></div><div class="faq-item"><dt>What is National Hot Dog Day?</dt><dd>National Hot Dog Day is an annual celebration of the popular American frankfurter, often observed in the United States around the third Wednesday of July, which the prompt specifies as July 23rd. It&#x27;s a day when enthusiasts and casual consumers alike enjoy hot dogs in various forms, recognizing their cultural significance as a staple of summer cookouts, sporting events, and quick meals across the nation.</dd></div><div class="faq-item"><dt>How do people celebrate National Hot Dog Day?</dt><dd>Grab a hot dog and consider its Coney Island roots — vendor Charles Feltman sold 'dachshund sausages' in milk rolls as early as 1867, and former employee Nathan Handwerker later undercut him with his own nickel stand in 1916.</dd></div>
+          <div class="faq-item"><dt>When is National Hot Dog Day?</dt><dd>It is observed on the third Wednesday of July each year.</dd></div><div class="faq-item"><dt>What is National Hot Dog Day?</dt><dd>National Hot Dog Day is an annual celebration of the popular American frankfurter, often observed in the United States around the third Wednesday of July. It&#x27;s a day when enthusiasts and casual consumers alike enjoy hot dogs in various forms, recognizing their cultural significance as a staple of summer cookouts, sporting events, and quick meals across the nation.</dd></div><div class="faq-item"><dt>How do people celebrate National Hot Dog Day?</dt><dd>Grab a hot dog and consider its Coney Island roots — vendor Charles Feltman sold 'dachshund sausages' in milk rolls as early as 1867, and former employee Nathan Handwerker later undercut him with his own nickel stand in 1916.</dd></div>
         </dl>
       </section>
 
@@ -1167,6 +1167,8 @@
           var d = new Date(year, resolved.month - 1, resolved.day);
           var monthName = d.toLocaleString("en-US", { month: "long" });
           pill.textContent = "Next: " + monthName + " " + resolved.day + ", " + year;
+          var fact = document.getElementById("floating-date-fact");
+          if (fact) fact.textContent = monthName + " " + resolved.day;
         })
         .catch(function() {});
     })();
