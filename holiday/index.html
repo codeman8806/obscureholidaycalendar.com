@@ -2888,9 +2888,15 @@
         searchInput.addEventListener("input", filterHolidays);
       }
 
-      if (randomBtn && allLinks.length) {
+      if (randomBtn) {
         randomBtn.addEventListener("click", () => {
-          const pick = allLinks[Math.floor(Math.random() * allLinks.length)];
+          // Re-query live rather than using the allLinks snapshot above — that
+          // snapshot is taken before the floating-holidays script (which runs
+          // async, appended earlier in the page) finishes injecting its links,
+          // so a random pick from it would never include a floating holiday.
+          const currentLinks = Array.from(document.querySelectorAll(".day-links a"));
+          if (!currentLinks.length) return;
+          const pick = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           if (pick) window.location.href = pick.href;
         });
       }
