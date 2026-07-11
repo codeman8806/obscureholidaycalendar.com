@@ -270,7 +270,7 @@
       width: 100%;
       margin: 0 auto;
     }
-    .download-panel h3 {
+    .download-panel h2 {
       margin: 0 0 12px;
       font-size: 1.05rem;
       letter-spacing: 0.04em;
@@ -293,6 +293,11 @@
       display: grid;
       gap: 16px;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .home-steps .section-heading {
+      grid-column: 1 / -1;
+      margin: 0;
+      font-size: 1.1rem;
     }
     .step-card {
       background: var(--home-panel);
@@ -505,6 +510,7 @@
       </section>
 
       <section class="home-steps reveal">
+        <h2 class="section-heading">How it works</h2>
         <article class="step-card">
           <div class="step-number">1</div>
           <h3>Discover a holiday</h3>
@@ -524,7 +530,7 @@
 
       <section class="home-download reveal">
         <div class="download-panel">
-          <h3>Download the app</h3>
+          <h2>Download the app</h2>
           <div class="store-badges">
             <a href="https://apps.apple.com/us/app/obscure-holiday-calendar/id6755315850" target="_blank" rel="noopener">
               <img class="badge-apple" src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" />
