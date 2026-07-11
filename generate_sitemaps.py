@@ -44,7 +44,9 @@ def slugify(name: str) -> str:
 
 def load_slug_dates():
     """
-    Return mapping of slug -> MM-DD string from holidays.json
+    Return mapping of slug -> MM-DD string from holidays.json's fixed-date
+    holidays, plus a resolved MM-DD for this year for any floatingHolidays
+    entry whose dateRule can be resolved (see resolve_date_rule below).
     """
     if not HOLIDAYS_JSON.exists():
         return {}
@@ -60,7 +62,91 @@ def load_slug_dates():
                 continue
             slug = item.get("slug") or slugify(name)
             mapping[slug] = item.get("date", date_key)
+
+    for slug, entry in data.get("floatingHolidays", {}).items():
+        resolved = resolve_date_rule(entry.get("dateRule"), CURRENT_YEAR)
+        if resolved:
+            mapping[slug] = f"{resolved[0]:02d}-{resolved[1]:02d}"
     return mapping
+
+
+# --- floatingHolidays dateRule resolver ---
+# Mirrors assets/floating-dates.js exactly (same verified seasonal-marker
+# table, sourced from astropixels.com/ephemeris/soleq2001.html and converted
+# UTC->US-Eastern calendar date). Keep the two in sync if either changes.
+_SEASONAL_MARKERS = {
+    2024: [(3, 19), (6, 20), (9, 22), (12, 21)], 2025: [(3, 20), (6, 20), (9, 22), (12, 21)],
+    2026: [(3, 20), (6, 21), (9, 22), (12, 21)], 2027: [(3, 20), (6, 21), (9, 23), (12, 21)],
+    2028: [(3, 19), (6, 20), (9, 22), (12, 21)], 2029: [(3, 20), (6, 20), (9, 22), (12, 21)],
+    2030: [(3, 20), (6, 21), (9, 22), (12, 21)], 2031: [(3, 20), (6, 21), (9, 23), (12, 21)],
+    2032: [(3, 19), (6, 20), (9, 22), (12, 21)], 2033: [(3, 20), (6, 20), (9, 22), (12, 21)],
+    2034: [(3, 20), (6, 21), (9, 22), (12, 21)], 2035: [(3, 20), (6, 21), (9, 23), (12, 21)],
+    2036: [(3, 19), (6, 20), (9, 22), (12, 21)], 2037: [(3, 20), (6, 20), (9, 22), (12, 21)],
+    2038: [(3, 20), (6, 21), (9, 22), (12, 21)], 2039: [(3, 20), (6, 21), (9, 22), (12, 21)],
+    2040: [(3, 19), (6, 20), (9, 22), (12, 21)], 2041: [(3, 20), (6, 20), (9, 22), (12, 21)],
+    2042: [(3, 20), (6, 21), (9, 22), (12, 21)], 2043: [(3, 20), (6, 21), (9, 22), (12, 21)],
+    2044: [(3, 19), (6, 20), (9, 22), (12, 21)], 2045: [(3, 20), (6, 20), (9, 22), (12, 21)],
+    2046: [(3, 20), (6, 21), (9, 22), (12, 21)], 2047: [(3, 20), (6, 21), (9, 22), (12, 21)],
+    2048: [(3, 19), (6, 20), (9, 22), (12, 21)], 2049: [(3, 20), (6, 20), (9, 22), (12, 21)],
+    2050: [(3, 20), (6, 20), (9, 22), (12, 21)],
+}
+_EVENT_INDEX = {"march-equinox": 0, "june-solstice": 1, "september-equinox": 2, "december-solstice": 3}
+_SEASON_TO_EVENT = {
+    "solstice": {"summer": "june-solstice", "winter": "december-solstice"},
+    "equinox": {"spring": "march-equinox", "fall": "september-equinox"},
+}
+
+
+def _resolve_seasonal_marker(year, event_key):
+    row = _SEASONAL_MARKERS.get(year)
+    if not row or not event_key:
+        return None
+    idx = _EVENT_INDEX.get(event_key)
+    if idx is None:
+        return None
+    return row[idx]
+
+
+def _resolve_nth_weekday(year, month, weekday, ordinal):
+    # weekday: 0=Sun..6=Sat (Python's date.weekday() is Mon=0..Sun=6, so convert)
+    if ordinal == -1:
+        next_month_first = datetime.date(year + (month // 12), (month % 12) + 1, 1)
+        last = next_month_first - datetime.timedelta(days=1)
+        last_wd = (last.weekday() + 1) % 7
+        diff = (last_wd - weekday + 7) % 7
+        day = last.day - diff
+        return (month, day)
+    first = datetime.date(year, month, 1)
+    first_wd = (first.weekday() + 1) % 7
+    offset = (weekday - first_wd + 7) % 7
+    return (month, 1 + offset + (ordinal - 1) * 7)
+
+
+def _resolve_relative_to_event(year, event, weekday, direction):
+    anchor = _resolve_seasonal_marker(year, event)
+    if not anchor:
+        return None
+    d = datetime.date(year, anchor[0], anchor[1])
+    step = -1 if direction == "before" else 1
+    while True:
+        d += datetime.timedelta(days=step)
+        if (d.weekday() + 1) % 7 == weekday:
+            return (d.month, d.day)
+
+
+def resolve_date_rule(date_rule, year):
+    if not date_rule or not date_rule.get("type"):
+        return None
+    rule_type = date_rule["type"]
+    if rule_type == "nth-weekday-of-month":
+        return _resolve_nth_weekday(year, date_rule["month"], date_rule["weekday"], date_rule["ordinal"])
+    if rule_type == "solstice":
+        return _resolve_seasonal_marker(year, _SEASON_TO_EVENT["solstice"].get(date_rule.get("season")))
+    if rule_type == "equinox":
+        return _resolve_seasonal_marker(year, _SEASON_TO_EVENT["equinox"].get(date_rule.get("season")))
+    if rule_type == "relative-to-event":
+        return _resolve_relative_to_event(year, date_rule["event"], date_rule["weekday"], date_rule["direction"])
+    return None
 
 
 def create_sitemap(urls, output_file):
