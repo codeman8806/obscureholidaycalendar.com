@@ -17,6 +17,7 @@ import {
   MessageFlags,
 } from "discord.js";
 import { commandDefs } from "./commandDefs.js";
+import { resolveDateRule } from "./floatingDates.js";
 
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
 const DAILY_CHANNEL_ID = process.env.DAILY_CHANNEL_ID || process.env.HOLIDAY_CHANNEL_ID || null;
@@ -404,10 +405,15 @@ function loadHolidays() {
       ensureHolidayMeta(holiday);
     });
   });
-  return holidays;
+  const floatingHolidays = data.floatingHolidays || {};
+  Object.entries(floatingHolidays).forEach(([slug, holiday]) => {
+    holiday.slug = slug;
+    ensureHolidayMeta(holiday);
+  });
+  return { holidays, floatingHolidays };
 }
 
-const holidaysByDate = loadHolidays();
+const { holidays: holidaysByDate, floatingHolidays: floatingHolidaysBySlug } = loadHolidays();
 const allHolidays = Object.values(holidaysByDate).flat();
 normalizeAllGuildConfigs();
 
@@ -1876,8 +1882,24 @@ function parseDate(input) {
   return `${pad(mm)}-${pad(dd)}`;
 }
 
+function resolveFloatingHolidaysForDate(mmdd) {
+  const year = new Date().getFullYear();
+  const matches = [];
+  for (const holiday of Object.values(floatingHolidaysBySlug)) {
+    const resolved = resolveDateRule(holiday.dateRule, year);
+    if (!resolved) continue;
+    if (`${pad(resolved.month)}-${pad(resolved.day)}` === mmdd) matches.push(holiday);
+  }
+  return matches;
+}
+
 function findByDate(mmdd) {
-  return holidaysByDate[mmdd] || [];
+  const fixed = holidaysByDate[mmdd] || [];
+  const floating = resolveFloatingHolidaysForDate(mmdd);
+  // Floating holidays are the rare case (this exact date only happens this
+  // once this year), so they take priority over fixed holidays that occupy
+  // this day every year — same convention as the website's homepage widget.
+  return floating.length ? [...floating, ...fixed] : fixed;
 }
 
 function findByName(query) {
