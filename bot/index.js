@@ -413,8 +413,30 @@ function loadHolidays() {
   return { holidays, floatingHolidays };
 }
 
+function resolveFloatingHolidayDisplayDate(dateRule) {
+  const now = new Date();
+  const year = now.getFullYear();
+  let resolved = resolveDateRule(dateRule, year);
+  if (resolved) {
+    const candidate = new Date(year, resolved.month - 1, resolved.day);
+    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    if (candidate < startOfToday) resolved = resolveDateRule(dateRule, year + 1);
+  }
+  return resolved ? `${pad(resolved.month)}-${pad(resolved.day)}` : null;
+}
+
 const { holidays: holidaysByDate, floatingHolidays: floatingHolidaysBySlug } = loadHolidays();
-const allHolidays = Object.values(holidaysByDate).flat();
+// allHolidays backs name-search, /random, and the wildcard-day feature — none
+// of them look a date up, so floating holidays need their own "date" field
+// (the next real occurrence) attached here to display sensibly, and the 2
+// entries with no confirmed dateRule are naturally excluded (no date to show).
+const allHolidays = Object.values(holidaysByDate)
+  .flat()
+  .concat(
+    Object.values(floatingHolidaysBySlug)
+      .map((h) => ({ ...h, date: resolveFloatingHolidayDisplayDate(h.dateRule) }))
+      .filter((h) => h.date)
+  );
 normalizeAllGuildConfigs();
 
 function isPremium(guild, member) {
