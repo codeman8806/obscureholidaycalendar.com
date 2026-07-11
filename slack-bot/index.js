@@ -119,7 +119,11 @@ function loadHolidays() {
 }
 
 const { holidays: holidaysByDate, floatingHolidays: floatingHolidaysBySlug } = loadHolidays();
-const allHolidays = Object.values(holidaysByDate).flat();
+// allHolidays backs /ohc-search and /ohc-random — neither displays a date
+// (formatHoliday's mmdd argument is omitted for both), so all floating
+// holidays can be included here regardless of dateRule, unlike findByDate's
+// date-based lookups.
+const allHolidays = Object.values(holidaysByDate).flat().concat(Object.values(floatingHolidaysBySlug));
 
 function normalizeName(text) {
   return (text || "")
