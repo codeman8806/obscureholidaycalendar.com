@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.codeman8806.obscureholidaycalendar",
+      "sha256_cert_fingerprints": [
+        "6E:BE:0C:63:3B:2D:DA:E5:5A:4A:A0:B2:3C:37:6E:1F:1D:12:48:D6:46:69:07:A9:B5:44:2A:3F:75:AD:C0:AF"
+      ]
+    }
+  }
+]
