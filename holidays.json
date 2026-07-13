@@ -5028,14 +5028,16 @@
     "07-08": [
       {
         "date": "07-08",
-        "description": "Video Games Day, often observed on July 8th, is an unofficial celebration dedicated to the entertainment, artistry, and cultural impact of video games. It encourages players and enthusiasts to enjoy their favorite titles, explore new ones, and recognize the significant role gaming plays in modern society, from casual mobile apps to competitive esports.",
-        "emoji": "🎮",
+        "name": "National SCUD Day",
+        "emoji": "😂",
+        "description": "National SCUD Day is observed annually on July 8th, its name a playful acronym for \"Savor the Comic, Unplug the Drama.\" The day was founded in 2007 by Stephanie West Allen, a former lawyer turned mediator and corporate coach who built the concept around a neuroscience-informed approach to conflict resolution. She launched it through her personal newsletter of the same name, inviting people to step away — for just 24 hours — from stressful conflicts, toxic gossip, and overwhelming news cycles. In their place, the day encourages pure, lighthearted silliness, backed by real science: even a single hearty laugh triggers immediate, measurable physical benefits.",
         "funFacts": [
-          "The first commercially available arcade video game was Computer Space, released in 1971.",
-          "The Pokémon franchise is the highest-grossing media franchise of all time, with total revenue exceeding $100 billion.",
-          "The concept of 'Easter eggs' in video games, referring to hidden messages or features, originated from the 1979 Atari game Adventure, where programmer Warren Robinett hid his name."
-        ],
-        "name": "Video Games Day"
+          "National SCUD Day was founded in 2007 by Stephanie West Allen, a former lawyer who became a mediator and corporate coach specializing in conflict resolution.",
+          "SCUD stands for \"Savor the Comic, Unplug the Drama\" — the same name Allen gave to the personal newsletter where she first launched the idea.",
+          "Allen built her mediation work around neuroscience research on conflict, which shaped SCUD Day's central idea: that stepping back from drama is a skill, not just a mood.",
+          "The day specifically targets three stress sources: toxic gossip, stressful conflicts, and overwhelming news feeds — asking people to unplug from all three for 24 hours.",
+          "The \"savor the comic\" half isn't just a mood booster — the Mayo Clinic notes that a deep, hearty laugh triggers immediate, measurable physical changes in the body, from stress-hormone reduction to improved circulation."
+        ]
       },
       {
         "date": "07-08",
