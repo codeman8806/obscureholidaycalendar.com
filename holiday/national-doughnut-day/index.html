@@ -757,7 +757,7 @@
       <section class="section" id="same-date">
         <h2>Also on this date</h2>
         <div class="share-tools">
-          <a class="btn-pill" href="/holiday/national-doughnut-day/" aria-current="page">National Doughnut Day</a><a class="btn-pill secondary" href="/holiday/vcr-day/">VCR Day</a>
+          <a class="btn-pill" href="/holiday/national-doughnut-day/" aria-current="page">National Doughnut Day</a><a class="btn-pill secondary" id="same-date-sibling" href="/holiday/vcr-day/">VCR Day</a>
         </div>
       </section>
 
@@ -1187,10 +1187,21 @@
             el.setAttribute("href", "/holiday/" + neighborSlug + "/");
             el.textContent = prefix + ": " + first.name;
           }
+          function updateSameDate(id, dt) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            var entries = (data.holidays && data.holidays[mmdd(dt)]) || [];
+            var first = entries[0];
+            if (!first) return;
+            var neighborSlug = first.slug || slugify(first.name);
+            el.setAttribute("href", "/holiday/" + neighborSlug + "/");
+            el.textContent = first.name;
+          }
           var yesterday = new Date(year, resolved.month - 1, resolved.day - 1);
           var tomorrow = new Date(year, resolved.month - 1, resolved.day + 1);
           updateNeighbor("continue-yesterday", yesterday, "Yesterday");
           updateNeighbor("continue-tomorrow", tomorrow, "Tomorrow");
+          updateSameDate("same-date-sibling", d);
           if (window.__rebuildNextRail) window.__rebuildNextRail();
         })
         .catch(function() {});
