@@ -1,0 +1,213 @@
+{
+  "generated_at": "2026-07-17T02:58:44.361110+00:00",
+  "total_records": 743,
+  "total_fixed_date": 732,
+  "total_floating_date": 11,
+  "floating_with_resolved_rule": 9,
+  "floating_without_rule": 2,
+  "category_breakdown": [
+    {
+      "category": "Food & Drink",
+      "count": 279,
+      "share_percent": 37.55
+    },
+    {
+      "category": "Fun & Weird (uncategorized)",
+      "count": 154,
+      "share_percent": 20.73
+    },
+    {
+      "category": "Animals & Nature",
+      "count": 75,
+      "share_percent": 10.09
+    },
+    {
+      "category": "Arts & Culture",
+      "count": 64,
+      "share_percent": 8.61
+    },
+    {
+      "category": "Science, History & Curiosities",
+      "count": 38,
+      "share_percent": 5.11
+    },
+    {
+      "category": "Kindness & Relationships",
+      "count": 36,
+      "share_percent": 4.85
+    },
+    {
+      "category": "Wellness & Self-Care",
+      "count": 35,
+      "share_percent": 4.71
+    },
+    {
+      "category": "Work & Technology",
+      "count": 30,
+      "share_percent": 4.04
+    },
+    {
+      "category": "Seasonal & Calendar",
+      "count": 25,
+      "share_percent": 3.36
+    },
+    {
+      "category": "Awareness & Advocacy",
+      "count": 7,
+      "share_percent": 0.94
+    }
+  ],
+  "food_subtypes": {
+    "total_food_records": 279,
+    "breakdown": {
+      "Dessert & Sweets": 103,
+      "Other Food": 73,
+      "Savory Meals": 42,
+      "Beverages": 34,
+      "Produce & Ingredients": 27
+    }
+  },
+  "top_emoji": [
+    {
+      "emoji": "🍪",
+      "count": 17
+    },
+    {
+      "emoji": "🍫",
+      "count": 15
+    },
+    {
+      "emoji": "🍰",
+      "count": 11
+    },
+    {
+      "emoji": "🍦",
+      "count": 9
+    },
+    {
+      "emoji": "🧀",
+      "count": 9
+    },
+    {
+      "emoji": "✨",
+      "count": 9
+    },
+    {
+      "emoji": "🥧",
+      "count": 9
+    },
+    {
+      "emoji": "😂",
+      "count": 7
+    }
+  ],
+  "unique_emoji_count": 403,
+  "naming_patterns": {
+    "starts_with_national": 295,
+    "starts_with_international": 28,
+    "starts_with_world": 30,
+    "plain_name": 390
+  },
+  "obscurity_index": {
+    "longest_names": [
+      {
+        "name": "National Pizza with the Works Except Anchovies Day",
+        "length": 50
+      },
+      {
+        "name": "Answer The Telephone Like Buddy The Elf Day",
+        "length": 43
+      },
+      {
+        "name": "National Law Enforcement Appreciation Day",
+        "length": 41
+      },
+      {
+        "name": "National Answer Your Cat's Questions Day",
+        "length": 40
+      },
+      {
+        "name": "National Two Different Colored Shoes Day",
+        "length": 40
+      },
+      {
+        "name": "Particularly Preposterous Packaging Day",
+        "length": 39
+      },
+      {
+        "name": "National Chocolate-covered Anything Day",
+        "length": 39
+      },
+      {
+        "name": "International Respect for Chickens Day",
+        "length": 38
+      },
+      {
+        "name": "National Chocolate Covered Pretzel Day",
+        "length": 38
+      },
+      {
+        "name": "Bittersweet Chocolate with Almonds Day",
+        "length": 38
+      }
+    ],
+    "niche_themed_count": 11,
+    "hobby_themed_count": 20
+  },
+  "fun_facts": {
+    "total_facts": 2713,
+    "avg_facts_per_observance": 3.65,
+    "longest_fact": {
+      "observance": "National Waterpark Day",
+      "text": "Not every early waterpark fared as well: Action Park, which opened in Vernon, New Jersey in 1978, became notorious for its poorly designed rides and earned nicknames like \"Traction Park\" and \"Class Action Park\" before closing in 1996 and reopening as the much safer Mountain Creek Waterpark."
+    }
+  },
+  "corrections_since_february": [
+    {
+      "date": "Jul 12",
+      "old": "Pecan Pie Day",
+      "new": "National Simplicity Day"
+    },
+    {
+      "date": "Jul 16",
+      "old": "Corn Fritters Day",
+      "new": "Guinea Pig Appreciation Day"
+    },
+    {
+      "date": "Jul 28",
+      "old": "Milk Chocolate Day",
+      "new": "National Waterpark Day"
+    },
+    {
+      "date": "Jul 30",
+      "old": "Cheesecake Day",
+      "new": "Paperback Book Day"
+    },
+    {
+      "date": "Aug 21",
+      "old": "Spumoni Day",
+      "new": "National Senior Citizens Day"
+    },
+    {
+      "date": "Sep 10",
+      "old": "TV Dinner Day",
+      "new": "National Anti-Junk Light Day"
+    },
+    {
+      "date": "Sep 12",
+      "old": "Chocolate Milkshake Day",
+      "new": "National Hug & High 5 Day"
+    },
+    {
+      "date": "Sep 24",
+      "old": "Cherries Jubilee Day",
+      "new": "Heritage Day"
+    },
+    {
+      "date": "Jul 8",
+      "old": "Video Games Day",
+      "new": "National SCUD Day"
+    }
+  ],
+  "methodology_note": "Categories assigned via ordered keyword matching against observance names; unmatched entries are labeled Fun & Weird (uncategorized) rather than folded into an unrelated category. See https://www.obscureholidaycalendar.com/reports/2026-national-day-report/#methodology for full details."
+}

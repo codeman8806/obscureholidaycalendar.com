@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="340" viewBox="0 0 1040 340" role="img" aria-labelledby="t d">
+<title id="t">Food &amp; Drink is not just dessert (279 food observances)</title>
+<desc id="d">Horizontal bar chart of five food subtypes led by Dessert and Sweets, followed by Other Food, Savory Meals, Beverages, and Produce and Ingredients.</desc>
+<defs>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f172a" flood-opacity="0.18"/>
+  </filter>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff" rx="14"/>
+
+<defs>
+<linearGradient id="grad0" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2c005f" stop-opacity="0.75"/><stop offset="100%" stop-color="#2c005f" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1c96f3" stop-opacity="0.75"/><stop offset="100%" stop-color="#1c96f3" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e0902e" stop-opacity="0.75"/><stop offset="100%" stop-color="#e0902e" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#22c55e" stop-opacity="0.75"/><stop offset="100%" stop-color="#22c55e" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e94979" stop-opacity="0.75"/><stop offset="100%" stop-color="#e94979" stop-opacity="1"/></linearGradient>
+</defs>
+<text x="300" y="30" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0f172a">Food &amp; Drink is not just dessert (279 food observances)</text>
+<text x="284" y="73.1" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Dessert &amp; Sweets</text>
+<rect x="300" y="50" width="600.0" height="34" rx="8" fill="url(#grad0)" filter="url(#softShadow)"/>
+<text x="912.0" y="73.1" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">103 (36.9%)</text>
+<text x="284" y="125.1" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Other Food</text>
+<rect x="300" y="102" width="425.2" height="34" rx="8" fill="url(#grad1)" filter="url(#softShadow)"/>
+<text x="737.2" y="125.1" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">73 (26.2%)</text>
+<text x="284" y="177.1" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Savory Meals</text>
+<rect x="300" y="154" width="244.7" height="34" rx="8" fill="url(#grad2)" filter="url(#softShadow)"/>
+<text x="556.7" y="177.1" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">42 (15.1%)</text>
+<text x="284" y="229.1" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Beverages</text>
+<rect x="300" y="206" width="198.1" height="34" rx="8" fill="url(#grad3)" filter="url(#softShadow)"/>
+<text x="510.1" y="229.1" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">34 (12.2%)</text>
+<text x="284" y="281.1" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Produce &amp; Ingredients</text>
+<rect x="300" y="258" width="157.3" height="34" rx="8" fill="url(#grad4)" filter="url(#softShadow)"/>
+<text x="469.3" y="281.1" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">27 (9.7%)</text>
+</svg>

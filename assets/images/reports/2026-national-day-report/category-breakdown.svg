@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="520" viewBox="0 0 1040 520" role="img" aria-labelledby="t d">
+<title id="t">What kind of holiday is it? (743 observances)</title>
+<desc id="d">Horizontal bar chart of ten observance categories led by Food and Drink, then a large honestly-labeled catch-all, then Animals and Nature.</desc>
+<defs>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f172a" flood-opacity="0.18"/>
+  </filter>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff" rx="14"/>
+
+<defs>
+<linearGradient id="grad0" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2c005f" stop-opacity="0.75"/><stop offset="100%" stop-color="#2c005f" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1c96f3" stop-opacity="0.75"/><stop offset="100%" stop-color="#1c96f3" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e0902e" stop-opacity="0.75"/><stop offset="100%" stop-color="#e0902e" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#22c55e" stop-opacity="0.75"/><stop offset="100%" stop-color="#22c55e" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e94979" stop-opacity="0.75"/><stop offset="100%" stop-color="#e94979" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.75"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#14b8a6" stop-opacity="0.75"/><stop offset="100%" stop-color="#14b8a6" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad7" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f59e0b" stop-opacity="0.75"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad8" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.75"/><stop offset="100%" stop-color="#ef4444" stop-opacity="1"/></linearGradient>
+<linearGradient id="grad9" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#64748b" stop-opacity="0.75"/><stop offset="100%" stop-color="#64748b" stop-opacity="1"/></linearGradient>
+</defs>
+<text x="300" y="30" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0f172a">What kind of holiday is it? (743 observances)</text>
+<text x="284" y="70.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Food &amp; Drink</text>
+<rect x="300" y="50" width="600.0" height="30" rx="8" fill="url(#grad0)" filter="url(#softShadow)"/>
+<text x="912.0" y="70.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">279 (37.5%)</text>
+<text x="284" y="114.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Fun &amp; Weird (uncategorized)</text>
+<rect x="300" y="94" width="331.2" height="30" rx="8" fill="url(#grad1)" filter="url(#softShadow)"/>
+<text x="643.2" y="114.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">154 (20.7%)</text>
+<text x="284" y="158.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Animals &amp; Nature</text>
+<rect x="300" y="138" width="161.3" height="30" rx="8" fill="url(#grad2)" filter="url(#softShadow)"/>
+<text x="473.3" y="158.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">75 (10.1%)</text>
+<text x="284" y="202.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Arts &amp; Culture</text>
+<rect x="300" y="182" width="137.6" height="30" rx="8" fill="url(#grad3)" filter="url(#softShadow)"/>
+<text x="449.6" y="202.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">64 (8.6%)</text>
+<text x="284" y="246.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Science, History &amp; Curiosities</text>
+<rect x="300" y="226" width="81.7" height="30" rx="8" fill="url(#grad4)" filter="url(#softShadow)"/>
+<text x="393.7" y="246.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">38 (5.1%)</text>
+<text x="284" y="290.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Kindness &amp; Relationships</text>
+<rect x="300" y="270" width="77.4" height="30" rx="8" fill="url(#grad5)" filter="url(#softShadow)"/>
+<text x="389.4" y="290.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">36 (4.8%)</text>
+<text x="284" y="334.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Wellness &amp; Self-Care</text>
+<rect x="300" y="314" width="75.3" height="30" rx="8" fill="url(#grad6)" filter="url(#softShadow)"/>
+<text x="387.3" y="334.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">35 (4.7%)</text>
+<text x="284" y="378.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Work &amp; Technology</text>
+<rect x="300" y="358" width="64.5" height="30" rx="8" fill="url(#grad7)" filter="url(#softShadow)"/>
+<text x="376.5" y="378.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">30 (4.0%)</text>
+<text x="284" y="422.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Seasonal &amp; Calendar</text>
+<rect x="300" y="402" width="53.8" height="30" rx="8" fill="url(#grad8)" filter="url(#softShadow)"/>
+<text x="365.8" y="422.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">25 (3.4%)</text>
+<text x="284" y="466.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="14" text-anchor="end" fill="#0f172a">Awareness &amp; Advocacy</text>
+<rect x="300" y="446" width="15.1" height="30" rx="8" fill="url(#grad9)" filter="url(#softShadow)"/>
+<text x="327.1" y="466.4" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#334155">7 (0.9%)</text>
+</svg>

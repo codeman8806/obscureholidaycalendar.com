@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="260" viewBox="0 0 1040 260" role="img" aria-labelledby="t d">
+<title id="t">The 8 most-used emoji across all 743 observances</title>
+<desc id="d">Bar chart with emoji glyphs showing cookie as the most frequent emoji at 17 uses, followed by chocolate bar and cake slice.</desc>
+<defs>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f172a" flood-opacity="0.18"/>
+  </filter>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff" rx="14"/>
+
+<text x="520.0" y="30" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#0f172a">The 8 most-used emoji across all 743 observances</text>
+<defs>
+<linearGradient id="egrad0" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2c005f" stop-opacity="0.75"/><stop offset="100%" stop-color="#2c005f" stop-opacity="1"/></linearGradient>
+<linearGradient id="egrad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1c96f3" stop-opacity="0.75"/><stop offset="100%" stop-color="#1c96f3" stop-opacity="1"/></linearGradient>
+<linearGradient id="egrad2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e0902e" stop-opacity="0.75"/><stop offset="100%" stop-color="#e0902e" stop-opacity="1"/></linearGradient>
+<linearGradient id="egrad3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#22c55e" stop-opacity="0.75"/><stop offset="100%" stop-color="#22c55e" stop-opacity="1"/></linearGradient>
+<linearGradient id="egrad4" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e94979" stop-opacity="0.75"/><stop offset="100%" stop-color="#e94979" stop-opacity="1"/></linearGradient>
+<linearGradient id="egrad5" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.75"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity="1"/></linearGradient>
+<linearGradient id="egrad6" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#14b8a6" stop-opacity="0.75"/><stop offset="100%" stop-color="#14b8a6" stop-opacity="1"/></linearGradient>
+<linearGradient id="egrad7" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f59e0b" stop-opacity="0.75"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="1"/></linearGradient>
+</defs>
+<rect x="37.0" y="100.0" width="56.0" height="130.0" rx="8" fill="url(#egrad0)" filter="url(#softShadow)"/>
+<text x="65.0" y="88.0" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">17</text>
+<text x="65.0" y="262.0" font-size="30" text-anchor="middle">🍪</text>
+<rect x="167.0" y="115.3" width="56.0" height="114.7" rx="8" fill="url(#egrad1)" filter="url(#softShadow)"/>
+<text x="195.0" y="103.3" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">15</text>
+<text x="195.0" y="262.0" font-size="30" text-anchor="middle">🍫</text>
+<rect x="297.0" y="145.9" width="56.0" height="84.1" rx="8" fill="url(#egrad2)" filter="url(#softShadow)"/>
+<text x="325.0" y="133.9" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">11</text>
+<text x="325.0" y="262.0" font-size="30" text-anchor="middle">🍰</text>
+<rect x="427.0" y="161.2" width="56.0" height="68.8" rx="8" fill="url(#egrad3)" filter="url(#softShadow)"/>
+<text x="455.0" y="149.2" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">9</text>
+<text x="455.0" y="262.0" font-size="30" text-anchor="middle">🍦</text>
+<rect x="557.0" y="161.2" width="56.0" height="68.8" rx="8" fill="url(#egrad4)" filter="url(#softShadow)"/>
+<text x="585.0" y="149.2" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">9</text>
+<text x="585.0" y="262.0" font-size="30" text-anchor="middle">🧀</text>
+<rect x="687.0" y="161.2" width="56.0" height="68.8" rx="8" fill="url(#egrad5)" filter="url(#softShadow)"/>
+<text x="715.0" y="149.2" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">9</text>
+<text x="715.0" y="262.0" font-size="30" text-anchor="middle">✨</text>
+<rect x="817.0" y="161.2" width="56.0" height="68.8" rx="8" fill="url(#egrad6)" filter="url(#softShadow)"/>
+<text x="845.0" y="149.2" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">9</text>
+<text x="845.0" y="262.0" font-size="30" text-anchor="middle">🥧</text>
+<rect x="947.0" y="176.5" width="56.0" height="53.5" rx="8" fill="url(#egrad7)" filter="url(#softShadow)"/>
+<text x="975.0" y="164.5" font-family="Inter, Manrope, -apple-system, system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">7</text>
+<text x="975.0" y="262.0" font-size="30" text-anchor="middle">😂</text>
+</svg>

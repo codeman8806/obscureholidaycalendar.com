@@ -3,32 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>2026 National Day Report: Category Breakdown &amp; Key Insights | Obscure Holiday Calendar</title>
-  <meta name="description" content="Data analysis of 732 observances showing which categories dominate, food trends, animal vs awareness ratios, and more." />
+  <title>2026 National Day Report: 743 Observances, Fully Re-Audited | Obscure Holiday Calendar</title>
+  <meta name="description" content="A fully re-audited data analysis of 743 observances: honest category breakdown, food trends, emoji patterns, and a full changelog of corrections since the February edition." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://www.obscureholidaycalendar.com/reports/2026-national-day-report/" />
 
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="2026 National Day Report: Category Breakdown &amp; Key Insights" />
-  <meta property="og:description" content="Data analysis of 732 observances showing which categories dominate, food trends, animal vs awareness ratios, and more." />
+  <meta property="og:title" content="2026 National Day Report: 743 Observances, Fully Re-Audited" />
+  <meta property="og:description" content="A fully re-audited data analysis of 743 observances: honest category breakdown, food trends, emoji patterns, and a full changelog of corrections since the February edition." />
   <meta property="og:url" content="https://www.obscureholidaycalendar.com/reports/2026-national-day-report/" />
-  <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-dominance.svg?v=20260221b" />
+  <meta property="og:image" content="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-breakdown.svg?v=20260716" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="2026 National Day Report: Category Breakdown &amp; Key Insights" />
-  <meta name="twitter:description" content="Data analysis of 732 observances showing which categories dominate, food trends, animal vs awareness ratios, and more." />
-  <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-dominance.svg?v=20260221b" />
+  <meta name="twitter:title" content="2026 National Day Report: 743 Observances, Fully Re-Audited" />
+  <meta name="twitter:description" content="A fully re-audited data analysis of 743 observances: honest category breakdown, food trends, emoji patterns, and a full changelog of corrections since the February edition." />
+  <meta name="twitter:image" content="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-breakdown.svg?v=20260716" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7162731177966348" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="/styles.css" />
   <style>
     .report-wrap { max-width: 980px; margin: 0 auto; padding: 24px 18px 64px; }
     .report-wrap h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 10px; }
-    .report-wrap h2 { margin-top: 38px; margin-bottom: 12px; }
+    .report-wrap h2 { margin-top: 42px; margin-bottom: 12px; }
+    .report-wrap h3 { margin-top: 24px; margin-bottom: 8px; }
     .report-wrap p, .report-wrap li { line-height: 1.7; color: #132238; }
     .report-meta { color: #475569; font-size: 0.95rem; margin-bottom: 20px; }
-    .exec-summary { background: #f8fafc; border: 1px solid #d9e2ec; border-radius: 10px; padding: 14px; margin-bottom: 18px; }
-    .exec-summary p { margin: 0 0 6px; font-weight: 700; color: #0f172a; }
+    .exec-summary { background: #f8fafc; border: 1px solid #d9e2ec; border-radius: 10px; padding: 16px; margin-bottom: 18px; }
+    .exec-summary p.label { margin: 0 0 6px; font-weight: 700; color: #0f172a; }
     .callout-quote { margin: 16px 0; padding: 12px 14px; border-left: 4px solid #0ea5e9; background: #f8fbff; color: #0f172a; font-size: 1.05rem; }
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 18px 0 26px; }
     .kpi-card { border: 1px solid #d9e2ec; border-radius: 12px; padding: 12px; background: #f8fbff; }
@@ -39,27 +40,51 @@
     figcaption { font-size: 0.9rem; color: #475569; margin-top: 8px; }
     .ad-section { margin: 24px 0; padding: 8px 0; }
     .table-scroll { overflow-x: auto; }
-    table { border-collapse: collapse; width: 100%; min-width: 540px; }
+    table { border-collapse: collapse; width: 100%; min-width: 460px; }
     th, td { border-bottom: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; }
     th { background: #f1f5f9; }
     .method-note { background: #f8fafc; border: 1px solid #d9e2ec; border-radius: 10px; padding: 12px; }
+    .fixbox { background: #fff8ee; border: 1px solid #f3d9a8; border-radius: 10px; padding: 14px; margin: 16px 0; }
+    .fixbox h3 { margin-top: 0; color: #7a4a00; }
+    .changelog-item { display: flex; gap: 12px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid #eef2f7; flex-wrap: wrap; }
+    .changelog-item:last-child { border-bottom: none; }
+    .changelog-date { font-weight: 700; color: #0b3a67; min-width: 60px; }
+    .changelog-old { color: #94a3b8; text-decoration: line-through; }
+    .changelog-arrow { color: #94a3b8; }
+    .changelog-new { font-weight: 700; color: #0f172a; }
+    .press-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 16px 0; }
+    .press-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; }
+    .press-card strong { display: block; font-size: 1.6rem; color: #0b3a67; }
+    .press-card span { color: #475569; font-size: 0.9rem; }
+    .copy-btn { margin-top: 8px; padding: 8px 12px; border-radius: 999px; background: #1c96f3; color: #fff; font-weight: 800; border: 0; cursor: pointer; font-size: 0.85rem; }
+    .copy-btn:hover { background: #1580d1; }
+    .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 16px 0; }
+    .download-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px; text-align: center; }
+    .download-card a { display: inline-block; margin-top: 8px; padding: 8px 16px; border-radius: 999px; background: #2c005f; color: #fff; font-weight: 800; text-decoration: none; font-size: 0.9rem; }
+    .download-card a:hover { background: #43007f; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 16px 0; }
+    .card-thumb { text-align: center; }
+    .card-thumb a { display: block; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 4px 10px rgba(15,23,42,0.12); }
+    .card-thumb img { width: 100%; height: auto; display: block; border-radius: 0; border: none; transition: transform 160ms ease; }
+    .card-thumb a:hover img { transform: scale(1.03); }
+    .card-thumb span { display: block; margin-top: 8px; font-size: 0.85rem; font-weight: 700; color: #334155; }
   </style>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "2026 National Day Report: Category Breakdown and Key Insights",
-    "description": "Data analysis of 732 observances showing which categories dominate, food trends, animal vs awareness ratios, and more.",
+    "headline": "2026 National Day Report: 743 Observances, Fully Re-Audited",
+    "description": "A fully re-audited data analysis of 743 observances: honest category breakdown, food trends, emoji patterns, and a full changelog of corrections since the February edition.",
     "author": "Obscure Holiday Calendar",
-    "image": "https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-dominance.svg?v=20260221b",
+    "image": "https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-breakdown.svg?v=20260716",
     "publisher": {
       "@type": "Organization",
       "name": "Obscure Holiday Calendar",
       "logo": { "@type": "ImageObject", "url": "https://www.obscureholidaycalendar.com/assets/app-icon.png" }
     },
     "datePublished": "2026-02-21",
-    "dateModified": "2026-02-21",
+    "dateModified": "2026-07-16",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.obscureholidaycalendar.com/reports/2026-national-day-report/" }
   }
   </script>
@@ -73,6 +98,21 @@
       { "@type": "ListItem", "position": 2, "name": "Reports", "item": "https://www.obscureholidaycalendar.com/reports/" },
       { "@type": "ListItem", "position": 3, "name": "2026 National Day Report", "item": "https://www.obscureholidaycalendar.com/reports/2026-national-day-report/" }
     ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "Obscure Holiday Calendar — 2026 National Day Dataset",
+    "description": "Category-tagged list of 743 U.S. national-day observances (732 fixed-date, 11 floating-date), including emoji and fun-fact metadata.",
+    "url": "https://www.obscureholidaycalendar.com/reports/2026-national-day-report/",
+    "distribution": [
+      { "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://www.obscureholidaycalendar.com/reports/2026_national_day_report_rows.csv" },
+      { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://www.obscureholidaycalendar.com/reports/2026_national_day_report_data.json" }
+    ],
+    "creator": { "@type": "Organization", "name": "Obscure Holiday Calendar" }
   }
   </script>
 
@@ -100,8 +140,14 @@
       <a href="/">Home</a> / <a href="/reports/">Reports</a> / 2026 National Day Report
     </nav>
 
-    <h1>The 2026 National Day Report: 732 Observances Analyzed</h1>
-    <p class="report-meta">Published February 21, 2026 · Source file analyzed: <code>holidays.json</code> in this repository.</p>
+    <h1>The 2026 National Day Report: 743 Observances, Fully Re-Audited</h1>
+    <p class="report-meta">Originally published February 21, 2026 · Updated and re-audited July 16, 2026 · Source: <code>holidays.json</code> in this repository, cross-checked entry by entry.</p>
+
+    <section class="fixbox" aria-label="Why this report changed">
+      <h3>⚠️ Why we rebuilt this report from scratch</h3>
+      <p>While auditing the underlying dataset for duplicate entries, we found that the February edition's category model had a bug: any observance that didn't match a specific food, awareness, or lifestyle keyword was silently dumped into <strong>"Animals &amp; Nature,"</strong> inflating it to a fabricated 37.16% "lead" it didn't earn. Spot-checking that bucket, roughly 8 in 10 of its entries — things like <em>Static Electricity Day</em>, <em>National Periodic Table Day</em>, and <em>Dr. Seuss Day</em> — had nothing to do with animals or nature at all.</p>
+      <p>We rebuilt the categorization from the ground up with a wider, more specific keyword model and an honestly-labeled catch-all bucket (see <a href="#methodology">Methodology</a>). The numbers below are not a light refresh of the old ones — several headline claims have changed because the old ones were wrong, not just stale.</p>
+    </section>
 
     <section class="exec-summary" aria-label="Cite this report" style="border-left: 4px solid #2c005f;">
       <h2 style="margin-top: 0;">Cite this report</h2>
@@ -110,16 +156,16 @@
         <div class="cite-item" style="background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px;">
           <div style="font-weight: 700; margin-bottom: 6px;">APA-style</div>
           <pre id="cite-apa" style="margin: 0; white-space: pre-wrap; word-break: break-word; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;">
-Obscure Holiday Calendar. (2026, February 21). 2026 National Day Report: Category breakdown & key insights. https://www.obscureholidaycalendar.com/reports/2026-national-day-report/
+Obscure Holiday Calendar. (2026, July 16). 2026 National Day Report: 743 observances, fully re-audited. https://www.obscureholidaycalendar.com/reports/2026-national-day-report/
           </pre>
-          <button type="button" data-copy-target="cite-apa" style="margin-top:8px; padding:8px 12px; border-radius:999px; background:#1c96f3; color:#fff; font-weight:800; border:0; cursor:pointer;">📋 Copy APA citation</button>
+          <button type="button" class="copy-btn" data-copy-target="cite-apa">📋 Copy APA citation</button>
         </div>
         <div class="cite-item" style="background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px;">
           <div style="font-weight: 700; margin-bottom: 6px;">Short (1‑line)</div>
           <pre id="cite-short" style="margin: 0; white-space: pre-wrap; word-break: break-word; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;">
 Obscure Holiday Calendar — 2026 National Day Report. https://www.obscureholidaycalendar.com/reports/2026-national-day-report/
           </pre>
-          <button type="button" data-copy-target="cite-short" style="margin-top:8px; padding:8px 12px; border-radius:999px; background:#1c96f3; color:#fff; font-weight:800; border:0; cursor:pointer;">📋 Copy short citation</button>
+          <button type="button" class="copy-btn" data-copy-target="cite-short">📋 Copy short citation</button>
         </div>
       </div>
       <p style="margin: 12px 0 6px; font-weight: 700;">Suggested attribution</p>
@@ -145,30 +191,46 @@ Obscure Holiday Calendar — 2026 National Day Report. https://www.obscureholida
             if(!btn) return;
             var id=btn.getAttribute('data-copy-target');
             copyById(id);
+            var original = btn.textContent;
+            btn.textContent = '✅ Copied!';
+            setTimeout(function(){ btn.textContent = original; }, 1600);
           }, {passive:true});
         })();
       </script>
     </section>
+
     <section class="exec-summary" aria-label="Executive Summary">
-      <p>Executive Summary</p>
+      <p class="label">Executive Summary</p>
       <ul>
-        <li>Animals &amp; Nature (37.16%) and Food (34.43%) account for 71.59% of all 732 records.</li>
-        <li>Animals &amp; Nature leads Awareness &amp; Advocacy by a 38.9:1 ratio (272 vs 7 records).</li>
-        <li>Food is not just desserts: 57.94% of food entries are non-dessert themes.</li>
-        <li>The top three categories (Animals &amp; Nature, Food, Arts &amp; Culture) represent 84.02% of the dataset.</li>
-        <li>The longest observance title is 50 characters, showing strong long-tail, niche intent potential.</li>
+        <li>The dataset now covers <strong>743 observances</strong> — 732 tied to a fixed calendar date, plus 11 that move every year (like Thanksgiving), tracked separately for the first time.</li>
+        <li><strong>Food &amp; Drink is the true largest category</strong> at 37.55% (279 of 743) — not the 37.16% "Animals &amp; Nature" claimed in February, which was a mislabeled catch-all bucket.</li>
+        <li>Properly measured, <strong>Animals &amp; Nature is 10.09%</strong> (75 of 743) of the dataset — a fifth of its previously reported size.</li>
+        <li>Food is not just dessert: <strong>63.1%</strong> of food entries are non-dessert (savory, beverage, produce, or other).</li>
+        <li>Across all 743 entries, the 🍪 cookie emoji is used more than any other (17 times), and the average observance carries <strong>3.65 fun facts</strong>.</li>
+        <li>Since February, we corrected <strong>9 duplicate-listing errors</strong> in the live database — see the full changelog below.</li>
       </ul>
     </section>
 
     <section>
-      <h2>What This Report Covers</h2>
-      <p>This edition analyzes <strong>732 observances</strong> and shows that Animals &amp; Nature (37.16%, 272 of 732) and Food (34.43%, 252 of 732) account for <strong>71.59%</strong> of the dataset. It also shows that the top three categories contribute <strong>84.02%</strong> of all observances (615 of 732), with Arts &amp; Culture adding 12.43% (91 of 732) behind the top two groups. The report uses category dominance, food-theme composition, advocacy representation, and lexical specificity. All percentages and counts below are computed directly from those rows. No figures are estimated, and all visuals are generated from the same computed outputs used in the written analysis.</p>
-      <div class="kpi-grid">
-        <div class="kpi-card"><div class="kpi-label">Rows in Dataset</div><div class="kpi-value">732</div></div>
-        <div class="kpi-card"><div class="kpi-label">Top Category Share</div><div class="kpi-value">37.16%</div></div>
-        <div class="kpi-card"><div class="kpi-label">Food Share</div><div class="kpi-value">34.43%</div></div>
-        <div class="kpi-card"><div class="kpi-label">Animal-to-Awareness Ratio</div><div class="kpi-value">38.9 : 1</div></div>
+      <h2>What Changed Since the February Edition</h2>
+      <p>This report doesn't just refresh numbers on a schedule — the underlying dataset is corrected in the open whenever we catch a problem, and this edition reflects nine specific fixes made between February and July. Each was a case where the database briefly listed the same holiday twice under near-identical names (e.g., "Pecan Pie Day" and "National Pecan Pie Day" for the same date) — a duplicate-detection audit caught all nine, and each was replaced with a distinct, real observance rather than deleted.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Date</th><th>Removed (duplicate)</th><th></th><th>Replaced with</th></tr></thead>
+          <tbody>
+            <tr><td>Jul 8</td><td class="changelog-old">Video Games Day</td><td class="changelog-arrow">→</td><td class="changelog-new">National SCUD Day</td></tr>
+            <tr><td>Jul 12</td><td class="changelog-old">Pecan Pie Day</td><td class="changelog-arrow">→</td><td class="changelog-new">National Simplicity Day</td></tr>
+            <tr><td>Jul 16</td><td class="changelog-old">Corn Fritters Day</td><td class="changelog-arrow">→</td><td class="changelog-new">Guinea Pig Appreciation Day</td></tr>
+            <tr><td>Jul 28</td><td class="changelog-old">Milk Chocolate Day</td><td class="changelog-arrow">→</td><td class="changelog-new">National Waterpark Day</td></tr>
+            <tr><td>Jul 30</td><td class="changelog-old">Cheesecake Day</td><td class="changelog-arrow">→</td><td class="changelog-new">Paperback Book Day</td></tr>
+            <tr><td>Aug 21</td><td class="changelog-old">Spumoni Day</td><td class="changelog-arrow">→</td><td class="changelog-new">National Senior Citizens Day</td></tr>
+            <tr><td>Sep 10</td><td class="changelog-old">TV Dinner Day</td><td class="changelog-arrow">→</td><td class="changelog-new">National Anti-Junk Light Day</td></tr>
+            <tr><td>Sep 12</td><td class="changelog-old">Chocolate Milkshake Day</td><td class="changelog-arrow">→</td><td class="changelog-new">National Hug &amp; High 5 Day</td></tr>
+            <tr><td>Sep 24</td><td class="changelog-old">Cherries Jubilee Day</td><td class="changelog-arrow">→</td><td class="changelog-new">Heritage Day</td></tr>
+          </tbody>
+        </table>
       </div>
+      <p>We also formally separated <strong>11 floating-date observances</strong> (Thanksgiving, Winter Solstice, World Sleep Day, and 8 others) from the fixed 366-day calendar, resolving 9 of them to a real date each year via calculated date rules (e.g. "3rd Thursday of November"). The remaining 2 don't yet have a confirmed rule and are excluded from date-based figures in this report.</p>
     </section>
 
     <section class="ad-section" aria-label="Advertisement">
@@ -184,101 +246,53 @@ Obscure Holiday Calendar — 2026 National Day Report. https://www.obscureholida
     </section>
 
     <section>
-      <h2>Category Dominance Analysis</h2>
-      <h2>What This Means for Content and Creators</h2>
-      <p>Animals &amp; Nature observances represent <strong>37.16% (272 of 732)</strong> of all recorded national-day observances in 2026. Food-related observances represent <strong>34.43% (252 of 732)</strong>. Arts &amp; Culture observances represent <strong>12.43% (91 of 732)</strong>, and Wellness &amp; Lifestyle observances represent <strong>5.33% (39 of 732)</strong>. Together, these four categories account for <strong>89.34% (654 of 732)</strong> of the dataset.</p>
-      <p>The top three dominant categories are:</p>
-      <ul>
-        <li><strong>Animals &amp; Nature</strong> &ndash; 272 records (37.16%)</li>
-        <li><strong>Food</strong> &ndash; 252 records (34.43%)</li>
-        <li><strong>Arts &amp; Culture</strong> &ndash; 91 records (12.43%)</li>
-      </ul>
-      <p>This composition supports a two-track strategy: volume capture in dominant lanes, and differentiation in mid-share lanes such as <a href="/holidays/arts-culture/">Arts &amp; Culture</a> and <a href="/holidays/wellness-lifestyle/">Wellness &amp; Lifestyle</a>. Numerically, Arts &amp; Culture exceeds Wellness &amp; Lifestyle by <strong>52 records</strong> and <strong>7.10 percentage points</strong>, while Animals &amp; Nature exceeds Food by <strong>20 records</strong> and <strong>2.73 percentage points</strong>.</p>
-      <blockquote class="callout-quote">“Animals &amp; Nature and Food alone make up 71.59% of the 2026 observance dataset.”</blockquote>
+      <h2>What This Report Covers</h2>
+      <p>This edition analyzes <strong>743 observances</strong> using a rebuilt, ten-category classification model (up from eight), applied consistently across every entry with keyword-based rules disclosed in the <a href="#methodology">Methodology</a> section. It covers category composition, food-theme breakdown, naming conventions, emoji usage, fun-fact density, and a full changelog of database corrections. All figures are computed directly from the live dataset — nothing here is estimated.</p>
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="kpi-label">Total Observances</div><div class="kpi-value">743</div></div>
+        <div class="kpi-card"><div class="kpi-label">Top Category</div><div class="kpi-value">Food &amp; Drink</div></div>
+        <div class="kpi-card"><div class="kpi-label">Food Share</div><div class="kpi-value">37.55%</div></div>
+        <div class="kpi-card"><div class="kpi-label">Floating Holidays</div><div class="kpi-value">11</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Category Breakdown</h2>
+      <p>Food &amp; Drink is the largest category at <strong>37.55% (279 of 743)</strong>, followed by an honestly-labeled catch-all of genuinely eclectic novelty days at <strong>20.73% (154)</strong> — things like <em>Blah Blah Blah Day</em> and <em>National Two Different Colored Shoes Day</em> that resist any tighter theme. Animals &amp; Nature, properly measured against real animal, plant, and environment keywords, comes in at <strong>10.09% (75)</strong>.</p>
+      <blockquote class="callout-quote">"Food &amp; Drink outnumbers Animals &amp; Nature by nearly 4 to 1 once the two categories are measured on equal footing."</blockquote>
       <figure>
-        <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-dominance.svg?v=20260221b" alt="Horizontal bar chart of category dominance showing animals and nature first, food second, arts and culture third, then smaller categories." />
-        <figcaption>Category comparison chart generated from computed primary-category counts.</figcaption>
+        <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/category-breakdown.svg?v=20260716" alt="Horizontal bar chart of ten observance categories: Food and Drink leads at 37.55%, followed by an honest catch-all category, then Animals and Nature, Arts and Culture, and six smaller categories." />
+        <figcaption>All ten categories, computed from the current live dataset of 743 observances.</figcaption>
       </figure>
       <div class="table-scroll">
         <table>
           <thead><tr><th>Category</th><th>Count</th><th>Share</th></tr></thead>
           <tbody>
-            <tr><td>Animals &amp; Nature</td><td>272</td><td>37.16%</td></tr>
-            <tr><td>Food</td><td>252</td><td>34.43%</td></tr>
-            <tr><td>Arts &amp; Culture</td><td>91</td><td>12.43%</td></tr>
-            <tr><td>Wellness &amp; Lifestyle</td><td>39</td><td>5.33%</td></tr>
-            <tr><td>Fun / Weird General</td><td>38</td><td>5.19%</td></tr>
-            <tr><td>Seasonal</td><td>24</td><td>3.28%</td></tr>
-            <tr><td>Work / Technology</td><td>9</td><td>1.23%</td></tr>
-            <tr><td>Awareness / Advocacy</td><td>7</td><td>0.96%</td></tr>
+            <tr><td>Food &amp; Drink</td><td>279</td><td>37.55%</td></tr>
+            <tr><td>Fun &amp; Weird (uncategorized)</td><td>154</td><td>20.73%</td></tr>
+            <tr><td>Animals &amp; Nature</td><td>75</td><td>10.09%</td></tr>
+            <tr><td>Arts &amp; Culture</td><td>64</td><td>8.61%</td></tr>
+            <tr><td>Science, History &amp; Curiosities</td><td>38</td><td>5.11%</td></tr>
+            <tr><td>Kindness &amp; Relationships</td><td>36</td><td>4.85%</td></tr>
+            <tr><td>Wellness &amp; Self-Care</td><td>35</td><td>4.71%</td></tr>
+            <tr><td>Work &amp; Technology</td><td>30</td><td>4.04%</td></tr>
+            <tr><td>Seasonal &amp; Calendar</td><td>25</td><td>3.36%</td></tr>
+            <tr><td>Awareness &amp; Advocacy</td><td>7</td><td>0.94%</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Summary: Category concentration is high, with 89.34% of all observances (654 of 732) falling into Animals &amp; Nature, Food, Arts &amp; Culture, and Wellness &amp; Lifestyle.</p>
+      <p>Summary: Food &amp; Drink and the honest catch-all bucket together make up 58.28% of all observances (433 of 743), with the remaining eight categories splitting the other 41.72%.</p>
     </section>
 
     <section>
       <h2>Food Observance Analysis</h2>
-      <h2>What This Means for Editorial Planning</h2>
-      <p>Food-related observances represent <strong>34.43% (252 of 732)</strong> of all recorded national-day observances in 2026, making Food the second-largest category in the dataset. To make this actionable, the food set was further split into subtypes using deterministic keyword rules on observance names. This subtype view is useful for publishers deciding whether to focus on recipe-friendly, beverage-friendly, or seasonal comfort-food narratives.</p>
-      <p>The largest food subtype in this snapshot is <strong>Other Food</strong> (106 entries, 42.06% of food records), followed by <strong>Dessert &amp; Sweets</strong> (84 entries, 33.33%). <strong>Savory Meals</strong> contributes 27 entries (10.71%), <strong>Beverages</strong> contributes 22 entries (8.73%), and <strong>Produce &amp; Ingredients</strong> contributes 13 entries (5.16%). This split shows that food demand in the catalog is not exclusively dessert-driven; there is enough savory and beverage inventory to support diverse editorial planning.</p>
-      <blockquote class="callout-quote">“Food-related observances account for 34.43% of all records, with 57.94% in non-dessert subtypes.”</blockquote>
+      <p>Food-related observances represent <strong>37.55% (279 of 743)</strong> of the dataset, making Food &amp; Drink the single largest category. Splitting food entries into subtypes shows the set is broader than dessert alone: <strong>Dessert &amp; Sweets</strong> is the largest subtype at 103 entries (36.9%), but <strong>Other Food</strong> (73, 26.2%), <strong>Savory Meals</strong> (42, 15.1%), <strong>Beverages</strong> (34, 12.2%), and <strong>Produce &amp; Ingredients</strong> (27, 9.7%) combine for <strong>63.1%</strong> of food entries.</p>
+      <blockquote class="callout-quote">"Nearly two-thirds of food-related observances have nothing to do with dessert."</blockquote>
       <figure>
-        <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/food-sub-breakdown.svg?v=20260221b" alt="Horizontal bar chart showing food observance sub-breakdown with Other Food and Dessert and Sweets as the largest subgroups." />
-        <figcaption>Food sub-breakdown by deterministic keyword grouping of food-category observance names.</figcaption>
+        <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/food-subtypes.svg?v=20260716" alt="Horizontal bar chart of five food subtypes: Dessert and Sweets leads at 36.9%, followed by Other Food, Savory Meals, Beverages, and Produce and Ingredients." />
+        <figcaption>Food subtype breakdown, 279 total food &amp; drink observances.</figcaption>
       </figure>
-      <p>For internal linking strategy, this subtype spread can support tighter “food lane” navigation: dessert clusters for seasonal baking periods, beverage clusters for quick social formats, and savory clusters for utility-first recipe content.</p>
-      <p>Summary: Food contributes 34.43% of all observances (252 of 732), and non-dessert food types account for 57.94% of the Food category.</p>
-    </section>
-
-    <section>
-      <h2>Animal vs Awareness Breakdown</h2>
-      <h2>What This Means for Topic Balance</h2>
-      <p>Animals &amp; Nature observances represent <strong>37.16% (272 of 732)</strong> of all recorded national-day observances in 2026. Awareness &amp; Advocacy represents <strong>0.96% (7 of 732)</strong>. That is a <strong>38.9 to 1</strong> ratio in favor of celebratory and affinity-based observances.</p>
-      <p>This gap is strategically relevant because Animals &amp; Nature leads Awareness &amp; Advocacy by <strong>265 records</strong> and <strong>36.20 percentage points</strong>. If the product goal is broad engagement, the current distribution favors high-share themes that perform in lightweight social and evergreen formats. If the goal includes educational or public-interest depth, awareness content remains a smaller share and may require intentional expansion policies.</p>
-      <blockquote class="callout-quote">“The Animals &amp; Nature category is 38.9 times larger than Awareness &amp; Advocacy in the current dataset.”</blockquote>
-      <figure>
-        <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/animal-vs-awareness.svg?v=20260221b" alt="Two-bar chart comparing Animals and Nature with Awareness and Advocacy, showing a large gap in record counts." />
-        <figcaption>Direct comparison of celebratory affinity inventory versus advocacy-style inventory.</figcaption>
-      </figure>
-      <p>Summary: Animals &amp; Nature has 272 observances versus 7 for Awareness &amp; Advocacy, a 38.9:1 ratio and a 36.20-point share gap.</p>
-    </section>
-
-    <section>
-      <h2>The Obscurity Index</h2>
-      <h2>What This Means for Long-Tail Search</h2>
-      <p>The Obscurity Index in this report is a practical proxy built from name-level specificity rather than subjective scoring. It combines three signals: longest observance names, niche-themed wording, and specific hobby-oriented themes. Longer names often indicate narrower intent or higher lexical specificity, while niche and hobby terms identify topics that are less likely to be discovered through broad category browsing.</p>
-      <p><strong>Longest names</strong> in the current snapshot include “National Pizza with the Works Except Anchovies Day” (50 characters), “Answer The Telephone Like Buddy The Elf Day” (43), and “National Law Enforcement Appreciation Day” (41). These titles are structurally specific and can support long-tail landing pages when paired with contextual internal links.</p>
-      <p><strong>Niche-themed examples</strong> include terms such as Morse code, cellophane tape, plimsoll, and barbershop quartet. <strong>Hobby-related examples</strong> include photography, puzzle, kite flying, museum, dance, and reading-oriented observances. In aggregate, these subsets are smaller than top-level category lanes but useful for expertise signals, newsletter segmentation, and partner campaigns that need precision over volume, especially when linked from broader clusters like <a href="/holidays/seasonal-holidays/">Seasonal Holidays</a>.</p>
-      <blockquote class="callout-quote">“The top obscurity signal reaches 50 characters: ‘National Pizza with the Works Except Anchovies Day.’”</blockquote>
-      <figure>
-        <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/obscurity-longest-names.svg?v=20260221b" alt="Horizontal bar chart ranking the ten longest observance names by character length as an obscurity proxy." />
-        <figcaption>Obscurity index proxy: longest observance names by character count.</figcaption>
-      </figure>
-      <div class="table-scroll">
-        <table>
-          <thead><tr><th>Example Signal</th><th>Observed Output</th></tr></thead>
-          <tbody>
-            <tr><td>Longest name (chars)</td><td>National Pizza with the Works Except Anchovies Day (50)</td></tr>
-            <tr><td>Niche-themed set size</td><td>27 matched records in current keyword list</td></tr>
-            <tr><td>Hobby-themed set size</td><td>37 matched records in current keyword list</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p>Summary: The obscurity profile is anchored by a 50-character maximum title, plus 27 niche-themed and 37 hobby-themed matched observances.</p>
-    </section>
-
-    <section>
-      <h2>Top 5 Surprising Insights</h2>
-      <h2>Fast Stats for Journalists and Editors</h2>
-      <ol>
-        <li><strong>Two categories dominate discovery.</strong> Animals &amp; Nature and Food together account for 71.59% of records, concentrating search and navigation demand in two lanes.</li>
-        <li><strong>Awareness content is structurally underrepresented.</strong> At 0.96% share (7 of 732), Awareness &amp; Advocacy is much smaller than Arts &amp; Culture (12.43%, 91 of 732) and Wellness &amp; Lifestyle (5.33%, 39 of 732).</li>
-        <li><strong>Food breadth is wider than expected.</strong> Non-dessert food entries (other food, savory, beverages, produce) represent 57.94% of food observances.</li>
-        <li><strong>Top-three concentration is unusually high.</strong> The top three categories account for 84.02%, indicating strong content clustering effects.</li>
-        <li><strong>Niche naming is a real long-tail asset.</strong> The longest and most specific observance names create natural opportunities for highly targeted queries and coverage.</li>
-      </ol>
-      <blockquote class="callout-quote">“The top three categories capture 84.02% of all records, leaving only 15.98% for the remaining five categories.”</blockquote>
+      <p>For editorial planning, this spread supports dessert content for seasonal baking periods, beverage content for quick social formats, and savory or produce content for utility-first recipe posts — the food lane is not a one-note dessert blog.</p>
     </section>
 
     <section class="ad-section" aria-label="Advertisement">
@@ -294,16 +308,140 @@ Obscure Holiday Calendar — 2026 National Day Report. https://www.obscureholida
     </section>
 
     <section>
+      <h2>Emoji Analysis</h2>
+      <p>Every observance in the dataset carries an emoji. Across all 743 entries, 403 unique emoji are used — but a handful dominate. The 🍪 cookie emoji leads with <strong>17 uses</strong>, followed by 🍫 chocolate bar (15) and 🍰 cake slice (11), reinforcing the food-heavy skew seen throughout this report. No observance is missing an emoji.</p>
+      <blockquote class="callout-quote">"The cookie emoji appears on 17 different national-day observances — more than any other symbol in the dataset."</blockquote>
+      <figure>
+        <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/top-emoji.svg?v=20260716" alt="Bar chart with emoji glyphs: cookie leads with 17 uses, followed by chocolate bar, cake, ice cream, cheese, sparkles, bread, and laughing-crying face." />
+        <figcaption>The 8 most frequently used emoji across all 743 observances.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>Naming Patterns</h2>
+      <p>How an observance is named turns out to be fairly predictable: <strong>52.5% (390 of 743)</strong> use a plain name with no prefix (e.g. "Groundhog Day"), while <strong>39.7% (295)</strong> start with the word "National." "World" (30, 4.0%) and "International" (28, 3.8%) prefixes are comparatively rare, typically reserved for observances with a genuine global framing rather than a U.S.-centric one.</p>
+      <figure>
+        <img src="https://www.obscureholidaycalendar.com/assets/images/reports/2026-national-day-report/naming-patterns.svg?v=20260716" alt="Donut chart showing 52.5% of observances have a plain name, 39.7% start with National, 4.0% start with World, and 3.8% start with International." />
+        <figcaption>Naming pattern breakdown across all 743 observances.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>The Obscurity Index</h2>
+      <p>The Obscurity Index is a practical proxy for lexical specificity built from three signals: the longest observance names, niche-themed wording, and hobby-oriented themes. Longer, more specific names tend to indicate narrower search intent — useful for long-tail content planning.</p>
+      <p><strong>Longest names</strong> in the current dataset include "National Pizza with the Works Except Anchovies Day" (50 characters), "Answer The Telephone Like Buddy The Elf Day" (43), and "National Law Enforcement Appreciation Day" (41). <strong>Niche-themed examples</strong> (11 matched) include Morse code, cellophane tape, plimsoll, and barbershop quartet. <strong>Hobby-themed examples</strong> (20 matched) include photography, puzzles, kite flying, and crossword-adjacent wordplay.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Example Signal</th><th>Observed Output</th></tr></thead>
+          <tbody>
+            <tr><td>Longest name (chars)</td><td>National Pizza with the Works Except Anchovies Day (50)</td></tr>
+            <tr><td>Niche-themed set size</td><td>11 matched records in current keyword list</td></tr>
+            <tr><td>Hobby-themed set size</td><td>20 matched records in current keyword list</td></tr>
+            <tr><td>Total fun facts across dataset</td><td>2,713 (avg. 3.65 per observance)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-label="Fast stats for press">
+      <h2>Fast Stats for Journalists and Editors</h2>
+      <p>Pull-quote-ready figures, each independently verifiable against the downloadable dataset below.</p>
+      <div class="press-grid">
+        <div class="press-card"><strong>743</strong><span>total observances tracked (732 fixed-date + 11 floating)</span></div>
+        <div class="press-card"><strong>37.55%</strong><span>share that are Food &amp; Drink observances, the true top category</span></div>
+        <div class="press-card"><strong>4:1</strong><span>ratio of Food &amp; Drink to Animals &amp; Nature, correctly measured</span></div>
+        <div class="press-card"><strong>9</strong><span>duplicate-listing errors found and corrected since February</span></div>
+        <div class="press-card"><strong>🍪 17×</strong><span>most-used emoji in the dataset (cookie)</span></div>
+        <div class="press-card"><strong>2,713</strong><span>total fun facts across the dataset (3.65 avg. per observance)</span></div>
+      </div>
+      <blockquote class="callout-quote">"63.1% of food-related observances are not dessert — the food lane is savory, liquid, and produce-driven more often than assumed."</blockquote>
+    </section>
+
+    <section aria-label="Shareable graphics">
+      <h2>Shareable Graphics</h2>
+      <p>Six ready-to-post stat cards (1080×1080px, PNG) summarizing this report's key findings — save any of them directly to share on social media, Slack, or in a newsletter. Free to repost with attribution to Obscure Holiday Calendar.</p>
+      <div class="card-grid">
+        <div class="card-thumb">
+          <a href="/assets/images/reports/2026-national-day-report/social-cards/card-total-observances.png" download>
+            <img src="/assets/images/reports/2026-national-day-report/social-cards/card-total-observances.png" alt="Shareable graphic: 743 obscure holidays tracked (732 fixed-date + 11 floating)." loading="lazy" />
+          </a>
+          <span>743 total observances</span>
+        </div>
+        <div class="card-thumb">
+          <a href="/assets/images/reports/2026-national-day-report/social-cards/card-top-category.png" download>
+            <img src="/assets/images/reports/2026-national-day-report/social-cards/card-top-category.png" alt="Shareable graphic: 37.55% of all observances are Food and Drink, the real number one category, not Animals and Nature." loading="lazy" />
+          </a>
+          <span>Correcting the record</span>
+        </div>
+        <div class="card-thumb">
+          <a href="/assets/images/reports/2026-national-day-report/social-cards/card-corrections.png" download>
+            <img src="/assets/images/reports/2026-national-day-report/social-cards/card-corrections.png" alt="Shareable graphic: 9 duplicate database errors found and corrected in our July audit." loading="lazy" />
+          </a>
+          <span>Full transparency</span>
+        </div>
+        <div class="card-thumb">
+          <a href="/assets/images/reports/2026-national-day-report/social-cards/card-emoji.png" download>
+            <img src="/assets/images/reports/2026-national-day-report/social-cards/card-emoji.png" alt="Shareable graphic: the cookie emoji appears on 17 different holidays, more than any other." loading="lazy" />
+          </a>
+          <span>Most-used emoji</span>
+        </div>
+        <div class="card-thumb">
+          <a href="/assets/images/reports/2026-national-day-report/social-cards/card-food-subtype.png" download>
+            <img src="/assets/images/reports/2026-national-day-report/social-cards/card-food-subtype.png" alt="Shareable graphic: 63.1% of food-themed observances are savory, beverages, or produce, not sweets." loading="lazy" />
+          </a>
+          <span>Food isn't just dessert</span>
+        </div>
+        <div class="card-thumb">
+          <a href="/assets/images/reports/2026-national-day-report/social-cards/card-fun-facts.png" download>
+            <img src="/assets/images/reports/2026-national-day-report/social-cards/card-fun-facts.png" alt="Shareable graphic: 2,713 fun facts across the dataset, 3.65 average per observance." loading="lazy" />
+          </a>
+          <span>Every entry, verified</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Download the dataset">
+      <h2>Download the Data</h2>
+      <p>For data journalists and researchers who want to verify these figures or build their own analysis, the full tagged dataset is available below.</p>
+      <div class="download-grid">
+        <div class="download-card">
+          <div style="font-weight:700;">CSV (all 743 rows)</div>
+          <div style="color:#475569; font-size:0.85rem;">date, name, category, emoji, floating</div>
+          <a href="/reports/2026_national_day_report_rows.csv" download>Download CSV</a>
+        </div>
+        <div class="download-card">
+          <div style="font-weight:700;">JSON (full computed stats)</div>
+          <div style="color:#475569; font-size:0.85rem;">category table, food subtypes, emoji, naming</div>
+          <a href="/reports/2026_national_day_report_data.json" download>Download JSON</a>
+        </div>
+      </div>
+      <p class="report-meta">Licensed for reuse with attribution to Obscure Holiday Calendar and a link back to this report.</p>
+    </section>
+
+    <section class="ad-section" aria-label="Advertisement">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-7162731177966348"
+           data-ad-slot="7747026448"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </section>
+
+    <section id="methodology">
       <h2>Methodology</h2>
       <div class="method-note">
         <ul>
-          <li>Dataset source: <code>holidays.json</code> snapshot in this repository.</li>
-          <li>Total records analyzed: 732.</li>
-          <li>Primary categories loaded from deterministic inference output in <code>reports/2026_national_day_report_rows.csv</code>.</li>
-          <li>Food sub-breakdown derived from keyword grouping rules applied to food-category observance names.</li>
-          <li>Animal vs awareness comparison uses category totals only; no external weighting.</li>
-          <li>Obscurity index uses character length ranking plus deterministic niche/hobby keyword matches.</li>
-          <li>Charts are static SVG files generated from computed values in the repo pipeline.</li>
+          <li>Dataset source: <code>holidays.json</code> snapshot in this repository, covering both the fixed 366-day calendar and the separate floating-date list.</li>
+          <li>Total records analyzed: 743 (732 fixed-date + 11 floating-date).</li>
+          <li>Categories are assigned by checking each observance's name against ten ordered keyword rule sets (Food &amp; Drink, Animals &amp; Nature, Kindness &amp; Relationships, Wellness &amp; Self-Care, Awareness &amp; Advocacy, Science/History &amp; Curiosities, Work &amp; Technology, Arts &amp; Culture, Seasonal &amp; Calendar), first match wins. Anything matching none of these is labeled <strong>"Fun &amp; Weird (uncategorized)"</strong> — honestly, rather than folded into an unrelated category.</li>
+          <li>This replaces the February edition's model, which used "Animals &amp; Nature" as an undisclosed default bucket for anything unmatched, inflating its share to 37.16%.</li>
+          <li>Food sub-breakdown uses a second keyword pass against food-category names only (Dessert &amp; Sweets, Savory Meals, Beverages, Produce &amp; Ingredients, Other Food).</li>
+          <li>Emoji and fun-fact statistics are read directly from each record's stored fields; no inference involved.</li>
+          <li>Obscurity index uses character-length ranking plus a curated niche/hobby keyword list, disclosed on request.</li>
+          <li>Charts are static SVG files generated directly from the computed JSON output in the repo pipeline — the same numbers appear in the downloadable CSV/JSON.</li>
         </ul>
       </div>
     </section>
