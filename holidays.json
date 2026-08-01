@@ -1,212 +1,4 @@
 {
-  "floatingHolidays": {
-    "ask-a-stupid-question-day": {
-      "description": "Ask a Stupid Question Day, observed annually on September 28th (or the last school day of September), is an informal holiday primarily designed to encourage individuals, especially students, to overcome the fear of asking questions they might deem \"stupid.\" Originating among teachers, its goal is to foster a safe environment for inquiry, promote curiosity, and highlight that no question is truly foolish if it leads to understanding and learning, thereby reducing inhibitions in academic and social settings.",
-      "emoji": "❓",
-      "funFacts": [
-        "The concept originated in the 1980s when teachers noticed students were hesitant to ask questions in class, fearing embarrassment.",
-        "It aims to encourage critical thinking and remove the stigma often associated with asking basic or foundational questions.",
-        "While officially September 28th, some schools observe it on the last Friday or last school day of September to maximize student participation."
-      ],
-      "name": "Ask a Stupid Question Day",
-      "originalDate": "09-28",
-      "originalIndex": 1,
-      "verifiedAt": "2026-07-03"
-    },
-    "beaujolais-nouveau-day": {
-      "dateRule": {
-        "month": 11,
-        "ordinal": 3,
-        "type": "nth-weekday-of-month",
-        "weekday": 4
-      },
-      "description": "Beaujolais Nouveau Day is an annual celebration marking the release of the first wine of the harvest from the Beaujolais region of France. This young, fruity red wine, made from Gamay grapes, is traditionally released at 12:01 AM on the third Thursday of November each year, sparking festivities globally. It signifies the culmination of the grape harvest and the beginning of the new wine season, bringing a fresh taste to wine enthusiasts.",
-      "emoji": "🍷",
-      "funFacts": [
-        "The iconic slogan \"Le Beaujolais Nouveau est arrivé!\" (The New Beaujolais has arrived!) heralds the wine's official release each year.",
-        "Made exclusively from Gamay grapes, Beaujolais Nouveau undergoes a process called carbonic maceration, which contributes to its vibrant fruit flavors and light body without significant tannin extraction.",
-        "Millions of bottles are shipped and uncorked globally in over 100 countries within days of its release, showcasing its international appeal.",
-        "Despite its French origins, Japan is historically one of the largest export markets for Beaujolais Nouveau, often consuming a significant portion of the annual production.",
-        "The tradition began as a local celebration among Beaujolais winemakers in the 19th century, evolving into a worldwide event in the latter half of the 20th century."
-      ],
-      "name": "Beaujolais Nouveau Day",
-      "originalDate": "11-21",
-      "originalIndex": 1,
-      "verifiedAt": "2026-07-03"
-    },
-    "national-daylight-appreciation-day": {
-      "dateRule": {
-        "season": "summer",
-        "type": "solstice"
-      },
-      "description": "National Daylight Appreciation Day is observed annually on June 21st, strategically coinciding with the summer solstice in the Northern Hemisphere. This day encourages people to celebrate and value the longest period of natural daylight experienced during the year. It's an occasion to enjoy outdoor activities, appreciate the sun's energy, warmth, and the positive impact of extended daylight on mood and well-being, reminding us to make the most of the abundant natural light before the days begin to shorten.",
-      "emoji": "☀️",
-      "funFacts": [
-        "The date universally coincides with the summer solstice, marking the longest period of daylight and the shortest night of the year in the Northern Hemisphere.",
-        "The word \"solstice\" originates from Latin, combining \"sol\" (sun) and \"sistere\" (to stand still), as the sun appears to pause its northward or southward movement.",
-        "Depending on latitude, the summer solstice can provide anywhere from around 14 hours of daylight to nearly 24 hours in regions close to the Arctic Circle."
-      ],
-      "name": "National Daylight Appreciation Day",
-      "originalDate": "06-21",
-      "originalIndex": 0,
-      "verifiedAt": "2026-07-03"
-    },
-    "national-doughnut-day": {
-      "dateRule": {
-        "month": 6,
-        "ordinal": 1,
-        "type": "nth-weekday-of-month",
-        "weekday": 5
-      },
-      "description": "National Doughnut Day is celebrated on the first Friday of June each year, honoring the Salvation Army 'Doughnut Lassies' who provided comfort and support to soldiers by serving them doughnuts on the front lines during World War I. Today, it's a popular occasion for bakeries and shops to offer free or discounted doughnuts, celebrating the beloved fried pastry and its historical significance.",
-      "emoji": "🍩",
-      "funFacts": [
-        "The holiday originated in 1938 in Chicago as a fundraiser for the Salvation Army to help those in need during the Great Depression and to commemorate the 'Doughnut Lassies' of WWI.",
-        "During World War I, Salvation Army volunteers would make and serve fresh doughnuts to American soldiers in the trenches of France, providing a morale boost and a taste of home.",
-        "The iconic doughnut hole is often credited to mid-19th-century New England ship captain Hanson Gregory, who reportedly punched holes in his mother's fried dough to ensure even cooking."
-      ],
-      "name": "National Doughnut Day",
-      "originalDate": "06-07",
-      "originalIndex": 0,
-      "verifiedAt": "2026-07-03"
-    },
-    "national-hot-dog-day": {
-      "dateRule": {
-        "month": 7,
-        "ordinal": 3,
-        "type": "nth-weekday-of-month",
-        "weekday": 3
-      },
-      "description": "National Hot Dog Day is an annual celebration of the popular American frankfurter, often observed in the United States around the third Wednesday of July. It's a day when enthusiasts and casual consumers alike enjoy hot dogs in various forms, recognizing their cultural significance as a staple of summer cookouts, sporting events, and quick meals across the nation.",
-      "emoji": "🌭",
-      "funFacts": [
-        "Americans consume an estimated 20 billion hot dogs annually.",
-        "The term 'hot dog' is believed to have originated from a 1901 cartoon depicting 'dachshund sausages.'",
-        "Many hot dog purists, especially in Chicago, famously argue that ketchup should not be used on a hot dog."
-      ],
-      "name": "National Hot Dog Day",
-      "originalDate": "07-23",
-      "originalIndex": 0,
-      "verifiedAt": "2026-07-03"
-    },
-    "national-ugly-sweater-day": {
-      "dateRule": {
-        "month": 12,
-        "ordinal": 3,
-        "type": "nth-weekday-of-month",
-        "weekday": 5
-      },
-      "description": "National Ugly Sweater Day is an annual celebration encouraging people to don their most garish, brightly colored, and often handmade festive sweaters. Typically observed in December, it's a lighthearted tradition embraced by offices, schools, and social gatherings to spread holiday cheer and often raise money for charity.",
-      "emoji": "🧥🎄",
-      "funFacts": [
-        "The trend of wearing \"ugly\" Christmas sweaters began in the 1980s, often seen as ironic fashion popularized by TV shows and movies.",
-        "The first official \"Ugly Christmas Sweater Party\" is often credited to a group in Vancouver, Canada, in 2002, helping to ignite the modern phenomenon.",
-        "Many Ugly Sweater Day events are used as fundraisers for various charities, encouraging participants to donate while showcasing their festive attire.",
-        "Guinness World Records has recognized attempts for the largest gathering of people wearing ugly Christmas sweaters, highlighting the global reach of the trend.",
-        "Celebrities and public figures have also embraced the trend, further popularizing it and making it a staple of holiday celebrations.",
-        "The sweaters are often characterized by excessive embellishments, such as tinsel, bells, oversized appliqués, and sometimes even working LED lights."
-      ],
-      "name": "National Ugly Sweater Day",
-      "originalDate": "12-19",
-      "originalIndex": 0,
-      "verifiedAt": "2026-07-03"
-    },
-    "stay-home-because-you-re-well-day": {
-      "description": "Stay Home Because You're Well Day, celebrated annually on November 30th, encourages individuals to take a proactive approach to their health by staying home from work or school not due to illness, but to rest, recharge, and prevent potential exposure to germs. This unofficial holiday champions self-care and highlights the importance of preventative well-being for maintaining long-term health and productivity, particularly as the cold and flu season typically gets underway.",
-      "emoji": "🏠",
-      "funFacts": [
-        "This unofficial holiday was created by Ruth and Thomas Roy of Wellcat.com, who are well-known for inventing numerous unique observances, often with a humorous or thought-provoking twist.",
-        "The day serves as a lighthearted yet significant reminder to prioritize self-care and combat burnout, advocating for a 'well day' to proactively address health rather than waiting until one is already sick.",
-        "It subtly critiques 'presenteeism' – the practice of attending work while feeling unwell – by promoting preventative rest days to avoid the spread of illness and sustain overall wellness."
-      ],
-      "name": "Stay Home Because You're Well Day",
-      "originalDate": "11-30",
-      "originalIndex": 1,
-      "verifiedAt": "2026-07-03"
-    },
-    "thanksgiving-day": {
-      "dateRule": {
-        "month": 11,
-        "ordinal": 4,
-        "type": "nth-weekday-of-month",
-        "weekday": 4
-      },
-      "description": "A national holiday primarily celebrated in the United States and Canada as a day of giving thanks for the harvest and other blessings of the past year. It typically involves a large family meal, often featuring turkey, and reflection on gratitude and community.",
-      "emoji": "🦃",
-      "funFacts": [
-        "The first Thanksgiving feast shared by the Pilgrims and the Wampanoag people in 1621 lasted three days.",
-        "While turkey is iconic, historical accounts suggest that venison and seafood, such as fish and lobster, were also prominent at early colonial harvest feasts.",
-        "Sarah Josepha Hale, the author of 'Mary Had a Little Lamb,' campaigned for 36 years to make Thanksgiving a national holiday.",
-        "The annual Macy's Thanksgiving Day Parade in New York City began in 1924, originally featuring animals from the Central Park Zoo.",
-        "In the US, two turkeys are 'pardoned' by the President each year, a tradition that became official in 1989.",
-        "Canadians celebrate Thanksgiving on the second Monday of October, a tradition that dates back to 1879, earlier than the US national holiday."
-      ],
-      "name": "Thanksgiving Day",
-      "originalDate": "11-27",
-      "originalIndex": 0,
-      "verifiedAt": "2026-07-03"
-    },
-    "tuba-day": {
-      "dateRule": {
-        "month": 5,
-        "ordinal": 1,
-        "type": "nth-weekday-of-month",
-        "weekday": 5
-      },
-      "description": "Tuba Day, observed annually on May 2nd (though sometimes celebrated on the first Friday in May), is a special holiday dedicated to recognizing and appreciating the often-overlooked contributions of tuba and euphonium players. Established by renowned tubist Harvey Phillips in 1979, the day highlights these musicians who provide the foundational bass voice and harmonic support in orchestras, concert bands, marching bands, and various musical ensembles worldwide.",
-      "emoji": "🎵",
-      "funFacts": [
-        "Tuba Day was founded by acclaimed American tubist Harvey Phillips in 1979.",
-        "The tuba is the largest and lowest-pitched instrument in the modern brass family.",
-        "The holiday aims to bring appreciation to tuba and euphonium players, who often play crucial but less prominent roles in musical ensembles."
-      ],
-      "name": "Tuba Day",
-      "originalDate": "05-02",
-      "originalIndex": 0,
-      "verifiedAt": "2026-07-03"
-    },
-    "winter-solstice": {
-      "dateRule": {
-        "season": "winter",
-        "type": "solstice"
-      },
-      "description": "The Winter Solstice marks the shortest day and longest night of the year in the Northern Hemisphere, occurring when the North Pole is tilted furthest away from the Sun. It is an astronomical event that signifies the official start of winter, after which the days gradually begin to lengthen.",
-      "emoji": "❄",
-      "funFacts": [
-        "The Winter Solstice has been celebrated since ancient times by various cultures, often associated with rebirth, new beginnings, and the return of light.",
-        "In many cultures, the Winter Solstice is known by different names, such as Yule in Germanic traditions or Dongzhi Festival in East Asia.",
-        "Stonehenge in England is famously aligned with the solstices, with its central axis pointing to the sunrise on the winter solstice.",
-        "Though it's the shortest day, the coldest temperatures typically occur weeks or months after the Winter Solstice due to thermal inertia.",
-        "The Earth's orbit around the sun causes the solstices. The winter solstice occurs when the sun reaches its southernmost point in the sky, directly overhead at the Tropic of Capricorn.",
-        "It is a moment when many animals, like bears, enter hibernation or significantly reduce their activity."
-      ],
-      "name": "Winter Solstice",
-      "originalDate": "12-21",
-      "originalIndex": 0,
-      "verifiedAt": "2026-07-03"
-    },
-    "world-sleep-day": {
-      "dateRule": {
-        "direction": "before",
-        "event": "march-equinox",
-        "type": "relative-to-event",
-        "weekday": 5
-      },
-      "description": "World Sleep Day is an annual event that aims to raise awareness about the importance of sleep for overall health and well-being. Observed on the Friday before the March Equinox, this day encourages individuals to appreciate the benefits of good sleep and promote better sleep practices worldwide.",
-      "emoji": "😴",
-      "funFacts": [
-        "The first World Sleep Day was celebrated in 2008 by the World Sleep Society.",
-        "Sleep loss is linked to numerous health issues, including obesity, diabetes, and heart disease.",
-        "Naps, when taken properly, can improve alertness and cognitive function.",
-        "The global theme for World Sleep Day changes every year, focusing on different sleep issues.",
-        "Around 60% of adults report having sleep problems at some point in their lives."
-      ],
-      "name": "World Sleep Day",
-      "originalDate": "03-13",
-      "originalIndex": 0,
-      "verifiedAt": "2026-07-03"
-    }
-  },
   "holidays": {
     "01-01": [
       {
@@ -1377,8 +1169,7 @@
           "The holiday was conceptualized by the show's fictional character, Leslie Knope, portrayed by Amy Poehler.",
           "Leslie Knope famously described it as 'Ladies celebrating ladies.'"
         ],
-        "name": "Galentine's Day",
-        "slug": "galentines-day"
+        "name": "Galentine's Day"
       }
     ],
     "02-14": [
@@ -1784,8 +1575,7 @@
           "While his fictional birthday is February 29th, Superman's actual first appearance in Action Comics #1 was on April 18, 1938.",
           "Theoretically, as a 'leapling' born on February 29th, Superman ages only one year for every four Earth years that pass, a fun quirk in his mythology."
         ],
-        "name": "Superman's Birthday",
-        "slug": "supermans-birthday"
+        "name": "Superman's Birthday"
       }
     ],
     "03-01": [
@@ -1798,8 +1588,7 @@
           "The first patent for peanut butter (a peanut paste process) was granted in 1884 to Marcellus Gilmore Edson of Montreal, Canada.",
           "It takes approximately 540 peanuts to make a 12-ounce jar of peanut butter."
         ],
-        "name": "National Peanut Butter Lover's Day",
-        "slug": "national-peanut-butter-lovers-day"
+        "name": "National Peanut Butter Lover's Day"
       },
       {
         "date": "03-01",
@@ -2129,8 +1918,7 @@
           "At its peak in 1936, Greenwood's factory produced over 400,000 pairs of earmuffs in a single year and kept his hometown employed for decades.",
           "Chester Greenwood was a prolific inventor who accumulated over 100 patents in his lifetime, for items ranging from a steel-toothed rake to a whistling teakettle."
         ],
-        "name": "National Earmuff Day",
-        "slug": "national-earmuff-day"
+        "name": "National Earmuff Day"
       },
       {
         "date": "03-13",
@@ -2242,8 +2030,7 @@
           "In Chicago, it is a tradition to dye the river green for St. Patrick's Day.",
           "Nearly 13 million pints of Guinness are consumed on St. Patrick's Day worldwide."
         ],
-        "name": "St. Patrick's Day",
-        "slug": "st-patricks-day"
+        "name": "St. Patrick's Day"
       },
       {
         "date": "03-17",
@@ -2299,8 +2086,7 @@
           "Laughter can strengthen relationships by fostering a sense of belonging and improving teamwork.",
           "Not only does laughter boost mood, but it can also enhance immune function and decrease pain perception."
         ],
-        "name": "National Let's Laugh Day",
-        "slug": "national-lets-laugh-day"
+        "name": "National Let's Laugh Day"
       },
       {
         "date": "03-19",
@@ -2782,8 +2568,7 @@
           "The act allowed for the sale of '3.2 beer,' referring to its alcohol content by weight (roughly 4% alcohol by volume).",
           "On April 7, 1933, the day the act took effect, breweries across the U.S. delivered millions of barrels of beer, prompting widespread public celebrations."
         ],
-        "name": "New Beer's Eve",
-        "slug": "new-beers-eve"
+        "name": "New Beer's Eve"
       },
       {
         "date": "04-06",
@@ -3202,8 +2987,7 @@
           "The customary exchange involves men giving women roses and women giving men books, a tradition with roots in medieval legends and modern literary promotion.",
           "Millions of roses and books are sold across Catalonia on this single day, making it one of the largest annual events for both industries."
         ],
-        "name": "Lover's Day",
-        "slug": "lovers-day"
+        "name": "Lover's Day"
       }
     ],
     "04-24": [
@@ -3410,8 +3194,7 @@
           "More than 96 countries are involved in tuna fisheries, and tuna and tuna-like species are worth billions of dollars annually, providing a vital source of protein and income worldwide.",
           "Tuna are warm-blooded and among the fastest fish in the sea, with some species like the bluefin capable of swimming in bursts of up to around 75 km/h (about 47 mph)."
         ],
-        "name": "World Tuna Day",
-        "slug": "world-tuna-day"
+        "name": "World Tuna Day"
       },
       {
         "date": "05-02",
@@ -3954,8 +3737,7 @@
           "The day is typically celebrated by spending quality time with brothers, reaching out to them, or expressing gratitude for their presence and support.",
           "Brother's Day complements other family-focused observances such as National Sister's Day (first Sunday in August) and National Sibling Day (April 10th)."
         ],
-        "name": "Brother's Day",
-        "slug": "brothers-day"
+        "name": "Brother's Day"
       }
     ],
     "05-25": [
@@ -4282,8 +4064,7 @@
           "The chocolate flavor comes from cocoa, derived from the beans of the cacao tree, which were once used as currency by the Aztecs and Maya.",
           "June falls in the middle of summer in the Northern Hemisphere, and July is designated National Ice Cream Month in the U.S., making early June a fitting warm-up for the frozen treat."
         ],
-        "name": "National Chocolate Ice Cream Day",
-        "slug": "national-chocolate-ice-cream-day"
+        "name": "National Chocolate Ice Cream Day"
       },
       {
         "date": "06-07",
@@ -4622,8 +4403,7 @@
           "Just like human fingerprints, no two giraffes have exactly the same coat pattern, allowing researchers to identify individuals in the wild.",
           "Giraffes need only about 5 to 30 minutes of sleep in a 24-hour period, often taken in short naps while standing up."
         ],
-        "name": "World Giraffe Day",
-        "slug": "world-giraffe-day"
+        "name": "World Giraffe Day"
       },
       {
         "date": "06-21",
@@ -5028,16 +4808,16 @@
     "07-08": [
       {
         "date": "07-08",
-        "name": "National SCUD Day",
-        "emoji": "😂",
         "description": "National SCUD Day is observed annually on July 8th, its name a playful acronym for \"Savor the Comic, Unplug the Drama.\" The day was founded in 2007 by Stephanie West Allen, a former lawyer turned mediator and corporate coach who built the concept around a neuroscience-informed approach to conflict resolution. She launched it through her personal newsletter of the same name, inviting people to step away — for just 24 hours — from stressful conflicts, toxic gossip, and overwhelming news cycles. In their place, the day encourages pure, lighthearted silliness, backed by real science: even a single hearty laugh triggers immediate, measurable physical benefits.",
+        "emoji": "😂",
         "funFacts": [
           "National SCUD Day was founded in 2007 by Stephanie West Allen, a former lawyer who became a mediator and corporate coach specializing in conflict resolution.",
           "SCUD stands for \"Savor the Comic, Unplug the Drama\" — the same name Allen gave to the personal newsletter where she first launched the idea.",
           "Allen built her mediation work around neuroscience research on conflict, which shaped SCUD Day's central idea: that stepping back from drama is a skill, not just a mood.",
           "The day specifically targets three stress sources: toxic gossip, stressful conflicts, and overwhelming news feeds — asking people to unplug from all three for 24 hours.",
           "The \"savor the comic\" half isn't just a mood booster — the Mayo Clinic notes that a deep, hearty laugh triggers immediate, measurable physical changes in the body, from stress-hormone reduction to improved circulation."
-        ]
+        ],
+        "name": "National SCUD Day"
       },
       {
         "date": "07-08",
@@ -5085,8 +4865,7 @@
           "In 1978, the Piña Colada was officially declared the national drink of Puerto Rico.",
           "The name 'Piña Colada' literally translates from Spanish to 'strained pineapple,' referring to the fresh pineapple juice used in the original recipe."
         ],
-        "name": "National Piña Colada Day",
-        "slug": "national-piña-colada-day"
+        "name": "National Piña Colada Day"
       },
       {
         "date": "07-10",
@@ -5236,16 +5015,16 @@
       },
       {
         "date": "07-16",
-        "name": "Guinea Pig Appreciation Day",
-        "emoji": "🐹",
         "description": "Guinea Pig Appreciation Day is observed annually on July 16th, honoring the small, gentle rodents that have won over millions of pet owners worldwide. The date was chosen by Piggles Guinea Pig Rescue, a Toronto-based rescue founded by Caroline Lane, using an alphabet code: G is the 7th letter (July) and P is the 16th (the 16th day). Despite their name, guinea pigs aren't pigs and aren't from Guinea — they're rodents native to the Andes Mountains of South America, domesticated by Indigenous peoples thousands of years before European traders introduced them to the continent that gave them their misleading English name. The day is a chance to celebrate their quirks, from their distinctive high-pitched 'wheek' to their long history alongside humans, and to encourage adoption from rescues over impulse purchases.",
+        "emoji": "🐹",
         "funFacts": [
           "Guinea Pig Appreciation Day was created in 2016 by Caroline Lane, founder of Piggles Guinea Pig Rescue in Toronto, Canada, which has helped rehome nearly 1,300 guinea pigs since 2009.",
           "The July 16 date comes from a simple alphabet code: G is the 7th letter of the alphabet (for July) and P is the 16th (for the 16th day).",
           "Guinea pigs are rodents, not pigs — their scientific name, Cavia porcellus, comes from the Latin \"porcellus\" (\"little pig\"), a nod to their round shape and piggy squeals.",
           "They're the only rodents known to make a \"wheek\" — a high-pitched squeal used specifically to get a human's attention, a behavior scientists believe developed only after domestication.",
           "Guinea pigs have been kept by humans for thousands of years, first domesticated by Indigenous peoples in the Andes for food and ceremonial use, and later studied in labs since the 1600s — which is where the idiom \"guinea pig,\" meaning test subject, comes from."
-        ]
+        ],
+        "name": "Guinea Pig Appreciation Day"
       }
     ],
     "07-17": [
@@ -5389,8 +5168,7 @@
           "The Pied Piper legend serves as a cautionary tale about keeping promises, as the Piper allegedly led away the town's children when he wasn't paid for removing the rats.",
           "The German town of Hamelin (Hameln) continues to embrace its legendary past, featuring Pied Piper-themed attractions and an annual historical play."
         ],
-        "name": "Rat Catcher’s Day",
-        "slug": "rat-catchers-day"
+        "name": "Rat Catcher’s Day"
       }
     ],
     "07-23": [
@@ -5405,8 +5183,7 @@
           "A 'gorgeous grandma' does not actually have to be a grandmother — the term is meant to honor all vibrant women of a certain age.",
           "Alice Solomon wrote a book titled 'The Gorgeous Grandma Book' to spread her message of positive, empowered aging."
         ],
-        "name": "National Gorgeous Grandma Day",
-        "slug": "national-gorgeous-grandma-day"
+        "name": "National Gorgeous Grandma Day"
       },
       {
         "date": "07-23",
@@ -5502,8 +5279,7 @@
           "The signature \"burnt\" sugar crust is traditionally created by sprinkling sugar over the chilled custard and then caramelizing it with a blowtorch or under a hot broiler.",
           "The basic ingredients for crème brûlée are simple: egg yolks, heavy cream, sugar, and a flavoring, most commonly vanilla."
         ],
-        "name": "National Crème Brûlée Day",
-        "slug": "national-crème-brûlée-day"
+        "name": "National Crème Brûlée Day"
       },
       {
         "date": "07-27",
@@ -5531,16 +5307,16 @@
       },
       {
         "date": "07-28",
-        "name": "National Waterpark Day",
-        "emoji": "🌊",
         "description": "National Waterpark Day is observed annually on July 28th, celebrating the towering slides, wave pools, and lazy rivers that make waterparks a defining part of American summer. The holiday was created by Kalahari Resorts and Conventions in 2017, timed to July because it's typically the hottest month of the year in the Northern Hemisphere. The modern waterpark traces back to Wet 'n Wild Orlando, opened in 1977 by SeaWorld co-founder George Millay, whose success helped inspire an entire industry — including New Jersey's infamous Action Park, which opened a year later and became almost as famous for its chaos as for its thrills. The day is an invitation to beat the heat the same way millions of families have for nearly five decades: at a waterpark.",
+        "emoji": "🌊",
         "funFacts": [
           "National Waterpark Day was created by Kalahari Resorts and Conventions in 2017, and lands in July because it's typically the hottest month of the year in the Northern Hemisphere.",
           "The world's first true modern waterpark, Wet 'n Wild Orlando, opened on March 13, 1977, founded by George Millay — who had earlier co-founded SeaWorld.",
           "Millay got the idea by combining two things he'd seen: the Splash Pad at Ontario Place in Canada and the wave pool at Point Mallard Park in Decatur, Alabama.",
           "Wet 'n Wild's success helped inspire the founding of the World Waterpark Association in 1982, the industry's main trade group.",
           "Not every early waterpark fared as well: Action Park, which opened in Vernon, New Jersey in 1978, became notorious for its poorly designed rides and earned nicknames like \"Traction Park\" and \"Class Action Park\" before closing in 1996 and reopening as the much safer Mountain Creek Waterpark."
-        ]
+        ],
+        "name": "National Waterpark Day"
       }
     ],
     "07-29": [
@@ -5581,16 +5357,16 @@
       },
       {
         "date": "07-30",
-        "name": "Paperback Book Day",
-        "emoji": "📚",
         "description": "Paperback Book Day is observed annually on July 30th, marking the day in 1935 that Penguin Books published the first modern paperbacks in England. The format was the brainchild of publisher Allen Lane, who came up with the idea after finding only poor-quality, overpriced books for sale at a train station bookstall while visiting Agatha Christie's country estate. Priced at just sixpence and color-coded by genre — orange for fiction, blue for biography, green for crime — the first ten Penguin titles made literature affordable and portable in a way it had never been before. The day celebrates the paperback's lasting legacy: a format that, within its first year alone, sold three million copies in a country of roughly 38 million people.",
+        "emoji": "📚",
         "funFacts": [
           "Paperback Book Day marks July 30, 1935, when Penguin Books published its first ten paperback titles in England, including works by Ernest Hemingway and Agatha Christie.",
           "Founder Allen Lane got the idea after a weekend at Agatha Christie's country estate, when he found nothing but poor-quality, overpriced books for sale at the Exeter St Davids train station.",
           "The first Penguin paperbacks cost just sixpence each and were color-coded by genre: orange for fiction, blue for biography, and green for crime.",
           "The penguin mascot was suggested by Lane's secretary, Joan Coles, after he asked for a \"dignified but flippant\" symbol for the new imprint.",
           "Penguin sold roughly 3 million paperbacks in its first year, and a bulk order of 63,000 books from Woolworth's helped fund the venture and prove the format's commercial viability."
-        ]
+        ],
+        "name": "Paperback Book Day"
       }
     ],
     "07-31": [
@@ -5642,6 +5418,17 @@
       }
     ],
     "08-02": [
+      {
+        "date": "08-02",
+        "description": "National Couch Cleaning Day, observed annually on August 2nd, is an unofficial reminder to give the most-used seat in the house the deep clean it rarely gets. Sofas quietly collect dust, skin cells, and dust mites between regular tidy-ups, so the day encourages vacuuming cushions, laundering removable covers, and spot-treating stains to keep the couch fresh and allergen-friendly.",
+        "emoji": "🛋️",
+        "funFacts": [
+          "A single dust mite lives for roughly 80 days and produces about 1,000 allergen-triggering waste particles in that time — the dark, warm crevices of a couch cushion are one of its favorite habitats.",
+          "Cleaning experts recommend vacuuming fabric couches at least once a week, since surface dusting alone doesn't reach the dirt and skin-cell debris embedded deep in the upholstery fibers.",
+          "The EPA recommends professional upholstery and carpet cleaning two to three times a year, on top of regular at-home vacuuming."
+        ],
+        "name": "National Couch Cleaning Day"
+      },
       {
         "date": "08-02",
         "description": "National Ice Cream Sandwich Day, observed annually on August 2nd, celebrates the delightful frozen treat that combines creamy ice cream with two soft cookies or wafers. It's a day dedicated to indulging in this beloved dessert, often marked by special deals and appreciation for its simple yet satisfying appeal across the United States.",
@@ -5854,8 +5641,7 @@
           "The name 's'more' is widely believed to be a contraction of 'some more,' reflecting the popular demand for an additional serving of the treat.",
           "Americans purchase over 90 million pounds of marshmallows each year, with a significant portion being used for s'mores, especially during summer months."
         ],
-        "name": "S'mores Day",
-        "slug": "smores-day"
+        "name": "S'mores Day"
       }
     ],
     "08-11": [
@@ -5903,8 +5689,7 @@
           "Birth order theory suggests middle children often develop strong diplomatic skills, becoming excellent mediators due to navigating relationships between older and younger siblings.",
           "Several influential figures are believed to have been middle children, including Abraham Lincoln, Bill Gates, and Madonna, often cited as examples of their independence and drive."
         ],
-        "name": "Middle Child's Day",
-        "slug": "middle-childs-day"
+        "name": "Middle Child's Day"
       }
     ],
     "08-13": [
@@ -6117,16 +5902,16 @@
       },
       {
         "date": "08-21",
-        "name": "National Senior Citizens Day",
-        "emoji": "🧓",
         "description": "National Senior Citizens Day is observed annually on August 21st, honoring the contributions older Americans have made to their families, communities, and country. President Ronald Reagan formally established the day by signing Proclamation 5847 on August 19, 1988, after Congress requested it through House Joint Resolution 138. Beyond celebration, the day is meant to raise awareness of issues that affect older adults, including declining health and elder abuse. It's a chance to check in on the senior citizens in your own life — a group that, as of 2024, made up roughly 18% of the U.S. population.",
+        "emoji": "🧓",
         "funFacts": [
           "National Senior Citizens Day was formally established when President Ronald Reagan signed Proclamation 5847 on August 19, 1988, after Congress requested it through House Joint Resolution 138.",
           "In his proclamation, Reagan wrote: \"Throughout our history, older people have achieved much for our families, our communities, and our country.\"",
           "Reagan himself was, at the time, the oldest person ever elected U.S. President, leaving office in 1989 at age 77 — a record later broken by several of his successors.",
           "The day is meant to do more than celebrate — it's also intended to raise awareness of issues like elder abuse and age-related health decline.",
           "As of 2024, about 61.2 million Americans — roughly 18% of the U.S. population — were age 65 or older, a share the Census Bureau expects to keep climbing for decades."
-        ]
+        ],
+        "name": "National Senior Citizens Day"
       }
     ],
     "08-22": [
@@ -6603,16 +6388,16 @@
       },
       {
         "date": "09-10",
-        "name": "National Anti-Junk Light Day",
-        "emoji": "💡",
         "description": "National Anti-Junk Light Day is observed annually on September 10th, raising awareness of \"junk light\" — the blue and green wavelengths emitted by screens, LEDs, and fluorescent bulbs that can disrupt sleep and eye health. The day was founded in 2018 by TrueDark, a company that makes light-filtering glasses, with the name deliberately echoing \"junk food\" to frame certain kinds of artificial light as something to consume in moderation. The concern isn't just personal: light pollution now affects an estimated 83% of the world's population, and a 2016 global atlas found the Milky Way hidden from more than a third of humanity, including nearly 80% of North Americans. The day is a nudge to rethink screen habits after dark and consider how the lights around you affect both your sleep and the night sky.",
+        "emoji": "💡",
         "funFacts": [
           "National Anti-Junk Light Day was founded in 2018 by TrueDark, a company that makes light-filtering eyewear designed to block disruptive wavelengths.",
           "The term \"junk light\" deliberately echoes \"junk food\" — framing blue and green light from screens and LEDs as something to consume in moderation, not eliminate entirely.",
           "Research from Harvard Medical School has found that blue light in the evening suppresses melatonin and shifts the body's internal clock more than warmer-toned light does.",
           "A 2016 global light pollution atlas published in Science Advances found the Milky Way hidden from more than one-third of humanity, including nearly 80% of North Americans.",
           "Light pollution doesn't just affect stargazing — it can also disrupt wildlife migration patterns, since many species rely on natural light and darkness cues to navigate and reproduce."
-        ]
+        ],
+        "name": "National Anti-Junk Light Day"
       }
     ],
     "09-11": [
@@ -6653,16 +6438,16 @@
       },
       {
         "date": "09-12",
-        "name": "National Hug & High 5 Day",
-        "emoji": "🤗",
         "description": "National Hug & High 5 Day is observed annually on September 12th, founded by Philadelphia's David Sylvester in memory of his childhood mentor Kevin Bowers, who died in the World Trade Center on September 11, 2001. Sylvester chose the date deliberately — the day after a tragedy, he says, is when people most appreciate a warm hug or an uplifting high five. Since setting out on his quest, he has bicycled across North America, Australia, Asia, and Africa, hugging and high-fiving more than half a million people in every U.S. state and dozens of countries. Along the way, he's made a point of visiting communities touched by violence, including Oklahoma City, San Bernardino, and Orlando, turning a simple gesture into a two-decade mission of human connection.",
+        "emoji": "🤗",
         "funFacts": [
           "National Hug & High 5 Day was founded in 2021 by David Sylvester, but his personal quest to hug and high-five strangers began the day after his childhood mentor, Kevin Bowers, died in the World Trade Center on 9/11.",
           "Sylvester has bicycled across North America three times, plus parts of Australia, Asia, and Africa, spreading hugs and high fives along the way.",
           "He's hugged or high-fived more than half a million people across every U.S. state and 37 countries — and counting.",
           "On his tours, Sylvester deliberately visits places touched by violence, including Oklahoma City, San Bernardino, Chicago, Cleveland, and Orlando.",
           "In his own words: \"I chose September 12 because it is after a tragedy when we all appreciate a warm and supportive hug and appreciate the uplifting power of a high5.\""
-        ]
+        ],
+        "name": "National Hug & High 5 Day"
       }
     ],
     "09-13": [
@@ -6734,8 +6519,7 @@
           "It comes in two main varieties: a clear 'white' version and a bright green version, which gets its color from added food coloring.",
           "A prominent ingredient in the classic Grasshopper cocktail, it also lends its flavor to popular desserts like mint chocolate chip ice cream."
         ],
-        "name": "National Crème de Menthe Day",
-        "slug": "national-crème-de-menthe-day"
+        "name": "National Crème de Menthe Day"
       }
     ],
     "09-16": [
@@ -6944,16 +6728,16 @@
       },
       {
         "date": "09-24",
-        "name": "Heritage Day",
-        "emoji": "🌍",
         "description": "Heritage Day is observed annually on September 24th, a South African public holiday celebrating the diverse cultures, traditions, and histories that make up the country's \"Rainbow Nation.\" First observed in 1995, the date carries deeper roots: in KwaZulu-Natal it was long known as Shaka Day, marking the presumed 1828 death of the Zulu king who united the region's Nguni clans. When the newly democratic Parliament nearly left the date off its 1994 holiday list, objections from Zulu communities led to a compromise — rather than honor one people or figure, the day would belong to all South Africans' heritage. Since 2005, it has also taken on a second identity as National Braai Day, when an informal campaign to rebrand the holiday around South Africa's backyard-barbecue tradition won the backing of Archbishop Desmond Tutu two years later.",
+        "emoji": "🌍",
         "funFacts": [
           "Heritage Day was first observed on September 24, 1995, the year after South Africa's first democratic elections.",
           "Before it became a national holiday, September 24 was known in KwaZulu-Natal as Shaka Day, commemorating the presumed 1828 death of Shaka, the Zulu king credited with uniting the region's Nguni clans.",
           "When the 1994 Public Holidays Bill nearly omitted the date, objections from the Inkatha Freedom Party led lawmakers to reframe it as a holiday for all South Africans' cultural heritage, rather than one group's history alone.",
           "In 2005, Jan Scannell — better known as \"Jan Braai\" — launched a media campaign to rebrand the day as National Braai Day, after the Afrikaans word for barbecue.",
           "Archbishop Desmond Tutu became patron of Braai Day in 2007, backing the idea that gathering around a braai could be a unifying ritual across South Africa's cultural and language divides."
-        ]
+        ],
+        "name": "Heritage Day"
       }
     ],
     "09-25": [
@@ -7053,8 +6837,7 @@
           "The World Health Organization, along with partners, set a goal of achieving zero human deaths from dog-mediated rabies by 2030 (\"Zero by 30\").",
           "Dogs are responsible for the vast majority of human rabies cases worldwide, which is why mass dog vaccination campaigns are central to World Rabies Day efforts."
         ],
-        "name": "World Rabies Day",
-        "slug": "world-rabies-day"
+        "name": "World Rabies Day"
       }
     ],
     "09-29": [
@@ -7198,8 +6981,7 @@
           "The longest recorded drive in professional golf was 515 yards by Mike Austin in 1974.",
           "The reason most golf courses have 18 holes is attributed to St Andrews' Old Course in 1764, which standardized the number."
         ],
-        "name": "National Golf Lover's Day",
-        "slug": "national-golf-lovers-day"
+        "name": "National Golf Lover's Day"
       }
     ],
     "10-05": [
@@ -7360,8 +7142,7 @@
           "While not a nationally recognized holiday, it's celebrated by many as a day to prioritize personal joy and self-care.",
           "People often 'celebrate' by treating themselves to something special, like a favorite meal, a relaxing activity, or by spending time on a personal hobby."
         ],
-        "name": "It's My Party Day",
-        "slug": "its-my-party-day"
+        "name": "It's My Party Day"
       },
       {
         "date": "10-11",
@@ -7409,8 +7190,7 @@
           "The 'M's in M&M's stand for Mars (Forrest Mars Sr.) and Murrie (Bruce Murrie, son of Hershey's president William Murrie, who partnered with Mars).",
           "The original M&M's colors were brown, yellow, orange, red, and green; blue was added to the standard color mix in 1995 after a public vote."
         ],
-        "name": "National M&M Day",
-        "slug": "national-mm-day"
+        "name": "National M&M Day"
       },
       {
         "date": "10-13",
@@ -7781,8 +7561,7 @@
           "The German Steiff company is widely credited with creating some of the first commercially produced stuffed toys in the late 19th century.",
           "Plush toys are frequently used in therapy and counseling as comfort objects to help reduce anxiety and promote emotional well-being."
         ],
-        "name": "Plush Animal Lover's Day",
-        "slug": "plush-animal-lovers-day"
+        "name": "Plush Animal Lover's Day"
       }
     ],
     "10-29": [
@@ -7878,8 +7657,7 @@
           "The U.S. Department of Commerce officially recognized National Author's Day in 1949, encouraging people to write letters to their favorite authors.",
           "Many famous authors have written under pseudonyms, such as Samuel Clemens (Mark Twain), Mary Ann Evans (George Eliot), and Eric Arthur Blair (George Orwell)."
         ],
-        "name": "National Author’s Day",
-        "slug": "national-authors-day"
+        "name": "National Author’s Day"
       }
     ],
     "11-02": [
@@ -7927,8 +7705,7 @@
           "Many common English clichés, such as 'ignorance is bliss' or 'all that glitters is not gold,' are derived from classical literature or ancient proverbs.",
           "While often criticized for lacking originality, clichés can sometimes serve as efficient shortcuts in communication, quickly conveying a familiar idea or emotion."
         ],
-        "name": "Cliché Day",
-        "slug": "cliché-day"
+        "name": "Cliché Day"
       }
     ],
     "11-04": [
@@ -8371,8 +8148,7 @@
           "The single custom is simply to greet ten or more people during the day, sending a message to world leaders to use communication rather than force to settle conflicts.",
           "Dozens of Nobel Peace Prize laureates have recognized World Hello Day as a meaningful instrument for preserving peace."
         ],
-        "name": "World Hello Day",
-        "slug": "world-hello-day"
+        "name": "World Hello Day"
       }
     ],
     "11-22": [
@@ -8400,8 +8176,7 @@
           "In several countries, including Mexico, this day is specifically known as \"Día del Músico,\" with vibrant public celebrations and tributes to local musicians.",
           "Renowned composers like Henry Purcell and George Frideric Handel composed significant musical works dedicated to Saint Cecilia."
         ],
-        "name": "Saint Cecilia's Day",
-        "slug": "saint-cecilias-day"
+        "name": "Saint Cecilia's Day"
       }
     ],
     "11-23": [
@@ -8477,8 +8252,7 @@
           "Green and yellow are the traditional colors for the Catherinettes' hats, symbolizing knowledge and faith, respectively.",
           "Saint Catherine of Alexandria is venerated in Catholicism as one of the Fourteen Holy Helpers, known for her virginity and martyrdom."
         ],
-        "name": "Saint Catherine's Day",
-        "slug": "saint-catherines-day"
+        "name": "Saint Catherine's Day"
       }
     ],
     "11-26": [
@@ -8521,8 +8295,7 @@
           "Bavarian cream is the same filling commonly found inside 'Bavarian cream' doughnuts, showing its versatility beyond pies.",
           "The day falls on November 27th each year, frequently landing near or on Thanksgiving, adding another dessert option to the holiday table."
         ],
-        "name": "National Bavarian Cream Pie Day",
-        "slug": "national-bavarian-cream-pie-day"
+        "name": "National Bavarian Cream Pie Day"
       },
       {
         "date": "11-27",
@@ -8611,8 +8384,7 @@
           "By 2003, organizations like CERT and the U.S. Department of Homeland Security had become involved in amplifying the day's cybersecurity awareness message.",
           "Common ways to mark the day include updating passwords, enabling multi-factor authentication, running antivirus scans, and educating others about phishing and online threats."
         ],
-        "name": "Computer Security Day",
-        "slug": "computer-security-day"
+        "name": "Computer Security Day"
       }
     ],
     "12-01": [
@@ -9131,8 +8903,7 @@
           "Oatmeal muffins are highly versatile, commonly customized with add-ins like blueberries, bananas, raisins, cinnamon, or nuts.",
           "Unlike frosted cupcakes they resemble, muffins are traditionally a quick bread leavened with baking powder or baking soda rather than yeast."
         ],
-        "name": "National Oatmeal Muffin Day",
-        "slug": "national-oatmeal-muffin-day"
+        "name": "National Oatmeal Muffin Day"
       },
       {
         "date": "12-19",
@@ -9189,8 +8960,7 @@
           "The dish is a staple on many American restaurant menus, from casual seafood shacks to sit-down eateries, and is often served with dipping sauces like cocktail or tartar.",
           "The holiday falls on the same date as the winter solstice, giving seafood fans a warm, comforting meal to enjoy on one of the year's shortest days."
         ],
-        "name": "National French Fried Shrimp Day",
-        "slug": "national-french-fried-shrimp-day"
+        "name": "National French Fried Shrimp Day"
       },
       {
         "date": "12-21",
