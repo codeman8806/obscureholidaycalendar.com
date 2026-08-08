@@ -5575,17 +5575,6 @@
     "08-08": [
       {
         "date": "08-08",
-        "description": "National CBD Day, observed annually on August 8th, is a day dedicated to celebrating and raising awareness about Cannabidiol (CBD), a non-intoxicating compound found in the cannabis plant. The day aims to educate the public about CBD's potential wellness benefits, its various forms, and its role in the growing health and wellness industry, distinguishing it from psychoactive cannabinoids like THC.",
-        "emoji": "🍃",
-        "funFacts": [
-          "CBD was first isolated by American chemist Roger Adams in 1940.",
-          "Unlike THC (tetrahydrocannabinol), CBD is non-psychoactive, meaning it does not produce the 'high' associated with cannabis.",
-          "In the United States, hemp-derived CBD products containing less than 0.3% THC were federally legalized by the 2018 Farm Bill."
-        ],
-        "name": "National CBD Day"
-      },
-      {
-        "date": "08-08",
         "description": "Happiness Happens Day is observed annually on August 8th, encouraging individuals to acknowledge and celebrate the happiness in their lives. Founded by the Secret Society of Happy People, the day serves as a reminder that happiness is a choice and can be found in everyday moments, promoting a positive outlook and the sharing of joyful experiences.",
         "emoji": "😊",
         "funFacts": [
@@ -5594,6 +5583,17 @@
           "Its primary goal is to encourage individuals to consciously recognize and celebrate the moments of happiness they experience daily."
         ],
         "name": "Happiness Happens Day"
+      },
+      {
+        "date": "08-08",
+        "description": "National CBD Day, observed annually on August 8th, is a day dedicated to celebrating and raising awareness about Cannabidiol (CBD), a non-intoxicating compound found in the cannabis plant. The day aims to educate the public about CBD's potential wellness benefits, its various forms, and its role in the growing health and wellness industry, distinguishing it from psychoactive cannabinoids like THC.",
+        "emoji": "🍃",
+        "funFacts": [
+          "CBD was first isolated by American chemist Roger Adams in 1940.",
+          "Unlike THC (tetrahydrocannabinol), CBD is non-psychoactive, meaning it does not produce the 'high' associated with cannabis.",
+          "In the United States, hemp-derived CBD products containing less than 0.3% THC were federally legalized by the 2018 Farm Bill."
+        ],
+        "name": "National CBD Day"
       }
     ],
     "08-09": [
