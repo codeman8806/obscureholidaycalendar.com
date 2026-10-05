@@ -5575,17 +5575,6 @@
     "08-08": [
       {
         "date": "08-08",
-        "description": "National CBD Day, observed annually on August 8th, is a day dedicated to celebrating and raising awareness about Cannabidiol (CBD), a non-intoxicating compound found in the cannabis plant. The day aims to educate the public about CBD's potential wellness benefits, its various forms, and its role in the growing health and wellness industry, distinguishing it from psychoactive cannabinoids like THC.",
-        "emoji": "🍃",
-        "funFacts": [
-          "CBD was first isolated by American chemist Roger Adams in 1940.",
-          "Unlike THC (tetrahydrocannabinol), CBD is non-psychoactive, meaning it does not produce the 'high' associated with cannabis.",
-          "In the United States, hemp-derived CBD products containing less than 0.3% THC were federally legalized by the 2018 Farm Bill."
-        ],
-        "name": "National CBD Day"
-      },
-      {
-        "date": "08-08",
         "description": "Happiness Happens Day is observed annually on August 8th, encouraging individuals to acknowledge and celebrate the happiness in their lives. Founded by the Secret Society of Happy People, the day serves as a reminder that happiness is a choice and can be found in everyday moments, promoting a positive outlook and the sharing of joyful experiences.",
         "emoji": "😊",
         "funFacts": [
@@ -5594,6 +5583,17 @@
           "Its primary goal is to encourage individuals to consciously recognize and celebrate the moments of happiness they experience daily."
         ],
         "name": "Happiness Happens Day"
+      },
+      {
+        "date": "08-08",
+        "description": "National CBD Day, observed annually on August 8th, is a day dedicated to celebrating and raising awareness about Cannabidiol (CBD), a non-intoxicating compound found in the cannabis plant. The day aims to educate the public about CBD's potential wellness benefits, its various forms, and its role in the growing health and wellness industry, distinguishing it from psychoactive cannabinoids like THC.",
+        "emoji": "🍃",
+        "funFacts": [
+          "CBD was first isolated by American chemist Roger Adams in 1940.",
+          "Unlike THC (tetrahydrocannabinol), CBD is non-psychoactive, meaning it does not produce the 'high' associated with cannabis.",
+          "In the United States, hemp-derived CBD products containing less than 0.3% THC were federally legalized by the 2018 Farm Bill."
+        ],
+        "name": "National CBD Day"
       }
     ],
     "08-09": [
@@ -7133,6 +7133,19 @@
       }
     ],
     "10-11": [
+      {
+        "date": "10-11",
+        "description": "National Running Backs Day is an unofficial NFL holiday honoring the ball carriers who grind out yards behind the line. NBC's Sunday Night Football invented it on air during the 49ers-Falcons game on October 19, 2025, after Christian McCaffrey and Bijan Robinson said running backs deserved their own day. NBC brought it back for 2026, declaring Sunday, October 11 — the night of its Ravens at Falcons broadcast — as this year's National Running Backs Day.",
+        "emoji": "🏈",
+        "funFacts": [
+          "Mike Tirico announced the very first National Running Backs Day with about 2:31 left in the fourth quarter of the 49ers-Falcons game on October 19, 2025, telling viewers, \"We've just determined that.\"",
+          "The idea came from the players themselves: 49ers star Christian McCaffrey and Falcons star Bijan Robinson both said running backs deserved some recognition.",
+          "NBC's prize was a pink robe and a \"gold\" chain bearing a brand-new National Running Backs Day logo, all put together in the 48 hours before kickoff.",
+          "Christian McCaffrey claimed the first robe after scoring a late touchdown to seal San Francisco's 20-10 win, then joked, \"This might be the one time I wear it.\"",
+          "It follows in the footsteps of National Tight Ends Day, which George Kittle helped spark in 2018 and the NFL made official on the fourth Sunday of October starting in 2019."
+        ],
+        "name": "National Running Backs Day"
+      },
       {
         "date": "10-11",
         "description": "It's My Party Day, observed annually on October 11th, is a playful holiday that encourages individuals to celebrate themselves and their personal desires. Inspired by Lesley Gore's classic 1963 hit song \"It's My Party,\" this day is all about self-indulgence, whether through a small personal treat, engaging in a favorite activity, or simply doing exactly what you want. It serves as a lighthearted reminder to take a moment to honor your own happiness and wishes.",
