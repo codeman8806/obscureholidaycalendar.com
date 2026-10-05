@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Refresh holidays from Firebase, snapshot them, and sync into the bot copy.
+# Refresh holidays from Firebase, snapshot them, and sync into both bot copies.
 # Usage:
 #   FIREBASE_URL="https://gen-lang-client-0034763265-default-rtdb.firebaseio.com/.json" ./update_holidays_from_firebase.sh
 # If FIREBASE_URL is not set, the default above is used.
@@ -41,10 +41,17 @@ else:
     payload = {"holidays": holidays}
     holiday_count = sum(len(items) for items in holidays.values() if isinstance(items, list))
 
+# Keep the floating (rule-dated) holidays: the site, both bots, and
+# generate_sitemaps.py all resolve their dates from this node.
+floating = data.get("floatingHolidays") if isinstance(data, dict) else None
+if floating:
+    payload["floatingHolidays"] = floating
+
 timestamp = datetime.datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
 snap_path = root / f"holidays_snapshot_{timestamp}.json"
 out_path = root / "holidays.json"
 bot_path = root / "bot" / "holidays.json"
+slack_bot_path = root / "slack-bot" / "holidays.json"
 
 # Write a pretty snapshot for diffing and archival.
 snap_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
@@ -52,10 +59,12 @@ snap_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
 # Write the canonical file used by the site generator.
 out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
 
-# Keep the bot copy in sync.
+# Keep both bot copies in sync.
 bot_path.write_text(out_path.read_text())
+slack_bot_path.write_text(out_path.read_text())
 
 print(f"Fetched {holiday_count} holidays")
 print(f"Snapshot saved to {snap_path.name}")
-print("Updated holidays.json and bot/holidays.json")
+print(f"Kept {len(payload.get('floatingHolidays', {}))} floating holidays")
+print("Updated holidays.json, bot/holidays.json, and slack-bot/holidays.json")
 PY
