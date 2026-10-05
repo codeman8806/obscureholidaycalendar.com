@@ -9279,5 +9279,232 @@
         "name": "No Interruptions Day"
       }
     ]
+  },
+  "floatingHolidays": {
+    "ask-a-stupid-question-day": {
+      "description": "Ask a Stupid Question Day, observed annually on September 28th (or the last school day of September), is an informal holiday primarily designed to encourage individuals, especially students, to overcome the fear of asking questions they might deem \"stupid.\" Originating among teachers, its goal is to foster a safe environment for inquiry, promote curiosity, and highlight that no question is truly foolish if it leads to understanding and learning, thereby reducing inhibitions in academic and social settings.",
+      "emoji": "❓",
+      "funFacts": [
+        "The concept originated in the 1980s when teachers noticed students were hesitant to ask questions in class, fearing embarrassment.",
+        "It aims to encourage critical thinking and remove the stigma often associated with asking basic or foundational questions.",
+        "While officially September 28th, some schools observe it on the last Friday or last school day of September to maximize student participation."
+      ],
+      "name": "Ask a Stupid Question Day",
+      "originalDate": "09-28",
+      "originalIndex": 1,
+      "verifiedAt": "2026-07-03"
+    },
+    "beaujolais-nouveau-day": {
+      "dateRule": {
+        "month": 11,
+        "ordinal": 3,
+        "type": "nth-weekday-of-month",
+        "weekday": 4
+      },
+      "description": "Beaujolais Nouveau Day is an annual celebration marking the release of the first wine of the harvest from the Beaujolais region of France. This young, fruity red wine, made from Gamay grapes, is traditionally released at 12:01 AM on the third Thursday of November each year, sparking festivities globally. It signifies the culmination of the grape harvest and the beginning of the new wine season, bringing a fresh taste to wine enthusiasts.",
+      "emoji": "🍷",
+      "funFacts": [
+        "The iconic slogan \"Le Beaujolais Nouveau est arrivé!\" (The New Beaujolais has arrived!) heralds the wine's official release each year.",
+        "Made exclusively from Gamay grapes, Beaujolais Nouveau undergoes a process called carbonic maceration, which contributes to its vibrant fruit flavors and light body without significant tannin extraction.",
+        "Millions of bottles are shipped and uncorked globally in over 100 countries within days of its release, showcasing its international appeal.",
+        "Despite its French origins, Japan is historically one of the largest export markets for Beaujolais Nouveau, often consuming a significant portion of the annual production.",
+        "The tradition began as a local celebration among Beaujolais winemakers in the 19th century, evolving into a worldwide event in the latter half of the 20th century."
+      ],
+      "name": "Beaujolais Nouveau Day",
+      "originalDate": "11-21",
+      "originalIndex": 1,
+      "verifiedAt": "2026-07-03"
+    },
+    "national-daylight-appreciation-day": {
+      "dateRule": {
+        "season": "summer",
+        "type": "solstice"
+      },
+      "description": "National Daylight Appreciation Day is observed annually on June 21st, strategically coinciding with the summer solstice in the Northern Hemisphere. This day encourages people to celebrate and value the longest period of natural daylight experienced during the year. It's an occasion to enjoy outdoor activities, appreciate the sun's energy, warmth, and the positive impact of extended daylight on mood and well-being, reminding us to make the most of the abundant natural light before the days begin to shorten.",
+      "emoji": "☀️",
+      "funFacts": [
+        "The date universally coincides with the summer solstice, marking the longest period of daylight and the shortest night of the year in the Northern Hemisphere.",
+        "The word \"solstice\" originates from Latin, combining \"sol\" (sun) and \"sistere\" (to stand still), as the sun appears to pause its northward or southward movement.",
+        "Depending on latitude, the summer solstice can provide anywhere from around 14 hours of daylight to nearly 24 hours in regions close to the Arctic Circle."
+      ],
+      "name": "National Daylight Appreciation Day",
+      "originalDate": "06-21",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "national-doughnut-day": {
+      "dateRule": {
+        "month": 6,
+        "ordinal": 1,
+        "type": "nth-weekday-of-month",
+        "weekday": 5
+      },
+      "description": "National Doughnut Day is celebrated on the first Friday of June each year, honoring the Salvation Army 'Doughnut Lassies' who provided comfort and support to soldiers by serving them doughnuts on the front lines during World War I. Today, it's a popular occasion for bakeries and shops to offer free or discounted doughnuts, celebrating the beloved fried pastry and its historical significance.",
+      "emoji": "🍩",
+      "funFacts": [
+        "The holiday originated in 1938 in Chicago as a fundraiser for the Salvation Army to help those in need during the Great Depression and to commemorate the 'Doughnut Lassies' of WWI.",
+        "During World War I, Salvation Army volunteers would make and serve fresh doughnuts to American soldiers in the trenches of France, providing a morale boost and a taste of home.",
+        "The iconic doughnut hole is often credited to mid-19th-century New England ship captain Hanson Gregory, who reportedly punched holes in his mother's fried dough to ensure even cooking."
+      ],
+      "name": "National Doughnut Day",
+      "originalDate": "06-07",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "national-hot-dog-day": {
+      "dateRule": {
+        "month": 7,
+        "ordinal": 3,
+        "type": "nth-weekday-of-month",
+        "weekday": 3
+      },
+      "description": "National Hot Dog Day is an annual celebration of the popular American frankfurter, often observed in the United States around the third Wednesday of July. It's a day when enthusiasts and casual consumers alike enjoy hot dogs in various forms, recognizing their cultural significance as a staple of summer cookouts, sporting events, and quick meals across the nation.",
+      "emoji": "🌭",
+      "funFacts": [
+        "Americans consume an estimated 20 billion hot dogs annually.",
+        "The term 'hot dog' is believed to have originated from a 1901 cartoon depicting 'dachshund sausages.'",
+        "Many hot dog purists, especially in Chicago, famously argue that ketchup should not be used on a hot dog."
+      ],
+      "name": "National Hot Dog Day",
+      "originalDate": "07-23",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "national-tight-ends-day": {
+      "dateRule": {
+        "month": 10,
+        "ordinal": 4,
+        "type": "nth-weekday-of-month",
+        "weekday": 0
+      },
+      "description": "National Tight Ends Day is an NFL celebration of the position that has to block like a lineman and catch like a receiver. It started as a sideline joke during the 49ers' win over the Detroit Lions in Week 2 of 2018, when Jimmy Garoppolo asked whether it was National Tight Ends Day and George Kittle answered that it was a holiday. The NFL made it official in 2019, and it is now observed every year on the fourth Sunday of October.",
+      "emoji": "🏈",
+      "funFacts": [
+        "It began in Week 2 of 2018 after Garrett Celek dragged two Lions defenders into the end zone on an 11-yard touchdown, and Jimmy Garoppolo asked on the sideline, \"What is it, like National Tight Ends Day?\"",
+        "George Kittle's answer stuck: \"Yeah, it's National Tight Ends Day. It's a holiday.\"",
+        "The NFL made it official in 2019, putting it on the fourth Sunday of October, which usually falls in Week 8 of the season.",
+        "On National Tight Ends Day 2024 (October 27), tight ends combined for 177 catches, a single-day NFL record, and 14 different tight ends scored touchdowns.",
+        "Proceeds from National Tight Ends Day merchandise have benefited the University of Iowa Stead Family Children's Hospital, a cause close to Kittle from his college days at Iowa."
+      ],
+      "name": "National Tight Ends Day",
+      "verifiedAt": "2026-10-05"
+    },
+    "national-ugly-sweater-day": {
+      "dateRule": {
+        "month": 12,
+        "ordinal": 3,
+        "type": "nth-weekday-of-month",
+        "weekday": 5
+      },
+      "description": "National Ugly Sweater Day is an annual celebration encouraging people to don their most garish, brightly colored, and often handmade festive sweaters. Typically observed in December, it's a lighthearted tradition embraced by offices, schools, and social gatherings to spread holiday cheer and often raise money for charity.",
+      "emoji": "🧥🎄",
+      "funFacts": [
+        "The trend of wearing \"ugly\" Christmas sweaters began in the 1980s, often seen as ironic fashion popularized by TV shows and movies.",
+        "The first official \"Ugly Christmas Sweater Party\" is often credited to a group in Vancouver, Canada, in 2002, helping to ignite the modern phenomenon.",
+        "Many Ugly Sweater Day events are used as fundraisers for various charities, encouraging participants to donate while showcasing their festive attire.",
+        "Guinness World Records has recognized attempts for the largest gathering of people wearing ugly Christmas sweaters, highlighting the global reach of the trend.",
+        "Celebrities and public figures have also embraced the trend, further popularizing it and making it a staple of holiday celebrations.",
+        "The sweaters are often characterized by excessive embellishments, such as tinsel, bells, oversized appliqués, and sometimes even working LED lights."
+      ],
+      "name": "National Ugly Sweater Day",
+      "originalDate": "12-19",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "stay-home-because-you-re-well-day": {
+      "description": "Stay Home Because You're Well Day, celebrated annually on November 30th, encourages individuals to take a proactive approach to their health by staying home from work or school not due to illness, but to rest, recharge, and prevent potential exposure to germs. This unofficial holiday champions self-care and highlights the importance of preventative well-being for maintaining long-term health and productivity, particularly as the cold and flu season typically gets underway.",
+      "emoji": "🏠",
+      "funFacts": [
+        "This unofficial holiday was created by Ruth and Thomas Roy of Wellcat.com, who are well-known for inventing numerous unique observances, often with a humorous or thought-provoking twist.",
+        "The day serves as a lighthearted yet significant reminder to prioritize self-care and combat burnout, advocating for a 'well day' to proactively address health rather than waiting until one is already sick.",
+        "It subtly critiques 'presenteeism' – the practice of attending work while feeling unwell – by promoting preventative rest days to avoid the spread of illness and sustain overall wellness."
+      ],
+      "name": "Stay Home Because You're Well Day",
+      "originalDate": "11-30",
+      "originalIndex": 1,
+      "verifiedAt": "2026-07-03"
+    },
+    "thanksgiving-day": {
+      "dateRule": {
+        "month": 11,
+        "ordinal": 4,
+        "type": "nth-weekday-of-month",
+        "weekday": 4
+      },
+      "description": "A national holiday primarily celebrated in the United States and Canada as a day of giving thanks for the harvest and other blessings of the past year. It typically involves a large family meal, often featuring turkey, and reflection on gratitude and community.",
+      "emoji": "🦃",
+      "funFacts": [
+        "The first Thanksgiving feast shared by the Pilgrims and the Wampanoag people in 1621 lasted three days.",
+        "While turkey is iconic, historical accounts suggest that venison and seafood, such as fish and lobster, were also prominent at early colonial harvest feasts.",
+        "Sarah Josepha Hale, the author of 'Mary Had a Little Lamb,' campaigned for 36 years to make Thanksgiving a national holiday.",
+        "The annual Macy's Thanksgiving Day Parade in New York City began in 1924, originally featuring animals from the Central Park Zoo.",
+        "In the US, two turkeys are 'pardoned' by the President each year, a tradition that became official in 1989.",
+        "Canadians celebrate Thanksgiving on the second Monday of October, a tradition that dates back to 1879, earlier than the US national holiday."
+      ],
+      "name": "Thanksgiving Day",
+      "originalDate": "11-27",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "tuba-day": {
+      "dateRule": {
+        "month": 5,
+        "ordinal": 1,
+        "type": "nth-weekday-of-month",
+        "weekday": 5
+      },
+      "description": "Tuba Day, observed annually on May 2nd (though sometimes celebrated on the first Friday in May), is a special holiday dedicated to recognizing and appreciating the often-overlooked contributions of tuba and euphonium players. Established by renowned tubist Harvey Phillips in 1979, the day highlights these musicians who provide the foundational bass voice and harmonic support in orchestras, concert bands, marching bands, and various musical ensembles worldwide.",
+      "emoji": "🎵",
+      "funFacts": [
+        "Tuba Day was founded by acclaimed American tubist Harvey Phillips in 1979.",
+        "The tuba is the largest and lowest-pitched instrument in the modern brass family.",
+        "The holiday aims to bring appreciation to tuba and euphonium players, who often play crucial but less prominent roles in musical ensembles."
+      ],
+      "name": "Tuba Day",
+      "originalDate": "05-02",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "winter-solstice": {
+      "dateRule": {
+        "season": "winter",
+        "type": "solstice"
+      },
+      "description": "The Winter Solstice marks the shortest day and longest night of the year in the Northern Hemisphere, occurring when the North Pole is tilted furthest away from the Sun. It is an astronomical event that signifies the official start of winter, after which the days gradually begin to lengthen.",
+      "emoji": "❄",
+      "funFacts": [
+        "The Winter Solstice has been celebrated since ancient times by various cultures, often associated with rebirth, new beginnings, and the return of light.",
+        "In many cultures, the Winter Solstice is known by different names, such as Yule in Germanic traditions or Dongzhi Festival in East Asia.",
+        "Stonehenge in England is famously aligned with the solstices, with its central axis pointing to the sunrise on the winter solstice.",
+        "Though it's the shortest day, the coldest temperatures typically occur weeks or months after the Winter Solstice due to thermal inertia.",
+        "The Earth's orbit around the sun causes the solstices. The winter solstice occurs when the sun reaches its southernmost point in the sky, directly overhead at the Tropic of Capricorn.",
+        "It is a moment when many animals, like bears, enter hibernation or significantly reduce their activity."
+      ],
+      "name": "Winter Solstice",
+      "originalDate": "12-21",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    },
+    "world-sleep-day": {
+      "dateRule": {
+        "direction": "before",
+        "event": "march-equinox",
+        "type": "relative-to-event",
+        "weekday": 5
+      },
+      "description": "World Sleep Day is an annual event that aims to raise awareness about the importance of sleep for overall health and well-being. Observed on the Friday before the March Equinox, this day encourages individuals to appreciate the benefits of good sleep and promote better sleep practices worldwide.",
+      "emoji": "😴",
+      "funFacts": [
+        "The first World Sleep Day was celebrated in 2008 by the World Sleep Society.",
+        "Sleep loss is linked to numerous health issues, including obesity, diabetes, and heart disease.",
+        "Naps, when taken properly, can improve alertness and cognitive function.",
+        "The global theme for World Sleep Day changes every year, focusing on different sleep issues.",
+        "Around 60% of adults report having sleep problems at some point in their lives."
+      ],
+      "name": "World Sleep Day",
+      "originalDate": "03-13",
+      "originalIndex": 0,
+      "verifiedAt": "2026-07-03"
+    }
   }
 }
